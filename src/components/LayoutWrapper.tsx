@@ -46,9 +46,9 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
           paddingTop: '56px',
           minHeight: '100vh',
           display: 'flex',
+          alignItems: 'flex-start',
           backgroundColor: 'var(--bg-primary)',
           boxSizing: 'border-box',
-          overflowX: 'hidden',
         }}
       >
         {/* 사이드바 - sticky로 스크롤 따라감 */}
@@ -59,6 +59,7 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
             flex: 1,
             minHeight: 'calc(100vh - 56px)',
             display: 'flex',
+            alignItems: 'flex-start',
           }}
         >
           <div
@@ -68,7 +69,6 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
               maxWidth: isTablet ? '100%' : '768px',
               padding: getContentPadding(),
               boxSizing: 'border-box',
-              overflowX: 'hidden',
             }}
           >
             {children}
@@ -81,10 +81,8 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
                 flexShrink: 0,
                 padding: '40px 24px 40px 0',
                 position: 'sticky',
-                top: '56px',
+                top: '96px',
                 height: 'fit-content',
-                maxHeight: 'calc(100vh - 56px)',
-                overflowY: 'auto',
                 alignSelf: 'flex-start',
               }}
             >
