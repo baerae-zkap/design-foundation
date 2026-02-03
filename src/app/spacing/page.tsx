@@ -3,6 +3,7 @@
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { TokenDownload } from "@/components/TokenDownload";
 import { spacing } from "@/data/tokens";
+import { formatTokenName } from "@/utils/formatTokenName";
 
 export default function SpacingPage() {
   return (
@@ -43,7 +44,7 @@ export default function SpacingPage() {
                 <div style={{ width: Math.max(token.value, 2), height: 8, backgroundColor: 'var(--brand-primary)', borderRadius: 2 }} />
               </div>
               <div className="flex-1">
-                <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>spacing{key.charAt(0).toUpperCase() + key.slice(1)}</span>
+                <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{formatTokenName('spacing', key)}</span>
               </div>
               <span className="text-sm font-mono" style={{ color: 'var(--text-tertiary)' }}>{token.value}px</span>
             </div>
@@ -62,7 +63,7 @@ export default function SpacingPage() {
                 <div className="absolute inset-0 rounded" style={{ margin: token.value / 4, backgroundColor: 'var(--blue-100)' }} />
               </div>
               <div className="flex-1">
-                <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>inset{key.charAt(0).toUpperCase() + key.slice(1)}</span>
+                <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{formatTokenName('inset', key)}</span>
                 <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>{token.description}</p>
               </div>
               <span className="text-sm font-mono" style={{ color: 'var(--text-tertiary)' }}>{token.value}px</span>
@@ -84,7 +85,7 @@ export default function SpacingPage() {
                 <div className="w-10 h-2 rounded" style={{ backgroundColor: 'var(--grey-300)' }} />
               </div>
               <div className="flex-1">
-                <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>stack{key.charAt(0).toUpperCase() + key.slice(1)}</span>
+                <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{formatTokenName('stack', key)}</span>
                 <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>{token.description}</p>
               </div>
               <span className="text-sm font-mono" style={{ color: 'var(--text-tertiary)' }}>{token.value}px</span>
@@ -106,7 +107,7 @@ export default function SpacingPage() {
                 <div className="w-3 h-6 rounded" style={{ backgroundColor: 'var(--grey-300)' }} />
               </div>
               <div className="flex-1">
-                <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>inline{key.charAt(0).toUpperCase() + key.slice(1)}</span>
+                <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{formatTokenName('inline', key)}</span>
                 <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>{token.description}</p>
               </div>
               <span className="text-sm font-mono" style={{ color: 'var(--text-tertiary)' }}>{token.value}px</span>
@@ -133,7 +134,7 @@ export default function SpacingPage() {
                 {key === "bottom" && <div className="absolute left-0 right-0 bottom-0 h-1" style={{ backgroundColor: 'var(--brand-primary)' }} />}
               </div>
               <div className="flex-1">
-                <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>screen{key.charAt(0).toUpperCase() + key.slice(1)}</span>
+                <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{formatTokenName('screen', key)}</span>
                 <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>{token.description}</p>
               </div>
               <span className="text-sm font-mono" style={{ color: 'var(--text-tertiary)' }}>{token.value}px</span>

@@ -3,6 +3,7 @@
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { TokenDownload } from "@/components/TokenDownload";
 import { radius } from "@/data/tokens";
+import { formatTokenName } from "@/utils/formatTokenName";
 
 export default function RadiusPage() {
   return (
@@ -49,7 +50,7 @@ export default function RadiusPage() {
                 />
               </div>
               <div className="flex-1">
-                <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>radius{key.charAt(0).toUpperCase() + key.slice(1)}</span>
+                <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{formatTokenName('radius', key)}</span>
                 <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>{token.description}</p>
               </div>
               <span className="text-sm font-mono" style={{ color: 'var(--text-tertiary)' }}>
@@ -76,7 +77,7 @@ export default function RadiusPage() {
                 </div>
               </div>
               <div className="flex-1">
-                <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>button{key.charAt(0).toUpperCase() + key.slice(1)}</span>
+                <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{formatTokenName('button', key)}</span>
                 <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>{token.description}</p>
               </div>
               <span className="text-sm font-mono" style={{ color: 'var(--text-tertiary)' }}>

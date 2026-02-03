@@ -3,6 +3,7 @@
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { TokenDownload } from "@/components/TokenDownload";
 import { shadow } from "@/data/tokens";
+import { formatTokenName } from "@/utils/formatTokenName";
 
 export default function ShadowPage() {
   return (
@@ -63,7 +64,7 @@ export default function ShadowPage() {
                 />
               </div>
               <div className="flex-1 min-w-0">
-                <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>shadow{key.charAt(0).toUpperCase() + key.slice(1)}</span>
+                <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{formatTokenName('shadow', key)}</span>
                 <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>{token.description}</p>
                 <p className="text-xs font-mono mt-1 truncate" style={{ color: 'var(--text-placeholder)' }}>{token.value}</p>
               </div>
