@@ -55,7 +55,9 @@ export function TableOfContents() {
     if (headings.length === 0) return;
 
     const handleScroll = () => {
+      const scrollY = window.scrollY;
       const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
 
       // 각 heading의 위치를 계산하여 현재 활성화할 항목 찾기
       let currentId = headings[0]?.id || "";
@@ -71,15 +73,10 @@ export function TableOfContents() {
         }
       }
 
-      // 마지막 heading이 화면에 보이면 마지막 항목 활성화
-      const lastHeading = headings[headings.length - 1];
-      const lastEl = document.getElementById(lastHeading.id);
-      if (lastEl) {
-        const rect = lastEl.getBoundingClientRect();
-        // 마지막 heading이 화면 중간보다 위에 있으면 활성화
-        if (rect.top <= windowHeight * 0.5) {
-          currentId = lastHeading.id;
-        }
+      // 페이지 맨 바닥에 도달했을 때만 마지막 항목 활성화
+      const isAtBottom = scrollY + windowHeight >= documentHeight - 10;
+      if (isAtBottom && headings.length > 0) {
+        currentId = headings[headings.length - 1].id;
       }
 
       setActiveId(currentId);
