@@ -317,6 +317,63 @@ export default function ColorsPage() {
             ))}
           </div>
         </div>
+
+        {/* Divider */}
+        <div style={{ marginBottom: 'var(--space-8)' }}>
+          <h3 className="text-sm font-semibold uppercase tracking-wider mb-3" style={{ color: 'var(--text-tertiary)' }}>Divider</h3>
+          <div
+            className="overflow-hidden"
+            style={{
+              backgroundColor: 'var(--bg-elevated)',
+              borderRadius: 'var(--radius-lg)',
+              border: '1px solid var(--divider)',
+            }}
+          >
+            {Object.entries(semantic.divider).map(([name, token], i, arr) => (
+              <div key={name} style={{ borderBottom: i < arr.length - 1 ? '1px solid var(--divider)' : 'none' }}>
+                <SemanticColorRow name={formatTokenName('divider', name)} value={token.value} description={token.description} />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Icon */}
+        <div style={{ marginBottom: 'var(--space-8)' }}>
+          <h3 className="text-sm font-semibold uppercase tracking-wider mb-3" style={{ color: 'var(--text-tertiary)' }}>Icon</h3>
+          <div
+            className="overflow-hidden"
+            style={{
+              backgroundColor: 'var(--bg-elevated)',
+              borderRadius: 'var(--radius-lg)',
+              border: '1px solid var(--divider)',
+            }}
+          >
+            {Object.entries(semantic.icon).map(([name, token], i, arr) => (
+              <div key={name} style={{ borderBottom: i < arr.length - 1 ? '1px solid var(--divider)' : 'none' }}>
+                <SemanticColorRow name={formatTokenName('icon', name)} value={token.value} description={token.description} />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Surface */}
+        <div style={{ marginBottom: 'var(--space-8)' }}>
+          <h3 className="text-sm font-semibold uppercase tracking-wider mb-3" style={{ color: 'var(--text-tertiary)' }}>Surface</h3>
+          <div
+            className="overflow-hidden"
+            style={{
+              backgroundColor: 'var(--bg-elevated)',
+              borderRadius: 'var(--radius-lg)',
+              border: '1px solid var(--divider)',
+            }}
+          >
+            {Object.entries(semantic.surface).map(([name, token], i, arr) => (
+              <div key={name} style={{ borderBottom: i < arr.length - 1 ? '1px solid var(--divider)' : 'none' }}>
+                <SemanticColorRow name={formatTokenName('surface', name)} value={token.value} description={token.description} />
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
     </div>
   );
