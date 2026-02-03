@@ -41,16 +41,6 @@ export default function TypographyPage() {
         </div>
       </section>
 
-      {/* Usage */}
-      <section className="mb-12">
-        <h2 id="usage" className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>기본 사용법</h2>
-        <pre className="code-block">
-          <code style={{ color: 'var(--text-secondary)' }}>{`// 타이포 토큰 스프레드 사용
-<Text style={{ ...theme.typography.heading.lg }}>제목</Text>
-<Text style={{ ...theme.typography.body.md }}>본문</Text>`}</code>
-        </pre>
-      </section>
-
       {/* Display */}
       <section className="mb-12">
         <h2 id="display" className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Display</h2>

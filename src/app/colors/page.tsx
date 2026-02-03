@@ -145,19 +145,6 @@ export default function ColorsPage() {
         { name: 'semantic-tokens.json', path: '/semantic-tokens.json' },
       ]} />
 
-      {/* Usage */}
-      <section style={{ marginBottom: 'var(--space-12)' }}>
-        <h2 id="usage" className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>기본 사용법</h2>
-        <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>
-          <code className="px-1.5 py-0.5 text-sm font-mono" style={{ backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-sm)' }}>theme</code> 객체에서 색상 토큰에 접근합니다.
-        </p>
-        <pre className="code-block">
-          <code>{`const { theme } = useTheme();
-
-<View style={{ backgroundColor: theme.colors.background.bg1 }} />`}</code>
-        </pre>
-      </section>
-
       {/* Palette */}
       <section style={{ marginBottom: 'var(--space-12)' }}>
         <h2 id="palette" className="text-xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>기본 색상</h2>

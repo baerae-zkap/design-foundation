@@ -35,17 +35,6 @@ export default function RadiusPage() {
         </div>
       </section>
 
-      {/* Usage */}
-      <section className="mb-12">
-        <h2 id="usage" className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>기본 사용법</h2>
-        <pre className="code-block">
-          <code style={{ color: 'var(--text-secondary)' }}>{`// 컴포넌트별 시멘틱 라운딩
-<Button style={{ borderRadius: theme.radius.button.md }} />
-<Card style={{ borderRadius: theme.radius.card }} />
-<Avatar style={{ borderRadius: theme.radius.avatar }} />`}</code>
-        </pre>
-      </section>
-
       {/* Primitive */}
       <section className="mb-12">
         <h2 id="primitive" className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Primitive</h2>

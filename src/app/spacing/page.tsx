@@ -32,19 +32,6 @@ export default function SpacingPage() {
         </div>
       </section>
 
-      {/* Usage */}
-      <section className="mb-12">
-        <h2 id="usage" className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>기본 사용법</h2>
-        <pre className="code-block">
-          <code style={{ color: 'var(--text-secondary)' }}>{`// 시멘틱 간격 사용
-<View style={{
-  padding: theme.spacing.inset.md,      // 16px
-  marginBottom: theme.spacing.stack.lg, // 24px
-  gap: theme.spacing.inline.sm,         // 8px
-}} />`}</code>
-        </pre>
-      </section>
-
       {/* Primitive */}
       <section className="mb-12">
         <h2 id="primitive" className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Primitive</h2>
