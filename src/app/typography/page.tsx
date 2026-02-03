@@ -49,7 +49,7 @@ export default function TypographyPage() {
           {Object.entries(typography.scale.display).map(([size, token]) => (
             <div key={size} className="p-5" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', backgroundColor: 'var(--bg-elevated)' }}>
               <div className="flex items-center justify-between mb-3">
-                <span className="text-sm font-medium" style={{ color: 'var(--brand-primary)' }}>display.{size}</span>
+                <span className="text-sm font-medium" style={{ color: 'var(--brand-primary)' }}>display{size.charAt(0).toUpperCase() + size.slice(1)}</span>
                 <span className="text-xs font-mono" style={{ color: 'var(--text-placeholder)' }}>{token.fontSize}px / {token.lineHeight}px • {token.fontWeight}</span>
               </div>
               <p
@@ -71,7 +71,7 @@ export default function TypographyPage() {
           {Object.entries(typography.scale.title).map(([size, token]) => (
             <div key={size} className="p-5" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', backgroundColor: 'var(--bg-elevated)' }}>
               <div className="flex items-center justify-between mb-3">
-                <span className="text-sm font-medium" style={{ color: 'var(--brand-primary)' }}>title.{size}</span>
+                <span className="text-sm font-medium" style={{ color: 'var(--brand-primary)' }}>title{size.charAt(0).toUpperCase() + size.slice(1)}</span>
                 <span className="text-xs font-mono" style={{ color: 'var(--text-placeholder)' }}>{token.fontSize}px / {token.lineHeight}px • {token.fontWeight}</span>
               </div>
               <p
@@ -93,7 +93,7 @@ export default function TypographyPage() {
           {Object.entries(typography.scale.subtitle).map(([size, token]) => (
             <div key={size} className="p-5" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', backgroundColor: 'var(--bg-elevated)' }}>
               <div className="flex items-center justify-between mb-3">
-                <span className="text-sm font-medium" style={{ color: 'var(--brand-primary)' }}>subtitle.{size}</span>
+                <span className="text-sm font-medium" style={{ color: 'var(--brand-primary)' }}>subtitle{size.charAt(0).toUpperCase() + size.slice(1)}</span>
                 <span className="text-xs font-mono" style={{ color: 'var(--text-placeholder)' }}>{token.fontSize}px / {token.lineHeight}px • {token.fontWeight}</span>
               </div>
               <p
@@ -115,7 +115,7 @@ export default function TypographyPage() {
           {Object.entries(typography.scale.heading).map(([size, token]) => (
             <div key={size} className="p-5" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', backgroundColor: 'var(--bg-elevated)' }}>
               <div className="flex items-center justify-between mb-3">
-                <span className="text-sm font-medium" style={{ color: 'var(--brand-primary)' }}>heading.{size}</span>
+                <span className="text-sm font-medium" style={{ color: 'var(--brand-primary)' }}>heading{size.charAt(0).toUpperCase() + size.slice(1)}</span>
                 <span className="text-xs font-mono" style={{ color: 'var(--text-placeholder)' }}>{token.fontSize}px / {token.lineHeight}px • {token.fontWeight}</span>
               </div>
               <p
@@ -137,7 +137,7 @@ export default function TypographyPage() {
           {Object.entries(typography.scale.body).map(([size, token]) => (
             <div key={size} className="p-5" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', backgroundColor: 'var(--bg-elevated)' }}>
               <div className="flex items-center justify-between mb-3">
-                <span className="text-sm font-medium" style={{ color: 'var(--brand-primary)' }}>body.{size}</span>
+                <span className="text-sm font-medium" style={{ color: 'var(--brand-primary)' }}>body{size.charAt(0).toUpperCase() + size.slice(1)}</span>
                 <span className="text-xs font-mono" style={{ color: 'var(--text-placeholder)' }}>{token.fontSize}px / {token.lineHeight}px • {token.fontWeight}</span>
               </div>
               <p
@@ -159,7 +159,7 @@ export default function TypographyPage() {
           {Object.entries(typography.scale.label).map(([size, token]) => (
             <div key={size} className="p-5" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', backgroundColor: 'var(--bg-elevated)' }}>
               <div className="flex items-center justify-between mb-3">
-                <span className="text-sm font-medium" style={{ color: 'var(--brand-primary)' }}>label.{size}</span>
+                <span className="text-sm font-medium" style={{ color: 'var(--brand-primary)' }}>label{size.charAt(0).toUpperCase() + size.slice(1)}</span>
                 <span className="text-xs font-mono" style={{ color: 'var(--text-placeholder)' }}>{token.fontSize}px / {token.lineHeight}px • {token.fontWeight}</span>
               </div>
               <p
@@ -181,7 +181,7 @@ export default function TypographyPage() {
           {Object.entries(typography.scale.numeric).map(([size, token]) => (
             <div key={size} className="p-5" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', backgroundColor: 'var(--bg-elevated)' }}>
               <div className="flex items-center justify-between mb-3">
-                <span className="text-sm font-medium" style={{ color: 'var(--brand-primary)' }}>numeric.{size}</span>
+                <span className="text-sm font-medium" style={{ color: 'var(--brand-primary)' }}>numeric{size.charAt(0).toUpperCase() + size.slice(1)}</span>
                 <span className="text-xs font-mono" style={{ color: 'var(--text-placeholder)' }}>{token.fontSize}px / {token.lineHeight}px • {token.fontWeight}</span>
               </div>
               <p
