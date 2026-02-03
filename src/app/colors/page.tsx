@@ -175,7 +175,7 @@ export default function ColorsPage() {
                     key={shade}
                     name={shade}
                     value={value as string}
-                    fullName={`colors.${colorName}${shade}`}
+                    fullName={`${colorName}${shade}`}
                   />
                 ))}
               </div>
@@ -187,8 +187,8 @@ export default function ColorsPage() {
         <div style={{ marginBottom: 'var(--space-8)' }}>
           <h3 className="text-sm font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>Static</h3>
           <div className="space-y-2">
-            <ColorBar name="white" value="#FFFFFF" fullName="colors.static.white" />
-            <ColorBar name="black" value="#000000" fullName="colors.static.black" />
+            <ColorBar name="white" value="#FFFFFF" fullName="staticWhite" />
+            <ColorBar name="black" value="#000000" fullName="staticBlack" />
           </div>
         </div>
       </section>
@@ -248,7 +248,7 @@ export default function ColorsPage() {
           >
             {Object.entries(semantic.brand).map(([name, token], i, arr) => (
               <div key={name} style={{ borderBottom: i < arr.length - 1 ? '1px solid var(--divider)' : 'none' }}>
-                <SemanticColorRow name={`brand.${name}`} value={token.value} description={token.description} />
+                <SemanticColorRow name={`brand${name.charAt(0).toUpperCase() + name.slice(1)}`} value={token.value} description={token.description} />
               </div>
             ))}
           </div>
@@ -267,7 +267,7 @@ export default function ColorsPage() {
           >
             {Object.entries(semantic.background).map(([name, token], i, arr) => (
               <div key={name} style={{ borderBottom: i < arr.length - 1 ? '1px solid var(--divider)' : 'none' }}>
-                <SemanticColorRow name={`background.${name}`} value={token.value} description={token.description} />
+                <SemanticColorRow name={`bg${name.charAt(0).toUpperCase() + name.slice(1)}`} value={token.value} description={token.description} />
               </div>
             ))}
           </div>
@@ -286,7 +286,7 @@ export default function ColorsPage() {
           >
             {Object.entries(semantic.text).map(([name, token], i, arr) => (
               <div key={name} style={{ borderBottom: i < arr.length - 1 ? '1px solid var(--divider)' : 'none' }}>
-                <SemanticColorRow name={`text.${name}`} value={token.value} description={token.description} />
+                <SemanticColorRow name={`text${name.charAt(0).toUpperCase() + name.slice(1)}`} value={token.value} description={token.description} />
               </div>
             ))}
           </div>
@@ -305,7 +305,7 @@ export default function ColorsPage() {
           >
             {Object.entries(semantic.semantic).map(([name, token], i, arr) => (
               <div key={name} style={{ borderBottom: i < arr.length - 1 ? '1px solid var(--divider)' : 'none' }}>
-                <SemanticColorRow name={`semantic.${name}`} value={token.value} description={token.description} />
+                <SemanticColorRow name={`status${name.charAt(0).toUpperCase() + name.slice(1)}`} value={token.value} description={token.description} />
               </div>
             ))}
           </div>
@@ -324,7 +324,7 @@ export default function ColorsPage() {
           >
             {Object.entries(semantic.button).map(([name, token], i, arr) => (
               <div key={name} style={{ borderBottom: i < arr.length - 1 ? '1px solid var(--divider)' : 'none' }}>
-                <SemanticColorRow name={`button.${name}`} value={token.value} description={token.description} />
+                <SemanticColorRow name={`button${name.charAt(0).toUpperCase() + name.slice(1)}`} value={token.value} description={token.description} />
               </div>
             ))}
           </div>
