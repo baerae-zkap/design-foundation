@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 interface HeaderProps {
@@ -44,8 +45,8 @@ export function Header({ onMenuClick }: HeaderProps) {
           padding: '0 20px',
         }}
       >
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}>
-          <span style={{ color: 'var(--brand-primary)', fontWeight: 700, fontSize: '18px' }}>ZKAP</span>
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
+          <Image src="/logo.svg" alt="ZKAP" width={80} height={24} style={{ height: '24px', width: 'auto' }} />
           <span style={{ color: 'var(--text-tertiary)', fontSize: '14px' }}>Design System</span>
         </Link>
 
