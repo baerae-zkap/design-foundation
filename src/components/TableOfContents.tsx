@@ -52,23 +52,42 @@ export function TableOfContents() {
   }, [pathname]);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id);
+    if (headings.length === 0) return;
+
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+
+      // 페이지 하단에 도달하면 마지막 항목 활성화
+      if (scrollY + windowHeight >= documentHeight - 50) {
+        setActiveId(headings[headings.length - 1].id);
+        return;
+      }
+
+      // 현재 보이는 영역에서 가장 위에 있는 heading 찾기
+      let currentId = "";
+      for (const heading of headings) {
+        const el = document.getElementById(heading.id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 120) {
+            currentId = heading.id;
           }
-        });
-      },
-      { rootMargin: "-80px 0px -80% 0px" }
-    );
+        }
+      }
 
-    headings.forEach((heading) => {
-      const el = document.getElementById(heading.id);
-      if (el) observer.observe(el);
-    });
+      if (currentId) {
+        setActiveId(currentId);
+      } else if (headings.length > 0) {
+        // 스크롤이 맨 위일 때 첫 번째 항목 활성화
+        setActiveId(headings[0].id);
+      }
+    };
 
-    return () => observer.disconnect();
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [headings]);
 
   if (headings.length === 0 || isTablet) {
