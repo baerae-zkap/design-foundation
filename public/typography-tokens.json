@@ -1,0 +1,433 @@
+{
+  "_meta": {
+    "version": "2.0",
+    "name": "zkap-design-system",
+    "type": "typography",
+    "created": "2025-02-03"
+  },
+
+  "typography": {
+    "primitive": {
+      "fontFamily": {
+        "base": "Pretendard",
+        "weights": {
+          "light": "Pretendard-Light",
+          "regular": "Pretendard-Regular",
+          "medium": "Pretendard-Medium",
+          "semibold": "Pretendard-SemiBold",
+          "bold": "Pretendard-Bold"
+        },
+        "numeric": {
+          "base": "Spoqa Han Sans Neo",
+          "weights": {
+            "light": "SpoqaHanSansNeo-Light",
+            "regular": "SpoqaHanSansNeo-Regular",
+            "medium": "SpoqaHanSansNeo-Medium",
+            "bold": "SpoqaHanSansNeo-Bold"
+          },
+          "_comment": "숫자 전용 폰트. 금액, 수량, 통계 등에 사용. 토스/신세계 등에서 사용하는 폰트"
+        },
+        "fallback": "-apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif",
+        "_comment": "Pretendard는 한글/영문 본문용, Spoqa Han Sans Neo는 숫자 강조용"
+      },
+
+      "fontWeight": {
+        "light": 300,
+        "regular": 400,
+        "medium": 500,
+        "semibold": 600,
+        "bold": 700,
+        "_comment": "light는 장식용, regular는 본문, medium은 강조, semibold는 제목, bold는 핵심 강조"
+      },
+
+      "fontSize": {
+        "3xs": 10,
+        "2xs": 11,
+        "xs": 12,
+        "sm": 14,
+        "md": 16,
+        "lg": 18,
+        "xl": 20,
+        "2xl": 24,
+        "3xl": 28,
+        "4xl": 32,
+        "5xl": 36,
+        "6xl": 40,
+        "7xl": 48,
+        "_comment": "md(16)가 기본 본문 크기. 접근성 기준 최소 본문 크기는 14px"
+      },
+
+      "lineHeight": {
+        "3xs": 14,
+        "2xs": 16,
+        "xs": 18,
+        "sm": 20,
+        "md": 24,
+        "lg": 26,
+        "xl": 28,
+        "2xl": 32,
+        "3xl": 38,
+        "4xl": 42,
+        "5xl": 48,
+        "6xl": 52,
+        "7xl": 60,
+        "_comment": "행간은 글자 크기의 1.4~1.6배 권장. 본문은 1.5배, 제목은 1.2~1.3배"
+      },
+
+      "letterSpacing": {
+        "tighter": -0.5,
+        "tight": -0.25,
+        "normal": 0,
+        "wide": 0.25,
+        "wider": 0.5,
+        "_comment": "큰 제목은 tight(-0.25), 본문은 normal(0). 한글은 자간 조절 최소화 권장"
+      }
+    },
+
+    "semantic": {
+      "_description": {
+        "display": "히어로 섹션, 대형 타이틀 등 시각적 임팩트가 필요한 곳",
+        "headline": "페이지/섹션의 주요 제목. 정보 계층의 최상위",
+        "title": "카드, 리스트 아이템, 모달 등의 제목",
+        "body": "일반 본문 텍스트. 가독성이 가장 중요",
+        "label": "입력 필드 라벨, 탭, 칩 등 UI 요소의 텍스트",
+        "button": "버튼, CTA 등 액션을 유도하는 텍스트",
+        "caption": "부가 설명, 타임스탬프, 메타 정보 등",
+        "numeric": "금액, 수량, 통계 등 숫자 표시용. tabular-nums로 정렬"
+      },
+
+      "display": {
+        "_comment": "히어로 영역, 온보딩, 마케팅 페이지 등 시각적 임팩트가 필요한 대형 텍스트",
+        "xl": {
+          "fontFamily": "{primitive.fontFamily.weights.bold}",
+          "fontWeight": "{primitive.fontWeight.bold}",
+          "fontSize": "{primitive.fontSize.7xl}",
+          "lineHeight": "{primitive.lineHeight.7xl}",
+          "letterSpacing": "{primitive.letterSpacing.tight}",
+          "_comment": "48px. 스플래시, 온보딩 메인 타이틀"
+        },
+        "lg": {
+          "fontFamily": "{primitive.fontFamily.weights.bold}",
+          "fontWeight": "{primitive.fontWeight.bold}",
+          "fontSize": "{primitive.fontSize.6xl}",
+          "lineHeight": "{primitive.lineHeight.6xl}",
+          "letterSpacing": "{primitive.letterSpacing.tight}",
+          "_comment": "40px. 히어로 섹션 타이틀"
+        },
+        "md": {
+          "fontFamily": "{primitive.fontFamily.weights.bold}",
+          "fontWeight": "{primitive.fontWeight.bold}",
+          "fontSize": "{primitive.fontSize.5xl}",
+          "lineHeight": "{primitive.lineHeight.5xl}",
+          "letterSpacing": "{primitive.letterSpacing.tight}",
+          "_comment": "36px. 프로모션 배너 타이틀"
+        },
+        "sm": {
+          "fontFamily": "{primitive.fontFamily.weights.bold}",
+          "fontWeight": "{primitive.fontWeight.bold}",
+          "fontSize": "{primitive.fontSize.4xl}",
+          "lineHeight": "{primitive.lineHeight.4xl}",
+          "letterSpacing": "{primitive.letterSpacing.tight}",
+          "_comment": "32px. 카드형 프로모션 타이틀"
+        }
+      },
+
+      "headline": {
+        "_comment": "페이지나 섹션의 주요 제목. 정보 계층 구조의 최상위 레벨",
+        "lg": {
+          "fontFamily": "{primitive.fontFamily.weights.semibold}",
+          "fontWeight": "{primitive.fontWeight.semibold}",
+          "fontSize": "{primitive.fontSize.3xl}",
+          "lineHeight": "{primitive.lineHeight.3xl}",
+          "letterSpacing": "{primitive.letterSpacing.tight}",
+          "_comment": "28px. 페이지 메인 타이틀, 주요 섹션 제목"
+        },
+        "md": {
+          "fontFamily": "{primitive.fontFamily.weights.semibold}",
+          "fontWeight": "{primitive.fontWeight.semibold}",
+          "fontSize": "{primitive.fontSize.2xl}",
+          "lineHeight": "{primitive.lineHeight.2xl}",
+          "letterSpacing": "{primitive.letterSpacing.normal}",
+          "_comment": "24px. 섹션 제목, 바텀시트 타이틀"
+        },
+        "sm": {
+          "fontFamily": "{primitive.fontFamily.weights.semibold}",
+          "fontWeight": "{primitive.fontWeight.semibold}",
+          "fontSize": "{primitive.fontSize.xl}",
+          "lineHeight": "{primitive.lineHeight.xl}",
+          "letterSpacing": "{primitive.letterSpacing.normal}",
+          "_comment": "20px. 서브 섹션 제목, 그룹 헤더"
+        }
+      },
+
+      "title": {
+        "_comment": "카드, 리스트 아이템, 모달 등 컴포넌트 수준의 제목",
+        "lg": {
+          "fontFamily": "{primitive.fontFamily.weights.bold}",
+          "fontWeight": "{primitive.fontWeight.bold}",
+          "fontSize": "{primitive.fontSize.2xl}",
+          "lineHeight": "{primitive.lineHeight.2xl}",
+          "letterSpacing": "{primitive.letterSpacing.normal}",
+          "_comment": "24px. 모달/다이얼로그 타이틀, 대형 카드 제목"
+        },
+        "md": {
+          "fontFamily": "{primitive.fontFamily.weights.bold}",
+          "fontWeight": "{primitive.fontWeight.bold}",
+          "fontSize": "{primitive.fontSize.xl}",
+          "lineHeight": "{primitive.lineHeight.xl}",
+          "letterSpacing": "{primitive.letterSpacing.normal}",
+          "_comment": "20px. 카드 제목, 리스트 아이템 타이틀"
+        },
+        "sm": {
+          "fontFamily": "{primitive.fontFamily.weights.bold}",
+          "fontWeight": "{primitive.fontWeight.bold}",
+          "fontSize": "{primitive.fontSize.lg}",
+          "lineHeight": "{primitive.lineHeight.lg}",
+          "letterSpacing": "{primitive.letterSpacing.normal}",
+          "_comment": "18px. 작은 카드 제목, 아코디언 헤더"
+        }
+      },
+
+      "body": {
+        "_comment": "일반 본문 텍스트. 가독성이 최우선. 긴 문장에 적합",
+        "lg": {
+          "fontFamily": "{primitive.fontFamily.weights.regular}",
+          "fontWeight": "{primitive.fontWeight.regular}",
+          "fontSize": "{primitive.fontSize.lg}",
+          "lineHeight": "{primitive.lineHeight.lg}",
+          "letterSpacing": "{primitive.letterSpacing.normal}",
+          "_comment": "18px. 강조 본문, 인트로 텍스트, 요약문"
+        },
+        "md": {
+          "fontFamily": "{primitive.fontFamily.weights.regular}",
+          "fontWeight": "{primitive.fontWeight.regular}",
+          "fontSize": "{primitive.fontSize.md}",
+          "lineHeight": "{primitive.lineHeight.md}",
+          "letterSpacing": "{primitive.letterSpacing.normal}",
+          "_comment": "16px. 기본 본문. 대부분의 텍스트에 사용"
+        },
+        "sm": {
+          "fontFamily": "{primitive.fontFamily.weights.regular}",
+          "fontWeight": "{primitive.fontWeight.regular}",
+          "fontSize": "{primitive.fontSize.sm}",
+          "lineHeight": "{primitive.lineHeight.sm}",
+          "letterSpacing": "{primitive.letterSpacing.normal}",
+          "_comment": "14px. 보조 본문, 상세 설명, 리스트 아이템 설명"
+        }
+      },
+
+      "label": {
+        "_comment": "UI 요소의 텍스트. 입력 필드 라벨, 탭, 칩, 태그 등",
+        "lg": {
+          "fontFamily": "{primitive.fontFamily.weights.medium}",
+          "fontWeight": "{primitive.fontWeight.medium}",
+          "fontSize": "{primitive.fontSize.md}",
+          "lineHeight": "{primitive.lineHeight.md}",
+          "letterSpacing": "{primitive.letterSpacing.normal}",
+          "_comment": "16px. 큰 입력 필드 라벨, 탭 텍스트"
+        },
+        "md": {
+          "fontFamily": "{primitive.fontFamily.weights.medium}",
+          "fontWeight": "{primitive.fontWeight.medium}",
+          "fontSize": "{primitive.fontSize.sm}",
+          "lineHeight": "{primitive.lineHeight.sm}",
+          "letterSpacing": "{primitive.letterSpacing.normal}",
+          "_comment": "14px. 기본 라벨, 칩 텍스트, 세그먼트 컨트롤"
+        },
+        "sm": {
+          "fontFamily": "{primitive.fontFamily.weights.medium}",
+          "fontWeight": "{primitive.fontWeight.medium}",
+          "fontSize": "{primitive.fontSize.xs}",
+          "lineHeight": "{primitive.lineHeight.xs}",
+          "letterSpacing": "{primitive.letterSpacing.normal}",
+          "_comment": "12px. 작은 라벨, 뱃지 텍스트, 태그"
+        }
+      },
+
+      "button": {
+        "_comment": "버튼, CTA 등 액션을 유도하는 텍스트. 명확한 가독성 필요",
+        "lg": {
+          "fontFamily": "{primitive.fontFamily.weights.semibold}",
+          "fontWeight": "{primitive.fontWeight.semibold}",
+          "fontSize": "{primitive.fontSize.lg}",
+          "lineHeight": "{primitive.lineHeight.lg}",
+          "letterSpacing": "{primitive.letterSpacing.normal}",
+          "_comment": "18px. 대형 CTA 버튼, 풀 너비 버튼"
+        },
+        "md": {
+          "fontFamily": "{primitive.fontFamily.weights.semibold}",
+          "fontWeight": "{primitive.fontWeight.semibold}",
+          "fontSize": "{primitive.fontSize.md}",
+          "lineHeight": "{primitive.lineHeight.md}",
+          "letterSpacing": "{primitive.letterSpacing.normal}",
+          "_comment": "16px. 기본 버튼, 주요 액션 버튼"
+        },
+        "sm": {
+          "fontFamily": "{primitive.fontFamily.weights.semibold}",
+          "fontWeight": "{primitive.fontWeight.semibold}",
+          "fontSize": "{primitive.fontSize.sm}",
+          "lineHeight": "{primitive.lineHeight.sm}",
+          "letterSpacing": "{primitive.letterSpacing.normal}",
+          "_comment": "14px. 보조 버튼, 인라인 액션"
+        },
+        "xs": {
+          "fontFamily": "{primitive.fontFamily.weights.semibold}",
+          "fontWeight": "{primitive.fontWeight.semibold}",
+          "fontSize": "{primitive.fontSize.xs}",
+          "lineHeight": "{primitive.lineHeight.xs}",
+          "letterSpacing": "{primitive.letterSpacing.normal}",
+          "_comment": "12px. 소형 버튼, 링크 스타일 버튼"
+        }
+      },
+
+      "caption": {
+        "_comment": "부가 정보, 타임스탬프, 메타 데이터 등 보조 텍스트",
+        "lg": {
+          "fontFamily": "{primitive.fontFamily.weights.regular}",
+          "fontWeight": "{primitive.fontWeight.regular}",
+          "fontSize": "{primitive.fontSize.sm}",
+          "lineHeight": "{primitive.lineHeight.sm}",
+          "letterSpacing": "{primitive.letterSpacing.normal}",
+          "_comment": "14px. 입력 필드 도움말, 설명 텍스트"
+        },
+        "md": {
+          "fontFamily": "{primitive.fontFamily.weights.regular}",
+          "fontWeight": "{primitive.fontWeight.regular}",
+          "fontSize": "{primitive.fontSize.xs}",
+          "lineHeight": "{primitive.lineHeight.xs}",
+          "letterSpacing": "{primitive.letterSpacing.normal}",
+          "_comment": "12px. 타임스탬프, 에러 메시지, 힌트 텍스트"
+        },
+        "sm": {
+          "fontFamily": "{primitive.fontFamily.weights.regular}",
+          "fontWeight": "{primitive.fontWeight.regular}",
+          "fontSize": "{primitive.fontSize.2xs}",
+          "lineHeight": "{primitive.lineHeight.2xs}",
+          "letterSpacing": "{primitive.letterSpacing.normal}",
+          "_comment": "11px. 법적 고지, 매우 작은 메타 정보"
+        }
+      },
+
+      "numeric": {
+        "_comment": "금액, 수량, 통계 등 숫자 전용. Spoqa Han Sans Neo 사용. tabular-nums로 자릿수 정렬",
+        "display": {
+          "fontFamily": "{primitive.fontFamily.numeric.weights.bold}",
+          "fontWeight": "{primitive.fontWeight.bold}",
+          "fontSize": "{primitive.fontSize.5xl}",
+          "lineHeight": "{primitive.lineHeight.5xl}",
+          "letterSpacing": "{primitive.letterSpacing.tight}",
+          "fontVariantNumeric": "tabular-nums",
+          "_comment": "36px. 대시보드 핵심 지표, 총 자산 표시"
+        },
+        "lg": {
+          "fontFamily": "{primitive.fontFamily.numeric.weights.bold}",
+          "fontWeight": "{primitive.fontWeight.bold}",
+          "fontSize": "{primitive.fontSize.2xl}",
+          "lineHeight": "{primitive.lineHeight.2xl}",
+          "letterSpacing": "{primitive.letterSpacing.tight}",
+          "fontVariantNumeric": "tabular-nums",
+          "_comment": "24px. 카드 내 주요 금액, 잔액 표시"
+        },
+        "md": {
+          "fontFamily": "{primitive.fontFamily.numeric.weights.medium}",
+          "fontWeight": "{primitive.fontWeight.medium}",
+          "fontSize": "{primitive.fontSize.lg}",
+          "lineHeight": "{primitive.lineHeight.lg}",
+          "letterSpacing": "{primitive.letterSpacing.tight}",
+          "fontVariantNumeric": "tabular-nums",
+          "_comment": "18px. 리스트 내 금액, 수량 표시"
+        },
+        "sm": {
+          "fontFamily": "{primitive.fontFamily.numeric.weights.medium}",
+          "fontWeight": "{primitive.fontWeight.medium}",
+          "fontSize": "{primitive.fontSize.sm}",
+          "lineHeight": "{primitive.lineHeight.sm}",
+          "letterSpacing": "{primitive.letterSpacing.tight}",
+          "fontVariantNumeric": "tabular-nums",
+          "_comment": "14px. 테이블 셀, 소형 금액 표시"
+        },
+        "xs": {
+          "fontFamily": "{primitive.fontFamily.numeric.weights.regular}",
+          "fontWeight": "{primitive.fontWeight.regular}",
+          "fontSize": "{primitive.fontSize.xs}",
+          "lineHeight": "{primitive.lineHeight.xs}",
+          "letterSpacing": "{primitive.letterSpacing.tight}",
+          "fontVariantNumeric": "tabular-nums",
+          "_comment": "12px. 변동률, 소수점, 부가 수치"
+        }
+      },
+
+      "link": {
+        "_comment": "인라인 링크 텍스트. 본문 내 클릭 가능한 텍스트",
+        "md": {
+          "fontFamily": "{primitive.fontFamily.weights.medium}",
+          "fontWeight": "{primitive.fontWeight.medium}",
+          "fontSize": "{primitive.fontSize.md}",
+          "lineHeight": "{primitive.lineHeight.md}",
+          "letterSpacing": "{primitive.letterSpacing.normal}",
+          "textDecoration": "underline",
+          "_comment": "16px. 본문 내 링크, '더 보기' 텍스트"
+        },
+        "sm": {
+          "fontFamily": "{primitive.fontFamily.weights.medium}",
+          "fontWeight": "{primitive.fontWeight.medium}",
+          "fontSize": "{primitive.fontSize.sm}",
+          "lineHeight": "{primitive.lineHeight.sm}",
+          "letterSpacing": "{primitive.letterSpacing.normal}",
+          "textDecoration": "underline",
+          "_comment": "14px. 보조 링크, 약관 동의 링크"
+        }
+      },
+
+      "code": {
+        "_comment": "코드, 계좌번호 등 모노스페이스가 필요한 텍스트",
+        "md": {
+          "fontFamily": "monospace",
+          "fontWeight": "{primitive.fontWeight.regular}",
+          "fontSize": "{primitive.fontSize.sm}",
+          "lineHeight": "{primitive.lineHeight.sm}",
+          "letterSpacing": "{primitive.letterSpacing.normal}",
+          "_comment": "14px. 계좌번호, 카드번호, 인증코드"
+        },
+        "sm": {
+          "fontFamily": "monospace",
+          "fontWeight": "{primitive.fontWeight.regular}",
+          "fontSize": "{primitive.fontSize.xs}",
+          "lineHeight": "{primitive.lineHeight.xs}",
+          "letterSpacing": "{primitive.letterSpacing.normal}",
+          "_comment": "12px. 참조번호, 거래번호"
+        }
+      }
+    },
+
+    "_migration": {
+      "_comment": "기존 zkap-rn-mvp 토큰에서 마이그레이션할 때 참조",
+      "headlineL": "semantic.headline.lg",
+      "headlineM": "semantic.headline.md",
+      "headlineS": "semantic.headline.sm",
+      "title1": "semantic.title.lg",
+      "title2": "semantic.title.md",
+      "title3": "semantic.title.sm",
+      "labelL": "semantic.label.lg",
+      "labelM": "semantic.label.md",
+      "labelS": "semantic.label.sm",
+      "body1": "semantic.body.md",
+      "body2": "semantic.body.sm",
+      "button1": "semantic.button.md",
+      "button2": "semantic.button.sm",
+      "button3": "semantic.button.xs",
+      "captionL": "semantic.caption.lg",
+      "captionM": "semantic.caption.md",
+      "captionS": "semantic.caption.sm"
+    },
+
+    "_usage": {
+      "_comment": "일반적인 사용 가이드라인",
+      "hierarchy": "display > headline > title > body/label > caption 순으로 시각적 위계",
+      "accessibility": "본문 최소 14px, 권장 16px. 명암비 4.5:1 이상",
+      "lineLength": "한 줄에 45-75자(한글 기준 22-37자) 권장",
+      "spacing": "제목과 본문 사이 여백은 본문 행간의 1.5-2배",
+      "consistency": "같은 계층의 텍스트는 같은 스타일 사용"
+    }
+  }
+}

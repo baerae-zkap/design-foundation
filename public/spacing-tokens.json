@@ -1,0 +1,352 @@
+{
+  "_meta": {
+    "version": "2.0",
+    "name": "zkap-design-system",
+    "type": "spacing",
+    "created": "2025-02-03",
+    "baseUnit": 4,
+    "_comment": "4px 기반 그리드 시스템. 모든 값은 4의 배수"
+  },
+
+  "spacing": {
+    "primitive": {
+      "_comment": "기본 간격 스케일. 4px 단위로 0~80px 범위",
+      "0": 0,
+      "1": 4,
+      "2": 8,
+      "3": 12,
+      "4": 16,
+      "5": 20,
+      "6": 24,
+      "7": 28,
+      "8": 32,
+      "10": 40,
+      "12": 48,
+      "14": 56,
+      "16": 64,
+      "20": 80,
+
+      "px": {
+        "_comment": "픽셀 단위 직접 참조용",
+        "0": "0px",
+        "4": "4px",
+        "8": "8px",
+        "12": "12px",
+        "16": "16px",
+        "20": "20px",
+        "24": "24px",
+        "28": "28px",
+        "32": "32px",
+        "40": "40px",
+        "48": "48px",
+        "56": "56px",
+        "64": "64px",
+        "80": "80px"
+      }
+    },
+
+    "semantic": {
+      "_description": {
+        "inset": "컴포넌트 내부 padding",
+        "stack": "수직 방향 요소 간 간격 (위아래)",
+        "inline": "수평 방향 요소 간 간격 (좌우)",
+        "section": "섹션/그룹 단위 간격",
+        "screen": "화면 레벨 여백"
+      },
+
+      "inset": {
+        "_comment": "컴포넌트 내부 padding. 버튼, 카드, 입력 필드 등",
+        "none": {
+          "value": "{primitive.0}",
+          "_comment": "0px. 패딩 없음"
+        },
+        "3xs": {
+          "value": "{primitive.1}",
+          "_comment": "4px. 뱃지, 태그 내부 최소 패딩"
+        },
+        "2xs": {
+          "value": "{primitive.2}",
+          "_comment": "8px. 소형 칩, 아이콘 버튼 패딩"
+        },
+        "xs": {
+          "value": "{primitive.3}",
+          "_comment": "12px. 소형 버튼, 입력 필드 좌우 패딩"
+        },
+        "sm": {
+          "value": "{primitive.4}",
+          "_comment": "16px. 기본 버튼 패딩, 카드 내부 여백"
+        },
+        "md": {
+          "value": "{primitive.5}",
+          "_comment": "20px. 중형 카드, 리스트 아이템 패딩"
+        },
+        "lg": {
+          "value": "{primitive.6}",
+          "_comment": "24px. 대형 카드, 모달 내부 패딩"
+        },
+        "xl": {
+          "value": "{primitive.8}",
+          "_comment": "32px. 풀스크린 모달, 온보딩 카드 패딩"
+        }
+      },
+
+      "stack": {
+        "_comment": "수직 방향 요소 간 간격. 리스트, 폼 필드 사이 등",
+        "none": {
+          "value": "{primitive.0}",
+          "_comment": "0px. 간격 없음"
+        },
+        "3xs": {
+          "value": "{primitive.1}",
+          "_comment": "4px. 아이콘과 텍스트, 매우 밀접한 요소"
+        },
+        "2xs": {
+          "value": "{primitive.2}",
+          "_comment": "8px. 라벨과 입력 필드, 관련 텍스트 그룹"
+        },
+        "xs": {
+          "value": "{primitive.3}",
+          "_comment": "12px. 리스트 아이템 사이, 폼 필드 간격"
+        },
+        "sm": {
+          "value": "{primitive.4}",
+          "_comment": "16px. 카드 내 섹션 구분, 단락 사이"
+        },
+        "md": {
+          "value": "{primitive.5}",
+          "_comment": "20px. 컴포넌트 그룹 사이"
+        },
+        "lg": {
+          "value": "{primitive.6}",
+          "_comment": "24px. 섹션 내 주요 구분"
+        },
+        "xl": {
+          "value": "{primitive.8}",
+          "_comment": "32px. 페이지 섹션 사이"
+        },
+        "2xl": {
+          "value": "{primitive.10}",
+          "_comment": "40px. 대형 섹션 구분"
+        },
+        "3xl": {
+          "value": "{primitive.12}",
+          "_comment": "48px. 페이지 주요 영역 구분"
+        }
+      },
+
+      "inline": {
+        "_comment": "수평 방향 요소 간 간격. 버튼 그룹, 아이콘-텍스트 등",
+        "none": {
+          "value": "{primitive.0}",
+          "_comment": "0px. 간격 없음"
+        },
+        "3xs": {
+          "value": "{primitive.1}",
+          "_comment": "4px. 아이콘과 텍스트 최소 간격"
+        },
+        "2xs": {
+          "value": "{primitive.2}",
+          "_comment": "8px. 기본 아이콘-텍스트 간격, 칩 사이"
+        },
+        "xs": {
+          "value": "{primitive.3}",
+          "_comment": "12px. 버튼 그룹 간격, 탭 사이"
+        },
+        "sm": {
+          "value": "{primitive.4}",
+          "_comment": "16px. 카드 그룹 간격"
+        },
+        "md": {
+          "value": "{primitive.5}",
+          "_comment": "20px. 큰 카드 사이 간격"
+        },
+        "lg": {
+          "value": "{primitive.6}",
+          "_comment": "24px. 그리드 gutter"
+        }
+      },
+
+      "screen": {
+        "_comment": "화면 레벨 여백. 스크린 좌우 패딩, 세이프 에어리어 등",
+        "paddingX": {
+          "value": "{primitive.5}",
+          "_comment": "20px. 화면 좌우 기본 패딩"
+        },
+        "paddingXCompact": {
+          "value": "{primitive.4}",
+          "_comment": "16px. 좁은 화면용 좌우 패딩"
+        },
+        "paddingXWide": {
+          "value": "{primitive.6}",
+          "_comment": "24px. 넓은 화면/태블릿 좌우 패딩"
+        },
+        "paddingTop": {
+          "value": "{primitive.4}",
+          "_comment": "16px. 화면 상단 기본 패딩"
+        },
+        "paddingBottom": {
+          "value": "{primitive.5}",
+          "_comment": "20px. 화면 하단 기본 패딩 (CTA 버튼 위)"
+        },
+        "safeAreaBottom": {
+          "value": "{primitive.8}",
+          "_comment": "32px. 홈 인디케이터 영역 고려한 하단 여백"
+        }
+      },
+
+      "component": {
+        "_comment": "특정 컴포넌트용 시멘틱 토큰",
+
+        "button": {
+          "paddingX": {
+            "lg": { "value": "{primitive.6}", "_comment": "24px. 대형 버튼 좌우" },
+            "md": { "value": "{primitive.5}", "_comment": "20px. 기본 버튼 좌우" },
+            "sm": { "value": "{primitive.4}", "_comment": "16px. 소형 버튼 좌우" },
+            "xs": { "value": "{primitive.3}", "_comment": "12px. 초소형 버튼 좌우" }
+          },
+          "paddingY": {
+            "lg": { "value": "{primitive.4}", "_comment": "16px. 대형 버튼 상하" },
+            "md": { "value": "{primitive.3}", "_comment": "12px. 기본 버튼 상하" },
+            "sm": { "value": "{primitive.2}", "_comment": "8px. 소형 버튼 상하" },
+            "xs": { "value": "{primitive.1}", "_comment": "4px. 초소형 버튼 상하" }
+          },
+          "gap": {
+            "value": "{primitive.2}",
+            "_comment": "8px. 버튼 내 아이콘-텍스트 간격"
+          }
+        },
+
+        "card": {
+          "padding": {
+            "lg": { "value": "{primitive.6}", "_comment": "24px. 대형 카드" },
+            "md": { "value": "{primitive.5}", "_comment": "20px. 기본 카드" },
+            "sm": { "value": "{primitive.4}", "_comment": "16px. 소형 카드" }
+          },
+          "gap": {
+            "value": "{primitive.4}",
+            "_comment": "16px. 카드 내 요소 간격"
+          }
+        },
+
+        "input": {
+          "paddingX": {
+            "value": "{primitive.4}",
+            "_comment": "16px. 입력 필드 좌우 패딩"
+          },
+          "paddingY": {
+            "value": "{primitive.3}",
+            "_comment": "12px. 입력 필드 상하 패딩"
+          },
+          "labelGap": {
+            "value": "{primitive.2}",
+            "_comment": "8px. 라벨과 입력 필드 사이"
+          },
+          "helperGap": {
+            "value": "{primitive.1}",
+            "_comment": "4px. 입력 필드와 도움말 텍스트 사이"
+          }
+        },
+
+        "list": {
+          "itemPaddingX": {
+            "value": "{primitive.5}",
+            "_comment": "20px. 리스트 아이템 좌우 패딩"
+          },
+          "itemPaddingY": {
+            "value": "{primitive.4}",
+            "_comment": "16px. 리스트 아이템 상하 패딩"
+          },
+          "itemGap": {
+            "value": "{primitive.0}",
+            "_comment": "0px. 리스트 아이템 사이 (divider 사용 시)"
+          },
+          "sectionGap": {
+            "value": "{primitive.8}",
+            "_comment": "32px. 리스트 섹션 사이"
+          }
+        },
+
+        "modal": {
+          "padding": {
+            "value": "{primitive.6}",
+            "_comment": "24px. 모달 내부 패딩"
+          },
+          "headerGap": {
+            "value": "{primitive.4}",
+            "_comment": "16px. 모달 헤더와 컨텐츠 사이"
+          },
+          "footerGap": {
+            "value": "{primitive.5}",
+            "_comment": "20px. 컨텐츠와 모달 푸터 사이"
+          },
+          "buttonGap": {
+            "value": "{primitive.3}",
+            "_comment": "12px. 모달 버튼 사이"
+          }
+        },
+
+        "bottomSheet": {
+          "padding": {
+            "value": "{primitive.5}",
+            "_comment": "20px. 바텀시트 기본 패딩"
+          },
+          "handleGap": {
+            "value": "{primitive.4}",
+            "_comment": "16px. 핸들과 컨텐츠 사이"
+          }
+        },
+
+        "header": {
+          "height": {
+            "value": "{primitive.14}",
+            "_comment": "56px. 기본 헤더 높이"
+          },
+          "paddingX": {
+            "value": "{primitive.4}",
+            "_comment": "16px. 헤더 좌우 패딩"
+          }
+        },
+
+        "tabBar": {
+          "height": {
+            "value": "{primitive.12}",
+            "_comment": "48px. 탭바 기본 높이"
+          },
+          "itemGap": {
+            "value": "{primitive.2}",
+            "_comment": "8px. 탭 아이템 사이"
+          }
+        },
+
+        "divider": {
+          "marginY": {
+            "value": "{primitive.4}",
+            "_comment": "16px. 구분선 상하 여백"
+          }
+        }
+      }
+    },
+
+    "_usage": {
+      "_comment": "간격 사용 가이드라인",
+      "proximity": "관련 요소는 가깝게(4-8px), 무관한 요소는 멀게(16px+)",
+      "hierarchy": "중요도가 높은 구분일수록 큰 간격 사용",
+      "consistency": "같은 맥락의 간격은 동일한 토큰 사용",
+      "touchTarget": "터치 영역은 최소 44px 확보 (iOS HIG 기준)",
+      "rhythm": "4px 배수로 시각적 리듬 유지"
+    },
+
+    "_migration": {
+      "_comment": "기존 하드코딩 값에서 토큰으로 마이그레이션 가이드",
+      "4": "primitive.1 또는 inset.3xs / stack.3xs / inline.3xs",
+      "8": "primitive.2 또는 inset.2xs / stack.2xs / inline.2xs",
+      "12": "primitive.3 또는 inset.xs / stack.xs / inline.xs",
+      "16": "primitive.4 또는 inset.sm / stack.sm / inline.sm",
+      "20": "primitive.5 또는 inset.md / stack.md / screen.paddingX",
+      "24": "primitive.6 또는 inset.lg / stack.lg / inline.lg",
+      "32": "primitive.8 또는 inset.xl / stack.xl",
+      "40": "primitive.10 또는 stack.2xl",
+      "48": "primitive.12 또는 stack.3xl"
+    }
+  }
+}

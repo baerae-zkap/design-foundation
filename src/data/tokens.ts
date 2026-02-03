@@ -1,0 +1,362 @@
+// ZKAP Design System Tokens
+
+export const palette = {
+  grey: {
+    50: "#F8F9FA",
+    100: "#F2F3F5",
+    200: "#E4E6EA",
+    300: "#D0D4DA",
+    400: "#9BA2AD",
+    500: "#6A717F",
+    600: "#4A5462",
+    700: "#364050",
+    800: "#1E2836",
+    900: "#101726",
+  },
+  blue: {
+    50: "#E6E8FF",
+    100: "#C0C5FF",
+    200: "#94A3FF",
+    300: "#667FFF",
+    400: "#4062FF",
+    500: "#004FFF",
+    600: "#0040F1",
+    700: "#0035E2",
+    800: "#0029D6",
+    900: "#0014C4",
+  },
+  red: {
+    50: "#FDE8EA",
+    100: "#FACBD0",
+    200: "#EE9194",
+    300: "#E46969",
+    400: "#E94A50",
+    500: "#F33B31",
+    600: "#E2332F",
+    700: "#CE2A2A",
+    800: "#BF2425",
+    900: "#AF1B1B",
+  },
+  orange: {
+    50: "#FEF4E0",
+    100: "#FEDEB3",
+    200: "#FECD81",
+    300: "#FEB74E",
+    400: "#FEA627",
+    500: "#FE9400",
+    600: "#FA8500",
+    700: "#F47300",
+    800: "#EE6200",
+    900: "#E54C00",
+  },
+  yellow: {
+    50: "#FEFCE7",
+    100: "#FEF8C5",
+    200: "#FEF49F",
+    300: "#FEF077",
+    400: "#FEEC53",
+    500: "#FEE73C",
+    600: "#FEDA36",
+    700: "#FEC92E",
+    800: "#FEB826",
+    900: "#FE9A18",
+  },
+  green: {
+    50: "#E2F7EA",
+    100: "#BBECCE",
+    200: "#91DFB1",
+    300: "#64D295",
+    400: "#47C77F",
+    500: "#26BA6B",
+    600: "#21A860",
+    700: "#1A9353",
+    800: "#147E47",
+    900: "#0B5E33",
+  },
+  teal: {
+    50: "#E0F4F3",
+    100: "#B4E5E2",
+    200: "#84D5D0",
+    300: "#53C4BE",
+    400: "#2FB8B0",
+    500: "#0CABA3",
+    600: "#0A9C95",
+    700: "#078984",
+    800: "#057773",
+    900: "#025755",
+  },
+  purple: {
+    50: "#F2E8FA",
+    100: "#DFC8F4",
+    200: "#CAA5ED",
+    300: "#B581E5",
+    400: "#A563DF",
+    500: "#9547D9",
+    600: "#873FCE",
+    700: "#7535BF",
+    800: "#632CB0",
+    900: "#471E95",
+  },
+  navy: {
+    50: "#DFEDF4",
+    100: "#AFD2E7",
+    200: "#84B8D8",
+    300: "#5E9DC9",
+    400: "#468BBF",
+    500: "#317DB7",
+    600: "#2971AA",
+    700: "#1E5E98",
+    800: "#184F85",
+    900: "#0F3868",
+  },
+  static: {
+    white: "#FFFFFF",
+    black: "#000000",
+  },
+};
+
+export const semanticColors = {
+  light: {
+    brand: {
+      primary: { value: palette.blue[500], description: "주 브랜드 컬러. 로고, 주요 CTA" },
+      secondary1: { value: palette.orange[700], description: "보조 브랜드 컬러 1. 포인트, 강조" },
+      secondary2: { value: palette.blue[200], description: "보조 브랜드 컬러 2. 연한 포인트" },
+      secondary3: { value: palette.navy[900], description: "보조 브랜드 컬러 3. 어두운 포인트" },
+    },
+    background: {
+      bg1: { value: palette.static.white, description: "기본 배경색. 대부분의 화면 바탕" },
+      bg2: { value: palette.grey[100], description: "보조 배경색. 섹션 구분, 입력필드 배경" },
+      bg3: { value: palette.blue[50], description: "강조 배경색. 프로모션 영역" },
+      elevated: { value: palette.static.white, description: "높이감 있는 카드 배경" },
+      sunken: { value: palette.grey[100], description: "움푹 들어간 영역. 인풋 필드 내부" },
+    },
+    text: {
+      text1: { value: palette.grey[900], description: "가장 중요한 텍스트. 제목, 본문" },
+      text2: { value: palette.grey[700], description: "보조 텍스트. 설명문, 부제목" },
+      text3: { value: palette.grey[500], description: "약한 텍스트. 힌트, 캡션" },
+      placeholder: { value: palette.grey[400], description: "입력 필드 플레이스홀더" },
+      disabled: { value: palette.grey[300], description: "비활성 상태 텍스트" },
+      link: { value: palette.blue[500], description: "클릭 가능한 링크 텍스트" },
+      error: { value: palette.red[500], description: "에러 메시지 텍스트" },
+      success: { value: palette.green[600], description: "성공 메시지 텍스트" },
+    },
+    divider: {
+      divider1: { value: palette.grey[200], description: "기본 구분선. 리스트 아이템 사이" },
+      divider2: { value: palette.grey[300], description: "강한 구분선. 섹션 사이" },
+      subtle: { value: palette.grey[100], description: "약한 구분선. 미세한 영역 분리" },
+    },
+    semantic: {
+      info: { value: palette.blue[500], description: "정보성 아이콘/텍스트" },
+      infoBg: { value: palette.blue[50], description: "정보성 메시지 배경" },
+      success: { value: palette.green[600], description: "성공 상태" },
+      successBg: { value: palette.green[50], description: "성공 메시지 배경" },
+      warning: { value: palette.orange[500], description: "경고 상태" },
+      warningBg: { value: palette.orange[50], description: "경고 메시지 배경" },
+      error: { value: palette.red[500], description: "에러 상태" },
+      errorBg: { value: palette.red[50], description: "에러 메시지 배경" },
+    },
+    button: {
+      primaryBg: { value: palette.blue[500], description: "Primary 버튼 배경" },
+      primaryText: { value: palette.static.white, description: "Primary 버튼 텍스트" },
+      secondaryBg: { value: palette.grey[100], description: "Secondary 버튼 배경" },
+      secondaryText: { value: palette.grey[900], description: "Secondary 버튼 텍스트" },
+      disabledBg: { value: palette.grey[200], description: "비활성 버튼 배경" },
+      disabledText: { value: palette.grey[400], description: "비활성 버튼 텍스트" },
+    },
+  },
+  dark: {
+    brand: {
+      primary: { value: palette.blue[400], description: "다크모드 브랜드 컬러" },
+      secondary1: { value: palette.orange[500], description: "다크모드 보조 컬러 1" },
+      secondary2: { value: palette.blue[300], description: "다크모드 보조 컬러 2" },
+      secondary3: { value: palette.navy[400], description: "다크모드 보조 컬러 3" },
+    },
+    background: {
+      bg1: { value: palette.grey[900], description: "다크모드 기본 배경" },
+      bg2: { value: palette.grey[800], description: "다크모드 보조 배경" },
+      bg3: { value: palette.blue[900], description: "다크모드 강조 배경" },
+      elevated: { value: palette.grey[800], description: "다크모드 카드 배경" },
+      sunken: { value: palette.grey[900], description: "다크모드 움푹 들어간 영역" },
+    },
+    text: {
+      text1: { value: palette.grey[50], description: "다크모드 기본 텍스트" },
+      text2: { value: palette.grey[300], description: "다크모드 보조 텍스트" },
+      text3: { value: palette.grey[400], description: "다크모드 약한 텍스트" },
+      placeholder: { value: palette.grey[500], description: "다크모드 플레이스홀더" },
+      disabled: { value: palette.grey[600], description: "다크모드 비활성 텍스트" },
+      link: { value: palette.blue[400], description: "다크모드 링크" },
+      error: { value: palette.red[400], description: "다크모드 에러" },
+      success: { value: palette.green[400], description: "다크모드 성공" },
+    },
+    divider: {
+      divider1: { value: palette.grey[700], description: "다크모드 기본 구분선" },
+      divider2: { value: palette.grey[600], description: "다크모드 강한 구분선" },
+      subtle: { value: palette.grey[800], description: "다크모드 약한 구분선" },
+    },
+    semantic: {
+      info: { value: palette.blue[400], description: "다크모드 정보" },
+      infoBg: { value: palette.blue[900], description: "다크모드 정보 배경" },
+      success: { value: palette.green[400], description: "다크모드 성공" },
+      successBg: { value: palette.green[900], description: "다크모드 성공 배경" },
+      warning: { value: palette.orange[400], description: "다크모드 경고" },
+      warningBg: { value: palette.orange[900], description: "다크모드 경고 배경" },
+      error: { value: palette.red[400], description: "다크모드 에러" },
+      errorBg: { value: palette.red[900], description: "다크모드 에러 배경" },
+    },
+    button: {
+      primaryBg: { value: palette.blue[500], description: "다크모드 Primary 버튼" },
+      primaryText: { value: palette.static.white, description: "다크모드 Primary 텍스트" },
+      secondaryBg: { value: palette.grey[700], description: "다크모드 Secondary 버튼" },
+      secondaryText: { value: palette.grey[100], description: "다크모드 Secondary 텍스트" },
+      disabledBg: { value: palette.grey[800], description: "다크모드 비활성 버튼" },
+      disabledText: { value: palette.grey[600], description: "다크모드 비활성 텍스트" },
+    },
+  },
+};
+
+export const typography = {
+  fontFamily: {
+    base: "Pretendard",
+    numeric: "Spoqa Han Sans Neo",
+  },
+  scale: {
+    // Display - 히어로, 랜딩 페이지
+    display: {
+      lg: { fontSize: 32, lineHeight: 40, fontWeight: 700, description: "메인 히어로 텍스트" },
+      md: { fontSize: 28, lineHeight: 36, fontWeight: 700, description: "섹션 타이틀" },
+      sm: { fontSize: 24, lineHeight: 32, fontWeight: 700, description: "서브 타이틀" },
+    },
+    // Title - 페이지/섹션 타이틀
+    title: {
+      t1: { fontSize: 36, lineHeight: 44, fontWeight: 700, description: "대형 페이지 타이틀" },
+      t2: { fontSize: 32, lineHeight: 40, fontWeight: 700, description: "페이지 타이틀" },
+      t3: { fontSize: 28, lineHeight: 36, fontWeight: 700, description: "섹션 타이틀" },
+      t4: { fontSize: 24, lineHeight: 32, fontWeight: 700, description: "서브섹션 타이틀" },
+    },
+    // Subtitle - 부제목, 서브헤더
+    subtitle: {
+      st1: { fontSize: 20, lineHeight: 28, fontWeight: 600, description: "큰 부제목" },
+      st2: { fontSize: 18, lineHeight: 26, fontWeight: 600, description: "중간 부제목" },
+      st3: { fontSize: 16, lineHeight: 24, fontWeight: 600, description: "기본 부제목" },
+      st4: { fontSize: 14, lineHeight: 20, fontWeight: 600, description: "작은 부제목" },
+    },
+    // Heading - 기존 호환용
+    heading: {
+      lg: { fontSize: 24, lineHeight: 32, fontWeight: 600, description: "페이지 제목" },
+      md: { fontSize: 20, lineHeight: 28, fontWeight: 600, description: "카드 제목" },
+      sm: { fontSize: 18, lineHeight: 26, fontWeight: 600, description: "섹션 소제목" },
+    },
+    // Body - 본문 텍스트
+    body: {
+      xl: { fontSize: 18, lineHeight: 28, fontWeight: 400, description: "본문 (큰 텍스트)" },
+      lg: { fontSize: 16, lineHeight: 24, fontWeight: 400, description: "본문 (기본)" },
+      md: { fontSize: 14, lineHeight: 20, fontWeight: 400, description: "본문 (보조)" },
+      sm: { fontSize: 13, lineHeight: 18, fontWeight: 400, description: "본문 (작은)" },
+      xs: { fontSize: 12, lineHeight: 16, fontWeight: 400, description: "본문 (미니)" },
+    },
+    // Label - UI 라벨, 버튼
+    label: {
+      lg: { fontSize: 16, lineHeight: 24, fontWeight: 500, description: "큰 라벨, 버튼" },
+      md: { fontSize: 14, lineHeight: 20, fontWeight: 500, description: "기본 라벨" },
+      sm: { fontSize: 12, lineHeight: 16, fontWeight: 500, description: "작은 라벨" },
+    },
+    // Numeric - 금액, 숫자 전용
+    numeric: {
+      xl: { fontSize: 32, lineHeight: 40, fontWeight: 600, description: "대형 금액 표시" },
+      lg: { fontSize: 24, lineHeight: 32, fontWeight: 600, description: "큰 금액" },
+      md: { fontSize: 18, lineHeight: 26, fontWeight: 600, description: "중간 금액" },
+      sm: { fontSize: 14, lineHeight: 20, fontWeight: 600, description: "작은 금액" },
+    },
+    // Caption & Overline
+    caption: { fontSize: 12, lineHeight: 16, fontWeight: 400, description: "부가 정보" },
+    overline: { fontSize: 11, lineHeight: 14, fontWeight: 500, description: "라벨, 태그" },
+  },
+};
+
+export const spacing = {
+  primitive: {
+    0: { value: 0, description: "없음" },
+    1: { value: 4, description: "4px" },
+    2: { value: 8, description: "8px" },
+    3: { value: 12, description: "12px" },
+    4: { value: 16, description: "16px" },
+    5: { value: 20, description: "20px" },
+    6: { value: 24, description: "24px" },
+    8: { value: 32, description: "32px" },
+    10: { value: 40, description: "40px" },
+    12: { value: 48, description: "48px" },
+    16: { value: 64, description: "64px" },
+    20: { value: 80, description: "80px" },
+  },
+  semantic: {
+    inset: {
+      xs: { value: 8, description: "소형 칩, 아이콘 버튼 패딩" },
+      sm: { value: 12, description: "소형 버튼, 입력 필드 좌우 패딩" },
+      md: { value: 16, description: "기본 버튼 패딩, 카드 내부 여백" },
+      lg: { value: 20, description: "넉넉한 카드 내부 여백" },
+      xl: { value: 24, description: "모달, 바텀시트 내부 여백" },
+    },
+    stack: {
+      xs: { value: 4, description: "타이틀-서브타이틀 간격" },
+      sm: { value: 8, description: "관련 요소 그룹핑" },
+      md: { value: 16, description: "리스트 아이템 간격" },
+      lg: { value: 24, description: "카드 간 간격" },
+      xl: { value: 32, description: "섹션 간 간격" },
+    },
+    inline: {
+      xs: { value: 4, description: "아이콘-텍스트 최소 간격" },
+      sm: { value: 8, description: "인라인 요소 기본 간격" },
+      md: { value: 12, description: "버튼 그룹 간격" },
+      lg: { value: 16, description: "탭 아이템 간격" },
+    },
+    screen: {
+      horizontal: { value: 20, description: "화면 좌우 패딩" },
+      top: { value: 16, description: "화면 상단 여백" },
+      bottom: { value: 32, description: "화면 하단 여백" },
+    },
+  },
+};
+
+export const radius = {
+  primitive: {
+    none: { value: 0, description: "직각" },
+    xs: { value: 2, description: "미세한 라운딩" },
+    sm: { value: 4, description: "작은 요소" },
+    md: { value: 8, description: "기본 라운딩" },
+    lg: { value: 12, description: "카드, 모달" },
+    xl: { value: 16, description: "큰 카드" },
+    "2xl": { value: 20, description: "바텀시트" },
+    full: { value: 9999, description: "원형, 필" },
+  },
+  semantic: {
+    button: {
+      sm: { value: 6, description: "소형 버튼" },
+      md: { value: 8, description: "기본 버튼" },
+      lg: { value: 12, description: "대형 버튼" },
+      full: { value: 9999, description: "pill 버튼" },
+    },
+    input: { value: 8, description: "입력 필드" },
+    card: { value: 12, description: "카드" },
+    chip: { value: 16, description: "칩, 태그" },
+    avatar: { value: 9999, description: "아바타 (원형)" },
+  },
+};
+
+export const shadow = {
+  primitive: {
+    none: { value: "none", description: "그림자 없음" },
+    xs: { value: "0px 1px 2px rgba(16, 23, 38, 0.06)", description: "elevation 1" },
+    sm: { value: "0px 2px 4px rgba(16, 23, 38, 0.08)", description: "elevation 2" },
+    md: { value: "0px 4px 8px rgba(16, 23, 38, 0.10)", description: "elevation 3" },
+    lg: { value: "0px 8px 16px rgba(16, 23, 38, 0.12)", description: "elevation 4" },
+    xl: { value: "0px 12px 24px rgba(16, 23, 38, 0.14)", description: "elevation 5" },
+    "2xl": { value: "0px 16px 32px rgba(16, 23, 38, 0.16)", description: "elevation 6" },
+  },
+  semantic: {
+    card: { value: "0px 2px 4px rgba(16, 23, 38, 0.08)", description: "카드 기본" },
+    cardHover: { value: "0px 4px 8px rgba(16, 23, 38, 0.10)", description: "카드 호버" },
+    dropdown: { value: "0px 4px 8px rgba(16, 23, 38, 0.10)", description: "드롭다운" },
+    modal: { value: "0px 8px 16px rgba(16, 23, 38, 0.12)", description: "모달" },
+    toast: { value: "0px 4px 8px rgba(16, 23, 38, 0.10)", description: "토스트" },
+  },
+};

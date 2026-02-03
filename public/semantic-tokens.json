@@ -1,0 +1,455 @@
+{
+  "_meta": {
+    "version": "2.0",
+    "name": "zkap-design-system",
+    "type": "semantic-tokens",
+    "created": "2025-02-03",
+    "paletteRef": "./palette.json"
+  },
+
+  "light": {
+    "_description": "라이트 테마 시멘틱 토큰",
+
+    "brand": {
+      "_description": "브랜드 아이덴티티 컬러",
+      "primary": "{palette.blue.500}",
+      "primary_comment": "주 브랜드 컬러. 로고, 주요 CTA",
+      "secondary1": "{palette.orange.700}",
+      "secondary1_comment": "보조 브랜드 컬러 1. 포인트, 강조",
+      "secondary2": "{palette.blue.200}",
+      "secondary2_comment": "보조 브랜드 컬러 2. 연한 포인트",
+      "secondary3": "{palette.navy.900}",
+      "secondary3_comment": "보조 브랜드 컬러 3. 어두운 포인트"
+    },
+
+    "background": {
+      "_description": "배경색 - 화면/컨테이너의 바탕색",
+      "bg1": "{palette.static.white}",
+      "bg1_comment": "기본 배경색. 대부분의 화면 바탕",
+      "bg2": "{palette.grey.100}",
+      "bg2_comment": "보조 배경색. 섹션 구분, 입력필드 배경",
+      "bg3": "{palette.blue.50}",
+      "bg3_comment": "강조 배경색. 프로모션 영역, 특별 섹션",
+      "bg4": "{palette.grey.200}",
+      "bg4_comment": "비활성 영역, 스켈레톤 로딩",
+      "grey": "{palette.grey.100}",
+      "grey_comment": "회색 배경이 필요한 영역. 리스트 사이 구분",
+      "layered": "{palette.static.white}",
+      "layered_comment": "겹쳐진 레이어 배경. 드롭다운, 메뉴",
+      "floated": "{palette.static.white}",
+      "floated_comment": "떠있는 요소 배경. FAB, 플로팅 버튼",
+      "elevated": "{palette.static.white}",
+      "elevated_comment": "높이감 있는 카드. 그림자와 함께 사용",
+      "sunken": "{palette.grey.100}",
+      "sunken_comment": "움푹 들어간 영역. 인풋 필드 내부"
+    },
+
+    "text": {
+      "_description": "텍스트 컬러 - 가독성과 정보 계층 표현",
+      "text1": "{palette.grey.900}",
+      "text1_comment": "가장 중요한 텍스트. 제목, 본문",
+      "text2": "{palette.grey.700}",
+      "text2_comment": "보조 텍스트. 설명문, 부제목",
+      "text3": "{palette.grey.500}",
+      "text3_comment": "약한 텍스트. 힌트, 캡션",
+      "text4": "{palette.grey.400}",
+      "text4_comment": "가장 약한 텍스트. 비활성 라벨",
+      "text1White": "{palette.static.white}",
+      "text1White_comment": "어두운 배경 위 기본 텍스트",
+      "text2White": "{palette.grey.200}",
+      "text2White_comment": "어두운 배경 위 보조 텍스트",
+      "text3White": "{palette.grey.300}",
+      "text3White_comment": "어두운 배경 위 약한 텍스트",
+      "placeholder": "{palette.grey.400}",
+      "placeholder_comment": "입력 필드 플레이스홀더",
+      "disabled": "{palette.grey.300}",
+      "disabled_comment": "비활성 상태 텍스트",
+      "link": "{palette.blue.500}",
+      "link_comment": "클릭 가능한 링크 텍스트",
+      "error": "{palette.red.500}",
+      "error_comment": "에러 메시지 텍스트",
+      "success": "{palette.green.600}",
+      "success_comment": "성공 메시지 텍스트"
+    },
+
+    "divider": {
+      "_description": "구분선 - 영역/콘텐츠 분리",
+      "divider1": "{palette.grey.200}",
+      "divider1_comment": "기본 구분선. 리스트 아이템 사이",
+      "divider2": "{palette.grey.300}",
+      "divider2_comment": "강한 구분선. 섹션 사이",
+      "subtle": "{palette.grey.100}",
+      "subtle_comment": "약한 구분선. 미세한 영역 분리",
+      "focus": "{palette.blue.500}",
+      "focus_comment": "포커스 상태 보더"
+    },
+
+    "semantic": {
+      "_description": "의미 기반 컬러 - 상태/피드백 표현",
+      "info": "{palette.blue.200}",
+      "info_comment": "정보성 메시지 아이콘/텍스트",
+      "infoBg": "{palette.blue.50}",
+      "infoBg_comment": "정보성 메시지 배경",
+      "infoBorder": "{palette.blue.200}",
+      "infoBorder_comment": "정보성 메시지 보더",
+      "success": "{palette.green.600}",
+      "success_comment": "성공 상태 아이콘/텍스트",
+      "successBg": "{palette.green.50}",
+      "successBg_comment": "성공 메시지 배경",
+      "successBorder": "{palette.green.200}",
+      "successBorder_comment": "성공 메시지 보더",
+      "warning": "{palette.orange.600}",
+      "warning_comment": "경고 상태 아이콘/텍스트",
+      "warningBg": "{palette.orange.50}",
+      "warningBg_comment": "경고 메시지 배경",
+      "warningBorder": "{palette.orange.200}",
+      "warningBorder_comment": "경고 메시지 보더",
+      "error": "{palette.red.600}",
+      "error_comment": "에러 상태 아이콘/텍스트",
+      "errorBg": "{palette.red.50}",
+      "errorBg_comment": "에러 메시지 배경",
+      "errorBorder": "{palette.red.200}",
+      "errorBorder_comment": "에러 메시지 보더"
+    },
+
+    "icon": {
+      "_description": "아이콘 컬러",
+      "default": "{palette.grey.400}",
+      "default_comment": "기본 아이콘. 네비게이션, 액션 버튼",
+      "secondary": "{palette.grey.500}",
+      "secondary_comment": "보조 아이콘. 정보성 아이콘",
+      "tertiary": "{palette.grey.400}",
+      "tertiary_comment": "약한 아이콘. 힌트, 데코레이션",
+      "disabled": "{palette.grey.300}",
+      "disabled_comment": "비활성 상태 아이콘",
+      "colored": "{palette.blue.500}",
+      "colored_comment": "강조 아이콘. 선택됨, 활성 상태",
+      "white": "{palette.static.white}",
+      "white_comment": "어두운 배경 위 아이콘"
+    },
+
+    "cta": {
+      "_description": "CTA(Call To Action) - 버튼/인터랙티브 요소",
+      "primary": {
+        "_description": "주요 액션 버튼",
+        "default": "{palette.blue.500}",
+        "default_comment": "기본 상태. 결제, 확인 등 주요 액션",
+        "hover": "{palette.blue.600}",
+        "hover_comment": "마우스 오버 상태",
+        "pressed": "{palette.blue.700}",
+        "pressed_comment": "누름/터치 상태",
+        "disabled": "{palette.grey.200}",
+        "disabled_comment": "비활성 상태. 조건 미충족"
+      },
+      "secondary": {
+        "_description": "보조 액션 버튼",
+        "default": "{palette.blue.50}",
+        "default_comment": "기본 상태. 취소, 이전 등 보조 액션",
+        "hover": "{palette.blue.100}",
+        "hover_comment": "마우스 오버 상태",
+        "pressed": "{palette.blue.200}",
+        "pressed_comment": "누름/터치 상태",
+        "text": "{palette.blue.600}",
+        "text_comment": "버튼 내부 텍스트 색상",
+        "disabled": "{palette.grey.100}",
+        "disabled_comment": "비활성 상태"
+      },
+      "tertiary": {
+        "_description": "텍스트/아웃라인 버튼",
+        "default": "{palette.static.white}",
+        "default_comment": "배경 없는 버튼. 덜 중요한 액션",
+        "hover": "{palette.grey.100}",
+        "hover_comment": "마우스 오버 상태",
+        "pressed": "{palette.grey.200}",
+        "pressed_comment": "누름/터치 상태",
+        "text": "{palette.grey.800}",
+        "text_comment": "버튼 내부 텍스트 색상",
+        "stroke": "{palette.grey.200}",
+        "stroke_comment": "아웃라인 보더 색상",
+        "disabled": "transparent",
+        "disabled_comment": "비활성 상태 (투명)"
+      },
+      "danger": {
+        "_description": "위험/삭제 액션 버튼",
+        "default": "{palette.red.500}",
+        "default_comment": "삭제, 해지 등 되돌리기 어려운 액션",
+        "hover": "{palette.red.600}",
+        "hover_comment": "마우스 오버 상태",
+        "pressed": "{palette.red.700}",
+        "pressed_comment": "누름/터치 상태",
+        "disabled": "{palette.grey.200}",
+        "disabled_comment": "비활성 상태"
+      },
+      "ghost": {
+        "_description": "고스트 버튼 - 배경 투명",
+        "default": "transparent",
+        "default_comment": "배경 완전 투명. 텍스트만 표시",
+        "hover": "{palette.grey.opacity.100}",
+        "hover_comment": "마우스 오버 시 약한 배경",
+        "pressed": "{palette.grey.opacity.200}",
+        "pressed_comment": "누름/터치 시 배경",
+        "text": "{palette.blue.500}",
+        "text_comment": "버튼 텍스트 색상"
+      }
+    },
+
+    "overlay": {
+      "_description": "오버레이 - 모달/딤 배경",
+      "dim": "{palette.grey.opacity.500}",
+      "dim_comment": "기본 딤 배경. 바텀시트, 모달",
+      "heavy": "{palette.grey.opacity.800}",
+      "heavy_comment": "강한 딤 배경. 중요 모달, 풀스크린 오버레이",
+      "light": "{palette.grey.opacity.200}",
+      "light_comment": "약한 딤 배경. 드롭다운 배경"
+    },
+
+    "surface": {
+      "_description": "서피스 - 떠있는 UI 요소 배경",
+      "card": "{palette.static.white}",
+      "card_comment": "카드 컴포넌트 배경",
+      "modal": "{palette.static.white}",
+      "modal_comment": "모달/다이얼로그 배경",
+      "sheet": "{palette.static.white}",
+      "sheet_comment": "바텀시트 배경",
+      "tooltip": "{palette.grey.800}",
+      "tooltip_comment": "툴팁 배경 (어두운 색)",
+      "popover": "{palette.static.white}",
+      "popover_comment": "팝오버/드롭다운 배경"
+    },
+
+    "trading": {
+      "_description": "트레이딩 - 주식/코인 등락 표시",
+      "profit": "{palette.red.500}",
+      "profit_comment": "상승/이익. 한국 주식 컨벤션 (빨강=상승)",
+      "profitBg": "{palette.red.opacity.10}",
+      "profitBg_comment": "상승 배경색. 차트, 뱃지",
+      "loss": "{palette.blue.500}",
+      "loss_comment": "하락/손실. 한국 주식 컨벤션 (파랑=하락)",
+      "lossBg": "{palette.blue.opacity.10}",
+      "lossBg_comment": "하락 배경색. 차트, 뱃지"
+    }
+  },
+
+  "dark": {
+    "_description": "다크 테마 시멘틱 토큰",
+
+    "brand": {
+      "_description": "브랜드 아이덴티티 컬러 (다크모드 조정)",
+      "primary": "{palette.blue.300}",
+      "primary_comment": "주 브랜드 컬러. 어두운 배경에서 가독성 확보",
+      "secondary1": "{palette.orange.600}",
+      "secondary1_comment": "보조 브랜드 컬러 1",
+      "secondary2": "{palette.blue.100}",
+      "secondary2_comment": "보조 브랜드 컬러 2",
+      "secondary3": "{palette.navy.600}",
+      "secondary3_comment": "보조 브랜드 컬러 3"
+    },
+
+    "background": {
+      "_description": "배경색 - 다크모드 화면 바탕",
+      "bg1": "{palette.grey.900}",
+      "bg1_comment": "기본 배경색. 대부분의 화면 바탕",
+      "bg2": "{palette.grey.800}",
+      "bg2_comment": "보조 배경색. 섹션 구분",
+      "bg3": "{palette.grey.700}",
+      "bg3_comment": "강조 배경색. 활성 영역",
+      "bg4": "{palette.grey.600}",
+      "bg4_comment": "비활성 영역, 스켈레톤 로딩",
+      "grey": "{palette.grey.800}",
+      "grey_comment": "회색 배경이 필요한 영역",
+      "layered": "{palette.grey.800}",
+      "layered_comment": "겹쳐진 레이어 배경",
+      "floated": "{palette.grey.700}",
+      "floated_comment": "떠있는 요소 배경",
+      "elevated": "{palette.grey.800}",
+      "elevated_comment": "높이감 있는 카드",
+      "sunken": "{palette.static.black}",
+      "sunken_comment": "움푹 들어간 영역. 최하위 레이어"
+    },
+
+    "text": {
+      "_description": "텍스트 컬러 - 다크모드 가독성",
+      "text1": "{palette.grey.50}",
+      "text1_comment": "가장 중요한 텍스트. 제목, 본문",
+      "text2": "{palette.grey.200}",
+      "text2_comment": "보조 텍스트. 설명문",
+      "text3": "{palette.grey.300}",
+      "text3_comment": "약한 텍스트. 힌트, 캡션",
+      "text4": "{palette.grey.400}",
+      "text4_comment": "가장 약한 텍스트. 비활성 라벨",
+      "text1White": "{palette.grey.50}",
+      "text1White_comment": "밝은 배경 위 기본 텍스트 (다크모드에선 동일)",
+      "text2White": "{palette.grey.200}",
+      "text2White_comment": "밝은 배경 위 보조 텍스트",
+      "text3White": "{palette.grey.300}",
+      "text3White_comment": "밝은 배경 위 약한 텍스트",
+      "placeholder": "{palette.grey.500}",
+      "placeholder_comment": "입력 필드 플레이스홀더",
+      "disabled": "{palette.grey.600}",
+      "disabled_comment": "비활성 상태 텍스트",
+      "link": "{palette.blue.300}",
+      "link_comment": "클릭 가능한 링크 텍스트",
+      "error": "{palette.red.400}",
+      "error_comment": "에러 메시지 텍스트",
+      "success": "{palette.green.400}",
+      "success_comment": "성공 메시지 텍스트"
+    },
+
+    "divider": {
+      "_description": "구분선 - 다크모드 영역 분리",
+      "divider1": "{palette.grey.800}",
+      "divider1_comment": "기본 구분선. 리스트 아이템 사이",
+      "divider2": "{palette.grey.700}",
+      "divider2_comment": "강한 구분선. 섹션 사이",
+      "subtle": "{palette.grey.800}",
+      "subtle_comment": "약한 구분선. 미세한 영역 분리",
+      "focus": "{palette.blue.400}",
+      "focus_comment": "포커스 상태 보더"
+    },
+
+    "semantic": {
+      "_description": "의미 기반 컬러 - 다크모드 상태 표현",
+      "info": "{palette.blue.400}",
+      "info_comment": "정보성 메시지 아이콘/텍스트",
+      "infoBg": "{palette.blue.opacity.20}",
+      "infoBg_comment": "정보성 메시지 배경 (투명도 사용)",
+      "infoBorder": "{palette.blue.opacity.40}",
+      "infoBorder_comment": "정보성 메시지 보더",
+      "success": "{palette.green.400}",
+      "success_comment": "성공 상태 아이콘/텍스트",
+      "successBg": "{palette.green.opacity.20}",
+      "successBg_comment": "성공 메시지 배경",
+      "successBorder": "{palette.green.opacity.40}",
+      "successBorder_comment": "성공 메시지 보더",
+      "warning": "{palette.orange.400}",
+      "warning_comment": "경고 상태 아이콘/텍스트",
+      "warningBg": "{palette.orange.opacity.20}",
+      "warningBg_comment": "경고 메시지 배경",
+      "warningBorder": "{palette.orange.opacity.40}",
+      "warningBorder_comment": "경고 메시지 보더",
+      "error": "{palette.red.400}",
+      "error_comment": "에러 상태 아이콘/텍스트",
+      "errorBg": "{palette.red.opacity.20}",
+      "errorBg_comment": "에러 메시지 배경",
+      "errorBorder": "{palette.red.opacity.40}",
+      "errorBorder_comment": "에러 메시지 보더"
+    },
+
+    "icon": {
+      "_description": "아이콘 컬러 - 다크모드",
+      "default": "{palette.grey.100}",
+      "default_comment": "기본 아이콘. 네비게이션, 액션 버튼",
+      "secondary": "{palette.grey.400}",
+      "secondary_comment": "보조 아이콘. 정보성 아이콘",
+      "tertiary": "{palette.grey.500}",
+      "tertiary_comment": "약한 아이콘. 힌트, 데코레이션",
+      "disabled": "{palette.grey.700}",
+      "disabled_comment": "비활성 상태 아이콘",
+      "colored": "{palette.blue.400}",
+      "colored_comment": "강조 아이콘. 선택됨, 활성 상태",
+      "white": "{palette.grey.50}",
+      "white_comment": "밝은 배경 위 아이콘"
+    },
+
+    "cta": {
+      "_description": "CTA 버튼 - 다크모드",
+      "primary": {
+        "_description": "주요 액션 버튼",
+        "default": "{palette.blue.500}",
+        "default_comment": "기본 상태. 다크모드에서도 동일",
+        "hover": "{palette.blue.400}",
+        "hover_comment": "마우스 오버 상태 (밝아짐)",
+        "pressed": "{palette.blue.300}",
+        "pressed_comment": "누름/터치 상태",
+        "disabled": "{palette.grey.800}",
+        "disabled_comment": "비활성 상태"
+      },
+      "secondary": {
+        "_description": "보조 액션 버튼",
+        "default": "{palette.blue.opacity.20}",
+        "default_comment": "기본 상태. 투명도 사용",
+        "hover": "{palette.blue.opacity.30}",
+        "hover_comment": "마우스 오버 상태",
+        "pressed": "{palette.blue.opacity.40}",
+        "pressed_comment": "누름/터치 상태",
+        "text": "{palette.blue.300}",
+        "text_comment": "버튼 내부 텍스트 색상",
+        "disabled": "{palette.grey.opacity.200}",
+        "disabled_comment": "비활성 상태"
+      },
+      "tertiary": {
+        "_description": "텍스트/아웃라인 버튼",
+        "default": "{palette.grey.900}",
+        "default_comment": "배경 없는 버튼",
+        "hover": "{palette.grey.800}",
+        "hover_comment": "마우스 오버 상태",
+        "pressed": "{palette.grey.700}",
+        "pressed_comment": "누름/터치 상태",
+        "text": "{palette.grey.200}",
+        "text_comment": "버튼 내부 텍스트 색상",
+        "stroke": "{palette.grey.800}",
+        "stroke_comment": "아웃라인 보더 색상",
+        "disabled": "transparent",
+        "disabled_comment": "비활성 상태"
+      },
+      "danger": {
+        "_description": "위험/삭제 액션 버튼",
+        "default": "{palette.red.500}",
+        "default_comment": "삭제, 해지 등",
+        "hover": "{palette.red.400}",
+        "hover_comment": "마우스 오버 상태",
+        "pressed": "{palette.red.300}",
+        "pressed_comment": "누름/터치 상태",
+        "disabled": "{palette.grey.800}",
+        "disabled_comment": "비활성 상태"
+      },
+      "ghost": {
+        "_description": "고스트 버튼",
+        "default": "transparent",
+        "default_comment": "배경 완전 투명",
+        "hover": "{palette.grey.opacityWhite.100}",
+        "hover_comment": "마우스 오버 시 약한 흰색 배경",
+        "pressed": "{palette.grey.opacityWhite.200}",
+        "pressed_comment": "누름/터치 시 배경",
+        "text": "{palette.blue.300}",
+        "text_comment": "버튼 텍스트 색상"
+      }
+    },
+
+    "overlay": {
+      "_description": "오버레이 - 다크모드 딤 배경",
+      "dim": "{palette.grey.opacity.700}",
+      "dim_comment": "기본 딤 배경. 더 어둡게",
+      "heavy": "{palette.grey.opacity.900}",
+      "heavy_comment": "강한 딤 배경. 거의 불투명",
+      "light": "{palette.grey.opacity.400}",
+      "light_comment": "약한 딤 배경"
+    },
+
+    "surface": {
+      "_description": "서피스 - 다크모드 UI 요소 배경",
+      "card": "{palette.grey.800}",
+      "card_comment": "카드 컴포넌트 배경",
+      "modal": "{palette.grey.700}",
+      "modal_comment": "모달/다이얼로그 배경",
+      "sheet": "{palette.grey.800}",
+      "sheet_comment": "바텀시트 배경",
+      "tooltip": "{palette.grey.600}",
+      "tooltip_comment": "툴팁 배경",
+      "popover": "{palette.grey.700}",
+      "popover_comment": "팝오버/드롭다운 배경"
+    },
+
+    "trading": {
+      "_description": "트레이딩 - 다크모드 등락 표시",
+      "profit": "{palette.red.400}",
+      "profit_comment": "상승/이익. 밝기 조정",
+      "profitBg": "{palette.red.opacity.20}",
+      "profitBg_comment": "상승 배경색. 투명도 증가",
+      "loss": "{palette.blue.400}",
+      "loss_comment": "하락/손실. 밝기 조정",
+      "lossBg": "{palette.blue.opacity.20}",
+      "lossBg_comment": "하락 배경색. 투명도 증가"
+    }
+  }
+}

@@ -1,0 +1,258 @@
+{
+  "_meta": {
+    "version": "2.0",
+    "name": "zkap-design-system",
+    "type": "shadow",
+    "created": "2025-02-03",
+    "_comment": "elevation 기반 그림자 시스템. 높이가 높을수록 그림자 강해짐"
+  },
+
+  "shadow": {
+    "primitive": {
+      "_comment": "elevation 레벨별 그림자. offsetY, blur, spread, opacity 조합",
+
+      "none": {
+        "value": "none",
+        "_comment": "그림자 없음"
+      },
+
+      "xs": {
+        "value": "0px 1px 2px rgba(16, 23, 38, 0.06)",
+        "offsetX": 0,
+        "offsetY": 1,
+        "blur": 2,
+        "spread": 0,
+        "color": "rgba(16, 23, 38, 0.06)",
+        "_comment": "elevation 1. 미세한 분리감"
+      },
+
+      "sm": {
+        "value": "0px 2px 4px rgba(16, 23, 38, 0.08)",
+        "offsetX": 0,
+        "offsetY": 2,
+        "blur": 4,
+        "spread": 0,
+        "color": "rgba(16, 23, 38, 0.08)",
+        "_comment": "elevation 2. 카드, 버튼 호버"
+      },
+
+      "md": {
+        "value": "0px 4px 8px rgba(16, 23, 38, 0.10)",
+        "offsetX": 0,
+        "offsetY": 4,
+        "blur": 8,
+        "spread": 0,
+        "color": "rgba(16, 23, 38, 0.10)",
+        "_comment": "elevation 3. 드롭다운, 팝오버"
+      },
+
+      "lg": {
+        "value": "0px 8px 16px rgba(16, 23, 38, 0.12)",
+        "offsetX": 0,
+        "offsetY": 8,
+        "blur": 16,
+        "spread": 0,
+        "color": "rgba(16, 23, 38, 0.12)",
+        "_comment": "elevation 4. 모달, 다이얼로그"
+      },
+
+      "xl": {
+        "value": "0px 12px 24px rgba(16, 23, 38, 0.14)",
+        "offsetX": 0,
+        "offsetY": 12,
+        "blur": 24,
+        "spread": 0,
+        "color": "rgba(16, 23, 38, 0.14)",
+        "_comment": "elevation 5. 네비게이션 드로어"
+      },
+
+      "2xl": {
+        "value": "0px 16px 32px rgba(16, 23, 38, 0.16)",
+        "offsetX": 0,
+        "offsetY": 16,
+        "blur": 32,
+        "spread": 0,
+        "color": "rgba(16, 23, 38, 0.16)",
+        "_comment": "elevation 6. 최상위 오버레이"
+      }
+    },
+
+    "semantic": {
+      "_description": {
+        "surface": "서피스/카드 레벨 그림자",
+        "overlay": "오버레이/모달 레벨 그림자",
+        "interactive": "인터랙션 상태 그림자"
+      },
+
+      "card": {
+        "default": {
+          "value": "{primitive.sm}",
+          "_comment": "기본 카드 그림자"
+        },
+        "elevated": {
+          "value": "{primitive.md}",
+          "_comment": "강조 카드, 호버 상태 카드"
+        },
+        "floating": {
+          "value": "{primitive.lg}",
+          "_comment": "플로팅 카드, 선택된 카드"
+        }
+      },
+
+      "button": {
+        "default": {
+          "value": "{primitive.none}",
+          "_comment": "기본 버튼은 그림자 없음"
+        },
+        "elevated": {
+          "value": "{primitive.sm}",
+          "_comment": "elevated 버튼, FAB"
+        },
+        "pressed": {
+          "value": "{primitive.xs}",
+          "_comment": "눌린 상태 버튼"
+        }
+      },
+
+      "dropdown": {
+        "default": {
+          "value": "{primitive.md}",
+          "_comment": "드롭다운 메뉴, 셀렉트 옵션"
+        }
+      },
+
+      "popover": {
+        "default": {
+          "value": "{primitive.md}",
+          "_comment": "팝오버, 툴팁"
+        }
+      },
+
+      "modal": {
+        "default": {
+          "value": "{primitive.lg}",
+          "_comment": "모달, 다이얼로그"
+        }
+      },
+
+      "bottomSheet": {
+        "default": {
+          "value": "{primitive.xl}",
+          "_comment": "바텀시트"
+        }
+      },
+
+      "drawer": {
+        "default": {
+          "value": "{primitive.xl}",
+          "_comment": "사이드 드로어, 네비게이션"
+        }
+      },
+
+      "toast": {
+        "default": {
+          "value": "{primitive.md}",
+          "_comment": "토스트 메시지"
+        }
+      },
+
+      "header": {
+        "default": {
+          "value": "{primitive.none}",
+          "_comment": "기본 헤더는 그림자 없음"
+        },
+        "scrolled": {
+          "value": "{primitive.xs}",
+          "_comment": "스크롤 시 헤더 그림자"
+        }
+      },
+
+      "tabBar": {
+        "default": {
+          "value": "{primitive.none}",
+          "_comment": "기본 탭바는 그림자 없음"
+        },
+        "elevated": {
+          "value": "{primitive.xs}",
+          "_comment": "elevated 탭바"
+        }
+      },
+
+      "input": {
+        "focus": {
+          "value": "0px 0px 0px 3px rgba(0, 79, 255, 0.15)",
+          "_comment": "입력 필드 포커스 링 (브랜드 컬러 기반)"
+        },
+        "error": {
+          "value": "0px 0px 0px 3px rgba(243, 59, 49, 0.15)",
+          "_comment": "입력 필드 에러 상태 포커스 링"
+        }
+      }
+    },
+
+    "dark": {
+      "_comment": "다크모드용 그림자. 밝은 테두리로 분리감 표현",
+
+      "primitive": {
+        "xs": {
+          "value": "0px 1px 2px rgba(0, 0, 0, 0.20)",
+          "_comment": "다크모드 elevation 1"
+        },
+        "sm": {
+          "value": "0px 2px 4px rgba(0, 0, 0, 0.25)",
+          "_comment": "다크모드 elevation 2"
+        },
+        "md": {
+          "value": "0px 4px 8px rgba(0, 0, 0, 0.30)",
+          "_comment": "다크모드 elevation 3"
+        },
+        "lg": {
+          "value": "0px 8px 16px rgba(0, 0, 0, 0.35)",
+          "_comment": "다크모드 elevation 4"
+        },
+        "xl": {
+          "value": "0px 12px 24px rgba(0, 0, 0, 0.40)",
+          "_comment": "다크모드 elevation 5"
+        },
+        "2xl": {
+          "value": "0px 16px 32px rgba(0, 0, 0, 0.45)",
+          "_comment": "다크모드 elevation 6"
+        }
+      },
+
+      "border": {
+        "_comment": "다크모드에서 그림자 대신 미세 테두리로 분리감 표현",
+        "subtle": {
+          "value": "0px 0px 0px 1px rgba(255, 255, 255, 0.06)",
+          "_comment": "미세한 테두리"
+        },
+        "default": {
+          "value": "0px 0px 0px 1px rgba(255, 255, 255, 0.10)",
+          "_comment": "기본 분리 테두리"
+        }
+      }
+    },
+
+    "_usage": {
+      "_comment": "그림자 사용 가이드라인",
+      "elevation": "z-index가 높은 요소일수록 큰 그림자 사용",
+      "consistency": "같은 elevation의 요소는 같은 그림자 사용",
+      "darkMode": "다크모드에서는 그림자 대신 밝은 테두리로 분리감 표현 고려",
+      "performance": "그림자 남용 시 렌더링 성능 저하 주의"
+    },
+
+    "_rn": {
+      "_comment": "React Native shadow 속성 매핑",
+      "ios": {
+        "shadowColor": "#101726",
+        "shadowOffset": "{ width: offsetX, height: offsetY }",
+        "shadowOpacity": "opacity 값 (0-1)",
+        "shadowRadius": "blur / 2"
+      },
+      "android": {
+        "elevation": "1-6 범위로 매핑",
+        "_note": "Android는 elevation 속성 사용. 세밀한 제어 불가"
+      }
+    }
+  }
+}

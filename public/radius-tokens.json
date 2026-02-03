@@ -1,0 +1,176 @@
+{
+  "_meta": {
+    "version": "2.0",
+    "name": "zkap-design-system",
+    "type": "radius",
+    "created": "2025-02-03",
+    "baseUnit": 4,
+    "_comment": "4px 기반 border-radius 시스템"
+  },
+
+  "radius": {
+    "primitive": {
+      "_comment": "기본 라운드 스케일",
+      "none": 0,
+      "xs": 4,
+      "sm": 8,
+      "md": 12,
+      "lg": 16,
+      "xl": 20,
+      "2xl": 24,
+      "3xl": 32,
+      "full": 9999
+    },
+
+    "semantic": {
+      "_description": {
+        "component": "UI 컴포넌트별 라운드 값",
+        "surface": "카드, 모달 등 서피스 레벨 라운드"
+      },
+
+      "button": {
+        "lg": {
+          "value": "{primitive.md}",
+          "_comment": "12px. 대형 버튼 (height 56px)"
+        },
+        "md": {
+          "value": "{primitive.sm}",
+          "_comment": "8px. 기본 버튼 (height 48px)"
+        },
+        "sm": {
+          "value": "{primitive.sm}",
+          "_comment": "8px. 소형 버튼 (height 40px)"
+        },
+        "xs": {
+          "value": "{primitive.xs}",
+          "_comment": "4px. 초소형 버튼 (height 32px)"
+        },
+        "pill": {
+          "value": "{primitive.full}",
+          "_comment": "완전 라운드. 필 형태 버튼"
+        }
+      },
+
+      "input": {
+        "default": {
+          "value": "{primitive.sm}",
+          "_comment": "8px. 기본 입력 필드"
+        },
+        "search": {
+          "value": "{primitive.full}",
+          "_comment": "완전 라운드. 검색 입력 필드"
+        }
+      },
+
+      "card": {
+        "lg": {
+          "value": "{primitive.xl}",
+          "_comment": "20px. 대형 카드, 프로모션 배너"
+        },
+        "md": {
+          "value": "{primitive.lg}",
+          "_comment": "16px. 기본 카드"
+        },
+        "sm": {
+          "value": "{primitive.md}",
+          "_comment": "12px. 소형 카드, 리스트 아이템 카드"
+        }
+      },
+
+      "chip": {
+        "default": {
+          "value": "{primitive.sm}",
+          "_comment": "8px. 기본 칩, 태그"
+        },
+        "pill": {
+          "value": "{primitive.full}",
+          "_comment": "완전 라운드. 필 형태 칩"
+        }
+      },
+
+      "badge": {
+        "default": {
+          "value": "{primitive.xs}",
+          "_comment": "4px. 기본 뱃지"
+        },
+        "pill": {
+          "value": "{primitive.full}",
+          "_comment": "완전 라운드. 숫자 뱃지, 알림 뱃지"
+        }
+      },
+
+      "avatar": {
+        "circle": {
+          "value": "{primitive.full}",
+          "_comment": "완전 라운드. 원형 아바타"
+        },
+        "square": {
+          "value": "{primitive.md}",
+          "_comment": "12px. 사각 아바타"
+        }
+      },
+
+      "image": {
+        "lg": {
+          "value": "{primitive.lg}",
+          "_comment": "16px. 대형 썸네일"
+        },
+        "md": {
+          "value": "{primitive.md}",
+          "_comment": "12px. 기본 썸네일"
+        },
+        "sm": {
+          "value": "{primitive.sm}",
+          "_comment": "8px. 소형 썸네일"
+        }
+      },
+
+      "modal": {
+        "default": {
+          "value": "{primitive.2xl}",
+          "_comment": "24px. 모달, 다이얼로그"
+        }
+      },
+
+      "bottomSheet": {
+        "default": {
+          "value": "{primitive.xl}",
+          "_comment": "20px. 바텀시트 상단 라운드"
+        }
+      },
+
+      "toast": {
+        "default": {
+          "value": "{primitive.md}",
+          "_comment": "12px. 토스트 메시지"
+        }
+      },
+
+      "tooltip": {
+        "default": {
+          "value": "{primitive.sm}",
+          "_comment": "8px. 툴팁"
+        }
+      },
+
+      "skeleton": {
+        "text": {
+          "value": "{primitive.xs}",
+          "_comment": "4px. 텍스트 스켈레톤"
+        },
+        "image": {
+          "value": "{primitive.md}",
+          "_comment": "12px. 이미지 스켈레톤"
+        }
+      }
+    },
+
+    "_usage": {
+      "_comment": "라운드 사용 가이드라인",
+      "hierarchy": "컨테이너(큰 라운드) > 내부 요소(작은 라운드) 순서로 적용",
+      "nesting": "중첩 시 내부 요소 라운드 = 외부 라운드 - padding",
+      "consistency": "같은 계층의 요소는 같은 라운드 사용",
+      "platform": "iOS는 큰 라운드 선호, Android는 작은 라운드 선호"
+    }
+  }
+}
