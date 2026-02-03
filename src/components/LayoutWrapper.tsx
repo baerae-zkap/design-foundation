@@ -73,13 +73,19 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
           >
             {children}
           </div>
-          {/* 우측 목차 */}
+          {/* 우측 목차 - sticky로 스크롤 따라감 */}
           {!isTablet && (
             <div
               style={{
                 width: '200px',
                 flexShrink: 0,
                 padding: '40px 24px 40px 0',
+                position: 'sticky',
+                top: '56px',
+                height: 'fit-content',
+                maxHeight: 'calc(100vh - 56px)',
+                overflowY: 'auto',
+                alignSelf: 'flex-start',
               }}
             >
               <TableOfContents />

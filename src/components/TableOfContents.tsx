@@ -76,17 +76,8 @@ export function TableOfContents() {
   }
 
   return (
-    <nav
-      style={{
-        width: "200px",
-        flexShrink: 0,
-        position: "sticky",
-        top: "80px",
-        height: "fit-content",
-        maxHeight: "calc(100vh - 100px)",
-        overflowY: "auto",
-      }}
-    >
+    <nav>
+
       <div
         style={{
           fontSize: "12px",
