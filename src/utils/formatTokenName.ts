@@ -21,14 +21,26 @@ export function expandSize(key: string): string {
     return sizeMap[key];
   }
 
-  // Handle title variants (t1 → 1)
-  if (/^t\d+$/.test(key)) {
-    return key.slice(1);
+  // Handle title variants (t1 → 2XLarge, t2 → ExtraLarge, t3 → Large, t4 → Medium)
+  const titleMap: Record<string, string> = {
+    't1': '2XLarge',
+    't2': 'ExtraLarge',
+    't3': 'Large',
+    't4': 'Medium',
+  };
+  if (titleMap[key]) {
+    return titleMap[key];
   }
 
-  // Handle subtitle variants (st1 → 1)
-  if (/^st\d+$/.test(key)) {
-    return key.slice(2);
+  // Handle subtitle variants (st1 → Large, st2 → Medium, st3 → Small, st4 → ExtraSmall)
+  const subtitleMap: Record<string, string> = {
+    'st1': 'Large',
+    'st2': 'Medium',
+    'st3': 'Small',
+    'st4': 'ExtraSmall',
+  };
+  if (subtitleMap[key]) {
+    return subtitleMap[key];
   }
 
   return key.charAt(0).toUpperCase() + key.slice(1);
