@@ -28,8 +28,8 @@ export function TableOfContents() {
   useEffect(() => {
     // Small delay to ensure DOM is updated after navigation
     const timeout = setTimeout(() => {
-      // Find all h2 and h3 elements in the main content
-      const elements = document.querySelectorAll("main h2, main h3");
+      // Find only h2 elements in the main content (중제목만)
+      const elements = document.querySelectorAll("main h2");
       const items: TocItem[] = [];
 
       elements.forEach((el) => {
