@@ -46,7 +46,7 @@ export function Header({ onMenuClick }: HeaderProps) {
         }}
       >
         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
-          <Image src="/logo.svg" alt="ZKAP" width={80} height={24} style={{ height: '24px', width: 'auto' }} />
+          <Image src="/design-foundation/logo.svg" alt="ZKAP" width={80} height={24} style={{ height: '24px', width: 'auto' }} />
           <span style={{ color: 'var(--text-tertiary)', fontSize: '14px' }}>Design System</span>
         </Link>
 

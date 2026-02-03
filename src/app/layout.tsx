@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   title: "ZKAP Design System",
   description: "Foundation tokens and guidelines for ZKAP products",
   icons: {
-    icon: "/favicon.svg",
+    icon: "/design-foundation/favicon.svg",
   },
 };
 
