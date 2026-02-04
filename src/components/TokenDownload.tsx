@@ -14,7 +14,7 @@ interface TokenDownloadProps {
 
 export function TokenDownload({ files }: TokenDownloadProps) {
   return (
-    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', marginBottom: '24px' }}>
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-3)', marginBottom: 'var(--space-6)' }}>
       {files.map((file) => (
         <a
           key={file.path}
@@ -23,8 +23,8 @@ export function TokenDownload({ files }: TokenDownloadProps) {
           style={{
             display: 'inline-flex',
             alignItems: 'center',
-            gap: '12px',
-            padding: '12px 16px',
+            gap: 'var(--space-3)',
+            padding: 'var(--space-3) var(--space-6)',
             backgroundColor: '#fff',
             borderRadius: 'var(--radius-md)',
             textDecoration: 'none',
