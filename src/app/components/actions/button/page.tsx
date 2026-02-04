@@ -1702,7 +1702,7 @@ function ButtonDemo({
         gap: 6,
         width: layout === "fillWidth" ? "100%" : "auto",
         minWidth: iconOnly ? "auto" : 80,
-        height: buttonType === "plain" ? "auto" : sizeHeights[size],
+        height: sizeHeights[size],
         opacity: disabled && !isLoading ? 1 : 1,
         position: "relative",
       }}
