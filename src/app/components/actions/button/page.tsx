@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { Breadcrumb } from "@/components/Breadcrumb";
-import { PlatformTabs, CodeBlock, PreviewBox, Platform } from "@/components/PlatformTabs";
+import { PlatformTabs, CodeBlock, PreviewBox, Platform, highlightCode } from "@/components/PlatformTabs";
 
 // GitHub source URLs (design-foundation repo)
 const GITHUB_BASE = "https://github.com/baerae-zkap/design-foundation/blob/main/src/source/components/Button";
@@ -210,7 +210,7 @@ function ButtonPlayground() {
             overflow: "auto",
           }}
         >
-          <code>{generateCode()}</code>
+          <code>{highlightCode(generateCode())}</code>
         </pre>
       </div>
     </div>

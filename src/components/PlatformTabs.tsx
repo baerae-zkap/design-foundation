@@ -108,6 +108,111 @@ interface CodeBlockProps {
   language?: string;
 }
 
+// Syntax highlighting function (exported for reuse)
+export function highlightCode(code: string): React.ReactNode[] {
+  const lines = code.split('\n');
+
+  return lines.map((line, lineIndex) => {
+    const parts: React.ReactNode[] = [];
+    let remaining = line;
+    let key = 0;
+
+    // Process the line character by character with regex
+    while (remaining.length > 0) {
+      // Comments
+      const commentMatch = remaining.match(/^(\/\/.*)/);
+      if (commentMatch) {
+        parts.push(<span key={key++} style={{ color: '#6b7280' }}>{commentMatch[1]}</span>);
+        remaining = remaining.slice(commentMatch[1].length);
+        continue;
+      }
+
+      // Strings (double quotes)
+      const stringMatch = remaining.match(/^("[^"]*")/);
+      if (stringMatch) {
+        parts.push(<span key={key++} style={{ color: '#a5d6ff' }}>{stringMatch[1]}</span>);
+        remaining = remaining.slice(stringMatch[1].length);
+        continue;
+      }
+
+      // Strings (single quotes)
+      const singleStringMatch = remaining.match(/^('[^']*')/);
+      if (singleStringMatch) {
+        parts.push(<span key={key++} style={{ color: '#a5d6ff' }}>{singleStringMatch[1]}</span>);
+        remaining = remaining.slice(singleStringMatch[1].length);
+        continue;
+      }
+
+      // Template literals
+      const templateMatch = remaining.match(/^(`[^`]*`)/);
+      if (templateMatch) {
+        parts.push(<span key={key++} style={{ color: '#a5d6ff' }}>{templateMatch[1]}</span>);
+        remaining = remaining.slice(templateMatch[1].length);
+        continue;
+      }
+
+      // JSX closing tags </Component>
+      const closingTagMatch = remaining.match(/^(<\/[A-Z][a-zA-Z]*>)/);
+      if (closingTagMatch) {
+        parts.push(<span key={key++} style={{ color: '#7dd3fc' }}>{closingTagMatch[1]}</span>);
+        remaining = remaining.slice(closingTagMatch[1].length);
+        continue;
+      }
+
+      // JSX self-closing tags <Component ... />
+      const selfClosingMatch = remaining.match(/^(<[A-Z][a-zA-Z]*)/);
+      if (selfClosingMatch) {
+        parts.push(<span key={key++} style={{ color: '#7dd3fc' }}>{selfClosingMatch[1]}</span>);
+        remaining = remaining.slice(selfClosingMatch[1].length);
+        continue;
+      }
+
+      // JSX closing bracket />
+      const closeBracketMatch = remaining.match(/^(\/?>)/);
+      if (closeBracketMatch) {
+        parts.push(<span key={key++} style={{ color: '#7dd3fc' }}>{closeBracketMatch[1]}</span>);
+        remaining = remaining.slice(closeBracketMatch[1].length);
+        continue;
+      }
+
+      // Keywords
+      const keywordMatch = remaining.match(/^(import|export|from|const|let|var|function|return|if|else|true|false|null|undefined)(?![a-zA-Z])/);
+      if (keywordMatch) {
+        parts.push(<span key={key++} style={{ color: '#f472b6' }}>{keywordMatch[1]}</span>);
+        remaining = remaining.slice(keywordMatch[1].length);
+        continue;
+      }
+
+      // Props/attributes (word followed by =)
+      const propMatch = remaining.match(/^([a-zA-Z][a-zA-Z0-9]*)(?==)/);
+      if (propMatch) {
+        parts.push(<span key={key++} style={{ color: '#c4b5fd' }}>{propMatch[1]}</span>);
+        remaining = remaining.slice(propMatch[1].length);
+        continue;
+      }
+
+      // Arrow functions
+      const arrowMatch = remaining.match(/^(=>)/);
+      if (arrowMatch) {
+        parts.push(<span key={key++} style={{ color: '#f472b6' }}>{arrowMatch[1]}</span>);
+        remaining = remaining.slice(arrowMatch[1].length);
+        continue;
+      }
+
+      // Default: add single character
+      parts.push(remaining[0]);
+      remaining = remaining.slice(1);
+    }
+
+    return (
+      <span key={lineIndex}>
+        {parts}
+        {lineIndex < lines.length - 1 && '\n'}
+      </span>
+    );
+  });
+}
+
 export function CodeBlock({ code, title, sourceUrl, language }: CodeBlockProps) {
   const [copied, setCopied] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -121,6 +226,8 @@ export function CodeBlock({ code, title, sourceUrl, language }: CodeBlockProps) 
   const lineCount = code.split("\n").length;
   const shouldShowExpand = lineCount > 10;
   const maxHeight = expanded ? "none" : "280px";
+
+  const highlightedCode = highlightCode(code);
 
   return (
     <div
@@ -186,7 +293,7 @@ export function CodeBlock({ code, title, sourceUrl, language }: CodeBlockProps) 
             backgroundColor: "#18181b",
           }}
         >
-          <code>{code}</code>
+          <code>{highlightedCode}</code>
         </pre>
 
         {/* Gradient overlay when collapsed */}
