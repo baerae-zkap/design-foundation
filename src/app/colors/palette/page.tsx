@@ -94,7 +94,14 @@ function isLightColor(color: string): boolean {
 }
 
 export default function PalettePage() {
-  const paletteColors = Object.entries(paletteJson).filter(([name]) => name !== "static" && name !== "_meta");
+  const paletteColors = Object.entries(paletteJson).filter(
+    ([name]) => name !== "static" && name !== "_meta" && name !== "opacity"
+  );
+
+  // 숫자 내림차순 정렬 (99→5, 밝은색→어두운색)
+  const sortShades = (shades: [string, string][]) => {
+    return shades.sort((a, b) => parseInt(b[0]) - parseInt(a[0]));
+  };
 
   return (
     <div>
@@ -103,6 +110,10 @@ export default function PalettePage() {
       <h1 className="text-3xl font-bold mb-4" style={{ color: 'var(--content-base-strong)' }}>Palette</h1>
       <p className="mb-6 leading-relaxed" style={{ color: 'var(--content-base-default)' }}>
         기본 색상 팔레트입니다. 직접 사용보다는 <strong style={{ color: 'var(--content-base-strong)' }}>Semantic 토큰</strong>을 통해 참조하세요.
+        <br />
+        <span style={{ fontSize: '14px', color: 'var(--content-base-secondary)' }}>
+          숫자가 클수록 밝은 색상입니다 (99 = 거의 흰색, 5 = 거의 검정).
+        </span>
       </p>
       <TokenDownload files={[
         { name: 'palette.json', path: '/palette.json' },
@@ -110,8 +121,10 @@ export default function PalettePage() {
 
       {paletteColors.map(([colorName, shades]) => {
         if (typeof shades !== "object") return null;
-        const colorShades = Object.entries(shades as Record<string, string>).filter(
-          ([key, val]) => typeof val === "string" && !key.startsWith("_")
+        const colorShades = sortShades(
+          Object.entries(shades as Record<string, string>).filter(
+            ([key, val]) => typeof val === "string" && !key.startsWith("_")
+          )
         );
 
         return (

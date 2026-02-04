@@ -1,10 +1,12 @@
 {
   "_meta": {
-    "version": "2.1",
+    "version": "3.0",
     "name": "zkap-design-system",
     "type": "semantic-tokens",
     "created": "2025-02-03",
-    "paletteRef": "./palette.json"
+    "updated": "2025-02-04",
+    "paletteRef": "./palette.json",
+    "_naming": "Target(surface/content/border/fill) + Role(base/brand/error) + Variant(default/strong/secondary)"
   },
 
   "light": {
@@ -15,45 +17,51 @@
       "base": {
         "default": "{palette.static.white}",
         "default_comment": "기본 배경색. 대부분의 화면 바탕",
-        "defaultPressed": "{palette.grey.100}",
-        "defaultPressed_comment": "기본 배경 눌림 상태",
-        "container": "{palette.grey.100}",
+        "alternative": "{palette.grey.99}",
+        "alternative_comment": "대체 배경색. 미묘한 구분",
+        "container": "{palette.grey.97}",
         "container_comment": "컨테이너 배경. 섹션 구분",
-        "containerPressed": "{palette.grey.200}",
+        "containerPressed": "{palette.grey.95}",
         "containerPressed_comment": "컨테이너 눌림 상태"
       },
+      "elevated": {
+        "default": "{palette.static.white}",
+        "default_comment": "Elevated 배경 (모달, 카드)",
+        "alternative": "{palette.grey.99}",
+        "alternative_comment": "Elevated 대체 배경"
+      },
       "brand": {
-        "default": "{palette.blue.600}",
+        "default": "{palette.blue.50}",
         "default_comment": "브랜드 배경. Primary 버튼",
-        "defaultPressed": "{palette.blue.700}",
+        "defaultPressed": "{palette.blue.45}",
         "defaultPressed_comment": "브랜드 배경 눌림 상태",
-        "secondary": "{palette.blue.50}",
+        "secondary": "{palette.blue.95}",
         "secondary_comment": "브랜드 보조 배경. Secondary 버튼",
-        "secondaryPressed": "{palette.blue.100}",
+        "secondaryPressed": "{palette.blue.90}",
         "secondaryPressed_comment": "브랜드 보조 눌림 상태"
       },
       "error": {
-        "default": "{palette.red.50}",
+        "default": "{palette.red.95}",
         "default_comment": "에러 배경",
-        "defaultPressed": "{palette.red.100}",
+        "defaultPressed": "{palette.red.90}",
         "defaultPressed_comment": "에러 배경 눌림 상태"
       },
       "warning": {
-        "default": "{palette.yellow.50}",
+        "default": "{palette.orange.95}",
         "default_comment": "경고 배경"
       },
       "success": {
-        "default": "{palette.green.50}",
+        "default": "{palette.green.95}",
         "default_comment": "성공 배경",
-        "defaultPressed": "{palette.green.100}",
+        "defaultPressed": "{palette.green.90}",
         "defaultPressed_comment": "성공 배경 눌림 상태"
       },
       "info": {
-        "default": "{palette.grey.100}",
+        "default": "{palette.grey.97}",
         "default_comment": "정보 배경"
       },
       "disabled": {
-        "default": "{palette.grey.200}",
+        "default": "{palette.grey.95}",
         "default_comment": "비활성 배경"
       }
     },
@@ -61,47 +69,55 @@
     "content": {
       "_description": "콘텐츠 컬러 - 텍스트, 아이콘 등",
       "base": {
-        "strong": "{palette.grey.800}",
+        "strong": "{palette.grey.15}",
         "strong_comment": "가장 강한 텍스트. 제목",
-        "default": "{palette.grey.600}",
+        "default": "{palette.grey.30}",
         "default_comment": "기본 텍스트. 본문",
-        "secondary": "{palette.grey.500}",
+        "secondary": "{palette.grey.50}",
         "secondary_comment": "보조 텍스트. 설명",
-        "placeholder": "{palette.grey.400}",
+        "neutral": "{palette.grey.60}",
+        "neutral_comment": "중립 텍스트. 캡션",
+        "alternative": "{palette.grey.70}",
+        "alternative_comment": "대체 텍스트. 힌트",
+        "placeholder": "{palette.grey.70}",
         "placeholder_comment": "플레이스홀더",
+        "assistive": "{palette.grey.80}",
+        "assistive_comment": "보조 텍스트. 비활성에 가까움",
+        "disable": "{palette.grey.90}",
+        "disable_comment": "비활성 텍스트",
         "onColor": "{palette.static.white}",
         "onColor_comment": "컬러 배경 위 텍스트"
       },
       "brand": {
-        "default": "{palette.blue.600}",
+        "default": "{palette.blue.50}",
         "default_comment": "브랜드 컬러 텍스트"
       },
       "error": {
-        "default": "{palette.red.600}",
+        "default": "{palette.red.50}",
         "default_comment": "에러 텍스트"
       },
       "warning": {
-        "default": "{palette.yellow.600}",
+        "default": "{palette.orange.50}",
         "default_comment": "경고 텍스트"
       },
       "success": {
-        "default": "{palette.green.600}",
+        "default": "{palette.green.50}",
         "default_comment": "성공 텍스트"
       },
       "info": {
-        "default": "{palette.teal.600}",
+        "default": "{palette.teal.50}",
         "default_comment": "정보 텍스트"
       },
       "profit": {
-        "default": "{palette.red.600}",
+        "default": "{palette.red.50}",
         "default_comment": "수익/상승 (한국 컨벤션)"
       },
       "loss": {
-        "default": "{palette.blue.600}",
-        "loss_comment": "손실/하락 (한국 컨벤션)"
+        "default": "{palette.blue.50}",
+        "default_comment": "손실/하락 (한국 컨벤션)"
       },
       "disabled": {
-        "default": "{palette.grey.500}",
+        "default": "{palette.grey.80}",
         "default_comment": "비활성 텍스트"
       }
     },
@@ -109,75 +125,108 @@
     "border": {
       "_description": "테두리/구분선 컬러",
       "base": {
-        "default": "{palette.grey.100}",
+        "default": "{palette.grey.95}",
         "default_comment": "기본 테두리",
-        "defaultPressed": "{palette.grey.300}",
+        "defaultPressed": "{palette.grey.90}",
         "defaultPressed_comment": "기본 테두리 눌림/포커스"
       },
       "secondary": {
-        "default": "{palette.grey.200}",
+        "default": "{palette.grey.90}",
         "default_comment": "강한 테두리",
-        "defaultPressed": "{palette.grey.300}",
+        "defaultPressed": "{palette.grey.80}",
         "defaultPressed_comment": "강한 테두리 눌림/포커스"
       },
+      "solid": {
+        "_description": "투명도 없는 solid 테두리",
+        "default": "{palette.grey.90}",
+        "default_comment": "Solid 기본 테두리",
+        "neutral": "{palette.grey.95}",
+        "neutral_comment": "Solid 중립 테두리",
+        "alternative": "{palette.grey.97}",
+        "alternative_comment": "Solid 약한 테두리"
+      },
       "brand": {
-        "default": "{palette.blue.600}",
+        "default": "{palette.blue.50}",
         "default_comment": "브랜드 테두리",
-        "defaultPressed": "{palette.blue.700}",
+        "defaultPressed": "{palette.blue.45}",
         "defaultPressed_comment": "브랜드 테두리 눌림/포커스"
       },
       "disabled": {
-        "default": "{palette.grey.300}",
-        "default_comment": "비활성 테두리",
-        "defaultPressed": "{palette.grey.400}",
-        "defaultPressed_comment": "비활성 테두리 눌림"
+        "default": "{palette.grey.90}",
+        "default_comment": "비활성 테두리"
       },
       "error": {
-        "default": "{palette.red.600}",
+        "default": "{palette.red.50}",
         "default_comment": "에러 테두리",
-        "defaultPressed": "{palette.red.700}",
+        "defaultPressed": "{palette.red.45}",
         "defaultPressed_comment": "에러 테두리 눌림"
       },
       "success": {
-        "default": "{palette.green.600}",
+        "default": "{palette.green.50}",
         "default_comment": "성공 테두리",
-        "defaultPressed": "{palette.green.700}",
+        "defaultPressed": "{palette.green.40}",
         "defaultPressed_comment": "성공 테두리 눌림"
       }
+    },
+
+    "fill": {
+      "_description": "컴포넌트 채움 (버튼, 칩 등) - opacity 활용",
+      "normal": "hsla(216, 9%, 45%, 0.22)",
+      "normal_comment": "기본 채움 (grey.50 + 22% opacity)",
+      "strong": "hsla(216, 9%, 45%, 0.28)",
+      "strong_comment": "강한 채움 (grey.50 + 28% opacity)",
+      "alternative": "hsla(216, 9%, 45%, 0.12)",
+      "alternative_comment": "약한 채움 (grey.50 + 12% opacity)"
+    },
+
+    "interaction": {
+      "_description": "인터랙션 상태 컬러",
+      "inactive": "{palette.grey.70}",
+      "inactive_comment": "비활성 인터랙션 (토글 OFF 등)",
+      "disable": "{palette.grey.90}",
+      "disable_comment": "비활성화된 상태"
     },
 
     "visualization": {
       "_description": "차트/그래프용 컬러",
       "categorical": {
-        "1": "{palette.blue.700}",
+        "1": "{palette.blue.50}",
         "1_comment": "차트 색상 1 (주요)",
-        "2": "{palette.blue.500}",
+        "2": "{palette.blue.65}",
         "2_comment": "차트 색상 2",
-        "3": "{palette.blue.300}",
+        "3": "{palette.blue.80}",
         "3_comment": "차트 색상 3",
-        "4": "{palette.grey.300}",
-        "4_comment": "차트 색상 4 (보조)"
+        "4": "{palette.teal.50}",
+        "4_comment": "차트 색상 4",
+        "5": "{palette.green.50}",
+        "5_comment": "차트 색상 5",
+        "6": "{palette.purple.50}",
+        "6_comment": "차트 색상 6",
+        "7": "{palette.orange.50}",
+        "7_comment": "차트 색상 7",
+        "8": "{palette.grey.50}",
+        "8_comment": "차트 색상 8 (보조)"
       }
     },
 
     "icon": {
-      "_description": "아이콘 전용 컬러 (content와 별도 정의 필요시)",
-      "default": "{palette.grey.400}",
+      "_description": "아이콘 전용 컬러",
+      "default": "{palette.grey.50}",
       "default_comment": "기본 아이콘",
-      "secondary": "{palette.grey.500}",
+      "secondary": "{palette.grey.60}",
       "secondary_comment": "보조 아이콘",
-      "disabled": "{palette.grey.300}",
+      "disabled": "{palette.grey.80}",
       "disabled_comment": "비활성 아이콘",
-      "brand": "{palette.blue.600}",
+      "brand": "{palette.blue.50}",
       "brand_comment": "브랜드 아이콘"
     },
 
     "overlay": {
       "_description": "오버레이/딤 배경",
-      "dim": "hsla(221, 43%, 11%, 0.4)",
-      "dim_comment": "기본 딤 배경 (grey.900 + 40% alpha)",
-      "heavy": "hsla(221, 43%, 11%, 0.85)",
-      "heavy_comment": "강한 딤 배경 (grey.900 + 85% alpha)"
+      "dim": "hsla(222, 33%, 11%, 0.40)",
+      "dim_comment": "기본 딤 배경 (grey.15 + 40% alpha)",
+      "heavy": "hsla(222, 33%, 11%, 0.85)",
+      "heavy_comment": "강한 딤 배경 (grey.15 + 85% alpha)"
     }
   },
 
@@ -187,47 +236,53 @@
     "surface": {
       "_description": "배경색/서피스 - 다크모드",
       "base": {
-        "default": "{palette.grey.900}",
+        "default": "{palette.grey.15}",
         "default_comment": "기본 배경색",
-        "defaultPressed": "{palette.grey.800}",
-        "defaultPressed_comment": "기본 배경 눌림 상태",
-        "container": "{palette.grey.800}",
+        "alternative": "{palette.grey.10}",
+        "alternative_comment": "대체 배경색 (더 어두운)",
+        "container": "{palette.grey.20}",
         "container_comment": "컨테이너 배경",
-        "containerPressed": "{palette.grey.700}",
+        "containerPressed": "{palette.grey.23}",
         "containerPressed_comment": "컨테이너 눌림 상태"
       },
+      "elevated": {
+        "default": "{palette.grey.17}",
+        "default_comment": "Elevated 배경 (모달, 카드)",
+        "alternative": "{palette.grey.20}",
+        "alternative_comment": "Elevated 대체 배경"
+      },
       "brand": {
-        "default": "{palette.blue.500}",
+        "default": "{palette.blue.55}",
         "default_comment": "브랜드 배경",
-        "defaultPressed": "{palette.blue.400}",
+        "defaultPressed": "{palette.blue.60}",
         "defaultPressed_comment": "브랜드 배경 눌림 상태",
-        "secondary": "{palette.blue.100}",
-        "secondary_comment": "브랜드 보조 배경",
-        "secondaryPressed": "{palette.blue.50}",
+        "secondary": "{palette.blue.20}",
+        "secondary_comment": "브랜드 보조 배경 (어두운 solid)",
+        "secondaryPressed": "{palette.blue.30}",
         "secondaryPressed_comment": "브랜드 보조 눌림 상태"
       },
       "error": {
-        "default": "{palette.red.100}",
+        "default": "{palette.red.20}",
         "default_comment": "에러 배경",
-        "defaultPressed": "{palette.red.50}",
+        "defaultPressed": "{palette.red.30}",
         "defaultPressed_comment": "에러 배경 눌림 상태"
       },
       "warning": {
-        "default": "{palette.yellow.100}",
+        "default": "{palette.orange.20}",
         "default_comment": "경고 배경"
       },
       "success": {
-        "default": "{palette.green.100}",
+        "default": "{palette.green.20}",
         "default_comment": "성공 배경",
-        "defaultPressed": "{palette.green.50}",
+        "defaultPressed": "{palette.green.30}",
         "defaultPressed_comment": "성공 배경 눌림 상태"
       },
       "info": {
-        "default": "{palette.grey.800}",
+        "default": "{palette.grey.20}",
         "default_comment": "정보 배경"
       },
       "disabled": {
-        "default": "{palette.grey.400}",
+        "default": "{palette.grey.22}",
         "default_comment": "비활성 배경"
       }
     },
@@ -235,47 +290,55 @@
     "content": {
       "_description": "콘텐츠 컬러 - 다크모드",
       "base": {
-        "strong": "{palette.grey.50}",
+        "strong": "{palette.grey.99}",
         "strong_comment": "가장 강한 텍스트",
-        "default": "{palette.grey.100}",
+        "default": "{palette.grey.95}",
         "default_comment": "기본 텍스트",
-        "secondary": "{palette.grey.300}",
+        "secondary": "{palette.grey.80}",
         "secondary_comment": "보조 텍스트",
-        "placeholder": "{palette.grey.600}",
+        "neutral": "{palette.grey.70}",
+        "neutral_comment": "중립 텍스트",
+        "alternative": "{palette.grey.60}",
+        "alternative_comment": "대체 텍스트",
+        "placeholder": "{palette.grey.50}",
         "placeholder_comment": "플레이스홀더",
+        "assistive": "{palette.grey.40}",
+        "assistive_comment": "보조 텍스트",
+        "disable": "{palette.grey.30}",
+        "disable_comment": "비활성 텍스트",
         "onColor": "{palette.static.white}",
         "onColor_comment": "컬러 배경 위 텍스트"
       },
       "brand": {
-        "default": "{palette.blue.500}",
+        "default": "{palette.blue.60}",
         "default_comment": "브랜드 컬러 텍스트"
       },
       "error": {
-        "default": "{palette.red.400}",
+        "default": "{palette.red.60}",
         "default_comment": "에러 텍스트"
       },
       "warning": {
-        "default": "{palette.yellow.400}",
+        "default": "{palette.orange.60}",
         "default_comment": "경고 텍스트"
       },
       "success": {
-        "default": "{palette.green.400}",
+        "default": "{palette.green.60}",
         "default_comment": "성공 텍스트"
       },
       "info": {
-        "default": "{palette.teal.500}",
+        "default": "{palette.teal.60}",
         "default_comment": "정보 텍스트"
       },
       "profit": {
-        "default": "{palette.red.500}",
+        "default": "{palette.red.60}",
         "default_comment": "수익/상승"
       },
       "loss": {
-        "default": "{palette.blue.500}",
+        "default": "{palette.blue.60}",
         "default_comment": "손실/하락"
       },
       "disabled": {
-        "default": "{palette.grey.700}",
+        "default": "{palette.grey.40}",
         "default_comment": "비활성 텍스트"
       }
     },
@@ -283,75 +346,108 @@
     "border": {
       "_description": "테두리/구분선 컬러 - 다크모드",
       "base": {
-        "default": "{palette.grey.600}",
+        "default": "{palette.grey.25}",
         "default_comment": "기본 테두리",
-        "defaultPressed": "{palette.grey.500}",
+        "defaultPressed": "{palette.grey.30}",
         "defaultPressed_comment": "기본 테두리 눌림/포커스"
       },
       "secondary": {
-        "default": "{palette.grey.500}",
+        "default": "{palette.grey.30}",
         "default_comment": "강한 테두리",
-        "defaultPressed": "{palette.grey.400}",
+        "defaultPressed": "{palette.grey.40}",
         "defaultPressed_comment": "강한 테두리 눌림/포커스"
       },
+      "solid": {
+        "_description": "투명도 없는 solid 테두리",
+        "default": "{palette.grey.25}",
+        "default_comment": "Solid 기본 테두리",
+        "neutral": "{palette.grey.23}",
+        "neutral_comment": "Solid 중립 테두리",
+        "alternative": "{palette.grey.22}",
+        "alternative_comment": "Solid 약한 테두리"
+      },
       "brand": {
-        "default": "{palette.blue.500}",
+        "default": "{palette.blue.55}",
         "default_comment": "브랜드 테두리",
-        "defaultPressed": "{palette.blue.400}",
+        "defaultPressed": "{palette.blue.60}",
         "defaultPressed_comment": "브랜드 테두리 눌림/포커스"
       },
       "disabled": {
-        "default": "{palette.grey.400}",
-        "default_comment": "비활성 테두리",
-        "defaultPressed": "{palette.grey.500}",
-        "defaultPressed_comment": "비활성 테두리 눌림"
+        "default": "{palette.grey.30}",
+        "default_comment": "비활성 테두리"
       },
       "error": {
-        "default": "{palette.red.500}",
+        "default": "{palette.red.55}",
         "default_comment": "에러 테두리",
-        "defaultPressed": "{palette.red.600}",
+        "defaultPressed": "{palette.red.60}",
         "defaultPressed_comment": "에러 테두리 눌림"
       },
       "success": {
-        "default": "{palette.green.500}",
+        "default": "{palette.green.55}",
         "default_comment": "성공 테두리",
-        "defaultPressed": "{palette.green.600}",
+        "defaultPressed": "{palette.green.60}",
         "defaultPressed_comment": "성공 테두리 눌림"
       }
+    },
+
+    "fill": {
+      "_description": "컴포넌트 채움 - 다크모드",
+      "normal": "hsla(216, 9%, 77%, 0.22)",
+      "normal_comment": "기본 채움 (grey.90 + 22% opacity)",
+      "strong": "hsla(216, 9%, 77%, 0.28)",
+      "strong_comment": "강한 채움 (grey.90 + 28% opacity)",
+      "alternative": "hsla(216, 9%, 77%, 0.12)",
+      "alternative_comment": "약한 채움 (grey.90 + 12% opacity)"
+    },
+
+    "interaction": {
+      "_description": "인터랙션 상태 컬러 - 다크모드",
+      "inactive": "{palette.grey.40}",
+      "inactive_comment": "비활성 인터랙션 (토글 OFF 등)",
+      "disable": "{palette.grey.25}",
+      "disable_comment": "비활성화된 상태"
     },
 
     "visualization": {
       "_description": "차트/그래프용 컬러 - 다크모드",
       "categorical": {
-        "1": "{palette.blue.400}",
+        "1": "{palette.blue.60}",
         "1_comment": "차트 색상 1 (주요)",
-        "2": "{palette.teal.400}",
+        "2": "{palette.blue.70}",
         "2_comment": "차트 색상 2",
-        "3": "{palette.teal.300}",
+        "3": "{palette.teal.60}",
         "3_comment": "차트 색상 3",
-        "4": "{palette.grey.400}",
-        "4_comment": "차트 색상 4 (보조)"
+        "4": "{palette.teal.70}",
+        "4_comment": "차트 색상 4",
+        "5": "{palette.green.60}",
+        "5_comment": "차트 색상 5",
+        "6": "{palette.purple.60}",
+        "6_comment": "차트 색상 6",
+        "7": "{palette.orange.60}",
+        "7_comment": "차트 색상 7",
+        "8": "{palette.grey.60}",
+        "8_comment": "차트 색상 8 (보조)"
       }
     },
 
     "icon": {
       "_description": "아이콘 전용 컬러 - 다크모드",
-      "default": "{palette.grey.100}",
+      "default": "{palette.grey.80}",
       "default_comment": "기본 아이콘",
-      "secondary": "{palette.grey.400}",
+      "secondary": "{palette.grey.60}",
       "secondary_comment": "보조 아이콘",
-      "disabled": "{palette.grey.700}",
+      "disabled": "{palette.grey.40}",
       "disabled_comment": "비활성 아이콘",
-      "brand": "{palette.blue.400}",
+      "brand": "{palette.blue.60}",
       "brand_comment": "브랜드 아이콘"
     },
 
     "overlay": {
       "_description": "오버레이/딤 배경 - 다크모드",
-      "dim": "hsla(221, 43%, 11%, 0.72)",
-      "dim_comment": "기본 딤 배경 (grey.900 + 72% alpha)",
-      "heavy": "hsla(221, 43%, 11%, 0.93)",
-      "heavy_comment": "강한 딤 배경 (grey.900 + 93% alpha)"
+      "dim": "hsla(222, 33%, 11%, 0.72)",
+      "dim_comment": "기본 딤 배경 (grey.15 + 72% alpha)",
+      "heavy": "hsla(222, 33%, 11%, 0.93)",
+      "heavy_comment": "강한 딤 배경 (grey.15 + 93% alpha)"
     }
   }
 }
