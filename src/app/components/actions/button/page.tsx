@@ -5,7 +5,7 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { PlatformTabs, CodeBlock, PreviewBox, Platform } from "@/components/PlatformTabs";
 
 // GitHub source URLs (design-foundation repo)
-const GITHUB_BASE = "https://github.com/baerae-zkap/design-foundation/blob/main/docs/src/source/components/Button";
+const GITHUB_BASE = "https://github.com/baerae-zkap/design-foundation/blob/main/src/source/components/Button";
 const BUTTON_SOURCE = `${GITHUB_BASE}/Button.tsx`;
 const BUTTON_STYLES = `${GITHUB_BASE}/Button.css.ts`;
 
