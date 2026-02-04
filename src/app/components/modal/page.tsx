@@ -116,14 +116,14 @@ export default function ModalPage() {
     <div>
       <Breadcrumb items={[{ label: "컴포넌트", href: "/" }, { label: "Modal" }]} />
 
-      <h1 className="text-3xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>Modal</h1>
+      <h1 className="text-3xl font-bold mb-2" style={{ color: "var(--text-primary)" }}>Modal</h1>
       <p className="mb-8 leading-relaxed" style={{ color: "var(--text-secondary)" }}>
         화면 위에 오버레이되어 사용자의 집중을 유도하는 대화상자입니다.
       </p>
 
       {/* Basic */}
       <section className="mb-12">
-        <h2 id="basic" className="text-xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>Basic</h2>
+        <h2 id="basic" className="text-xl font-bold mb-1" style={{ color: "var(--text-primary)" }}>Basic</h2>
         <p className="mb-4" style={{ color: "var(--text-secondary)" }}>기본 모달입니다. 버튼을 클릭해보세요.</p>
         <div className="p-6" style={{ backgroundColor: "var(--bg-elevated)", borderRadius: "var(--radius-lg)", border: "1px solid var(--divider)" }}>
           <Button onClick={() => setBasicOpen(true)}>모달 열기</Button>
@@ -146,7 +146,7 @@ export default function ModalPage() {
 
       {/* Confirm */}
       <section className="mb-12">
-        <h2 id="confirm" className="text-xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>Confirm Dialog</h2>
+        <h2 id="confirm" className="text-xl font-bold mb-1" style={{ color: "var(--text-primary)" }}>Confirm Dialog</h2>
         <p className="mb-4" style={{ color: "var(--text-secondary)" }}>사용자 확인이 필요한 경우 사용합니다.</p>
         <div className="p-6" style={{ backgroundColor: "var(--bg-elevated)", borderRadius: "var(--radius-lg)", border: "1px solid var(--divider)" }}>
           <Button onClick={() => setConfirmOpen(true)}>삭제하기</Button>
@@ -179,7 +179,7 @@ export default function ModalPage() {
 
       {/* Sizes */}
       <section className="mb-12">
-        <h2 id="sizes" className="text-xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>Sizes</h2>
+        <h2 id="sizes" className="text-xl font-bold mb-1" style={{ color: "var(--text-primary)" }}>Sizes</h2>
         <p className="mb-4" style={{ color: "var(--text-secondary)" }}>컨텐츠 양에 따라 크기를 선택합니다.</p>
         <div className="p-6 flex flex-wrap gap-4" style={{ backgroundColor: "var(--bg-elevated)", borderRadius: "var(--radius-lg)", border: "1px solid var(--divider)" }}>
           <Button onClick={() => setSizeOpen("sm")}>Small (320px)</Button>
@@ -197,7 +197,7 @@ export default function ModalPage() {
 
       {/* Form Modal */}
       <section className="mb-12">
-        <h2 id="form" className="text-xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>Form Modal</h2>
+        <h2 id="form" className="text-xl font-bold mb-1" style={{ color: "var(--text-primary)" }}>Form Modal</h2>
         <p className="mb-4" style={{ color: "var(--text-secondary)" }}>폼 입력을 받는 모달 예시입니다.</p>
         <div className="p-6" style={{ backgroundColor: "var(--bg-elevated)", borderRadius: "var(--radius-lg)", border: "1px solid var(--divider)" }}>
           <Button onClick={() => setFormOpen(true)}>프로필 수정</Button>
@@ -250,7 +250,7 @@ export default function ModalPage() {
 
       {/* Props */}
       <section className="mb-12">
-        <h2 id="props" className="text-xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>Props</h2>
+        <h2 id="props" className="text-xl font-bold mb-1" style={{ color: "var(--text-primary)" }}>Props</h2>
         <div className="overflow-hidden" style={{ backgroundColor: "var(--bg-elevated)", borderRadius: "var(--radius-lg)", border: "1px solid var(--divider)" }}>
           <table style={{ width: "100%", borderCollapse: "collapse" }}>
             <thead>

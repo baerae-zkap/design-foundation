@@ -107,7 +107,7 @@ export default function PalettePage() {
     <div>
       <Breadcrumb items={[{ label: "파운데이션", href: "/" }, { label: "Palette" }]} />
 
-      <h1 className="text-3xl font-bold mb-4" style={{ color: 'var(--content-base-strong)' }}>Palette</h1>
+      <h1 className="text-3xl font-bold mb-2" style={{ color: 'var(--content-base-strong)' }}>Palette</h1>
       <p className="mb-6 leading-relaxed" style={{ color: 'var(--content-base-default)' }}>
         기본 색상 팔레트입니다. 직접 사용보다는 <strong style={{ color: 'var(--content-base-strong)' }}>Semantic 토큰</strong>을 통해 참조하세요.
         <br />

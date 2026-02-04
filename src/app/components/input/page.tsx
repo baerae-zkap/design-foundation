@@ -65,14 +65,14 @@ export default function InputPage() {
     <div>
       <Breadcrumb items={[{ label: "컴포넌트", href: "/" }, { label: "Input" }]} />
 
-      <h1 className="text-3xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>Input</h1>
+      <h1 className="text-3xl font-bold mb-2" style={{ color: "var(--text-primary)" }}>Input</h1>
       <p className="mb-8 leading-relaxed" style={{ color: "var(--text-secondary)" }}>
         사용자로부터 텍스트 입력을 받는 기본 폼 요소입니다. 다양한 타입과 상태를 지원합니다.
       </p>
 
       {/* Basic */}
       <section className="mb-12">
-        <h2 id="basic" className="text-xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>Basic</h2>
+        <h2 id="basic" className="text-xl font-bold mb-1" style={{ color: "var(--text-primary)" }}>Basic</h2>
         <p className="mb-4" style={{ color: "var(--text-secondary)" }}>기본 입력 필드입니다. 직접 입력해보세요.</p>
         <div className="p-6" style={{ backgroundColor: "var(--bg-elevated)", borderRadius: "var(--radius-lg)", border: "1px solid var(--divider)" }}>
           <div style={{ maxWidth: 320 }}>
@@ -97,7 +97,7 @@ export default function InputPage() {
 
       {/* Types */}
       <section className="mb-12">
-        <h2 id="types" className="text-xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>Types</h2>
+        <h2 id="types" className="text-xl font-bold mb-1" style={{ color: "var(--text-primary)" }}>Types</h2>
         <p className="mb-4" style={{ color: "var(--text-secondary)" }}>텍스트, 이메일, 비밀번호 타입을 지원합니다.</p>
         <div className="p-6" style={{ backgroundColor: "var(--bg-elevated)", borderRadius: "var(--radius-lg)", border: "1px solid var(--divider)" }}>
           <div className="grid gap-6" style={{ maxWidth: 320 }}>
@@ -126,7 +126,7 @@ export default function InputPage() {
 
       {/* States */}
       <section className="mb-12">
-        <h2 id="states" className="text-xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>States</h2>
+        <h2 id="states" className="text-xl font-bold mb-1" style={{ color: "var(--text-primary)" }}>States</h2>
         <p className="mb-4" style={{ color: "var(--text-secondary)" }}>에러 및 비활성화 상태를 지원합니다.</p>
         <div className="p-6" style={{ backgroundColor: "var(--bg-elevated)", borderRadius: "var(--radius-lg)", border: "1px solid var(--divider)" }}>
           <div className="grid gap-6" style={{ maxWidth: 320 }}>
@@ -150,7 +150,7 @@ export default function InputPage() {
 
       {/* Props */}
       <section className="mb-12">
-        <h2 id="props" className="text-xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>Props</h2>
+        <h2 id="props" className="text-xl font-bold mb-1" style={{ color: "var(--text-primary)" }}>Props</h2>
         <div className="overflow-hidden" style={{ backgroundColor: "var(--bg-elevated)", borderRadius: "var(--radius-lg)", border: "1px solid var(--divider)" }}>
           <table style={{ width: "100%", borderCollapse: "collapse" }}>
             <thead>

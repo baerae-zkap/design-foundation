@@ -25,7 +25,7 @@ export default function ShadowPage() {
     <div>
       <Breadcrumb items={[{ label: "파운데이션", href: "/" }, { label: "Shadow" }]} />
 
-      <h1 className="text-3xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Shadow</h1>
+      <h1 className="text-3xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>Shadow</h1>
       <p className="mb-6 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
         <strong style={{ color: 'var(--text-primary)' }}>Elevation(높이)</strong> 개념의 그림자 시스템입니다.
         레이어가 높을수록 그림자가 짙어집니다.
@@ -36,7 +36,7 @@ export default function ShadowPage() {
 
       {/* Visual Scale */}
       <section className="mb-12">
-        <h2 id="elevation" className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Elevation 시각화</h2>
+        <h2 id="elevation" className="text-xl font-bold mb-1" style={{ color: 'var(--text-primary)' }}>Elevation 시각화</h2>
         <div className="p-8" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', backgroundColor: 'var(--bg-secondary)' }}>
           <div className="flex items-end justify-center gap-6 flex-wrap">
             {Object.entries(primitive).filter(([k]) => !k.startsWith("_")).map(([key, token], index) => {
@@ -64,7 +64,7 @@ export default function ShadowPage() {
 
       {/* Primitive */}
       <section className="mb-12">
-        <h2 id="primitive" className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Primitive</h2>
+        <h2 id="primitive" className="text-xl font-bold mb-1" style={{ color: 'var(--text-primary)' }}>Primitive</h2>
         <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>기본 그림자 단계입니다.</p>
         <div className="space-y-3">
           {Object.entries(primitive).filter(([k]) => !k.startsWith("_")).map(([key, token]) => {
@@ -94,7 +94,7 @@ export default function ShadowPage() {
 
       {/* Button Shadows */}
       <section className="mb-12">
-        <h2 id="button" className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Button</h2>
+        <h2 id="button" className="text-xl font-bold mb-1" style={{ color: 'var(--text-primary)' }}>Button</h2>
         <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>버튼 컴포넌트용 그림자입니다.</p>
         <div className="overflow-hidden" style={{ backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
           {Object.entries(semantic.button).filter(([k]) => !k.startsWith("_")).map(([key, token], i, arr) => {
@@ -123,7 +123,7 @@ export default function ShadowPage() {
 
       {/* Header & TabBar */}
       <section className="mb-12">
-        <h2 id="header" className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Header & TabBar</h2>
+        <h2 id="header" className="text-xl font-bold mb-1" style={{ color: 'var(--text-primary)' }}>Header & TabBar</h2>
         <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>헤더와 탭바 컴포넌트용 그림자입니다.</p>
         <div className="overflow-hidden" style={{ backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
           {Object.entries(semantic.header).filter(([k]) => !k.startsWith("_")).map(([key, token]) => (
@@ -147,7 +147,7 @@ export default function ShadowPage() {
 
       {/* Surface Shadows */}
       <section className="mb-12">
-        <h2 id="surface" className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Surface</h2>
+        <h2 id="surface" className="text-xl font-bold mb-1" style={{ color: 'var(--text-primary)' }}>Surface</h2>
         <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>모달, 드롭다운, 토스트 등 서피스 컴포넌트용 그림자입니다.</p>
         <div className="overflow-hidden" style={{ backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
           {[
@@ -181,7 +181,7 @@ export default function ShadowPage() {
 
       {/* Input Focus */}
       <section className="mb-12">
-        <h2 id="input" className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Input Focus</h2>
+        <h2 id="input" className="text-xl font-bold mb-1" style={{ color: 'var(--text-primary)' }}>Input Focus</h2>
         <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>입력 필드 포커스 링 그림자입니다.</p>
         <div className="overflow-hidden" style={{ backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
           {Object.entries(semantic.input).filter(([k]) => !k.startsWith("_")).map(([key, token], i, arr) => (
@@ -213,7 +213,7 @@ export default function ShadowPage() {
 
       {/* Dark Mode */}
       <section className="mb-12">
-        <h2 id="dark" className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Dark Mode</h2>
+        <h2 id="dark" className="text-xl font-bold mb-1" style={{ color: 'var(--text-primary)' }}>Dark Mode</h2>
         <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>다크모드용 그림자입니다. 더 강한 그림자와 테두리로 분리감을 표현합니다.</p>
         <div className="overflow-hidden" style={{ backgroundColor: 'var(--grey-15)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--grey-30)' }}>
           {Object.entries(dark.primitive).filter(([k]) => !k.startsWith("_")).map(([key, token]) => {
@@ -258,7 +258,7 @@ export default function ShadowPage() {
 
       {/* Platform Notes */}
       <section className="mb-12">
-        <h2 id="platform" className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>플랫폼별 구현</h2>
+        <h2 id="platform" className="text-xl font-bold mb-1" style={{ color: 'var(--text-primary)' }}>플랫폼별 구현</h2>
         <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>React Native에서 iOS와 Android는 그림자 구현 방식이 다릅니다.</p>
         <div className="grid sm:grid-cols-2 gap-4">
           <div className="p-5" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', backgroundColor: 'var(--bg-elevated)' }}>
@@ -298,7 +298,7 @@ function SemanticSection({ id, title, description, data }: {
 }) {
   return (
     <section className="mb-12">
-      <h2 id={id} className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>{title}</h2>
+      <h2 id={id} className="text-xl font-bold mb-1" style={{ color: 'var(--text-primary)' }}>{title}</h2>
       <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>{description}</p>
       <div className="overflow-hidden" style={{ backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
         {Object.entries(data).filter(([k]) => !k.startsWith("_")).map(([key, token], i, arr) => {

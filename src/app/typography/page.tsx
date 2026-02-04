@@ -13,7 +13,7 @@ export default function TypographyPage() {
     <div>
       <Breadcrumb items={[{ label: "파운데이션", href: "/" }, { label: "Typography" }]} />
 
-      <h1 className="text-3xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Typography</h1>
+      <h1 className="text-3xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>Typography</h1>
       <p className="mb-6 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
         ZKAP 타이포그래피는 <strong style={{ color: 'var(--text-primary)' }}>가독성</strong>과 <strong style={{ color: 'var(--text-primary)' }}>시각적 위계</strong>를 고려해 설계되었습니다.
       </p>
@@ -23,7 +23,7 @@ export default function TypographyPage() {
 
       {/* Font Family */}
       <section className="mb-12">
-        <h2 id="font-family" className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>폰트 패밀리</h2>
+        <h2 id="font-family" className="text-xl font-bold mb-1" style={{ color: 'var(--text-primary)' }}>폰트 패밀리</h2>
         <div className="grid sm:grid-cols-2 gap-4">
           <div className="p-6" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', backgroundColor: 'var(--bg-elevated)' }}>
             <p className="text-sm mb-2" style={{ color: 'var(--text-tertiary)' }}>기본 텍스트</p>
@@ -96,7 +96,7 @@ interface TypoToken {
 function TypographySection({ id, title, description, category, isTertiary }: { id: string; title: string; description: string; category: any; isTertiary?: boolean }) {
   return (
     <section className="mb-12">
-      <h2 id={id} className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>{title}</h2>
+      <h2 id={id} className="text-xl font-bold mb-1" style={{ color: 'var(--text-primary)' }}>{title}</h2>
       <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>{description}</p>
       <div className="space-y-3">
         {Object.entries(category).filter(([k]) => !k.startsWith("_")).map(([size, tokenRaw]) => {
@@ -126,7 +126,7 @@ function TypographySection({ id, title, description, category, isTertiary }: { i
 function TypographySectionNumeric({ id, title, description, category }: { id: string; title: string; description: string; category: any }) {
   return (
     <section className="mb-12">
-      <h2 id={id} className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>{title}</h2>
+      <h2 id={id} className="text-xl font-bold mb-1" style={{ color: 'var(--text-primary)' }}>{title}</h2>
       <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>{description}</p>
       <div className="space-y-3">
         {Object.entries(category).filter(([k]) => !k.startsWith("_")).map(([size, tokenRaw]) => {
@@ -156,7 +156,7 @@ function TypographySectionNumeric({ id, title, description, category }: { id: st
 function TypographySectionCode({ id, title, description, category }: { id: string; title: string; description: string; category: any }) {
   return (
     <section className="mb-12">
-      <h2 id={id} className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>{title}</h2>
+      <h2 id={id} className="text-xl font-bold mb-1" style={{ color: 'var(--text-primary)' }}>{title}</h2>
       <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>{description}</p>
       <div className="space-y-3">
         {Object.entries(category).filter(([k]) => !k.startsWith("_")).map(([size, tokenRaw]) => {

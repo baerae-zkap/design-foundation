@@ -298,7 +298,7 @@ export default function SemanticPage() {
     <div>
       <Breadcrumb items={[{ label: "파운데이션", href: "/" }, { label: "Semantic" }]} />
 
-      <h1 className="text-3xl font-bold mb-4" style={{ color: 'var(--content-base-strong)' }}>
+      <h1 className="text-3xl font-bold mb-2" style={{ color: 'var(--content-base-strong)' }}>
         Semantic Colors
       </h1>
       <p className="mb-6 leading-relaxed" style={{ color: 'var(--content-base-default)' }}>

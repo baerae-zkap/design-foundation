@@ -24,7 +24,7 @@ export default function RadiusPage() {
     <div>
       <Breadcrumb items={[{ label: "파운데이션", href: "/" }, { label: "Radius" }]} />
 
-      <h1 className="text-3xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Radius</h1>
+      <h1 className="text-3xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>Radius</h1>
       <p className="mb-6 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
         모서리 둥글기(border-radius) 토큰입니다. 컴포넌트 유형에 맞는 값을 선택해주세요.
       </p>
@@ -33,17 +33,16 @@ export default function RadiusPage() {
       ]} />
 
       {/* Visual Scale */}
-      <section className="mb-12">
-        <h2 id="scale" className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>스케일 시각화</h2>
-        <div className="p-6" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', backgroundColor: 'var(--bg-elevated)' }}>
-          <div className="flex items-center justify-between">
+      <section style={{ marginBottom: 48 }}>
+        <h2 id="scale" style={{ fontSize: 20, fontWeight: 700, marginBottom: 12, color: 'var(--text-primary)' }}>스케일 시각화</h2>
+        <div style={{ padding: 24, borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', backgroundColor: 'var(--bg-elevated)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             {Object.entries(primitive).filter(([k]) => !k.startsWith("_")).map(([key, value]) => (
-              <div key={key} className="flex flex-col items-center gap-2">
+              <div key={key} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
                 <div
-                  className="w-12 h-12"
-                  style={{ backgroundColor: 'var(--brand-primary)', borderRadius: value === 9999 ? "50%" : value }}
+                  style={{ width: 48, height: 48, backgroundColor: 'var(--brand-primary)', borderRadius: value === 9999 ? "50%" : value }}
                 />
-                <span className="text-xs font-mono" style={{ color: 'var(--text-tertiary)' }}>{key}</span>
+                <span style={{ fontSize: 12, fontFamily: 'var(--font-mono)', color: 'var(--text-tertiary)' }}>{key}</span>
               </div>
             ))}
           </div>
@@ -51,19 +50,19 @@ export default function RadiusPage() {
       </section>
 
       {/* Primitive */}
-      <section className="mb-12">
-        <h2 id="primitive" className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Primitive</h2>
-        <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>기본 라운딩 값 목록입니다.</p>
-        <div className="overflow-hidden" style={{ backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
+      <section style={{ marginBottom: 48 }}>
+        <h2 id="primitive" style={{ fontSize: 20, fontWeight: 700, marginBottom: 4, color: 'var(--text-primary)' }}>Primitive</h2>
+        <p style={{ marginBottom: 16, color: 'var(--text-secondary)' }}>기본 라운딩 값 목록입니다.</p>
+        <div style={{ backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', overflow: 'hidden' }}>
           {Object.entries(primitive).filter(([k]) => !k.startsWith("_")).map(([key, value], i, arr) => (
-            <div key={key} className="flex items-center gap-4 p-4 transition-colors" style={{ borderBottom: i < arr.length - 1 ? '1px solid var(--divider)' : 'none' }}>
-              <div className="w-16 flex justify-center">
-                <div className="w-12 h-12" style={{ backgroundColor: 'var(--brand-primary)', borderRadius: value === 9999 ? "50%" : value }} />
+            <div key={key} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: 16, borderBottom: i < arr.length - 1 ? '1px solid var(--divider)' : 'none' }}>
+              <div style={{ width: 64, display: 'flex', justifyContent: 'center' }}>
+                <div style={{ width: 48, height: 48, backgroundColor: 'var(--brand-primary)', borderRadius: value === 9999 ? "50%" : value }} />
               </div>
-              <div className="flex-1">
-                <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{formatTokenName('radius', key)}</span>
+              <div style={{ flex: 1 }}>
+                <span style={{ fontSize: 14, fontWeight: 500, color: 'var(--text-primary)' }}>{formatTokenName('radius', key)}</span>
               </div>
-              <span className="text-sm font-mono" style={{ color: 'var(--text-tertiary)' }}>{value === 9999 ? "9999px" : `${value}px`}</span>
+              <span style={{ fontSize: 14, fontFamily: 'var(--font-mono)', color: 'var(--text-tertiary)' }}>{value === 9999 ? "9999px" : `${value}px`}</span>
             </div>
           ))}
         </div>
@@ -71,39 +70,50 @@ export default function RadiusPage() {
 
       {/* Input */}
       <SemanticSection id="input" title="Input" description="입력 필드용 라운딩입니다." data={semantic.input} renderPreview={(value) => (
-        <div className="w-full h-10" style={{ border: '2px solid var(--divider)', backgroundColor: 'var(--bg-secondary)', borderRadius: value === 9999 ? 9999 : value }} />
+        <div style={{ width: 72, height: 36, border: '2px solid var(--divider)', backgroundColor: 'var(--bg-secondary)', borderRadius: value === 9999 ? 9999 : value }} />
       )} />
 
       {/* Card */}
       <SemanticSection id="card" title="Card" description="카드 컴포넌트용 라운딩입니다." data={semantic.card} renderPreview={(value) => (
-        <div className="w-full h-16" style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--divider)', borderRadius: value }} />
+        <div style={{ width: 72, height: 48, backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--divider)', borderRadius: value }} />
       )} />
 
       {/* Chip */}
       <SemanticSection id="chip" title="Chip" description="칩/태그 컴포넌트용 라운딩입니다." data={semantic.chip} renderPreview={(value) => (
-        <span className="px-3 py-1 text-sm" style={{ backgroundColor: 'var(--blue-90)', color: 'var(--blue-50)', borderRadius: value === 9999 ? 9999 : value }}>Tag</span>
+        <span style={{ display: 'inline-block', padding: '4px 12px', fontSize: 13, backgroundColor: '#dbeafe', color: '#2563eb', borderRadius: value === 9999 ? 9999 : value }}>Tag</span>
       )} />
 
       {/* Badge */}
       <SemanticSection id="badge" title="Badge" description="뱃지 컴포넌트용 라운딩입니다." data={semantic.badge} renderPreview={(value) => (
-        <span className="px-2 py-0.5 text-xs font-medium" style={{ backgroundColor: 'var(--red-500)', color: 'white', borderRadius: value === 9999 ? 9999 : value }}>NEW</span>
+        <span style={{ display: 'inline-block', padding: '2px 8px', fontSize: 12, fontWeight: 500, backgroundColor: '#ef4444', color: 'white', borderRadius: value === 9999 ? 9999 : value }}>NEW</span>
       )} />
 
       {/* Avatar */}
       <SemanticSection id="avatar" title="Avatar" description="아바타 컴포넌트용 라운딩입니다." data={semantic.avatar} renderPreview={(value) => (
-        <div className="w-10 h-10" style={{ background: 'linear-gradient(135deg, var(--blue-65), var(--blue-50))', borderRadius: value === 9999 ? '50%' : value }} />
+        <div style={{ width: 40, height: 40, background: '#e2e8f0', borderRadius: value === 9999 ? '50%' : value, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="#94a3b8">
+            <circle cx="12" cy="8" r="4" />
+            <path d="M12 14c-4 0-8 2-8 4v2h16v-2c0-2-4-4-8-4z" />
+          </svg>
+        </div>
       )} />
 
       {/* Image */}
       <SemanticSection id="image" title="Image" description="이미지/썸네일 컴포넌트용 라운딩입니다." data={semantic.image} renderPreview={(value) => (
-        <div className="w-16 h-12" style={{ backgroundColor: 'var(--grey-90)', borderRadius: value }} />
+        <div style={{ width: 56, height: 40, background: '#e2e8f0', borderRadius: value, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#94a3b8">
+            <rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="#94a3b8" strokeWidth="2"/>
+            <circle cx="8.5" cy="8.5" r="1.5" />
+            <path d="M21 15l-5-5-4 4-3-3-6 6" stroke="#94a3b8" strokeWidth="2" fill="none"/>
+          </svg>
+        </div>
       )} />
 
       {/* Surface Components */}
-      <section className="mb-12">
-        <h2 id="surface" className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Surface</h2>
-        <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>모달, 바텀시트, 토스트 등 서피스 컴포넌트용 라운딩입니다.</p>
-        <div className="overflow-hidden" style={{ backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
+      <section style={{ marginBottom: 48 }}>
+        <h2 id="surface" style={{ fontSize: 20, fontWeight: 700, marginBottom: 4, color: 'var(--text-primary)' }}>Surface</h2>
+        <p style={{ marginBottom: 16, color: 'var(--text-secondary)' }}>모달, 바텀시트, 토스트 등 서피스 컴포넌트용 라운딩입니다.</p>
+        <div style={{ backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', overflow: 'hidden' }}>
           {[
             { key: 'modal', token: semantic.modal.default },
             { key: 'bottomSheet', token: semantic.bottomSheet.default },
@@ -112,12 +122,43 @@ export default function RadiusPage() {
           ].map(({ key, token }, i, arr) => {
             const value = resolveRef(token);
             return (
-              <div key={key} className="flex items-center gap-4 p-4 transition-colors" style={{ borderBottom: i < arr.length - 1 ? '1px solid var(--divider)' : 'none' }}>
-                <div className="flex-1">
-                  <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{key}</span>
-                  <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>{token._comment || ''}</p>
+              <div key={key} style={{ display: 'flex', alignItems: 'center', gap: 24, padding: '20px 16px', borderBottom: i < arr.length - 1 ? '1px solid var(--divider)' : 'none' }}>
+                <div style={{ width: 140, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                  {key === 'modal' && (
+                    <div style={{ width: 120, height: 80, backgroundColor: '#fff', border: '1px solid #cbd5e1', borderRadius: value, boxShadow: '0 8px 24px rgba(0,0,0,0.15)', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+                      <div style={{ padding: '8px 10px', borderBottom: '1px solid #e2e8f0' }}>
+                        <div style={{ width: 40, height: 6, backgroundColor: '#cbd5e1', borderRadius: 2 }} />
+                      </div>
+                      <div style={{ flex: 1, padding: 10, display: 'flex', flexDirection: 'column', gap: 4 }}>
+                        <div style={{ width: '100%', height: 4, backgroundColor: '#f1f5f9', borderRadius: 2 }} />
+                        <div style={{ width: '70%', height: 4, backgroundColor: '#f1f5f9', borderRadius: 2 }} />
+                      </div>
+                    </div>
+                  )}
+                  {key === 'bottomSheet' && (
+                    <div style={{ width: 120, height: 70, backgroundColor: '#fff', border: '1px solid #cbd5e1', borderTopLeftRadius: value, borderTopRightRadius: value, borderBottomLeftRadius: 0, borderBottomRightRadius: 0, boxShadow: '0 -4px 16px rgba(0,0,0,0.1)', display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: 8 }}>
+                      <div style={{ width: 32, height: 4, backgroundColor: '#cbd5e1', borderRadius: 2, marginBottom: 12 }} />
+                      <div style={{ width: '80%', height: 4, backgroundColor: '#f1f5f9', borderRadius: 2, marginBottom: 6 }} />
+                      <div style={{ width: '60%', height: 4, backgroundColor: '#f1f5f9', borderRadius: 2 }} />
+                    </div>
+                  )}
+                  {key === 'toast' && (
+                    <div style={{ width: 120, height: 36, backgroundColor: '#1e293b', borderRadius: value, display: 'flex', alignItems: 'center', padding: '0 12px', gap: 8, boxShadow: '0 4px 12px rgba(0,0,0,0.15)' }}>
+                      <div style={{ width: 14, height: 14, backgroundColor: '#22c55e', borderRadius: '50%' }} />
+                      <span style={{ fontSize: 11, color: '#fff' }}>완료!</span>
+                    </div>
+                  )}
+                  {key === 'tooltip' && (
+                    <div style={{ width: 80, height: 28, backgroundColor: '#1e293b', borderRadius: value, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
+                      <span style={{ fontSize: 11, color: '#fff' }}>도움말</span>
+                    </div>
+                  )}
                 </div>
-                <span className="text-sm font-mono" style={{ color: 'var(--text-tertiary)' }}>{value}px</span>
+                <div style={{ flex: 1 }}>
+                  <span style={{ fontSize: 14, fontWeight: 500, color: 'var(--text-primary)' }}>{key}</span>
+                  <p style={{ fontSize: 12, color: 'var(--text-tertiary)', marginTop: 2 }}>{token._comment || ''}</p>
+                </div>
+                <span style={{ fontSize: 14, fontFamily: 'var(--font-mono)', color: 'var(--text-tertiary)' }}>{value}px</span>
               </div>
             );
           })}
@@ -126,7 +167,7 @@ export default function RadiusPage() {
 
       {/* Skeleton */}
       <SemanticSection id="skeleton" title="Skeleton" description="스켈레톤 로딩 컴포넌트용 라운딩입니다." data={semantic.skeleton} renderPreview={(value, key) => (
-        <div className={key === 'text' ? 'w-20 h-4' : 'w-12 h-12'} style={{ backgroundColor: 'var(--grey-95)', borderRadius: value }} />
+        <div style={{ width: key === 'text' ? 64 : 40, height: key === 'text' ? 14 : 40, background: 'linear-gradient(90deg, #e2e8f0, #f1f5f9, #e2e8f0)', borderRadius: value }} />
       )} />
     </div>
   );
@@ -140,22 +181,22 @@ function SemanticSection({ id, title, description, data, renderPreview }: {
   renderPreview: (value: number, key: string) => React.ReactNode;
 }) {
   return (
-    <section className="mb-12">
-      <h2 id={id} className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>{title}</h2>
-      <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>{description}</p>
-      <div className="overflow-hidden" style={{ backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
+    <section style={{ marginBottom: 48 }}>
+      <h2 id={id} style={{ fontSize: 20, fontWeight: 700, marginBottom: 4, color: 'var(--text-primary)' }}>{title}</h2>
+      <p style={{ marginBottom: 16, color: 'var(--text-secondary)' }}>{description}</p>
+      <div style={{ backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', overflow: 'hidden' }}>
         {Object.entries(data).filter(([k]) => !k.startsWith("_")).map(([key, token], i, arr) => {
           const value = resolveRef(token);
           return (
-            <div key={key} className="flex items-center gap-4 p-4 transition-colors" style={{ borderBottom: i < arr.length - 1 ? '1px solid var(--divider)' : 'none' }}>
-              <div className="w-24 flex justify-center">
+            <div key={key} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: 16, borderBottom: i < arr.length - 1 ? '1px solid var(--divider)' : 'none' }}>
+              <div style={{ width: 96, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 {renderPreview(value, key)}
               </div>
-              <div className="flex-1">
-                <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{formatTokenName(id, key)}</span>
-                <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>{token._comment || ''}</p>
+              <div style={{ flex: 1 }}>
+                <span style={{ fontSize: 14, fontWeight: 500, color: 'var(--text-primary)' }}>{formatTokenName(id, key)}</span>
+                <p style={{ fontSize: 12, color: 'var(--text-tertiary)', marginTop: 2 }}>{token._comment || ''}</p>
               </div>
-              <span className="text-sm font-mono" style={{ color: 'var(--text-tertiary)' }}>{value === 9999 ? "9999px" : `${value}px`}</span>
+              <span style={{ fontSize: 14, fontFamily: 'var(--font-mono)', color: 'var(--text-tertiary)' }}>{value === 9999 ? "9999px" : `${value}px`}</span>
             </div>
           );
         })}

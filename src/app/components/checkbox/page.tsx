@@ -74,14 +74,14 @@ export default function CheckboxPage() {
     <div>
       <Breadcrumb items={[{ label: "컴포넌트", href: "/" }, { label: "Checkbox" }]} />
 
-      <h1 className="text-3xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>Checkbox</h1>
+      <h1 className="text-3xl font-bold mb-2" style={{ color: "var(--text-primary)" }}>Checkbox</h1>
       <p className="mb-8 leading-relaxed" style={{ color: "var(--text-secondary)" }}>
         사용자가 여러 옵션 중 하나 이상을 선택할 수 있는 선택 요소입니다.
       </p>
 
       {/* Basic */}
       <section className="mb-12">
-        <h2 id="basic" className="text-xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>Basic</h2>
+        <h2 id="basic" className="text-xl font-bold mb-1" style={{ color: "var(--text-primary)" }}>Basic</h2>
         <p className="mb-4" style={{ color: "var(--text-secondary)" }}>기본 체크박스입니다. 클릭해보세요.</p>
         <div className="p-6" style={{ backgroundColor: "var(--bg-elevated)", borderRadius: "var(--radius-lg)", border: "1px solid var(--divider)" }}>
           <div className="flex flex-col gap-4">
@@ -108,7 +108,7 @@ export default function CheckboxPage() {
 
       {/* States */}
       <section className="mb-12">
-        <h2 id="states" className="text-xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>States</h2>
+        <h2 id="states" className="text-xl font-bold mb-1" style={{ color: "var(--text-primary)" }}>States</h2>
         <p className="mb-4" style={{ color: "var(--text-secondary)" }}>체크됨, 체크 안됨, 비활성화 상태를 지원합니다.</p>
         <div className="p-6" style={{ backgroundColor: "var(--bg-elevated)", borderRadius: "var(--radius-lg)", border: "1px solid var(--divider)" }}>
           <div className="flex flex-col gap-4">
@@ -122,7 +122,7 @@ export default function CheckboxPage() {
 
       {/* Group Example */}
       <section className="mb-12">
-        <h2 id="group" className="text-xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>Group Example</h2>
+        <h2 id="group" className="text-xl font-bold mb-1" style={{ color: "var(--text-primary)" }}>Group Example</h2>
         <p className="mb-4" style={{ color: "var(--text-secondary)" }}>전체 선택 기능이 포함된 체크박스 그룹 예시입니다.</p>
         <div className="p-6" style={{ backgroundColor: "var(--bg-elevated)", borderRadius: "var(--radius-lg)", border: "1px solid var(--divider)" }}>
           <div className="flex flex-col gap-2">
@@ -154,7 +154,7 @@ export default function CheckboxPage() {
 
       {/* Props */}
       <section className="mb-12">
-        <h2 id="props" className="text-xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>Props</h2>
+        <h2 id="props" className="text-xl font-bold mb-1" style={{ color: "var(--text-primary)" }}>Props</h2>
         <div className="overflow-hidden" style={{ backgroundColor: "var(--bg-elevated)", borderRadius: "var(--radius-lg)", border: "1px solid var(--divider)" }}>
           <table style={{ width: "100%", borderCollapse: "collapse" }}>
             <thead>

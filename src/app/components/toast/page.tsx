@@ -159,14 +159,14 @@ export default function ToastPage() {
 
       <Breadcrumb items={[{ label: "컴포넌트", href: "/" }, { label: "Toast" }]} />
 
-      <h1 className="text-3xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>Toast</h1>
+      <h1 className="text-3xl font-bold mb-2" style={{ color: "var(--text-primary)" }}>Toast</h1>
       <p className="mb-8 leading-relaxed" style={{ color: "var(--text-secondary)" }}>
         사용자에게 피드백 메시지를 일시적으로 표시하는 알림 컴포넌트입니다.
       </p>
 
       {/* Types */}
       <section className="mb-12">
-        <h2 id="types" className="text-xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>Types</h2>
+        <h2 id="types" className="text-xl font-bold mb-1" style={{ color: "var(--text-primary)" }}>Types</h2>
         <p className="mb-4" style={{ color: "var(--text-secondary)" }}>상황에 맞는 타입을 선택합니다. 버튼을 클릭해보세요.</p>
         <div className="p-6 flex flex-wrap gap-4" style={{ backgroundColor: "var(--bg-elevated)", borderRadius: "var(--radius-lg)", border: "1px solid var(--divider)" }}>
           <Button variant="success" onClick={() => showToast("저장되었습니다.", "success")}>
@@ -193,7 +193,7 @@ showToast("새로운 알림이 있습니다.", "info");`}</code>
 
       {/* Preview */}
       <section className="mb-12">
-        <h2 id="preview" className="text-xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>Preview</h2>
+        <h2 id="preview" className="text-xl font-bold mb-1" style={{ color: "var(--text-primary)" }}>Preview</h2>
         <p className="mb-4" style={{ color: "var(--text-secondary)" }}>각 타입별 토스트 미리보기입니다.</p>
         <div className="p-6 space-y-4" style={{ backgroundColor: "var(--bg-secondary)", borderRadius: "var(--radius-lg)", border: "1px solid var(--divider)" }}>
           {(["success", "error", "warning", "info"] as ToastType[]).map((type) => {
@@ -272,7 +272,7 @@ showToast("새로운 알림이 있습니다.", "info");`}</code>
 
       {/* Props */}
       <section className="mb-12">
-        <h2 id="props" className="text-xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>Props</h2>
+        <h2 id="props" className="text-xl font-bold mb-1" style={{ color: "var(--text-primary)" }}>Props</h2>
         <div className="overflow-hidden" style={{ backgroundColor: "var(--bg-elevated)", borderRadius: "var(--radius-lg)", border: "1px solid var(--divider)" }}>
           <table style={{ width: "100%", borderCollapse: "collapse" }}>
             <thead>

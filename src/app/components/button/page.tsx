@@ -164,14 +164,14 @@ export default function ButtonPage() {
 
       <Breadcrumb items={[{ label: "컴포넌트", href: "/" }, { label: "Button" }]} />
 
-      <h1 className="text-3xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>Button</h1>
+      <h1 className="text-3xl font-bold mb-2" style={{ color: "var(--text-primary)" }}>Button</h1>
       <p className="mb-8 leading-relaxed" style={{ color: "var(--text-secondary)" }}>
         사용자 액션을 유도하는 핵심 인터랙션 요소입니다. 시각적 계층과 맥락에 맞는 variant를 선택하세요.
       </p>
 
       {/* Variants */}
       <section className="mb-12">
-        <h2 id="variants" className="text-xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>Variants</h2>
+        <h2 id="variants" className="text-xl font-bold mb-1" style={{ color: "var(--text-primary)" }}>Variants</h2>
         <p className="mb-4" style={{ color: "var(--text-secondary)" }}>
           버튼의 중요도와 맥락에 따라 적절한 variant를 선택합니다. 버튼을 눌러 인터랙션을 확인해보세요.
         </p>
@@ -203,7 +203,7 @@ export default function ButtonPage() {
 
       {/* Sizes */}
       <section className="mb-12">
-        <h2 id="sizes" className="text-xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>Sizes</h2>
+        <h2 id="sizes" className="text-xl font-bold mb-1" style={{ color: "var(--text-primary)" }}>Sizes</h2>
         <p className="mb-4" style={{ color: "var(--text-secondary)" }}>
           5가지 크기를 제공합니다. UI 밀도와 터치 영역을 고려해 선택하세요.
         </p>
@@ -240,7 +240,7 @@ export default function ButtonPage() {
 
       {/* With Icons */}
       <section className="mb-12">
-        <h2 id="icons" className="text-xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>With Icons</h2>
+        <h2 id="icons" className="text-xl font-bold mb-1" style={{ color: "var(--text-primary)" }}>With Icons</h2>
         <p className="mb-4" style={{ color: "var(--text-secondary)" }}>
           아이콘과 함께 사용하여 의미를 명확히 전달할 수 있습니다.
         </p>
@@ -270,7 +270,7 @@ export default function ButtonPage() {
 
       {/* States */}
       <section className="mb-12">
-        <h2 id="states" className="text-xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>States</h2>
+        <h2 id="states" className="text-xl font-bold mb-1" style={{ color: "var(--text-primary)" }}>States</h2>
         <p className="mb-4" style={{ color: "var(--text-secondary)" }}>
           버튼의 다양한 상태를 지원합니다.
         </p>
@@ -302,7 +302,7 @@ export default function ButtonPage() {
 
       {/* Full Width */}
       <section className="mb-12">
-        <h2 id="fullwidth" className="text-xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>Full Width</h2>
+        <h2 id="fullwidth" className="text-xl font-bold mb-1" style={{ color: "var(--text-primary)" }}>Full Width</h2>
         <p className="mb-4" style={{ color: "var(--text-secondary)" }}>
           모바일 화면이나 모달 하단에서 전체 너비 버튼이 필요할 때 사용합니다.
         </p>
@@ -318,7 +318,7 @@ export default function ButtonPage() {
 
       {/* Button Group */}
       <section className="mb-12">
-        <h2 id="group" className="text-xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>Button Group</h2>
+        <h2 id="group" className="text-xl font-bold mb-1" style={{ color: "var(--text-primary)" }}>Button Group</h2>
         <p className="mb-4" style={{ color: "var(--text-secondary)" }}>
           관련된 액션들을 그룹으로 묶어 사용합니다.
         </p>
@@ -342,7 +342,7 @@ export default function ButtonPage() {
 
       {/* Interactive Demo */}
       <section className="mb-12">
-        <h2 id="interactive" className="text-xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>Interactive Demo</h2>
+        <h2 id="interactive" className="text-xl font-bold mb-1" style={{ color: "var(--text-primary)" }}>Interactive Demo</h2>
         <p className="mb-4" style={{ color: "var(--text-secondary)" }}>
           다양한 인터랙션을 체험해보세요.
         </p>
@@ -374,7 +374,7 @@ export default function ButtonPage() {
 
       {/* Accessibility */}
       <section className="mb-12">
-        <h2 id="a11y" className="text-xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>Accessibility</h2>
+        <h2 id="a11y" className="text-xl font-bold mb-1" style={{ color: "var(--text-primary)" }}>Accessibility</h2>
         <div className="p-4" style={{ backgroundColor: "var(--bg-secondary)", borderRadius: "var(--radius-md)" }}>
           <ul className="text-sm space-y-2" style={{ color: "var(--text-secondary)" }}>
             <li>• 최소 터치 영역 44×44px (모바일 권장)</li>
@@ -388,7 +388,7 @@ export default function ButtonPage() {
 
       {/* Props */}
       <section className="mb-12">
-        <h2 id="props" className="text-xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>Props</h2>
+        <h2 id="props" className="text-xl font-bold mb-1" style={{ color: "var(--text-primary)" }}>Props</h2>
         <div className="overflow-x-auto" style={{ backgroundColor: "var(--bg-elevated)", borderRadius: "var(--radius-lg)", border: "1px solid var(--divider)" }}>
           <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 600 }}>
             <thead>
