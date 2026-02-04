@@ -21,7 +21,7 @@ const foundationsNav = [
 
 const componentsNav = [
   { title: "Overview", href: "/components" },
-  { title: "Action Item", href: "/components/actions/action-item" },
+  { title: "Action Area", href: "/components/actions/action-item" },
   { title: "Button", href: "/components/actions/button" },
 ];
 

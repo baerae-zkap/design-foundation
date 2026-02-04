@@ -8,7 +8,7 @@ const componentCategories = [
     title: "Actions",
     description: "사용자의 액션을 유도하는 인터랙티브 요소",
     components: [
-      { name: "Action Item", href: "/components/actions/action-item", status: "ready" },
+      { name: "Action Area", href: "/components/actions/action-item", status: "ready" },
       { name: "Button", href: "/components/actions/button", status: "ready" },
     ],
   },

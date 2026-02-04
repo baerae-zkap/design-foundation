@@ -28,22 +28,8 @@ export default function ButtonPage() {
         작업을 수행하는데 사용되는 클릭 가능한 요소입니다. 폼 제출, 다이얼로그 상호작용, 작업 취소 및 삭제 등의 액션을 트리거합니다.
       </p>
 
-      {/* Hero Image */}
-      <div
-        style={{
-          aspectRatio: "21/9",
-          borderRadius: 24,
-          border: "1px solid var(--divider)",
-          backgroundColor: "#fafafa",
-          marginBottom: 32,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          overflow: "hidden",
-        }}
-      >
-        <ButtonHeroMockup />
-      </div>
+      {/* Interactive Playground */}
+      <ButtonPlayground />
 
       {/* Platform Tabs */}
       <PlatformTabs>
@@ -53,48 +39,293 @@ export default function ButtonPage() {
   );
 }
 
-function ButtonHeroMockup() {
+function ButtonPlayground() {
+  const [buttonType, setButtonType] = useState<ButtonType>("filled");
+  const [color, setColor] = useState<ButtonColor>("brandDefault");
+  const [size, setSize] = useState<ButtonSize>("medium");
+  const [isLoading, setIsLoading] = useState(false);
+  const [disabled, setDisabled] = useState(false);
+  const [label, setLabel] = useState("Button");
+  const [codeType, setCodeType] = useState<"rn" | "web">("rn");
+
+  const buttonTypes: ButtonType[] = ["filled", "outlined", "plain"];
+  const colors: ButtonColor[] = ["brandDefault", "brandSecondary", "baseContainer", "successDefault", "errorDefault"];
+  const sizes: ButtonSize[] = ["small", "medium", "large", "xLarge"];
+
+  const generateCode = () => {
+    const props = [];
+    if (buttonType !== "filled") props.push(`buttonType="${buttonType}"`);
+    if (color !== "brandDefault") props.push(`color="${color}"`);
+    if (size !== "medium") props.push(`size="${size}"`);
+    if (isLoading) props.push("isLoading");
+    if (disabled) props.push("disabled");
+
+    const propsStr = props.length > 0 ? `\n  ${props.join("\n  ")}\n` : " ";
+
+    if (codeType === "rn") {
+      return `<Button${propsStr.length > 1 ? propsStr : " "}onPress={() => {}}>
+  ${label}
+</Button>`;
+    } else {
+      return `<Button${propsStr.length > 1 ? propsStr : " "}onClick={() => {}}>
+  ${label}
+</Button>`;
+    }
+  };
+
   return (
-    <div style={{ display: "flex", gap: 20, alignItems: "center" }}>
+    <div
+      style={{
+        borderRadius: 16,
+        border: "1px solid var(--divider)",
+        overflow: "hidden",
+        marginBottom: 32,
+      }}
+    >
+      {/* Preview Area */}
       <div
         style={{
-          padding: "14px 28px",
-          backgroundColor: "var(--brand-primary)",
-          color: "white",
-          borderRadius: 8,
-          fontSize: 15,
-          fontWeight: 600,
-          boxShadow: "0 4px 14px rgba(37, 99, 235, 0.35)",
+          padding: 48,
+          backgroundColor: "#fafafa",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          minHeight: 120,
         }}
       >
-        Filled
+        <ButtonDemo
+          buttonType={buttonType}
+          color={color}
+          size={size}
+          isLoading={isLoading}
+          disabled={disabled}
+        >
+          {label}
+        </ButtonDemo>
       </div>
+
+      {/* Controls */}
       <div
         style={{
-          padding: "14px 28px",
-          backgroundColor: "white",
-          color: "var(--brand-primary)",
-          border: "1px solid var(--brand-primary)",
-          borderRadius: 8,
-          fontSize: 15,
-          fontWeight: 600,
+          padding: 20,
+          backgroundColor: "var(--bg-primary)",
+          borderTop: "1px solid var(--divider)",
+          display: "flex",
+          flexDirection: "column",
+          gap: 16,
         }}
       >
-        Outlined
+        {/* Row 1: Type & Color */}
+        <div style={{ display: "flex", gap: 24, flexWrap: "wrap" }}>
+          <ControlGroup label="Type">
+            <SegmentedControl
+              options={buttonTypes.map(t => ({ value: t, label: t.charAt(0).toUpperCase() + t.slice(1) }))}
+              value={buttonType}
+              onChange={(v) => setButtonType(v as ButtonType)}
+            />
+          </ControlGroup>
+          <ControlGroup label="Color">
+            <select
+              value={color}
+              onChange={(e) => setColor(e.target.value as ButtonColor)}
+              style={{
+                padding: "6px 12px",
+                fontSize: 13,
+                borderRadius: 6,
+                border: "1px solid var(--divider)",
+                backgroundColor: "var(--bg-primary)",
+                color: "var(--text-primary)",
+                cursor: "pointer",
+              }}
+            >
+              {colors.map(c => (
+                <option key={c} value={c}>{c}</option>
+              ))}
+            </select>
+          </ControlGroup>
+        </div>
+
+        {/* Row 2: Size & States */}
+        <div style={{ display: "flex", gap: 24, flexWrap: "wrap" }}>
+          <ControlGroup label="Size">
+            <SegmentedControl
+              options={sizes.map(s => ({ value: s, label: s.charAt(0).toUpperCase() + s.slice(1) }))}
+              value={size}
+              onChange={(v) => setSize(v as ButtonSize)}
+            />
+          </ControlGroup>
+          <ControlGroup label="States">
+            <div style={{ display: "flex", gap: 12 }}>
+              <ToggleChip active={isLoading} onClick={() => setIsLoading(!isLoading)}>Loading</ToggleChip>
+              <ToggleChip active={disabled} onClick={() => setDisabled(!disabled)}>Disabled</ToggleChip>
+            </div>
+          </ControlGroup>
+        </div>
+
+        {/* Row 3: Label */}
+        <ControlGroup label="Label">
+          <input
+            type="text"
+            value={label}
+            onChange={(e) => setLabel(e.target.value)}
+            style={{
+              padding: "6px 12px",
+              fontSize: 13,
+              borderRadius: 6,
+              border: "1px solid var(--divider)",
+              backgroundColor: "var(--bg-primary)",
+              color: "var(--text-primary)",
+              width: 160,
+            }}
+          />
+        </ControlGroup>
       </div>
-      <div
-        style={{
-          padding: "14px 28px",
-          backgroundColor: "transparent",
-          color: "var(--brand-primary)",
-          borderRadius: 8,
-          fontSize: 15,
-          fontWeight: 600,
-        }}
-      >
-        Plain
+
+      {/* Generated Code */}
+      <div style={{ borderTop: "1px solid var(--divider)" }}>
+        <div
+          style={{
+            padding: "10px 20px",
+            backgroundColor: "#18181b",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <div style={{ display: "flex", gap: 8 }}>
+            <CodeTypeTab active={codeType === "rn"} onClick={() => setCodeType("rn")}>React Native</CodeTypeTab>
+            <CodeTypeTab active={codeType === "web"} onClick={() => setCodeType("web")}>Web</CodeTypeTab>
+          </div>
+          <CopyButton text={generateCode()} />
+        </div>
+        <pre
+          style={{
+            margin: 0,
+            padding: 16,
+            fontSize: 13,
+            lineHeight: 1.6,
+            color: "#e4e4e7",
+            backgroundColor: "#18181b",
+            fontFamily: "'SF Mono', 'Fira Code', monospace",
+            overflow: "auto",
+          }}
+        >
+          <code>{generateCode()}</code>
+        </pre>
       </div>
     </div>
+  );
+}
+
+function ControlGroup({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+      <span style={{ fontSize: 12, fontWeight: 500, color: "var(--text-tertiary)", textTransform: "uppercase", letterSpacing: "0.03em" }}>
+        {label}
+      </span>
+      {children}
+    </div>
+  );
+}
+
+function SegmentedControl({ options, value, onChange }: { options: { value: string; label: string }[]; value: string; onChange: (v: string) => void }) {
+  return (
+    <div style={{ display: "flex", gap: 2, padding: 2, backgroundColor: "var(--bg-secondary)", borderRadius: 8 }}>
+      {options.map(opt => (
+        <button
+          key={opt.value}
+          onClick={() => onChange(opt.value)}
+          style={{
+            padding: "6px 12px",
+            fontSize: 12,
+            fontWeight: 500,
+            color: value === opt.value ? "var(--text-primary)" : "var(--text-tertiary)",
+            backgroundColor: value === opt.value ? "var(--bg-primary)" : "transparent",
+            border: "none",
+            borderRadius: 6,
+            cursor: "pointer",
+            transition: "all 0.15s ease",
+            boxShadow: value === opt.value ? "0 1px 3px rgba(0,0,0,0.1)" : "none",
+          }}
+        >
+          {opt.label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function ToggleChip({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
+  return (
+    <button
+      onClick={onClick}
+      style={{
+        padding: "6px 12px",
+        fontSize: 12,
+        fontWeight: 500,
+        color: active ? "var(--brand-primary)" : "var(--text-tertiary)",
+        backgroundColor: active ? "#dbeafe" : "var(--bg-secondary)",
+        border: active ? "1px solid var(--brand-primary)" : "1px solid transparent",
+        borderRadius: 16,
+        cursor: "pointer",
+        transition: "all 0.15s ease",
+      }}
+    >
+      {children}
+    </button>
+  );
+}
+
+function CodeTypeTab({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
+  return (
+    <button
+      onClick={onClick}
+      style={{
+        padding: "4px 12px",
+        fontSize: 12,
+        fontWeight: 500,
+        color: active ? "#e4e4e7" : "#71717a",
+        backgroundColor: active ? "#27272a" : "transparent",
+        border: "none",
+        borderRadius: 4,
+        cursor: "pointer",
+        transition: "all 0.15s ease",
+      }}
+    >
+      {children}
+    </button>
+  );
+}
+
+function CopyButton({ text }: { text: string }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <button
+      onClick={handleCopy}
+      style={{
+        padding: "4px 10px",
+        fontSize: 11,
+        fontWeight: 500,
+        color: copied ? "#22c55e" : "#71717a",
+        backgroundColor: "transparent",
+        border: "1px solid #3f3f46",
+        borderRadius: 4,
+        cursor: "pointer",
+        display: "flex",
+        alignItems: "center",
+        gap: 4,
+        transition: "all 0.15s ease",
+      }}
+    >
+      {copied ? "Copied!" : "Copy"}
+    </button>
   );
 }
 
@@ -1470,13 +1701,14 @@ function ButtonDemo({
         justifyContent: "center",
         gap: 6,
         width: layout === "fillWidth" ? "100%" : "auto",
+        minWidth: iconOnly ? "auto" : 80,
         height: buttonType === "plain" ? "auto" : sizeHeights[size],
         opacity: disabled && !isLoading ? 1 : 1,
         position: "relative",
       }}
     >
       {isLoading ? (
-        <LoadingSpinner />
+        <LoadingDots />
       ) : (
         <>
           {leadingIcon && (
@@ -1533,10 +1765,7 @@ function LoadingButtonDemo() {
       }}
     >
       {isLoading ? (
-        <>
-          <LoadingSpinner />
-          Loading...
-        </>
+        <LoadingDots />
       ) : (
         "Click to Load"
       )}
@@ -1544,20 +1773,29 @@ function LoadingButtonDemo() {
   );
 }
 
-function LoadingSpinner() {
+function LoadingDots({ color = "currentColor" }: { color?: string }) {
   return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      style={{ animation: "spin 1s linear infinite" }}
-    >
-      <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
-      <path d="M21 12a9 9 0 11-6.219-8.56" />
-    </svg>
+    <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+      <style>{`
+        @keyframes dotPulse {
+          0%, 100% { transform: scale(0.6); opacity: 0.4; }
+          50% { transform: scale(1); opacity: 1; }
+        }
+      `}</style>
+      {[0, 1, 2, 3].map((i) => (
+        <div
+          key={i}
+          style={{
+            width: 6,
+            height: 6,
+            borderRadius: "50%",
+            backgroundColor: color,
+            animation: `dotPulse 1.2s ease-in-out infinite`,
+            animationDelay: `${i * 0.15}s`,
+          }}
+        />
+      ))}
+    </div>
   );
 }
 
