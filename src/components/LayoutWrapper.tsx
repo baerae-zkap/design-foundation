@@ -66,7 +66,7 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
             style={{
               flex: 1,
               width: '100%',
-              maxWidth: isTablet ? '100%' : '960px',
+              maxWidth: isTablet ? '100%' : '840px',
               padding: getContentPadding(),
               boxSizing: 'border-box',
             }}
