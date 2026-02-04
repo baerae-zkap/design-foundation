@@ -1,5 +1,7 @@
 "use client";
 
+const basePath = process.env.NODE_ENV === 'production' ? '/design-foundation' : '';
+
 interface TokenFile {
   name: string;
   path: string;
@@ -16,7 +18,7 @@ export function TokenDownload({ files }: TokenDownloadProps) {
       {files.map((file) => (
         <a
           key={file.path}
-          href={file.path}
+          href={`${basePath}${file.path}`}
           download={file.name}
           style={{
             display: 'inline-flex',
