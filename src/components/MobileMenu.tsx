@@ -21,13 +21,8 @@ const foundationsNav = [
 
 const componentsNav = [
   { title: "Overview", href: "/components" },
-  { title: "Button", href: "/components/actions/button", category: "Actions" },
-  { title: "Icon Button", href: "/components/actions/icon-button", category: "Actions" },
-  { title: "Checkbox", href: "/components/inputs/checkbox", category: "Selection & Input" },
-  { title: "Switch", href: "/components/inputs/switch", category: "Selection & Input" },
-  { title: "Toast", href: "/components/feedback/toast", category: "Feedback" },
-  { title: "Modal", href: "/components/presentation/modal", category: "Presentation" },
-  { title: "Avatar", href: "/components/contents/avatar", category: "Contents" },
+  { title: "Action Item", href: "/components/actions/action-item" },
+  { title: "Button", href: "/components/actions/button" },
 ];
 
 interface MobileMenuProps {

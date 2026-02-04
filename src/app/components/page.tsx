@@ -8,68 +8,8 @@ const componentCategories = [
     title: "Actions",
     description: "사용자의 액션을 유도하는 인터랙티브 요소",
     components: [
+      { name: "Action Item", href: "/components/actions/action-item", status: "ready" },
       { name: "Button", href: "/components/actions/button", status: "ready" },
-      { name: "Icon Button", href: "/components/actions/icon-button", status: "planned" },
-      { name: "Text Button", href: "/components/actions/text-button", status: "planned" },
-      { name: "Chip", href: "/components/actions/chip", status: "planned" },
-    ],
-  },
-  {
-    title: "Selection & Input",
-    description: "데이터 입력 및 선택을 위한 폼 요소",
-    components: [
-      { name: "Checkbox", href: "/components/inputs/checkbox", status: "planned" },
-      { name: "Radio", href: "/components/inputs/radio", status: "planned" },
-      { name: "Switch", href: "/components/inputs/switch", status: "planned" },
-      { name: "Text Field", href: "/components/inputs/text-field", status: "planned" },
-      { name: "Text Area", href: "/components/inputs/text-area", status: "planned" },
-      { name: "Select", href: "/components/inputs/select", status: "planned" },
-    ],
-  },
-  {
-    title: "Feedback",
-    description: "사용자에게 정보와 피드백을 전달",
-    components: [
-      { name: "Toast", href: "/components/feedback/toast", status: "planned" },
-      { name: "Alert", href: "/components/feedback/alert", status: "planned" },
-      { name: "Snackbar", href: "/components/feedback/snackbar", status: "planned" },
-    ],
-  },
-  {
-    title: "Presentation",
-    description: "콘텐츠를 오버레이 형태로 표시",
-    components: [
-      { name: "Modal", href: "/components/presentation/modal", status: "planned" },
-      { name: "Bottom Sheet", href: "/components/presentation/bottom-sheet", status: "planned" },
-      { name: "Tooltip", href: "/components/presentation/tooltip", status: "planned" },
-      { name: "Popover", href: "/components/presentation/popover", status: "planned" },
-    ],
-  },
-  {
-    title: "Contents",
-    description: "정보를 시각적으로 표현하는 요소",
-    components: [
-      { name: "Avatar", href: "/components/contents/avatar", status: "planned" },
-      { name: "Badge", href: "/components/contents/badge", status: "planned" },
-      { name: "Card", href: "/components/contents/card", status: "planned" },
-      { name: "Accordion", href: "/components/contents/accordion", status: "planned" },
-    ],
-  },
-  {
-    title: "Navigation",
-    description: "앱 내 탐색을 위한 요소",
-    components: [
-      { name: "Tab", href: "/components/navigation/tab", status: "planned" },
-      { name: "Bottom Navigation", href: "/components/navigation/bottom-navigation", status: "planned" },
-      { name: "Pagination", href: "/components/navigation/pagination", status: "planned" },
-    ],
-  },
-  {
-    title: "Loading",
-    description: "로딩 상태를 표시하는 요소",
-    components: [
-      { name: "Skeleton", href: "/components/loading/skeleton", status: "planned" },
-      { name: "Spinner", href: "/components/loading/spinner", status: "planned" },
     ],
   },
 ];
