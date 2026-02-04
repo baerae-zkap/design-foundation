@@ -79,23 +79,25 @@ function SidebarItem({ title, href, isActive }: SidebarItemProps) {
         fontWeight: isActive ? 500 : 400,
         borderRadius: '8px',
         margin: '2px 8px',
-        transition: 'all 150ms ease',
+        transition: 'all 200ms cubic-bezier(0.16, 1, 0.3, 1)',
       }}
     >
       <span>{title}</span>
-      {showHighlight && (
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          style={{ opacity: isActive ? 1 : 0.6 }}
-        >
-          <path d="M5 12h14M12 5l7 7-7 7" />
-        </svg>
-      )}
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        style={{
+          opacity: showHighlight ? (isActive ? 1 : 0.6) : 0,
+          transform: showHighlight ? 'translateX(0)' : 'translateX(-4px)',
+          transition: 'all 200ms cubic-bezier(0.16, 1, 0.3, 1)',
+        }}
+      >
+        <path d="M5 12h14M12 5l7 7-7 7" />
+      </svg>
     </Link>
   );
 }
