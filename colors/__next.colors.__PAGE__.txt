@@ -1,6 +1,6 @@
 1:"$Sreact.fragment"
 3:I[97367,["/design-foundation/_next/static/chunks/ff1a16fafef87110.js","/design-foundation/_next/static/chunks/d2be314c3ece3fbe.js"],"OutletBoundary"]
 4:"$Sreact.suspense"
-0:{"buildId":"fX04am3gs_Gm-Be9i8-Yw","rsc":["$","$1","c",{"children":["$L2",null,["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"loading":null,"isPartial":false}
+0:{"buildId":"R8htlOHXSVEJDGKzRkT3x","rsc":["$","$1","c",{"children":["$L2",null,["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"loading":null,"isPartial":false}
 5:null
 2:E{"digest":"NEXT_REDIRECT;replace;/colors/palette;307;"}
