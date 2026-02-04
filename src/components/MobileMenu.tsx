@@ -18,6 +18,7 @@ const navigation = [
       { title: "Spacing", href: "/spacing" },
       { title: "Radius", href: "/radius" },
       { title: "Shadow", href: "/shadow" },
+      { title: "Interaction", href: "/interaction" },
     ],
   },
 ];
