@@ -60,12 +60,12 @@
       "_comment": "컴포넌트별 권장 모션 조합",
       "button": {
         "hover": {
-          "duration": "150ms",
+          "duration": "{duration.fast}",
           "easing": "{easing.easeOut}",
-          "_comment": "호버 상태 전환 (instant보다 약간 느리게)"
+          "_comment": "호버 상태 전환 (200ms)"
         },
         "press": {
-          "duration": "{duration.instant}",
+          "duration": "150ms",
           "easing": "{easing.easeOut}",
           "_comment": "눌림 상태"
         }

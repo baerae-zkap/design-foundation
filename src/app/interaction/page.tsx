@@ -326,7 +326,7 @@ function LiveExamples() {
       {/* Button Demo */}
       <div style={{ padding: 24, backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
         <h3 style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-primary)', marginBottom: 4 }}>Button</h3>
-        <p style={{ fontSize: 12, color: 'var(--text-tertiary)', marginBottom: 16 }}>hover: 150ms easeOut / press: 100ms easeOut</p>
+        <p style={{ fontSize: 12, color: 'var(--text-tertiary)', marginBottom: 16 }}>hover: 200ms easeOut / press: 150ms easeOut</p>
         <button
           style={{
             padding: '12px 24px',
@@ -337,7 +337,7 @@ function LiveExamples() {
             border: 'none',
             borderRadius: 8,
             cursor: 'pointer',
-            transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)',
+            transition: 'all 200ms cubic-bezier(0.16, 1, 0.3, 1)',
           }}
           onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#1d4ed8'; }}
           onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#2563eb'; e.currentTarget.style.transform = 'scale(1)'; }}
@@ -446,7 +446,7 @@ function LiveExamples() {
             border: 'none',
             borderRadius: 8,
             cursor: 'pointer',
-            transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)',
+            transition: 'all 200ms cubic-bezier(0.16, 1, 0.3, 1)',
           }}
           onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#1d4ed8'; }}
           onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#2563eb'; e.currentTarget.style.transform = 'scale(1)'; }}
@@ -472,7 +472,7 @@ function LiveExamples() {
             border: 'none',
             borderRadius: 8,
             cursor: 'pointer',
-            transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)',
+            transition: 'all 200ms cubic-bezier(0.16, 1, 0.3, 1)',
           }}
           onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#16a34a'; }}
           onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#22c55e'; e.currentTarget.style.transform = 'scale(1)'; }}
@@ -498,7 +498,7 @@ function LiveExamples() {
             border: '1px solid var(--divider)',
             borderRadius: 8,
             cursor: 'pointer',
-            transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)',
+            transition: 'all 200ms cubic-bezier(0.16, 1, 0.3, 1)',
           }}
           onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)'; }}
           onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--bg-secondary)'; e.currentTarget.style.transform = 'scale(1)'; }}
@@ -547,7 +547,7 @@ function LiveExamples() {
                 border: 'none',
                 borderRadius: 8,
                 cursor: 'pointer',
-                transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)',
+                transition: 'all 200ms cubic-bezier(0.16, 1, 0.3, 1)',
               }}
               onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#1d4ed8'; }}
               onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#2563eb'; e.currentTarget.style.transform = 'scale(1)'; }}
@@ -648,7 +648,7 @@ function LiveExamples() {
                 border: 'none',
                 borderRadius: 8,
                 cursor: 'pointer',
-                transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)',
+                transition: 'all 200ms cubic-bezier(0.16, 1, 0.3, 1)',
               }}
               onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)'; }}
               onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--bg-secondary)'; e.currentTarget.style.transform = 'scale(1)'; }}
