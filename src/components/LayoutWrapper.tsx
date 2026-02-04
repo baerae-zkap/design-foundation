@@ -40,7 +40,7 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
       {/* 전체 레이아웃 가운데 정렬 */}
       <div
         style={{
-          maxWidth: '1200px',
+          maxWidth: '1400px',
           width: '100%',
           margin: '0 auto',
           paddingTop: '56px',
@@ -66,7 +66,7 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
             style={{
               flex: 1,
               width: '100%',
-              maxWidth: isTablet ? '100%' : '768px',
+              maxWidth: isTablet ? '100%' : '960px',
               padding: getContentPadding(),
               boxSizing: 'border-box',
             }}
