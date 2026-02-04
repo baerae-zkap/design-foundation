@@ -44,7 +44,7 @@ function Button({
   const getVariantStyles = (v: ButtonVariant): React.CSSProperties => {
     const styles: Record<ButtonVariant, React.CSSProperties> = {
       primary: { backgroundColor: "var(--brand-primary)", color: "white", border: "none" },
-      secondary: { backgroundColor: "var(--grey-100)", color: "var(--text-primary)", border: "none" },
+      secondary: { backgroundColor: "var(--grey-97)", color: "var(--text-primary)", border: "none" },
       outline: { backgroundColor: "transparent", color: "var(--brand-primary)", border: "1px solid var(--brand-primary)" },
       ghost: { backgroundColor: "transparent", color: "var(--text-secondary)", border: "none" },
       danger: { backgroundColor: "#EF4444", color: "white", border: "none" },
@@ -378,9 +378,9 @@ export default function ButtonPage() {
         <div className="p-4" style={{ backgroundColor: "var(--bg-secondary)", borderRadius: "var(--radius-md)" }}>
           <ul className="text-sm space-y-2" style={{ color: "var(--text-secondary)" }}>
             <li>• 최소 터치 영역 44×44px (모바일 권장)</li>
-            <li>• disabled 상태에서 <code style={{ backgroundColor: "var(--grey-200)", padding: "2px 6px", borderRadius: 4 }}>aria-disabled="true"</code> 적용</li>
-            <li>• loading 상태에서 <code style={{ backgroundColor: "var(--grey-200)", padding: "2px 6px", borderRadius: 4 }}>aria-busy="true"</code> 적용</li>
-            <li>• iconOnly 버튼에는 <code style={{ backgroundColor: "var(--grey-200)", padding: "2px 6px", borderRadius: 4 }}>aria-label</code> 필수</li>
+            <li>• disabled 상태에서 <code style={{ backgroundColor: "var(--grey-95)", padding: "2px 6px", borderRadius: 4 }}>aria-disabled="true"</code> 적용</li>
+            <li>• loading 상태에서 <code style={{ backgroundColor: "var(--grey-95)", padding: "2px 6px", borderRadius: 4 }}>aria-busy="true"</code> 적용</li>
+            <li>• iconOnly 버튼에는 <code style={{ backgroundColor: "var(--grey-95)", padding: "2px 6px", borderRadius: 4 }}>aria-label</code> 필수</li>
             <li>• 색상 대비 WCAG AA 이상 준수</li>
           </ul>
         </div>

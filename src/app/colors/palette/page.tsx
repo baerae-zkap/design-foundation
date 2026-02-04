@@ -38,7 +38,7 @@ function ColorBar({ name, value, fullName }: { name: string; value: string; full
           style={{
             fontSize: '14px',
             fontWeight: 500,
-            color: isLight ? 'var(--grey-900)' : '#FFFFFF',
+            color: isLight ? 'var(--grey-15)' : '#FFFFFF',
             whiteSpace: 'nowrap',
             overflow: 'hidden',
             textOverflow: 'ellipsis',
@@ -51,7 +51,7 @@ function ColorBar({ name, value, fullName }: { name: string; value: string; full
           style={{
             fontSize: '12px',
             fontFamily: 'var(--font-mono)',
-            color: isLight ? 'var(--grey-600)' : 'rgba(255,255,255,0.7)'
+            color: isLight ? 'var(--grey-40)' : 'rgba(255,255,255,0.7)'
           }}
         >
           {value}
@@ -62,7 +62,7 @@ function ColorBar({ name, value, fullName }: { name: string; value: string; full
           style={{
             fontSize: '12px',
             fontWeight: 500,
-            color: isLight ? 'var(--grey-600)' : 'rgba(255,255,255,0.7)',
+            color: isLight ? 'var(--grey-40)' : 'rgba(255,255,255,0.7)',
             flexShrink: 0,
             marginLeft: '8px',
           }}

@@ -111,7 +111,7 @@ export function Sidebar() {
                           padding: '8px 12px',
                           fontSize: '14px',
                           textDecoration: 'none',
-                          backgroundColor: isActive(child.href) ? 'var(--blue-50)' : 'transparent',
+                          backgroundColor: isActive(child.href) ? 'var(--blue-95)' : 'transparent',
                           color: isActive(child.href) ? 'var(--brand-primary)' : 'var(--text-secondary)',
                           fontWeight: isActive(child.href) ? 500 : 400,
                           borderRadius: 'var(--radius-md)',
@@ -132,7 +132,7 @@ export function Sidebar() {
                   fontSize: '14px',
                   borderRadius: 'var(--radius-md)',
                   textDecoration: 'none',
-                  backgroundColor: isActive(item.href) ? 'var(--blue-50)' : 'transparent',
+                  backgroundColor: isActive(item.href) ? 'var(--blue-95)' : 'transparent',
                   color: isActive(item.href) ? 'var(--brand-primary)' : 'var(--text-secondary)',
                   fontWeight: isActive(item.href) ? 500 : 400,
                 }}

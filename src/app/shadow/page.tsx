@@ -215,22 +215,22 @@ export default function ShadowPage() {
       <section className="mb-12">
         <h2 id="dark" className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Dark Mode</h2>
         <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>다크모드용 그림자입니다. 더 강한 그림자와 테두리로 분리감을 표현합니다.</p>
-        <div className="overflow-hidden" style={{ backgroundColor: 'var(--grey-900)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--grey-700)' }}>
+        <div className="overflow-hidden" style={{ backgroundColor: 'var(--grey-15)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--grey-30)' }}>
           {Object.entries(dark.primitive).filter(([k]) => !k.startsWith("_")).map(([key, token]) => {
             const t = token as { value: string; _comment?: string };
             return (
             <div
               key={key}
               className="flex items-center gap-4 p-4 cursor-pointer transition-colors"
-              style={{ borderBottom: '1px solid var(--grey-700)' }}
+              style={{ borderBottom: '1px solid var(--grey-30)' }}
               onClick={() => navigator.clipboard.writeText(t.value)}
             >
               <div className="w-20 flex justify-center">
-                <div className="w-16 h-12" style={{ backgroundColor: 'var(--grey-800)', borderRadius: 'var(--radius-md)', boxShadow: t.value }} />
+                <div className="w-16 h-12" style={{ backgroundColor: 'var(--grey-20)', borderRadius: 'var(--radius-md)', boxShadow: t.value }} />
               </div>
               <div className="flex-1 min-w-0">
-                <span className="text-sm font-medium" style={{ color: 'var(--grey-100)' }}>{formatTokenName('dark', key)}</span>
-                <p className="text-xs" style={{ color: 'var(--grey-400)' }}>{t._comment || ''}</p>
+                <span className="text-sm font-medium" style={{ color: 'var(--grey-97)' }}>{formatTokenName('dark', key)}</span>
+                <p className="text-xs" style={{ color: 'var(--grey-70)' }}>{t._comment || ''}</p>
               </div>
             </div>
           );})}
@@ -240,15 +240,15 @@ export default function ShadowPage() {
             <div
               key={key}
               className="flex items-center gap-4 p-4 cursor-pointer transition-colors"
-              style={{ borderBottom: i < arr.length - 1 ? '1px solid var(--grey-700)' : 'none' }}
+              style={{ borderBottom: i < arr.length - 1 ? '1px solid var(--grey-30)' : 'none' }}
               onClick={() => navigator.clipboard.writeText(t.value)}
             >
               <div className="w-20 flex justify-center">
-                <div className="w-16 h-12" style={{ backgroundColor: 'var(--grey-800)', borderRadius: 'var(--radius-md)', boxShadow: t.value }} />
+                <div className="w-16 h-12" style={{ backgroundColor: 'var(--grey-20)', borderRadius: 'var(--radius-md)', boxShadow: t.value }} />
               </div>
               <div className="flex-1 min-w-0">
-                <span className="text-sm font-medium" style={{ color: 'var(--grey-100)' }}>{formatTokenName('border', key)}</span>
-                <p className="text-xs" style={{ color: 'var(--grey-400)' }}>{t._comment || ''}</p>
+                <span className="text-sm font-medium" style={{ color: 'var(--grey-97)' }}>{formatTokenName('border', key)}</span>
+                <p className="text-xs" style={{ color: 'var(--grey-70)' }}>{t._comment || ''}</p>
               </div>
             </div>
           );})}

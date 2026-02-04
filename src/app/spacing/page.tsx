@@ -81,7 +81,7 @@ export default function SpacingPage() {
             return (
               <div key={key} className="flex items-center gap-4 p-4 transition-colors" style={{ borderBottom: i < arr.length - 1 ? '1px solid var(--divider)' : 'none' }}>
                 <div className="w-16 h-10 rounded relative flex items-center justify-center" style={{ border: '2px solid var(--brand-primary)' }}>
-                  <div className="absolute inset-0 rounded" style={{ margin: value / 4, backgroundColor: 'var(--blue-100)' }} />
+                  <div className="absolute inset-0 rounded" style={{ margin: value / 4, backgroundColor: 'var(--blue-90)' }} />
                 </div>
                 <div className="flex-1">
                   <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{formatTokenName('inset', key)}</span>
@@ -105,9 +105,9 @@ export default function SpacingPage() {
             return (
               <div key={key} className="flex items-center gap-4 p-4 transition-colors" style={{ borderBottom: i < arr.length - 1 ? '1px solid var(--divider)' : 'none' }}>
                 <div className="w-16 flex flex-col items-center">
-                  <div className="w-10 h-2 rounded" style={{ backgroundColor: 'var(--grey-300)' }} />
+                  <div className="w-10 h-2 rounded" style={{ backgroundColor: 'var(--grey-90)' }} />
                   <div style={{ width: 2, height: Math.max(value, 2), backgroundColor: 'var(--brand-primary)' }} />
-                  <div className="w-10 h-2 rounded" style={{ backgroundColor: 'var(--grey-300)' }} />
+                  <div className="w-10 h-2 rounded" style={{ backgroundColor: 'var(--grey-90)' }} />
                 </div>
                 <div className="flex-1">
                   <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{formatTokenName('vertical', key)}</span>
@@ -131,9 +131,9 @@ export default function SpacingPage() {
             return (
               <div key={key} className="flex items-center gap-4 p-4 transition-colors" style={{ borderBottom: i < arr.length - 1 ? '1px solid var(--divider)' : 'none' }}>
                 <div className="w-16 flex items-center justify-center">
-                  <div className="w-3 h-6 rounded" style={{ backgroundColor: 'var(--grey-300)' }} />
+                  <div className="w-3 h-6 rounded" style={{ backgroundColor: 'var(--grey-90)' }} />
                   <div style={{ width: Math.max(value, 2), height: 2, backgroundColor: 'var(--brand-primary)' }} />
-                  <div className="w-3 h-6 rounded" style={{ backgroundColor: 'var(--grey-300)' }} />
+                  <div className="w-3 h-6 rounded" style={{ backgroundColor: 'var(--grey-90)' }} />
                 </div>
                 <div className="flex-1">
                   <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{formatTokenName('horizontal', key)}</span>
@@ -156,7 +156,7 @@ export default function SpacingPage() {
             const comment = (token as { _comment?: string })._comment || '';
             return (
               <div key={key} className="flex items-center gap-4 p-4 transition-colors" style={{ borderBottom: i < arr.length - 1 ? '1px solid var(--divider)' : 'none' }}>
-                <div className="w-16 h-10 rounded relative" style={{ border: '1px solid var(--grey-300)' }}>
+                <div className="w-16 h-10 rounded relative" style={{ border: '1px solid var(--grey-90)' }}>
                   {key.includes("X") && (
                     <>
                       <div className="absolute left-0 top-0 bottom-0 w-1" style={{ backgroundColor: 'var(--brand-primary)' }} />

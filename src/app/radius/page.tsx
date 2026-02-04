@@ -81,7 +81,7 @@ export default function RadiusPage() {
 
       {/* Chip */}
       <SemanticSection id="chip" title="Chip" description="칩/태그 컴포넌트용 라운딩입니다." data={semantic.chip} renderPreview={(value) => (
-        <span className="px-3 py-1 text-sm" style={{ backgroundColor: 'var(--blue-100)', color: 'var(--blue-600)', borderRadius: value === 9999 ? 9999 : value }}>Tag</span>
+        <span className="px-3 py-1 text-sm" style={{ backgroundColor: 'var(--blue-90)', color: 'var(--blue-50)', borderRadius: value === 9999 ? 9999 : value }}>Tag</span>
       )} />
 
       {/* Badge */}
@@ -91,12 +91,12 @@ export default function RadiusPage() {
 
       {/* Avatar */}
       <SemanticSection id="avatar" title="Avatar" description="아바타 컴포넌트용 라운딩입니다." data={semantic.avatar} renderPreview={(value) => (
-        <div className="w-10 h-10" style={{ background: 'linear-gradient(135deg, var(--blue-400), var(--blue-600))', borderRadius: value === 9999 ? '50%' : value }} />
+        <div className="w-10 h-10" style={{ background: 'linear-gradient(135deg, var(--blue-65), var(--blue-50))', borderRadius: value === 9999 ? '50%' : value }} />
       )} />
 
       {/* Image */}
       <SemanticSection id="image" title="Image" description="이미지/썸네일 컴포넌트용 라운딩입니다." data={semantic.image} renderPreview={(value) => (
-        <div className="w-16 h-12" style={{ backgroundColor: 'var(--grey-300)', borderRadius: value }} />
+        <div className="w-16 h-12" style={{ backgroundColor: 'var(--grey-90)', borderRadius: value }} />
       )} />
 
       {/* Surface Components */}
@@ -126,7 +126,7 @@ export default function RadiusPage() {
 
       {/* Skeleton */}
       <SemanticSection id="skeleton" title="Skeleton" description="스켈레톤 로딩 컴포넌트용 라운딩입니다." data={semantic.skeleton} renderPreview={(value, key) => (
-        <div className={key === 'text' ? 'w-20 h-4' : 'w-12 h-12'} style={{ backgroundColor: 'var(--grey-200)', borderRadius: value }} />
+        <div className={key === 'text' ? 'w-20 h-4' : 'w-12 h-12'} style={{ backgroundColor: 'var(--grey-95)', borderRadius: value }} />
       )} />
     </div>
   );

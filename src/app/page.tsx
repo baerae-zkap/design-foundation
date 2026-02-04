@@ -208,7 +208,7 @@ export default function Home() {
               </div>
               <svg
                 className="w-5 h-5 transition-colors"
-                style={{ color: 'var(--grey-300)' }}
+                style={{ color: 'var(--grey-90)' }}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"

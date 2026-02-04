@@ -14,7 +14,7 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
           {index > 0 && (
             <svg
               className="w-4 h-4"
-              style={{ color: 'var(--grey-300)' }}
+              style={{ color: 'var(--grey-90)' }}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"

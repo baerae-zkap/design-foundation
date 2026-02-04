@@ -175,7 +175,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                           padding: '12px 16px',
                           fontSize: '15px',
                           textDecoration: 'none',
-                          backgroundColor: isActive(child.href) ? 'var(--blue-50)' : 'transparent',
+                          backgroundColor: isActive(child.href) ? 'var(--blue-95)' : 'transparent',
                           color: isActive(child.href) ? 'var(--brand-primary)' : 'var(--text-secondary)',
                           fontWeight: isActive(child.href) ? 500 : 400,
                           borderRadius: 'var(--radius-md)',
@@ -196,7 +196,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                   fontSize: '15px',
                   borderRadius: 'var(--radius-md)',
                   textDecoration: 'none',
-                  backgroundColor: isActive(item.href) ? 'var(--blue-50)' : 'transparent',
+                  backgroundColor: isActive(item.href) ? 'var(--blue-95)' : 'transparent',
                   color: isActive(item.href) ? 'var(--brand-primary)' : 'var(--text-secondary)',
                   fontWeight: isActive(item.href) ? 500 : 400,
                 }}

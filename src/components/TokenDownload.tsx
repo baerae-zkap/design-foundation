@@ -32,7 +32,7 @@ export function TokenDownload({ files }: TokenDownloadProps) {
             transition: 'all 0.15s ease',
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = 'var(--grey-200)';
+            e.currentTarget.style.backgroundColor = 'var(--grey-95)';
             e.currentTarget.style.borderColor = 'var(--divider-strong)';
           }}
           onMouseLeave={(e) => {

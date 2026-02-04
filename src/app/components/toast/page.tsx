@@ -111,7 +111,7 @@ function Toast({ message, type = "info", isVisible, onClose }: ToastProps) {
 function Button({ variant = "primary", children, onClick }: { variant?: "primary" | "secondary" | "success" | "error" | "warning"; children: React.ReactNode; onClick?: () => void }) {
   const variantStyles: Record<string, React.CSSProperties> = {
     primary: { backgroundColor: "var(--brand-primary)", color: "white" },
-    secondary: { backgroundColor: "var(--grey-200)", color: "var(--text-primary)" },
+    secondary: { backgroundColor: "var(--grey-95)", color: "var(--text-primary)" },
     success: { backgroundColor: "#10B981", color: "white" },
     error: { backgroundColor: "#EF4444", color: "white" },
     warning: { backgroundColor: "#F59E0B", color: "white" },
