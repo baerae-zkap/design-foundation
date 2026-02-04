@@ -2,8 +2,11 @@
 
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { TokenDownload } from "@/components/TokenDownload";
-import { typography } from "@/data/tokens";
+import typographyJson from "../../../public/typography-tokens.json";
 import { formatTokenName } from "@/utils/formatTokenName";
+
+const primitive = typographyJson.typography.primitive;
+const semantic = typographyJson.typography.semantic;
 
 export default function TypographyPage() {
   return (
@@ -24,7 +27,7 @@ export default function TypographyPage() {
         <div className="grid sm:grid-cols-2 gap-4">
           <div className="p-6" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', backgroundColor: 'var(--bg-elevated)' }}>
             <p className="text-sm mb-2" style={{ color: 'var(--text-tertiary)' }}>기본 텍스트</p>
-            <p className="text-2xl font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>{typography.fontFamily.base}</p>
+            <p className="text-2xl font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>{primitive.fontFamily.base}</p>
             <p className="text-sm mb-4" style={{ color: 'var(--text-secondary)' }}>본문, 제목, UI 텍스트 전반</p>
             <div className="pt-4" style={{ borderTop: '1px solid var(--divider)' }}>
               <p className="text-xl" style={{ color: 'var(--text-primary)' }}>가나다라마바사 ABCDEFG</p>
@@ -33,7 +36,7 @@ export default function TypographyPage() {
 
           <div className="p-6" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', backgroundColor: 'var(--bg-elevated)' }}>
             <p className="text-sm mb-2" style={{ color: 'var(--text-tertiary)' }}>숫자 전용</p>
-            <p className="text-2xl font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>{typography.fontFamily.numeric}</p>
+            <p className="text-2xl font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>{primitive.fontFamily.numeric.base}</p>
             <p className="text-sm mb-4" style={{ color: 'var(--text-secondary)' }}>금액, 통계, 타이머 등 숫자</p>
             <div className="pt-4" style={{ borderTop: '1px solid var(--divider)' }}>
               <p className="text-xl font-mono" style={{ color: 'var(--text-primary)' }}>₩1,234,567</p>
@@ -43,189 +46,138 @@ export default function TypographyPage() {
       </section>
 
       {/* Display */}
-      <section className="mb-12">
-        <h2 id="display" className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Display</h2>
-        <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>랜딩 페이지, 히어로 영역의 대형 타이틀에 적합합니다.</p>
-        <div className="space-y-3">
-          {Object.entries(typography.scale.display).map(([size, token]) => (
-            <div key={size} className="p-5" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', backgroundColor: 'var(--bg-elevated)' }}>
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-sm font-medium" style={{ color: 'var(--brand-primary)' }}>{formatTokenName('display', size)}</span>
-                <span className="text-xs font-mono" style={{ color: 'var(--text-placeholder)' }}>{token.fontSize}px / {token.lineHeight}px • {token.fontWeight}</span>
-              </div>
-              <p
-                style={{ color: 'var(--text-primary)', fontSize: token.fontSize, lineHeight: `${token.lineHeight}px`, fontWeight: token.fontWeight }}
-              >
-                디자인 시스템으로 일관된 경험을
-              </p>
-              <p className="text-xs mt-2" style={{ color: 'var(--text-tertiary)' }}>{token.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <TypographySection id="display" title="Display" description="랜딩 페이지, 히어로 영역의 대형 타이틀에 적합합니다." category={semantic.display} />
+
+      {/* Headline */}
+      <TypographySection id="headline" title="Headline" description="페이지나 섹션의 주요 제목입니다. 정보 계층 구조의 최상위 레벨." category={semantic.headline} />
 
       {/* Title */}
-      <section className="mb-12">
-        <h2 id="title" className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Title</h2>
-        <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>페이지 및 섹션의 주요 타이틀에 사용합니다.</p>
-        <div className="space-y-3">
-          {Object.entries(typography.scale.title).map(([size, token]) => (
-            <div key={size} className="p-5" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', backgroundColor: 'var(--bg-elevated)' }}>
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-sm font-medium" style={{ color: 'var(--brand-primary)' }}>{formatTokenName('title', size)}</span>
-                <span className="text-xs font-mono" style={{ color: 'var(--text-placeholder)' }}>{token.fontSize}px / {token.lineHeight}px • {token.fontWeight}</span>
-              </div>
-              <p
-                style={{ color: 'var(--text-primary)', fontSize: token.fontSize, lineHeight: `${token.lineHeight}px`, fontWeight: token.fontWeight }}
-              >
-                타이틀 예시 텍스트
-              </p>
-              <p className="text-xs mt-2" style={{ color: 'var(--text-tertiary)' }}>{token.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Subtitle */}
-      <section className="mb-12">
-        <h2 id="subtitle" className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Subtitle</h2>
-        <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>부제목, 서브헤더에 사용합니다.</p>
-        <div className="space-y-3">
-          {Object.entries(typography.scale.subtitle).map(([size, token]) => (
-            <div key={size} className="p-5" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', backgroundColor: 'var(--bg-elevated)' }}>
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-sm font-medium" style={{ color: 'var(--brand-primary)' }}>{formatTokenName('subtitle', size)}</span>
-                <span className="text-xs font-mono" style={{ color: 'var(--text-placeholder)' }}>{token.fontSize}px / {token.lineHeight}px • {token.fontWeight}</span>
-              </div>
-              <p
-                style={{ color: 'var(--text-primary)', fontSize: token.fontSize, lineHeight: `${token.lineHeight}px`, fontWeight: token.fontWeight }}
-              >
-                부제목 예시 텍스트
-              </p>
-              <p className="text-xs mt-2" style={{ color: 'var(--text-tertiary)' }}>{token.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Heading */}
-      <section className="mb-12">
-        <h2 id="heading" className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Heading</h2>
-        <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>페이지 타이틀, 섹션 헤더에 사용합니다. (기존 호환용)</p>
-        <div className="space-y-3">
-          {Object.entries(typography.scale.heading).map(([size, token]) => (
-            <div key={size} className="p-5" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', backgroundColor: 'var(--bg-elevated)' }}>
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-sm font-medium" style={{ color: 'var(--brand-primary)' }}>{formatTokenName('heading', size)}</span>
-                <span className="text-xs font-mono" style={{ color: 'var(--text-placeholder)' }}>{token.fontSize}px / {token.lineHeight}px • {token.fontWeight}</span>
-              </div>
-              <p
-                style={{ color: 'var(--text-primary)', fontSize: token.fontSize, lineHeight: `${token.lineHeight}px`, fontWeight: token.fontWeight }}
-              >
-                섹션 제목 예시 텍스트
-              </p>
-              <p className="text-xs mt-2" style={{ color: 'var(--text-tertiary)' }}>{token.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <TypographySection id="title" title="Title" description="카드, 리스트 아이템, 모달 등 컴포넌트 수준의 제목입니다." category={semantic.title} />
 
       {/* Body */}
-      <section className="mb-12">
-        <h2 id="body" className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Body</h2>
-        <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>일반 본문, 설명 텍스트에 사용합니다.</p>
-        <div className="space-y-3">
-          {Object.entries(typography.scale.body).map(([size, token]) => (
-            <div key={size} className="p-5" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', backgroundColor: 'var(--bg-elevated)' }}>
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-sm font-medium" style={{ color: 'var(--brand-primary)' }}>{formatTokenName('body', size)}</span>
-                <span className="text-xs font-mono" style={{ color: 'var(--text-placeholder)' }}>{token.fontSize}px / {token.lineHeight}px • {token.fontWeight}</span>
-              </div>
-              <p
-                style={{ color: 'var(--text-primary)', fontSize: token.fontSize, lineHeight: `${token.lineHeight}px`, fontWeight: token.fontWeight }}
-              >
-                본문 텍스트 예시입니다. 디자인 시스템은 일관된 사용자 경험을 제공합니다.
-              </p>
-              <p className="text-xs mt-2" style={{ color: 'var(--text-tertiary)' }}>{token.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <TypographySection id="body" title="Body" description="일반 본문, 설명 텍스트에 사용합니다. 링크는 body + underline + brand color 조합으로 사용합니다." category={semantic.body} />
 
       {/* Label */}
-      <section className="mb-12">
-        <h2 id="label" className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Label</h2>
-        <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>버튼, 입력 필드 라벨, UI 요소에 사용합니다.</p>
-        <div className="space-y-3">
-          {Object.entries(typography.scale.label).map(([size, token]) => (
-            <div key={size} className="p-5" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', backgroundColor: 'var(--bg-elevated)' }}>
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-sm font-medium" style={{ color: 'var(--brand-primary)' }}>{formatTokenName('label', size)}</span>
-                <span className="text-xs font-mono" style={{ color: 'var(--text-placeholder)' }}>{token.fontSize}px / {token.lineHeight}px • {token.fontWeight}</span>
-              </div>
-              <p
-                style={{ color: 'var(--text-primary)', fontSize: token.fontSize, lineHeight: `${token.lineHeight}px`, fontWeight: token.fontWeight }}
-              >
-                라벨 텍스트
-              </p>
-              <p className="text-xs mt-2" style={{ color: 'var(--text-tertiary)' }}>{token.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <TypographySection id="label" title="Label" description="UI 요소 텍스트입니다 (버튼, 탭, 칩, 라벨 등). 버튼은 label + fontWeight.semibold 조합으로 사용합니다." category={semantic.label} />
+
+      {/* Caption */}
+      <TypographySection id="caption" title="Caption" description="부가 정보, 타임스탬프, 메타 데이터 등 보조 텍스트입니다." category={semantic.caption} isTertiary />
 
       {/* Numeric */}
-      <section className="mb-12">
-        <h2 id="numeric" className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Numeric</h2>
-        <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>금액, 통계 등 숫자 표시에 사용합니다. Spoqa Han Sans Neo 폰트 권장.</p>
-        <div className="space-y-3">
-          {Object.entries(typography.scale.numeric).map(([size, token]) => (
+      <TypographySectionNumeric id="numeric" title="Numeric" description="금액, 수량, 통계 등 숫자 전용입니다. Spoqa Han Sans Neo 폰트 권장." category={semantic.numeric} />
+
+      {/* Code */}
+      <TypographySectionCode id="code" title="Code" description="코드, 계좌번호 등 모노스페이스가 필요한 텍스트입니다." category={semantic.code} />
+    </div>
+  );
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function resolveTypoValue(ref: string | number): number {
+  if (typeof ref === "number") return ref;
+  if (typeof ref === "string" && ref.startsWith("{primitive.")) {
+    const path = ref.slice(11, -1).split(".");
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let val: any = primitive;
+    for (const key of path) val = val?.[key];
+    return typeof val === "number" ? val : 0;
+  }
+  return 0;
+}
+
+interface TypoToken {
+  fontSize: string | number;
+  lineHeight: string | number;
+  fontWeight: string | number;
+  _comment?: string;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function TypographySection({ id, title, description, category, isTertiary }: { id: string; title: string; description: string; category: any; isTertiary?: boolean }) {
+  return (
+    <section className="mb-12">
+      <h2 id={id} className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>{title}</h2>
+      <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>{description}</p>
+      <div className="space-y-3">
+        {Object.entries(category).filter(([k]) => !k.startsWith("_")).map(([size, tokenRaw]) => {
+          const token = tokenRaw as TypoToken;
+          const fontSize = resolveTypoValue(token.fontSize);
+          const lineHeight = resolveTypoValue(token.lineHeight);
+          const fontWeight = resolveTypoValue(token.fontWeight);
+          return (
             <div key={size} className="p-5" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', backgroundColor: 'var(--bg-elevated)' }}>
               <div className="flex items-center justify-between mb-3">
-                <span className="text-sm font-medium" style={{ color: 'var(--brand-primary)' }}>{formatTokenName('numeric', size)}</span>
-                <span className="text-xs font-mono" style={{ color: 'var(--text-placeholder)' }}>{token.fontSize}px / {token.lineHeight}px • {token.fontWeight}</span>
+                <span className="text-sm font-medium" style={{ color: 'var(--brand-primary)' }}>{formatTokenName(id, size)}</span>
+                <span className="text-xs font-mono" style={{ color: 'var(--text-placeholder)' }}>{fontSize}px / {lineHeight}px • {fontWeight}</span>
               </div>
-              <p
-                style={{ color: 'var(--text-primary)', fontSize: token.fontSize, lineHeight: `${token.lineHeight}px`, fontWeight: token.fontWeight, fontFamily: 'var(--font-mono)' }}
-              >
+              <p style={{ color: isTertiary ? 'var(--text-tertiary)' : 'var(--text-primary)', fontSize, lineHeight: `${lineHeight}px`, fontWeight }}>
+                {isTertiary ? '캡션 텍스트 • 2024.01.01 • 부가 정보' : '디자인 시스템으로 일관된 경험을'}
+              </p>
+              <p className="text-xs mt-2" style={{ color: 'var(--text-tertiary)' }}>{token._comment || ''}</p>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function TypographySectionNumeric({ id, title, description, category }: { id: string; title: string; description: string; category: any }) {
+  return (
+    <section className="mb-12">
+      <h2 id={id} className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>{title}</h2>
+      <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>{description}</p>
+      <div className="space-y-3">
+        {Object.entries(category).filter(([k]) => !k.startsWith("_")).map(([size, tokenRaw]) => {
+          const token = tokenRaw as TypoToken;
+          const fontSize = resolveTypoValue(token.fontSize);
+          const lineHeight = resolveTypoValue(token.lineHeight);
+          const fontWeight = resolveTypoValue(token.fontWeight);
+          return (
+            <div key={size} className="p-5" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', backgroundColor: 'var(--bg-elevated)' }}>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-sm font-medium" style={{ color: 'var(--brand-primary)' }}>{formatTokenName(id, size)}</span>
+                <span className="text-xs font-mono" style={{ color: 'var(--text-placeholder)' }}>{fontSize}px / {lineHeight}px • {fontWeight}</span>
+              </div>
+              <p style={{ color: 'var(--text-primary)', fontSize, lineHeight: `${lineHeight}px`, fontWeight, fontFamily: 'var(--font-mono)', fontVariantNumeric: 'tabular-nums' }}>
                 ₩1,234,567
               </p>
-              <p className="text-xs mt-2" style={{ color: 'var(--text-tertiary)' }}>{token.description}</p>
+              <p className="text-xs mt-2" style={{ color: 'var(--text-tertiary)' }}>{token._comment || ''}</p>
             </div>
-          ))}
-        </div>
-      </section>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
 
-      {/* Caption & Overline */}
-      <section className="mb-12">
-        <h2 id="caption" className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Caption & Overline</h2>
-        <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>부가 정보, 태그 등에 사용합니다.</p>
-        <div className="grid sm:grid-cols-2 gap-3">
-          <div className="p-5" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', backgroundColor: 'var(--bg-elevated)' }}>
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-sm font-medium" style={{ color: 'var(--brand-primary)' }}>caption</span>
-              <span className="text-xs font-mono" style={{ color: 'var(--text-placeholder)' }}>{typography.scale.caption.fontSize}px</span>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function TypographySectionCode({ id, title, description, category }: { id: string; title: string; description: string; category: any }) {
+  return (
+    <section className="mb-12">
+      <h2 id={id} className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>{title}</h2>
+      <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>{description}</p>
+      <div className="space-y-3">
+        {Object.entries(category).filter(([k]) => !k.startsWith("_")).map(([size, tokenRaw]) => {
+          const token = tokenRaw as TypoToken;
+          const fontSize = resolveTypoValue(token.fontSize);
+          const lineHeight = resolveTypoValue(token.lineHeight);
+          const fontWeight = resolveTypoValue(token.fontWeight);
+          return (
+            <div key={size} className="p-5" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', backgroundColor: 'var(--bg-elevated)' }}>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-sm font-medium" style={{ color: 'var(--brand-primary)' }}>{formatTokenName(id, size)}</span>
+                <span className="text-xs font-mono" style={{ color: 'var(--text-placeholder)' }}>{fontSize}px / {lineHeight}px • {fontWeight}</span>
+              </div>
+              <code style={{ color: 'var(--text-primary)', fontSize, lineHeight: `${lineHeight}px`, fontWeight, fontFamily: 'monospace', backgroundColor: 'var(--bg-secondary)', padding: '2px 6px', borderRadius: 'var(--radius-sm)' }}>
+                110-123-456789
+              </code>
+              <p className="text-xs mt-2" style={{ color: 'var(--text-tertiary)' }}>{token._comment || ''}</p>
             </div>
-            <p
-              style={{ color: 'var(--text-primary)', fontSize: typography.scale.caption.fontSize, lineHeight: `${typography.scale.caption.lineHeight}px` }}
-            >
-              캡션 텍스트 • 부가 정보
-            </p>
-          </div>
-          <div className="p-5" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', backgroundColor: 'var(--bg-elevated)' }}>
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-sm font-medium" style={{ color: 'var(--brand-primary)' }}>overline</span>
-              <span className="text-xs font-mono" style={{ color: 'var(--text-placeholder)' }}>{typography.scale.overline.fontSize}px</span>
-            </div>
-            <p
-              className="uppercase tracking-wider"
-              style={{ color: 'var(--text-primary)', fontSize: typography.scale.overline.fontSize, lineHeight: `${typography.scale.overline.lineHeight}px`, fontWeight: typography.scale.overline.fontWeight }}
-            >
-              라벨 텍스트 • 태그
-            </p>
-          </div>
-        </div>
-      </section>
-    </div>
+          );
+        })}
+      </div>
+    </section>
   );
 }

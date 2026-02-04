@@ -28,29 +28,6 @@
         "surface": "카드, 모달 등 서피스 레벨 라운드"
       },
 
-      "button": {
-        "lg": {
-          "value": "{primitive.md}",
-          "_comment": "12px. 대형 버튼 (height 56px)"
-        },
-        "md": {
-          "value": "{primitive.sm}",
-          "_comment": "8px. 기본 버튼 (height 48px)"
-        },
-        "sm": {
-          "value": "{primitive.sm}",
-          "_comment": "8px. 소형 버튼 (height 40px)"
-        },
-        "xs": {
-          "value": "{primitive.xs}",
-          "_comment": "4px. 초소형 버튼 (height 32px)"
-        },
-        "pill": {
-          "value": "{primitive.full}",
-          "_comment": "완전 라운드. 필 형태 버튼"
-        }
-      },
-
       "input": {
         "default": {
           "value": "{primitive.sm}",

@@ -12,7 +12,8 @@ const navigation = [
   {
     title: "파운데이션",
     children: [
-      { title: "Colors", href: "/colors" },
+      { title: "Palette", href: "/colors/palette" },
+      { title: "Semantic", href: "/colors/semantic" },
       { title: "Typography", href: "/typography" },
       { title: "Spacing", href: "/spacing" },
       { title: "Radius", href: "/radius" },

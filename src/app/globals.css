@@ -1,43 +1,84 @@
 @import "tailwindcss";
 
-/* ZKAP Design System Tokens */
+/* ZKAP Design System Tokens - HSLA format */
 :root {
   /* Grey */
-  --grey-50: #F8F9FA;
-  --grey-100: #F2F3F5;
-  --grey-200: #E4E6EA;
-  --grey-300: #D0D4DA;
-  --grey-400: #9BA2AD;
-  --grey-500: #6A717F;
-  --grey-600: #4A5462;
-  --grey-700: #364050;
-  --grey-800: #1E2836;
-  --grey-900: #101726;
+  --grey-50: hsla(210, 17%, 98%, 1);
+  --grey-100: hsla(220, 14%, 96%, 1);
+  --grey-200: hsla(216, 14%, 91%, 1);
+  --grey-300: hsla(216, 12%, 84%, 1);
+  --grey-400: hsla(214, 10%, 64%, 1);
+  --grey-500: hsla(217, 10%, 46%, 1);
+  --grey-600: hsla(214, 14%, 34%, 1);
+  --grey-700: hsla(217, 20%, 26%, 1);
+  --grey-800: hsla(214, 29%, 16%, 1);
+  --grey-900: hsla(221, 43%, 11%, 1);
 
   /* Blue (Brand) */
-  --blue-50: #E6E8FF;
-  --blue-100: #C0C5FF;
-  --blue-200: #94A3FF;
-  --blue-300: #667FFF;
-  --blue-400: #4062FF;
-  --blue-500: #004FFF;
-  --blue-600: #0040F1;
-  --blue-700: #0035E2;
-  --blue-800: #0029D6;
-  --blue-900: #0014C4;
+  --blue-50: hsla(235, 100%, 95%, 1);
+  --blue-100: hsla(234, 100%, 88%, 1);
+  --blue-200: hsla(231, 100%, 79%, 1);
+  --blue-300: hsla(229, 100%, 70%, 1);
+  --blue-400: hsla(228, 100%, 63%, 1);
+  --blue-500: hsla(221, 100%, 50%, 1);
+  --blue-600: hsla(224, 100%, 47%, 1);
+  --blue-700: hsla(226, 100%, 44%, 1);
+  --blue-800: hsla(228, 100%, 42%, 1);
+  --blue-900: hsla(234, 100%, 38%, 1);
 
-  /* Semantic - Light */
-  --bg-primary: #FFFFFF;
-  --bg-secondary: var(--grey-100);
-  --bg-elevated: #FFFFFF;
-  --text-primary: var(--grey-900);
-  --text-secondary: var(--grey-700);
-  --text-tertiary: var(--grey-500);
-  --text-placeholder: var(--grey-400);
-  --divider: var(--grey-200);
-  --divider-strong: var(--grey-300);
-  --brand-primary: var(--blue-500);
-  --brand-hover: var(--blue-600);
+  /* Semantic - Surface */
+  --surface-base-default: hsla(0, 0%, 100%, 1);
+  --surface-base-defaultPressed: var(--grey-100);
+  --surface-base-container: var(--grey-100);
+  --surface-base-containerPressed: var(--grey-200);
+  --surface-brand-default: var(--blue-600);
+  --surface-brand-defaultPressed: var(--blue-700);
+  --surface-brand-secondary: var(--blue-50);
+  --surface-brand-secondaryPressed: var(--blue-100);
+  --surface-error-default: hsla(354, 91%, 95%, 1);
+  --surface-warning-default: hsla(55, 93%, 95%, 1);
+  --surface-success-default: hsla(143, 60%, 93%, 1);
+  --surface-info-default: var(--grey-100);
+  --surface-disabled-default: var(--grey-200);
+
+  /* Semantic - Content */
+  --content-base-strong: var(--grey-800);
+  --content-base-default: var(--grey-600);
+  --content-base-secondary: var(--grey-500);
+  --content-base-placeholder: var(--grey-400);
+  --content-base-onColor: hsla(0, 0%, 100%, 1);
+  --content-brand-default: var(--blue-600);
+  --content-error-default: hsla(0, 72%, 51%, 1);
+  --content-warning-default: hsla(33, 91%, 44%, 1);
+  --content-success-default: hsla(142, 71%, 38%, 1);
+  --content-info-default: hsla(175, 84%, 29%, 1);
+  --content-profit-default: hsla(0, 72%, 51%, 1);
+  --content-loss-default: var(--blue-600);
+  --content-disabled-default: var(--grey-500);
+
+  /* Semantic - Border */
+  --border-base-default: var(--grey-100);
+  --border-base-defaultPressed: var(--grey-300);
+  --border-secondary-default: var(--grey-200);
+  --border-secondary-defaultPressed: var(--grey-300);
+  --border-brand-default: var(--blue-600);
+  --border-brand-defaultPressed: var(--blue-700);
+  --border-disabled-default: var(--grey-300);
+  --border-error-default: hsla(0, 72%, 51%, 1);
+  --border-success-default: hsla(142, 71%, 38%, 1);
+
+  /* Legacy aliases for backwards compatibility */
+  --bg-primary: var(--surface-base-default);
+  --bg-secondary: var(--surface-base-container);
+  --bg-elevated: var(--surface-base-default);
+  --text-primary: var(--content-base-strong);
+  --text-secondary: var(--content-base-default);
+  --text-tertiary: var(--content-base-secondary);
+  --text-placeholder: var(--content-base-placeholder);
+  --divider: var(--border-base-default);
+  --divider-strong: var(--border-secondary-default);
+  --brand-primary: var(--content-brand-default);
+  --brand-hover: var(--blue-700);
 
   /* Spacing (4px grid) */
   --space-1: 4px;

@@ -48,8 +48,8 @@
     "semantic": {
       "_description": {
         "inset": "컴포넌트 내부 padding",
-        "stack": "수직 방향 요소 간 간격 (위아래)",
-        "inline": "수평 방향 요소 간 간격 (좌우)",
+        "vertical": "수직 방향 요소 간 간격 (위아래)",
+        "horizontal": "수평 방향 요소 간 간격 (좌우)",
         "section": "섹션/그룹 단위 간격",
         "screen": "화면 레벨 여백"
       },
@@ -90,7 +90,7 @@
         }
       },
 
-      "stack": {
+      "vertical": {
         "_comment": "수직 방향 요소 간 간격. 리스트, 폼 필드 사이 등",
         "none": {
           "value": "{primitive.0}",
@@ -134,7 +134,7 @@
         }
       },
 
-      "inline": {
+      "horizontal": {
         "_comment": "수평 방향 요소 간 간격. 버튼 그룹, 아이콘-텍스트 등",
         "none": {
           "value": "{primitive.0}",
@@ -338,15 +338,15 @@
 
     "_migration": {
       "_comment": "기존 하드코딩 값에서 토큰으로 마이그레이션 가이드",
-      "4": "primitive.1 또는 inset.3xs / stack.3xs / inline.3xs",
-      "8": "primitive.2 또는 inset.2xs / stack.2xs / inline.2xs",
-      "12": "primitive.3 또는 inset.xs / stack.xs / inline.xs",
-      "16": "primitive.4 또는 inset.sm / stack.sm / inline.sm",
-      "20": "primitive.5 또는 inset.md / stack.md / screen.paddingX",
-      "24": "primitive.6 또는 inset.lg / stack.lg / inline.lg",
-      "32": "primitive.8 또는 inset.xl / stack.xl",
-      "40": "primitive.10 또는 stack.2xl",
-      "48": "primitive.12 또는 stack.3xl"
+      "4": "primitive.1 또는 inset.3xs / vertical.3xs / horizontal.3xs",
+      "8": "primitive.2 또는 inset.2xs / vertical.2xs / horizontal.2xs",
+      "12": "primitive.3 또는 inset.xs / vertical.xs / horizontal.xs",
+      "16": "primitive.4 또는 inset.sm / vertical.sm / horizontal.sm",
+      "20": "primitive.5 또는 inset.md / vertical.md / screen.paddingX",
+      "24": "primitive.6 또는 inset.lg / vertical.lg / horizontal.lg",
+      "32": "primitive.8 또는 inset.xl / vertical.xl",
+      "40": "primitive.10 또는 vertical.2xl",
+      "48": "primitive.12 또는 vertical.3xl"
     }
   }
 }

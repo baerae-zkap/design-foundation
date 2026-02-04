@@ -89,9 +89,8 @@
         "display": "히어로 섹션, 대형 타이틀 등 시각적 임팩트가 필요한 곳",
         "headline": "페이지/섹션의 주요 제목. 정보 계층의 최상위",
         "title": "카드, 리스트 아이템, 모달 등의 제목",
-        "body": "일반 본문 텍스트. 가독성이 가장 중요",
-        "label": "입력 필드 라벨, 탭, 칩 등 UI 요소의 텍스트",
-        "button": "버튼, CTA 등 액션을 유도하는 텍스트",
+        "body": "일반 본문 텍스트. 링크는 body + underline + brand color 조합",
+        "label": "UI 요소 텍스트 (버튼, 탭, 칩, 라벨 등). 버튼은 label + fontWeight.semibold 조합",
         "caption": "부가 설명, 타임스탬프, 메타 정보 등",
         "numeric": "금액, 수량, 통계 등 숫자 표시용. tabular-nums로 정렬"
       },
@@ -189,7 +188,7 @@
       },
 
       "body": {
-        "_comment": "일반 본문 텍스트. 가독성이 최우선. 긴 문장에 적합",
+        "_comment": "일반 본문 텍스트. 링크는 body + underline + brand color 조합 사용",
         "lg": {
           "fontFamily": "{primitive.fontFamily.weights.regular}",
           "fontWeight": "{primitive.fontWeight.regular}",
@@ -217,7 +216,7 @@
       },
 
       "label": {
-        "_comment": "UI 요소의 텍스트. 입력 필드 라벨, 탭, 칩, 태그 등",
+        "_comment": "UI 요소 텍스트 (버튼, 탭, 칩, 라벨 등). 버튼은 label + fontWeight.semibold 조합 사용",
         "lg": {
           "fontFamily": "{primitive.fontFamily.weights.medium}",
           "fontWeight": "{primitive.fontWeight.medium}",
@@ -241,42 +240,6 @@
           "lineHeight": "{primitive.lineHeight.xs}",
           "letterSpacing": "{primitive.letterSpacing.normal}",
           "_comment": "12px. 작은 라벨, 뱃지 텍스트, 태그"
-        }
-      },
-
-      "button": {
-        "_comment": "버튼, CTA 등 액션을 유도하는 텍스트. 명확한 가독성 필요",
-        "lg": {
-          "fontFamily": "{primitive.fontFamily.weights.semibold}",
-          "fontWeight": "{primitive.fontWeight.semibold}",
-          "fontSize": "{primitive.fontSize.lg}",
-          "lineHeight": "{primitive.lineHeight.lg}",
-          "letterSpacing": "{primitive.letterSpacing.normal}",
-          "_comment": "18px. 대형 CTA 버튼, 풀 너비 버튼"
-        },
-        "md": {
-          "fontFamily": "{primitive.fontFamily.weights.semibold}",
-          "fontWeight": "{primitive.fontWeight.semibold}",
-          "fontSize": "{primitive.fontSize.md}",
-          "lineHeight": "{primitive.lineHeight.md}",
-          "letterSpacing": "{primitive.letterSpacing.normal}",
-          "_comment": "16px. 기본 버튼, 주요 액션 버튼"
-        },
-        "sm": {
-          "fontFamily": "{primitive.fontFamily.weights.semibold}",
-          "fontWeight": "{primitive.fontWeight.semibold}",
-          "fontSize": "{primitive.fontSize.sm}",
-          "lineHeight": "{primitive.lineHeight.sm}",
-          "letterSpacing": "{primitive.letterSpacing.normal}",
-          "_comment": "14px. 보조 버튼, 인라인 액션"
-        },
-        "xs": {
-          "fontFamily": "{primitive.fontFamily.weights.semibold}",
-          "fontWeight": "{primitive.fontWeight.semibold}",
-          "fontSize": "{primitive.fontSize.xs}",
-          "lineHeight": "{primitive.lineHeight.xs}",
-          "letterSpacing": "{primitive.letterSpacing.normal}",
-          "_comment": "12px. 소형 버튼, 링크 스타일 버튼"
         }
       },
 
@@ -310,7 +273,7 @@
 
       "numeric": {
         "_comment": "금액, 수량, 통계 등 숫자 전용. Spoqa Han Sans Neo 사용. tabular-nums로 자릿수 정렬",
-        "display": {
+        "xl": {
           "fontFamily": "{primitive.fontFamily.numeric.weights.bold}",
           "fontWeight": "{primitive.fontWeight.bold}",
           "fontSize": "{primitive.fontSize.5xl}",
@@ -357,27 +320,6 @@
         }
       },
 
-      "link": {
-        "_comment": "인라인 링크 텍스트. 본문 내 클릭 가능한 텍스트",
-        "md": {
-          "fontFamily": "{primitive.fontFamily.weights.medium}",
-          "fontWeight": "{primitive.fontWeight.medium}",
-          "fontSize": "{primitive.fontSize.md}",
-          "lineHeight": "{primitive.lineHeight.md}",
-          "letterSpacing": "{primitive.letterSpacing.normal}",
-          "textDecoration": "underline",
-          "_comment": "16px. 본문 내 링크, '더 보기' 텍스트"
-        },
-        "sm": {
-          "fontFamily": "{primitive.fontFamily.weights.medium}",
-          "fontWeight": "{primitive.fontWeight.medium}",
-          "fontSize": "{primitive.fontSize.sm}",
-          "lineHeight": "{primitive.lineHeight.sm}",
-          "letterSpacing": "{primitive.letterSpacing.normal}",
-          "textDecoration": "underline",
-          "_comment": "14px. 보조 링크, 약관 동의 링크"
-        }
-      },
 
       "code": {
         "_comment": "코드, 계좌번호 등 모노스페이스가 필요한 텍스트",

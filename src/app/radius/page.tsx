@@ -2,8 +2,22 @@
 
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { TokenDownload } from "@/components/TokenDownload";
-import { radius } from "@/data/tokens";
+import radiusJson from "../../../public/radius-tokens.json";
 import { formatTokenName } from "@/utils/formatTokenName";
+
+const primitive = radiusJson.radius.primitive;
+const semantic = radiusJson.radius.semantic;
+
+function resolveRef(token: { value: string; _comment?: string }): number {
+  const val = token.value;
+  if (val.startsWith("{primitive.")) {
+    const key = val.slice(11, -1);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const p = (primitive as any)[key];
+    return typeof p === "number" ? p : 0;
+  }
+  return parseInt(val) || 0;
+}
 
 export default function RadiusPage() {
   return (
@@ -23,11 +37,11 @@ export default function RadiusPage() {
         <h2 id="scale" className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>스케일 시각화</h2>
         <div className="p-6" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', backgroundColor: 'var(--bg-elevated)' }}>
           <div className="flex items-center justify-between">
-            {Object.entries(radius.primitive).map(([key, token]) => (
+            {Object.entries(primitive).filter(([k]) => !k.startsWith("_")).map(([key, value]) => (
               <div key={key} className="flex flex-col items-center gap-2">
                 <div
                   className="w-12 h-12"
-                  style={{ backgroundColor: 'var(--brand-primary)', borderRadius: token.value === 9999 ? "50%" : token.value }}
+                  style={{ backgroundColor: 'var(--brand-primary)', borderRadius: value === 9999 ? "50%" : value }}
                 />
                 <span className="text-xs font-mono" style={{ color: 'var(--text-tertiary)' }}>{key}</span>
               </div>
@@ -41,127 +55,111 @@ export default function RadiusPage() {
         <h2 id="primitive" className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Primitive</h2>
         <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>기본 라운딩 값 목록입니다.</p>
         <div className="overflow-hidden" style={{ backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
-          {Object.entries(radius.primitive).map(([key, token], i, arr) => (
+          {Object.entries(primitive).filter(([k]) => !k.startsWith("_")).map(([key, value], i, arr) => (
             <div key={key} className="flex items-center gap-4 p-4 transition-colors" style={{ borderBottom: i < arr.length - 1 ? '1px solid var(--divider)' : 'none' }}>
               <div className="w-16 flex justify-center">
-                <div
-                  className="w-12 h-12"
-                  style={{ backgroundColor: 'var(--brand-primary)', borderRadius: token.value === 9999 ? "50%" : token.value }}
-                />
+                <div className="w-12 h-12" style={{ backgroundColor: 'var(--brand-primary)', borderRadius: value === 9999 ? "50%" : value }} />
               </div>
               <div className="flex-1">
                 <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{formatTokenName('radius', key)}</span>
-                <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>{token.description}</p>
               </div>
-              <span className="text-sm font-mono" style={{ color: 'var(--text-tertiary)' }}>
-                {token.value === 9999 ? "9999px" : `${token.value}px`}
-              </span>
+              <span className="text-sm font-mono" style={{ color: 'var(--text-tertiary)' }}>{value === 9999 ? "9999px" : `${value}px`}</span>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Button */}
+      {/* Input */}
+      <SemanticSection id="input" title="Input" description="입력 필드용 라운딩입니다." data={semantic.input} renderPreview={(value) => (
+        <div className="w-full h-10" style={{ border: '2px solid var(--divider)', backgroundColor: 'var(--bg-secondary)', borderRadius: value === 9999 ? 9999 : value }} />
+      )} />
+
+      {/* Card */}
+      <SemanticSection id="card" title="Card" description="카드 컴포넌트용 라운딩입니다." data={semantic.card} renderPreview={(value) => (
+        <div className="w-full h-16" style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--divider)', borderRadius: value }} />
+      )} />
+
+      {/* Chip */}
+      <SemanticSection id="chip" title="Chip" description="칩/태그 컴포넌트용 라운딩입니다." data={semantic.chip} renderPreview={(value) => (
+        <span className="px-3 py-1 text-sm" style={{ backgroundColor: 'var(--blue-100)', color: 'var(--blue-600)', borderRadius: value === 9999 ? 9999 : value }}>Tag</span>
+      )} />
+
+      {/* Badge */}
+      <SemanticSection id="badge" title="Badge" description="뱃지 컴포넌트용 라운딩입니다." data={semantic.badge} renderPreview={(value) => (
+        <span className="px-2 py-0.5 text-xs font-medium" style={{ backgroundColor: 'var(--red-500)', color: 'white', borderRadius: value === 9999 ? 9999 : value }}>NEW</span>
+      )} />
+
+      {/* Avatar */}
+      <SemanticSection id="avatar" title="Avatar" description="아바타 컴포넌트용 라운딩입니다." data={semantic.avatar} renderPreview={(value) => (
+        <div className="w-10 h-10" style={{ background: 'linear-gradient(135deg, var(--blue-400), var(--blue-600))', borderRadius: value === 9999 ? '50%' : value }} />
+      )} />
+
+      {/* Image */}
+      <SemanticSection id="image" title="Image" description="이미지/썸네일 컴포넌트용 라운딩입니다." data={semantic.image} renderPreview={(value) => (
+        <div className="w-16 h-12" style={{ backgroundColor: 'var(--grey-300)', borderRadius: value }} />
+      )} />
+
+      {/* Surface Components */}
       <section className="mb-12">
-        <h2 id="button" className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Button</h2>
-        <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>버튼 컴포넌트용 라운딩입니다.</p>
+        <h2 id="surface" className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Surface</h2>
+        <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>모달, 바텀시트, 토스트 등 서피스 컴포넌트용 라운딩입니다.</p>
         <div className="overflow-hidden" style={{ backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
-          {Object.entries(radius.semantic.button).map(([key, token], i, arr) => (
+          {[
+            { key: 'modal', token: semantic.modal.default },
+            { key: 'bottomSheet', token: semantic.bottomSheet.default },
+            { key: 'toast', token: semantic.toast.default },
+            { key: 'tooltip', token: semantic.tooltip.default },
+          ].map(({ key, token }, i, arr) => {
+            const value = resolveRef(token);
+            return (
+              <div key={key} className="flex items-center gap-4 p-4 transition-colors" style={{ borderBottom: i < arr.length - 1 ? '1px solid var(--divider)' : 'none' }}>
+                <div className="flex-1">
+                  <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{key}</span>
+                  <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>{token._comment || ''}</p>
+                </div>
+                <span className="text-sm font-mono" style={{ color: 'var(--text-tertiary)' }}>{value}px</span>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* Skeleton */}
+      <SemanticSection id="skeleton" title="Skeleton" description="스켈레톤 로딩 컴포넌트용 라운딩입니다." data={semantic.skeleton} renderPreview={(value, key) => (
+        <div className={key === 'text' ? 'w-20 h-4' : 'w-12 h-12'} style={{ backgroundColor: 'var(--grey-200)', borderRadius: value }} />
+      )} />
+    </div>
+  );
+}
+
+function SemanticSection({ id, title, description, data, renderPreview }: {
+  id: string;
+  title: string;
+  description: string;
+  data: Record<string, { value: string; _comment?: string }>;
+  renderPreview: (value: number, key: string) => React.ReactNode;
+}) {
+  return (
+    <section className="mb-12">
+      <h2 id={id} className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>{title}</h2>
+      <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>{description}</p>
+      <div className="overflow-hidden" style={{ backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
+        {Object.entries(data).filter(([k]) => !k.startsWith("_")).map(([key, token], i, arr) => {
+          const value = resolveRef(token);
+          return (
             <div key={key} className="flex items-center gap-4 p-4 transition-colors" style={{ borderBottom: i < arr.length - 1 ? '1px solid var(--divider)' : 'none' }}>
               <div className="w-24 flex justify-center">
-                <div
-                  className="px-4 py-2 text-sm font-medium"
-                  style={{ backgroundColor: 'var(--brand-primary)', color: 'white', borderRadius: token.value === 9999 ? 9999 : token.value }}
-                >
-                  Button
-                </div>
+                {renderPreview(value, key)}
               </div>
               <div className="flex-1">
-                <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{formatTokenName('button', key)}</span>
-                <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>{token.description}</p>
+                <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{formatTokenName(id, key)}</span>
+                <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>{token._comment || ''}</p>
               </div>
-              <span className="text-sm font-mono" style={{ color: 'var(--text-tertiary)' }}>
-                {token.value === 9999 ? "9999px" : `${token.value}px`}
-              </span>
+              <span className="text-sm font-mono" style={{ color: 'var(--text-tertiary)' }}>{value === 9999 ? "9999px" : `${value}px`}</span>
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Components */}
-      <section className="mb-12">
-        <h2 id="components" className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Components</h2>
-        <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>UI 요소별 권장 라운딩입니다.</p>
-        <div className="grid sm:grid-cols-2 gap-4">
-          {/* Input */}
-          <div className="p-5" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', backgroundColor: 'var(--bg-elevated)' }}>
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-sm font-medium" style={{ color: 'var(--brand-primary)' }}>input</span>
-              <span className="text-xs font-mono" style={{ color: 'var(--text-placeholder)' }}>{radius.semantic.input.value}px</span>
-            </div>
-            <div
-              className="w-full h-10"
-              style={{ border: '2px solid var(--divider)', backgroundColor: 'var(--bg-secondary)', borderRadius: radius.semantic.input.value }}
-            />
-            <p className="text-xs mt-2" style={{ color: 'var(--text-tertiary)' }}>{radius.semantic.input.description}</p>
-          </div>
-
-          {/* Card */}
-          <div className="p-5" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', backgroundColor: 'var(--bg-elevated)' }}>
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-sm font-medium" style={{ color: 'var(--brand-primary)' }}>card</span>
-              <span className="text-xs font-mono" style={{ color: 'var(--text-placeholder)' }}>{radius.semantic.card.value}px</span>
-            </div>
-            <div
-              className="w-full h-16"
-              style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--divider)', borderRadius: radius.semantic.card.value }}
-            />
-            <p className="text-xs mt-2" style={{ color: 'var(--text-tertiary)' }}>{radius.semantic.card.description}</p>
-          </div>
-
-          {/* Chip */}
-          <div className="p-5" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', backgroundColor: 'var(--bg-elevated)' }}>
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-sm font-medium" style={{ color: 'var(--brand-primary)' }}>chip</span>
-              <span className="text-xs font-mono" style={{ color: 'var(--text-placeholder)' }}>{radius.semantic.chip.value}px</span>
-            </div>
-            <div className="flex gap-2">
-              <span
-                className="px-3 py-1 text-sm"
-                style={{ backgroundColor: 'var(--blue-100)', color: 'var(--blue-600)', borderRadius: radius.semantic.chip.value }}
-              >
-                Tag
-              </span>
-              <span
-                className="px-3 py-1 text-sm"
-                style={{ backgroundColor: 'var(--grey-200)', color: 'var(--grey-700)', borderRadius: radius.semantic.chip.value }}
-              >
-                Label
-              </span>
-            </div>
-            <p className="text-xs mt-2" style={{ color: 'var(--text-tertiary)' }}>{radius.semantic.chip.description}</p>
-          </div>
-
-          {/* Avatar */}
-          <div className="p-5" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', backgroundColor: 'var(--bg-elevated)' }}>
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-sm font-medium" style={{ color: 'var(--brand-primary)' }}>avatar</span>
-              <span className="text-xs font-mono" style={{ color: 'var(--text-placeholder)' }}>9999px (full)</span>
-            </div>
-            <div className="flex gap-3">
-              <div
-                className="w-10 h-10"
-                style={{ background: 'linear-gradient(135deg, var(--blue-400), var(--blue-600))', borderRadius: radius.semantic.avatar.value }}
-              />
-              <div
-                className="w-10 h-10"
-                style={{ background: 'linear-gradient(135deg, var(--grey-400), var(--grey-600))', borderRadius: radius.semantic.avatar.value }}
-              />
-            </div>
-            <p className="text-xs mt-2" style={{ color: 'var(--text-tertiary)' }}>{radius.semantic.avatar.description}</p>
-          </div>
-        </div>
-      </section>
-    </div>
+          );
+        })}
+      </div>
+    </section>
   );
 }
