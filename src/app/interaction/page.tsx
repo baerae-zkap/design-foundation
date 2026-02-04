@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { TokenDownload } from "@/components/TokenDownload";
 import interactionJson from "../../../public/interaction-tokens.json";
@@ -294,25 +294,39 @@ function InteractiveDemo() {
 
 function LiveExamples() {
   const [modalOpen, setModalOpen] = useState(false);
-  const [toastVisible, setToastVisible] = useState(false);
+  const [toasts, setToasts] = useState<{ id: number; exiting: boolean }[]>([]);
   const [bottomSheetOpen, setBottomSheetOpen] = useState(false);
   const [toggleOn, setToggleOn] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const toastIdRef = useRef(0);
 
-  // Auto-hide toast
-  useState(() => {
-    if (toastVisible) {
-      const timer = setTimeout(() => setToastVisible(false), 3000);
-      return () => clearTimeout(timer);
-    }
-  });
+  const addToast = () => {
+    const id = toastIdRef.current++;
+    setToasts(prev => [...prev, { id, exiting: false }]);
+
+    // Auto-hide after 3 seconds
+    setTimeout(() => {
+      setToasts(prev => prev.map(t => t.id === id ? { ...t, exiting: true } : t));
+      // Remove after exit animation
+      setTimeout(() => {
+        setToasts(prev => prev.filter(t => t.id !== id));
+      }, 200);
+    }, 3000);
+  };
+
+  const removeToast = (id: number) => {
+    setToasts(prev => prev.map(t => t.id === id ? { ...t, exiting: true } : t));
+    setTimeout(() => {
+      setToasts(prev => prev.filter(t => t.id !== id));
+    }, 200);
+  };
 
   return (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16 }}>
       {/* Button Demo */}
       <div style={{ padding: 24, backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
         <h3 style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-primary)', marginBottom: 4 }}>Button</h3>
-        <p style={{ fontSize: 12, color: 'var(--text-tertiary)', marginBottom: 16 }}>hover: 100ms easeOut / press: 100ms easeOut</p>
+        <p style={{ fontSize: 12, color: 'var(--text-tertiary)', marginBottom: 16 }}>hover: 150ms easeOut / press: 100ms easeOut</p>
         <button
           style={{
             padding: '12px 24px',
@@ -323,11 +337,11 @@ function LiveExamples() {
             border: 'none',
             borderRadius: 8,
             cursor: 'pointer',
-            transition: 'all 100ms cubic-bezier(0.16, 1, 0.3, 1)',
+            transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)',
           }}
           onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#1d4ed8'; e.currentTarget.style.transform = 'scale(1.02)'; }}
           onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#2563eb'; e.currentTarget.style.transform = 'scale(1)'; }}
-          onMouseDown={(e) => { e.currentTarget.style.transform = 'scale(0.98)'; }}
+          onMouseDown={(e) => { e.currentTarget.style.transform = 'scale(0.96)'; }}
           onMouseUp={(e) => { e.currentTarget.style.transform = 'scale(1.02)'; }}
         >
           Hover & Press
@@ -432,7 +446,12 @@ function LiveExamples() {
             border: 'none',
             borderRadius: 8,
             cursor: 'pointer',
+            transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)',
           }}
+          onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#1d4ed8'; e.currentTarget.style.transform = 'scale(1.02)'; }}
+          onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#2563eb'; e.currentTarget.style.transform = 'scale(1)'; }}
+          onMouseDown={(e) => { e.currentTarget.style.transform = 'scale(0.96)'; }}
+          onMouseUp={(e) => { e.currentTarget.style.transform = 'scale(1.02)'; }}
         >
           Open Modal
         </button>
@@ -443,7 +462,7 @@ function LiveExamples() {
         <h3 style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-primary)', marginBottom: 4 }}>Toast</h3>
         <p style={{ fontSize: 12, color: 'var(--text-tertiary)', marginBottom: 16 }}>enter: 300ms spring / exit: 200ms easeIn</p>
         <button
-          onClick={() => setToastVisible(true)}
+          onClick={addToast}
           style={{
             padding: '10px 20px',
             fontSize: 14,
@@ -453,7 +472,12 @@ function LiveExamples() {
             border: 'none',
             borderRadius: 8,
             cursor: 'pointer',
+            transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)',
           }}
+          onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#16a34a'; e.currentTarget.style.transform = 'scale(1.02)'; }}
+          onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#22c55e'; e.currentTarget.style.transform = 'scale(1)'; }}
+          onMouseDown={(e) => { e.currentTarget.style.transform = 'scale(0.96)'; }}
+          onMouseUp={(e) => { e.currentTarget.style.transform = 'scale(1.02)'; }}
         >
           Show Toast
         </button>
@@ -474,7 +498,12 @@ function LiveExamples() {
             border: '1px solid var(--divider)',
             borderRadius: 8,
             cursor: 'pointer',
+            transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)',
           }}
+          onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)'; e.currentTarget.style.transform = 'scale(1.02)'; }}
+          onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--bg-secondary)'; e.currentTarget.style.transform = 'scale(1)'; }}
+          onMouseDown={(e) => { e.currentTarget.style.transform = 'scale(0.96)'; }}
+          onMouseUp={(e) => { e.currentTarget.style.transform = 'scale(1.02)'; }}
         >
           Open Sheet
         </button>
@@ -518,7 +547,12 @@ function LiveExamples() {
                 border: 'none',
                 borderRadius: 8,
                 cursor: 'pointer',
+                transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)',
               }}
+              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#1d4ed8'; e.currentTarget.style.transform = 'scale(1.02)'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#2563eb'; e.currentTarget.style.transform = 'scale(1)'; }}
+              onMouseDown={(e) => { e.currentTarget.style.transform = 'scale(0.96)'; }}
+              onMouseUp={(e) => { e.currentTarget.style.transform = 'scale(1.02)'; }}
             >
               Close
             </button>
@@ -526,36 +560,51 @@ function LiveExamples() {
         </div>
       )}
 
-      {/* Toast */}
-      {toastVisible && (
-        <div
-          style={{
-            position: 'fixed',
-            bottom: 24,
-            right: 24,
-            backgroundColor: '#1e293b',
-            color: 'white',
-            padding: '14px 20px',
-            borderRadius: 12,
-            display: 'flex',
-            alignItems: 'center',
-            gap: 12,
-            zIndex: 1000,
-            animation: 'toastIn 300ms cubic-bezier(0.34, 1.56, 0.64, 1)',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-          }}
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="#22c55e">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-          </svg>
-          <span style={{ fontSize: 14, fontWeight: 500 }}>Successfully saved!</span>
-          <button onClick={() => setToastVisible(false)} style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', marginLeft: 8 }}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M18 6L6 18M6 6l12 12"/>
+      {/* Toast Stack */}
+      <div style={{ position: 'fixed', bottom: 24, right: 24, zIndex: 1000, display: 'flex', flexDirection: 'column-reverse', gap: 8 }}>
+        {toasts.map((toast, index) => (
+          <div
+            key={toast.id}
+            style={{
+              backgroundColor: '#1e293b',
+              color: 'white',
+              padding: '14px 20px',
+              borderRadius: 12,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 12,
+              boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+              animation: toast.exiting
+                ? 'toastOut 200ms cubic-bezier(0.7, 0, 0.84, 0) forwards'
+                : 'toastIn 300ms cubic-bezier(0.34, 1.56, 0.64, 1)',
+              transform: `translateY(${index * -4}px)`,
+              transition: 'transform 200ms cubic-bezier(0.16, 1, 0.3, 1)',
+            }}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#22c55e">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
             </svg>
-          </button>
-        </div>
-      )}
+            <span style={{ fontSize: 14, fontWeight: 500 }}>Successfully saved!</span>
+            <button
+              onClick={() => removeToast(toast.id)}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: '#94a3b8',
+                cursor: 'pointer',
+                marginLeft: 8,
+                transition: 'color 150ms',
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = '#ffffff'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = '#94a3b8'; }}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M18 6L6 18M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
+        ))}
+      </div>
 
       {/* Bottom Sheet */}
       {bottomSheetOpen && (
@@ -599,7 +648,12 @@ function LiveExamples() {
                 border: 'none',
                 borderRadius: 8,
                 cursor: 'pointer',
+                transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)',
               }}
+              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)'; e.currentTarget.style.transform = 'scale(1.01)'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--bg-secondary)'; e.currentTarget.style.transform = 'scale(1)'; }}
+              onMouseDown={(e) => { e.currentTarget.style.transform = 'scale(0.98)'; }}
+              onMouseUp={(e) => { e.currentTarget.style.transform = 'scale(1.01)'; }}
             >
               Close
             </button>
@@ -619,6 +673,10 @@ function LiveExamples() {
         @keyframes toastIn {
           from { opacity: 0; transform: translateX(100%); }
           to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes toastOut {
+          from { opacity: 1; transform: translateX(0); }
+          to { opacity: 0; transform: translateX(100%); }
         }
         @keyframes sheetIn {
           from { transform: translateY(100%); }
