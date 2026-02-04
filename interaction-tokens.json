@@ -1,0 +1,158 @@
+{
+  "_meta": {
+    "version": "1.0",
+    "name": "zkap-design-system",
+    "type": "interaction",
+    "created": "2025-02-04",
+    "_comment": "앱 인터랙션 기반 모션 시스템"
+  },
+
+  "interaction": {
+    "duration": {
+      "_comment": "지속 시간 - 컴포넌트 크기/복잡도에 따라 선택",
+      "instant": {
+        "value": "100ms",
+        "_comment": "즉각 반응. 호버, 포커스, 토글 상태"
+      },
+      "fast": {
+        "value": "200ms",
+        "_comment": "빠른 피드백. 버튼 클릭, 체크박스, 작은 요소"
+      },
+      "normal": {
+        "value": "300ms",
+        "_comment": "기본 전환. 드롭다운, 아코디언, 탭 전환"
+      },
+      "slow": {
+        "value": "400ms",
+        "_comment": "부드러운 전환. 모달, 사이드시트"
+      },
+      "slower": {
+        "value": "500ms",
+        "_comment": "강조 전환. 페이지 전환, 대형 요소"
+      }
+    },
+
+    "easing": {
+      "_comment": "가속 곡선 - 동작 특성에 따라 선택",
+      "easeOut": {
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "_comment": "등장/확장. 빠르게 시작, 부드럽게 끝"
+      },
+      "easeIn": {
+        "value": "cubic-bezier(0.7, 0, 0.84, 0)",
+        "_comment": "퇴장/축소. 부드럽게 시작, 빠르게 끝"
+      },
+      "easeInOut": {
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "_comment": "상태 전환. 양쪽 부드러움 (Material 기본)"
+      },
+      "spring": {
+        "value": "cubic-bezier(0.34, 1.56, 0.64, 1)",
+        "_comment": "탄성/바운스. 강조, 성공 피드백"
+      },
+      "linear": {
+        "value": "linear",
+        "_comment": "균일 속도. 로딩, 프로그레스"
+      }
+    },
+
+    "semantic": {
+      "_comment": "컴포넌트별 권장 모션 조합",
+      "button": {
+        "hover": {
+          "duration": "{duration.instant}",
+          "easing": "{easing.easeOut}",
+          "_comment": "호버 상태 전환"
+        },
+        "press": {
+          "duration": "{duration.instant}",
+          "easing": "{easing.easeOut}",
+          "_comment": "눌림 상태"
+        }
+      },
+      "toggle": {
+        "switch": {
+          "duration": "{duration.fast}",
+          "easing": "{easing.spring}",
+          "_comment": "토글 스위치 전환"
+        }
+      },
+      "dropdown": {
+        "open": {
+          "duration": "{duration.fast}",
+          "easing": "{easing.easeOut}",
+          "_comment": "드롭다운 열기"
+        },
+        "close": {
+          "duration": "{duration.instant}",
+          "easing": "{easing.easeIn}",
+          "_comment": "드롭다운 닫기"
+        }
+      },
+      "modal": {
+        "enter": {
+          "duration": "{duration.normal}",
+          "easing": "{easing.easeOut}",
+          "_comment": "모달 등장"
+        },
+        "exit": {
+          "duration": "{duration.fast}",
+          "easing": "{easing.easeIn}",
+          "_comment": "모달 퇴장"
+        }
+      },
+      "toast": {
+        "enter": {
+          "duration": "{duration.normal}",
+          "easing": "{easing.spring}",
+          "_comment": "토스트 등장 (바운스)"
+        },
+        "exit": {
+          "duration": "{duration.fast}",
+          "easing": "{easing.easeIn}",
+          "_comment": "토스트 퇴장"
+        }
+      },
+      "bottomSheet": {
+        "enter": {
+          "duration": "{duration.slow}",
+          "easing": "{easing.easeOut}",
+          "_comment": "바텀시트 슬라이드 업"
+        },
+        "exit": {
+          "duration": "{duration.normal}",
+          "easing": "{easing.easeIn}",
+          "_comment": "바텀시트 슬라이드 다운"
+        }
+      },
+      "skeleton": {
+        "pulse": {
+          "duration": "1500ms",
+          "easing": "{easing.easeInOut}",
+          "_comment": "스켈레톤 펄스 애니메이션 (반복)"
+        }
+      },
+      "fade": {
+        "in": {
+          "duration": "{duration.fast}",
+          "easing": "{easing.easeOut}",
+          "_comment": "페이드 인"
+        },
+        "out": {
+          "duration": "{duration.instant}",
+          "easing": "{easing.easeIn}",
+          "_comment": "페이드 아웃"
+        }
+      }
+    },
+
+    "_usage": {
+      "_comment": "모션 사용 가이드라인",
+      "principle": "등장은 천천히(easeOut), 퇴장은 빠르게(easeIn)",
+      "feedback": "사용자 액션에는 즉각 반응 (instant/fast)",
+      "hierarchy": "작은 요소는 빠르게, 큰 요소는 느리게",
+      "reduce": "prefers-reduced-motion 설정 존중 필수",
+      "performance": "transform, opacity만 사용 권장 (GPU 가속)"
+    }
+  }
+}
