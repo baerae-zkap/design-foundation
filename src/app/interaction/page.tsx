@@ -51,9 +51,16 @@ export default function InteractionPage() {
         <InteractiveDemo />
       </section>
 
-      {/* Semantic */}
+      {/* Live Examples */}
       <section style={{ marginBottom: 48 }}>
-        <h2 id="semantic" style={{ fontSize: 20, fontWeight: 700, marginBottom: 4, color: 'var(--text-primary)' }}>Semantic</h2>
+        <h2 id="examples" style={{ fontSize: 20, fontWeight: 700, marginBottom: 4, color: 'var(--text-primary)' }}>Live Examples</h2>
+        <p style={{ marginBottom: 16, color: 'var(--text-secondary)' }}>실제 컴포넌트에서 인터랙션을 확인하세요.</p>
+        <LiveExamples />
+      </section>
+
+      {/* Semantic Reference */}
+      <section style={{ marginBottom: 48 }}>
+        <h2 id="semantic" style={{ fontSize: 20, fontWeight: 700, marginBottom: 4, color: 'var(--text-primary)' }}>Semantic Reference</h2>
         <p style={{ marginBottom: 16, color: 'var(--text-secondary)' }}>컴포넌트별 권장 모션 조합입니다.</p>
         <div style={{ backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', overflow: 'hidden' }}>
           {Object.entries(semantic).filter(([k]) => !k.startsWith("_")).map(([component, actions], i, arr) => (
@@ -281,6 +288,343 @@ function InteractiveDemo() {
           transition: all {durationValue} {easingValue};
         </code>
       </div>
+    </div>
+  );
+}
+
+function LiveExamples() {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [toastVisible, setToastVisible] = useState(false);
+  const [bottomSheetOpen, setBottomSheetOpen] = useState(false);
+  const [toggleOn, setToggleOn] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  // Auto-hide toast
+  useState(() => {
+    if (toastVisible) {
+      const timer = setTimeout(() => setToastVisible(false), 3000);
+      return () => clearTimeout(timer);
+    }
+  });
+
+  return (
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16 }}>
+      {/* Button Demo */}
+      <div style={{ padding: 24, backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
+        <h3 style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-primary)', marginBottom: 4 }}>Button</h3>
+        <p style={{ fontSize: 12, color: 'var(--text-tertiary)', marginBottom: 16 }}>hover: 100ms easeOut / press: 100ms easeOut</p>
+        <button
+          style={{
+            padding: '12px 24px',
+            fontSize: 14,
+            fontWeight: 600,
+            backgroundColor: '#2563eb',
+            color: 'white',
+            border: 'none',
+            borderRadius: 8,
+            cursor: 'pointer',
+            transition: 'all 100ms cubic-bezier(0.16, 1, 0.3, 1)',
+          }}
+          onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#1d4ed8'; e.currentTarget.style.transform = 'scale(1.02)'; }}
+          onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#2563eb'; e.currentTarget.style.transform = 'scale(1)'; }}
+          onMouseDown={(e) => { e.currentTarget.style.transform = 'scale(0.98)'; }}
+          onMouseUp={(e) => { e.currentTarget.style.transform = 'scale(1.02)'; }}
+        >
+          Hover & Press
+        </button>
+      </div>
+
+      {/* Toggle Demo */}
+      <div style={{ padding: 24, backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
+        <h3 style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-primary)', marginBottom: 4 }}>Toggle</h3>
+        <p style={{ fontSize: 12, color: 'var(--text-tertiary)', marginBottom: 16 }}>switch: 200ms spring</p>
+        <button
+          onClick={() => setToggleOn(!toggleOn)}
+          style={{
+            width: 52,
+            height: 28,
+            borderRadius: 14,
+            border: 'none',
+            backgroundColor: toggleOn ? '#2563eb' : '#cbd5e1',
+            cursor: 'pointer',
+            position: 'relative',
+            transition: 'background-color 200ms cubic-bezier(0.34, 1.56, 0.64, 1)',
+          }}
+        >
+          <div style={{
+            position: 'absolute',
+            top: 2,
+            left: toggleOn ? 26 : 2,
+            width: 24,
+            height: 24,
+            borderRadius: '50%',
+            backgroundColor: 'white',
+            boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
+            transition: 'left 200ms cubic-bezier(0.34, 1.56, 0.64, 1)',
+          }} />
+        </button>
+      </div>
+
+      {/* Dropdown Demo */}
+      <div style={{ padding: 24, backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
+        <h3 style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-primary)', marginBottom: 4 }}>Dropdown</h3>
+        <p style={{ fontSize: 12, color: 'var(--text-tertiary)', marginBottom: 16 }}>open: 200ms easeOut / close: 100ms easeIn</p>
+        <div style={{ position: 'relative' }}>
+          <button
+            onClick={() => setDropdownOpen(!dropdownOpen)}
+            style={{
+              padding: '10px 16px',
+              fontSize: 14,
+              backgroundColor: 'var(--bg-secondary)',
+              color: 'var(--text-primary)',
+              border: '1px solid var(--divider)',
+              borderRadius: 8,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 8,
+            }}
+          >
+            Select option
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ transform: dropdownOpen ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 200ms cubic-bezier(0.16, 1, 0.3, 1)' }}>
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+          </button>
+          <div style={{
+            position: 'absolute',
+            top: '100%',
+            left: 0,
+            right: 0,
+            marginTop: 4,
+            backgroundColor: 'white',
+            border: '1px solid var(--divider)',
+            borderRadius: 8,
+            boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+            overflow: 'hidden',
+            opacity: dropdownOpen ? 1 : 0,
+            transform: dropdownOpen ? 'translateY(0) scale(1)' : 'translateY(-8px) scale(0.95)',
+            pointerEvents: dropdownOpen ? 'auto' : 'none',
+            transition: dropdownOpen
+              ? 'all 200ms cubic-bezier(0.16, 1, 0.3, 1)'
+              : 'all 100ms cubic-bezier(0.7, 0, 0.84, 0)',
+          }}>
+            {['Option 1', 'Option 2', 'Option 3'].map((opt) => (
+              <div key={opt} style={{ padding: '10px 16px', fontSize: 14, cursor: 'pointer' }} onClick={() => setDropdownOpen(false)}>
+                {opt}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Modal Demo */}
+      <div style={{ padding: 24, backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
+        <h3 style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-primary)', marginBottom: 4 }}>Modal</h3>
+        <p style={{ fontSize: 12, color: 'var(--text-tertiary)', marginBottom: 16 }}>enter: 300ms easeOut / exit: 200ms easeIn</p>
+        <button
+          onClick={() => setModalOpen(true)}
+          style={{
+            padding: '10px 20px',
+            fontSize: 14,
+            fontWeight: 500,
+            backgroundColor: '#2563eb',
+            color: 'white',
+            border: 'none',
+            borderRadius: 8,
+            cursor: 'pointer',
+          }}
+        >
+          Open Modal
+        </button>
+      </div>
+
+      {/* Toast Demo */}
+      <div style={{ padding: 24, backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
+        <h3 style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-primary)', marginBottom: 4 }}>Toast</h3>
+        <p style={{ fontSize: 12, color: 'var(--text-tertiary)', marginBottom: 16 }}>enter: 300ms spring / exit: 200ms easeIn</p>
+        <button
+          onClick={() => setToastVisible(true)}
+          style={{
+            padding: '10px 20px',
+            fontSize: 14,
+            fontWeight: 500,
+            backgroundColor: '#22c55e',
+            color: 'white',
+            border: 'none',
+            borderRadius: 8,
+            cursor: 'pointer',
+          }}
+        >
+          Show Toast
+        </button>
+      </div>
+
+      {/* BottomSheet Demo */}
+      <div style={{ padding: 24, backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
+        <h3 style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-primary)', marginBottom: 4 }}>Bottom Sheet</h3>
+        <p style={{ fontSize: 12, color: 'var(--text-tertiary)', marginBottom: 16 }}>enter: 400ms easeOut / exit: 300ms easeIn</p>
+        <button
+          onClick={() => setBottomSheetOpen(true)}
+          style={{
+            padding: '10px 20px',
+            fontSize: 14,
+            fontWeight: 500,
+            backgroundColor: 'var(--bg-secondary)',
+            color: 'var(--text-primary)',
+            border: '1px solid var(--divider)',
+            borderRadius: 8,
+            cursor: 'pointer',
+          }}
+        >
+          Open Sheet
+        </button>
+      </div>
+
+      {/* Modal Overlay */}
+      {modalOpen && (
+        <div
+          onClick={() => setModalOpen(false)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            backgroundColor: 'rgba(0,0,0,0.5)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 1000,
+            animation: 'fadeIn 300ms cubic-bezier(0.16, 1, 0.3, 1)',
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              width: 400,
+              backgroundColor: 'white',
+              borderRadius: 24,
+              padding: 24,
+              animation: 'modalIn 300ms cubic-bezier(0.16, 1, 0.3, 1)',
+            }}
+          >
+            <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>Modal Title</h3>
+            <p style={{ fontSize: 14, color: '#64748b', marginBottom: 24 }}>This modal uses 300ms easeOut for enter animation.</p>
+            <button
+              onClick={() => setModalOpen(false)}
+              style={{
+                padding: '10px 20px',
+                fontSize: 14,
+                fontWeight: 500,
+                backgroundColor: '#2563eb',
+                color: 'white',
+                border: 'none',
+                borderRadius: 8,
+                cursor: 'pointer',
+              }}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Toast */}
+      {toastVisible && (
+        <div
+          style={{
+            position: 'fixed',
+            bottom: 24,
+            right: 24,
+            backgroundColor: '#1e293b',
+            color: 'white',
+            padding: '14px 20px',
+            borderRadius: 12,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 12,
+            zIndex: 1000,
+            animation: 'toastIn 300ms cubic-bezier(0.34, 1.56, 0.64, 1)',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+          }}
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#22c55e">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+          </svg>
+          <span style={{ fontSize: 14, fontWeight: 500 }}>Successfully saved!</span>
+          <button onClick={() => setToastVisible(false)} style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', marginLeft: 8 }}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M18 6L6 18M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+      )}
+
+      {/* Bottom Sheet */}
+      {bottomSheetOpen && (
+        <div
+          onClick={() => setBottomSheetOpen(false)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            backgroundColor: 'rgba(0,0,0,0.5)',
+            zIndex: 1000,
+            animation: 'fadeIn 400ms cubic-bezier(0.16, 1, 0.3, 1)',
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              right: 0,
+              backgroundColor: 'white',
+              borderTopLeftRadius: 20,
+              borderTopRightRadius: 20,
+              padding: 24,
+              paddingBottom: 40,
+              animation: 'sheetIn 400ms cubic-bezier(0.16, 1, 0.3, 1)',
+            }}
+          >
+            <div style={{ width: 40, height: 4, backgroundColor: '#cbd5e1', borderRadius: 2, margin: '0 auto 20px' }} />
+            <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>Bottom Sheet</h3>
+            <p style={{ fontSize: 14, color: '#64748b', marginBottom: 24 }}>This sheet uses 400ms easeOut for enter animation.</p>
+            <button
+              onClick={() => setBottomSheetOpen(false)}
+              style={{
+                width: '100%',
+                padding: '14px',
+                fontSize: 14,
+                fontWeight: 500,
+                backgroundColor: 'var(--bg-secondary)',
+                color: 'var(--text-primary)',
+                border: 'none',
+                borderRadius: 8,
+                cursor: 'pointer',
+              }}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
+      <style>{`
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes modalIn {
+          from { opacity: 0; transform: scale(0.95) translateY(10px); }
+          to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        @keyframes toastIn {
+          from { opacity: 0; transform: translateX(100%); }
+          to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes sheetIn {
+          from { transform: translateY(100%); }
+          to { transform: translateY(0); }
+        }
+      `}</style>
     </div>
   );
 }
