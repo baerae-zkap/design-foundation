@@ -4,90 +4,30 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 
-const navigation = [
-  {
-    title: "소개",
-    href: "/",
-  },
-  {
-    title: "파운데이션",
-    children: [
-      { title: "Palette", href: "/colors/palette" },
-      { title: "Semantic", href: "/colors/semantic" },
-      { title: "Typography", href: "/typography" },
-      { title: "Spacing", href: "/spacing" },
-      { title: "Radius", href: "/radius" },
-      { title: "Shadow", href: "/shadow" },
-      { title: "Interaction", href: "/interaction" },
-    ],
-  },
-  {
-    title: "컴포넌트",
-    children: [
-      { title: "Overview", href: "/components" },
-    ],
-  },
-  {
-    title: "Actions",
-    children: [
-      { title: "Button", href: "/components/actions/button" },
-      { title: "Icon Button", href: "/components/actions/icon-button" },
-      { title: "Text Button", href: "/components/actions/text-button" },
-      { title: "Chip", href: "/components/actions/chip" },
-    ],
-  },
-  {
-    title: "Selection & Input",
-    children: [
-      { title: "Checkbox", href: "/components/inputs/checkbox" },
-      { title: "Radio", href: "/components/inputs/radio" },
-      { title: "Switch", href: "/components/inputs/switch" },
-      { title: "Text Field", href: "/components/inputs/text-field" },
-      { title: "Text Area", href: "/components/inputs/text-area" },
-      { title: "Select", href: "/components/inputs/select" },
-    ],
-  },
-  {
-    title: "Feedback",
-    children: [
-      { title: "Toast", href: "/components/feedback/toast" },
-      { title: "Alert", href: "/components/feedback/alert" },
-      { title: "Snackbar", href: "/components/feedback/snackbar" },
-    ],
-  },
-  {
-    title: "Presentation",
-    children: [
-      { title: "Modal", href: "/components/presentation/modal" },
-      { title: "Bottom Sheet", href: "/components/presentation/bottom-sheet" },
-      { title: "Tooltip", href: "/components/presentation/tooltip" },
-      { title: "Popover", href: "/components/presentation/popover" },
-    ],
-  },
-  {
-    title: "Contents",
-    children: [
-      { title: "Avatar", href: "/components/contents/avatar" },
-      { title: "Badge", href: "/components/contents/badge" },
-      { title: "Card", href: "/components/contents/card" },
-      { title: "Accordion", href: "/components/contents/accordion" },
-    ],
-  },
-  {
-    title: "Navigation",
-    children: [
-      { title: "Tab", href: "/components/navigation/tab" },
-      { title: "Bottom Navigation", href: "/components/navigation/bottom-navigation" },
-      { title: "Pagination", href: "/components/navigation/pagination" },
-    ],
-  },
-  {
-    title: "Loading",
-    children: [
-      { title: "Skeleton", href: "/components/loading/skeleton" },
-      { title: "Spinner", href: "/components/loading/spinner" },
-    ],
-  },
+const mainNavigation = [
+  { title: "Foundations", href: "/foundations" },
+  { title: "Components", href: "/components" },
+];
+
+const foundationsNav = [
+  { title: "Overview", href: "/foundations" },
+  { title: "Colors", href: "/colors/palette" },
+  { title: "Typography", href: "/typography" },
+  { title: "Spacing", href: "/spacing" },
+  { title: "Radius", href: "/radius" },
+  { title: "Shadow", href: "/shadow" },
+  { title: "Interaction", href: "/interaction" },
+];
+
+const componentsNav = [
+  { title: "Overview", href: "/components" },
+  { title: "Button", href: "/components/actions/button", category: "Actions" },
+  { title: "Icon Button", href: "/components/actions/icon-button", category: "Actions" },
+  { title: "Checkbox", href: "/components/inputs/checkbox", category: "Selection & Input" },
+  { title: "Switch", href: "/components/inputs/switch", category: "Selection & Input" },
+  { title: "Toast", href: "/components/feedback/toast", category: "Feedback" },
+  { title: "Modal", href: "/components/presentation/modal", category: "Presentation" },
+  { title: "Avatar", href: "/components/contents/avatar", category: "Contents" },
 ];
 
 interface MobileMenuProps {
@@ -97,9 +37,7 @@ interface MobileMenuProps {
 
 export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const pathname = usePathname();
-  const [expanded, setExpanded] = useState<Record<string, boolean>>({
-    "파운데이션": true,
-  });
+  const [activeTab, setActiveTab] = useState<"foundations" | "components">("foundations");
 
   // Close menu when route changes (but not on initial render)
   const prevPathRef = useRef(pathname);
@@ -109,6 +47,15 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
       onClose();
     }
   }, [pathname, onClose]);
+
+  // Set active tab based on pathname
+  useEffect(() => {
+    if (pathname.startsWith("/components")) {
+      setActiveTab("components");
+    } else {
+      setActiveTab("foundations");
+    }
+  }, [pathname]);
 
   // Prevent body scroll when menu is open
   useEffect(() => {
@@ -122,11 +69,14 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
     };
   }, [isOpen]);
 
-  const toggleExpand = (title: string) => {
-    setExpanded((prev) => ({ ...prev, [title]: !prev[title] }));
+  const isActive = (href: string) => {
+    if (href === "/colors/palette") {
+      return pathname.startsWith("/colors");
+    }
+    return pathname === href;
   };
 
-  const isActive = (href: string) => pathname === href;
+  const navigation = activeTab === "foundations" ? foundationsNav : componentsNav;
 
   if (!isOpen) return null;
 
@@ -183,6 +133,29 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         </button>
       </div>
 
+      {/* Tab Navigation */}
+      <div style={{ display: 'flex', padding: '12px 16px', gap: 8, borderBottom: '1px solid var(--divider)' }}>
+        {mainNavigation.map((item) => (
+          <button
+            key={item.href}
+            onClick={() => setActiveTab(item.title.toLowerCase() as "foundations" | "components")}
+            style={{
+              flex: 1,
+              padding: '10px 16px',
+              fontSize: '14px',
+              fontWeight: activeTab === item.title.toLowerCase() ? 600 : 400,
+              color: activeTab === item.title.toLowerCase() ? 'var(--text-primary)' : 'var(--text-secondary)',
+              backgroundColor: activeTab === item.title.toLowerCase() ? 'var(--bg-secondary)' : 'transparent',
+              border: 'none',
+              borderRadius: '8px',
+              cursor: 'pointer',
+            }}
+          >
+            {item.title}
+          </button>
+        ))}
+      </div>
+
       {/* Navigation */}
       <nav
         style={{
@@ -192,87 +165,23 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         }}
       >
         {navigation.map((item) => (
-          <div key={item.title} style={{ marginBottom: '4px' }}>
-            {item.children ? (
-              <>
-                <button
-                  onClick={() => toggleExpand(item.title)}
-                  style={{
-                    width: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    padding: '12px 16px',
-                    fontSize: '15px',
-                    color: 'var(--text-secondary)',
-                    background: 'none',
-                    border: 'none',
-                    borderRadius: 'var(--radius-md)',
-                    cursor: 'pointer',
-                    textAlign: 'left',
-                  }}
-                >
-                  <span>{item.title}</span>
-                  <svg
-                    style={{
-                      width: '20px',
-                      height: '20px',
-                      transform: expanded[item.title] ? 'rotate(180deg)' : 'rotate(0deg)',
-                      transition: 'transform 0.2s',
-                    }}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                {expanded[item.title] && (
-                  <div style={{
-                    marginLeft: '20px',
-                    marginTop: '4px',
-                    paddingLeft: '12px',
-                    borderLeft: '1px solid var(--divider)',
-                  }}>
-                    {item.children.map((child) => (
-                      <Link
-                        key={child.href}
-                        href={child.href}
-                        style={{
-                          display: 'block',
-                          padding: '12px 16px',
-                          fontSize: '15px',
-                          textDecoration: 'none',
-                          backgroundColor: isActive(child.href) ? 'var(--blue-95)' : 'transparent',
-                          color: isActive(child.href) ? 'var(--brand-primary)' : 'var(--text-secondary)',
-                          fontWeight: isActive(child.href) ? 500 : 400,
-                          borderRadius: 'var(--radius-md)',
-                        }}
-                      >
-                        {child.title}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </>
-            ) : (
-              <Link
-                href={item.href}
-                style={{
-                  display: 'block',
-                  padding: '12px 16px',
-                  fontSize: '15px',
-                  borderRadius: 'var(--radius-md)',
-                  textDecoration: 'none',
-                  backgroundColor: isActive(item.href) ? 'var(--blue-95)' : 'transparent',
-                  color: isActive(item.href) ? 'var(--brand-primary)' : 'var(--text-secondary)',
-                  fontWeight: isActive(item.href) ? 500 : 400,
-                }}
-              >
-                {item.title}
-              </Link>
-            )}
-          </div>
+          <Link
+            key={item.href}
+            href={item.href}
+            style={{
+              display: 'block',
+              padding: '12px 16px',
+              fontSize: '15px',
+              textDecoration: 'none',
+              backgroundColor: isActive(item.href) ? 'var(--blue-95)' : 'transparent',
+              color: isActive(item.href) ? 'var(--brand-primary)' : 'var(--text-secondary)',
+              fontWeight: isActive(item.href) ? 500 : 400,
+              borderRadius: 'var(--radius-md)',
+              marginBottom: 4,
+            }}
+          >
+            {item.title}
+          </Link>
         ))}
       </nav>
     </div>

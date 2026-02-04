@@ -2,13 +2,20 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface HeaderProps {
   onMenuClick?: () => void;
 }
 
+const mainNavigation = [
+  { title: "Foundations", href: "/foundations" },
+  { title: "Components", href: "/components" },
+];
+
 export function Header({ onMenuClick }: HeaderProps) {
+  const pathname = usePathname();
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -20,6 +27,13 @@ export function Header({ onMenuClick }: HeaderProps) {
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+
+  const isActive = (href: string) => {
+    if (href === "/foundations") {
+      return pathname === "/" || pathname.startsWith("/foundations") || pathname.startsWith("/colors") || pathname.startsWith("/typography") || pathname.startsWith("/spacing") || pathname.startsWith("/radius") || pathname.startsWith("/shadow") || pathname.startsWith("/interaction");
+    }
+    return pathname.startsWith(href);
+  };
 
   return (
     <header
@@ -36,19 +50,44 @@ export function Header({ onMenuClick }: HeaderProps) {
     >
       <div
         style={{
-          maxWidth: '1200px',
+          maxWidth: '1400px',
           margin: '0 auto',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           height: '100%',
-          padding: '0 20px',
+          padding: '0 24px',
         }}
       >
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
-          <Image src="/design-foundation/logo.svg" alt="ZKAP" width={80} height={24} style={{ height: '24px', width: 'auto' }} />
-          <span style={{ color: 'var(--text-tertiary)', fontSize: '14px' }}>Design System</span>
-        </Link>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '40px' }}>
+          <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
+            <Image src="/design-foundation/logo.svg" alt="ZKAP" width={80} height={24} style={{ height: '24px', width: 'auto' }} />
+            <span style={{ color: 'var(--text-tertiary)', fontSize: '14px' }}>Design System</span>
+          </Link>
+
+          {!isMobile && (
+            <nav style={{ display: 'flex', gap: '8px' }}>
+              {mainNavigation.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  style={{
+                    padding: '8px 16px',
+                    fontSize: '14px',
+                    fontWeight: isActive(item.href) ? 600 : 400,
+                    color: isActive(item.href) ? 'var(--text-primary)' : 'var(--text-secondary)',
+                    textDecoration: 'none',
+                    borderRadius: '8px',
+                    backgroundColor: isActive(item.href) ? 'var(--bg-secondary)' : 'transparent',
+                    transition: 'all 150ms ease',
+                  }}
+                >
+                  {item.title}
+                </Link>
+              ))}
+            </nav>
+          )}
+        </div>
 
         {isMobile && (
           <button

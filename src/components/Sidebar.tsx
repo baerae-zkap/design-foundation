@@ -4,99 +4,88 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 
-const navigation = [
+const foundationsNav = [
   {
-    title: "소개",
-    href: "/",
+    title: "Overview",
+    href: "/foundations",
+    hasArrow: true,
   },
   {
-    title: "파운데이션",
-    children: [
-      { title: "Palette", href: "/colors/palette" },
-      { title: "Semantic", href: "/colors/semantic" },
-      { title: "Typography", href: "/typography" },
-      { title: "Spacing", href: "/spacing" },
-      { title: "Radius", href: "/radius" },
-      { title: "Shadow", href: "/shadow" },
-      { title: "Interaction", href: "/interaction" },
-    ],
+    title: "Base material",
+    isLabel: true,
   },
+  { title: "Colors", href: "/colors/palette" },
+  { title: "Typography", href: "/typography" },
+  { title: "Spacing", href: "/spacing" },
+  { title: "Radius", href: "/radius" },
+  { title: "Shadow", href: "/shadow" },
+  { title: "Interaction", href: "/interaction" },
+];
+
+const componentsNav = [
   {
-    title: "컴포넌트",
-    children: [
-      { title: "Overview", href: "/components" },
-    ],
+    title: "Overview",
+    href: "/components",
+    hasArrow: true,
   },
   {
     title: "Actions",
-    children: [
-      { title: "Button", href: "/components/actions/button" },
-      { title: "Icon Button", href: "/components/actions/icon-button" },
-      { title: "Text Button", href: "/components/actions/text-button" },
-      { title: "Chip", href: "/components/actions/chip" },
-    ],
+    isLabel: true,
   },
+  { title: "Button", href: "/components/actions/button" },
+  { title: "Icon Button", href: "/components/actions/icon-button" },
+  { title: "Text Button", href: "/components/actions/text-button" },
+  { title: "Chip", href: "/components/actions/chip" },
   {
     title: "Selection & Input",
-    children: [
-      { title: "Checkbox", href: "/components/inputs/checkbox" },
-      { title: "Radio", href: "/components/inputs/radio" },
-      { title: "Switch", href: "/components/inputs/switch" },
-      { title: "Text Field", href: "/components/inputs/text-field" },
-      { title: "Text Area", href: "/components/inputs/text-area" },
-      { title: "Select", href: "/components/inputs/select" },
-    ],
+    isLabel: true,
   },
+  { title: "Checkbox", href: "/components/inputs/checkbox" },
+  { title: "Radio", href: "/components/inputs/radio" },
+  { title: "Switch", href: "/components/inputs/switch" },
+  { title: "Text Field", href: "/components/inputs/text-field" },
+  { title: "Text Area", href: "/components/inputs/text-area" },
+  { title: "Select", href: "/components/inputs/select" },
   {
     title: "Feedback",
-    children: [
-      { title: "Toast", href: "/components/feedback/toast" },
-      { title: "Alert", href: "/components/feedback/alert" },
-      { title: "Snackbar", href: "/components/feedback/snackbar" },
-    ],
+    isLabel: true,
   },
+  { title: "Toast", href: "/components/feedback/toast" },
+  { title: "Alert", href: "/components/feedback/alert" },
+  { title: "Snackbar", href: "/components/feedback/snackbar" },
   {
     title: "Presentation",
-    children: [
-      { title: "Modal", href: "/components/presentation/modal" },
-      { title: "Bottom Sheet", href: "/components/presentation/bottom-sheet" },
-      { title: "Tooltip", href: "/components/presentation/tooltip" },
-      { title: "Popover", href: "/components/presentation/popover" },
-    ],
+    isLabel: true,
   },
+  { title: "Modal", href: "/components/presentation/modal" },
+  { title: "Bottom Sheet", href: "/components/presentation/bottom-sheet" },
+  { title: "Tooltip", href: "/components/presentation/tooltip" },
+  { title: "Popover", href: "/components/presentation/popover" },
   {
     title: "Contents",
-    children: [
-      { title: "Avatar", href: "/components/contents/avatar" },
-      { title: "Badge", href: "/components/contents/badge" },
-      { title: "Card", href: "/components/contents/card" },
-      { title: "Accordion", href: "/components/contents/accordion" },
-    ],
+    isLabel: true,
   },
+  { title: "Avatar", href: "/components/contents/avatar" },
+  { title: "Badge", href: "/components/contents/badge" },
+  { title: "Card", href: "/components/contents/card" },
+  { title: "Accordion", href: "/components/contents/accordion" },
   {
     title: "Navigation",
-    children: [
-      { title: "Tab", href: "/components/navigation/tab" },
-      { title: "Bottom Navigation", href: "/components/navigation/bottom-navigation" },
-      { title: "Pagination", href: "/components/navigation/pagination" },
-    ],
+    isLabel: true,
   },
+  { title: "Tab", href: "/components/navigation/tab" },
+  { title: "Bottom Navigation", href: "/components/navigation/bottom-navigation" },
+  { title: "Pagination", href: "/components/navigation/pagination" },
   {
     title: "Loading",
-    children: [
-      { title: "Skeleton", href: "/components/loading/skeleton" },
-      { title: "Spinner", href: "/components/loading/spinner" },
-    ],
+    isLabel: true,
   },
+  { title: "Skeleton", href: "/components/loading/skeleton" },
+  { title: "Spinner", href: "/components/loading/spinner" },
 ];
 
 export function Sidebar() {
   const pathname = usePathname();
-  const [expanded, setExpanded] = useState<Record<string, boolean>>({
-    "파운데이션": true,
-    "컴포넌트": true,
-    "Actions": true,
-  });
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -109,109 +98,80 @@ export function Sidebar() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  const toggleExpand = (title: string) => {
-    setExpanded((prev) => ({ ...prev, [title]: !prev[title] }));
-  };
+  // Determine which navigation to show based on current path
+  const isFoundations = pathname === "/" || pathname.startsWith("/foundations") || pathname.startsWith("/colors") || pathname.startsWith("/typography") || pathname.startsWith("/spacing") || pathname.startsWith("/radius") || pathname.startsWith("/shadow") || pathname.startsWith("/interaction");
 
-  const isActive = (href: string) => pathname === href;
+  const navigation = isFoundations ? foundationsNav : componentsNav;
+
+  const isActive = (href: string) => {
+    if (href === "/colors/palette") {
+      return pathname.startsWith("/colors");
+    }
+    return pathname === href;
+  };
 
   if (isMobile) return null;
 
   return (
     <aside
       style={{
-        width: '240px',
+        width: '220px',
         flexShrink: 0,
-        borderRight: '1px solid var(--divider)',
         position: 'sticky',
         top: '56px',
         height: 'calc(100vh - 56px)',
         overflowY: 'auto',
+        padding: '24px 0',
       }}
     >
-      <nav style={{ padding: '24px 16px' }}>
-        {navigation.map((item) => (
-          <div key={item.title} style={{ marginBottom: '4px' }}>
-            {item.children ? (
-              <>
-                <button
-                  onClick={() => toggleExpand(item.title)}
-                  style={{
-                    width: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    padding: '10px 12px',
-                    fontSize: '14px',
-                    color: 'var(--text-secondary)',
-                    background: 'none',
-                    border: 'none',
-                    borderRadius: 'var(--radius-md)',
-                    cursor: 'pointer',
-                  }}
-                >
-                  <span>{item.title}</span>
-                  <svg
-                    style={{
-                      width: '16px',
-                      height: '16px',
-                      transform: expanded[item.title] ? 'rotate(180deg)' : 'rotate(0deg)',
-                      transition: 'transform 0.2s',
-                    }}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                {expanded[item.title] && (
-                  <div style={{
-                    marginLeft: '16px',
-                    marginTop: '4px',
-                    paddingLeft: '12px',
-                    borderLeft: '1px solid var(--divider)',
-                  }}>
-                    {item.children.map((child) => (
-                      <Link
-                        key={child.href}
-                        href={child.href}
-                        style={{
-                          display: 'block',
-                          padding: '8px 12px',
-                          fontSize: '14px',
-                          textDecoration: 'none',
-                          backgroundColor: isActive(child.href) ? 'var(--blue-95)' : 'transparent',
-                          color: isActive(child.href) ? 'var(--brand-primary)' : 'var(--text-secondary)',
-                          fontWeight: isActive(child.href) ? 500 : 400,
-                          borderRadius: 'var(--radius-md)',
-                        }}
-                      >
-                        {child.title}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </>
-            ) : (
-              <Link
-                href={item.href}
+      <nav>
+        {navigation.map((item, index) => {
+          if (item.isLabel) {
+            return (
+              <div
+                key={`label-${index}`}
                 style={{
-                  display: 'block',
-                  padding: '10px 12px',
-                  fontSize: '14px',
-                  borderRadius: 'var(--radius-md)',
-                  textDecoration: 'none',
-                  backgroundColor: isActive(item.href) ? 'var(--blue-95)' : 'transparent',
-                  color: isActive(item.href) ? 'var(--brand-primary)' : 'var(--text-secondary)',
-                  fontWeight: isActive(item.href) ? 500 : 400,
+                  padding: '20px 16px 8px',
+                  fontSize: '12px',
+                  fontWeight: 500,
+                  color: 'var(--text-tertiary)',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.5px',
                 }}
               >
                 {item.title}
-              </Link>
-            )}
-          </div>
-        ))}
+              </div>
+            );
+          }
+
+          return (
+            <Link
+              key={item.href}
+              href={item.href!}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: '10px 16px',
+                fontSize: '14px',
+                textDecoration: 'none',
+                backgroundColor: isActive(item.href!) ? 'var(--bg-secondary)' : 'transparent',
+                color: isActive(item.href!) ? 'var(--text-primary)' : 'var(--text-secondary)',
+                fontWeight: isActive(item.href!) ? 500 : 400,
+                borderRadius: '8px',
+                margin: '2px 8px',
+                transition: 'all 150ms ease',
+              }}
+            >
+              <span>{item.title}</span>
+              {item.hasArrow && (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              )}
+            </Link>
+          );
+        })}
       </nav>
     </aside>
   );
