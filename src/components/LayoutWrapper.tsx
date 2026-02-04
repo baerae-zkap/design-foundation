@@ -53,43 +53,51 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
       >
         {/* 사이드바 - sticky로 스크롤 따라감 */}
         <Sidebar />
+
+        {/* 사이드바와 콘텐츠 사이 간격 */}
+        {!isTablet && <div style={{ width: '40px', flexShrink: 0 }} />}
+
         {/* 메인 컨텐츠 */}
         <main
           style={{
             flex: 1,
             minHeight: 'calc(100vh - 56px)',
             display: 'flex',
+            justifyContent: 'center',
             alignItems: 'flex-start',
           }}
         >
           <div
             style={{
-              flex: 1,
               width: '100%',
-              maxWidth: isTablet ? '100%' : '840px',
+              maxWidth: isTablet ? '100%' : '720px',
               padding: getContentPadding(),
               boxSizing: 'border-box',
             }}
           >
             {children}
           </div>
-          {/* 우측 목차 - sticky로 스크롤 따라감 */}
-          {!isTablet && (
-            <div
-              style={{
-                width: '200px',
-                flexShrink: 0,
-                padding: '40px 24px 40px 0',
-                position: 'sticky',
-                top: '96px',
-                height: 'fit-content',
-                alignSelf: 'flex-start',
-              }}
-            >
-              <TableOfContents />
-            </div>
-          )}
         </main>
+
+        {/* 콘텐츠와 목차 사이 간격 */}
+        {!isTablet && <div style={{ width: '40px', flexShrink: 0 }} />}
+
+        {/* 우측 목차 - sticky로 스크롤 따라감 */}
+        {!isTablet && (
+          <div
+            style={{
+              width: '200px',
+              flexShrink: 0,
+              padding: '40px 0',
+              position: 'sticky',
+              top: '96px',
+              height: 'fit-content',
+              alignSelf: 'flex-start',
+            }}
+          >
+            <TableOfContents />
+          </div>
+        )}
       </div>
     </>
   );
