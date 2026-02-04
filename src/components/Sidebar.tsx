@@ -173,12 +173,10 @@ export function Sidebar() {
               <div
                 key={`label-${index}`}
                 style={{
-                  padding: '20px 16px 8px',
-                  fontSize: '12px',
-                  fontWeight: 500,
-                  color: 'var(--text-tertiary)',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.5px',
+                  padding: '24px 16px 8px',
+                  fontSize: '13px',
+                  fontWeight: 400,
+                  color: '#94a3b8',
                 }}
               >
                 {item.title}
