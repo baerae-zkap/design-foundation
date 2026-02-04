@@ -59,35 +59,33 @@ export function Header({ onMenuClick }: HeaderProps) {
           padding: '0 24px',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '40px' }}>
-          <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
-            <Image src="/design-foundation/logo.svg" alt="ZKAP" width={80} height={24} style={{ height: '24px', width: 'auto' }} />
-            <span style={{ color: 'var(--text-tertiary)', fontSize: '14px' }}>Design System</span>
-          </Link>
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
+          <Image src="/design-foundation/logo.svg" alt="ZKAP" width={80} height={24} style={{ height: '24px', width: 'auto' }} />
+          <span style={{ color: 'var(--text-tertiary)', fontSize: '14px' }}>Design System</span>
+        </Link>
 
-          {!isMobile && (
-            <nav style={{ display: 'flex', gap: '8px' }}>
-              {mainNavigation.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  style={{
-                    padding: '8px 16px',
-                    fontSize: '14px',
-                    fontWeight: isActive(item.href) ? 600 : 400,
-                    color: isActive(item.href) ? 'var(--text-primary)' : 'var(--text-secondary)',
-                    textDecoration: 'none',
-                    borderRadius: '8px',
-                    backgroundColor: isActive(item.href) ? 'var(--bg-secondary)' : 'transparent',
-                    transition: 'all 150ms ease',
-                  }}
-                >
-                  {item.title}
-                </Link>
-              ))}
-            </nav>
-          )}
-        </div>
+        {!isMobile && (
+          <nav style={{ display: 'flex', gap: '8px' }}>
+            {mainNavigation.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                style={{
+                  padding: '8px 16px',
+                  fontSize: '14px',
+                  fontWeight: isActive(item.href) ? 600 : 400,
+                  color: isActive(item.href) ? 'var(--text-primary)' : 'var(--text-secondary)',
+                  textDecoration: 'none',
+                  borderRadius: '8px',
+                  backgroundColor: isActive(item.href) ? 'var(--bg-secondary)' : 'transparent',
+                  transition: 'all 150ms ease',
+                }}
+              >
+                {item.title}
+              </Link>
+            ))}
+          </nav>
+        )}
 
         {isMobile && (
           <button
