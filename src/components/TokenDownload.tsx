@@ -3,6 +3,7 @@
 interface TokenFile {
   name: string;
   path: string;
+  size?: string;
 }
 
 interface TokenDownloadProps {
@@ -11,7 +12,7 @@ interface TokenDownloadProps {
 
 export function TokenDownload({ files }: TokenDownloadProps) {
   return (
-    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '24px' }}>
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', marginBottom: '24px' }}>
       {files.map((file) => (
         <a
           key={file.path}
@@ -20,30 +21,30 @@ export function TokenDownload({ files }: TokenDownloadProps) {
           style={{
             display: 'inline-flex',
             alignItems: 'center',
-            gap: '6px',
-            padding: '8px 14px',
-            backgroundColor: 'var(--bg-secondary)',
-            color: 'var(--text-secondary)',
+            gap: '12px',
+            padding: '12px 16px',
+            backgroundColor: '#fff',
             borderRadius: 'var(--radius-md)',
-            fontSize: '13px',
-            fontWeight: 500,
             textDecoration: 'none',
-            border: '1px solid var(--divider)',
+            border: '1px solid var(--brand-primary)',
             transition: 'all 0.15s ease',
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = 'var(--grey-95)';
-            e.currentTarget.style.borderColor = 'var(--divider-strong)';
+            e.currentTarget.style.backgroundColor = 'var(--blue-99)';
+            e.currentTarget.style.borderColor = 'var(--brand-hover)';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
-            e.currentTarget.style.borderColor = 'var(--divider)';
+            e.currentTarget.style.backgroundColor = '#fff';
+            e.currentTarget.style.borderColor = 'var(--brand-primary)';
           }}
         >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--brand-primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
           </svg>
-          {file.name}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+            <span style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text-primary)' }}>{file.name}</span>
+            <span style={{ fontSize: '12px', color: 'var(--text-tertiary)' }}>{file.size || 'JSON'}</span>
+          </div>
         </a>
       ))}
     </div>
