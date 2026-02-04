@@ -87,6 +87,7 @@ function ColorSwatch({ value, theme }: { value: string; theme: 'light' | 'dark' 
           height: '48px',
           backgroundColor: value,
           borderRadius: 'var(--radius-md)',
+          border: '1px solid var(--grey-30)',
         }}
       />
       <span
