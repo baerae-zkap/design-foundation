@@ -54,6 +54,25 @@
         }
       },
 
+      "button": {
+        "sm": {
+          "value": "{primitive.sm}",
+          "_comment": "8px. 소형 버튼 (xs, sm 사이즈)"
+        },
+        "md": {
+          "value": "{primitive.sm}",
+          "_comment": "8px. 기본 버튼 (md 사이즈)"
+        },
+        "lg": {
+          "value": "{primitive.md}",
+          "_comment": "12px. 대형 버튼 (lg, xl 사이즈)"
+        },
+        "pill": {
+          "value": "{primitive.full}",
+          "_comment": "완전 라운드. 필 형태 버튼"
+        }
+      },
+
       "chip": {
         "default": {
           "value": "{primitive.sm}",

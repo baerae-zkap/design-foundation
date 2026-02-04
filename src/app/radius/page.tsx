@@ -78,6 +78,20 @@ export default function RadiusPage() {
         <div style={{ width: 72, height: 48, backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--divider)', borderRadius: value }} />
       )} />
 
+      {/* Button */}
+      <SemanticSection id="button" title="Button" description="버튼 컴포넌트용 라운딩입니다." data={semantic.button} renderPreview={(value, key) => (
+        <button style={{
+          padding: key === 'lg' ? '10px 20px' : '8px 16px',
+          fontSize: key === 'lg' ? 14 : 13,
+          fontWeight: 500,
+          backgroundColor: '#2563eb',
+          color: 'white',
+          border: 'none',
+          borderRadius: value === 9999 ? 9999 : value,
+          cursor: 'pointer'
+        }}>Button</button>
+      )} />
+
       {/* Chip */}
       <SemanticSection id="chip" title="Chip" description="칩/태그 컴포넌트용 라운딩입니다." data={semantic.chip} renderPreview={(value) => (
         <span style={{ display: 'inline-block', padding: '4px 12px', fontSize: 13, backgroundColor: '#dbeafe', color: '#2563eb', borderRadius: value === 9999 ? 9999 : value }}>Tag</span>
