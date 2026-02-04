@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { usePathname } from "next/navigation";
+import { PLATFORM_TAB_CHANGE_EVENT } from "./PlatformTabs";
 
 interface TocItem {
   id: string;
@@ -25,31 +26,44 @@ export function TableOfContents() {
     return () => window.removeEventListener('resize', checkTablet);
   }, []);
 
-  useEffect(() => {
-    // Small delay to ensure DOM is updated after navigation
-    const timeout = setTimeout(() => {
-      // Find only h2 elements in the main content (중제목만)
-      const elements = document.querySelectorAll("main h2");
-      const items: TocItem[] = [];
+  // Function to scan headings from DOM
+  const scanHeadings = useCallback(() => {
+    // Find only h2 elements in the main content (중제목만)
+    const elements = document.querySelectorAll("main h2");
+    const items: TocItem[] = [];
 
-      elements.forEach((el) => {
-        const id = el.id || el.textContent?.toLowerCase().replace(/\s+/g, "-") || "";
-        if (!el.id && id) {
-          el.id = id;
-        }
-        items.push({
-          id,
-          text: el.textContent || "",
-          level: el.tagName === "H2" ? 2 : 3,
-        });
+    elements.forEach((el) => {
+      const id = el.id || el.textContent?.toLowerCase().replace(/\s+/g, "-") || "";
+      if (!el.id && id) {
+        el.id = id;
+      }
+      items.push({
+        id,
+        text: el.textContent || "",
+        level: el.tagName === "H2" ? 2 : 3,
       });
+    });
 
-      setHeadings(items);
-      setActiveId("");
-    }, 100);
+    setHeadings(items);
+    setActiveId("");
+  }, []);
 
+  // Scan on pathname change
+  useEffect(() => {
+    const timeout = setTimeout(scanHeadings, 100);
     return () => clearTimeout(timeout);
-  }, [pathname]);
+  }, [pathname, scanHeadings]);
+
+  // Listen for platform tab changes
+  useEffect(() => {
+    const handleTabChange = () => {
+      // Re-scan headings when tab changes
+      setTimeout(scanHeadings, 100);
+    };
+
+    window.addEventListener(PLATFORM_TAB_CHANGE_EVENT, handleTabChange);
+    return () => window.removeEventListener(PLATFORM_TAB_CHANGE_EVENT, handleTabChange);
+  }, [scanHeadings]);
 
   useEffect(() => {
     if (headings.length === 0) return;

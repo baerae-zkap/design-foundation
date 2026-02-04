@@ -1,8 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export type Platform = "design" | "web" | "rn";
+
+// Custom event name for tab changes
+export const PLATFORM_TAB_CHANGE_EVENT = "platformTabChange";
 
 interface PlatformTabsProps {
   children: (platform: Platform) => React.ReactNode;
@@ -17,6 +20,21 @@ export function PlatformTabs({ children, defaultPlatform = "design" }: PlatformT
     { id: "web", label: "Web" },
     { id: "rn", label: "React Native" },
   ];
+
+  const handleTabChange = (platform: Platform) => {
+    setActivePlatform(platform);
+    // Dispatch custom event after a small delay to allow DOM to update
+    setTimeout(() => {
+      window.dispatchEvent(new CustomEvent(PLATFORM_TAB_CHANGE_EVENT, { detail: { platform } }));
+    }, 50);
+  };
+
+  // Dispatch initial event on mount
+  useEffect(() => {
+    setTimeout(() => {
+      window.dispatchEvent(new CustomEvent(PLATFORM_TAB_CHANGE_EVENT, { detail: { platform: activePlatform } }));
+    }, 100);
+  }, []);
 
   return (
     <div>
@@ -37,7 +55,7 @@ export function PlatformTabs({ children, defaultPlatform = "design" }: PlatformT
           <TabButton
             key={tab.id}
             active={activePlatform === tab.id}
-            onClick={() => setActivePlatform(tab.id)}
+            onClick={() => handleTabChange(tab.id)}
           >
             {tab.label}
           </TabButton>
