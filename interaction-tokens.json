@@ -60,9 +60,9 @@
       "_comment": "컴포넌트별 권장 모션 조합",
       "button": {
         "hover": {
-          "duration": "{duration.instant}",
+          "duration": "150ms",
           "easing": "{easing.easeOut}",
-          "_comment": "호버 상태 전환"
+          "_comment": "호버 상태 전환 (instant보다 약간 느리게)"
         },
         "press": {
           "duration": "{duration.instant}",
