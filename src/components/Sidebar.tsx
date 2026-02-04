@@ -58,6 +58,28 @@ interface SidebarItemProps {
   isActive: boolean;
 }
 
+const sidebarStyles = `
+  .sidebar-scroll {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .sidebar-scroll::-webkit-scrollbar {
+    width: 6px;
+    background: transparent;
+  }
+  .sidebar-scroll::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 3px;
+  }
+  .sidebar-scroll:hover::-webkit-scrollbar-thumb {
+    background: var(--divider);
+  }
+  .sidebar-scroll:hover {
+    scrollbar-width: thin;
+    scrollbar-color: var(--divider) transparent;
+  }
+`;
+
 function SidebarItem({ title, href, isActive }: SidebarItemProps) {
   const [isHovered, setIsHovered] = useState(false);
   const showHighlight = isActive || isHovered;
@@ -130,18 +152,21 @@ export function Sidebar() {
   if (isMobile) return null;
 
   return (
-    <aside
-      style={{
-        width: '220px',
-        flexShrink: 0,
-        position: 'sticky',
-        top: '56px',
-        height: 'calc(100vh - 56px)',
-        overflowY: 'auto',
-        padding: '24px 0',
-      }}
-    >
-      <nav>
+    <>
+      <style>{sidebarStyles}</style>
+      <aside
+        className="sidebar-scroll"
+        style={{
+          width: '220px',
+          flexShrink: 0,
+          position: 'sticky',
+          top: '56px',
+          height: 'calc(100vh - 56px)',
+          overflowY: 'auto',
+          padding: '24px 0',
+        }}
+      >
+        <nav>
         {navigation.map((item, index) => {
           if (item.isLabel) {
             return (
@@ -170,7 +195,8 @@ export function Sidebar() {
             />
           );
         })}
-      </nav>
-    </aside>
+        </nav>
+      </aside>
+    </>
   );
 }
