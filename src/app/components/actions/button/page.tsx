@@ -1648,11 +1648,17 @@ function ButtonDemo({
     if (buttonType === "filled") {
       return { bg: getBg(), text: c.text, border: "transparent" };
     } else if (buttonType === "outlined") {
-      const outlinedText = color === "brandDefault" || color === "brandSecondary" ? "#2563eb" : c.text;
+      // outlined 버튼은 텍스트 색상 유지, 배경만 살짝 어두워짐
+      const getOutlinedText = () => {
+        if (color === "brandDefault" || color === "brandSecondary") return "#2563eb";
+        if (color === "successDefault") return "#16a34a";
+        if (color === "errorDefault") return "#dc2626";
+        return "#334155";
+      };
       return {
-        bg: actualPressed ? c.bgPressed : isHovered ? "#f8fafc" : "white",
-        text: outlinedText,
-        border: isHovered ? c.borderHover : c.border,
+        bg: actualPressed ? "#f1f5f9" : isHovered ? "#f8fafc" : "white",
+        text: getOutlinedText(),
+        border: c.border,
       };
     } else {
       return { bg: "transparent", text: c.text === "white" ? "#2563eb" : c.text, border: "transparent" };
