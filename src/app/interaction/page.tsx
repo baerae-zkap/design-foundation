@@ -339,10 +339,10 @@ function LiveExamples() {
             cursor: 'pointer',
             transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)',
           }}
-          onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#1d4ed8'; e.currentTarget.style.transform = 'scale(1.02)'; }}
+          onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#1d4ed8'; }}
           onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#2563eb'; e.currentTarget.style.transform = 'scale(1)'; }}
-          onMouseDown={(e) => { e.currentTarget.style.transform = 'scale(0.96)'; }}
-          onMouseUp={(e) => { e.currentTarget.style.transform = 'scale(1.02)'; }}
+          onMouseDown={(e) => { e.currentTarget.style.backgroundColor = '#1e40af'; e.currentTarget.style.transform = 'scale(0.97)'; }}
+          onMouseUp={(e) => { e.currentTarget.style.backgroundColor = '#1d4ed8'; e.currentTarget.style.transform = 'scale(1)'; }}
         >
           Hover & Press
         </button>
@@ -448,10 +448,10 @@ function LiveExamples() {
             cursor: 'pointer',
             transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)',
           }}
-          onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#1d4ed8'; e.currentTarget.style.transform = 'scale(1.02)'; }}
+          onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#1d4ed8'; }}
           onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#2563eb'; e.currentTarget.style.transform = 'scale(1)'; }}
-          onMouseDown={(e) => { e.currentTarget.style.transform = 'scale(0.96)'; }}
-          onMouseUp={(e) => { e.currentTarget.style.transform = 'scale(1.02)'; }}
+          onMouseDown={(e) => { e.currentTarget.style.backgroundColor = '#1e40af'; e.currentTarget.style.transform = 'scale(0.97)'; }}
+          onMouseUp={(e) => { e.currentTarget.style.backgroundColor = '#1d4ed8'; e.currentTarget.style.transform = 'scale(1)'; }}
         >
           Open Modal
         </button>
@@ -474,10 +474,10 @@ function LiveExamples() {
             cursor: 'pointer',
             transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)',
           }}
-          onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#16a34a'; e.currentTarget.style.transform = 'scale(1.02)'; }}
+          onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#16a34a'; }}
           onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#22c55e'; e.currentTarget.style.transform = 'scale(1)'; }}
-          onMouseDown={(e) => { e.currentTarget.style.transform = 'scale(0.96)'; }}
-          onMouseUp={(e) => { e.currentTarget.style.transform = 'scale(1.02)'; }}
+          onMouseDown={(e) => { e.currentTarget.style.backgroundColor = '#15803d'; e.currentTarget.style.transform = 'scale(0.97)'; }}
+          onMouseUp={(e) => { e.currentTarget.style.backgroundColor = '#16a34a'; e.currentTarget.style.transform = 'scale(1)'; }}
         >
           Show Toast
         </button>
@@ -500,10 +500,10 @@ function LiveExamples() {
             cursor: 'pointer',
             transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)',
           }}
-          onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)'; e.currentTarget.style.transform = 'scale(1.02)'; }}
+          onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)'; }}
           onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--bg-secondary)'; e.currentTarget.style.transform = 'scale(1)'; }}
-          onMouseDown={(e) => { e.currentTarget.style.transform = 'scale(0.96)'; }}
-          onMouseUp={(e) => { e.currentTarget.style.transform = 'scale(1.02)'; }}
+          onMouseDown={(e) => { e.currentTarget.style.backgroundColor = '#d1d5db'; e.currentTarget.style.transform = 'scale(0.97)'; }}
+          onMouseUp={(e) => { e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)'; e.currentTarget.style.transform = 'scale(1)'; }}
         >
           Open Sheet
         </button>
@@ -549,10 +549,10 @@ function LiveExamples() {
                 cursor: 'pointer',
                 transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)',
               }}
-              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#1d4ed8'; e.currentTarget.style.transform = 'scale(1.02)'; }}
+              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#1d4ed8'; }}
               onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#2563eb'; e.currentTarget.style.transform = 'scale(1)'; }}
-              onMouseDown={(e) => { e.currentTarget.style.transform = 'scale(0.96)'; }}
-              onMouseUp={(e) => { e.currentTarget.style.transform = 'scale(1.02)'; }}
+              onMouseDown={(e) => { e.currentTarget.style.backgroundColor = '#1e40af'; e.currentTarget.style.transform = 'scale(0.97)'; }}
+              onMouseUp={(e) => { e.currentTarget.style.backgroundColor = '#1d4ed8'; e.currentTarget.style.transform = 'scale(1)'; }}
             >
               Close
             </button>
@@ -650,10 +650,10 @@ function LiveExamples() {
                 cursor: 'pointer',
                 transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)',
               }}
-              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)'; e.currentTarget.style.transform = 'scale(1.01)'; }}
+              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)'; }}
               onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--bg-secondary)'; e.currentTarget.style.transform = 'scale(1)'; }}
-              onMouseDown={(e) => { e.currentTarget.style.transform = 'scale(0.98)'; }}
-              onMouseUp={(e) => { e.currentTarget.style.transform = 'scale(1.01)'; }}
+              onMouseDown={(e) => { e.currentTarget.style.backgroundColor = '#d1d5db'; e.currentTarget.style.transform = 'scale(0.98)'; }}
+              onMouseUp={(e) => { e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)'; e.currentTarget.style.transform = 'scale(1)'; }}
             >
               Close
             </button>
