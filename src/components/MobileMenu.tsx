@@ -21,6 +21,73 @@ const navigation = [
       { title: "Interaction", href: "/interaction" },
     ],
   },
+  {
+    title: "컴포넌트",
+    children: [
+      { title: "Overview", href: "/components" },
+    ],
+  },
+  {
+    title: "Actions",
+    children: [
+      { title: "Button", href: "/components/actions/button" },
+      { title: "Icon Button", href: "/components/actions/icon-button" },
+      { title: "Text Button", href: "/components/actions/text-button" },
+      { title: "Chip", href: "/components/actions/chip" },
+    ],
+  },
+  {
+    title: "Selection & Input",
+    children: [
+      { title: "Checkbox", href: "/components/inputs/checkbox" },
+      { title: "Radio", href: "/components/inputs/radio" },
+      { title: "Switch", href: "/components/inputs/switch" },
+      { title: "Text Field", href: "/components/inputs/text-field" },
+      { title: "Text Area", href: "/components/inputs/text-area" },
+      { title: "Select", href: "/components/inputs/select" },
+    ],
+  },
+  {
+    title: "Feedback",
+    children: [
+      { title: "Toast", href: "/components/feedback/toast" },
+      { title: "Alert", href: "/components/feedback/alert" },
+      { title: "Snackbar", href: "/components/feedback/snackbar" },
+    ],
+  },
+  {
+    title: "Presentation",
+    children: [
+      { title: "Modal", href: "/components/presentation/modal" },
+      { title: "Bottom Sheet", href: "/components/presentation/bottom-sheet" },
+      { title: "Tooltip", href: "/components/presentation/tooltip" },
+      { title: "Popover", href: "/components/presentation/popover" },
+    ],
+  },
+  {
+    title: "Contents",
+    children: [
+      { title: "Avatar", href: "/components/contents/avatar" },
+      { title: "Badge", href: "/components/contents/badge" },
+      { title: "Card", href: "/components/contents/card" },
+      { title: "Accordion", href: "/components/contents/accordion" },
+    ],
+  },
+  {
+    title: "Navigation",
+    children: [
+      { title: "Tab", href: "/components/navigation/tab" },
+      { title: "Bottom Navigation", href: "/components/navigation/bottom-navigation" },
+      { title: "Pagination", href: "/components/navigation/pagination" },
+    ],
+  },
+  {
+    title: "Loading",
+    children: [
+      { title: "Skeleton", href: "/components/loading/skeleton" },
+      { title: "Spinner", href: "/components/loading/spinner" },
+    ],
+  },
 ];
 
 interface MobileMenuProps {
