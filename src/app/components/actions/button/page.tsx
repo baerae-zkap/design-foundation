@@ -1113,20 +1113,33 @@ function WebContent() {
       </Section>
 
       <Section title="API Reference">
-        <PropsTable
-          props={[
-            { name: "children", type: "ReactNode", required: false, description: "버튼 텍스트 (plain 타입용)" },
-            { name: "buttonType", type: '"filled" | "outlined" | "plain"', required: false, defaultVal: '"filled"', description: "버튼 스타일" },
-            { name: "color", type: '"brandDefault" | "brandSecondary" | "baseContainer" | "successDefault" | "errorDefault" | "kakaoDefault" | "googleDefault"', required: false, defaultVal: '"brandDefault"', description: "색상 테마" },
-            { name: "size", type: '"small" | "medium" | "large" | "xLarge"', required: false, defaultVal: '"medium"', description: "버튼 크기" },
-            { name: "layout", type: '"hug" | "fillWidth" | "fill"', required: false, defaultVal: '"hug"', description: "레이아웃 모드" },
-            { name: "disabled", type: "boolean", required: false, defaultVal: "false", description: "비활성화 상태" },
-            { name: "isLoading", type: "boolean", required: false, defaultVal: "false", description: "로딩 상태" },
-            { name: "leftContent", type: "ReactNode", required: false, description: "좌측 콘텐츠 (Grid 모드)" },
-            { name: "centerContent", type: "ReactNode", required: false, description: "중앙 콘텐츠 (Grid 모드)" },
-            { name: "rightContent", type: "ReactNode", required: false, description: "우측 콘텐츠 (Grid 모드)" },
-          ]}
-        />
+        <Subsection title="Common Props">
+          <PropsTable
+            props={[
+              { name: "children", type: "ReactNode", required: false, description: "버튼 텍스트 (plain 타입용)" },
+              { name: "buttonType", type: '"filled" | "outlined" | "plain"', required: false, defaultVal: '"filled"', description: "버튼 스타일" },
+              { name: "color", type: '"brandDefault" | "brandSecondary" | "baseContainer" | "successDefault" | "errorDefault" | "kakaoDefault" | "googleDefault"', required: false, defaultVal: '"brandDefault"', description: "색상 테마" },
+              { name: "size", type: '"small" | "medium" | "large" | "xLarge"', required: false, defaultVal: '"medium"', description: "버튼 크기" },
+              { name: "layout", type: '"hug" | "fillWidth" | "fill"', required: false, defaultVal: '"hug"', description: "레이아웃 모드" },
+              { name: "disabled", type: "boolean", required: false, defaultVal: "false", description: "비활성화 상태" },
+              { name: "isLoading", type: "boolean", required: false, defaultVal: "false", description: "로딩 상태" },
+              { name: "leftContent", type: "ReactNode", required: false, description: "좌측 콘텐츠 (Grid 모드)" },
+              { name: "centerContent", type: "ReactNode", required: false, description: "중앙 콘텐츠 (Grid 모드)" },
+              { name: "rightContent", type: "ReactNode", required: false, description: "우측 콘텐츠 (Grid 모드)" },
+            ]}
+          />
+        </Subsection>
+        <Subsection title="Web-specific Props">
+          <PropsTable
+            props={[
+              { name: "onClick", type: "() => void", required: false, description: "클릭 핸들러" },
+              { name: "type", type: '"button" | "submit" | "reset"', required: false, defaultVal: '"button"', description: "HTML button type" },
+              { name: "aria-label", type: "string", required: false, description: "스크린 리더용 레이블 (icon-only 필수)" },
+              { name: "aria-busy", type: "boolean", required: false, description: "로딩 상태 접근성 전달" },
+              { name: "aria-disabled", type: "boolean", required: false, description: "비활성화 상태 접근성 전달" },
+            ]}
+          />
+        </Subsection>
       </Section>
     </>
   );
@@ -1346,21 +1359,36 @@ function RNContent() {
       </Section>
 
       <Section title="API Reference">
-        <PropsTable
-          props={[
-            { name: "children", type: "ReactNode", required: false, description: "버튼 텍스트 (plain 타입용)" },
-            { name: "buttonType", type: '"filled" | "outlined" | "plain"', required: false, defaultVal: '"filled"', description: "버튼 스타일" },
-            { name: "color", type: '"brandDefault" | "brandSecondary" | "baseContainer" | "successDefault" | "errorDefault" | "kakaoDefault" | "googleDefault"', required: false, defaultVal: '"brandDefault"', description: "색상 테마" },
-            { name: "size", type: '"small" | "medium" | "large" | "xLarge"', required: false, defaultVal: '"medium"', description: "버튼 크기" },
-            { name: "layout", type: '"hug" | "fillWidth" | "fill"', required: false, defaultVal: '"hug"', description: "레이아웃 모드" },
-            { name: "disabled", type: "boolean", required: false, defaultVal: "false", description: "비활성화 상태" },
-            { name: "isLoading", type: "boolean", required: false, defaultVal: "false", description: "로딩 상태" },
-            { name: "leftContent", type: "ReactNode", required: false, description: "좌측 콘텐츠 (Grid 모드)" },
-            { name: "centerContent", type: "ReactNode", required: false, description: "중앙 콘텐츠 (Grid 모드)" },
-            { name: "rightContent", type: "ReactNode", required: false, description: "우측 콘텐츠 (Grid 모드)" },
-            { name: "onPress", type: "() => void", required: false, description: "탭 핸들러" },
-          ]}
-        />
+        <Subsection title="Common Props">
+          <PropsTable
+            props={[
+              { name: "children", type: "ReactNode", required: false, description: "버튼 텍스트 (plain 타입용)" },
+              { name: "buttonType", type: '"filled" | "outlined" | "plain"', required: false, defaultVal: '"filled"', description: "버튼 스타일" },
+              { name: "color", type: '"brandDefault" | "brandSecondary" | "baseContainer" | "successDefault" | "errorDefault" | "kakaoDefault" | "googleDefault"', required: false, defaultVal: '"brandDefault"', description: "색상 테마" },
+              { name: "size", type: '"small" | "medium" | "large" | "xLarge"', required: false, defaultVal: '"medium"', description: "버튼 크기" },
+              { name: "layout", type: '"hug" | "fillWidth" | "fill"', required: false, defaultVal: '"hug"', description: "레이아웃 모드" },
+              { name: "disabled", type: "boolean", required: false, defaultVal: "false", description: "비활성화 상태" },
+              { name: "isLoading", type: "boolean", required: false, defaultVal: "false", description: "로딩 상태" },
+              { name: "leftContent", type: "ReactNode", required: false, description: "좌측 콘텐츠 (Grid 모드)" },
+              { name: "centerContent", type: "ReactNode", required: false, description: "중앙 콘텐츠 (Grid 모드)" },
+              { name: "rightContent", type: "ReactNode", required: false, description: "우측 콘텐츠 (Grid 모드)" },
+            ]}
+          />
+        </Subsection>
+        <Subsection title="React Native-specific Props">
+          <PropsTable
+            props={[
+              { name: "onPress", type: "(event: GestureResponderEvent) => void", required: false, description: "탭 핸들러" },
+              { name: "onPressIn", type: "(event: GestureResponderEvent) => void", required: false, description: "터치 시작 핸들러" },
+              { name: "onPressOut", type: "(event: GestureResponderEvent) => void", required: false, description: "터치 종료 핸들러" },
+              { name: "onLongPress", type: "(event: GestureResponderEvent) => void", required: false, description: "길게 누르기 핸들러" },
+              { name: "accessibilityLabel", type: "string", required: false, description: "스크린 리더용 레이블 (icon-only 필수)" },
+              { name: "accessibilityHint", type: "string", required: false, description: "동작 힌트 설명" },
+              { name: "accessibilityState", type: "AccessibilityState", required: false, description: "접근성 상태 (disabled, busy 등)" },
+              { name: "hitSlop", type: "Insets", required: false, description: "터치 영역 확장" },
+            ]}
+          />
+        </Subsection>
       </Section>
     </>
   );
@@ -1661,7 +1689,20 @@ function ButtonDemo({
         border: c.border,
       };
     } else {
-      return { bg: "transparent", text: c.text === "white" ? "#2563eb" : c.text, border: "transparent" };
+      // plain 버튼은 각 color에 맞는 텍스트 색상 사용
+      const getPlainText = () => {
+        switch (color) {
+          case "brandDefault": return "#2563eb";
+          case "brandSecondary": return "#2563eb";
+          case "baseContainer": return "#334155";
+          case "successDefault": return "#16a34a";
+          case "errorDefault": return "#dc2626";
+          case "kakaoDefault": return "#191919";
+          case "googleDefault": return "#334155";
+          default: return "#2563eb";
+        }
+      };
+      return { bg: "transparent", text: getPlainText(), border: "transparent" };
     }
   };
 
