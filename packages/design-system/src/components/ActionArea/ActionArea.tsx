@@ -59,6 +59,50 @@ export interface ActionAreaButtonProps extends Omit<HTMLAttributes<HTMLButtonEle
 }
 
 // ============================================
+// Color Utilities
+// ============================================
+
+/**
+ * Convert a color to its transparent version (alpha = 0)
+ * This prevents the "transparent black" issue in gradients
+ * where 'transparent' is interpreted as rgba(0,0,0,0)
+ */
+function toTransparent(color: string): string {
+  // Handle common color names
+  if (color === 'white' || color === '#fff' || color === '#ffffff') {
+    return 'rgba(255,255,255,0)';
+  }
+  if (color === 'black' || color === '#000' || color === '#000000') {
+    return 'rgba(0,0,0,0)';
+  }
+  // Handle hex colors
+  if (color.startsWith('#')) {
+    const hex = color.slice(1);
+    let r, g, b;
+    if (hex.length === 3) {
+      r = parseInt(hex[0] + hex[0], 16);
+      g = parseInt(hex[1] + hex[1], 16);
+      b = parseInt(hex[2] + hex[2], 16);
+    } else {
+      r = parseInt(hex.slice(0, 2), 16);
+      g = parseInt(hex.slice(2, 4), 16);
+      b = parseInt(hex.slice(4, 6), 16);
+    }
+    return `rgba(${r},${g},${b},0)`;
+  }
+  // Handle rgb/rgba
+  if (color.startsWith('rgb')) {
+    const match = color.match(/\d+/g);
+    if (match) {
+      const [r, g, b] = match;
+      return `rgba(${r},${g},${b},0)`;
+    }
+  }
+  // Fallback to transparent white
+  return 'rgba(255,255,255,0)';
+}
+
+// ============================================
 // Spacing Tokens (from Foundation)
 // ============================================
 
@@ -134,7 +178,7 @@ export const ActionArea = forwardRef<HTMLDivElement, ActionAreaProps>(
       variant = 'strong',
       position = 'static',
       showGradient = true,
-      gradientHeight = 24,
+      gradientHeight = 80,
       caption,
       useSafeArea = true,
       backgroundColor = 'white',
@@ -180,7 +224,7 @@ export const ActionArea = forwardRef<HTMLDivElement, ActionAreaProps>(
               left: 0,
               right: 0,
               height: gradientHeight,
-              background: `linear-gradient(to bottom, transparent 0%, ${backgroundColor} 100%)`,
+              background: `linear-gradient(to bottom, ${toTransparent(backgroundColor)} 0%, ${backgroundColor} 100%)`,
               pointerEvents: 'none',
             }}
           />

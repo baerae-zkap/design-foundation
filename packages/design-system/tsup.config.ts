@@ -17,7 +17,12 @@ export default defineConfig([
     format: ['cjs', 'esm'],
     dts: true,
     sourcemap: true,
-    external: ['react', 'react-native'],
+    external: [
+      'react',
+      'react-native',
+      'react-native-safe-area-context',
+      'react-native-linear-gradient',
+    ],
     outDir: 'dist/native',
   },
 ]);
