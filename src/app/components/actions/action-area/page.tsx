@@ -47,32 +47,48 @@ function ActionAreaPlayground() {
   const generateCode = () => {
     const eventHandler = codeType === "rn" ? "onPress={() => {}}" : "onClick={() => {}}";
     const size = variant === "compact" ? "medium" : "xLarge";
+    const isCompact = variant === "compact";
 
-    // Determine flex direction based on variant
-    const isVertical = variant === "strong" || variant === "cancel";
-    const flexDirection = isVertical ? "column" : "row";
-    const justifyContent = variant === "compact" ? ", justifyContent: 'flex-end'" : "";
-    const alignItems = combination === "sub" && isVertical ? ", alignItems: 'center'" : "";
-
-    // Main button - Cancel variant uses error color
-    const mainColor = variant === "cancel" ? "errorDefault" : "brandDefault";
-    const mainLabel = variant === "cancel" ? "삭제" : "Main action";
-    const mainButton = `  <Button
-    buttonType="filled"
-    color="${mainColor}"
+    // Cancel variant: single outlined cancel button
+    if (variant === "cancel") {
+      return `{/* Cancel variant: single dismiss button */}
+<View style={{ flexDirection: 'column', gap: 12, padding: 20 }}>
+  <Button
+    buttonType="outlined"
+    color="baseContainer"
     size="${size}"
     layout="fillWidth"
     ${eventHandler}
   >
-    ${mainLabel}
+    Cancel
+  </Button>
+</View>`;
+    }
+
+    // Determine flex direction based on variant
+    const isVertical = variant === "strong";
+    const flexDirection = isVertical ? "column" : "row";
+    const justifyContent = isCompact ? ", justifyContent: 'flex-end'" : "";
+    const alignItems = combination === "sub" && isVertical ? ", alignItems: 'center'" : "";
+
+    // Layout prop - compact uses hug, others use fillWidth
+    const layoutProp = isCompact ? "" : `\n    layout="fillWidth"`;
+
+    // Main button
+    const mainButton = `  <Button
+    buttonType="filled"
+    color="brandDefault"
+    size="${size}"${layoutProp}
+    ${eventHandler}
+  >
+    Main action
   </Button>`;
 
     // Alternative button
     const altButton = `  <Button
     buttonType="outlined"
     color="baseContainer"
-    size="${size}"
-    layout="fillWidth"
+    size="${size}"${layoutProp}
     ${eventHandler}
   >
     Alternative
@@ -122,8 +138,10 @@ ${buttons}
 </View>`;
   };
 
-  const isVertical = variant === "strong" || variant === "cancel";
+  const isVertical = variant === "strong";
   const buttonSize = variant === "compact" ? "small" : "xLarge";
+  // Cancel variant only shows single cancel button
+  const effectiveCombination = variant === "cancel" ? "main" : combination;
 
   return (
     <div style={{ marginBottom: 32 }}>
@@ -150,44 +168,50 @@ ${buttons}
           >
             <div style={{ width: "100%", maxWidth: 340 }}>
               <ActionAreaDemo variant={variant}>
-                {/* Sub action (left/top position for neutral/compact) */}
-                {combination === "sub" && !isVertical && (
-                  subButtonOption === "icon" ? (
-                    <IconButtonDemo size={buttonSize} />
-                  ) : (
-                    <ActionAreaButtonDemo variant="sub" size={buttonSize}>
-                      Sub action
-                    </ActionAreaButtonDemo>
-                  )
-                )}
-                {/* Alternative (left position for neutral/compact) */}
-                {combination === "alternative" && !isVertical && (
-                  <ActionAreaButtonDemo variant="alternative" size={buttonSize}>
-                    Alternative
+                {/* Cancel variant: single cancel button only */}
+                {variant === "cancel" ? (
+                  <ActionAreaButtonDemo variant="cancel" size={buttonSize}>
+                    Cancel
                   </ActionAreaButtonDemo>
-                )}
-                {/* Main button */}
-                <ActionAreaButtonDemo
-                  variant={variant === "cancel" ? "cancel" : "main"}
-                  size={buttonSize}
-                >
-                  {variant === "cancel" ? "삭제" : "Main action"}
-                </ActionAreaButtonDemo>
-                {/* Alternative (bottom position for strong/cancel) */}
-                {combination === "alternative" && isVertical && (
-                  <ActionAreaButtonDemo variant="alternative" size={buttonSize}>
-                    Alternative
-                  </ActionAreaButtonDemo>
-                )}
-                {/* Sub action (bottom position for strong/cancel) */}
-                {combination === "sub" && isVertical && (
-                  subButtonOption === "icon" ? (
-                    <IconButtonDemo size={buttonSize} />
-                  ) : (
-                    <ActionAreaButtonDemo variant="sub" size={buttonSize}>
-                      Sub action
+                ) : (
+                  <>
+                    {/* Sub action (left/top position for neutral/compact) */}
+                    {effectiveCombination === "sub" && !isVertical && (
+                      subButtonOption === "icon" ? (
+                        <IconButtonDemo size={buttonSize} />
+                      ) : (
+                        <ActionAreaButtonDemo variant="sub" size={buttonSize} compact={variant === "compact"}>
+                          Sub action
+                        </ActionAreaButtonDemo>
+                      )
+                    )}
+                    {/* Alternative (left position for neutral/compact) */}
+                    {effectiveCombination === "alternative" && !isVertical && (
+                      <ActionAreaButtonDemo variant="alternative" size={buttonSize} compact={variant === "compact"}>
+                        Alternative
+                      </ActionAreaButtonDemo>
+                    )}
+                    {/* Main button */}
+                    <ActionAreaButtonDemo variant="main" size={buttonSize} compact={variant === "compact"}>
+                      Main action
                     </ActionAreaButtonDemo>
-                  )
+                    {/* Alternative (bottom position for strong) */}
+                    {effectiveCombination === "alternative" && isVertical && (
+                      <ActionAreaButtonDemo variant="alternative" size={buttonSize}>
+                        Alternative
+                      </ActionAreaButtonDemo>
+                    )}
+                    {/* Sub action (bottom position for strong) */}
+                    {effectiveCombination === "sub" && isVertical && (
+                      subButtonOption === "icon" ? (
+                        <IconButtonDemo size={buttonSize} />
+                      ) : (
+                        <ActionAreaButtonDemo variant="sub" size={buttonSize}>
+                          Sub action
+                        </ActionAreaButtonDemo>
+                      )
+                    )}
+                  </>
                 )}
               </ActionAreaDemo>
             </div>
@@ -1613,7 +1637,7 @@ interface ActionAreaButtonDemoProps {
   children: React.ReactNode;
 }
 
-function ActionAreaButtonDemo({ variant, size, children }: ActionAreaButtonDemoProps) {
+function ActionAreaButtonDemo({ variant, size, children, compact = false }: ActionAreaButtonDemoProps & { compact?: boolean }) {
   const [isPressed, setIsPressed] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -1625,9 +1649,12 @@ function ActionAreaButtonDemo({ variant, size, children }: ActionAreaButtonDemoP
     const height = sizeHeights[size];
     const fontSize = size === "xLarge" ? 15 : 14;
 
+    // In compact mode, buttons should hug content, not fill width
+    const shouldFill = !compact && variant !== "sub";
+
     const baseStyles = {
       height,
-      padding: "10px 16px",
+      padding: variant === "sub" ? "10px 12px" : "10px 20px",
       fontSize,
       fontWeight: 600,
       borderRadius: 8,
@@ -1637,8 +1664,9 @@ function ActionAreaButtonDemo({ variant, size, children }: ActionAreaButtonDemoP
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      width: variant === "sub" ? "auto" : "100%",
-      flex: variant === "sub" ? "0 0 auto" : 1,
+      width: shouldFill ? "100%" : "auto",
+      flex: shouldFill ? 1 : "0 0 auto",
+      whiteSpace: "nowrap" as const,
     };
 
     switch (variant) {
@@ -1651,12 +1679,14 @@ function ActionAreaButtonDemo({ variant, size, children }: ActionAreaButtonDemoP
           border: "none",
         };
       case "cancel":
-        // Button: buttonType="filled" color="errorDefault"
+        // Button: buttonType="outlined" - Cancel is a dismiss action, outlined style
         return {
           ...baseStyles,
-          backgroundColor: isPressed ? "#b91c1c" : isHovered ? "#dc2626" : "#ef4444",
-          color: "white",
-          border: "none",
+          backgroundColor: isPressed ? "#f1f5f9" : isHovered ? "#f8fafc" : "white",
+          color: "#334155",
+          border: "1px solid #cbd5e1",
+          width: "100%",
+          flex: 1,
         };
       case "alternative":
         // Button: buttonType="outlined" color="baseContainer"
@@ -1667,10 +1697,10 @@ function ActionAreaButtonDemo({ variant, size, children }: ActionAreaButtonDemoP
           border: "1px solid #cbd5e1",
         };
       case "sub":
-        // TextButton: color="brandDefault"
+        // TextButton: color="brandDefault" - plain text, no border
         return {
           ...baseStyles,
-          backgroundColor: "transparent",
+          backgroundColor: isPressed ? "rgba(37, 99, 235, 0.08)" : isHovered ? "rgba(37, 99, 235, 0.04)" : "transparent",
           color: isPressed ? "#1e40af" : isHovered ? "#1d4ed8" : "#2563eb",
           border: "none",
         };
