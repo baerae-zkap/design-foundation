@@ -104,7 +104,7 @@ export default function PalettePage() {
   };
 
   return (
-    <div>
+    <div style={{ maxWidth: 720 }}>
       <Breadcrumb items={[{ label: "파운데이션", href: "/" }, { label: "Palette" }]} />
 
       <h1 className="text-3xl font-bold mb-2" style={{ color: 'var(--content-base-strong)' }}>Palette</h1>

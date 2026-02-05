@@ -136,7 +136,7 @@ ${captionCode}${buttons}
               backgroundColor: "#fafbfc",
             }}
           >
-            <div style={{ width: 320 }}>
+            <div style={{ width: "100%", maxWidth: 320 }}>
               <ActionAreaDemo
                 variant={variant}
                 extra={hasExtra}
@@ -514,7 +514,7 @@ function DesignContent() {
             가장 강조되는 레이아웃으로, 사용자의 주요 결정을 유도할 때 적합합니다.
           </p>
           <PreviewBox>
-            <div style={{ width: 320, display: "flex", flexDirection: "column", gap: 16 }}>
+            <div style={{ width: "100%", maxWidth: 320, display: "flex", flexDirection: "column", gap: 16 }}>
               <ActionAreaDemo variant="strong">
                 <ActionAreaButtonDemo variant="main" size="xLarge">Main</ActionAreaButtonDemo>
                 <ActionAreaButtonDemo variant="alternative" size="xLarge">Alternative</ActionAreaButtonDemo>
@@ -533,7 +533,7 @@ function DesignContent() {
             <strong style={{ color: "var(--text-primary)" }}>가로 배치, 동일 너비</strong>. 확인/취소 다이얼로그나 두 가지 선택이 균등한 비중을 가질 때 사용합니다.
           </p>
           <PreviewBox>
-            <div style={{ width: 320, display: "flex", flexDirection: "column", gap: 16 }}>
+            <div style={{ width: "100%", maxWidth: 320, display: "flex", flexDirection: "column", gap: 16 }}>
               <ActionAreaDemo variant="neutral">
                 <ActionAreaButtonDemo variant="alternative" size="xLarge">Alternative</ActionAreaButtonDemo>
                 <ActionAreaButtonDemo variant="main" size="xLarge">Main</ActionAreaButtonDemo>
@@ -553,7 +553,7 @@ function DesignContent() {
             컨텐츠와 함께 배치되어 공간을 절약합니다.
           </p>
           <PreviewBox>
-            <div style={{ width: 320, display: "flex", flexDirection: "column", gap: 16 }}>
+            <div style={{ width: "100%", maxWidth: 320, display: "flex", flexDirection: "column", gap: 16 }}>
               <ActionAreaDemo variant="compact">
                 <ActionAreaButtonDemo variant="alternative" size="small">Alternative</ActionAreaButtonDemo>
                 <ActionAreaButtonDemo variant="main" size="small">Main</ActionAreaButtonDemo>
@@ -573,7 +573,7 @@ function DesignContent() {
             추가 선택이 필요 없는 단순한 확인 동작에 적합합니다.
           </p>
           <PreviewBox>
-            <div style={{ width: 320 }}>
+            <div style={{ width: "100%", maxWidth: 320 }}>
               <ActionAreaDemo variant="cancel">
                 <ActionAreaButtonDemo variant="main" size="xLarge">확인</ActionAreaButtonDemo>
               </ActionAreaDemo>
@@ -589,7 +589,7 @@ function DesignContent() {
           체크박스나 추가 정보 입력이 필요한 경우에 활용합니다.
         </p>
         <PreviewBox>
-          <div style={{ width: 320 }}>
+          <div style={{ width: "100%", maxWidth: 320 }}>
             <ActionAreaDemo variant="strong" extra>
               <ActionAreaButtonDemo variant="main" size="xLarge">Main</ActionAreaButtonDemo>
             </ActionAreaDemo>
@@ -599,7 +599,7 @@ function DesignContent() {
           <InlineCode>extraContent</InlineCode> prop을 통해 상단에 커스텀 콘텐츠를 배치할 수 있습니다.
         </p>
         <PreviewBox>
-          <div style={{ width: 320 }}>
+          <div style={{ width: "100%", maxWidth: 320 }}>
             <ActionAreaWithExtra />
           </div>
         </PreviewBox>
@@ -612,7 +612,7 @@ function DesignContent() {
           사용자에게 액션의 결과를 명확히 전달하거나 추가 안내가 필요할 때 사용합니다.
         </p>
         <PreviewBox>
-          <div style={{ width: 320 }}>
+          <div style={{ width: "100%", maxWidth: 320 }}>
             <ActionAreaDemo variant="strong" caption="변경 사항을 저장하시겠습니까?">
               <ActionAreaButtonDemo variant="main" size="xLarge">저장</ActionAreaButtonDemo>
               <ActionAreaButtonDemo variant="alternative" size="xLarge">취소</ActionAreaButtonDemo>
@@ -700,7 +700,7 @@ function DesignContent() {
             기본 상태입니다. 사용자가 상호작용할 수 있습니다.
           </p>
           <PreviewBox>
-            <div style={{ width: 320 }}>
+            <div style={{ width: "100%", maxWidth: 320 }}>
               <ActionAreaDemo variant="strong">
                 <ActionAreaButtonDemo variant="main" size="xLarge">확인</ActionAreaButtonDemo>
                 <ActionAreaButtonDemo variant="alternative" size="xLarge">취소</ActionAreaButtonDemo>
@@ -714,7 +714,7 @@ function DesignContent() {
             버튼을 누르고 있을 때의 상태입니다. 시각적 피드백으로 scale과 색상 변화가 적용됩니다.
           </p>
           <PreviewBox>
-            <div style={{ width: 320 }}>
+            <div style={{ width: "100%", maxWidth: 320 }}>
               <ActionAreaDemo variant="strong">
                 <StateButtonDemo state="pressed" variant="main">확인 (Pressed)</StateButtonDemo>
                 <StateButtonDemo state="pressed" variant="alternative">취소 (Pressed)</StateButtonDemo>
@@ -729,7 +729,7 @@ function DesignContent() {
             필수 조건이 충족되지 않았을 때 사용합니다.
           </p>
           <PreviewBox>
-            <div style={{ width: 320 }}>
+            <div style={{ width: "100%", maxWidth: 320 }}>
               <ActionAreaDemo variant="strong">
                 <StateButtonDemo state="disabled" variant="main">확인 (Disabled)</StateButtonDemo>
                 <StateButtonDemo state="disabled" variant="alternative">취소 (Disabled)</StateButtonDemo>
@@ -743,7 +743,7 @@ function DesignContent() {
             로딩 상태입니다. 비동기 작업이 진행 중일 때 표시되며, 추가 상호작용이 방지됩니다.
           </p>
           <PreviewBox>
-            <div style={{ width: 320 }}>
+            <div style={{ width: "100%", maxWidth: 320 }}>
               <ActionAreaDemo variant="strong">
                 <StateButtonDemo state="loading" variant="main">처리 중...</StateButtonDemo>
                 <StateButtonDemo state="disabled" variant="alternative">취소</StateButtonDemo>
@@ -852,7 +852,7 @@ function WebContent() {
           세로 배치, Main 버튼이 위에 위치합니다.
         </p>
         <PreviewBox>
-          <div style={{ width: 320, display: "flex", flexDirection: "column", gap: 16 }}>
+          <div style={{ width: "100%", maxWidth: 320, display: "flex", flexDirection: "column", gap: 16 }}>
             <ActionAreaDemo variant="strong">
               <ActionAreaButtonDemo variant="main" size="xLarge">Main</ActionAreaButtonDemo>
               <ActionAreaButtonDemo variant="alternative" size="xLarge">Alternative</ActionAreaButtonDemo>
@@ -886,7 +886,7 @@ function WebContent() {
           가로 배치, 동일 너비로 Main 버튼이 오른쪽에 위치합니다.
         </p>
         <PreviewBox>
-          <div style={{ width: 320 }}>
+          <div style={{ width: "100%", maxWidth: 320 }}>
             <ActionAreaDemo variant="neutral">
               <ActionAreaButtonDemo variant="alternative" size="xLarge">Alternative</ActionAreaButtonDemo>
               <ActionAreaButtonDemo variant="main" size="xLarge">Main</ActionAreaButtonDemo>
@@ -920,7 +920,7 @@ function WebContent() {
           가로 배치, 우측 정렬, 작은 버튼 사이즈입니다.
         </p>
         <PreviewBox>
-          <div style={{ width: 320 }}>
+          <div style={{ width: "100%", maxWidth: 320 }}>
             <ActionAreaDemo variant="compact">
               <ActionAreaButtonDemo variant="sub" size="small">Sub</ActionAreaButtonDemo>
               <ActionAreaButtonDemo variant="main" size="small">Main</ActionAreaButtonDemo>
@@ -950,7 +950,7 @@ function WebContent() {
           단일 버튼으로 확인/닫기 동작에 사용합니다.
         </p>
         <PreviewBox>
-          <div style={{ width: 320 }}>
+          <div style={{ width: "100%", maxWidth: 320 }}>
             <ActionAreaDemo variant="cancel">
               <ActionAreaButtonDemo variant="main" size="xLarge">확인</ActionAreaButtonDemo>
             </ActionAreaDemo>
@@ -974,7 +974,7 @@ function WebContent() {
           버튼 상단에 안내 텍스트를 추가합니다.
         </p>
         <PreviewBox>
-          <div style={{ width: 320 }}>
+          <div style={{ width: "100%", maxWidth: 320 }}>
             <ActionAreaDemo variant="strong" caption="변경 사항을 저장하시겠습니까?">
               <ActionAreaButtonDemo variant="main" size="xLarge">저장</ActionAreaButtonDemo>
               <ActionAreaButtonDemo variant="alternative" size="xLarge">취소</ActionAreaButtonDemo>
@@ -1011,7 +1011,7 @@ function WebContent() {
           주요 액션과 보조 링크를 함께 제공합니다.
         </p>
         <PreviewBox>
-          <div style={{ width: 320 }}>
+          <div style={{ width: "100%", maxWidth: 320 }}>
             <ActionAreaDemo variant="strong">
               <ActionAreaButtonDemo variant="main" size="xLarge">로그인</ActionAreaButtonDemo>
               <ActionAreaButtonDemo variant="sub" size="xLarge">회원가입</ActionAreaButtonDemo>
@@ -1114,7 +1114,7 @@ import { View, Text } from 'react-native';`} />
           세로 배치, Main 버튼이 위에 위치합니다.
         </p>
         <PreviewBox>
-          <div style={{ width: 320, display: "flex", flexDirection: "column", gap: 16 }}>
+          <div style={{ width: "100%", maxWidth: 320, display: "flex", flexDirection: "column", gap: 16 }}>
             <ActionAreaDemo variant="strong">
               <ActionAreaButtonDemo variant="main" size="xLarge">Main</ActionAreaButtonDemo>
               <ActionAreaButtonDemo variant="alternative" size="xLarge">Alternative</ActionAreaButtonDemo>
@@ -1148,7 +1148,7 @@ import { View, Text } from 'react-native';`} />
           가로 배치, 동일 너비로 Main 버튼이 오른쪽에 위치합니다.
         </p>
         <PreviewBox>
-          <div style={{ width: 320 }}>
+          <div style={{ width: "100%", maxWidth: 320 }}>
             <ActionAreaDemo variant="neutral">
               <ActionAreaButtonDemo variant="alternative" size="xLarge">Alternative</ActionAreaButtonDemo>
               <ActionAreaButtonDemo variant="main" size="xLarge">Main</ActionAreaButtonDemo>
@@ -1182,7 +1182,7 @@ import { View, Text } from 'react-native';`} />
           가로 배치, 우측 정렬, 작은 버튼 사이즈입니다.
         </p>
         <PreviewBox>
-          <div style={{ width: 320 }}>
+          <div style={{ width: "100%", maxWidth: 320 }}>
             <ActionAreaDemo variant="compact">
               <ActionAreaButtonDemo variant="sub" size="small">Sub</ActionAreaButtonDemo>
               <ActionAreaButtonDemo variant="main" size="small">Main</ActionAreaButtonDemo>
@@ -1212,7 +1212,7 @@ import { View, Text } from 'react-native';`} />
           단일 버튼으로 확인/닫기 동작에 사용합니다.
         </p>
         <PreviewBox>
-          <div style={{ width: 320 }}>
+          <div style={{ width: "100%", maxWidth: 320 }}>
             <ActionAreaDemo variant="cancel">
               <ActionAreaButtonDemo variant="main" size="xLarge">확인</ActionAreaButtonDemo>
             </ActionAreaDemo>
@@ -1236,7 +1236,7 @@ import { View, Text } from 'react-native';`} />
           버튼 상단에 안내 텍스트를 추가합니다.
         </p>
         <PreviewBox>
-          <div style={{ width: 320 }}>
+          <div style={{ width: "100%", maxWidth: 320 }}>
             <ActionAreaDemo variant="strong" caption="변경 사항을 저장하시겠습니까?">
               <ActionAreaButtonDemo variant="main" size="xLarge">저장</ActionAreaButtonDemo>
               <ActionAreaButtonDemo variant="alternative" size="xLarge">취소</ActionAreaButtonDemo>
@@ -1273,7 +1273,7 @@ import { View, Text } from 'react-native';`} />
           주요 액션과 보조 링크를 함께 제공합니다.
         </p>
         <PreviewBox>
-          <div style={{ width: 320 }}>
+          <div style={{ width: "100%", maxWidth: 320 }}>
             <ActionAreaDemo variant="strong">
               <ActionAreaButtonDemo variant="main" size="xLarge">로그인</ActionAreaButtonDemo>
               <ActionAreaButtonDemo variant="sub" size="xLarge">회원가입</ActionAreaButtonDemo>

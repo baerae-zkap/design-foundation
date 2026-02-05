@@ -62,7 +62,7 @@ export default function InputPage() {
   const emailError = emailValue && !emailValue.includes("@") ? "올바른 이메일 형식이 아닙니다." : "";
 
   return (
-    <div>
+    <div style={{ maxWidth: 720 }}>
       <Breadcrumb items={[{ label: "컴포넌트", href: "/" }, { label: "Input" }]} />
 
       <h1 className="text-3xl font-bold mb-2" style={{ color: "var(--text-primary)" }}>Input</h1>

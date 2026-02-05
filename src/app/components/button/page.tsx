@@ -154,7 +154,7 @@ export default function ButtonPage() {
   };
 
   return (
-    <div>
+    <div style={{ maxWidth: 720 }}>
       <style>{`
         @keyframes spin {
           from { transform: rotate(0deg); }

@@ -549,7 +549,7 @@ function DesignContent() {
             소셜 로그인 버튼을 위한 전용 색상입니다.
           </p>
           <PreviewBox>
-            <div style={{ display: "flex", gap: 12, flexDirection: "column", width: 280 }}>
+            <div style={{ display: "flex", gap: 12, flexDirection: "column", width: "100%", maxWidth: 280 }}>
               <ButtonDemo buttonType="filled" color="kakaoDefault" layout="fillWidth">
                 <KakaoIcon />
                 카카오로 시작하기
@@ -662,7 +662,7 @@ function DesignContent() {
         </div>
 
         <PreviewBox>
-          <div style={{ width: 300, display: "flex", flexDirection: "column", gap: 12 }}>
+          <div style={{ width: "100%", maxWidth: 300, display: "flex", flexDirection: "column", gap: 12 }}>
             <div>
               <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginBottom: 8 }}>hug (default)</p>
               <ButtonDemo buttonType="filled" color="brandDefault">Hug Content</ButtonDemo>
@@ -1179,7 +1179,7 @@ function WebContent() {
 
       <Section title="Layout">
         <PreviewBox>
-          <div style={{ width: 280, display: "flex", flexDirection: "column", gap: 12 }}>
+          <div style={{ width: "100%", maxWidth: 280, display: "flex", flexDirection: "column", gap: 12 }}>
             <ButtonDemo buttonType="filled" color="brandDefault" layout="fillWidth">Fill Width</ButtonDemo>
             <ButtonDemo buttonType="filled" color="brandDefault">Hug (default)</ButtonDemo>
           </div>
@@ -1409,7 +1409,7 @@ function RNContent() {
 
       <Section title="Layout">
         <PreviewBox>
-          <div style={{ width: 280, display: "flex", flexDirection: "column", gap: 12 }}>
+          <div style={{ width: "100%", maxWidth: 280, display: "flex", flexDirection: "column", gap: 12 }}>
             <ButtonDemo buttonType="filled" color="brandDefault" layout="fillWidth">Fill Width</ButtonDemo>
             <ButtonDemo buttonType="filled" color="brandDefault">Hug (default)</ButtonDemo>
           </div>

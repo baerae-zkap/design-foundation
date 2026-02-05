@@ -113,7 +113,7 @@ export default function ModalPage() {
   const [formOpen, setFormOpen] = useState(false);
 
   return (
-    <div>
+    <div style={{ maxWidth: 720 }}>
       <Breadcrumb items={[{ label: "컴포넌트", href: "/" }, { label: "Modal" }]} />
 
       <h1 className="text-3xl font-bold mb-2" style={{ color: "var(--text-primary)" }}>Modal</h1>

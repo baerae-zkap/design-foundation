@@ -30,7 +30,7 @@ const foundations = [
 
 export default function Home() {
   return (
-    <div>
+    <div style={{ maxWidth: 720 }}>
       <h1
         className="text-3xl font-bold mb-2"
         style={{ color: 'var(--text-primary)' }}

@@ -71,7 +71,7 @@ export default function CheckboxPage() {
   };
 
   return (
-    <div>
+    <div style={{ maxWidth: 720 }}>
       <Breadcrumb items={[{ label: "컴포넌트", href: "/" }, { label: "Checkbox" }]} />
 
       <h1 className="text-3xl font-bold mb-2" style={{ color: "var(--text-primary)" }}>Checkbox</h1>

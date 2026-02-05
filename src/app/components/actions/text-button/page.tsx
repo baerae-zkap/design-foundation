@@ -741,7 +741,7 @@ function WebContent() {
           Action Area에서 보조 액션으로 사용됩니다. 주요 버튼과 함께 시각적 계층을 형성합니다.
         </p>
         <PreviewBox>
-          <div style={{ width: 320 }}>
+          <div style={{ width: "100%", maxWidth: 320 }}>
             <ActionAreaWithTextButton />
           </div>
         </PreviewBox>
@@ -899,7 +899,7 @@ function RNContent() {
           Action Area에서 보조 액션으로 사용됩니다. 주요 버튼과 함께 시각적 계층을 형성합니다.
         </p>
         <PreviewBox>
-          <div style={{ width: 320 }}>
+          <div style={{ width: "100%", maxWidth: 320 }}>
             <ActionAreaWithTextButton />
           </div>
         </PreviewBox>

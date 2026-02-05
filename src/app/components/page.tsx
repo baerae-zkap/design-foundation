@@ -29,7 +29,7 @@ const componentCategories = [
 
 export default function ComponentsPage() {
   return (
-    <div>
+    <div style={{ maxWidth: 720 }}>
       <h1 style={{
         fontSize: 32,
         fontWeight: 700,

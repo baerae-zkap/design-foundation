@@ -11,7 +11,7 @@ const semantic = interactionJson.interaction.semantic;
 
 export default function InteractionPage() {
   return (
-    <div>
+    <div style={{ maxWidth: 720 }}>
       <Breadcrumb items={[{ label: "파운데이션", href: "/" }, { label: "Interaction" }]} />
 
       <h1 style={{ fontSize: 30, fontWeight: 700, marginBottom: 8, color: 'var(--text-primary)' }}>Interaction</h1>
