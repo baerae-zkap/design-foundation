@@ -43,20 +43,19 @@ function ButtonPlayground() {
   const [buttonType, setButtonType] = useState<ButtonType>("filled");
   const [color, setColor] = useState<ButtonColor>("brandDefault");
   const [size, setSize] = useState<ButtonSize>("medium");
+  const [leadingIcon, setLeadingIcon] = useState(false);
+  const [trailingIcon, setTrailingIcon] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [disabled, setDisabled] = useState(false);
-  const [label, setLabel] = useState("Button");
   const [codeType, setCodeType] = useState<"rn" | "web">("rn");
-
-  const buttonTypes: ButtonType[] = ["filled", "outlined", "plain"];
-  const colors: ButtonColor[] = ["brandDefault", "brandSecondary", "baseContainer", "successDefault", "errorDefault"];
-  const sizes: ButtonSize[] = ["small", "medium", "large", "xLarge"];
 
   const generateCode = () => {
     const props = [];
     if (buttonType !== "filled") props.push(`buttonType="${buttonType}"`);
     if (color !== "brandDefault") props.push(`color="${color}"`);
     if (size !== "medium") props.push(`size="${size}"`);
+    if (leadingIcon) props.push(`leftContent={<Icon name="plus" />}`);
+    if (trailingIcon) props.push(`rightContent={<Icon name="chevron-right" />}`);
     if (isLoading) props.push("isLoading");
     if (disabled) props.push("disabled");
 
@@ -64,128 +63,155 @@ function ButtonPlayground() {
 
     if (codeType === "rn") {
       return `<Button${propsStr.length > 1 ? propsStr : " "}onPress={() => {}}>
-  ${label}
+  Button
 </Button>`;
     } else {
       return `<Button${propsStr.length > 1 ? propsStr : " "}onClick={() => {}}>
-  ${label}
+  Button
 </Button>`;
     }
   };
 
-  return (
-    <div
-      style={{
-        borderRadius: 16,
-        border: "1px solid var(--divider)",
-        overflow: "hidden",
-        marginBottom: 32,
-      }}
-    >
-      {/* Preview Area */}
-      <div
-        style={{
-          padding: 48,
-          backgroundColor: "#fafafa",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          minHeight: 120,
-        }}
-      >
-        <ButtonDemo
-          buttonType={buttonType}
-          color={color}
-          size={size}
-          isLoading={isLoading}
-          disabled={disabled}
-        >
-          {label}
-        </ButtonDemo>
-      </div>
+  const colorLabels: Record<ButtonColor, string> = {
+    brandDefault: "Brand Primary",
+    brandSecondary: "Brand Secondary",
+    baseContainer: "Base",
+    successDefault: "Success",
+    errorDefault: "Error",
+    kakaoDefault: "Kakao",
+    googleDefault: "Google",
+  };
 
-      {/* Controls */}
+  return (
+    <div style={{ marginBottom: 32 }}>
+      {/* Main Playground Card */}
       <div
         style={{
-          padding: 20,
-          backgroundColor: "var(--bg-primary)",
-          borderTop: "1px solid var(--divider)",
-          display: "flex",
-          flexDirection: "column",
-          gap: 16,
+          borderRadius: 20,
+          border: "1px solid #e5e5e5",
+          overflow: "hidden",
+          backgroundColor: "#fafbfc",
         }}
       >
-        {/* Row 1: Type & Color */}
-        <div style={{ display: "flex", gap: 24, flexWrap: "wrap" }}>
-          <ControlGroup label="Type">
-            <SegmentedControl
-              options={buttonTypes.map(t => ({ value: t, label: t.charAt(0).toUpperCase() + t.slice(1) }))}
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 240px" }}>
+          {/* Preview Area */}
+          <div
+            style={{
+              padding: 60,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              minHeight: 280,
+              backgroundColor: "#fafbfc",
+            }}
+          >
+            <ButtonDemo
+              buttonType={buttonType}
+              color={color}
+              size={size}
+              isLoading={isLoading}
+              disabled={disabled}
+              leadingIcon={leadingIcon}
+              trailingIcon={trailingIcon}
+            >
+              Button
+            </ButtonDemo>
+          </div>
+
+          {/* Control Panel */}
+          <div
+            style={{
+              padding: 24,
+              backgroundColor: "white",
+              borderLeft: "1px solid #e5e5e5",
+              display: "flex",
+              flexDirection: "column",
+              gap: 24,
+            }}
+          >
+            {/* Type */}
+            <RadioGroup
+              label="Type"
+              options={[
+                { value: "filled", label: "Filled" },
+                { value: "outlined", label: "Outlined" },
+              ]}
               value={buttonType}
               onChange={(v) => setButtonType(v as ButtonType)}
             />
-          </ControlGroup>
-          <ControlGroup label="Color">
-            <select
-              value={color}
-              onChange={(e) => setColor(e.target.value as ButtonColor)}
-              style={{
-                padding: "6px 12px",
-                fontSize: 13,
-                borderRadius: 6,
-                border: "1px solid var(--divider)",
-                backgroundColor: "var(--bg-primary)",
-                color: "var(--text-primary)",
-                cursor: "pointer",
-              }}
-            >
-              {colors.map(c => (
-                <option key={c} value={c}>{c}</option>
-              ))}
-            </select>
-          </ControlGroup>
-        </div>
 
-        {/* Row 2: Size & States */}
-        <div style={{ display: "flex", gap: 24, flexWrap: "wrap" }}>
-          <ControlGroup label="Size">
-            <SegmentedControl
-              options={sizes.map(s => ({ value: s, label: s.charAt(0).toUpperCase() + s.slice(1) }))}
+            {/* Color */}
+            <RadioGroup
+              label="Color"
+              options={[
+                { value: "brandDefault", label: colorLabels.brandDefault },
+                { value: "brandSecondary", label: colorLabels.brandSecondary },
+                { value: "baseContainer", label: colorLabels.baseContainer },
+                { value: "successDefault", label: colorLabels.successDefault },
+                { value: "errorDefault", label: colorLabels.errorDefault },
+              ]}
+              value={color}
+              onChange={(v) => setColor(v as ButtonColor)}
+            />
+
+            {/* Size */}
+            <RadioGroup
+              label="Size"
+              options={[
+                { value: "small", label: "Small" },
+                { value: "medium", label: "Medium" },
+                { value: "large", label: "Large" },
+                { value: "xLarge", label: "X-Large" },
+              ]}
               value={size}
               onChange={(v) => setSize(v as ButtonSize)}
             />
-          </ControlGroup>
-          <ControlGroup label="States">
-            <div style={{ display: "flex", gap: 12 }}>
-              <ToggleChip active={isLoading} onClick={() => setIsLoading(!isLoading)}>Loading</ToggleChip>
-              <ToggleChip active={disabled} onClick={() => setDisabled(!disabled)}>Disabled</ToggleChip>
-            </div>
-          </ControlGroup>
-        </div>
 
-        {/* Row 3: Label */}
-        <ControlGroup label="Label">
-          <input
-            type="text"
-            value={label}
-            onChange={(e) => setLabel(e.target.value)}
-            style={{
-              padding: "6px 12px",
-              fontSize: 13,
-              borderRadius: 6,
-              border: "1px solid var(--divider)",
-              backgroundColor: "var(--bg-primary)",
-              color: "var(--text-primary)",
-              width: 160,
-            }}
-          />
-        </ControlGroup>
+            {/* Leading icon */}
+            <RadioGroup
+              label="Leading icon"
+              options={[
+                { value: "false", label: "False" },
+                { value: "true", label: "True" },
+              ]}
+              value={leadingIcon ? "true" : "false"}
+              onChange={(v) => setLeadingIcon(v === "true")}
+            />
+
+            {/* Trailing icon */}
+            <RadioGroup
+              label="Trailing icon"
+              options={[
+                { value: "false", label: "False" },
+                { value: "true", label: "True" },
+              ]}
+              value={trailingIcon ? "true" : "false"}
+              onChange={(v) => setTrailingIcon(v === "true")}
+            />
+
+            {/* States */}
+            <RadioGroup
+              label="State"
+              options={[
+                { value: "default", label: "Default" },
+                { value: "loading", label: "Loading" },
+                { value: "disabled", label: "Disabled" },
+              ]}
+              value={isLoading ? "loading" : disabled ? "disabled" : "default"}
+              onChange={(v) => {
+                setIsLoading(v === "loading");
+                setDisabled(v === "disabled");
+              }}
+            />
+          </div>
+        </div>
       </div>
 
       {/* Generated Code */}
-      <div style={{ borderTop: "1px solid var(--divider)" }}>
+      <div style={{ marginTop: 16, borderRadius: 12, overflow: "hidden", border: "1px solid var(--divider)" }}>
         <div
           style={{
-            padding: "10px 20px",
+            padding: "10px 16px",
             backgroundColor: "#18181b",
             display: "flex",
             alignItems: "center",
@@ -217,62 +243,60 @@ function ButtonPlayground() {
   );
 }
 
-function ControlGroup({ label, children }: { label: string; children: React.ReactNode }) {
+function RadioGroup({ label, options, value, onChange }: {
+  label: string;
+  options: { value: string; label: string }[];
+  value: string;
+  onChange: (v: string) => void;
+}) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-      <span style={{ fontSize: 12, fontWeight: 500, color: "var(--text-tertiary)", textTransform: "uppercase", letterSpacing: "0.03em" }}>
+    <div>
+      <div style={{ fontSize: 13, fontWeight: 500, color: "#9ca3af", marginBottom: 10 }}>
         {label}
-      </span>
-      {children}
+      </div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        {options.map(opt => (
+          <label
+            key={opt.value}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 10,
+              cursor: "pointer",
+              fontSize: 14,
+              fontWeight: 500,
+              color: "var(--text-primary)",
+            }}
+            onClick={() => onChange(opt.value)}
+          >
+            <div
+              style={{
+                width: 20,
+                height: 20,
+                borderRadius: "50%",
+                border: value === opt.value ? "2px solid #3b82f6" : "2px solid #d1d5db",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                transition: "all 0.15s ease",
+              }}
+            >
+              {value === opt.value && (
+                <div
+                  style={{
+                    width: 10,
+                    height: 10,
+                    borderRadius: "50%",
+                    backgroundColor: "#3b82f6",
+                  }}
+                />
+              )}
+            </div>
+            {opt.label}
+          </label>
+        ))}
+      </div>
     </div>
-  );
-}
-
-function SegmentedControl({ options, value, onChange }: { options: { value: string; label: string }[]; value: string; onChange: (v: string) => void }) {
-  return (
-    <div style={{ display: "flex", gap: 2, padding: 2, backgroundColor: "var(--bg-secondary)", borderRadius: 8 }}>
-      {options.map(opt => (
-        <button
-          key={opt.value}
-          onClick={() => onChange(opt.value)}
-          style={{
-            padding: "6px 12px",
-            fontSize: 12,
-            fontWeight: 500,
-            color: value === opt.value ? "var(--text-primary)" : "var(--text-tertiary)",
-            backgroundColor: value === opt.value ? "var(--bg-primary)" : "transparent",
-            border: "none",
-            borderRadius: 6,
-            cursor: "pointer",
-            transition: "all 0.15s ease",
-            boxShadow: value === opt.value ? "0 1px 3px rgba(0,0,0,0.1)" : "none",
-          }}
-        >
-          {opt.label}
-        </button>
-      ))}
-    </div>
-  );
-}
-
-function ToggleChip({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
-  return (
-    <button
-      onClick={onClick}
-      style={{
-        padding: "6px 12px",
-        fontSize: 12,
-        fontWeight: 500,
-        color: active ? "var(--brand-primary)" : "var(--text-tertiary)",
-        backgroundColor: active ? "#dbeafe" : "var(--bg-secondary)",
-        border: active ? "1px solid var(--brand-primary)" : "1px solid transparent",
-        borderRadius: 16,
-        cursor: "pointer",
-        transition: "all 0.15s ease",
-      }}
-    >
-      {children}
-    </button>
   );
 }
 
@@ -348,40 +372,129 @@ function DesignContent() {
     <>
       {/* Anatomy */}
       <Section title="Anatomy">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
-          Button은 다음 요소들로 구성됩니다.
-        </p>
-        <PreviewBox padding={40}>
-          <AnatomyDiagram />
-        </PreviewBox>
-        <div style={{ marginTop: 20, display: "grid", gridTemplateColumns: "32px 1fr", gap: "12px 16px", fontSize: 14 }}>
-          <NumberBadge>1</NumberBadge>
-          <div>
-            <strong style={{ color: "var(--text-primary)" }}>Leading icon</strong>
-            <span style={{ color: "var(--text-secondary)" }}> — 레이블 앞에 위치하는 아이콘 (leftContent)</span>
-          </div>
-          <NumberBadge>2</NumberBadge>
-          <div>
-            <strong style={{ color: "var(--text-primary)" }}>Label</strong>
-            <span style={{ color: "var(--text-secondary)" }}> — 버튼의 액션을 설명하는 텍스트 (centerContent / children)</span>
-          </div>
-          <NumberBadge>3</NumberBadge>
-          <div>
-            <strong style={{ color: "var(--text-primary)" }}>Trailing icon</strong>
-            <span style={{ color: "var(--text-secondary)" }}> — 레이블 뒤에 위치하는 아이콘 (rightContent)</span>
-          </div>
-          <NumberBadge>4</NumberBadge>
-          <div>
-            <strong style={{ color: "var(--text-primary)" }}>Container</strong>
-            <span style={{ color: "var(--text-secondary)" }}> — 버튼의 배경 영역, 터치/클릭 영역 정의</span>
-          </div>
+        <AnatomyDiagram />
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr 1fr",
+          gap: 24,
+          marginTop: 20,
+          fontSize: 14,
+          fontWeight: 500,
+          color: "var(--text-primary)",
+        }}>
+          <div>1. Leading Icon</div>
+          <div style={{ textAlign: "center" }}>2. Label</div>
+          <div style={{ textAlign: "right" }}>3. Trailing Icon</div>
         </div>
+      </Section>
+
+      {/* Usage Guidelines */}
+      <Section title="Usage Guidelines">
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 24, lineHeight: 1.6 }}>
+          일관된 UX를 위해 아래 권고 조합을 따르세요. 모든 조합이 가능하지만, <strong style={{ color: "var(--text-primary)" }}>권장 패턴</strong>을 사용하면 사용자가 예측 가능한 경험을 할 수 있습니다.
+        </p>
+
+        {/* Recommended Combinations */}
+        <Subsection title="Recommended Combinations">
+          <div style={{ display: "grid", gap: 12 }}>
+            <UsageCard
+              situation="Primary CTA"
+              desc="화면에서 가장 중요한 액션"
+              buttonType="filled"
+              color="brandDefault"
+              examples={["결제하기", "가입하기", "제출"]}
+            />
+            <UsageCard
+              situation="Secondary CTA"
+              desc="두 번째로 중요한 액션"
+              buttonType="filled"
+              color="brandSecondary"
+              examples={["다음", "확인", "저장"]}
+            />
+            <UsageCard
+              situation="Cancel / Dismiss"
+              desc="취소, 닫기 등 보조 액션"
+              buttonType="outlined"
+              color="baseContainer"
+              examples={["취소", "닫기", "나중에"]}
+            />
+            <UsageCard
+              situation="Destructive Action"
+              desc="되돌릴 수 없는 위험한 액션"
+              buttonType="filled"
+              color="errorDefault"
+              examples={["삭제", "탈퇴", "초기화"]}
+            />
+            <UsageCard
+              situation="Success / Complete"
+              desc="긍정적 완료 액션"
+              buttonType="filled"
+              color="successDefault"
+              examples={["완료", "승인", "확정"]}
+            />
+          </div>
+        </Subsection>
+
+        {/* Design Principles */}
+        <Subsection title="Design Principles">
+          <div style={{ display: "grid", gap: 16 }}>
+            <PrincipleCard
+              number={1}
+              title="화면당 Primary CTA는 1개"
+              desc="brandDefault + filled 조합은 화면당 1개만 사용하세요. 여러 액션이 있다면 나머지는 brandSecondary 또는 outlined를 사용합니다."
+              doExample={
+                <div style={{ display: "flex", gap: 8 }}>
+                  <ButtonDemo buttonType="filled" color="brandDefault" size="small">결제하기</ButtonDemo>
+                  <ButtonDemo buttonType="outlined" color="baseContainer" size="small">취소</ButtonDemo>
+                </div>
+              }
+              dontExample={
+                <div style={{ display: "flex", gap: 8 }}>
+                  <ButtonDemo buttonType="filled" color="brandDefault" size="small">결제하기</ButtonDemo>
+                  <ButtonDemo buttonType="filled" color="brandDefault" size="small">장바구니</ButtonDemo>
+                </div>
+              }
+            />
+            <PrincipleCard
+              number={2}
+              title="버튼 계층 구조 유지"
+              desc="가장 중요한 액션에 가장 강조된 스타일을 사용하세요. 취소/닫기는 항상 outlined + baseContainer입니다."
+              hierarchy={["brandDefault (filled)", "brandSecondary (filled)", "outlined", "TextButton"]}
+            />
+            <PrincipleCard
+              number={3}
+              title="색상의 의미를 지키세요"
+              desc="errorDefault는 위험한 액션에만, successDefault는 긍정적 완료에만 사용하세요. 일반 액션에 semantic 색상을 사용하지 마세요."
+            />
+          </div>
+        </Subsection>
+
+        {/* Button Placement */}
+        <Subsection title="Button Placement">
+          <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
+            다이얼로그나 폼에서 버튼 배치 순서:
+          </p>
+          <div style={{ display: "grid", gap: 16 }}>
+            <PlacementExample
+              title="일반 다이얼로그"
+              left={{ type: "outlined", color: "baseContainer", label: "취소" }}
+              right={{ type: "filled", color: "brandDefault", label: "확인" }}
+              note="확인(Primary)이 오른쪽"
+            />
+            <PlacementExample
+              title="위험 액션 확인"
+              left={{ type: "outlined", color: "baseContainer", label: "취소" }}
+              right={{ type: "filled", color: "errorDefault", label: "삭제" }}
+              note="위험 액션이 오른쪽"
+            />
+          </div>
+        </Subsection>
       </Section>
 
       {/* Variants */}
       <Section title="Variants">
         <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
-          <InlineCode>buttonType</InlineCode> prop을 통해 3가지 variant를 사용할 수 있습니다. 각 variant는 시각적 강조 수준이 다릅니다.
+          <InlineCode>buttonType</InlineCode> prop을 통해 2가지 variant를 사용할 수 있습니다. 각 variant는 시각적 강조 수준이 다릅니다.
         </p>
 
         <Subsection title="Filled">
@@ -404,18 +517,6 @@ function DesignContent() {
             <div style={{ display: "flex", gap: 16 }}>
               <ButtonDemo buttonType="outlined" color="brandDefault">Brand Default</ButtonDemo>
               <ButtonDemo buttonType="outlined" color="baseContainer">Base Container</ButtonDemo>
-            </div>
-          </PreviewBox>
-        </Subsection>
-
-        <Subsection title="Plain">
-          <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
-            배경이 없는 텍스트 버튼입니다. <strong style={{ color: "var(--text-primary)" }}>가장 낮은 강조</strong>에 사용합니다. 취소, 건너뛰기 등 덜 중요한 액션에 적합합니다.
-          </p>
-          <PreviewBox>
-            <div style={{ display: "flex", gap: 16 }}>
-              <ButtonDemo buttonType="plain" color="brandDefault">Plain Button</ButtonDemo>
-              <ButtonDemo buttonType="plain" color="baseContainer">Base Plain</ButtonDemo>
             </div>
           </PreviewBox>
         </Subsection>
@@ -602,7 +703,6 @@ function DesignContent() {
               <StateDemo label="Default" state="default" />
               <StateDemo label="Hover" state="hover" />
               <StateDemo label="Pressed" state="pressed" />
-              <StateDemo label="Focus" state="focus" />
               <StateDemo label="Disabled" state="disabled" />
             </div>
           </PreviewBox>
@@ -611,7 +711,6 @@ function DesignContent() {
               <strong style={{ color: "var(--text-primary)" }}>Default:</strong> 기본 상태<br />
               <strong style={{ color: "var(--text-primary)" }}>Hover:</strong> 마우스 오버 시 배경색이 약간 어두워짐<br />
               <strong style={{ color: "var(--text-primary)" }}>Pressed:</strong> 클릭/터치 시 배경색이 더 어두워지고 scale(0.98) 적용<br />
-              <strong style={{ color: "var(--text-primary)" }}>Focus:</strong> 키보드 포커스 시 focus ring 표시<br />
               <strong style={{ color: "var(--text-primary)" }}>Disabled:</strong> 비활성화 시 opacity 감소, 클릭 불가
             </p>
           </div>
@@ -691,69 +790,6 @@ function DesignContent() {
         </Subsection>
       </Section>
 
-      {/* Hierarchy */}
-      <Section title="Hierarchy">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 24, lineHeight: 1.6 }}>
-          버튼의 시각적 계층을 통해 행동의 중요도를 표현합니다. 레벨이 높을수록 더 강한 시각적 강조를 가집니다.
-        </p>
-        <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-          <HierarchyItem level={4} variant="filled" color="brandDefault" description="화면 내에서 가장 중요한 메인 행동을 유도합니다.">
-            Level 4 - Primary
-          </HierarchyItem>
-          <HierarchyItem level={3} variant="outlined" color="brandDefault" description="미리보기, 임시 저장 등 대체 행동을 제안합니다.">
-            Level 3 - Secondary
-          </HierarchyItem>
-          <HierarchyItem level={2} variant="filled" color="baseContainer" description="Toggle 상태 변경 후 또는 보조적인 확인 액션에 사용합니다.">
-            Level 2 - Tertiary
-          </HierarchyItem>
-          <HierarchyItem level={1} variant="outlined" color="baseContainer" description="닫기, 취소, 돌아가기 등 가장 낮은 우선순위의 액션입니다.">
-            Level 1 - Ghost
-          </HierarchyItem>
-        </div>
-      </Section>
-
-      {/* Button Layout Patterns */}
-      <Section title="Button layout">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 24, lineHeight: 1.6 }}>
-          여러 버튼을 함께 배치할 때의 레이아웃 패턴입니다.
-        </p>
-
-        <Subsection title="Priority > Strong (Vertical)">
-          <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
-            수직 배열로 메인과 서브의 비중이 명확하거나, Label이 길거나, 유도 목적이 분명할 때 사용합니다.
-          </p>
-          <PreviewBox>
-            <div style={{ width: 280, display: "flex", flexDirection: "column", gap: 8 }}>
-              <ButtonDemo buttonType="filled" color="brandDefault" layout="fillWidth" size="large">확인</ButtonDemo>
-              <ButtonDemo buttonType="outlined" color="baseContainer" layout="fillWidth" size="large">취소</ButtonDemo>
-            </div>
-          </PreviewBox>
-        </Subsection>
-
-        <Subsection title="Priority > Neutral (Horizontal)">
-          <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
-            Label이 짧고 명료하거나 버튼의 역할이 비등할 때 사용합니다. <strong style={{ color: "var(--text-primary)" }}>주요 액션은 오른쪽에 배치</strong>하여 오른손 엄지의 접근성을 높입니다.
-          </p>
-          <PreviewBox>
-            <div style={{ width: 280, display: "flex", gap: 8 }}>
-              <ButtonDemo buttonType="outlined" color="baseContainer" layout="fillWidth">취소</ButtonDemo>
-              <ButtonDemo buttonType="filled" color="brandDefault" layout="fillWidth">확인</ButtonDemo>
-            </div>
-          </PreviewBox>
-        </Subsection>
-
-        <Subsection title="Single Action">
-          <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
-            단일 액션만 있을 때는 전체 너비를 사용합니다.
-          </p>
-          <PreviewBox>
-            <div style={{ width: 280 }}>
-              <ButtonDemo buttonType="filled" color="brandDefault" layout="fillWidth" size="large">확인</ButtonDemo>
-            </div>
-          </PreviewBox>
-        </Subsection>
-      </Section>
-
       {/* Accessibility */}
       <Section title="Accessibility">
         <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
@@ -822,16 +858,16 @@ function DesignContent() {
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
           <div>
             <PreviewBox padding={24}>
-              <ButtonDemo buttonType="filled" color="errorDefault">삭제하기</ButtonDemo>
+              <ButtonDemo buttonType="filled" color="brandDefault">확인</ButtonDemo>
             </PreviewBox>
-            <DoLabel>errorDefault를 사용하여 위험한 액션임을 명확히 표현합니다.</DoLabel>
+            <DoLabel>디자인 시스템의 기본 스타일을 유지합니다.</DoLabel>
           </div>
           <div>
             <PreviewBox padding={24}>
               <button
                 style={{
                   padding: "10px 24px",
-                  backgroundColor: "#ef4444",
+                  backgroundColor: "#2563eb",
                   color: "white",
                   border: "none",
                   borderRadius: 20,
@@ -839,31 +875,10 @@ function DesignContent() {
                   fontWeight: 600,
                 }}
               >
-                삭제
+                확인
               </button>
             </PreviewBox>
             <DontLabel>높이와 border-radius를 임의로 변경하지 않습니다.</DontLabel>
-          </div>
-        </div>
-
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 16 }}>
-          <div>
-            <PreviewBox padding={24}>
-              <div style={{ display: "flex", gap: 8 }}>
-                <ButtonDemo buttonType="outlined" color="baseContainer">취소</ButtonDemo>
-                <ButtonDemo buttonType="filled" color="brandDefault">확인</ButtonDemo>
-              </div>
-            </PreviewBox>
-            <DoLabel>주요 액션을 오른쪽에 배치하여 접근성을 높입니다.</DoLabel>
-          </div>
-          <div>
-            <PreviewBox padding={24}>
-              <div style={{ display: "flex", gap: 8 }}>
-                <ButtonDemo buttonType="filled" color="brandDefault">확인</ButtonDemo>
-                <ButtonDemo buttonType="filled" color="brandDefault">저장</ButtonDemo>
-              </div>
-            </PreviewBox>
-            <DontLabel>동일한 강조의 Primary 버튼을 여러 개 배치하지 않습니다.</DontLabel>
           </div>
         </div>
 
@@ -983,7 +998,6 @@ function WebContent() {
           <div style={{ display: "flex", gap: 16 }}>
             <ButtonDemo buttonType="filled" color="brandDefault">Filled</ButtonDemo>
             <ButtonDemo buttonType="outlined" color="brandDefault">Outlined</ButtonDemo>
-            <ButtonDemo buttonType="plain" color="brandDefault">Plain</ButtonDemo>
           </div>
         </PreviewBox>
         <CodeBlock
@@ -993,10 +1007,6 @@ function WebContent() {
 
 <Button buttonType="outlined" color="brandDefault">
   Outlined
-</Button>
-
-<Button buttonType="plain" color="brandDefault">
-  Plain
 </Button>`}
           sourceUrl={BUTTON_SOURCE}
         />
@@ -1116,8 +1126,8 @@ function WebContent() {
         <Subsection title="Common Props">
           <PropsTable
             props={[
-              { name: "children", type: "ReactNode", required: false, description: "버튼 텍스트 (plain 타입용)" },
-              { name: "buttonType", type: '"filled" | "outlined" | "plain"', required: false, defaultVal: '"filled"', description: "버튼 스타일" },
+              { name: "children", type: "ReactNode", required: false, description: "버튼 텍스트" },
+              { name: "buttonType", type: '"filled" | "outlined"', required: false, defaultVal: '"filled"', description: "버튼 스타일" },
               { name: "color", type: '"brandDefault" | "brandSecondary" | "baseContainer" | "successDefault" | "errorDefault" | "kakaoDefault" | "googleDefault"', required: false, defaultVal: '"brandDefault"', description: "색상 테마" },
               { name: "size", type: '"small" | "medium" | "large" | "xLarge"', required: false, defaultVal: '"medium"', description: "버튼 크기" },
               { name: "layout", type: '"hug" | "fillWidth" | "fill"', required: false, defaultVal: '"hug"', description: "레이아웃 모드" },
@@ -1194,7 +1204,6 @@ function RNContent() {
           <div style={{ display: "flex", gap: 16 }}>
             <ButtonDemo buttonType="filled" color="brandDefault">Filled</ButtonDemo>
             <ButtonDemo buttonType="outlined" color="brandDefault">Outlined</ButtonDemo>
-            <ButtonDemo buttonType="plain" color="brandDefault">Plain</ButtonDemo>
           </div>
         </PreviewBox>
         <CodeBlock
@@ -1212,14 +1221,6 @@ function RNContent() {
   onPress={() => {}}
 >
   Outlined
-</Button>
-
-<Button
-  buttonType="plain"
-  color="brandDefault"
-  onPress={() => {}}
->
-  Plain
 </Button>`}
           sourceUrl={BUTTON_SOURCE}
         />
@@ -1362,8 +1363,8 @@ function RNContent() {
         <Subsection title="Common Props">
           <PropsTable
             props={[
-              { name: "children", type: "ReactNode", required: false, description: "버튼 텍스트 (plain 타입용)" },
-              { name: "buttonType", type: '"filled" | "outlined" | "plain"', required: false, defaultVal: '"filled"', description: "버튼 스타일" },
+              { name: "children", type: "ReactNode", required: false, description: "버튼 텍스트" },
+              { name: "buttonType", type: '"filled" | "outlined"', required: false, defaultVal: '"filled"', description: "버튼 스타일" },
               { name: "color", type: '"brandDefault" | "brandSecondary" | "baseContainer" | "successDefault" | "errorDefault" | "kakaoDefault" | "googleDefault"', required: false, defaultVal: '"brandDefault"', description: "색상 테마" },
               { name: "size", type: '"small" | "medium" | "large" | "xLarge"', required: false, defaultVal: '"medium"', description: "버튼 크기" },
               { name: "layout", type: '"hug" | "fillWidth" | "fill"', required: false, defaultVal: '"hug"', description: "레이아웃 모드" },
@@ -1510,20 +1511,216 @@ function PropsTable({ props }: { props: { name: string; type: string; required: 
   );
 }
 
-function HierarchyItem({ level, variant, color, description, children }: { level: number; variant: "filled" | "outlined"; color: "brandDefault" | "baseContainer"; description: string; children: React.ReactNode }) {
+// ============================================
+// Usage Guidelines Components
+// ============================================
+function UsageCard({ situation, desc, buttonType, color, examples }: {
+  situation: string;
+  desc: string;
+  buttonType: "filled" | "outlined";
+  color: ButtonColor;
+  examples: string[];
+}) {
   return (
-    <div style={{ display: "flex", gap: 20, alignItems: "center", padding: 16, backgroundColor: "var(--bg-secondary)", borderRadius: 12 }}>
-      <div style={{ flex: "0 0 140px" }}>
-        <ButtonDemo buttonType={variant} color={color}>{children}</ButtonDemo>
-      </div>
-      <div style={{ flex: 1 }}>
-        <p style={{ fontSize: 14, marginBottom: 4, fontWeight: 600, color: "var(--text-primary)" }}>
-          Level {level}
+    <div style={{
+      display: "grid",
+      gridTemplateColumns: "1fr auto",
+      gap: 16,
+      padding: 16,
+      backgroundColor: "white",
+      borderRadius: 12,
+      border: "1px solid var(--divider)",
+      alignItems: "center",
+    }}>
+      <div>
+        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
+          <span style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)" }}>{situation}</span>
+          <span style={{
+            fontSize: 11,
+            padding: "2px 6px",
+            backgroundColor: buttonType === "filled" ? "#dbeafe" : "#f1f5f9",
+            color: buttonType === "filled" ? "#1d4ed8" : "#475569",
+            borderRadius: 4,
+            fontWeight: 500,
+          }}>
+            {buttonType} + {color}
+          </span>
+        </div>
+        <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0, marginBottom: 6 }}>{desc}</p>
+        <p style={{ fontSize: 12, color: "var(--text-tertiary)", margin: 0 }}>
+          예시: {examples.join(", ")}
         </p>
-        <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0, lineHeight: 1.5 }}>
-          {description}
-        </p>
       </div>
+      <ButtonDemo buttonType={buttonType} color={color} size="small">
+        {examples[0]}
+      </ButtonDemo>
+    </div>
+  );
+}
+
+function PrincipleCard({ number, title, desc, doExample, dontExample, hierarchy }: {
+  number: number;
+  title: string;
+  desc: string;
+  doExample?: React.ReactNode;
+  dontExample?: React.ReactNode;
+  hierarchy?: string[];
+}) {
+  return (
+    <div style={{
+      padding: 24,
+      backgroundColor: "white",
+      borderRadius: 16,
+      border: "1px solid var(--divider)",
+    }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
+        <span style={{
+          width: 24,
+          height: 24,
+          borderRadius: "50%",
+          backgroundColor: "var(--brand-primary)",
+          color: "white",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontSize: 13,
+          fontWeight: 600,
+        }}>
+          {number}
+        </span>
+        <span style={{ fontSize: 15, fontWeight: 600, color: "var(--text-primary)" }}>{title}</span>
+      </div>
+      <p style={{ fontSize: 14, color: "var(--text-secondary)", margin: 0, marginBottom: doExample || hierarchy ? 20 : 0, lineHeight: 1.6 }}>{desc}</p>
+
+      {(doExample || dontExample) && (
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+          {doExample && (
+            <DoCard>{doExample}</DoCard>
+          )}
+          {dontExample && (
+            <DontCard>{dontExample}</DontCard>
+          )}
+        </div>
+      )}
+
+      {hierarchy && (
+        <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+          {hierarchy.map((item, i) => (
+            <div key={item} style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <span style={{
+                fontSize: 12,
+                padding: "4px 10px",
+                backgroundColor: i === 0 ? "#dbeafe" : i === 1 ? "#e0e7ff" : i === 2 ? "#f1f5f9" : "#fafafa",
+                color: i === 0 ? "#1d4ed8" : i === 1 ? "#4338ca" : "#64748b",
+                borderRadius: 6,
+                fontWeight: 500,
+              }}>
+                {item}
+              </span>
+              {i < hierarchy.length - 1 && (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              )}
+            </div>
+          ))}
+          <span style={{ fontSize: 12, color: "var(--text-tertiary)", marginLeft: 4 }}>(강조도 순)</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function DoCard({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{ borderRadius: 12, overflow: "hidden", border: "1px solid var(--divider)" }}>
+      {/* Preview area */}
+      <div style={{
+        padding: 24,
+        backgroundColor: "#f8f9fa",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: 80,
+      }}>
+        {children}
+      </div>
+      {/* Label */}
+      <div style={{
+        padding: "12px 16px",
+        backgroundColor: "white",
+        borderTop: "1px solid var(--divider)",
+        display: "flex",
+        alignItems: "center",
+        gap: 6,
+      }}>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" fill="#22c55e"/>
+          <path d="M8 12l3 3 5-5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+        <span style={{ fontSize: 14, fontWeight: 600, color: "#16a34a" }}>Do</span>
+      </div>
+    </div>
+  );
+}
+
+function DontCard({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{ borderRadius: 12, overflow: "hidden", border: "1px solid var(--divider)" }}>
+      {/* Preview area */}
+      <div style={{
+        padding: 24,
+        backgroundColor: "#f8f9fa",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: 80,
+      }}>
+        {children}
+      </div>
+      {/* Label */}
+      <div style={{
+        padding: "12px 16px",
+        backgroundColor: "white",
+        borderTop: "1px solid var(--divider)",
+        display: "flex",
+        alignItems: "center",
+        gap: 6,
+      }}>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" fill="#ef4444"/>
+          <path d="M15 9l-6 6M9 9l6 6" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+        </svg>
+        <span style={{ fontSize: 14, fontWeight: 600, color: "#dc2626" }}>Don&apos;t</span>
+      </div>
+    </div>
+  );
+}
+
+function PlacementExample({ title, left, right, note }: {
+  title: string;
+  left: { type: "filled" | "outlined"; color: ButtonColor; label: string };
+  right: { type: "filled" | "outlined"; color: ButtonColor; label: string };
+  note: string;
+}) {
+  return (
+    <div style={{
+      padding: 20,
+      backgroundColor: "white",
+      borderRadius: 12,
+      border: "1px solid var(--divider)",
+    }}>
+      <div style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", marginBottom: 16 }}>{title}</div>
+      <div style={{
+        display: "flex",
+        justifyContent: "flex-end",
+        gap: 8,
+        padding: 20,
+        backgroundColor: "#f8f9fa",
+        borderRadius: 8,
+      }}>
+        <ButtonDemo buttonType={left.type} color={left.color} size="small">{left.label}</ButtonDemo>
+        <ButtonDemo buttonType={right.type} color={right.color} size="small">{right.label}</ButtonDemo>
+      </div>
+      <p style={{ fontSize: 13, color: "var(--text-tertiary)", margin: 0, marginTop: 12 }}>{note}</p>
     </div>
   );
 }
@@ -1533,41 +1730,51 @@ function HierarchyItem({ level, variant, color, description, children }: { level
 // ============================================
 function AnatomyDiagram() {
   return (
-    <div style={{ position: "relative", display: "inline-block" }}>
-      {/* Container outline */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 8,
-          padding: "12px 20px",
-          backgroundColor: "var(--brand-primary)",
-          borderRadius: 8,
-          border: "2px dashed rgba(255,255,255,0.5)",
-        }}
-      >
-        {/* Leading icon */}
-        <div style={{ position: "relative" }}>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-            <path d="M12 5v14M5 12h14" />
-          </svg>
-          <span style={{ position: "absolute", top: -24, left: "50%", transform: "translateX(-50%)", fontSize: 11, color: "var(--text-tertiary)", whiteSpace: "nowrap" }}>1</span>
-        </div>
-        {/* Label */}
-        <div style={{ position: "relative" }}>
-          <span style={{ fontSize: 14, fontWeight: 600, color: "white" }}>Button Label</span>
-          <span style={{ position: "absolute", top: -24, left: "50%", transform: "translateX(-50%)", fontSize: 11, color: "var(--text-tertiary)", whiteSpace: "nowrap" }}>2</span>
-        </div>
-        {/* Trailing icon */}
-        <div style={{ position: "relative" }}>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-            <path d="M9 18l6-6-6-6" />
-          </svg>
-          <span style={{ position: "absolute", top: -24, left: "50%", transform: "translateX(-50%)", fontSize: 11, color: "var(--text-tertiary)", whiteSpace: "nowrap" }}>3</span>
-        </div>
-      </div>
-      {/* Container label */}
-      <span style={{ position: "absolute", bottom: -24, left: "50%", transform: "translateX(-50%)", fontSize: 11, color: "var(--text-tertiary)", whiteSpace: "nowrap" }}>4. Container</span>
+    <div style={{
+      backgroundColor: "#f5f5f7",
+      borderRadius: 16,
+      padding: "60px 40px",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    }}>
+      <svg width="400" height="120" viewBox="0 0 400 120">
+        {/* Lines */}
+        {/* Line from circle 1 to leading icon */}
+        <line x1="60" y1="50" x2="120" y2="50" stroke="#374151" strokeWidth="1.5" />
+        <circle cx="120" cy="50" r="3" fill="#374151" />
+
+        {/* Line from circle 2 to label (vertical) */}
+        <line x1="200" y1="50" x2="200" y2="85" stroke="#374151" strokeWidth="1.5" />
+        <circle cx="200" cy="50" r="3" fill="#374151" />
+
+        {/* Line from circle 3 to trailing icon */}
+        <line x1="280" y1="50" x2="340" y2="50" stroke="#374151" strokeWidth="1.5" />
+        <circle cx="280" cy="50" r="3" fill="#374151" />
+
+        {/* Numbered circles */}
+        {/* Circle 1 */}
+        <circle cx="45" cy="50" r="16" fill="#374151" />
+        <text x="45" y="55" textAnchor="middle" fill="white" fontSize="13" fontWeight="600">1</text>
+
+        {/* Circle 2 */}
+        <circle cx="200" cy="100" r="16" fill="#374151" />
+        <text x="200" y="105" textAnchor="middle" fill="white" fontSize="13" fontWeight="600">2</text>
+
+        {/* Circle 3 */}
+        <circle cx="355" cy="50" r="16" fill="#374151" />
+        <text x="355" y="55" textAnchor="middle" fill="white" fontSize="13" fontWeight="600">3</text>
+
+        {/* Button content */}
+        {/* Leading icon placeholder (dashed box) */}
+        <rect x="125" y="38" width="24" height="24" rx="4" fill="none" stroke="#3b82f6" strokeWidth="1.5" strokeDasharray="3 2" />
+
+        {/* Text button label */}
+        <text x="200" y="55" textAnchor="middle" fill="#3b82f6" fontSize="16" fontWeight="600">Text button</text>
+
+        {/* Trailing icon placeholder (dashed box) */}
+        <rect x="251" y="38" width="24" height="24" rx="4" fill="none" stroke="#3b82f6" strokeWidth="1.5" strokeDasharray="3 2" />
+      </svg>
     </div>
   );
 }
@@ -1613,7 +1820,7 @@ function StateDemo({ label, state }: { label: string; state: "default" | "hover"
 // ============================================
 // Demo Components
 // ============================================
-type ButtonType = "filled" | "outlined" | "plain";
+type ButtonType = "filled" | "outlined";
 type ButtonColor = "brandDefault" | "brandSecondary" | "baseContainer" | "successDefault" | "errorDefault" | "kakaoDefault" | "googleDefault";
 type ButtonSize = "small" | "medium" | "large" | "xLarge";
 type ButtonLayout = "hug" | "fillWidth" | "fill";
@@ -1675,7 +1882,7 @@ function ButtonDemo({
 
     if (buttonType === "filled") {
       return { bg: getBg(), text: c.text, border: "transparent" };
-    } else if (buttonType === "outlined") {
+    } else {
       // outlined 버튼은 텍스트 색상 유지, 배경만 살짝 어두워짐
       const getOutlinedText = () => {
         if (color === "brandDefault" || color === "brandSecondary") return "#2563eb";
@@ -1688,21 +1895,6 @@ function ButtonDemo({
         text: getOutlinedText(),
         border: c.border,
       };
-    } else {
-      // plain 버튼은 각 color에 맞는 텍스트 색상 사용
-      const getPlainText = () => {
-        switch (color) {
-          case "brandDefault": return "#2563eb";
-          case "brandSecondary": return "#2563eb";
-          case "baseContainer": return "#334155";
-          case "successDefault": return "#16a34a";
-          case "errorDefault": return "#dc2626";
-          case "kakaoDefault": return "#191919";
-          case "googleDefault": return "#334155";
-          default: return "#2563eb";
-        }
-      };
-      return { bg: "transparent", text: getPlainText(), border: "transparent" };
     }
   };
 

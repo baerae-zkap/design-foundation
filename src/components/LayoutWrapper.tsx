@@ -70,7 +70,7 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
           <div
             style={{
               width: '100%',
-              maxWidth: isTablet ? '100%' : '720px',
+              maxWidth: isTablet ? '100%' : '1100px',
               padding: getContentPadding(),
               boxSizing: 'border-box',
             }}
