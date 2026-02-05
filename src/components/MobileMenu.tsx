@@ -24,6 +24,7 @@ const componentsNav = [
   { title: "Action Area", href: "/components/actions/action-area" },
   { title: "Button", href: "/components/actions/button" },
   { title: "Chip", href: "/components/actions/chip" },
+  { title: "Icon Button", href: "/components/actions/icon-button" },
   { title: "Text Button", href: "/components/actions/text-button" },
 ];
 

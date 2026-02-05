@@ -27,3 +27,11 @@ export type {
   ChipColor,
   ChipSize,
 } from './components/Chip';
+
+export { IconButton } from './components/IconButton';
+export type {
+  IconButtonProps,
+  IconButtonVariant,
+  IconButtonColor,
+  IconButtonSize,
+} from './components/IconButton';
