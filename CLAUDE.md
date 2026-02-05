@@ -31,17 +31,19 @@
 | Accordion | ✅ | ✅ | ✅ | ✅ |
 | Card | ✅ | ✅ | ✅ | ✅ |
 | ContentBadge | ✅ | ✅ | ✅ | ✅ |
+| ListCell | ✅ | ✅ | ✅ | ✅ |
+| ListCard | ✅ | ✅ | ✅ | ✅ |
 
 ### 다음 작업 우선순위
 
 Montage 디자인 시스템 기준 우선순위:
 
 1. **Avatar / Avatar Group** - 사용자 프로필
-2. **List Card** - 리스트 카드
-3. **Alert** - 경고 메시지
-4. **Radio** - 라디오 버튼
-5. **Select** - 드롭다운 선택
-6. **Play Badge** - 재생 뱃지
+2. **Alert** - 경고 메시지
+3. **Radio** - 라디오 버튼
+4. **Select** - 드롭다운 선택
+5. **Play Badge** - 재생 뱃지
+6. **Section Header** - 섹션 헤더
 
 ### 새 컴포넌트 추가 방법
 
