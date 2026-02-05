@@ -838,6 +838,31 @@ function DesignContent() {
             </table>
           </div>
         </Subsection>
+
+        <Subsection title="Design Principles">
+          <div style={{ display: "grid", gap: 16 }}>
+            <PrincipleCard
+              number={1}
+              title="Focus Visible"
+              desc="키보드 포커스 시 2px solid outline이 표시됩니다. 포커스 링은 버튼 외곽에서 2px offset으로 표시되어 시인성을 확보합니다."
+            />
+            <PrincipleCard
+              number={2}
+              title="Minimum Touch Target"
+              desc="모든 버튼은 최소 44x44px 터치 영역을 확보합니다 (iOS HIG 기준). small 사이즈도 hitSlop을 통해 터치 영역을 보장합니다."
+            />
+            <PrincipleCard
+              number={3}
+              title="Color Contrast"
+              desc="WCAG 2.1 AA 기준(4.5:1)을 충족하는 색상 대비를 유지합니다. disabled 상태에서도 텍스트 가독성을 유지합니다."
+            />
+            <PrincipleCard
+              number={4}
+              title="Screen Reader Support"
+              desc="버튼의 역할(role='button')과 상태(aria-disabled, aria-busy)가 스크린 리더에 전달됩니다. icon-only 버튼은 반드시 aria-label을 제공해야 합니다."
+            />
+          </div>
+        </Subsection>
       </Section>
 
       {/* Best Practices */}
@@ -1014,32 +1039,6 @@ function DesignContent() {
             </table>
           </div>
         </Subsection>
-      </Section>
-
-      {/* Accessibility */}
-      <Section title="Accessibility">
-        <div style={{ display: "grid", gap: 16 }}>
-          <PrincipleCard
-            number={1}
-            title="Focus Visible"
-            desc="키보드 포커스 시 2px solid outline이 표시됩니다. 포커스 링은 버튼 외곽에서 2px offset으로 표시되어 시인성을 확보합니다."
-          />
-          <PrincipleCard
-            number={2}
-            title="Minimum Touch Target"
-            desc="모든 버튼은 최소 44x44px 터치 영역을 확보합니다 (iOS HIG 기준). small 사이즈도 hitSlop을 통해 터치 영역을 보장합니다."
-          />
-          <PrincipleCard
-            number={3}
-            title="Color Contrast"
-            desc="WCAG 2.1 AA 기준(4.5:1)을 충족하는 색상 대비를 유지합니다. disabled 상태에서도 텍스트 가독성을 유지합니다."
-          />
-          <PrincipleCard
-            number={4}
-            title="Screen Reader Support"
-            desc="버튼의 역할(role='button')과 상태(aria-disabled, aria-busy)가 스크린 리더에 전달됩니다. icon-only 버튼은 반드시 aria-label을 제공해야 합니다."
-          />
-        </div>
       </Section>
     </>
   );
