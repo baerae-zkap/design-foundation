@@ -738,6 +738,123 @@ function DesignContent() {
         </Subsection>
       </Section>
 
+      {/* States */}
+      <Section title="States">
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 24, lineHeight: 1.6 }}>
+          ActionArea 내의 버튼들은 다음 상태를 지원합니다.
+        </p>
+
+        <Subsection title="Enabled (Default)">
+          <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
+            기본 상태입니다. 사용자가 상호작용할 수 있습니다.
+          </p>
+          <PreviewBox>
+            <div style={{ width: 320 }}>
+              <ActionAreaDemo variant="strong">
+                <ActionAreaButtonDemo variant="main" size="xLarge">확인</ActionAreaButtonDemo>
+                <ActionAreaButtonDemo variant="alternative" size="xLarge">취소</ActionAreaButtonDemo>
+              </ActionAreaDemo>
+            </div>
+          </PreviewBox>
+        </Subsection>
+
+        <Subsection title="Pressed">
+          <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
+            버튼을 누르고 있을 때의 상태입니다. 시각적 피드백으로 scale과 색상 변화가 적용됩니다.
+          </p>
+          <PreviewBox>
+            <div style={{ width: 320 }}>
+              <ActionAreaDemo variant="strong">
+                <StateButtonDemo state="pressed" variant="main">확인 (Pressed)</StateButtonDemo>
+                <StateButtonDemo state="pressed" variant="alternative">취소 (Pressed)</StateButtonDemo>
+              </ActionAreaDemo>
+            </div>
+          </PreviewBox>
+        </Subsection>
+
+        <Subsection title="Disabled">
+          <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
+            비활성화 상태입니다. 사용자가 상호작용할 수 없으며, 시각적으로 흐리게 표시됩니다.
+            필수 조건이 충족되지 않았을 때 사용합니다.
+          </p>
+          <PreviewBox>
+            <div style={{ width: 320 }}>
+              <ActionAreaDemo variant="strong">
+                <StateButtonDemo state="disabled" variant="main">확인 (Disabled)</StateButtonDemo>
+                <StateButtonDemo state="disabled" variant="alternative">취소 (Disabled)</StateButtonDemo>
+              </ActionAreaDemo>
+            </div>
+          </PreviewBox>
+        </Subsection>
+
+        <Subsection title="Loading">
+          <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
+            로딩 상태입니다. 비동기 작업이 진행 중일 때 표시되며, 추가 상호작용이 방지됩니다.
+          </p>
+          <PreviewBox>
+            <div style={{ width: 320 }}>
+              <ActionAreaDemo variant="strong">
+                <StateButtonDemo state="loading" variant="main">처리 중...</StateButtonDemo>
+                <StateButtonDemo state="disabled" variant="alternative">취소</StateButtonDemo>
+              </ActionAreaDemo>
+            </div>
+          </PreviewBox>
+        </Subsection>
+      </Section>
+
+      {/* Accessibility */}
+      <Section title="Accessibility">
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 24, lineHeight: 1.6 }}>
+          ActionArea는 모든 사용자가 접근할 수 있도록 접근성 기능을 지원합니다.
+        </p>
+
+        <div style={{ display: "grid", gap: 16 }}>
+          <AccessibilityCard
+            icon="⌨️"
+            title="키보드 내비게이션"
+            items={[
+              "Tab: 버튼 간 포커스 이동",
+              "Enter / Space: 포커스된 버튼 실행",
+              "포커스 링이 시각적으로 표시됨",
+            ]}
+          />
+          <AccessibilityCard
+            icon="🔊"
+            title="스크린 리더"
+            items={[
+              "버튼 역할(role=\"button\")이 자동으로 적용됨",
+              "비활성화 상태가 aria-disabled로 전달됨",
+              "로딩 상태가 aria-busy로 전달됨",
+            ]}
+          />
+          <AccessibilityCard
+            icon="📱"
+            title="터치 타겟"
+            items={[
+              "최소 44x44px 터치 영역 확보 (WCAG 2.5.5)",
+              "xLarge 사이즈: 48px 높이로 충분한 터치 영역 제공",
+              "버튼 간 최소 10px 간격으로 오터치 방지",
+            ]}
+          />
+          <AccessibilityCard
+            icon="🎨"
+            title="색상 대비"
+            items={[
+              "Main 버튼: 4.5:1 이상 대비율 확보",
+              "텍스트와 배경 간 WCAG AA 기준 충족",
+              "비활성화 상태도 구분 가능한 대비 유지",
+            ]}
+          />
+        </div>
+
+        <div style={{ marginTop: 24, padding: 16, backgroundColor: "var(--bg-secondary)", borderRadius: 8 }}>
+          <p style={{ margin: 0, fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.8 }}>
+            <strong style={{ color: "var(--text-primary)" }}>React Native 접근성:</strong> accessibilityLabel, accessibilityHint,
+            accessibilityState props를 통해 네이티브 접근성 기능을 활용하세요.
+          </p>
+        </div>
+      </Section>
+
       {/* Design Tokens */}
       <Section title="Design Tokens">
         <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
@@ -1357,6 +1474,35 @@ import { View, Text } from 'react-native';`} />
             ]}
           />
         </Subsection>
+
+        <Subsection title="React Native 전용 Props">
+          <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
+            React Native 환경에서 접근성과 테스트를 위해 사용할 수 있는 추가 props입니다.
+          </p>
+          <PropsTable
+            props={[
+              { name: "accessibilityLabel", type: "string", required: false, description: "스크린 리더가 읽을 버튼 설명 텍스트" },
+              { name: "accessibilityHint", type: "string", required: false, description: "버튼 동작에 대한 추가 힌트" },
+              { name: "accessibilityState", type: "AccessibilityState", required: false, description: "{ disabled, busy } 등 접근성 상태" },
+              { name: "testID", type: "string", required: false, description: "E2E 테스트용 식별자" },
+              { name: "hapticFeedback", type: '"light" | "medium" | "heavy"', required: false, description: "탭 시 햅틱 피드백 강도" },
+            ]}
+          />
+          <CodeBlock code={`// 접근성을 고려한 사용 예시
+<Button
+  buttonType="filled"
+  color="brandDefault"
+  size="xLarge"
+  layout="fillWidth"
+  accessibilityLabel="결제하기"
+  accessibilityHint="터치하면 결제가 진행됩니다"
+  testID="checkout-button"
+  hapticFeedback="medium"
+  onPress={handleCheckout}
+>
+  결제하기
+</Button>`} />
+        </Subsection>
       </Section>
     </>
   );
@@ -1861,5 +2007,110 @@ function PlainButtonDemo({ children }: { children: React.ReactNode }) {
     >
       {children}
     </button>
+  );
+}
+
+// State demo button for States section
+function StateButtonDemo({ state, variant, children }: {
+  state: "pressed" | "disabled" | "loading";
+  variant: "main" | "alternative";
+  children: React.ReactNode;
+}) {
+  const getStyles = () => {
+    const baseStyles = {
+      height: 48,
+      padding: "10px 16px",
+      fontSize: 15,
+      fontWeight: 600,
+      borderRadius: 8,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: 8,
+      width: "100%",
+      flex: 1,
+      transition: "all 150ms ease",
+    };
+
+    if (state === "disabled") {
+      return {
+        ...baseStyles,
+        backgroundColor: "#e2e8f0",
+        color: "#94a3b8",
+        border: variant === "alternative" ? "1px solid #e2e8f0" : "none",
+        cursor: "not-allowed",
+      };
+    }
+
+    if (state === "loading") {
+      return {
+        ...baseStyles,
+        backgroundColor: variant === "main" ? "#2563eb" : "white",
+        color: variant === "main" ? "white" : "#334155",
+        border: variant === "alternative" ? "1px solid #cbd5e1" : "none",
+        cursor: "wait",
+        opacity: 0.8,
+      };
+    }
+
+    // pressed state
+    if (variant === "main") {
+      return {
+        ...baseStyles,
+        backgroundColor: "#1e40af",
+        color: "white",
+        border: "none",
+        transform: "scale(0.98)",
+        cursor: "pointer",
+      };
+    } else {
+      return {
+        ...baseStyles,
+        backgroundColor: "#f1f5f9",
+        color: "#334155",
+        border: "1px solid #cbd5e1",
+        transform: "scale(0.98)",
+        cursor: "pointer",
+      };
+    }
+  };
+
+  return (
+    <button style={getStyles()} disabled={state === "disabled" || state === "loading"}>
+      {state === "loading" && (
+        <svg width="16" height="16" viewBox="0 0 24 24" style={{ animation: "spin 1s linear infinite" }}>
+          <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" fill="none" strokeDasharray="32" strokeLinecap="round" />
+        </svg>
+      )}
+      {children}
+    </button>
+  );
+}
+
+// Accessibility card component
+function AccessibilityCard({ icon, title, items }: {
+  icon: string;
+  title: string;
+  items: string[];
+}) {
+  return (
+    <div style={{
+      padding: 20,
+      backgroundColor: "white",
+      borderRadius: 12,
+      border: "1px solid var(--divider)",
+    }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
+        <span style={{ fontSize: 20 }}>{icon}</span>
+        <span style={{ fontSize: 15, fontWeight: 600, color: "var(--text-primary)" }}>{title}</span>
+      </div>
+      <ul style={{ margin: 0, padding: 0, paddingLeft: 20, listStyle: "disc" }}>
+        {items.map((item, i) => (
+          <li key={i} style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.8 }}>
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

@@ -10,7 +10,7 @@ const componentCategories = [
     components: [
       {
         name: "Action area",
-        href: "/components/actions/action-item",
+        href: "/components/actions/action-area",
         thumbnail: "/design-foundation/thumbnails/action-area.png",
       },
       {
