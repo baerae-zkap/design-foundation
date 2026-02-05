@@ -53,28 +53,37 @@ function ListCellPlayground() {
   const [hasLeading, setHasLeading] = useState(true);
   const [hasSubtitle, setHasSubtitle] = useState(true);
   const [hasTrailing, setHasTrailing] = useState(true);
-  const [divider, setDivider] = useState(false);
+  const [divider, setDivider] = useState(true);
 
   return (
     <div style={{ marginBottom: 32 }}>
       <div style={{ borderRadius: 20, overflow: "hidden", backgroundColor: "#fafbfc" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", minHeight: 300 }}>
           <div style={{ padding: 40, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <div style={{ width: 320, backgroundColor: "white", borderRadius: 12, border: "1px solid #e2e8f0", overflow: "hidden" }}>
+            <div style={{ width: 320, backgroundColor: "white", borderRadius: 16, overflow: "hidden" }}>
               <ListCellDemo
                 size={size}
-                leading={hasLeading ? <AvatarDemo /> : undefined}
-                title="홍길동"
-                subtitle={hasSubtitle ? "hong@example.com" : undefined}
+                leading={hasLeading ? <TransactionIcon /> : undefined}
+                title="거래내역"
+                subtitle={hasSubtitle ? undefined : undefined}
                 trailing={hasTrailing ? <ChevronIcon /> : undefined}
                 divider={divider}
                 onClick={() => {}}
               />
               <ListCellDemo
                 size={size}
-                leading={hasLeading ? <AvatarDemo /> : undefined}
-                title="김철수"
-                subtitle={hasSubtitle ? "kim@example.com" : undefined}
+                leading={hasLeading ? <ExchangeIcon /> : undefined}
+                title="거래소 연동 관리"
+                subtitle={hasSubtitle ? undefined : undefined}
+                trailing={hasTrailing ? <ChevronIcon /> : undefined}
+                divider={divider}
+                onClick={() => {}}
+              />
+              <ListCellDemo
+                size={size}
+                leading={hasLeading ? <SettingsIconDemo /> : undefined}
+                title="설정"
+                subtitle={hasSubtitle ? undefined : undefined}
                 trailing={hasTrailing ? <ChevronIcon /> : undefined}
                 onClick={() => {}}
               />
@@ -145,6 +154,23 @@ function DesignContent() {
           <div style={{ textAlign: "center" }}>2. Content (Title + Subtitle)</div>
           <div style={{ textAlign: "right" }}>3. Trailing</div>
         </div>
+      </Section>
+
+      <Section title="ZKAP 설정 메뉴">
+        <PreviewBox>
+          <div style={{ padding: 24, width: "100%" }}>
+            <div style={{ backgroundColor: "white", borderRadius: 16, overflow: "hidden", maxWidth: 360 }}>
+              <ListCellDemo leading={<TransactionIcon />} title="거래내역" trailing={<ChevronIcon />} divider onClick={() => {}} />
+              <ListCellDemo leading={<ExchangeIcon />} title="거래소 연동 관리" trailing={<ChevronIcon />} onClick={() => {}} />
+              <div style={{ padding: "20px 16px 8px", fontSize: 13, fontWeight: 500, color: "#94a3b8" }}>활동하기</div>
+              <ListCellDemo leading={<MissionIcon />} title="데일리 미션 & 혜택" trailing={<ChevronIcon />} divider onClick={() => {}} />
+              <ListCellDemo leading={<WalletIcon />} title="지갑 체험하기 (Beta)" trailing={<ChevronIcon />} onClick={() => {}} />
+              <div style={{ padding: "20px 16px 8px", fontSize: 13, fontWeight: 500, color: "#94a3b8" }}>시스템</div>
+              <ListCellDemo leading={<SettingsIconDemo />} title="설정" trailing={<ChevronIcon />} divider onClick={() => {}} />
+              <ListCellDemo leading={<LogoutIcon />} title="로그아웃" trailing={<ChevronIcon />} onClick={() => {}} />
+            </div>
+          </div>
+        </PreviewBox>
       </Section>
 
       <Section title="Sizes">
@@ -272,20 +298,72 @@ function RNContent() {
 />`} />
       </Section>
 
-      <Section title="Settings Menu Example">
-        <CodeBlock code={`<View>
+      <Section title="ZKAP 설정 메뉴 예시">
+        <CodeBlock code={`// ZKAP 앱 더보기 메뉴
+<View style={{ backgroundColor: 'white', borderRadius: 16 }}>
   <ListCell
-    leading={<SettingsIcon />}
-    title="알림 설정"
+    leading={<TransactionIcon />}
+    title="거래내역"
     trailing={<ChevronRight />}
-    onPress={() => navigate('notifications')}
+    onPress={() => navigate('transactions')}
     divider
   />
   <ListCell
-    leading={<ProfileIcon />}
-    title="계정 정보"
+    leading={<ExchangeIcon />}
+    title="거래소 연동 관리"
     trailing={<ChevronRight />}
-    onPress={() => navigate('account')}
+    onPress={() => navigate('exchanges')}
+  />
+
+  <SectionHeader title="활동하기" />
+  <ListCell
+    leading={<MissionIcon />}
+    title="데일리 미션 & 혜택"
+    trailing={<ChevronRight />}
+    onPress={() => navigate('missions')}
+    divider
+  />
+  <ListCell
+    leading={<WalletIcon />}
+    title="지갑 체험하기 (Beta)"
+    trailing={<ChevronRight />}
+    onPress={() => navigate('wallet')}
+  />
+
+  <SectionHeader title="시스템" />
+  <ListCell
+    leading={<SettingsIcon />}
+    title="설정"
+    trailing={<ChevronRight />}
+    onPress={() => navigate('settings')}
+    divider
+  />
+  <ListCell
+    leading={<LogoutIcon />}
+    title="로그아웃"
+    trailing={<ChevronRight />}
+    onPress={handleLogout}
+  />
+</View>`} />
+      </Section>
+
+      <Section title="거래소 연동 상태 예시">
+        <CodeBlock code={`// 거래소 연동 관리 화면
+<View style={{ backgroundColor: 'white', borderRadius: 16 }}>
+  <ListCell
+    leading={<UpbitLogo />}
+    title="업비트"
+    subtitle="연동됨"
+    trailing={<Text style={{ color: '#22c55e' }}>연결됨</Text>}
+    onPress={() => navigate('upbit-detail')}
+    divider
+  />
+  <ListCell
+    leading={<BithumbLogo />}
+    title="빗썸"
+    subtitle="미연동"
+    trailing={<Text style={{ color: '#3b82f6' }}>연결하기</Text>}
+    onPress={() => connectExchange('bithumb')}
   />
 </View>`} />
       </Section>
@@ -393,7 +471,78 @@ function PropsTable({ props }: { props: { name: string; type: string; required: 
   );
 }
 
-// Demo Components
+// Demo Components - ZKAP App Icons
+function TransactionIcon() {
+  return (
+    <div style={{ width: 40, height: 40, borderRadius: 12, backgroundColor: "#f1f5f9", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#64748b" strokeWidth="2">
+        <rect x="3" y="3" width="18" height="18" rx="2" />
+        <line x1="3" y1="9" x2="21" y2="9" />
+        <line x1="9" y1="21" x2="9" y2="9" />
+      </svg>
+    </div>
+  );
+}
+
+function ExchangeIcon() {
+  return (
+    <div style={{ width: 40, height: 40, borderRadius: 12, backgroundColor: "#f1f5f9", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#64748b" strokeWidth="2">
+        <path d="M16 3l4 4-4 4" />
+        <path d="M20 7H4" />
+        <path d="M8 21l-4-4 4-4" />
+        <path d="M4 17h16" />
+      </svg>
+    </div>
+  );
+}
+
+function MissionIcon() {
+  return (
+    <div style={{ width: 40, height: 40, borderRadius: 12, backgroundColor: "#fef3c7", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="2">
+        <circle cx="12" cy="8" r="6" />
+        <path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11" />
+      </svg>
+    </div>
+  );
+}
+
+function WalletIcon() {
+  return (
+    <div style={{ width: 40, height: 40, borderRadius: 12, backgroundColor: "#ede9fe", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" strokeWidth="2">
+        <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4" />
+        <path d="M3 5v14a2 2 0 0 0 2 2h16v-5" />
+        <path d="M18 12a2 2 0 0 0 0 4h4v-4h-4z" />
+      </svg>
+    </div>
+  );
+}
+
+function SettingsIconDemo() {
+  return (
+    <div style={{ width: 40, height: 40, borderRadius: 12, backgroundColor: "#f1f5f9", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#64748b" strokeWidth="2">
+        <circle cx="12" cy="12" r="3" />
+        <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" />
+      </svg>
+    </div>
+  );
+}
+
+function LogoutIcon() {
+  return (
+    <div style={{ width: 40, height: 40, borderRadius: 12, backgroundColor: "#fef2f2", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2">
+        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+        <path d="M16 17l5-5-5-5" />
+        <line x1="21" y1="12" x2="9" y2="12" />
+      </svg>
+    </div>
+  );
+}
+
 function AvatarDemo() {
   return (
     <div style={{ width: 36, height: 36, borderRadius: "50%", backgroundColor: "#e2e8f0", display: "flex", alignItems: "center", justifyContent: "center" }}>

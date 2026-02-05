@@ -43,7 +43,7 @@ export default function ListCardPage() {
 }
 
 function ListCardPlayground() {
-  const [variant, setVariant] = useState<ListCardVariant>("elevated");
+  const [variant, setVariant] = useState<ListCardVariant>("filled");
   const [size, setSize] = useState<ListCardSize>("medium");
   const [hasThumbnail, setHasThumbnail] = useState(true);
   const [hasBadge, setHasBadge] = useState(true);
@@ -58,11 +58,11 @@ function ListCardPlayground() {
             <ListCardDemo
               variant={variant}
               size={size}
-              thumbnail={hasThumbnail ? <ThumbnailDemo /> : undefined}
-              badges={hasBadge ? <BadgeDemo /> : undefined}
-              title="프리미엄 무선 이어폰"
-              subtitle={hasSubtitle ? "고음질 블루투스 5.3 지원" : undefined}
-              meta={hasMeta ? "₩89,000" : undefined}
+              thumbnail={hasThumbnail ? <EthereumIcon /> : undefined}
+              badges={hasBadge ? <UpbitBadge /> : undefined}
+              title="이더리움"
+              subtitle={hasSubtitle ? <span style={{ color: "#3b82f6" }}>500,000원 구매 완료</span> : undefined}
+              meta={hasMeta ? <SavingsMeta amount="5,750원" label="아꼈어요" /> : undefined}
               onClick={() => {}}
             />
           </div>
@@ -95,7 +95,7 @@ function ListCardPlayground() {
                   <CheckboxOption label="Thumbnail" checked={hasThumbnail} onChange={setHasThumbnail} />
                   <CheckboxOption label="Badge" checked={hasBadge} onChange={setHasBadge} />
                   <CheckboxOption label="Subtitle" checked={hasSubtitle} onChange={setHasSubtitle} />
-                  <CheckboxOption label="Meta (Price)" checked={hasMeta} onChange={setHasMeta} />
+                  <CheckboxOption label="Meta (Savings)" checked={hasMeta} onChange={setHasMeta} />
                 </div>
               </div>
             </div>
@@ -150,11 +150,36 @@ function DesignContent() {
         </div>
       </Section>
 
+      <Section title="ZKAP 거래 내역">
+        <PreviewBox>
+          <div style={{ padding: 24, width: "100%" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
+              <div style={{ width: 6, height: 6, borderRadius: 3, backgroundColor: "#e2e8f0" }} />
+              <span style={{ fontSize: 13, color: "#64748b", fontWeight: 500 }}>5월 19일 월요일</span>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+              <ListCardDemo variant="filled" thumbnail={<EthereumIcon />} badges={<UpbitBadge />} title="이더리움" subtitle="500,000원 구매 진행중" onClick={() => {}} />
+              <ListCardDemo variant="filled" thumbnail={<EthereumIcon />} badges={<UpbitBadge />} title="이더리움" subtitle={<span style={{ color: "#3b82f6" }}>500,000원 구매 완료</span>} meta={<SavingsMeta amount="5,750원" label="아꼈어요" />} onClick={() => {}} />
+              <ListCardDemo variant="filled" thumbnail={<EthereumIcon />} badges={<UpbitBadge />} title="이더리움" subtitle={<span style={{ color: "#ef4444" }}>500,000원 구매 실패</span>} onClick={() => {}} />
+            </div>
+
+            <div style={{ display: "flex", alignItems: "center", gap: 8, margin: "24px 0 16px" }}>
+              <div style={{ width: 6, height: 6, borderRadius: 3, backgroundColor: "#e2e8f0" }} />
+              <span style={{ fontSize: 13, color: "#64748b", fontWeight: 500 }}>5월 18일 일요일</span>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+              <ListCardDemo variant="filled" thumbnail={<EthereumIcon />} badges={<UpbitBadge />} title="이더리움" subtitle={<span style={{ color: "#3b82f6" }}>500,000원 판매 완료</span>} meta={<SavingsMeta amount="5,750원" label="더 받았어요" />} onClick={() => {}} />
+              <ListCardDemo variant="filled" thumbnail={<BitcoinIcon />} badges={<BithumbBadge />} title="비트코인" subtitle={<span style={{ color: "#3b82f6" }}>1,000,000원 구매 완료</span>} meta={<SavingsMeta amount="12,500원" label="아꼈어요" />} onClick={() => {}} />
+            </div>
+          </div>
+        </PreviewBox>
+      </Section>
+
       <Section title="Variants">
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16 }}>
           {(["elevated", "outlined", "filled"] as ListCardVariant[]).map((v) => (
             <VariantCard key={v} name={v.charAt(0).toUpperCase() + v.slice(1)} description={v === "elevated" ? "그림자 효과" : v === "outlined" ? "테두리" : "배경색"}>
-              <ListCardDemo variant={v} size="small" thumbnail={<ThumbnailDemo size={40} />} title="상품명" meta="₩10,000" />
+              <ListCardDemo variant={v} size="small" thumbnail={<EthereumIcon size={40} />} title="이더리움" meta={<span style={{ color: "#3b82f6", fontSize: 12 }}>완료</span>} />
             </VariantCard>
           ))}
         </div>
@@ -277,16 +302,67 @@ function RNContent() {
 />`} />
       </Section>
 
-      <Section title="Product List Example">
-        <CodeBlock code={`{products.map((product) => (
+      <Section title="ZKAP 거래 내역 예시">
+        <CodeBlock code={`// 암호화폐 거래 내역 리스트
+<View>
+  <DateSeparator date="5월 19일 월요일" />
+
+  {/* 구매 진행중 */}
   <ListCard
-    key={product.id}
-    thumbnail={<Image source={{ uri: product.image }} />}
-    badges={product.isNew && <ContentBadge color="brandDefault" size="small">NEW</ContentBadge>}
-    title={product.name}
-    subtitle={product.description}
-    meta={\`₩\${product.price.toLocaleString()}\`}
-    onPress={() => navigate('product', { id: product.id })}
+    variant="filled"
+    thumbnail={<EthereumIcon />}
+    badges={<UpbitBadge />}
+    title="이더리움"
+    subtitle="500,000원 구매 진행중"
+    onPress={() => navigate('transaction-detail', { id })}
+  />
+
+  {/* 구매 완료 - 절약 금액 표시 */}
+  <ListCard
+    variant="filled"
+    thumbnail={<EthereumIcon />}
+    badges={<UpbitBadge />}
+    title="이더리움"
+    subtitle={<Text style={{ color: '#3b82f6' }}>500,000원 구매 완료</Text>}
+    meta={
+      <View style={{ alignItems: 'flex-end' }}>
+        <Text style={{ color: '#3b82f6', fontWeight: '600' }}>5,750원</Text>
+        <Text style={{ color: '#94a3b8', fontSize: 11 }}>아꼈어요</Text>
+      </View>
+    }
+    onPress={() => navigate('transaction-detail', { id })}
+  />
+
+  {/* 구매 실패 */}
+  <ListCard
+    variant="filled"
+    thumbnail={<EthereumIcon />}
+    badges={<UpbitBadge />}
+    title="이더리움"
+    subtitle={<Text style={{ color: '#ef4444' }}>500,000원 구매 실패</Text>}
+    onPress={() => navigate('transaction-detail', { id })}
+  />
+</View>`} />
+      </Section>
+
+      <Section title="자산 포트폴리오 예시">
+        <CodeBlock code={`// 보유 자산 리스트
+{assets.map((asset) => (
+  <ListCard
+    key={asset.symbol}
+    variant="elevated"
+    thumbnail={<CryptoIcon symbol={asset.symbol} />}
+    title={asset.name}
+    subtitle={\`\${asset.amount} \${asset.symbol}\`}
+    meta={
+      <View style={{ alignItems: 'flex-end' }}>
+        <Text style={{ fontWeight: '600' }}>₩{asset.value.toLocaleString()}</Text>
+        <Text style={{ color: asset.change >= 0 ? '#22c55e' : '#ef4444' }}>
+          {asset.change >= 0 ? '+' : ''}{asset.change}%
+        </Text>
+      </View>
+    }
+    onPress={() => navigate('asset-detail', { symbol: asset.symbol })}
   />
 ))}`} />
       </Section>
@@ -394,7 +470,59 @@ function PropsTable({ props }: { props: { name: string; type: string; required: 
   );
 }
 
-// Demo Components
+// Demo Components - ZKAP Crypto Icons
+function EthereumIcon({ size = 48 }: { size?: number }) {
+  return (
+    <div style={{ width: size, height: size, borderRadius: size / 2, backgroundColor: "#f1f5f9", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <svg width={size * 0.55} height={size * 0.55} viewBox="0 0 24 24" fill="#627eea">
+        <path d="M12 1.5l-7 10.5 7 4 7-4-7-10.5z" opacity="0.6" />
+        <path d="M12 22.5l-7-10 7 4 7-4-7 10z" />
+      </svg>
+    </div>
+  );
+}
+
+function BitcoinIcon({ size = 48 }: { size?: number }) {
+  return (
+    <div style={{ width: size, height: size, borderRadius: size / 2, backgroundColor: "#fff7ed", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <svg width={size * 0.55} height={size * 0.55} viewBox="0 0 24 24" fill="#f7931a">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.5 15h-1v1.5h-1V17h-1v1.5h-1V17H8v-1h1v-8H8V7h1.5V5.5h1V7h1V5.5h1V7c1.38 0 2.5 1.12 2.5 2.5 0 .82-.4 1.54-1 2 .83.46 1.5 1.37 1.5 2.5 0 1.38-1.12 2.5-2.5 2.5h-.5v1h-1v-1zm-.5-7c.55 0 1-.45 1-1s-.45-1-1-1h-2v2h2zm.5 5c.55 0 1-.45 1-1s-.45-1-1-1h-2.5v2H13z" />
+      </svg>
+    </div>
+  );
+}
+
+function UpbitBadge() {
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+      <div style={{ width: 16, height: 16, borderRadius: 8, backgroundColor: "#ff7800", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <span style={{ color: "white", fontSize: 8, fontWeight: 700 }}>U</span>
+      </div>
+      <span style={{ fontSize: 11, color: "#64748b", fontWeight: 500 }}>업비트</span>
+    </div>
+  );
+}
+
+function BithumbBadge() {
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+      <div style={{ width: 16, height: 16, borderRadius: 8, backgroundColor: "#f5c400", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <span style={{ color: "white", fontSize: 8, fontWeight: 700 }}>B</span>
+      </div>
+      <span style={{ fontSize: 11, color: "#64748b", fontWeight: 500 }}>빗썸</span>
+    </div>
+  );
+}
+
+function SavingsMeta({ amount, label }: { amount: string; label: string }) {
+  return (
+    <div style={{ textAlign: "right" }}>
+      <div style={{ fontSize: 14, color: "#3b82f6", fontWeight: 600 }}>{amount}</div>
+      <div style={{ fontSize: 11, color: "#94a3b8" }}>{label}</div>
+    </div>
+  );
+}
+
 function ThumbnailDemo({ size = 80 }: { size?: number }) {
   return (
     <div style={{ width: size, height: size, backgroundColor: "#e2e8f0", borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center" }}>
