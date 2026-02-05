@@ -178,7 +178,7 @@ export const ActionArea = forwardRef<HTMLDivElement, ActionAreaProps>(
       variant = 'strong',
       position = 'static',
       showGradient = true,
-      gradientHeight = 80,
+      gradientHeight = 48,
       caption,
       useSafeArea = true,
       backgroundColor = 'white',

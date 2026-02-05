@@ -30,7 +30,7 @@ import { ActionArea, ActionAreaButton } from '@zkap/design-system';
 | `variant` | `'strong' \| 'neutral' \| 'compact'` | `'strong'` | 레이아웃 variant |
 | `position` | `'static' \| 'sticky' \| 'fixed'` | `'static'` | 위치 설정 |
 | `showGradient` | `boolean` | `true` | 상단 그라데이션 표시 여부 |
-| `gradientHeight` | `number` | `80` | 그라데이션 높이 (px) |
+| `gradientHeight` | `number` | `48` | 그라데이션 높이 (px) |
 | `caption` | `string` | - | 캡션 텍스트 (버튼 상단) |
 | `useSafeArea` | `boolean` | `true` | Safe area 하단 패딩 적용 |
 | `backgroundColor` | `string` | `'white'` | 배경색 |

@@ -26,6 +26,8 @@ import {
   type PressableProps,
   type ViewStyle,
   type TextStyle,
+  type PressableStateCallbackType,
+  type StyleProp,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
@@ -180,7 +182,7 @@ export const ActionArea = forwardRef<View, ActionAreaProps>(
       variant = 'strong',
       position = 'static',
       showGradient = true,
-      gradientHeight = 80,
+      gradientHeight = 48,
       caption,
       useSafeArea = true,
       backgroundColor = 'white',
@@ -228,7 +230,7 @@ export const ActionArea = forwardRef<View, ActionAreaProps>(
               left: 0,
               right: 0,
               height: gradientHeight,
-            }}
+            } as ViewStyle}
             pointerEvents="none"
           />
         )}
@@ -298,9 +300,9 @@ export const ActionAreaButton = forwardRef<View, ActionAreaButtonProps>(
       <Pressable
         ref={ref}
         disabled={isDisabled}
-        style={({ pressed }) => [
+        style={(state: PressableStateCallbackType): StyleProp<ViewStyle> => [
           buttonStyle,
-          pressed && { opacity: 0.8 },
+          state.pressed && { opacity: 0.8 },
           style as ViewStyle,
         ]}
         {...props}
