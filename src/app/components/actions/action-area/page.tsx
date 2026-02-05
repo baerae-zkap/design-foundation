@@ -41,7 +41,6 @@ export default function ActionAreaPage() {
 function ActionAreaPlayground() {
   const [variant, setVariant] = useState<ActionAreaVariant>("strong");
   const [buttonCombo, setButtonCombo] = useState<"main+alt" | "main+sub" | "main">("main+alt");
-  const [hasExtra, setHasExtra] = useState(false);
   const [hasCaption, setHasCaption] = useState(false);
   const [codeType, setCodeType] = useState<"rn" | "web">("rn");
 
@@ -50,7 +49,7 @@ function ActionAreaPlayground() {
     const size = variant === "compact" ? "medium" : "xLarge";
 
     // Determine flex direction based on variant
-    const flexDirection = variant === "strong" || variant === "cancel" ? "column" : "row";
+    const flexDirection = variant === "strong" ? "column" : "row";
     const justifyContent = variant === "compact" ? ", justifyContent: 'flex-end'" : "";
     const alignItems = buttonCombo === "main+sub" && variant === "strong" ? ", alignItems: 'center'" : "";
 
@@ -92,7 +91,7 @@ function ActionAreaPlayground() {
     // Build buttons based on combo and variant
     let buttons = "";
     if (buttonCombo === "main+alt") {
-      if (variant === "strong" || variant === "cancel") {
+      if (variant === "strong") {
         buttons = `${mainButton}\n${altButton}`;
       } else {
         // neutral, compact: Alternative first, then Main
@@ -139,7 +138,6 @@ ${captionCode}${buttons}
             <div style={{ width: "100%", maxWidth: 320 }}>
               <ActionAreaDemo
                 variant={variant}
-                extra={hasExtra}
                 caption={hasCaption ? "변경 사항을 저장하시겠습니까?" : undefined}
               >
                 <ActionAreaButtonDemo variant="main" size={variant === "compact" ? "small" : "xLarge"}>
@@ -177,7 +175,6 @@ ${captionCode}${buttons}
                 { value: "strong", label: "Strong" },
                 { value: "neutral", label: "Neutral" },
                 { value: "compact", label: "Compact" },
-                { value: "cancel", label: "Cancel" },
               ]}
               value={variant}
               onChange={(v) => setVariant(v as ActionAreaVariant)}
@@ -193,17 +190,6 @@ ${captionCode}${buttons}
               ]}
               value={buttonCombo}
               onChange={(v) => setButtonCombo(v as "main+alt" | "main+sub" | "main")}
-            />
-
-            {/* Extra */}
-            <RadioGroup
-              label="Extra"
-              options={[
-                { value: "false", label: "False" },
-                { value: "true", label: "True" },
-              ]}
-              value={hasExtra ? "true" : "false"}
-              onChange={(v) => setHasExtra(v === "true")}
             />
 
             {/* Caption */}
@@ -566,43 +552,6 @@ function DesignContent() {
           </PreviewBox>
         </Subsection>
 
-        {/* Cancel */}
-        <Subsection title="Cancel">
-          <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
-            <strong style={{ color: "var(--text-primary)" }}>단일 버튼</strong>. 알림 다이얼로그의 확인이나 단순 닫기에 사용합니다.
-            추가 선택이 필요 없는 단순한 확인 동작에 적합합니다.
-          </p>
-          <PreviewBox>
-            <div style={{ width: "100%", maxWidth: 320 }}>
-              <ActionAreaDemo variant="cancel">
-                <ActionAreaButtonDemo variant="main" size="xLarge">확인</ActionAreaButtonDemo>
-              </ActionAreaDemo>
-            </div>
-          </PreviewBox>
-        </Subsection>
-      </Section>
-
-      {/* Extra Action Area */}
-      <Section title="Extra Action Area">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
-          <InlineCode>extra</InlineCode> prop을 활성화하면 버튼 영역과 상단 콘텐츠 영역을 시각적으로 구분합니다.
-          체크박스나 추가 정보 입력이 필요한 경우에 활용합니다.
-        </p>
-        <PreviewBox>
-          <div style={{ width: "100%", maxWidth: 320 }}>
-            <ActionAreaDemo variant="strong" extra>
-              <ActionAreaButtonDemo variant="main" size="xLarge">Main</ActionAreaButtonDemo>
-            </ActionAreaDemo>
-          </div>
-        </PreviewBox>
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginTop: 20, marginBottom: 20, lineHeight: 1.6 }}>
-          <InlineCode>extraContent</InlineCode> prop을 통해 상단에 커스텀 콘텐츠를 배치할 수 있습니다.
-        </p>
-        <PreviewBox>
-          <div style={{ width: "100%", maxWidth: 320 }}>
-            <ActionAreaWithExtra />
-          </div>
-        </PreviewBox>
       </Section>
 
       {/* Caption */}
@@ -650,12 +599,6 @@ function DesignContent() {
                   <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)" }}><code style={{ backgroundColor: "#dbeafe", padding: "2px 6px", borderRadius: 4, fontSize: 12, color: "#1d4ed8" }}>neutral</code></td>
                   <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>Main + Alternative</td>
                   <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", color: "var(--text-tertiary)", fontSize: 13 }}>확인/취소</td>
-                </tr>
-                <tr>
-                  <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", fontWeight: 500 }}>단순 확인</td>
-                  <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)" }}><code style={{ backgroundColor: "#dbeafe", padding: "2px 6px", borderRadius: 4, fontSize: 12, color: "#1d4ed8" }}>cancel</code></td>
-                  <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>Main only</td>
-                  <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", color: "var(--text-tertiary)", fontSize: 13 }}>알림 닫기</td>
                 </tr>
                 <tr>
                   <td style={{ padding: "10px 14px", fontWeight: 500 }}>인라인 액션</td>
@@ -941,30 +884,6 @@ function WebContent() {
 </View>`} />
       </Section>
 
-      <Section title="Cancel Variant">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
-          단일 버튼으로 확인/닫기 동작에 사용합니다.
-        </p>
-        <PreviewBox>
-          <div style={{ width: "100%", maxWidth: 320 }}>
-            <ActionAreaDemo variant="cancel">
-              <ActionAreaButtonDemo variant="main" size="xLarge">확인</ActionAreaButtonDemo>
-            </ActionAreaDemo>
-          </div>
-        </PreviewBox>
-        <CodeBlock code={`<View style={{ padding: 20 }}>
-  <Button
-    buttonType="filled"
-    color="brandDefault"
-    size="xLarge"
-    layout="fillWidth"
-    onClick={() => {}}
-  >
-    확인
-  </Button>
-</View>`} />
-      </Section>
-
       <Section title="With Caption">
         <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
           버튼 상단에 안내 텍스트를 추가합니다.
@@ -1195,30 +1114,6 @@ import { View, Text } from 'react-native';`} />
     onPress={() => {}}
   >
     Main
-  </Button>
-</View>`} />
-      </Section>
-
-      <Section title="Cancel Variant">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
-          단일 버튼으로 확인/닫기 동작에 사용합니다.
-        </p>
-        <PreviewBox>
-          <div style={{ width: "100%", maxWidth: 320 }}>
-            <ActionAreaDemo variant="cancel">
-              <ActionAreaButtonDemo variant="main" size="xLarge">확인</ActionAreaButtonDemo>
-            </ActionAreaDemo>
-          </div>
-        </PreviewBox>
-        <CodeBlock code={`<View style={{ padding: 20 }}>
-  <Button
-    buttonType="filled"
-    color="brandDefault"
-    size="xLarge"
-    layout="fillWidth"
-    onPress={() => {}}
-  >
-    확인
   </Button>
 </View>`} />
       </Section>
@@ -1607,7 +1502,7 @@ function AnatomyDiagram() {
 // ============================================
 // Demo Components (matching Button page styling)
 // ============================================
-type ActionAreaVariant = "strong" | "neutral" | "compact" | "cancel";
+type ActionAreaVariant = "strong" | "neutral" | "compact";
 type ButtonVariant = "main" | "sub" | "alternative";
 type ButtonSize = "small" | "xLarge";
 type ButtonType = "filled" | "outlined";
@@ -1616,15 +1511,13 @@ type ButtonColor = "brandDefault" | "brandSecondary" | "baseContainer" | "succes
 interface ActionAreaDemoProps {
   variant: ActionAreaVariant;
   children: React.ReactNode;
-  extra?: boolean;
   caption?: string;
 }
 
-function ActionAreaDemo({ variant, children, extra, caption }: ActionAreaDemoProps) {
+function ActionAreaDemo({ variant, children, caption }: ActionAreaDemoProps) {
   const getLayout = () => {
     switch (variant) {
       case "strong":
-      case "cancel":
         return { flexDirection: "column" as const, gap: 12 };
       case "neutral":
         return { flexDirection: "row" as const, gap: 12 };
@@ -1651,7 +1544,6 @@ function ActionAreaDemo({ variant, children, extra, caption }: ActionAreaDemoPro
         style={{
           padding: 20,
           backgroundColor: "white",
-          borderTop: extra ? "3px solid #d1d5db" : "none",
         }}
       >
         {caption && (
@@ -1661,45 +1553,6 @@ function ActionAreaDemo({ variant, children, extra, caption }: ActionAreaDemoPro
         )}
         <div style={{ display: "flex", ...layout }}>
           {children}
-        </div>
-      </div>
-
-      {/* Home indicator */}
-      <div style={{ padding: "8px 0 12px", backgroundColor: "white", display: "flex", justifyContent: "center" }}>
-        <div style={{ width: 60, height: 4, backgroundColor: "#d1d5db", borderRadius: 2 }} />
-      </div>
-    </div>
-  );
-}
-
-function ActionAreaWithExtra() {
-  const [checked, setChecked] = useState(false);
-
-  return (
-    <div
-      style={{
-        borderLeft: "2px solid #d1d5db",
-        borderRight: "2px solid #d1d5db",
-        borderBottom: "2px solid #d1d5db",
-        borderRadius: "0 0 20px 20px",
-        overflow: "hidden",
-        backgroundColor: "white",
-      }}
-    >
-      {/* Extra Content with top divider */}
-      <div style={{ borderTop: "3px solid #e5e7eb", padding: 20 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
-          <input
-            type="checkbox"
-            checked={checked}
-            onChange={(e) => setChecked(e.target.checked)}
-            style={{ width: 18, height: 18, accentColor: "#2563eb" }}
-          />
-          <label style={{ fontSize: 14, color: "#18181b" }}>약관에 동의합니다.</label>
-        </div>
-        {/* Buttons */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-          <ActionAreaButtonDemo variant="main" size="xLarge">동의하고 계속하기</ActionAreaButtonDemo>
         </div>
       </div>
 
