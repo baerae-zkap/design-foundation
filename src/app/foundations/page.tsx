@@ -73,7 +73,7 @@ const foundations = [
 
 export default function FoundationsPage() {
   return (
-    <div style={{ maxWidth: 960, margin: "0 auto" }}>
+    <div style={{ maxWidth: 720 }}>
       <Breadcrumb items={[{ label: "Foundations" }]} />
 
       <h1 style={{ fontSize: 32, fontWeight: 700, marginBottom: 8, color: "var(--text-primary)" }}>

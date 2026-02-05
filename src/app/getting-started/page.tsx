@@ -4,7 +4,7 @@ import { PreviewBox, CodeBlock } from "@/components/PlatformTabs";
 
 export default function GettingStartedPage() {
   return (
-    <div style={{ padding: "40px 48px", maxWidth: 900 }}>
+    <div style={{ maxWidth: 720 }}>
       <header style={{ marginBottom: 48 }}>
         <h1
           style={{
