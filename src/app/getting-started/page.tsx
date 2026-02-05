@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { PreviewBox, CodeBlock } from "@/components/PlatformTabs";
 
 export default function GettingStartedPage() {
@@ -234,7 +235,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 function ComponentCard({ name, description, href }: { name: string; description: string; href: string }) {
   return (
-    <a
+    <Link
       href={href}
       style={{
         display: "block",
@@ -260,6 +261,6 @@ function ComponentCard({ name, description, href }: { name: string; description:
       <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0, lineHeight: 1.5 }}>
         {description}
       </p>
-    </a>
+    </Link>
   );
 }
