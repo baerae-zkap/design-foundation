@@ -1,0 +1,72 @@
+{
+  "name": "@zkap/design-system",
+  "version": "0.1.0",
+  "description": "ZKAP Design System - React & React Native Components with AI-readable documentation",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./native": {
+      "types": "./dist/native/index.d.ts",
+      "import": "./dist/native/index.mjs",
+      "require": "./dist/native/index.js"
+    },
+    "./docs": "./docs/COMPONENTS.md",
+    "./docs/*": "./docs/*"
+  },
+  "files": [
+    "dist",
+    "docs",
+    "src/**/*.md",
+    "README.md",
+    "COMPONENTS.md"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsup",
+    "build:watch": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src/",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-native": ">=0.70.0"
+  },
+  "peerDependenciesMeta": {
+    "react-native": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/react": "^19",
+    "@types/react-native": "^0.72",
+    "react": "^19",
+    "tsup": "^8",
+    "typescript": "^5"
+  },
+  "keywords": [
+    "design-system",
+    "react",
+    "react-native",
+    "components",
+    "ui",
+    "zkap",
+    "ai-docs"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/baerae-zkap/design-foundation.git",
+    "directory": "packages/design-system"
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}

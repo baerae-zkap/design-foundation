@@ -442,24 +442,11 @@ function DesignContent() {
               number={1}
               title="화면당 Primary CTA는 1개"
               desc="brandDefault + filled 조합은 화면당 1개만 사용하세요. 여러 액션이 있다면 나머지는 brandSecondary 또는 outlined를 사용합니다."
-              doExample={
-                <div style={{ display: "flex", gap: 8 }}>
-                  <ButtonDemo buttonType="filled" color="brandDefault" size="small">결제하기</ButtonDemo>
-                  <ButtonDemo buttonType="outlined" color="baseContainer" size="small">취소</ButtonDemo>
-                </div>
-              }
-              dontExample={
-                <div style={{ display: "flex", gap: 8 }}>
-                  <ButtonDemo buttonType="filled" color="brandDefault" size="small">결제하기</ButtonDemo>
-                  <ButtonDemo buttonType="filled" color="brandDefault" size="small">장바구니</ButtonDemo>
-                </div>
-              }
             />
             <PrincipleCard
               number={2}
               title="버튼 계층 구조 유지"
-              desc="가장 중요한 액션에 가장 강조된 스타일을 사용하세요. 취소/닫기는 항상 outlined + baseContainer입니다."
-              hierarchy={["brandDefault (filled)", "brandSecondary (filled)", "outlined", "TextButton"]}
+              desc="가장 중요한 액션에 가장 강조된 스타일을 사용하세요. 취소/닫기는 항상 outlined + baseContainer입니다. 강조도: brandDefault > brandSecondary > outlined > TextButton"
             />
             <PrincipleCard
               number={3}
@@ -901,51 +888,157 @@ function DesignContent() {
       {/* Design Tokens */}
       <Section title="Design Tokens">
         <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
-          Button 컴포넌트에 적용된 디자인 토큰입니다.
+          Button 컴포넌트에 적용된 Foundation 기반 디자인 토큰입니다. <a href="/spacing" style={{ color: "var(--brand-primary)" }}>Spacing 토큰 전체 보기 →</a>
         </p>
 
-        <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)" }}>
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
-            <thead>
-              <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Property</th>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Token</th>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Value</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-primary)" }}>Border Radius</td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><InlineCode>vars.radius.s</InlineCode></td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>8px</td>
-              </tr>
-              <tr>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-primary)" }}>Horizontal Padding</td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><InlineCode>vars.spacing[4]</InlineCode></td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>16px</td>
-              </tr>
-              <tr>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-primary)" }}>Border Width (outlined)</td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>-</td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>1px</td>
-              </tr>
-              <tr>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-primary)" }}>Typography (small-large)</td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><InlineCode>typography.sm.semibold</InlineCode></td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>14px / 600</td>
-              </tr>
-              <tr>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-primary)" }}>Typography (xLarge)</td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><InlineCode>typography.base.semibold</InlineCode></td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>16px / 600</td>
-              </tr>
-              <tr>
-                <td style={{ padding: "12px 16px", color: "var(--text-primary)" }}>Press Scale</td>
-                <td style={{ padding: "12px 16px" }}>-</td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>0.98</td>
-              </tr>
-            </tbody>
-          </table>
+        <Subsection title="Spacing & Layout">
+          <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+              <thead>
+                <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Property</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Foundation Token</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-primary)" }}>Horizontal Padding</td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><InlineCode>button.paddingX.sm</InlineCode></td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>16px (primitive.4)</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-primary)" }}>Icon-Text Gap</td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><InlineCode>button.gap</InlineCode></td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>8px (primitive.2)</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-primary)" }}>Border Radius</td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><InlineCode>radius.s</InlineCode></td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>8px</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "12px 16px", color: "var(--text-primary)" }}>Border Width (outlined)</td>
+                  <td style={{ padding: "12px 16px" }}>-</td>
+                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>1px</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </Subsection>
+
+        <Subsection title="Height (Size별)">
+          <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+              <thead>
+                <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Size</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Foundation Token</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><InlineCode>small</InlineCode></td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><InlineCode>primitive.8 + 4</InlineCode></td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>36px</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><InlineCode>medium</InlineCode></td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><InlineCode>primitive.10</InlineCode></td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>40px</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><InlineCode>large</InlineCode></td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><InlineCode>primitive.12 - 4</InlineCode></td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>44px</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "12px 16px" }}><InlineCode>xLarge</InlineCode></td>
+                  <td style={{ padding: "12px 16px" }}><InlineCode>primitive.12</InlineCode></td>
+                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>48px</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </Subsection>
+
+        <Subsection title="Typography">
+          <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+              <thead>
+                <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Size</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Token</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>small / medium / large</td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><InlineCode>typography.sm.semibold</InlineCode></td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>14px / 600</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "12px 16px" }}>xLarge</td>
+                  <td style={{ padding: "12px 16px" }}><InlineCode>typography.base.semibold</InlineCode></td>
+                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>16px / 600</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </Subsection>
+
+        <Subsection title="Interaction">
+          <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+              <thead>
+                <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Property</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Value</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>설명</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-primary)" }}>Press Scale</td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>0.98</td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>누름 시 살짝 축소</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "12px 16px", color: "var(--text-primary)" }}>Min Touch Target</td>
+                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>44px</td>
+                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>iOS HIG 기준 최소 터치 영역</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </Subsection>
+      </Section>
+
+      {/* Accessibility */}
+      <Section title="Accessibility">
+        <div style={{ display: "grid", gap: 16 }}>
+          <PrincipleCard
+            number={1}
+            title="Focus Visible"
+            desc="키보드 포커스 시 2px solid outline이 표시됩니다. 포커스 링은 버튼 외곽에서 2px offset으로 표시되어 시인성을 확보합니다."
+          />
+          <PrincipleCard
+            number={2}
+            title="Minimum Touch Target"
+            desc="모든 버튼은 최소 44x44px 터치 영역을 확보합니다 (iOS HIG 기준). small 사이즈도 hitSlop을 통해 터치 영역을 보장합니다."
+          />
+          <PrincipleCard
+            number={3}
+            title="Color Contrast"
+            desc="WCAG 2.1 AA 기준(4.5:1)을 충족하는 색상 대비를 유지합니다. disabled 상태에서도 텍스트 가독성을 유지합니다."
+          />
+          <PrincipleCard
+            number={4}
+            title="Screen Reader Support"
+            desc="버튼의 역할(role='button')과 상태(aria-disabled, aria-busy)가 스크린 리더에 전달됩니다. icon-only 버튼은 반드시 aria-label을 제공해야 합니다."
+          />
         </div>
       </Section>
     </>
@@ -1558,73 +1651,36 @@ function UsageCard({ situation, desc, buttonType, color, examples }: {
   );
 }
 
-function PrincipleCard({ number, title, desc, doExample, dontExample, hierarchy }: {
+function PrincipleCard({ number, title, desc }: {
   number: number;
   title: string;
   desc: string;
-  doExample?: React.ReactNode;
-  dontExample?: React.ReactNode;
-  hierarchy?: string[];
 }) {
   return (
     <div style={{
-      padding: 24,
+      padding: 20,
       backgroundColor: "white",
-      borderRadius: 16,
+      borderRadius: 12,
       border: "1px solid var(--divider)",
     }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 8 }}>
         <span style={{
-          width: 24,
-          height: 24,
+          width: 22,
+          height: 22,
           borderRadius: "50%",
-          backgroundColor: "var(--brand-primary)",
-          color: "white",
+          backgroundColor: "#e5e7eb",
+          color: "#6b7280",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          fontSize: 13,
+          fontSize: 12,
           fontWeight: 600,
         }}>
           {number}
         </span>
         <span style={{ fontSize: 15, fontWeight: 600, color: "var(--text-primary)" }}>{title}</span>
       </div>
-      <p style={{ fontSize: 14, color: "var(--text-secondary)", margin: 0, marginBottom: doExample || hierarchy ? 20 : 0, lineHeight: 1.6 }}>{desc}</p>
-
-      {(doExample || dontExample) && (
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
-          {doExample && (
-            <DoCard>{doExample}</DoCard>
-          )}
-          {dontExample && (
-            <DontCard>{dontExample}</DontCard>
-          )}
-        </div>
-      )}
-
-      {hierarchy && (
-        <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
-          {hierarchy.map((item, i) => (
-            <div key={item} style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <span style={{
-                fontSize: 12,
-                padding: "4px 10px",
-                backgroundColor: i === 0 ? "#dbeafe" : i === 1 ? "#e0e7ff" : i === 2 ? "#f1f5f9" : "#fafafa",
-                color: i === 0 ? "#1d4ed8" : i === 1 ? "#4338ca" : "#64748b",
-                borderRadius: 6,
-                fontWeight: 500,
-              }}>
-                {item}
-              </span>
-              {i < hierarchy.length - 1 && (
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-              )}
-            </div>
-          ))}
-          <span style={{ fontSize: 12, color: "var(--text-tertiary)", marginLeft: 4 }}>(강조도 순)</span>
-        </div>
-      )}
+      <p style={{ fontSize: 14, color: "var(--text-secondary)", margin: 0, lineHeight: 1.6, paddingLeft: 34 }}>{desc}</p>
     </div>
   );
 }

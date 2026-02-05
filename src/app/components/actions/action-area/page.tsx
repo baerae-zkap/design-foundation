@@ -43,7 +43,6 @@ function ActionAreaPlayground() {
   const [buttonCombo, setButtonCombo] = useState<"main+alt" | "main+sub" | "main">("main+alt");
   const [hasExtra, setHasExtra] = useState(false);
   const [hasCaption, setHasCaption] = useState(false);
-  const [hasBackground, setHasBackground] = useState(false);
   const [codeType, setCodeType] = useState<"rn" | "web">("rn");
 
   const generateCode = () => {
@@ -82,14 +81,13 @@ function ActionAreaPlayground() {
     Alternative
   </Button>`;
 
-    // Sub button (plain style)
-    const subButton = `  <Button
-    buttonType="plain"
+    // Sub button (TextButton)
+    const subButton = `  <TextButton
     color="brandDefault"
     ${eventHandler}
   >
     Sub
-  </Button>`;
+  </TextButton>`;
 
     // Build buttons based on combo and variant
     let buttons = "";
@@ -106,24 +104,11 @@ function ActionAreaPlayground() {
       buttons = mainButton;
     }
 
-    // Wrapper style
-    let wrapperStyle = `flexDirection: '${flexDirection}', gap: 10, padding: 20${justifyContent}${alignItems}`;
+    // Wrapper style - padding: Modal(24px) or BottomSheet(20px), gap: modal.buttonGap(12px)
+    const wrapperStyle = `flexDirection: '${flexDirection}', gap: 12, padding: 20${justifyContent}${alignItems}`;
 
-    // Background wrapper
-    if (hasBackground) {
-      if (codeType === "rn") {
-        return `<LinearGradient
-  colors={['rgba(255,255,255,0)', '#f4f4f5']}
-  style={{ padding: 20 }}
->
-${captionCode}${buttons}
-</LinearGradient>`;
-      } else {
-        wrapperStyle = `flexDirection: '${flexDirection}', gap: 10, padding: 20${justifyContent}${alignItems}, background: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, #f4f4f5 100%)'`;
-      }
-    }
-
-    return `<View style={{ ${wrapperStyle} }}>
+    return `{/* gap: modal.buttonGap(12), padding: bottomSheet.padding(20) or modal.padding(24) */}
+<View style={{ ${wrapperStyle} }}>
 ${captionCode}${buttons}
 </View>`;
   };
@@ -156,7 +141,6 @@ ${captionCode}${buttons}
                 variant={variant}
                 extra={hasExtra}
                 caption={hasCaption ? "변경 사항을 저장하시겠습니까?" : undefined}
-                background={hasBackground}
               >
                 <ActionAreaButtonDemo variant="main" size={variant === "compact" ? "small" : "xLarge"}>
                   Main
@@ -232,17 +216,6 @@ ${captionCode}${buttons}
               value={hasCaption ? "true" : "false"}
               onChange={(v) => setHasCaption(v === "true")}
             />
-
-            {/* Background */}
-            <RadioGroup
-              label="Background"
-              options={[
-                { value: "false", label: "False" },
-                { value: "true", label: "True" },
-              ]}
-              value={hasBackground ? "true" : "false"}
-              onChange={(v) => setHasBackground(v === "true")}
-            />
           </div>
         </div>
       </div>
@@ -301,7 +274,7 @@ function RadioGroup({ label, options, value, onChange }: {
             style={{
               display: "flex",
               alignItems: "center",
-              gap: 10,
+              gap: 12,
               cursor: "pointer",
               fontSize: 14,
               fontWeight: 500,
@@ -486,13 +459,12 @@ function DesignContent() {
   Alternative
 </Button>
 
-// variant="sub" maps to:
-<Button
-  buttonType="plain"
+// variant="sub" maps to TextButton:
+<TextButton
   color="brandDefault"
 >
   Sub
-</Button>`} />
+</TextButton>`} />
       </Section>
 
       {/* Anatomy */}
@@ -649,28 +621,6 @@ function DesignContent() {
         </PreviewBox>
       </Section>
 
-      {/* Background */}
-      <Section title="Background">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
-          <InlineCode>background</InlineCode> prop을 활성화하면 gradient 배경이나 divider가 표시됩니다.
-          스크롤 가능한 콘텐츠 위에 ActionArea를 고정할 때 시각적 구분을 위해 사용합니다.
-        </p>
-        <PreviewBox>
-          <div style={{ width: 320 }}>
-            <ActionAreaDemo variant="strong" background>
-              <ActionAreaButtonDemo variant="main" size="xLarge">Main</ActionAreaButtonDemo>
-              <ActionAreaButtonDemo variant="alternative" size="xLarge">Alternative</ActionAreaButtonDemo>
-            </ActionAreaDemo>
-          </div>
-        </PreviewBox>
-        <div style={{ marginTop: 16, padding: 16, backgroundColor: "var(--bg-secondary)", borderRadius: 8, fontSize: 13 }}>
-          <p style={{ margin: 0, color: "var(--text-secondary)", lineHeight: 1.8 }}>
-            <strong style={{ color: "var(--text-primary)" }}>Auto Detection:</strong> Popup, Bottom Sheet 내부에서 사용할 경우,
-            스크롤 여부에 따라 background 옵션이 자동으로 조정됩니다.
-          </p>
-        </div>
-      </Section>
-
       {/* Usage Guidelines */}
       <Section title="Usage Guidelines">
         <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 24, lineHeight: 1.6 }}>
@@ -678,42 +628,43 @@ function DesignContent() {
         </p>
 
         <Subsection title="Recommended Combinations">
-          <div style={{ display: "grid", gap: 12 }}>
-            <UsageCard
-              situation="중요한 결정"
-              desc="모달에서 주요 액션과 취소를 제공"
-              variant="strong"
-              buttons="Main + Alternative"
-              examples={["결제 확인", "회원가입", "파일 저장"]}
-            />
-            <UsageCard
-              situation="균등한 선택지"
-              desc="두 가지 옵션이 비슷한 중요도를 가질 때"
-              variant="neutral"
-              buttons="Main + Alternative"
-              examples={["확인/취소", "예/아니오"]}
-            />
-            <UsageCard
-              situation="보조 액션 포함"
-              desc="주요 액션과 함께 덜 중요한 링크 제공"
-              variant="strong"
-              buttons="Main + Sub"
-              examples={["로그인 + 회원가입", "구매 + 장바구니"]}
-            />
-            <UsageCard
-              situation="단순 확인"
-              desc="추가 선택 없이 확인만 필요할 때"
-              variant="cancel"
-              buttons="Main only"
-              examples={["알림 확인", "안내 닫기"]}
-            />
-            <UsageCard
-              situation="인라인 액션"
-              desc="카드나 리스트 아이템 내부"
-              variant="compact"
-              buttons="Main + Alternative"
-              examples={["수정/삭제", "승인/반려"]}
-            />
+          <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+              <thead>
+                <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
+                  <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)", color: "var(--text-primary)" }}>상황</th>
+                  <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)", color: "var(--text-primary)" }}>Variant</th>
+                  <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)", color: "var(--text-primary)" }}>버튼 조합</th>
+                  <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)", color: "var(--text-primary)" }}>예시</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", fontWeight: 500 }}>중요한 결정</td>
+                  <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)" }}><code style={{ backgroundColor: "#dbeafe", padding: "2px 6px", borderRadius: 4, fontSize: 12, color: "#1d4ed8" }}>strong</code></td>
+                  <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>Main + Alternative</td>
+                  <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", color: "var(--text-tertiary)", fontSize: 13 }}>결제, 저장</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", fontWeight: 500 }}>균등한 선택</td>
+                  <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)" }}><code style={{ backgroundColor: "#dbeafe", padding: "2px 6px", borderRadius: 4, fontSize: 12, color: "#1d4ed8" }}>neutral</code></td>
+                  <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>Main + Alternative</td>
+                  <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", color: "var(--text-tertiary)", fontSize: 13 }}>확인/취소</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", fontWeight: 500 }}>단순 확인</td>
+                  <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)" }}><code style={{ backgroundColor: "#dbeafe", padding: "2px 6px", borderRadius: 4, fontSize: 12, color: "#1d4ed8" }}>cancel</code></td>
+                  <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>Main only</td>
+                  <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", color: "var(--text-tertiary)", fontSize: 13 }}>알림 닫기</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "10px 14px", fontWeight: 500 }}>인라인 액션</td>
+                  <td style={{ padding: "10px 14px" }}><code style={{ backgroundColor: "#dbeafe", padding: "2px 6px", borderRadius: 4, fontSize: 12, color: "#1d4ed8" }}>compact</code></td>
+                  <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>Main + Alternative</td>
+                  <td style={{ padding: "10px 14px", color: "var(--text-tertiary)", fontSize: 13 }}>수정/삭제</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </Subsection>
 
@@ -802,63 +753,10 @@ function DesignContent() {
         </Subsection>
       </Section>
 
-      {/* Accessibility */}
-      <Section title="Accessibility">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 24, lineHeight: 1.6 }}>
-          ActionArea는 모든 사용자가 접근할 수 있도록 접근성 기능을 지원합니다.
-        </p>
-
-        <div style={{ display: "grid", gap: 16 }}>
-          <AccessibilityCard
-            icon="⌨️"
-            title="키보드 내비게이션"
-            items={[
-              "Tab: 버튼 간 포커스 이동",
-              "Enter / Space: 포커스된 버튼 실행",
-              "포커스 링이 시각적으로 표시됨",
-            ]}
-          />
-          <AccessibilityCard
-            icon="🔊"
-            title="스크린 리더"
-            items={[
-              "버튼 역할(role=\"button\")이 자동으로 적용됨",
-              "비활성화 상태가 aria-disabled로 전달됨",
-              "로딩 상태가 aria-busy로 전달됨",
-            ]}
-          />
-          <AccessibilityCard
-            icon="📱"
-            title="터치 타겟"
-            items={[
-              "최소 44x44px 터치 영역 확보 (WCAG 2.5.5)",
-              "xLarge 사이즈: 48px 높이로 충분한 터치 영역 제공",
-              "버튼 간 최소 10px 간격으로 오터치 방지",
-            ]}
-          />
-          <AccessibilityCard
-            icon="🎨"
-            title="색상 대비"
-            items={[
-              "Main 버튼: 4.5:1 이상 대비율 확보",
-              "텍스트와 배경 간 WCAG AA 기준 충족",
-              "비활성화 상태도 구분 가능한 대비 유지",
-            ]}
-          />
-        </div>
-
-        <div style={{ marginTop: 24, padding: 16, backgroundColor: "var(--bg-secondary)", borderRadius: 8 }}>
-          <p style={{ margin: 0, fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.8 }}>
-            <strong style={{ color: "var(--text-primary)" }}>React Native 접근성:</strong> accessibilityLabel, accessibilityHint,
-            accessibilityState props를 통해 네이티브 접근성 기능을 활용하세요.
-          </p>
-        </div>
-      </Section>
-
       {/* Design Tokens */}
       <Section title="Design Tokens">
         <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
-          ActionArea 컴포넌트에 적용된 디자인 토큰입니다.
+          ActionArea는 사용되는 컨텍스트에 따라 다른 토큰을 적용합니다. <a href="/spacing" style={{ color: "var(--brand-primary)" }}>Spacing 토큰 전체 보기 →</a>
         </p>
 
         <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)" }}>
@@ -866,38 +764,69 @@ function DesignContent() {
             <thead>
               <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
                 <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)", color: "var(--text-primary)" }}>Property</th>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)", color: "var(--text-primary)" }}>Context</th>
                 <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)", color: "var(--text-primary)" }}>Token</th>
                 <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)", color: "var(--text-primary)" }}>Value</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-primary)" }}>Container Padding</td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><InlineCode>vars.spacing[5]</InlineCode></td>
+                <td rowSpan={2} style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-primary)", verticalAlign: "middle" }}>Container Padding</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)", fontSize: 13 }}>Modal</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><InlineCode>modal.padding</InlineCode></td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>24px</td>
+              </tr>
+              <tr>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)", fontSize: 13 }}>BottomSheet</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><InlineCode>bottomSheet.padding</InlineCode></td>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>20px</td>
               </tr>
               <tr>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-primary)" }}>Button Gap (Strong)</td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><InlineCode>vars.spacing[2.5]</InlineCode></td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>10px</td>
-              </tr>
-              <tr>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-primary)" }}>Button Gap (Neutral/Compact)</td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><InlineCode>vars.spacing[2.5]</InlineCode></td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>10px</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-primary)" }}>Button Gap</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)", fontSize: 13 }}>All</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><InlineCode>modal.buttonGap</InlineCode></td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>12px</td>
               </tr>
               <tr>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-primary)" }}>Caption Font Size</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)", fontSize: 13 }}>All</td>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><InlineCode>typography.sm</InlineCode></td>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>14px</td>
               </tr>
               <tr>
                 <td style={{ padding: "12px 16px", color: "var(--text-primary)" }}>Button Height (xLarge)</td>
-                <td style={{ padding: "12px 16px" }}><InlineCode>48px</InlineCode></td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)", fontSize: 13 }}>All</td>
+                <td style={{ padding: "12px 16px" }}><InlineCode>primitive.12</InlineCode></td>
                 <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>48px</td>
               </tr>
             </tbody>
           </table>
+        </div>
+      </Section>
+
+      {/* Accessibility */}
+      <Section title="Accessibility">
+        <div style={{ display: "grid", gap: 16 }}>
+          <PrincipleCard
+            number={1}
+            title="Focus Order"
+            desc="버튼 간 포커스 순서는 시각적 순서와 일치합니다. Strong variant에서는 Main → Alternative 순으로, Neutral/Compact에서는 좌측 → 우측 순으로 포커스가 이동합니다."
+          />
+          <PrincipleCard
+            number={2}
+            title="Keyboard Navigation"
+            desc="Tab 키로 버튼 간 이동, Enter 또는 Space 키로 활성화할 수 있습니다. 모달 내에서는 Tab이 Action Area 내에서 순환하도록 구현합니다."
+          />
+          <PrincipleCard
+            number={3}
+            title="Screen Reader Announcement"
+            desc="버튼 그룹의 컨텍스트를 role='group'과 aria-label로 전달합니다. caption이 있는 경우 aria-describedby로 연결하여 맥락을 제공합니다."
+          />
+          <PrincipleCard
+            number={4}
+            title="Loading State"
+            desc="로딩 상태에서는 aria-busy='true'를 설정하고, 완료 시 결과를 aria-live 영역으로 알립니다. 로딩 중에는 추가 상호작용이 방지됩니다."
+          />
         </div>
       </Section>
     </>
@@ -914,6 +843,10 @@ function WebContent() {
         <CodeBlock code={`import { Button } from '@zkap/design-system';`} />
       </Section>
 
+      <div style={{ padding: "12px 16px", backgroundColor: "var(--blue-95)", borderRadius: 8, marginBottom: 24, fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.6 }}>
+        <strong style={{ color: "var(--text-primary)" }}>Token Usage:</strong> 아래 예제의 <code style={{ backgroundColor: "rgba(0,0,0,0.06)", padding: "2px 4px", borderRadius: 3 }}>gap: 12</code>는 <code style={{ backgroundColor: "rgba(0,0,0,0.06)", padding: "2px 4px", borderRadius: 3 }}>modal.buttonGap</code>, <code style={{ backgroundColor: "rgba(0,0,0,0.06)", padding: "2px 4px", borderRadius: 3 }}>padding: 20</code>은 <code style={{ backgroundColor: "rgba(0,0,0,0.06)", padding: "2px 4px", borderRadius: 3 }}>bottomSheet.padding</code> 기준입니다. Modal에서는 <code style={{ backgroundColor: "rgba(0,0,0,0.06)", padding: "2px 4px", borderRadius: 3 }}>padding: 24</code> (<code style={{ backgroundColor: "rgba(0,0,0,0.06)", padding: "2px 4px", borderRadius: 3 }}>modal.padding</code>)를 사용하세요.
+      </div>
+
       <Section title="Strong Variant">
         <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
           세로 배치, Main 버튼이 위에 위치합니다.
@@ -926,7 +859,7 @@ function WebContent() {
             </ActionAreaDemo>
           </div>
         </PreviewBox>
-        <CodeBlock code={`<View style={{ flexDirection: 'column', gap: 10, padding: 20 }}>
+        <CodeBlock code={`<View style={{ flexDirection: 'column', gap: 12, padding: 20 }}>
   <Button
     buttonType="filled"
     color="brandDefault"
@@ -960,7 +893,7 @@ function WebContent() {
             </ActionAreaDemo>
           </div>
         </PreviewBox>
-        <CodeBlock code={`<View style={{ flexDirection: 'row', gap: 10, padding: 20 }}>
+        <CodeBlock code={`<View style={{ flexDirection: 'row', gap: 12, padding: 20 }}>
   <Button
     buttonType="outlined"
     color="baseContainer"
@@ -994,14 +927,13 @@ function WebContent() {
             </ActionAreaDemo>
           </div>
         </PreviewBox>
-        <CodeBlock code={`<View style={{ flexDirection: 'row', gap: 10, justifyContent: 'flex-end', padding: 20 }}>
-  <Button
-    buttonType="plain"
+        <CodeBlock code={`<View style={{ flexDirection: 'row', gap: 12, justifyContent: 'flex-end', padding: 20 }}>
+  <TextButton
     color="brandDefault"
     onClick={() => {}}
   >
     Sub
-  </Button>
+  </TextButton>
   <Button
     buttonType="filled"
     color="brandDefault"
@@ -1049,7 +981,7 @@ function WebContent() {
             </ActionAreaDemo>
           </div>
         </PreviewBox>
-        <CodeBlock code={`<View style={{ flexDirection: 'column', gap: 10, padding: 20 }}>
+        <CodeBlock code={`<View style={{ flexDirection: 'column', gap: 12, padding: 20 }}>
   <Text style={{ fontSize: 14, color: '#6b7280', textAlign: 'center', marginBottom: 6 }}>
     변경 사항을 저장하시겠습니까?
   </Text>
@@ -1074,33 +1006,6 @@ function WebContent() {
 </View>`} />
       </Section>
 
-      <Section title="With Background">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
-          스크롤 콘텐츠 위에 고정할 때 gradient 배경을 추가합니다.
-        </p>
-        <PreviewBox>
-          <div style={{ width: 320 }}>
-            <ActionAreaDemo variant="strong" background>
-              <ActionAreaButtonDemo variant="main" size="xLarge">Main</ActionAreaButtonDemo>
-            </ActionAreaDemo>
-          </div>
-        </PreviewBox>
-        <CodeBlock code={`<View style={{
-  padding: 20,
-  background: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, #f4f4f5 100%)'
-}}>
-  <Button
-    buttonType="filled"
-    color="brandDefault"
-    size="xLarge"
-    layout="fillWidth"
-    onClick={() => {}}
-  >
-    Main
-  </Button>
-</View>`} />
-      </Section>
-
       <Section title="Main + Sub Combination">
         <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
           주요 액션과 보조 링크를 함께 제공합니다.
@@ -1113,7 +1018,7 @@ function WebContent() {
             </ActionAreaDemo>
           </div>
         </PreviewBox>
-        <CodeBlock code={`<View style={{ flexDirection: 'column', gap: 10, padding: 20, alignItems: 'center' }}>
+        <CodeBlock code={`<View style={{ flexDirection: 'column', gap: 12, padding: 20, alignItems: 'center' }}>
   <Button
     buttonType="filled"
     color="brandDefault"
@@ -1123,13 +1028,12 @@ function WebContent() {
   >
     로그인
   </Button>
-  <Button
-    buttonType="plain"
+  <TextButton
     color="brandDefault"
     onClick={() => {}}
   >
     회원가입
-  </Button>
+  </TextButton>
 </View>`} />
       </Section>
 
@@ -1201,6 +1105,10 @@ function RNContent() {
 import { View, Text } from 'react-native';`} />
       </Section>
 
+      <div style={{ padding: "12px 16px", backgroundColor: "var(--blue-95)", borderRadius: 8, marginBottom: 24, fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.6 }}>
+        <strong style={{ color: "var(--text-primary)" }}>Token Usage:</strong> 아래 예제의 <code style={{ backgroundColor: "rgba(0,0,0,0.06)", padding: "2px 4px", borderRadius: 3 }}>gap: 12</code>는 <code style={{ backgroundColor: "rgba(0,0,0,0.06)", padding: "2px 4px", borderRadius: 3 }}>modal.buttonGap</code>, <code style={{ backgroundColor: "rgba(0,0,0,0.06)", padding: "2px 4px", borderRadius: 3 }}>padding: 20</code>은 <code style={{ backgroundColor: "rgba(0,0,0,0.06)", padding: "2px 4px", borderRadius: 3 }}>bottomSheet.padding</code> 기준입니다. Modal에서는 <code style={{ backgroundColor: "rgba(0,0,0,0.06)", padding: "2px 4px", borderRadius: 3 }}>padding: 24</code> (<code style={{ backgroundColor: "rgba(0,0,0,0.06)", padding: "2px 4px", borderRadius: 3 }}>modal.padding</code>)를 사용하세요.
+      </div>
+
       <Section title="Strong Variant">
         <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
           세로 배치, Main 버튼이 위에 위치합니다.
@@ -1213,7 +1121,7 @@ import { View, Text } from 'react-native';`} />
             </ActionAreaDemo>
           </div>
         </PreviewBox>
-        <CodeBlock code={`<View style={{ flexDirection: 'column', gap: 10, padding: 20 }}>
+        <CodeBlock code={`<View style={{ flexDirection: 'column', gap: 12, padding: 20 }}>
   <Button
     buttonType="filled"
     color="brandDefault"
@@ -1247,7 +1155,7 @@ import { View, Text } from 'react-native';`} />
             </ActionAreaDemo>
           </div>
         </PreviewBox>
-        <CodeBlock code={`<View style={{ flexDirection: 'row', gap: 10, padding: 20 }}>
+        <CodeBlock code={`<View style={{ flexDirection: 'row', gap: 12, padding: 20 }}>
   <Button
     buttonType="outlined"
     color="baseContainer"
@@ -1281,14 +1189,13 @@ import { View, Text } from 'react-native';`} />
             </ActionAreaDemo>
           </div>
         </PreviewBox>
-        <CodeBlock code={`<View style={{ flexDirection: 'row', gap: 10, justifyContent: 'flex-end', padding: 20 }}>
-  <Button
-    buttonType="plain"
+        <CodeBlock code={`<View style={{ flexDirection: 'row', gap: 12, justifyContent: 'flex-end', padding: 20 }}>
+  <TextButton
     color="brandDefault"
     onPress={() => {}}
   >
     Sub
-  </Button>
+  </TextButton>
   <Button
     buttonType="filled"
     color="brandDefault"
@@ -1336,7 +1243,7 @@ import { View, Text } from 'react-native';`} />
             </ActionAreaDemo>
           </div>
         </PreviewBox>
-        <CodeBlock code={`<View style={{ flexDirection: 'column', gap: 10, padding: 20 }}>
+        <CodeBlock code={`<View style={{ flexDirection: 'column', gap: 12, padding: 20 }}>
   <Text style={{ fontSize: 14, color: '#6b7280', textAlign: 'center', marginBottom: 6 }}>
     변경 사항을 저장하시겠습니까?
   </Text>
@@ -1361,35 +1268,6 @@ import { View, Text } from 'react-native';`} />
 </View>`} />
       </Section>
 
-      <Section title="With Background">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
-          스크롤 콘텐츠 위에 고정할 때 gradient 배경을 추가합니다.
-        </p>
-        <PreviewBox>
-          <div style={{ width: 320 }}>
-            <ActionAreaDemo variant="strong" background>
-              <ActionAreaButtonDemo variant="main" size="xLarge">Main</ActionAreaButtonDemo>
-            </ActionAreaDemo>
-          </div>
-        </PreviewBox>
-        <CodeBlock code={`import LinearGradient from 'react-native-linear-gradient';
-
-<LinearGradient
-  colors={['rgba(255,255,255,0)', '#f4f4f5']}
-  style={{ padding: 20 }}
->
-  <Button
-    buttonType="filled"
-    color="brandDefault"
-    size="xLarge"
-    layout="fillWidth"
-    onPress={() => {}}
-  >
-    Main
-  </Button>
-</LinearGradient>`} />
-      </Section>
-
       <Section title="Main + Sub Combination">
         <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
           주요 액션과 보조 링크를 함께 제공합니다.
@@ -1402,7 +1280,7 @@ import { View, Text } from 'react-native';`} />
             </ActionAreaDemo>
           </div>
         </PreviewBox>
-        <CodeBlock code={`<View style={{ flexDirection: 'column', gap: 10, padding: 20, alignItems: 'center' }}>
+        <CodeBlock code={`<View style={{ flexDirection: 'column', gap: 12, padding: 20, alignItems: 'center' }}>
   <Button
     buttonType="filled"
     color="brandDefault"
@@ -1412,13 +1290,12 @@ import { View, Text } from 'react-native';`} />
   >
     로그인
   </Button>
-  <Button
-    buttonType="plain"
+  <TextButton
     color="brandDefault"
     onPress={() => {}}
   >
     회원가입
-  </Button>
+  </TextButton>
 </View>`} />
       </Section>
 
@@ -1650,24 +1527,24 @@ function PrincipleCard({ number, title, desc }: {
       borderRadius: 12,
       border: "1px solid var(--divider)",
     }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 8 }}>
         <span style={{
-          width: 24,
-          height: 24,
+          width: 22,
+          height: 22,
           borderRadius: "50%",
-          backgroundColor: "var(--brand-primary)",
-          color: "white",
+          backgroundColor: "#e5e7eb",
+          color: "#6b7280",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          fontSize: 13,
+          fontSize: 12,
           fontWeight: 600,
         }}>
           {number}
         </span>
         <span style={{ fontSize: 15, fontWeight: 600, color: "var(--text-primary)" }}>{title}</span>
       </div>
-      <p style={{ fontSize: 14, color: "var(--text-secondary)", margin: 0, lineHeight: 1.6 }}>{desc}</p>
+      <p style={{ fontSize: 14, color: "var(--text-secondary)", margin: 0, lineHeight: 1.6, paddingLeft: 32 }}>{desc}</p>
     </div>
   );
 }
@@ -1680,42 +1557,56 @@ function AnatomyDiagram() {
     <div style={{
       backgroundColor: "#f5f5f7",
       borderRadius: 16,
-      padding: "40px",
+      padding: "32px 40px",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
     }}>
-      <svg width="360" height="200" viewBox="0 0 360 200">
-        {/* Container background */}
-        <rect x="30" y="30" width="300" height="140" rx="12" fill="white" stroke="#e5e7eb" strokeWidth="1" />
+      <svg width="320" height="160" viewBox="0 0 320 160">
+        {/* Screen side borders (open top) */}
+        <line x1="60" y1="0" x2="60" y2="140" stroke="#d1d5db" strokeWidth="2" />
+        <line x1="260" y1="0" x2="260" y2="140" stroke="#d1d5db" strokeWidth="2" />
 
-        {/* Caption area */}
-        <text x="180" y="60" textAnchor="middle" fill="#6b7280" fontSize="13">변경 사항을 저장하시겠습니까?</text>
+        {/* Screen bottom with rounded corners */}
+        <path d="M60 140 L60 150 Q60 160 70 160 L250 160 Q260 160 260 150 L260 140" fill="none" stroke="#d1d5db" strokeWidth="2" />
+
+        {/* Action Area background */}
+        <rect x="61" y="0" width="198" height="140" fill="white" />
+
+        {/* Caption */}
+        <text x="160" y="28" textAnchor="middle" fill="#6b7280" fontSize="11">변경 사항을 저장하시겠습니까?</text>
 
         {/* Main button */}
-        <rect x="50" y="80" width="260" height="36" rx="8" fill="#2563eb" />
-        <text x="180" y="104" textAnchor="middle" fill="white" fontSize="14" fontWeight="600">Main</text>
+        <rect x="76" y="42" width="168" height="36" rx="8" fill="#2563eb" />
+        <text x="160" y="65" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">Main</text>
 
         {/* Alternative button */}
-        <rect x="50" y="124" width="260" height="36" rx="8" fill="white" stroke="#cbd5e1" strokeWidth="1" />
-        <text x="180" y="148" textAnchor="middle" fill="#334155" fontSize="14" fontWeight="600">Alternative</text>
+        <rect x="76" y="86" width="168" height="36" rx="8" fill="white" stroke="#cbd5e1" strokeWidth="1" />
+        <text x="160" y="109" textAnchor="middle" fill="#334155" fontSize="12" fontWeight="600">Alternative</text>
+
+        {/* Home indicator */}
+        <rect x="130" y="135" width="60" height="4" rx="2" fill="#d1d5db" />
 
         {/* Number indicators */}
-        <circle cx="20" cy="55" r="12" fill="#374151" />
-        <text x="20" y="59" textAnchor="middle" fill="white" fontSize="11" fontWeight="600">1</text>
-        <line x1="32" y1="55" x2="50" y2="55" stroke="#374151" strokeWidth="1" />
+        {/* 1. Caption */}
+        <circle cx="30" cy="28" r="12" fill="#374151" />
+        <text x="30" y="32" textAnchor="middle" fill="white" fontSize="11" fontWeight="600">1</text>
+        <line x1="42" y1="28" x2="72" y2="28" stroke="#374151" strokeWidth="1" strokeDasharray="2,2" />
 
-        <circle cx="340" cy="98" r="12" fill="#374151" />
-        <text x="340" y="102" textAnchor="middle" fill="white" fontSize="11" fontWeight="600">2</text>
-        <line x1="310" y1="98" x2="328" y2="98" stroke="#374151" strokeWidth="1" />
+        {/* 2. Main Button */}
+        <circle cx="290" cy="60" r="12" fill="#374151" />
+        <text x="290" y="64" textAnchor="middle" fill="white" fontSize="11" fontWeight="600">2</text>
+        <line x1="245" y1="60" x2="278" y2="60" stroke="#374151" strokeWidth="1" strokeDasharray="2,2" />
 
-        <circle cx="340" cy="142" r="12" fill="#374151" />
-        <text x="340" y="146" textAnchor="middle" fill="white" fontSize="11" fontWeight="600">3</text>
-        <line x1="310" y1="142" x2="328" y2="142" stroke="#374151" strokeWidth="1" />
+        {/* 3. Alternative Button */}
+        <circle cx="290" cy="104" r="12" fill="#374151" />
+        <text x="290" y="108" textAnchor="middle" fill="white" fontSize="11" fontWeight="600">3</text>
+        <line x1="245" y1="104" x2="278" y2="104" stroke="#374151" strokeWidth="1" strokeDasharray="2,2" />
 
-        <circle cx="20" cy="100" r="12" fill="#374151" />
-        <text x="20" y="104" textAnchor="middle" fill="white" fontSize="11" fontWeight="600">4</text>
-        <line x1="32" y1="100" x2="50" y2="80" stroke="#374151" strokeWidth="1" />
+        {/* 4. Container */}
+        <circle cx="30" cy="90" r="12" fill="#374151" />
+        <text x="30" y="94" textAnchor="middle" fill="white" fontSize="11" fontWeight="600">4</text>
+        <line x1="42" y1="90" x2="60" y2="90" stroke="#374151" strokeWidth="1" strokeDasharray="2,2" />
       </svg>
     </div>
   );
@@ -1735,19 +1626,18 @@ interface ActionAreaDemoProps {
   children: React.ReactNode;
   extra?: boolean;
   caption?: string;
-  background?: boolean;
 }
 
-function ActionAreaDemo({ variant, children, extra, caption, background }: ActionAreaDemoProps) {
+function ActionAreaDemo({ variant, children, extra, caption }: ActionAreaDemoProps) {
   const getLayout = () => {
     switch (variant) {
       case "strong":
       case "cancel":
-        return { flexDirection: "column" as const, gap: 10 };
+        return { flexDirection: "column" as const, gap: 12 };
       case "neutral":
-        return { flexDirection: "row" as const, gap: 10 };
+        return { flexDirection: "row" as const, gap: 12 };
       case "compact":
-        return { flexDirection: "row" as const, gap: 10, justifyContent: "flex-end" as const };
+        return { flexDirection: "row" as const, gap: 12, justifyContent: "flex-end" as const };
     }
   };
 
@@ -1756,22 +1646,35 @@ function ActionAreaDemo({ variant, children, extra, caption, background }: Actio
   return (
     <div
       style={{
-        padding: 20,
-        backgroundColor: background ? "transparent" : "white",
-        background: background ? "linear-gradient(180deg, rgba(255,255,255,0) 0%, #f4f4f5 100%)" : "white",
-        borderRadius: 16,
-        border: "1px solid #e5e7eb",
-        borderTop: extra ? "3px solid #d1d5db" : "1px solid #e5e7eb",
-        boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
+        borderLeft: "2px solid #d1d5db",
+        borderRight: "2px solid #d1d5db",
+        borderBottom: "2px solid #d1d5db",
+        borderRadius: "0 0 20px 20px",
+        overflow: "hidden",
+        backgroundColor: "white",
       }}
     >
-      {caption && (
-        <p style={{ fontSize: 14, color: "#6b7280", marginBottom: 16, textAlign: "center", lineHeight: 1.5 }}>
-          {caption}
-        </p>
-      )}
-      <div style={{ display: "flex", ...layout }}>
-        {children}
+      {/* Action Area content */}
+      <div
+        style={{
+          padding: 20,
+          backgroundColor: "white",
+          borderTop: extra ? "3px solid #d1d5db" : "none",
+        }}
+      >
+        {caption && (
+          <p style={{ fontSize: 14, color: "#6b7280", marginBottom: 16, textAlign: "center", lineHeight: 1.5 }}>
+            {caption}
+          </p>
+        )}
+        <div style={{ display: "flex", ...layout }}>
+          {children}
+        </div>
+      </div>
+
+      {/* Home indicator */}
+      <div style={{ padding: "8px 0 12px", backgroundColor: "white", display: "flex", justifyContent: "center" }}>
+        <div style={{ width: 60, height: 4, backgroundColor: "#d1d5db", borderRadius: 2 }} />
       </div>
     </div>
   );
@@ -1783,26 +1686,34 @@ function ActionAreaWithExtra() {
   return (
     <div
       style={{
-        padding: 20,
+        borderLeft: "2px solid #d1d5db",
+        borderRight: "2px solid #d1d5db",
+        borderBottom: "2px solid #d1d5db",
+        borderRadius: "0 0 20px 20px",
+        overflow: "hidden",
         backgroundColor: "white",
-        borderRadius: 16,
-        border: "1px solid #e5e7eb",
-        borderTop: "3px solid #d1d5db",
       }}
     >
-      {/* Extra Content */}
-      <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-        <input
-          type="checkbox"
-          checked={checked}
-          onChange={(e) => setChecked(e.target.checked)}
-          style={{ width: 18, height: 18, accentColor: "#2563eb" }}
-        />
-        <label style={{ fontSize: 14, color: "#18181b" }}>약관에 동의합니다.</label>
+      {/* Extra Content with top divider */}
+      <div style={{ borderTop: "3px solid #e5e7eb", padding: 20 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
+          <input
+            type="checkbox"
+            checked={checked}
+            onChange={(e) => setChecked(e.target.checked)}
+            style={{ width: 18, height: 18, accentColor: "#2563eb" }}
+          />
+          <label style={{ fontSize: 14, color: "#18181b" }}>약관에 동의합니다.</label>
+        </div>
+        {/* Buttons */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+          <ActionAreaButtonDemo variant="main" size="xLarge">동의하고 계속하기</ActionAreaButtonDemo>
+        </div>
       </div>
-      {/* Buttons */}
-      <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-        <ActionAreaButtonDemo variant="main" size="xLarge">동의하고 계속하기</ActionAreaButtonDemo>
+
+      {/* Home indicator */}
+      <div style={{ padding: "8px 0 12px", backgroundColor: "white", display: "flex", justifyContent: "center" }}>
+        <div style={{ width: 60, height: 4, backgroundColor: "#d1d5db", borderRadius: 2 }} />
       </div>
     </div>
   );
@@ -1861,7 +1772,7 @@ function ActionAreaButtonDemo({ variant, size, children }: ActionAreaButtonDemoP
           border: "1px solid #cbd5e1",
         };
       case "sub":
-        // Button: buttonType="plain" color="brandDefault"
+        // TextButton: color="brandDefault"
         return {
           ...baseStyles,
           backgroundColor: "transparent",
@@ -2100,7 +2011,7 @@ function AccessibilityCard({ icon, title, items }: {
       borderRadius: 12,
       border: "1px solid var(--divider)",
     }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
         <span style={{ fontSize: 20 }}>{icon}</span>
         <span style={{ fontSize: 15, fontWeight: 600, color: "var(--text-primary)" }}>{title}</span>
       </div>

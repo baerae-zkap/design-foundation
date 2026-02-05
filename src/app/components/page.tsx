@@ -18,6 +18,11 @@ const componentCategories = [
         href: "/components/actions/button",
         thumbnail: "/design-foundation/thumbnails/button.png",
       },
+      {
+        name: "Text button",
+        href: "/components/actions/text-button",
+        thumbnail: "/design-foundation/thumbnails/text-button.png",
+      },
     ],
   },
 ];
