@@ -194,7 +194,6 @@ export const ActionArea = forwardRef<HTMLDivElement, ActionAreaProps>(
               style={{
                 fontSize: 14,
                 color: '#6b7280',
-                marginBottom: 16,
                 textAlign: 'center',
                 lineHeight: 1.5,
                 margin: 0,
