@@ -29,6 +29,8 @@ const componentsNav = [
   { title: "Accordion", href: "/components/contents/accordion" },
   { title: "Card", href: "/components/contents/card" },
   { title: "Content Badge", href: "/components/contents/content-badge" },
+  { title: "List Card", href: "/components/contents/list-card" },
+  { title: "List Cell", href: "/components/contents/list-cell" },
 ];
 
 interface MobileMenuProps {
