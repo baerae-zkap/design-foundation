@@ -843,10 +843,6 @@ function WebContent() {
         <CodeBlock code={`import { Button } from '@zkap/design-system';`} />
       </Section>
 
-      <div style={{ padding: "12px 16px", backgroundColor: "var(--blue-95)", borderRadius: 8, marginBottom: 24, fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.6 }}>
-        <strong style={{ color: "var(--text-primary)" }}>Token Usage:</strong> 아래 예제의 <code style={{ backgroundColor: "rgba(0,0,0,0.06)", padding: "2px 4px", borderRadius: 3 }}>gap: 12</code>는 <code style={{ backgroundColor: "rgba(0,0,0,0.06)", padding: "2px 4px", borderRadius: 3 }}>modal.buttonGap</code>, <code style={{ backgroundColor: "rgba(0,0,0,0.06)", padding: "2px 4px", borderRadius: 3 }}>padding: 20</code>은 <code style={{ backgroundColor: "rgba(0,0,0,0.06)", padding: "2px 4px", borderRadius: 3 }}>bottomSheet.padding</code> 기준입니다. Modal에서는 <code style={{ backgroundColor: "rgba(0,0,0,0.06)", padding: "2px 4px", borderRadius: 3 }}>padding: 24</code> (<code style={{ backgroundColor: "rgba(0,0,0,0.06)", padding: "2px 4px", borderRadius: 3 }}>modal.padding</code>)를 사용하세요.
-      </div>
-
       <Section title="Strong Variant">
         <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
           세로 배치, Main 버튼이 위에 위치합니다.
@@ -1104,10 +1100,6 @@ function RNContent() {
         <CodeBlock code={`import { Button } from '@zkap/design-system';
 import { View, Text } from 'react-native';`} />
       </Section>
-
-      <div style={{ padding: "12px 16px", backgroundColor: "var(--blue-95)", borderRadius: 8, marginBottom: 24, fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.6 }}>
-        <strong style={{ color: "var(--text-primary)" }}>Token Usage:</strong> 아래 예제의 <code style={{ backgroundColor: "rgba(0,0,0,0.06)", padding: "2px 4px", borderRadius: 3 }}>gap: 12</code>는 <code style={{ backgroundColor: "rgba(0,0,0,0.06)", padding: "2px 4px", borderRadius: 3 }}>modal.buttonGap</code>, <code style={{ backgroundColor: "rgba(0,0,0,0.06)", padding: "2px 4px", borderRadius: 3 }}>padding: 20</code>은 <code style={{ backgroundColor: "rgba(0,0,0,0.06)", padding: "2px 4px", borderRadius: 3 }}>bottomSheet.padding</code> 기준입니다. Modal에서는 <code style={{ backgroundColor: "rgba(0,0,0,0.06)", padding: "2px 4px", borderRadius: 3 }}>padding: 24</code> (<code style={{ backgroundColor: "rgba(0,0,0,0.06)", padding: "2px 4px", borderRadius: 3 }}>modal.padding</code>)를 사용하세요.
-      </div>
 
       <Section title="Strong Variant">
         <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>

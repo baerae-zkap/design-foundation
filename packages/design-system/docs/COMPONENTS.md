@@ -6,10 +6,10 @@
 
 ```tsx
 // Web
-import { Button, TextButton } from '@zkap/design-system';
+import { Button, TextButton, ActionArea, ActionAreaButton } from '@zkap/design-system';
 
 // React Native
-import { Button, TextButton } from '@zkap/design-system/native';
+import { Button, TextButton, ActionArea, ActionAreaButton } from '@zkap/design-system/native';
 ```
 
 ## Available Components
@@ -18,7 +18,8 @@ import { Button, TextButton } from '@zkap/design-system/native';
 |-----------|-------------|-----|
 | Button | 작업을 수행하는 클릭 가능한 요소 | [Button.md](./components/Button.md) |
 | TextButton | 텍스트 기반의 가벼운 액션 버튼 | [TextButton.md](./components/TextButton.md) |
-| ActionArea | 모달/시트 하단의 버튼 그룹 레이아웃 | [ActionArea.md](./components/ActionArea.md) |
+| ActionArea | 모달/시트 하단의 버튼 그룹 컨테이너 (sticky, gradient 지원) | [ActionArea.md](./components/ActionArea.md) |
+| ActionAreaButton | ActionArea 내부 전용 버튼 (main/alternative/sub) | [ActionArea.md](./components/ActionArea.md) |
 
 ## Design Tokens (Foundation)
 
