@@ -34,12 +34,12 @@ import LinearGradient from 'react-native-linear-gradient';
 // Types
 // ============================================
 
-export type ActionAreaVariant = 'strong' | 'neutral' | 'cancel' | 'compact';
+export type ActionAreaVariant = 'strong' | 'neutral' | 'compact';
 export type ActionAreaPosition = 'static' | 'absolute';
 export type ActionAreaButtonVariant = 'main' | 'alternative' | 'sub';
 
 export interface ActionAreaProps extends ViewProps {
-  /** 레이아웃 variant - strong(세로/메인상단), neutral(가로/균등), cancel(세로/취소상단), compact(가로/우측정렬) */
+  /** 레이아웃 variant - strong(세로/메인상단), neutral(가로/균등), compact(가로/우측정렬) */
   variant?: ActionAreaVariant;
   /** 위치 설정 - static(기본), absolute(하단고정) */
   position?: ActionAreaPosition;
@@ -148,7 +148,7 @@ export const ActionArea = forwardRef<View, ActionAreaProps>(
   ) => {
     const insets = useSafeArea ? useSafeAreaInsets() : { bottom: 0 };
 
-    const isVertical = variant === 'strong' || variant === 'cancel';
+    const isVertical = variant === 'strong';
     const isCompact = variant === 'compact';
 
     const containerStyle: ViewStyle = {

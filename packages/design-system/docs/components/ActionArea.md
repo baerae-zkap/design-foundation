@@ -27,7 +27,7 @@ import { ActionArea, ActionAreaButton } from '@zkap/design-system';
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `variant` | `'strong' \| 'neutral' \| 'cancel' \| 'compact'` | `'strong'` | 레이아웃 variant |
+| `variant` | `'strong' \| 'neutral' \| 'compact'` | `'strong'` | 레이아웃 variant |
 | `position` | `'static' \| 'sticky' \| 'fixed'` | `'static'` | 위치 설정 |
 | `showGradient` | `boolean` | `true` | 상단 그라데이션 표시 여부 |
 | `gradientHeight` | `number` | `24` | 그라데이션 높이 (px) |
@@ -95,19 +95,6 @@ ActionArea 내부에서 사용되는 버튼 컴포넌트입니다.
 - **용도**: 인라인 액션 (수정/삭제)
 - **배치**: 가로, 우측 정렬
 - **버튼 크기**: medium
-
-### 4. Cancel
-```tsx
-// 단일 버튼
-<ActionArea variant="cancel">
-  <ActionAreaButton variant="main" onClick={handleClose}>
-    확인
-  </ActionAreaButton>
-</ActionArea>
-```
-- **용도**: 단순 확인/닫기
-- **배치**: 단일 버튼, 전체 너비
-- **버튼 크기**: xLarge
 
 ## Position & Gradient
 

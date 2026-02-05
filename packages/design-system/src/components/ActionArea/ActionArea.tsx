@@ -22,12 +22,12 @@ import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
 // Types
 // ============================================
 
-export type ActionAreaVariant = 'strong' | 'neutral' | 'cancel' | 'compact';
+export type ActionAreaVariant = 'strong' | 'neutral' | 'compact';
 export type ActionAreaPosition = 'static' | 'sticky' | 'fixed';
 export type ActionAreaButtonVariant = 'main' | 'alternative' | 'sub';
 
 export interface ActionAreaProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
-  /** 레이아웃 variant - strong(세로/메인상단), neutral(가로/균등), cancel(세로/취소상단), compact(가로/우측정렬) */
+  /** 레이아웃 variant - strong(세로/메인상단), neutral(가로/균등), compact(가로/우측정렬) */
   variant?: ActionAreaVariant;
   /** 위치 설정 - static(기본), sticky(스크롤시고정), fixed(항상고정) */
   position?: ActionAreaPosition;
@@ -86,10 +86,6 @@ const variantLayouts: Record<ActionAreaVariant, React.CSSProperties> = {
   },
   neutral: {
     flexDirection: 'row',
-    gap: tokens.modal.buttonGap,
-  },
-  cancel: {
-    flexDirection: 'column',
     gap: tokens.modal.buttonGap,
   },
   compact: {
