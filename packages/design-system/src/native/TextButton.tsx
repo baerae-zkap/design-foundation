@@ -17,11 +17,10 @@
 
 import React, { forwardRef, type ReactNode } from 'react';
 import {
-  TouchableOpacity,
+  Pressable,
   Text,
   View,
-  StyleSheet,
-  type TouchableOpacityProps,
+  type PressableProps,
   type ViewStyle,
   type TextStyle,
 } from 'react-native';
@@ -30,7 +29,7 @@ export type TextButtonVariant = 'clear' | 'underline' | 'arrow';
 export type TextButtonColor = 'brandDefault' | 'baseDefault' | 'errorDefault';
 export type TextButtonSize = 'xSmall' | 'small' | 'medium' | 'large' | 'xLarge';
 
-export interface TextButtonProps extends Omit<TouchableOpacityProps, 'style'> {
+export interface TextButtonProps extends Omit<PressableProps, 'style'> {
   /** 버튼 스타일 - clear(기본), underline(밑줄), arrow(화살표) */
   variant?: TextButtonVariant;
   /** 색상 테마 */
@@ -51,10 +50,10 @@ const sizeConfig: Record<TextButtonSize, number> = {
   xLarge: 20,
 };
 
-const colorConfig: Record<TextButtonColor, string> = {
-  brandDefault: '#2563eb',
-  baseDefault: '#334155',
-  errorDefault: '#ef4444',
+const colorConfig: Record<TextButtonColor, { default: string; pressed: string; pressedBg: string }> = {
+  brandDefault: { default: '#2563eb', pressed: '#1e40af', pressedBg: 'rgba(0, 0, 0, 0.06)' },
+  baseDefault: { default: '#334155', pressed: '#1e293b', pressedBg: 'rgba(0, 0, 0, 0.06)' },
+  errorDefault: { default: '#ef4444', pressed: '#b91c1c', pressedBg: 'rgba(0, 0, 0, 0.06)' },
 };
 
 export const TextButton = forwardRef<View, TextButtonProps>(
@@ -71,42 +70,50 @@ export const TextButton = forwardRef<View, TextButtonProps>(
     ref
   ) => {
     const fontSize = sizeConfig[size];
-    const textColor = disabled ? '#94a3b8' : colorConfig[color];
+    const colorStyle = colorConfig[color];
 
-    const containerStyle: ViewStyle = {
+    const getContainerStyle = (pressed: boolean): ViewStyle => ({
       flexDirection: 'row',
       alignItems: 'center',
       gap: 4,
       paddingVertical: 4,
       paddingHorizontal: 8,
-    };
+      borderRadius: 6,
+      backgroundColor: pressed && !disabled ? colorStyle.pressedBg : 'transparent',
+    });
 
-    const textStyle: TextStyle = {
-      fontSize,
-      fontWeight: '500',
-      color: textColor,
-      textDecorationLine: variant === 'underline' ? 'underline' : 'none',
+    const getTextStyle = (pressed: boolean): TextStyle => {
+      const textColor = disabled ? '#94a3b8' : (pressed ? colorStyle.pressed : colorStyle.default);
+      return {
+        fontSize,
+        fontWeight: '500',
+        color: textColor,
+        textDecorationLine: variant === 'underline' ? 'underline' : 'none',
+      };
     };
 
     return (
-      <TouchableOpacity
+      <Pressable
         disabled={disabled}
-        activeOpacity={0.7}
         accessibilityRole="button"
-        accessibilityState={{ disabled }}
+        accessibilityState={{ disabled: !!disabled }}
         hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-        style={[containerStyle, style]}
+        style={({ pressed }) => [getContainerStyle(pressed), style as ViewStyle]}
         {...props}
       >
-        {typeof children === 'string' ? (
-          <Text style={textStyle}>{children}</Text>
-        ) : (
-          children
+        {({ pressed }) => (
+          <>
+            {typeof children === 'string' ? (
+              <Text style={getTextStyle(pressed)}>{children}</Text>
+            ) : (
+              children
+            )}
+            {variant === 'arrow' && (
+              <ArrowIcon size={fontSize * 0.875} color={disabled ? '#94a3b8' : (pressed ? colorStyle.pressed : colorStyle.default)} />
+            )}
+          </>
         )}
-        {variant === 'arrow' && (
-          <ArrowIcon size={fontSize * 0.875} color={textColor} />
-        )}
-      </TouchableOpacity>
+      </Pressable>
     );
   }
 );

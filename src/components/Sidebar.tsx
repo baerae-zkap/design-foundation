@@ -18,9 +18,11 @@ const foundationsNav = [
 
 const componentsNav = [
   { title: "Overview", href: "/components" },
+  { title: "Getting Started", href: "/getting-started" },
   { title: "Actions", isLabel: true },
   { title: "Action Area", href: "/components/actions/action-area" },
   { title: "Button", href: "/components/actions/button" },
+  { title: "Chip", href: "/components/actions/chip" },
   { title: "Text Button", href: "/components/actions/text-button" },
 ];
 

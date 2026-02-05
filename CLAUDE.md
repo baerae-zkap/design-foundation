@@ -5,6 +5,71 @@
 회사 서비스에서 사용할 **Design Foundation & Components Library**를 구축하는 프로젝트.
 디자이너가 주도하여 만들고 있으며, 개발자가 실제 서비스에 적용할 수 있는 컴포넌트 라이브러리를 목표로 함.
 
+---
+
+## 현재 상태 (2025-02-06)
+
+### 배포 완료
+
+| 항목 | 상태 | 내용 |
+|------|------|------|
+| 패키지명 | ✅ | `@baerae-zkap/design-system@0.1.7` |
+| 레지스트리 | ✅ | Google Artifact Registry |
+| zkap-rn-mvp 통합 | ✅ | 타입 충돌 없이 설치됨 |
+| iOS/Android 테스트 | ✅ | 시뮬레이터에서 검증됨 |
+| Storybook | ✅ | zkap-rn-mvp에서 컴포넌트 테스트 |
+
+### 완성된 컴포넌트
+
+| 컴포넌트 | Web | React Native | Storybook | 문서 |
+|----------|-----|--------------|-----------|------|
+| Button | ✅ | ✅ | ✅ | ✅ |
+| TextButton | ✅ | ✅ | ✅ | ✅ |
+| ActionArea | ✅ | ✅ | ✅ | ✅ |
+| Chip | ✅ | ✅ | ✅ | ✅ |
+
+### 다음 작업 우선순위
+
+Montage 디자인 시스템 기준 우선순위:
+
+1. **IconButton** - 아이콘 버튼
+2. **Avatar / Avatar Group** - 사용자 프로필
+3. **Card / List Card** - 콘텐츠 카드
+4. **Alert** - 경고 메시지
+5. **Radio** - 라디오 버튼
+6. **Select** - 드롭다운 선택
+
+### 새 컴포넌트 추가 방법
+
+```bash
+# 1. 컴포넌트 파일 생성 (Foundation 토큰 기반)
+# - packages/design-system/src/components/[Name]/[Name].tsx (Web)
+# - packages/design-system/src/native/[Name].tsx (React Native)
+
+# 2. Export 추가
+# - packages/design-system/src/index.ts (Web)
+# - packages/design-system/src/native/index.ts (React Native)
+
+# 3. 문서 추가
+# - packages/design-system/docs/components/[Name].md
+
+# 4. Storybook 스토리 추가
+# - zkap-rn-mvp/stories/baerae-design-system/[Name].stories.tsx
+
+# 5. 빌드 & 배포
+cd packages/design-system
+pnpm build
+npm version patch
+npm publish
+
+# 6. zkap-rn-mvp에서 패키지 업데이트
+cd ../zkap-rn-mvp
+pnpm update @baerae-zkap/design-system
+pnpm storybook  # 스토리북에서 확인
+```
+
+---
+
 ## 작업 방식 (중요)
 
 > **시간 단축을 위한 전략적 접근**
@@ -97,8 +162,287 @@ design-foundation/
 │   ├── Dialog/
 │   └── ... (26개 컴포넌트)
 │
-└── public/               # 정적 파일
+├── public/               # 정적 파일
+│   └── *-tokens.json     # Foundation 토큰 정의
+│
+└── packages/             # NPM 패키지 (실제 배포용)
+    └── design-system/    # @baerae-zkap/design-system 패키지
+        ├── src/
+        │   ├── components/   # 웹 컴포넌트 (Button, TextButton, ActionArea)
+        │   ├── native/       # React Native 컴포넌트
+        │   └── index.ts      # 웹 export
+        ├── docs/             # AI용 마크다운 문서
+        ├── dist/             # 빌드 결과물
+        └── package.json      # @baerae-zkap/design-system v0.1.0
 ```
+
+---
+
+## 실제 패키지 구조 (중요)
+
+### 패키지 위치
+```
+/packages/design-system/          ← @baerae-zkap/design-system 패키지
+├── src/components/               ← 웹 컴포넌트 (실제 코드)
+│   ├── Button/Button.tsx
+│   ├── TextButton/TextButton.tsx
+│   └── ActionArea/ActionArea.tsx
+├── src/native/                   ← React Native 컴포넌트
+└── docs/                         ← AI 문서
+```
+
+### 패키지 사용법
+```typescript
+// 웹 (React)
+import { Button, TextButton, ActionArea } from '@baerae-zkap/design-system';
+
+// React Native
+import { Button, TextButton, ActionArea } from '@baerae-zkap/design-system/native';
+```
+
+### 로컬 테스트 (zkap-rn-mvp에서)
+```bash
+# 방법 1: npm link
+cd /Users/jaden/design-foundation/packages/design-system
+npm link
+cd /Users/jaden/zkap-rn-mvp
+npm link @baerae-zkap/design-system
+
+# 방법 2: 파일 경로로 설치
+npm install ../design-foundation/packages/design-system
+```
+
+---
+
+## AI 바이브코딩을 위한 문서 구조 (핵심)
+
+### 문서 위치 (중앙 집중형)
+```
+packages/design-system/
+├── docs/                         ← AI가 참조하는 문서
+│   ├── COMPONENTS.md             ← 전체 컴포넌트 개요
+│   └── components/
+│       ├── Button.md             ← Button 상세 가이드
+│       ├── TextButton.md         ← TextButton 상세 가이드
+│       └── ActionArea.md         ← ActionArea 상세 가이드
+├── src/components/               ← 웹 컴포넌트
+└── src/native/                   ← React Native 컴포넌트
+```
+
+### AI 문서 접근 경로
+```typescript
+// AI가 참조하는 문서 경로
+import docs from '@baerae-zkap/design-system/docs';
+// → node_modules/@baerae-zkap/design-system/docs/COMPONENTS.md
+
+// 개별 컴포넌트 문서
+// → node_modules/@baerae-zkap/design-system/docs/components/Button.md
+```
+
+### 컴포넌트 수정 시 필수 싱크 체크리스트
+
+> ⚠️ **컴포넌트 수정 시 아래 5곳을 반드시 동기화해야 합니다.**
+
+| # | 위치 | 파일 | 설명 |
+|---|------|------|------|
+| 1 | **웹 컴포넌트** | `packages/design-system/src/components/Button/` | 웹용 실제 코드 |
+| 2 | **RN 컴포넌트** | `packages/design-system/src/native/Button.tsx` | React Native 실제 코드 |
+| 3 | **AI 문서** | `packages/design-system/docs/components/Button.md` | AI 참조 문서 |
+| 4 | **문서 Demo** | `src/app/components/actions/button/page.tsx` | 문서 사이트 시각화 |
+| 5 | **Storybook** | `zkap-rn-mvp/stories/baerae-design-system/Button.stories.tsx` | 컴포넌트 테스트 |
+
+### 싱크 작업 순서
+
+```
+1. Foundation 토큰 확인
+   └── public/spacing-tokens.json, radius-tokens.json
+
+2. 실제 컴포넌트 수정
+   ├── packages/design-system/src/components/  (웹)
+   └── packages/design-system/src/native/       (RN)
+
+3. AI 문서 업데이트
+   └── packages/design-system/docs/components/
+
+4. 문서 사이트 Demo 업데이트
+   └── src/app/components/*/page.tsx
+
+5. Storybook 스토리 업데이트
+   └── zkap-rn-mvp/stories/baerae-design-system/
+
+6. 패키지 빌드 & 배포
+   └── cd packages/design-system && npm run build && npm version patch && npm publish
+```
+
+---
+
+## Storybook 동기화 규칙 (핵심)
+
+> ⚠️ **모든 컴포넌트는 Web, Native, Storybook에서 동일하게 동작해야 합니다.**
+
+### Storybook 위치
+```
+zkap-rn-mvp/stories/baerae-design-system/
+├── Button.stories.tsx      # Button 스토리
+├── TextButton.stories.tsx  # TextButton 스토리
+└── ActionArea.stories.tsx  # ActionArea 스토리
+```
+
+### 일관성 규칙
+
+| 항목 | 규칙 | 예시 |
+|------|------|------|
+| **Props API** | Web/Native/Storybook 동일 | `buttonType`, `color`, `size` |
+| **색상 값** | Foundation 토큰 기반 동일 | `brandDefault: #2563eb` |
+| **Pressed 상태** | 어두워지는 방향으로 통일 | `#2563eb` → `#1d4ed8` |
+| **Alternative 버튼** | `filled baseContainer` 사용 | `outlined` 사용 금지 |
+
+### Storybook Import 규칙
+```typescript
+// ✅ 올바른 import (native export 사용)
+import { Button, TextButton, ActionArea } from '@baerae-zkap/design-system/native';
+
+// ❌ 잘못된 import
+import { Button } from '@baerae-zkap/design-system';  // 웹용
+```
+
+### 필수 스토리 패턴
+
+각 컴포넌트 스토리에는 다음 항목이 포함되어야 합니다:
+
+| 스토리 | 설명 | 필수 |
+|--------|------|------|
+| `Default` | Controls로 조정 가능한 기본 스토리 | ✅ |
+| `Sizes` | 사이즈별 비교 | ✅ |
+| `Colors` | 색상별 비교 | ✅ |
+| `States` | Normal, Disabled, Loading 등 | ✅ |
+| `PressedState` | 눌림 상태 확인용 (클릭 테스트) | 권장 |
+
+### ActionArea 조합 규칙
+
+ActionArea는 Button, TextButton을 children으로 조합합니다:
+
+```typescript
+// ✅ 올바른 사용
+<ActionArea variant="neutral">
+  <Button buttonType="filled" color="baseContainer" onPress={() => {}}>취소</Button>
+  <Button buttonType="filled" color="brandDefault" onPress={() => {}}>확인</Button>
+</ActionArea>
+
+// ❌ 잘못된 사용 (ActionAreaButton은 제거됨)
+<ActionArea>
+  <ActionAreaButton>...</ActionAreaButton>
+</ActionArea>
+
+// ❌ 잘못된 사용 (outlined 대신 filled baseContainer)
+<Button buttonType="outlined" color="brandDefault">취소</Button>
+```
+
+### 검증 체크리스트
+
+컴포넌트 수정 후 반드시 확인:
+
+- [ ] **Props 일치**: Web, Native, Storybook에서 동일한 props 지원
+- [ ] **색상 일치**: 동일한 color에 동일한 hex 값 사용
+- [ ] **Pressed 상태**: 누르면 어두워지는지 확인 (밝아지면 안됨)
+- [ ] **토큰 사용**: 하드코딩 값 대신 Foundation 토큰 값 사용
+- [ ] **Storybook 실행**: `pnpm storybook`으로 렌더링 확인
+
+---
+
+## 플랫폼 분리 구조
+
+| 위치 | 플랫폼 | 용도 |
+|------|--------|------|
+| `packages/design-system/src/components/` | **웹 (React)** | 실제 배포용 웹 컴포넌트 |
+| `packages/design-system/src/native/` | **React Native** | 실제 배포용 RN 컴포넌트 |
+| `packages/design-system/docs/` | **마크다운** | AI 참조용 문서 |
+| `src/app/` | **Next.js** | 문서 사이트 + Demo 컴포넌트 |
+| `zkap-rn-mvp/stories/baerae-design-system/` | **Storybook** | 컴포넌트 테스트 & 문서화 |
+| `existing-components/` | **참고용** | 기존 컨벤션 참조 (사용 X) |
+
+**실제 React Native 컴포넌트**:
+```tsx
+// packages/design-system/src/native/Button.tsx
+// Pressable 사용 (pressed 상태 지원)
+import { Pressable, Text, View } from 'react-native';
+```
+
+**문서 Demo 컴포넌트 (웹 시뮬레이션)**:
+```tsx
+// src/app/components/actions/button/page.tsx
+// 웹에서 RN 컴포넌트를 직접 import 불가하므로 Demo로 시각화
+function ButtonDemo({ ... }) { ... }
+```
+
+### 싱크 유지 체크리스트
+
+컴포넌트 수정 시 **반드시** 5곳을 동기화해야 합니다:
+
+| 변경 항목 | Web | Native | Storybook | 비고 |
+|----------|-----|--------|-----------|------|
+| **Foundation 토큰** | ✅ | ✅ | ✅ | `public/*-tokens.json` 참조 |
+| **Props 인터페이스** | ✅ | ✅ | ✅ | 동일한 props 지원 |
+| **스타일 값** | ✅ | ✅ | ✅ | radius, padding, gap 등 |
+| **Pressed 상태** | ✅ | ✅ | ✅ | **어두워지는 방향**으로 통일 |
+| **색상 맵** | ✅ | ✅ | ✅ | 동일한 hex 값 |
+
+### Pressed 상태 색상 규칙 (중요)
+
+> ⚠️ **Pressed 상태는 반드시 어두워져야 합니다. 밝아지면 안됩니다.**
+
+| 컴포넌트 | Color | Default | Pressed | 방향 |
+|----------|-------|---------|---------|------|
+| Button (filled) | brandDefault | `#2563eb` | `#1d4ed8` | 어두워짐 ✅ |
+| Button (filled) | baseContainer | `#f1f5f9` | `#e2e8f0` | 어두워짐 ✅ |
+| Button (filled) | successDefault | `#22c55e` | `#16a34a` | 어두워짐 ✅ |
+| Button (filled) | errorDefault | `#ef4444` | `#dc2626` | 어두워짐 ✅ |
+| TextButton | brandDefault | `#2563eb` | `#1e40af` + `rgba(0,0,0,0.06)` bg | 어두워짐 ✅ |
+| TextButton | baseDefault | `#334155` | `#1e293b` + `rgba(0,0,0,0.06)` bg | 어두워짐 ✅ |
+
+**잘못된 예시** (밝아지는 pressed):
+```typescript
+// ❌ 이렇게 하면 안됨 - 밝아지는 pressed
+pressedBg: 'rgba(37, 99, 235, 0.1)'  // 투명한 파란색 오버레이
+
+// ✅ 올바른 방법 - 어두워지는 pressed
+pressedBg: 'rgba(0, 0, 0, 0.06)'     // 어두운 오버레이
+pressed: '#1e40af'                   // 더 어두운 텍스트 색상
+```
+
+### 싱크 작업 순서
+
+1. **Foundation 토큰 수정** → `public/*-tokens.json`
+2. **실제 컴포넌트 반영** → `existing-components/*/`
+3. **문서 Demo 반영** → `src/app/components/*/page.tsx`
+4. **문서 내용 업데이트** → Design Tokens 테이블, 코드 예제
+
+### Demo 컴포넌트 위치
+
+각 문서 페이지 하단에 Demo 컴포넌트 정의:
+```
+src/app/components/actions/button/page.tsx
+├── DesignContent()      # Design 탭 내용
+├── WebContent()         # Web 탭 내용
+├── RNContent()          # React Native 탭 내용
+└── function ButtonDemo()     # ← Demo 컴포넌트 (파일 하단)
+    function TextButtonDemo() # ← 필요시 추가 Demo
+```
+
+### Foundation 토큰 파일
+
+| 파일 | 내용 |
+|------|------|
+| `public/spacing-tokens.json` | 간격, 패딩, gap 토큰 |
+| `public/radius-tokens.json` | border-radius 토큰 |
+
+**Demo 컴포넌트에서 참조해야 할 주요 토큰**:
+- `button.gap` = 8px
+- `button.sm/md` radius = 8px
+- `button.lg` radius = 12px
+- `button.paddingX.*` / `button.paddingY.*`
+
+---
 
 ## 컨벤션 (existing-components 기준)
 
@@ -254,6 +598,87 @@ style={{ gap: 12, padding: 24 }}  // modal.buttonGap(12), modal.padding(24)
 // BottomSheet 내부
 style={{ gap: 12, padding: 20 }}  // modal.buttonGap(12), bottomSheet.padding(20)
 ```
+
+### Radius 토큰 (Foundation 기반)
+
+> **중요**: 컴포넌트 개발 시 하드코딩 값 대신 반드시 Foundation 토큰을 사용해야 합니다.
+> 토큰 정의 파일: `public/radius-tokens.json`
+
+**기본 단위**: 4px (모든 값은 4의 배수)
+
+#### Primitive 토큰
+| 토큰 | 값 | 용도 |
+|------|-----|------|
+| `primitive.none` | 0px | 라운드 없음 |
+| `primitive.xs` | 4px | 최소 라운드 |
+| `primitive.sm` | 8px | 소형 라운드 |
+| `primitive.md` | 12px | 중형 라운드 |
+| `primitive.lg` | 16px | 대형 라운드 |
+| `primitive.xl` | 20px | 특대 라운드 |
+| `primitive.full` | 9999px | 완전 라운드 (원형) |
+
+#### Component 토큰 (컴포넌트 전용)
+
+| 컴포넌트 | 토큰 | 값 | 용도 |
+|---------|------|-----|------|
+| **Button** | `button.sm` | 8px | 소형/중형 버튼 (xs, sm, md 사이즈) |
+| | `button.md` | 8px | 기본 버튼 (md 사이즈) |
+| | `button.lg` | 12px | 대형 버튼 (lg, xl 사이즈) |
+| | `button.pill` | 9999px | 필 형태 버튼 |
+| **Card** | `card.sm` | 12px | 소형 카드, 리스트 아이템 |
+| | `card.md` | 16px | 기본 카드 |
+| | `card.lg` | 20px | 대형 카드, 프로모션 |
+| **Input** | `input.default` | 8px | 기본 입력 필드 |
+| | `input.search` | 9999px | 검색 입력 필드 |
+| **Modal** | `modal.default` | 24px | 모달, 다이얼로그 |
+| **BottomSheet** | `bottomSheet.default` | 20px | 바텀시트 상단 |
+| **Toast** | `toast.default` | 12px | 토스트 메시지 |
+
+#### 사용 예시
+
+```typescript
+// ❌ 하드코딩 금지
+borderRadius: 12
+
+// ✅ Foundation 토큰 사용 (사이즈별 분기)
+// Button 컴포넌트
+borderRadius: (size === "large" || size === "xLarge") ? 12 : 8  // button.lg(12) or button.sm(8)
+
+// Card 컴포넌트
+borderRadius: 16  // card.md(16)
+
+// Modal 컴포넌트
+borderRadius: 24  // modal.default(24)
+```
+
+---
+
+## Foundation 토큰 필수 사용 규칙 (핵심)
+
+> ⚠️ **컴포넌트 개발 시 하드코딩 값 사용 금지. 반드시 Foundation 토큰 참조.**
+
+### 토큰 파일 위치
+| 파일 | 내용 |
+|------|------|
+| `public/spacing-tokens.json` | 간격, 패딩, gap, 높이 |
+| `public/radius-tokens.json` | border-radius |
+
+### 토큰 적용 대상
+| 속성 | 참조 토큰 | 예시 |
+|------|----------|------|
+| `padding` | spacing.semantic.inset.* / component.* | `button.paddingX.md = 20px` |
+| `gap` | spacing.semantic.horizontal.* / component.* | `button.gap = 8px` |
+| `margin` | spacing.semantic.vertical.* / horizontal.* | `vertical.sm = 16px` |
+| `borderRadius` | radius.semantic.* | `button.lg = 12px` |
+| `height` | spacing.primitive.* | `primitive.12 = 48px` |
+
+### 작업 시 체크리스트
+- [ ] 새 컴포넌트 개발 → `public/*-tokens.json`에서 해당 토큰 확인
+- [ ] 스타일 값 작성 → 하드코딩 대신 토큰 값 사용
+- [ ] 사이즈별 분기 필요 → 토큰 문서 참조하여 올바른 값 적용
+- [ ] 토큰에 없는 값 → Foundation 파일에 새 토큰 추가 후 사용
+
+---
 
 ## 기존 컴포넌트 목록 (existing-components)
 

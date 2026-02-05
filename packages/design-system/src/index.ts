@@ -13,11 +13,17 @@ export type { ButtonProps } from './components/Button';
 export { TextButton } from './components/TextButton';
 export type { TextButtonProps } from './components/TextButton';
 
-export { ActionArea, ActionAreaButton } from './components/ActionArea';
+export { ActionArea } from './components/ActionArea';
 export type {
   ActionAreaProps,
-  ActionAreaButtonProps,
   ActionAreaVariant,
   ActionAreaPosition,
-  ActionAreaButtonVariant,
 } from './components/ActionArea';
+
+export { Chip } from './components/Chip';
+export type {
+  ChipProps,
+  ChipVariant,
+  ChipColor,
+  ChipSize,
+} from './components/Chip';

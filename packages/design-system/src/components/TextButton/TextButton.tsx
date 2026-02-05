@@ -15,7 +15,7 @@
  * </TextButton>
  */
 
-import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
+import { forwardRef, useState, type ButtonHTMLAttributes, type ReactNode } from 'react';
 
 export type TextButtonVariant = 'clear' | 'underline' | 'arrow';
 export type TextButtonColor = 'brandDefault' | 'baseDefault' | 'errorDefault';
@@ -40,10 +40,10 @@ const sizeStyles: Record<TextButtonSize, number> = {
   xLarge: 20,
 };
 
-const colorStyles: Record<TextButtonColor, { default: string; hover: string; pressed: string }> = {
-  brandDefault: { default: '#2563eb', hover: '#1d4ed8', pressed: '#1e40af' },
-  baseDefault: { default: '#334155', hover: '#1e293b', pressed: '#0f172a' },
-  errorDefault: { default: '#ef4444', hover: '#dc2626', pressed: '#b91c1c' },
+const colorStyles: Record<TextButtonColor, { default: string; pressed: string; pressedBg: string }> = {
+  brandDefault: { default: '#2563eb', pressed: '#1e40af', pressedBg: 'rgba(0, 0, 0, 0.06)' },
+  baseDefault: { default: '#334155', pressed: '#1e293b', pressedBg: 'rgba(0, 0, 0, 0.06)' },
+  errorDefault: { default: '#ef4444', pressed: '#b91c1c', pressedBg: 'rgba(0, 0, 0, 0.06)' },
 };
 
 export const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(
@@ -55,12 +55,31 @@ export const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(
       disabled = false,
       children,
       style,
+      onMouseDown,
+      onMouseUp,
+      onMouseLeave,
       ...props
     },
     ref
   ) => {
+    const [isPressed, setIsPressed] = useState(false);
     const fontSize = sizeStyles[size];
     const colorStyle = colorStyles[color];
+
+    const handleMouseDown = (e: React.MouseEvent<HTMLButtonElement>) => {
+      setIsPressed(true);
+      onMouseDown?.(e);
+    };
+
+    const handleMouseUp = (e: React.MouseEvent<HTMLButtonElement>) => {
+      setIsPressed(false);
+      onMouseUp?.(e);
+    };
+
+    const handleMouseLeave = (e: React.MouseEvent<HTMLButtonElement>) => {
+      setIsPressed(false);
+      onMouseLeave?.(e);
+    };
 
     const buttonStyle: React.CSSProperties = {
       display: 'inline-flex',
@@ -69,13 +88,13 @@ export const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(
       padding: '4px 8px',
       fontSize,
       fontWeight: 500,
-      color: disabled ? '#94a3b8' : colorStyle.default,
-      background: 'transparent',
+      color: disabled ? '#94a3b8' : (isPressed ? colorStyle.pressed : colorStyle.default),
+      background: isPressed && !disabled ? colorStyle.pressedBg : 'transparent',
       border: 'none',
       borderRadius: 6,
       cursor: disabled ? 'not-allowed' : 'pointer',
       textDecoration: variant === 'underline' ? 'underline' : 'none',
-      transition: 'color 150ms ease',
+      transition: 'color 150ms ease, background-color 150ms ease',
       ...style,
     };
 
@@ -85,6 +104,9 @@ export const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(
         disabled={disabled}
         aria-disabled={disabled}
         style={buttonStyle}
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseLeave}
         {...props}
       >
         {children}

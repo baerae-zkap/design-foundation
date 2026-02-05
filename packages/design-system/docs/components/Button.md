@@ -6,13 +6,13 @@
 
 ```tsx
 // Web
-import { Button } from '@zkap/design-system';
+import { Button } from '@baerae-zkap/design-system';
 <Button buttonType="filled" color="brandDefault" size="medium" onClick={() => {}}>
   Label
 </Button>
 
 // React Native
-import { Button } from '@zkap/design-system/native';
+import { Button } from '@baerae-zkap/design-system/native';
 <Button buttonType="filled" color="brandDefault" size="medium" onPress={() => {}}>
   Label
 </Button>

@@ -1,4 +1,4 @@
-# @zkap/design-system - AI Documentation
+# @baerae-zkap/design-system - AI Documentation
 
 > 이 문서는 AI가 바이브코딩 시 참조하는 컴포넌트 가이드입니다.
 
@@ -6,10 +6,10 @@
 
 ```tsx
 // Web
-import { Button, TextButton, ActionArea, ActionAreaButton } from '@zkap/design-system';
+import { Button, TextButton, ActionArea, ActionAreaButton } from '@baerae-zkap/design-system';
 
 // React Native
-import { Button, TextButton, ActionArea, ActionAreaButton } from '@zkap/design-system/native';
+import { Button, TextButton, ActionArea, ActionAreaButton } from '@baerae-zkap/design-system/native';
 ```
 
 ## Available Components

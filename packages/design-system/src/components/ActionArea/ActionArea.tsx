@@ -3,20 +3,22 @@
  *
  * @description 모달, 바텀시트, 화면 하단에서 버튼 그룹을 제공하는 컴포넌트입니다.
  * 스크롤 시 하단에 고정되며, 상단 그라데이션으로 콘텐츠가 자연스럽게 페이드됩니다.
+ *
+ * ActionArea는 Button, TextButton 컴포넌트를 children으로 받아 레이아웃을 구성합니다.
  * @see docs/components/ActionArea.md - AI용 상세 가이드
  *
  * @example
  * <ActionArea variant="strong" position="sticky">
- *   <ActionAreaButton variant="main" onClick={() => {}}>
+ *   <Button buttonType="filled" color="brandDefault" onClick={() => {}}>
  *     확인
- *   </ActionAreaButton>
- *   <ActionAreaButton variant="alternative" onClick={() => {}}>
+ *   </Button>
+ *   <Button buttonType="outlined" color="brandDefault" onClick={() => {}}>
  *     취소
- *   </ActionAreaButton>
+ *   </Button>
  * </ActionArea>
  */
 
-import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
+import React, { forwardRef, type HTMLAttributes, type ReactNode, Children, isValidElement, cloneElement } from 'react';
 
 // ============================================
 // Types
@@ -24,7 +26,6 @@ import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
 
 export type ActionAreaVariant = 'strong' | 'neutral' | 'compact';
 export type ActionAreaPosition = 'static' | 'sticky' | 'fixed';
-export type ActionAreaButtonVariant = 'main' | 'alternative' | 'sub';
 
 export interface ActionAreaProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   /** 레이아웃 variant - strong(세로/메인상단), neutral(가로/균등), compact(가로/우측정렬) */
@@ -41,20 +42,7 @@ export interface ActionAreaProps extends Omit<HTMLAttributes<HTMLDivElement>, 'c
   useSafeArea?: boolean;
   /** 배경색 */
   backgroundColor?: string;
-  /** 버튼 요소들 */
-  children: ReactNode;
-}
-
-export interface ActionAreaButtonProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'color'> {
-  /** 버튼 역할 - main(주요), alternative(대안), sub(보조) */
-  variant?: ActionAreaButtonVariant;
-  /** 버튼 크기 */
-  size?: 'small' | 'medium' | 'large' | 'xLarge';
-  /** 로딩 상태 */
-  isLoading?: boolean;
-  /** 비활성화 */
-  disabled?: boolean;
-  /** 버튼 텍스트 */
+  /** 버튼 요소들 (Button, TextButton 컴포넌트) */
   children: ReactNode;
 }
 
@@ -140,35 +128,6 @@ const variantLayouts: Record<ActionAreaVariant, React.CSSProperties> = {
 };
 
 // ============================================
-// Button Styles
-// ============================================
-
-const buttonVariantStyles: Record<ActionAreaButtonVariant, React.CSSProperties> = {
-  main: {
-    backgroundColor: '#2563eb',
-    color: 'white',
-    border: 'none',
-  },
-  alternative: {
-    backgroundColor: 'white',
-    color: '#2563eb',
-    border: '1px solid #2563eb',
-  },
-  sub: {
-    backgroundColor: 'transparent',
-    color: '#6b7280',
-    border: 'none',
-  },
-};
-
-const buttonSizeStyles: Record<string, { height: number; fontSize: number; padding: string }> = {
-  small: { height: 36, fontSize: 14, padding: '0 16px' },
-  medium: { height: 40, fontSize: 14, padding: '0 16px' },
-  large: { height: 44, fontSize: 14, padding: '0 20px' },
-  xLarge: { height: 48, fontSize: 16, padding: '0 24px' },
-};
-
-// ============================================
 // ActionArea Component
 // ============================================
 
@@ -189,6 +148,8 @@ export const ActionArea = forwardRef<HTMLDivElement, ActionAreaProps>(
     ref
   ) => {
     const layout = variantLayouts[variant];
+    const isVertical = variant === 'strong';
+    const isCompact = variant === 'compact';
 
     const containerStyle: React.CSSProperties = {
       position: position === 'static' ? 'relative' : position,
@@ -212,6 +173,41 @@ export const ActionArea = forwardRef<HTMLDivElement, ActionAreaProps>(
       display: 'flex',
       ...layout,
     };
+
+    // Process children to add proper styling for layout
+    const processedChildren = Children.map(children, (child) => {
+      if (isValidElement(child)) {
+        const childType = child.type as { displayName?: string };
+        const isButton = childType.displayName === 'Button';
+        const isTextButton = childType.displayName === 'TextButton';
+
+        if (isButton) {
+          // In non-compact horizontal layouts, buttons should fill width equally
+          const shouldFillWidth = !isCompact;
+          const existingStyle = (child.props as { style?: React.CSSProperties }).style || {};
+
+          return cloneElement(child as React.ReactElement<{ layout?: string; style?: React.CSSProperties }>, {
+            layout: shouldFillWidth ? 'fillWidth' : (child.props as { layout?: string }).layout,
+            style: {
+              ...existingStyle,
+              // In horizontal layouts, each button gets flex: 1 for equal width
+              ...((!isVertical && !isCompact) && { flex: 1 }),
+            },
+          });
+        }
+
+        if (isTextButton) {
+          const existingStyle = (child.props as { style?: React.CSSProperties }).style || {};
+          return cloneElement(child as React.ReactElement<{ style?: React.CSSProperties }>, {
+            style: {
+              ...existingStyle,
+              alignSelf: 'center',
+            },
+          });
+        }
+      }
+      return child;
+    });
 
     return (
       <div ref={ref} style={containerStyle} {...props}>
@@ -249,7 +245,7 @@ export const ActionArea = forwardRef<HTMLDivElement, ActionAreaProps>(
           )}
 
           {/* Buttons */}
-          <div style={buttonContainerStyle}>{children}</div>
+          <div style={buttonContainerStyle}>{processedChildren}</div>
         </div>
       </div>
     );
@@ -257,80 +253,3 @@ export const ActionArea = forwardRef<HTMLDivElement, ActionAreaProps>(
 );
 
 ActionArea.displayName = 'ActionArea';
-
-// ============================================
-// ActionAreaButton Component
-// ============================================
-
-export const ActionAreaButton = forwardRef<HTMLButtonElement, ActionAreaButtonProps>(
-  (
-    {
-      variant = 'main',
-      size = 'xLarge',
-      isLoading = false,
-      disabled = false,
-      children,
-      style,
-      ...props
-    },
-    ref
-  ) => {
-    const variantStyle = buttonVariantStyles[variant];
-    const sizeStyle = buttonSizeStyles[size];
-    const isDisabled = disabled || isLoading;
-
-    const buttonStyle: React.CSSProperties = {
-      display: 'inline-flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      height: sizeStyle.height,
-      padding: sizeStyle.padding,
-      fontSize: sizeStyle.fontSize,
-      fontWeight: 600,
-      borderRadius: 8,
-      cursor: isDisabled ? 'not-allowed' : 'pointer',
-      transition: 'all 150ms ease',
-      width: variant === 'sub' ? 'auto' : '100%',
-      opacity: isDisabled ? 0.5 : 1,
-      ...variantStyle,
-      ...(isDisabled && {
-        backgroundColor: variant === 'main' ? '#e2e8f0' : 'transparent',
-        color: '#94a3b8',
-        border: variant === 'alternative' ? '1px solid #e2e8f0' : 'none',
-      }),
-      ...style,
-    };
-
-    return (
-      <button ref={ref} disabled={isDisabled} style={buttonStyle} {...props}>
-        {isLoading ? <LoadingDots /> : children}
-      </button>
-    );
-  }
-);
-
-ActionAreaButton.displayName = 'ActionAreaButton';
-
-// ============================================
-// LoadingDots
-// ============================================
-
-function LoadingDots() {
-  return (
-    <span style={{ display: 'flex', gap: 4 }}>
-      {[0, 1, 2].map((i) => (
-        <span
-          key={i}
-          style={{
-            width: 6,
-            height: 6,
-            borderRadius: '50%',
-            backgroundColor: 'currentColor',
-            animation: `pulse 1.2s ease-in-out infinite`,
-            animationDelay: `${i * 0.15}s`,
-          }}
-        />
-      ))}
-    </span>
-  );
-}

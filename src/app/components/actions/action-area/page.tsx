@@ -86,7 +86,7 @@ function ActionAreaPlayground() {
 
     // Alternative button
     const altButton = `  <Button
-    buttonType="outlined"
+    buttonType="filled"
     color="baseContainer"
     size="${size}"${layoutProp}
     ${eventHandler}
@@ -149,12 +149,11 @@ ${buttons}
       <div
         style={{
           borderRadius: 20,
-          border: "1px solid #e5e5e5",
           overflow: "hidden",
           backgroundColor: "#fafbfc",
         }}
       >
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 240px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
           {/* Preview Area */}
           <div
             style={{
@@ -162,7 +161,6 @@ ${buttons}
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              minHeight: 320,
               backgroundColor: "#fafbfc",
             }}
           >
@@ -220,51 +218,67 @@ ${buttons}
           {/* Control Panel */}
           <div
             style={{
-              padding: 24,
-              backgroundColor: "white",
-              borderLeft: "1px solid #e5e5e5",
-              borderRadius: "0 20px 20px 0",
+              backgroundColor: "#fafbfc",
               display: "flex",
               flexDirection: "column",
-              gap: 24,
+              padding: 16,
+              overflow: "hidden",
+              height: "100%",
+              boxSizing: "border-box",
             }}
           >
-            {/* Variants */}
-            <RadioGroup
-              label="Variants"
-              options={[
-                { value: "strong", label: "Strong" },
-                { value: "neutral", label: "Neutral" },
-                { value: "compact", label: "Compact" },
-                { value: "cancel", label: "Cancel" },
-              ]}
-              value={variant}
-              onChange={(v) => setVariant(v as ActionAreaVariant)}
-            />
+            {/* Inner Card */}
+            <div
+              style={{
+                flex: 1,
+                minHeight: 0,
+                padding: 24,
+                overflowY: "auto",
+                display: "flex",
+                flexDirection: "column",
+                gap: 28,
+                backgroundColor: "white",
+                borderRadius: 16,
+              }}
+            >
+              {/* Variants */}
+              <RadioGroup
+                label="Variants"
+                options={[
+                  { value: "strong", label: "Strong" },
+                  { value: "neutral", label: "Neutral" },
+                  { value: "compact", label: "Compact" },
+                  { value: "cancel", label: "Cancel" },
+                ]}
+                value={variant}
+                onChange={(v) => setVariant(v as ActionAreaVariant)}
+              />
 
-            {/* Combination */}
-            <RadioGroup
-              label="Combination"
-              options={[
-                { value: "alternative", label: "With alternative action" },
-                { value: "sub", label: "With sub action" },
-                { value: "main", label: "Main only" },
-              ]}
-              value={combination}
-              onChange={(v) => setCombination(v as "alternative" | "sub" | "main")}
-            />
+              {/* Combination - disabled when Cancel variant */}
+              <RadioGroup
+                label="Combination"
+                options={[
+                  { value: "alternative", label: "With alternative action" },
+                  { value: "sub", label: "With sub action" },
+                  { value: "main", label: "Main only" },
+                ]}
+                value={combination}
+                onChange={(v) => setCombination(v as "alternative" | "sub" | "main")}
+                disabled={variant === "cancel"}
+              />
 
-            {/* Sub button option - only show when "With sub action" is selected */}
-            <RadioGroup
-              label="Sub button option"
-              options={[
-                { value: "label", label: "Label" },
-                { value: "icon", label: "With icon" },
-              ]}
-              value={subButtonOption}
-              onChange={(v) => setSubButtonOption(v as "label" | "icon")}
-              disabled={combination !== "sub"}
-            />
+              {/* Sub button option - disabled when not "With sub action" or Cancel variant */}
+              <RadioGroup
+                label="Sub button option"
+                options={[
+                  { value: "label", label: "Label" },
+                  { value: "icon", label: "With icon" },
+                ]}
+                value={subButtonOption}
+                onChange={(v) => setSubButtonOption(v as "label" | "icon")}
+                disabled={combination !== "sub" || variant === "cancel"}
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -314,50 +328,55 @@ function RadioGroup({ label, options, value, onChange, disabled = false }: {
 }) {
   return (
     <div style={{ opacity: disabled ? 0.4 : 1, pointerEvents: disabled ? "none" : "auto" }}>
-      <div style={{ fontSize: 13, fontWeight: 500, color: "#9ca3af", marginBottom: 10 }}>
+      <div style={{ fontSize: 14, fontWeight: 500, color: "#c4c4c4", marginBottom: 14 }}>
         {label}
       </div>
-      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-        {options.map(opt => (
-          <label
-            key={opt.value}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 12,
-              cursor: disabled ? "default" : "pointer",
-              fontSize: 14,
-              fontWeight: 500,
-              color: "var(--text-primary)",
-            }}
-            onClick={() => !disabled && onChange(opt.value)}
-          >
-            <div
+      <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+        {options.map(opt => {
+          const isSelected = value === opt.value;
+          return (
+            <label
+              key={opt.value}
               style={{
-                width: 20,
-                height: 20,
-                borderRadius: "50%",
-                border: value === opt.value ? "2px solid #3b82f6" : "2px solid #d1d5db",
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "center",
-                transition: "all 0.15s ease",
+                gap: 12,
+                cursor: "pointer",
+                fontSize: 15,
+                fontWeight: 500,
+                color: isSelected ? "var(--text-primary)" : "#9ca3af",
+                transition: "color 0.15s ease",
               }}
+              onClick={() => onChange(opt.value)}
             >
-              {value === opt.value && (
-                <div
-                  style={{
-                    width: 10,
-                    height: 10,
-                    borderRadius: "50%",
-                    backgroundColor: "#3b82f6",
-                  }}
-                />
-              )}
-            </div>
-            {opt.label}
-          </label>
-        ))}
+              <div
+                style={{
+                  width: 22,
+                  height: 22,
+                  borderRadius: "50%",
+                  border: isSelected ? "2px solid #3b82f6" : "2px solid #e5e5e5",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  transition: "all 0.15s ease",
+                  backgroundColor: "white",
+                }}
+              >
+                {isSelected && (
+                  <div
+                    style={{
+                      width: 12,
+                      height: 12,
+                      borderRadius: "50%",
+                      backgroundColor: "#3b82f6",
+                    }}
+                  />
+                )}
+              </div>
+              {opt.label}
+            </label>
+          );
+        })}
       </div>
     </div>
   );
@@ -436,15 +455,15 @@ function DesignContent() {
       {/* Button Mapping */}
       <Section title="Button Component Mapping">
         <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
-          <InlineCode>ActionAreaButton</InlineCode>은 내부적으로 <InlineCode>Button</InlineCode> 컴포넌트를 사용합니다.
-          각 variant는 아래와 같이 Button props로 매핑됩니다.
+          <InlineCode>ActionArea</InlineCode>는 <InlineCode>Button</InlineCode>과 <InlineCode>TextButton</InlineCode> 컴포넌트를 children으로 받습니다.
+          각 역할에 맞게 아래와 같이 Button props를 설정합니다.
         </p>
 
         <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)", marginBottom: 32 }}>
           <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
             <thead>
               <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)", color: "var(--text-primary)" }}>ActionAreaButton variant</th>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)", color: "var(--text-primary)" }}>역할</th>
                 <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)", color: "var(--text-primary)" }}>Button props</th>
                 <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)", color: "var(--text-primary)" }}>Preview</th>
               </tr>
@@ -452,10 +471,10 @@ function DesignContent() {
             <tbody>
               <tr>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>
-                  <InlineCode>main</InlineCode>
+                  <InlineCode>주요 (Main)</InlineCode>
                 </td>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "#6366f1" }}>
-                  buttonType=&quot;filled&quot; color=&quot;brandDefault&quot; size=&quot;xLarge&quot; layout=&quot;fillWidth&quot;
+                  buttonType=&quot;filled&quot; color=&quot;brandDefault&quot;
                 </td>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>
                   <ButtonDemo buttonType="filled" color="brandDefault" size="small">Main</ButtonDemo>
@@ -463,58 +482,48 @@ function DesignContent() {
               </tr>
               <tr>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>
-                  <InlineCode>alternative</InlineCode>
+                  <InlineCode>대안 (Alternative)</InlineCode>
                 </td>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "#6366f1" }}>
-                  buttonType=&quot;outlined&quot; color=&quot;baseContainer&quot; size=&quot;xLarge&quot; layout=&quot;fillWidth&quot;
+                  buttonType=&quot;filled&quot; color=&quot;baseContainer&quot;
                 </td>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>
-                  <ButtonDemo buttonType="outlined" color="baseContainer" size="small">Alternative</ButtonDemo>
+                  <ButtonDemo buttonType="filled" color="baseContainer" size="small">Alternative</ButtonDemo>
                 </td>
               </tr>
               <tr>
                 <td style={{ padding: "12px 16px" }}>
-                  <InlineCode>sub</InlineCode>
+                  <InlineCode>보조 (Sub)</InlineCode>
                 </td>
                 <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 12, color: "#6366f1" }}>
-                  buttonType=&quot;plain&quot; color=&quot;brandDefault&quot;
+                  TextButton color=&quot;baseDefault&quot;
                 </td>
                 <td style={{ padding: "12px 16px" }}>
-                  <PlainButtonDemo>Sub</PlainButtonDemo>
+                  <TextButtonDemo size="small">Sub</TextButtonDemo>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <CodeBlock code={`// ActionAreaButton internally uses Button component:
+        <CodeBlock code={`// ActionArea에서 Button/TextButton 사용:
 
-// variant="main" maps to:
-<Button
-  buttonType="filled"
-  color="brandDefault"
-  size="xLarge"
-  layout="fillWidth"
->
-  Main
-</Button>
+import { ActionArea, Button, TextButton } from '@baerae-zkap/design-system/native';
 
-// variant="alternative" maps to:
-<Button
-  buttonType="outlined"
-  color="baseContainer"
-  size="xLarge"
-  layout="fillWidth"
->
-  Alternative
-</Button>
+// 주요 액션 (Main)
+<Button buttonType="filled" color="brandDefault">확인</Button>
 
-// variant="sub" maps to TextButton:
-<TextButton
-  color="brandDefault"
->
-  Sub
-</TextButton>`} />
+// 대안 액션 (Alternative) - filled gray
+<Button buttonType="filled" color="baseContainer">취소</Button>
+
+// 보조 링크 (Sub)
+<TextButton color="baseDefault">건너뛰기</TextButton>
+
+// ActionArea로 감싸면 자동 레이아웃
+<ActionArea variant="neutral">
+  <Button buttonType="filled" color="baseContainer" onPress={() => {}}>취소</Button>
+  <Button buttonType="filled" color="brandDefault" onPress={() => {}}>확인</Button>
+</ActionArea>`} />
       </Section>
 
       {/* Anatomy */}
@@ -840,12 +849,46 @@ function DesignContent() {
   );
 }
 
+const GITHUB_BASE = "https://github.com/baerae-zkap/design-foundation/blob/main/packages/design-system/src";
+const ACTIONAREA_SOURCE = `${GITHUB_BASE}/components/ActionArea/ActionArea.tsx`;
+
 // ============================================
 // Web Tab Content
 // ============================================
 function WebContent() {
   return (
     <>
+      <Section title="Source Code">
+        <div style={{ padding: 16, backgroundColor: "var(--bg-secondary)", borderRadius: 12, marginBottom: 24, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <div>
+            <p style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", margin: 0 }}>ActionArea Component</p>
+            <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: "4px 0 0 0" }}>실제 컴포넌트 소스 코드를 GitHub에서 확인하세요.</p>
+          </div>
+          <a
+            href={ACTIONAREA_SOURCE}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 6,
+              padding: "8px 16px",
+              fontSize: 13,
+              fontWeight: 500,
+              color: "white",
+              backgroundColor: "#24292f",
+              borderRadius: 12,
+              textDecoration: "none",
+            }}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+            </svg>
+            View on GitHub
+          </a>
+        </div>
+      </Section>
+
       <Section title="Import">
         <CodeBlock code={`import { Button } from '@zkap/design-system';`} />
       </Section>
@@ -1073,12 +1116,45 @@ function WebContent() {
   );
 }
 
+const ACTIONAREA_NATIVE_SOURCE = `${GITHUB_BASE}/native/ActionArea.tsx`;
+
 // ============================================
 // React Native Tab Content
 // ============================================
 function RNContent() {
   return (
     <>
+      <Section title="Source Code">
+        <div style={{ padding: 16, backgroundColor: "var(--bg-secondary)", borderRadius: 12, marginBottom: 24, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <div>
+            <p style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", margin: 0 }}>ActionArea Component</p>
+            <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: "4px 0 0 0" }}>실제 컴포넌트 소스 코드를 GitHub에서 확인하세요.</p>
+          </div>
+          <a
+            href={ACTIONAREA_NATIVE_SOURCE}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 6,
+              padding: "8px 16px",
+              fontSize: 13,
+              fontWeight: 500,
+              color: "white",
+              backgroundColor: "#24292f",
+              borderRadius: 12,
+              textDecoration: "none",
+            }}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+            </svg>
+            View on GitHub
+          </a>
+        </div>
+      </Section>
+
       <Section title="Import">
         <CodeBlock code={`import { Button } from '@zkap/design-system';
 import { View, Text } from 'react-native';`} />
@@ -1532,8 +1608,8 @@ function AnatomyDiagram() {
         <text x="160" y="65" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">Main</text>
 
         {/* Alternative button */}
-        <rect x="76" y="86" width="168" height="36" rx="8" fill="white" stroke="#cbd5e1" strokeWidth="1" />
-        <text x="160" y="109" textAnchor="middle" fill="#334155" fontSize="12" fontWeight="600">Alternative</text>
+        <rect x="76" y="86" width="168" height="36" rx="8" fill="#f3f4f6" />
+        <text x="160" y="109" textAnchor="middle" fill="#374151" fontSize="12" fontWeight="600">Alternative</text>
 
         {/* Home indicator */}
         <rect x="130" y="135" width="60" height="4" rx="2" fill="#d1d5db" />
@@ -1657,7 +1733,7 @@ function ActionAreaButtonDemo({ variant, size, children, compact = false }: Acti
       padding: variant === "sub" ? "10px 12px" : "10px 20px",
       fontSize,
       fontWeight: 600,
-      borderRadius: 8,
+      borderRadius: 12,
       cursor: "pointer",
       transition: "all 150ms ease",
       transform: isPressed ? "scale(0.98)" : "scale(1)",
@@ -1689,12 +1765,12 @@ function ActionAreaButtonDemo({ variant, size, children, compact = false }: Acti
           flex: 1,
         };
       case "alternative":
-        // Button: buttonType="outlined" color="baseContainer"
+        // Button: buttonType="filled" color="baseContainer" - filled gray style
         return {
           ...baseStyles,
-          backgroundColor: isPressed ? "#f1f5f9" : isHovered ? "#f8fafc" : "white",
-          color: "#334155",
-          border: "1px solid #cbd5e1",
+          backgroundColor: isPressed ? "#d1d5db" : isHovered ? "#e5e7eb" : "#f3f4f6",
+          color: "#374151",
+          border: "none",
         };
       case "sub":
         // TextButton: color="brandDefault" - plain text, no border
@@ -1738,7 +1814,7 @@ function IconButtonDemo({ size }: { size: ButtonSize }) {
         width: sizeMap[size],
         height: sizeMap[size],
         padding: 0,
-        borderRadius: 8,
+        borderRadius: 12,
         cursor: "pointer",
         transition: "all 150ms ease",
         transform: isPressed ? "scale(0.98)" : "scale(1)",
@@ -1835,20 +1911,20 @@ function ButtonDemo({
       onMouseDown={() => !disabled && !isLoading && setIsPressed(true)}
       onMouseUp={() => setIsPressed(false)}
       style={{
-        padding: "10px 16px",
+        padding: size === "xLarge" ? "14px 24px" : size === "large" ? "12px 20px" : size === "medium" ? "10px 20px" : "8px 16px",
         fontSize: size === "xLarge" ? 15 : 14,
         fontWeight: 600,
         backgroundColor: colors.bg,
         color: colors.text,
         border: buttonType === "outlined" ? `1px solid ${colors.border}` : "none",
-        borderRadius: 8,
+        borderRadius: (size === "large" || size === "xLarge") ? 12 : 8,
         cursor: disabled || isLoading ? "not-allowed" : "pointer",
         transition: "all 150ms ease",
         transform: isPressed ? "scale(0.98)" : "scale(1)",
         display: "inline-flex",
         alignItems: "center",
         justifyContent: "center",
-        gap: 6,
+        gap: 8,
         width: layout === "fillWidth" ? "100%" : "auto",
         minWidth: 80,
         height: sizeHeights[size],
@@ -1859,27 +1935,95 @@ function ButtonDemo({
   );
 }
 
-// Plain button demo for sub variant display
-function PlainButtonDemo({ children }: { children: React.ReactNode }) {
+// TextButton demo for sub variant display (matches TextButtonDemo from text-button page)
+type TextButtonColor = "brandDefault" | "baseDefault" | "errorDefault";
+type TextButtonSize = "xSmall" | "small" | "medium" | "large" | "xLarge";
+type TextButtonVariant = "default" | "underline";
+
+interface TextButtonDemoProps {
+  variant?: TextButtonVariant;
+  color?: TextButtonColor;
+  size?: TextButtonSize;
+  disabled?: boolean;
+  children: React.ReactNode;
+}
+
+function TextButtonDemo({
+  variant = "default",
+  color = "brandDefault",
+  size = "medium",
+  disabled = false,
+  children
+}: TextButtonDemoProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
 
+  const getColor = () => {
+    if (disabled) return "#9ca3af";
+    switch (color) {
+      case "brandDefault": return "#2563eb";
+      case "baseDefault": return "#374151";
+      case "errorDefault": return "#dc2626";
+    }
+  };
+
+  const getFontSize = () => {
+    switch (size) {
+      case "xSmall": return 12;
+      case "small": return 14;
+      case "medium": return 16;
+      case "large": return 18;
+      case "xLarge": return 20;
+    }
+  };
+
+  const getBackgroundColor = () => {
+    if (disabled) return "transparent";
+    const colorMap = {
+      brandDefault: {
+        pressed: "rgba(37, 99, 235, 0.12)",
+        hovered: "rgba(37, 99, 235, 0.06)",
+        default: "transparent",
+      },
+      baseDefault: {
+        pressed: "rgba(55, 65, 81, 0.12)",
+        hovered: "rgba(55, 65, 81, 0.06)",
+        default: "transparent",
+      },
+      errorDefault: {
+        pressed: "rgba(220, 38, 38, 0.12)",
+        hovered: "rgba(220, 38, 38, 0.06)",
+        default: "transparent",
+      },
+    };
+    const colors = colorMap[color];
+    if (isPressed) return colors.pressed;
+    if (isHovered) return colors.hovered;
+    return colors.default;
+  };
+
   return (
     <button
+      disabled={disabled}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => { setIsHovered(false); setIsPressed(false); }}
       onMouseDown={() => setIsPressed(true)}
       onMouseUp={() => setIsPressed(false)}
       style={{
-        padding: "8px 12px",
-        fontSize: 14,
-        fontWeight: 600,
-        backgroundColor: "transparent",
-        color: isPressed ? "#1e40af" : isHovered ? "#1d4ed8" : "#2563eb",
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 4,
+        padding: "4px 8px",
         border: "none",
-        borderRadius: 8,
-        cursor: "pointer",
-        transition: "all 150ms ease",
+        borderRadius: 6,
+        backgroundColor: getBackgroundColor(),
+        color: getColor(),
+        fontSize: getFontSize(),
+        fontWeight: 500,
+        cursor: disabled ? "not-allowed" : "pointer",
+        opacity: disabled ? 0.38 : 1,
+        textDecoration: variant === "underline" ? "underline" : "none",
+        transition: "background-color 0.15s ease, opacity 0.15s ease",
       }}
     >
       {children}
@@ -1899,7 +2043,7 @@ function StateButtonDemo({ state, variant, children }: {
       padding: "10px 16px",
       fontSize: 15,
       fontWeight: 600,
-      borderRadius: 8,
+      borderRadius: 12,
       display: "flex",
       alignItems: "center",
       justifyContent: "center",

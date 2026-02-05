@@ -88,12 +88,11 @@ function ButtonPlayground() {
       <div
         style={{
           borderRadius: 20,
-          border: "1px solid #e5e5e5",
           overflow: "hidden",
           backgroundColor: "#fafbfc",
         }}
       >
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 240px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
           {/* Preview Area */}
           <div
             style={{
@@ -101,7 +100,6 @@ function ButtonPlayground() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              minHeight: 280,
               backgroundColor: "#fafbfc",
             }}
           >
@@ -121,88 +119,104 @@ function ButtonPlayground() {
           {/* Control Panel */}
           <div
             style={{
-              padding: 24,
-              backgroundColor: "white",
-              borderLeft: "1px solid #e5e5e5",
+              backgroundColor: "#fafbfc",
               display: "flex",
               flexDirection: "column",
-              gap: 24,
+              padding: 16,
+              overflow: "hidden",
+              height: "100%",
+              boxSizing: "border-box",
             }}
           >
-            {/* Type */}
-            <RadioGroup
-              label="Type"
-              options={[
-                { value: "filled", label: "Filled" },
-                { value: "outlined", label: "Outlined" },
-              ]}
-              value={buttonType}
-              onChange={(v) => setButtonType(v as ButtonType)}
-            />
-
-            {/* Color */}
-            <RadioGroup
-              label="Color"
-              options={[
-                { value: "brandDefault", label: colorLabels.brandDefault },
-                { value: "brandSecondary", label: colorLabels.brandSecondary },
-                { value: "baseContainer", label: colorLabels.baseContainer },
-                { value: "successDefault", label: colorLabels.successDefault },
-                { value: "errorDefault", label: colorLabels.errorDefault },
-              ]}
-              value={color}
-              onChange={(v) => setColor(v as ButtonColor)}
-            />
-
-            {/* Size */}
-            <RadioGroup
-              label="Size"
-              options={[
-                { value: "small", label: "Small" },
-                { value: "medium", label: "Medium" },
-                { value: "large", label: "Large" },
-                { value: "xLarge", label: "X-Large" },
-              ]}
-              value={size}
-              onChange={(v) => setSize(v as ButtonSize)}
-            />
-
-            {/* Leading icon */}
-            <RadioGroup
-              label="Leading icon"
-              options={[
-                { value: "false", label: "False" },
-                { value: "true", label: "True" },
-              ]}
-              value={leadingIcon ? "true" : "false"}
-              onChange={(v) => setLeadingIcon(v === "true")}
-            />
-
-            {/* Trailing icon */}
-            <RadioGroup
-              label="Trailing icon"
-              options={[
-                { value: "false", label: "False" },
-                { value: "true", label: "True" },
-              ]}
-              value={trailingIcon ? "true" : "false"}
-              onChange={(v) => setTrailingIcon(v === "true")}
-            />
-
-            {/* States */}
-            <RadioGroup
-              label="State"
-              options={[
-                { value: "default", label: "Default" },
-                { value: "loading", label: "Loading" },
-                { value: "disabled", label: "Disabled" },
-              ]}
-              value={isLoading ? "loading" : disabled ? "disabled" : "default"}
-              onChange={(v) => {
-                setIsLoading(v === "loading");
-                setDisabled(v === "disabled");
+            {/* Inner Card */}
+            <div
+              style={{
+                flex: 1,
+                minHeight: 0,
+                padding: 24,
+                overflowY: "auto",
+                display: "flex",
+                flexDirection: "column",
+                gap: 28,
+                backgroundColor: "white",
+                borderRadius: 16,
               }}
-            />
+            >
+              {/* Type */}
+              <RadioGroup
+                label="Type"
+                options={[
+                  { value: "filled", label: "Filled" },
+                  { value: "outlined", label: "Outlined" },
+                ]}
+                value={buttonType}
+                onChange={(v) => setButtonType(v as ButtonType)}
+              />
+
+              {/* Color */}
+              <RadioGroup
+                label="Color"
+                options={[
+                  { value: "brandDefault", label: colorLabels.brandDefault },
+                  { value: "brandSecondary", label: colorLabels.brandSecondary },
+                  { value: "baseContainer", label: colorLabels.baseContainer },
+                  { value: "successDefault", label: colorLabels.successDefault },
+                  { value: "errorDefault", label: colorLabels.errorDefault },
+                ]}
+                value={color}
+                onChange={(v) => setColor(v as ButtonColor)}
+              />
+
+              {/* Size */}
+              <RadioGroup
+                label="Size"
+                options={[
+                  { value: "small", label: "Small" },
+                  { value: "medium", label: "Medium" },
+                  { value: "large", label: "Large" },
+                  { value: "xLarge", label: "X-Large" },
+                ]}
+                value={size}
+                onChange={(v) => setSize(v as ButtonSize)}
+              />
+
+              {/* Leading icon */}
+              <RadioGroup
+                label="Leading icon"
+                options={[
+                  { value: "false", label: "False" },
+                  { value: "true", label: "True" },
+                ]}
+                value={leadingIcon ? "true" : "false"}
+                onChange={(v) => setLeadingIcon(v === "true")}
+              />
+
+              {/* Trailing icon */}
+              <RadioGroup
+                label="Trailing icon"
+                options={[
+                  { value: "false", label: "False" },
+                  { value: "true", label: "True" },
+                ]}
+                value={trailingIcon ? "true" : "false"}
+                onChange={(v) => setTrailingIcon(v === "true")}
+              />
+
+              {/* States */}
+              <RadioGroup
+                label="State"
+                options={[
+                  { value: "default", label: "Default" },
+                  { value: "loading", label: "Loading" },
+                  { value: "disabled", label: "Disabled" },
+                ]}
+                value={isLoading ? "loading" : disabled ? "disabled" : "default"}
+                onChange={(v) => {
+                  setIsLoading(v === "loading");
+                  setDisabled(v === "disabled");
+                }}
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -251,50 +265,55 @@ function RadioGroup({ label, options, value, onChange }: {
 }) {
   return (
     <div>
-      <div style={{ fontSize: 13, fontWeight: 500, color: "#9ca3af", marginBottom: 10 }}>
+      <div style={{ fontSize: 14, fontWeight: 500, color: "#c4c4c4", marginBottom: 14 }}>
         {label}
       </div>
-      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-        {options.map(opt => (
-          <label
-            key={opt.value}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 10,
-              cursor: "pointer",
-              fontSize: 14,
-              fontWeight: 500,
-              color: "var(--text-primary)",
-            }}
-            onClick={() => onChange(opt.value)}
-          >
-            <div
+      <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+        {options.map(opt => {
+          const isSelected = value === opt.value;
+          return (
+            <label
+              key={opt.value}
               style={{
-                width: 20,
-                height: 20,
-                borderRadius: "50%",
-                border: value === opt.value ? "2px solid #3b82f6" : "2px solid #d1d5db",
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "center",
-                transition: "all 0.15s ease",
+                gap: 12,
+                cursor: "pointer",
+                fontSize: 15,
+                fontWeight: 500,
+                color: isSelected ? "var(--text-primary)" : "#9ca3af",
+                transition: "color 0.15s ease",
               }}
+              onClick={() => onChange(opt.value)}
             >
-              {value === opt.value && (
-                <div
-                  style={{
-                    width: 10,
-                    height: 10,
-                    borderRadius: "50%",
-                    backgroundColor: "#3b82f6",
-                  }}
-                />
-              )}
-            </div>
-            {opt.label}
-          </label>
-        ))}
+              <div
+                style={{
+                  width: 22,
+                  height: 22,
+                  borderRadius: "50%",
+                  border: isSelected ? "2px solid #3b82f6" : "2px solid #e5e5e5",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  transition: "all 0.15s ease",
+                  backgroundColor: "white",
+                }}
+              >
+                {isSelected && (
+                  <div
+                    style={{
+                      width: 12,
+                      height: 12,
+                      borderRadius: "50%",
+                      backgroundColor: "#3b82f6",
+                    }}
+                  />
+                )}
+              </div>
+              {opt.label}
+            </label>
+          );
+        })}
       </div>
     </div>
   );
@@ -414,7 +433,7 @@ function DesignContent() {
             <UsageCard
               situation="Cancel / Dismiss"
               desc="취소, 닫기 등 보조 액션"
-              buttonType="outlined"
+              buttonType="filled"
               color="baseContainer"
               examples={["취소", "닫기", "나중에"]}
             />
@@ -446,7 +465,7 @@ function DesignContent() {
             <PrincipleCard
               number={2}
               title="버튼 계층 구조 유지"
-              desc="가장 중요한 액션에 가장 강조된 스타일을 사용하세요. 취소/닫기는 항상 outlined + baseContainer입니다. 강조도: brandDefault > brandSecondary > outlined > TextButton"
+              desc="가장 중요한 액션에 가장 강조된 스타일을 사용하세요. 취소/닫기는 filled + baseContainer입니다. 강조도: brandDefault > brandSecondary > baseContainer > TextButton"
             />
             <PrincipleCard
               number={3}
@@ -464,13 +483,13 @@ function DesignContent() {
           <div style={{ display: "grid", gap: 16 }}>
             <PlacementExample
               title="일반 다이얼로그"
-              left={{ type: "outlined", color: "baseContainer", label: "취소" }}
+              left={{ type: "filled", color: "baseContainer", label: "취소" }}
               right={{ type: "filled", color: "brandDefault", label: "확인" }}
               note="확인(Primary)이 오른쪽"
             />
             <PlacementExample
               title="위험 액션 확인"
-              left={{ type: "outlined", color: "baseContainer", label: "취소" }}
+              left={{ type: "filled", color: "baseContainer", label: "취소" }}
               right={{ type: "filled", color: "errorDefault", label: "삭제" }}
               note="위험 액션이 오른쪽"
             />
@@ -693,7 +712,7 @@ function DesignContent() {
               <StateDemo label="Disabled" state="disabled" />
             </div>
           </PreviewBox>
-          <div style={{ marginTop: 16, padding: 16, backgroundColor: "var(--bg-secondary)", borderRadius: 8, fontSize: 13 }}>
+          <div style={{ marginTop: 16, padding: 16, backgroundColor: "var(--bg-secondary)", borderRadius: 12, fontSize: 13 }}>
             <p style={{ margin: 0, color: "var(--text-secondary)", lineHeight: 1.8 }}>
               <strong style={{ color: "var(--text-primary)" }}>Default:</strong> 기본 상태<br />
               <strong style={{ color: "var(--text-primary)" }}>Hover:</strong> 마우스 오버 시 배경색이 약간 어두워짐<br />
@@ -1069,7 +1088,7 @@ function WebContent() {
               fontWeight: 500,
               color: "white",
               backgroundColor: "#24292f",
-              borderRadius: 8,
+              borderRadius: 12,
               textDecoration: "none",
             }}
           >
@@ -1272,7 +1291,7 @@ function RNContent() {
               fontWeight: 500,
               color: "white",
               backgroundColor: "#24292f",
-              borderRadius: 8,
+              borderRadius: 12,
               textDecoration: "none",
             }}
           >
@@ -1770,7 +1789,7 @@ function PlacementExample({ title, left, right, note }: {
         gap: 8,
         padding: 20,
         backgroundColor: "#f8f9fa",
-        borderRadius: 8,
+        borderRadius: 12,
       }}>
         <ButtonDemo buttonType={left.type} color={left.color} size="small">{left.label}</ButtonDemo>
         <ButtonDemo buttonType={right.type} color={right.color} size="small">{right.label}</ButtonDemo>
@@ -1843,7 +1862,7 @@ function StateDemo({ label, state }: { label: string; state: "default" | "hover"
       padding: "10px 20px",
       fontSize: 14,
       fontWeight: 600,
-      borderRadius: 8,
+      borderRadius: 12,
       border: "none",
       cursor: state === "disabled" ? "not-allowed" : "pointer",
       transition: "all 150ms ease",
@@ -1980,20 +1999,22 @@ function ButtonDemo({
       onMouseDown={() => !disabled && !isLoading && setIsPressed(true)}
       onMouseUp={() => setIsPressed(false)}
       style={{
-        padding: iconOnly ? "10px" : "10px 16px",
+        padding: iconOnly
+          ? (size === "xLarge" ? "14px" : size === "large" ? "12px" : size === "medium" ? "10px" : "8px")
+          : (size === "xLarge" ? "14px 24px" : size === "large" ? "12px 20px" : size === "medium" ? "10px 20px" : "8px 16px"),
         fontSize: size === "xLarge" ? 15 : 14,
         fontWeight: 600,
         backgroundColor: colors.bg,
         color: colors.text,
         border: buttonType === "outlined" ? `1px solid ${colors.border}` : "none",
-        borderRadius: 8,
+        borderRadius: (size === "large" || size === "xLarge") ? 12 : 8,
         cursor: disabled || isLoading ? "not-allowed" : "pointer",
         transition: "all 150ms ease",
         transform: actualPressed ? "scale(0.98)" : "scale(1)",
         display: "inline-flex",
         alignItems: "center",
         justifyContent: "center",
-        gap: 6,
+        gap: 8,
         width: layout === "fillWidth" ? "100%" : "auto",
         minWidth: iconOnly ? "auto" : 80,
         height: sizeHeights[size],
@@ -2047,7 +2068,7 @@ function LoadingButtonDemo() {
         backgroundColor: "#2563eb",
         color: "white",
         border: "none",
-        borderRadius: 8,
+        borderRadius: 12,
         cursor: isLoading ? "not-allowed" : "pointer",
         transition: "all 150ms ease",
         display: "inline-flex",

@@ -6,13 +6,13 @@
 
 ```tsx
 // Web
-import { TextButton } from '@zkap/design-system';
+import { TextButton } from '@baerae-zkap/design-system';
 <TextButton variant="clear" color="brandDefault" size="medium" onClick={() => {}}>
   더보기
 </TextButton>
 
 // React Native
-import { TextButton } from '@zkap/design-system/native';
+import { TextButton } from '@baerae-zkap/design-system/native';
 <TextButton variant="clear" color="brandDefault" size="medium" onPress={() => {}}>
   더보기
 </TextButton>

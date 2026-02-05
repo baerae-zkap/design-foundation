@@ -15,7 +15,7 @@
  * </Button>
  */
 
-import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
+import { forwardRef, useState, type ButtonHTMLAttributes, type ReactNode } from 'react';
 
 export type ButtonType = 'filled' | 'outlined';
 export type ButtonColor =
@@ -53,26 +53,29 @@ const sizeStyles: Record<ButtonSize, { height: number; fontSize: number; padding
   xLarge: { height: 48, fontSize: 16, padding: '0 24px' },
 };
 
-const colorStyles: Record<ButtonColor, { filled: Record<string, string>; outlined: Record<string, string> }> = {
+const colorStyles: Record<ButtonColor, {
+  filled: { bg: string; bgPressed: string; color: string };
+  outlined: { bg: string; bgPressed: string; color: string; border: string };
+}> = {
   brandDefault: {
-    filled: { background: '#2563eb', color: 'white', border: 'none' },
-    outlined: { background: 'white', color: '#2563eb', border: '1px solid #2563eb' },
+    filled: { bg: '#2563eb', bgPressed: '#1d4ed8', color: 'white' },
+    outlined: { bg: 'white', bgPressed: '#eff6ff', color: '#2563eb', border: '#2563eb' },
   },
   brandSecondary: {
-    filled: { background: '#dbeafe', color: '#2563eb', border: 'none' },
-    outlined: { background: 'white', color: '#2563eb', border: '1px solid #93c5fd' },
+    filled: { bg: '#dbeafe', bgPressed: '#bfdbfe', color: '#2563eb' },
+    outlined: { bg: 'white', bgPressed: '#eff6ff', color: '#2563eb', border: '#93c5fd' },
   },
   baseContainer: {
-    filled: { background: '#f1f5f9', color: '#334155', border: 'none' },
-    outlined: { background: 'white', color: '#334155', border: '1px solid #cbd5e1' },
+    filled: { bg: '#f1f5f9', bgPressed: '#e2e8f0', color: '#334155' },
+    outlined: { bg: 'white', bgPressed: '#f8fafc', color: '#334155', border: '#cbd5e1' },
   },
   successDefault: {
-    filled: { background: '#22c55e', color: 'white', border: 'none' },
-    outlined: { background: 'white', color: '#16a34a', border: '1px solid #22c55e' },
+    filled: { bg: '#22c55e', bgPressed: '#16a34a', color: 'white' },
+    outlined: { bg: 'white', bgPressed: '#f0fdf4', color: '#16a34a', border: '#22c55e' },
   },
   errorDefault: {
-    filled: { background: '#ef4444', color: 'white', border: 'none' },
-    outlined: { background: 'white', color: '#dc2626', border: '1px solid #ef4444' },
+    filled: { bg: '#ef4444', bgPressed: '#dc2626', color: 'white' },
+    outlined: { bg: 'white', bgPressed: '#fef2f2', color: '#dc2626', border: '#ef4444' },
   },
 };
 
@@ -89,13 +92,32 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       rightContent,
       children,
       style,
+      onMouseDown,
+      onMouseUp,
+      onMouseLeave,
       ...props
     },
     ref
   ) => {
+    const [isPressed, setIsPressed] = useState(false);
     const sizeStyle = sizeStyles[size];
     const colorStyle = colorStyles[color][buttonType];
     const isDisabled = disabled || isLoading;
+
+    const handleMouseDown = (e: React.MouseEvent<HTMLButtonElement>) => {
+      setIsPressed(true);
+      onMouseDown?.(e);
+    };
+
+    const handleMouseUp = (e: React.MouseEvent<HTMLButtonElement>) => {
+      setIsPressed(false);
+      onMouseUp?.(e);
+    };
+
+    const handleMouseLeave = (e: React.MouseEvent<HTMLButtonElement>) => {
+      setIsPressed(false);
+      onMouseLeave?.(e);
+    };
 
     const buttonStyle: React.CSSProperties = {
       display: 'inline-flex',
@@ -108,15 +130,16 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       fontWeight: 600,
       borderRadius: 8,
       cursor: isDisabled ? 'not-allowed' : 'pointer',
-      transition: 'all 150ms ease',
+      transition: 'background-color 150ms ease',
       width: layout === 'fillWidth' ? '100%' : 'auto',
       opacity: isDisabled ? 0.5 : 1,
-      ...colorStyle,
-      ...(isDisabled && {
-        background: '#e2e8f0',
-        color: '#94a3b8',
-        border: buttonType === 'outlined' ? '1px solid #e2e8f0' : 'none',
-      }),
+      background: isDisabled
+        ? '#e2e8f0'
+        : (isPressed ? colorStyle.bgPressed : colorStyle.bg),
+      color: isDisabled ? '#94a3b8' : colorStyle.color,
+      border: buttonType === 'outlined'
+        ? `1px solid ${isDisabled ? '#e2e8f0' : (colorStyle as { border: string }).border}`
+        : 'none',
       ...style,
     };
 
@@ -127,6 +150,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         aria-busy={isLoading}
         aria-disabled={isDisabled}
         style={buttonStyle}
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseLeave}
         {...props}
       >
         {isLoading ? (

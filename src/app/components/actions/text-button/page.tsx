@@ -78,12 +78,11 @@ function TextButtonPlayground() {
       <div
         style={{
           borderRadius: 20,
-          border: "1px solid #e5e5e5",
           overflow: "hidden",
           backgroundColor: "#fafbfc",
         }}
       >
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 240px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
           {/* Preview Area */}
           <div
             style={{
@@ -91,7 +90,6 @@ function TextButtonPlayground() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              minHeight: 240,
               backgroundColor: "#fafbfc",
             }}
           >
@@ -108,62 +106,78 @@ function TextButtonPlayground() {
           {/* Control Panel */}
           <div
             style={{
-              padding: 24,
-              backgroundColor: "white",
-              borderLeft: "1px solid #e5e5e5",
+              backgroundColor: "#fafbfc",
               display: "flex",
               flexDirection: "column",
-              gap: 24,
+              padding: 16,
+              overflow: "hidden",
+              height: "100%",
+              boxSizing: "border-box",
             }}
           >
-            {/* Variant */}
-            <RadioGroup
-              label="Variant"
-              options={[
-                { value: "clear", label: "Clear" },
-                { value: "underline", label: "Underline" },
-                { value: "arrow", label: "Arrow" },
-              ]}
-              value={variant}
-              onChange={(v) => setVariant(v as TextButtonVariant)}
-            />
+            {/* Inner Card */}
+            <div
+              style={{
+                flex: 1,
+                minHeight: 0,
+                padding: 24,
+                overflowY: "auto",
+                display: "flex",
+                flexDirection: "column",
+                gap: 28,
+                backgroundColor: "white",
+                borderRadius: 16,
+              }}
+            >
+              {/* Variant */}
+              <RadioGroup
+                label="Variant"
+                options={[
+                  { value: "clear", label: "Clear" },
+                  { value: "underline", label: "Underline" },
+                  { value: "arrow", label: "Arrow" },
+                ]}
+                value={variant}
+                onChange={(v) => setVariant(v as TextButtonVariant)}
+              />
 
-            {/* Color */}
-            <RadioGroup
-              label="Color"
-              options={[
-                { value: "brandDefault", label: colorLabels.brandDefault },
-                { value: "baseDefault", label: colorLabels.baseDefault },
-                { value: "errorDefault", label: colorLabels.errorDefault },
-              ]}
-              value={color}
-              onChange={(v) => setColor(v as TextButtonColor)}
-            />
+              {/* Color */}
+              <RadioGroup
+                label="Color"
+                options={[
+                  { value: "brandDefault", label: colorLabels.brandDefault },
+                  { value: "baseDefault", label: colorLabels.baseDefault },
+                  { value: "errorDefault", label: colorLabels.errorDefault },
+                ]}
+                value={color}
+                onChange={(v) => setColor(v as TextButtonColor)}
+              />
 
-            {/* Size */}
-            <RadioGroup
-              label="Size"
-              options={[
-                { value: "xSmall", label: "XS" },
-                { value: "small", label: "S" },
-                { value: "medium", label: "M" },
-                { value: "large", label: "L" },
-                { value: "xLarge", label: "XL" },
-              ]}
-              value={size}
-              onChange={(v) => setSize(v as TextButtonSize)}
-            />
+              {/* Size */}
+              <RadioGroup
+                label="Size"
+                options={[
+                  { value: "xSmall", label: "XS" },
+                  { value: "small", label: "S" },
+                  { value: "medium", label: "M" },
+                  { value: "large", label: "L" },
+                  { value: "xLarge", label: "XL" },
+                ]}
+                value={size}
+                onChange={(v) => setSize(v as TextButtonSize)}
+              />
 
-            {/* State */}
-            <RadioGroup
-              label="State"
-              options={[
-                { value: "default", label: "Default" },
-                { value: "disabled", label: "Disabled" },
-              ]}
-              value={disabled ? "disabled" : "default"}
-              onChange={(v) => setDisabled(v === "disabled")}
-            />
+              {/* State */}
+              <RadioGroup
+                label="State"
+                options={[
+                  { value: "default", label: "Default" },
+                  { value: "disabled", label: "Disabled" },
+                ]}
+                value={disabled ? "disabled" : "default"}
+                onChange={(v) => setDisabled(v === "disabled")}
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -212,50 +226,55 @@ function RadioGroup({ label, options, value, onChange }: {
 }) {
   return (
     <div>
-      <div style={{ fontSize: 13, fontWeight: 500, color: "#9ca3af", marginBottom: 10 }}>
+      <div style={{ fontSize: 14, fontWeight: 500, color: "#c4c4c4", marginBottom: 14 }}>
         {label}
       </div>
-      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-        {options.map(opt => (
-          <label
-            key={opt.value}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 10,
-              cursor: "pointer",
-              fontSize: 14,
-              fontWeight: 500,
-              color: "var(--text-primary)",
-            }}
-            onClick={() => onChange(opt.value)}
-          >
-            <div
+      <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+        {options.map(opt => {
+          const isSelected = value === opt.value;
+          return (
+            <label
+              key={opt.value}
               style={{
-                width: 20,
-                height: 20,
-                borderRadius: "50%",
-                border: value === opt.value ? "2px solid #3b82f6" : "2px solid #d1d5db",
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "center",
-                transition: "all 0.15s ease",
+                gap: 12,
+                cursor: "pointer",
+                fontSize: 15,
+                fontWeight: 500,
+                color: isSelected ? "var(--text-primary)" : "#9ca3af",
+                transition: "color 0.15s ease",
               }}
+              onClick={() => onChange(opt.value)}
             >
-              {value === opt.value && (
-                <div
-                  style={{
-                    width: 10,
-                    height: 10,
-                    borderRadius: "50%",
-                    backgroundColor: "#3b82f6",
-                  }}
-                />
-              )}
-            </div>
-            {opt.label}
-          </label>
-        ))}
+              <div
+                style={{
+                  width: 22,
+                  height: 22,
+                  borderRadius: "50%",
+                  border: isSelected ? "2px solid #3b82f6" : "2px solid #e5e5e5",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  transition: "all 0.15s ease",
+                  backgroundColor: "white",
+                }}
+              >
+                {isSelected && (
+                  <div
+                    style={{
+                      width: 12,
+                      height: 12,
+                      borderRadius: "50%",
+                      backgroundColor: "#3b82f6",
+                    }}
+                  />
+                )}
+              </div>
+              {opt.label}
+            </label>
+          );
+        })}
       </div>
     </div>
   );
@@ -656,9 +675,43 @@ function DesignContent() {
   );
 }
 
+const GITHUB_BASE = "https://github.com/baerae-zkap/design-foundation/blob/main/packages/design-system/src";
+const TEXTBUTTON_SOURCE = `${GITHUB_BASE}/components/TextButton/TextButton.tsx`;
+
 function WebContent() {
   return (
     <div>
+      <Section title="Source Code">
+        <div style={{ padding: 16, backgroundColor: "var(--bg-secondary)", borderRadius: 12, marginBottom: 24, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <div>
+            <p style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", margin: 0 }}>TextButton Component</p>
+            <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: "4px 0 0 0" }}>실제 컴포넌트 소스 코드를 GitHub에서 확인하세요.</p>
+          </div>
+          <a
+            href={TEXTBUTTON_SOURCE}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 6,
+              padding: "8px 16px",
+              fontSize: 13,
+              fontWeight: 500,
+              color: "white",
+              backgroundColor: "#24292f",
+              borderRadius: 12,
+              textDecoration: "none",
+            }}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+            </svg>
+            View on GitHub
+          </a>
+        </div>
+      </Section>
+
       <Section title="Import">
         <CodeBlock code={`import { TextButton } from '@zkap/design-system';`} />
       </Section>
@@ -814,9 +867,42 @@ function WebContent() {
   );
 }
 
+const TEXTBUTTON_NATIVE_SOURCE = `${GITHUB_BASE}/native/TextButton.tsx`;
+
 function RNContent() {
   return (
     <div>
+      <Section title="Source Code">
+        <div style={{ padding: 16, backgroundColor: "var(--bg-secondary)", borderRadius: 12, marginBottom: 24, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <div>
+            <p style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", margin: 0 }}>TextButton Component</p>
+            <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: "4px 0 0 0" }}>실제 컴포넌트 소스 코드를 GitHub에서 확인하세요.</p>
+          </div>
+          <a
+            href={TEXTBUTTON_NATIVE_SOURCE}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 6,
+              padding: "8px 16px",
+              fontSize: 13,
+              fontWeight: 500,
+              color: "white",
+              backgroundColor: "#24292f",
+              borderRadius: 12,
+              textDecoration: "none",
+            }}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+            </svg>
+            View on GitHub
+          </a>
+        </div>
+      </Section>
+
       <Section title="Import">
         <CodeBlock code={`import { TextButton } from '@zkap/design-system';`} />
       </Section>
@@ -1069,7 +1155,7 @@ function VariantCard({ name, description, children }: {
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "#fafbfc",
-        borderRadius: 8,
+        borderRadius: 12,
         marginBottom: 16,
       }}>
         {children}
@@ -1327,11 +1413,32 @@ function TextButtonDemo({ variant, color, size, disabled, isHovered, isPressed, 
     }
   };
 
-  const getOpacity = () => {
-    if (disabled) return 0.38;
-    if (actualPressed) return 0.7;
-    if (actualHovered) return 0.85;
-    return 1;
+  const getBackgroundColor = () => {
+    if (disabled) return "transparent";
+
+    // 각 컬러별 배경색 (pressed > hovered > default)
+    const colorMap = {
+      brandDefault: {
+        pressed: "rgba(37, 99, 235, 0.12)",
+        hovered: "rgba(37, 99, 235, 0.06)",
+        default: "transparent",
+      },
+      baseDefault: {
+        pressed: "rgba(55, 65, 81, 0.12)",
+        hovered: "rgba(55, 65, 81, 0.06)",
+        default: "transparent",
+      },
+      errorDefault: {
+        pressed: "rgba(220, 38, 38, 0.12)",
+        hovered: "rgba(220, 38, 38, 0.06)",
+        default: "transparent",
+      },
+    };
+
+    const colors = colorMap[color];
+    if (actualPressed) return colors.pressed;
+    if (actualHovered) return colors.hovered;
+    return colors.default;
   };
 
   return (
@@ -1345,16 +1452,17 @@ function TextButtonDemo({ variant, color, size, disabled, isHovered, isPressed, 
         display: "inline-flex",
         alignItems: "center",
         gap: 4,
-        padding: "4px 0",
+        padding: "4px 8px",
         border: "none",
-        backgroundColor: "transparent",
+        borderRadius: 6,
+        backgroundColor: getBackgroundColor(),
         color: getColor(),
         fontSize: getFontSize(),
         fontWeight: 500,
         cursor: disabled ? "not-allowed" : "pointer",
-        opacity: getOpacity(),
+        opacity: disabled ? 0.38 : 1,
         textDecoration: variant === "underline" ? "underline" : "none",
-        transition: "opacity 0.15s ease",
+        transition: "background-color 0.15s ease, opacity 0.15s ease",
       }}
     >
       {children}

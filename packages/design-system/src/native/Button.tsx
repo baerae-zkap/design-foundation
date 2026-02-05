@@ -17,12 +17,11 @@
 
 import React, { forwardRef, type ReactNode } from 'react';
 import {
-  TouchableOpacity,
+  Pressable,
   Text,
   View,
   ActivityIndicator,
-  StyleSheet,
-  type TouchableOpacityProps,
+  type PressableProps,
   type ViewStyle,
   type TextStyle,
 } from 'react-native';
@@ -37,7 +36,7 @@ export type ButtonColor =
 export type ButtonSize = 'small' | 'medium' | 'large' | 'xLarge';
 export type ButtonLayout = 'hug' | 'fillWidth';
 
-export interface ButtonProps extends Omit<TouchableOpacityProps, 'style'> {
+export interface ButtonProps extends Omit<PressableProps, 'style'> {
   /** 버튼 스타일 - filled(채워진) 또는 outlined(테두리) */
   buttonType?: ButtonType;
   /** 색상 테마 */
@@ -65,26 +64,29 @@ const sizeConfig: Record<ButtonSize, { height: number; fontSize: number; padding
   xLarge: { height: 48, fontSize: 16, paddingHorizontal: 24 },
 };
 
-const colorConfig: Record<ButtonColor, { filled: { bg: string; text: string }; outlined: { bg: string; text: string; border: string } }> = {
+const colorConfig: Record<ButtonColor, {
+  filled: { bg: string; bgPressed: string; text: string };
+  outlined: { bg: string; bgPressed: string; text: string; border: string };
+}> = {
   brandDefault: {
-    filled: { bg: '#2563eb', text: '#ffffff' },
-    outlined: { bg: '#ffffff', text: '#2563eb', border: '#2563eb' },
+    filled: { bg: '#2563eb', bgPressed: '#1d4ed8', text: '#ffffff' },
+    outlined: { bg: '#ffffff', bgPressed: '#eff6ff', text: '#2563eb', border: '#2563eb' },
   },
   brandSecondary: {
-    filled: { bg: '#dbeafe', text: '#2563eb' },
-    outlined: { bg: '#ffffff', text: '#2563eb', border: '#93c5fd' },
+    filled: { bg: '#dbeafe', bgPressed: '#bfdbfe', text: '#2563eb' },
+    outlined: { bg: '#ffffff', bgPressed: '#eff6ff', text: '#2563eb', border: '#93c5fd' },
   },
   baseContainer: {
-    filled: { bg: '#f1f5f9', text: '#334155' },
-    outlined: { bg: '#ffffff', text: '#334155', border: '#cbd5e1' },
+    filled: { bg: '#f1f5f9', bgPressed: '#e2e8f0', text: '#334155' },
+    outlined: { bg: '#ffffff', bgPressed: '#f8fafc', text: '#334155', border: '#cbd5e1' },
   },
   successDefault: {
-    filled: { bg: '#22c55e', text: '#ffffff' },
-    outlined: { bg: '#ffffff', text: '#16a34a', border: '#22c55e' },
+    filled: { bg: '#22c55e', bgPressed: '#16a34a', text: '#ffffff' },
+    outlined: { bg: '#ffffff', bgPressed: '#f0fdf4', text: '#16a34a', border: '#22c55e' },
   },
   errorDefault: {
-    filled: { bg: '#ef4444', text: '#ffffff' },
-    outlined: { bg: '#ffffff', text: '#dc2626', border: '#ef4444' },
+    filled: { bg: '#ef4444', bgPressed: '#dc2626', text: '#ffffff' },
+    outlined: { bg: '#ffffff', bgPressed: '#fef2f2', text: '#dc2626', border: '#ef4444' },
   },
 };
 
@@ -109,7 +111,7 @@ export const Button = forwardRef<View, ButtonProps>(
     const colorStyle = colorConfig[color][buttonType];
     const isDisabled = disabled || isLoading;
 
-    const containerStyle: ViewStyle = {
+    const getContainerStyle = (pressed: boolean): ViewStyle => ({
       height: sizeStyle.height,
       paddingHorizontal: sizeStyle.paddingHorizontal,
       borderRadius: 8,
@@ -117,14 +119,16 @@ export const Button = forwardRef<View, ButtonProps>(
       alignItems: 'center',
       justifyContent: 'center',
       gap: 8,
-      backgroundColor: isDisabled ? '#e2e8f0' : colorStyle.bg,
+      backgroundColor: isDisabled
+        ? '#e2e8f0'
+        : (pressed ? colorStyle.bgPressed : colorStyle.bg),
       ...(buttonType === 'outlined' && {
         borderWidth: 1,
         borderColor: isDisabled ? '#e2e8f0' : (colorStyle as { border: string }).border,
       }),
       ...(layout === 'fillWidth' && { width: '100%' }),
       opacity: isDisabled ? 0.5 : 1,
-    };
+    });
 
     const textStyle: TextStyle = {
       fontSize: sizeStyle.fontSize,
@@ -133,13 +137,12 @@ export const Button = forwardRef<View, ButtonProps>(
     };
 
     return (
-      <TouchableOpacity
+      <Pressable
         ref={ref}
         disabled={isDisabled}
-        activeOpacity={0.8}
         accessibilityRole="button"
         accessibilityState={{ disabled: isDisabled, busy: isLoading }}
-        style={[containerStyle, style]}
+        style={({ pressed }) => [getContainerStyle(pressed), style]}
         {...props}
       >
         {isLoading ? (
@@ -155,7 +158,7 @@ export const Button = forwardRef<View, ButtonProps>(
             {rightContent}
           </>
         )}
-      </TouchableOpacity>
+      </Pressable>
     );
   }
 );
