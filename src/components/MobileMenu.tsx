@@ -26,6 +26,8 @@ const componentsNav = [
   { title: "Chip", href: "/components/actions/chip" },
   { title: "Icon Button", href: "/components/actions/icon-button" },
   { title: "Text Button", href: "/components/actions/text-button" },
+  { title: "Accordion", href: "/components/contents/accordion" },
+  { title: "Card", href: "/components/contents/card" },
 ];
 
 interface MobileMenuProps {

@@ -55,87 +55,87 @@ const colorConfig: Record<ChipColor, {
 }> = {
   brandDefault: {
     filled: {
-      bg: '#dbeafe',
-      bgPressed: '#bfdbfe',
-      bgSelected: '#2563eb',
-      text: '#1e40af',
-      textSelected: '#ffffff',
+      bg: '#dbeafe', // surface.brand.secondary (palette.blue.95)
+      bgPressed: '#bfdbfe', // surface.brand.secondaryPressed (palette.blue.90)
+      bgSelected: '#2563eb', // surface.brand.default (palette.blue.50)
+      text: '#1e40af', // content.brand.strong (palette.blue.30)
+      textSelected: '#ffffff', // content.base.onColor (palette.static.white)
     },
     outlined: {
       bg: 'transparent',
-      bgPressed: 'rgba(37, 99, 235, 0.08)',
-      bgSelected: '#2563eb',
-      border: '#2563eb',
-      text: '#2563eb',
-      textSelected: '#ffffff',
+      bgPressed: 'rgba(37, 99, 235, 0.08)', // brand pressed overlay
+      bgSelected: '#2563eb', // surface.brand.default (palette.blue.50)
+      border: '#2563eb', // border.brand.default (palette.blue.50)
+      text: '#2563eb', // content.brand.default (palette.blue.50)
+      textSelected: '#ffffff', // content.base.onColor (palette.static.white)
     },
   },
   baseDefault: {
     filled: {
-      bg: '#f1f5f9',
-      bgPressed: '#e2e8f0',
-      bgSelected: '#334155',
-      text: '#334155',
-      textSelected: '#ffffff',
+      bg: '#f1f5f9', // surface.base.container (palette.grey.97)
+      bgPressed: '#e2e8f0', // surface.base.containerPressed (palette.grey.95)
+      bgSelected: '#334155', // content.base.default filled (palette.grey.30)
+      text: '#334155', // content.base.default (palette.grey.30)
+      textSelected: '#ffffff', // content.base.onColor (palette.static.white)
     },
     outlined: {
       bg: 'transparent',
-      bgPressed: 'rgba(0, 0, 0, 0.04)',
-      bgSelected: '#334155',
-      border: '#cbd5e1',
-      text: '#334155',
-      textSelected: '#ffffff',
+      bgPressed: 'rgba(0, 0, 0, 0.04)', // base pressed overlay
+      bgSelected: '#334155', // content.base.default filled (palette.grey.30)
+      border: '#cbd5e1', // border.base.default (palette.grey.90)
+      text: '#334155', // content.base.default (palette.grey.30)
+      textSelected: '#ffffff', // content.base.onColor (palette.static.white)
     },
   },
   successDefault: {
     filled: {
-      bg: '#dcfce7',
-      bgPressed: '#bbf7d0',
-      bgSelected: '#16a34a',
-      text: '#166534',
-      textSelected: '#ffffff',
+      bg: '#dcfce7', // surface.success.default (palette.green.95)
+      bgPressed: '#bbf7d0', // surface.success.defaultPressed (palette.green.90)
+      bgSelected: '#16a34a', // content.success.strong (palette.green.40)
+      text: '#166534', // content.success.dark (palette.green.30)
+      textSelected: '#ffffff', // content.base.onColor (palette.static.white)
     },
     outlined: {
       bg: 'transparent',
-      bgPressed: 'rgba(34, 197, 94, 0.08)',
-      bgSelected: '#16a34a',
-      border: '#22c55e',
-      text: '#166534',
-      textSelected: '#ffffff',
+      bgPressed: 'rgba(34, 197, 94, 0.08)', // success pressed overlay
+      bgSelected: '#16a34a', // content.success.strong (palette.green.40)
+      border: '#22c55e', // border.success.default (palette.green.50)
+      text: '#166534', // content.success.dark (palette.green.30)
+      textSelected: '#ffffff', // content.base.onColor (palette.static.white)
     },
   },
   errorDefault: {
     filled: {
-      bg: '#fee2e2',
-      bgPressed: '#fecaca',
-      bgSelected: '#dc2626',
-      text: '#991b1b',
-      textSelected: '#ffffff',
+      bg: '#fee2e2', // surface.error.default (palette.red.95)
+      bgPressed: '#fecaca', // surface.error.defaultPressed (palette.red.90)
+      bgSelected: '#dc2626', // content.error.strong (palette.red.40)
+      text: '#991b1b', // content.error.dark (palette.red.30)
+      textSelected: '#ffffff', // content.base.onColor (palette.static.white)
     },
     outlined: {
       bg: 'transparent',
-      bgPressed: 'rgba(239, 68, 68, 0.08)',
-      bgSelected: '#dc2626',
-      border: '#ef4444',
-      text: '#991b1b',
-      textSelected: '#ffffff',
+      bgPressed: 'rgba(239, 68, 68, 0.08)', // error pressed overlay
+      bgSelected: '#dc2626', // content.error.strong (palette.red.40)
+      border: '#ef4444', // border.error.default (palette.red.50)
+      text: '#991b1b', // content.error.dark (palette.red.30)
+      textSelected: '#ffffff', // content.base.onColor (palette.static.white)
     },
   },
   warningDefault: {
     filled: {
-      bg: '#fef9c3',
-      bgPressed: '#fef08a',
-      bgSelected: '#ca8a04',
-      text: '#854d0e',
-      textSelected: '#ffffff',
+      bg: '#fef9c3', // surface.warning.default (palette.yellow.95)
+      bgPressed: '#fef08a', // surface.warning.defaultPressed (palette.yellow.90)
+      bgSelected: '#ca8a04', // content.warning.strong (palette.yellow.40)
+      text: '#854d0e', // content.warning.dark (palette.yellow.30)
+      textSelected: '#ffffff', // content.base.onColor (palette.static.white)
     },
     outlined: {
       bg: 'transparent',
-      bgPressed: 'rgba(234, 179, 8, 0.08)',
-      bgSelected: '#ca8a04',
-      border: '#eab308',
-      text: '#854d0e',
-      textSelected: '#ffffff',
+      bgPressed: 'rgba(234, 179, 8, 0.08)', // warning pressed overlay
+      bgSelected: '#ca8a04', // content.warning.strong (palette.yellow.40)
+      border: '#eab308', // border.warning.default (palette.yellow.50)
+      text: '#854d0e', // content.warning.dark (palette.yellow.30)
+      textSelected: '#ffffff', // content.base.onColor (palette.static.white)
     },
   },
 };
@@ -187,7 +187,7 @@ export const Chip = forwardRef<HTMLButtonElement, ChipProps>(
     };
 
     const getTextColor = (): string => {
-      if (disabled) return '#94a3b8';
+      if (disabled) return '#94a3b8'; // content.disabled.default (palette.grey.70)
       return selected ? colorStyle.textSelected : colorStyle.text;
     };
 
@@ -203,9 +203,9 @@ export const Chip = forwardRef<HTMLButtonElement, ChipProps>(
       color: getTextColor(),
       backgroundColor: getBackgroundColor(),
       border: variant === 'outlined' && !selected
-        ? `1px solid ${disabled ? '#cbd5e1' : (colorStyle as { border: string }).border}`
+        ? `1px solid ${disabled ? '#cbd5e1' : (colorStyle as { border: string }).border}` // disabled border: border.disabled.default (palette.grey.90)
         : 'none',
-      borderRadius: sizeStyle.height / 2,
+      borderRadius: sizeStyle.height / 2, // radius.primitive.full (9999px for pill shape)
       cursor: disabled ? 'not-allowed' : 'pointer',
       opacity: disabled ? 0.5 : 1,
       transition: 'background-color 150ms ease, color 150ms ease',

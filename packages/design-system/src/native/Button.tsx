@@ -58,10 +58,10 @@ export interface ButtonProps extends Omit<PressableProps, 'style'> {
 }
 
 const sizeConfig: Record<ButtonSize, { height: number; fontSize: number; paddingHorizontal: number }> = {
-  small: { height: 36, fontSize: 14, paddingHorizontal: 16 },
-  medium: { height: 40, fontSize: 14, paddingHorizontal: 16 },
-  large: { height: 44, fontSize: 14, paddingHorizontal: 20 },
-  xLarge: { height: 48, fontSize: 16, paddingHorizontal: 24 },
+  small: { height: 36, fontSize: 14, paddingHorizontal: 16 }, // button.paddingX.sm (spacing.component.button.paddingX.sm)
+  medium: { height: 40, fontSize: 14, paddingHorizontal: 16 }, // button.paddingX.sm (spacing.component.button.paddingX.sm)
+  large: { height: 44, fontSize: 14, paddingHorizontal: 20 }, // button.paddingX.md (spacing.component.button.paddingX.md)
+  xLarge: { height: 48, fontSize: 16, paddingHorizontal: 24 }, // button.paddingX.lg (spacing.component.button.paddingX.lg)
 };
 
 const colorConfig: Record<ButtonColor, {
@@ -69,24 +69,69 @@ const colorConfig: Record<ButtonColor, {
   outlined: { bg: string; bgPressed: string; text: string; border: string };
 }> = {
   brandDefault: {
-    filled: { bg: '#2563eb', bgPressed: '#1d4ed8', text: '#ffffff' },
-    outlined: { bg: '#ffffff', bgPressed: '#eff6ff', text: '#2563eb', border: '#2563eb' },
+    filled: {
+      bg: '#2563eb', // surface.brand.default (palette.blue.50)
+      bgPressed: '#1d4ed8', // surface.brand.defaultPressed (palette.blue.45)
+      text: '#ffffff' // content.base.onColor (palette.static.white)
+    },
+    outlined: {
+      bg: '#ffffff', // surface.base.default (palette.static.white)
+      bgPressed: '#eff6ff', // surface.brand.secondary light hover (palette.blue.98)
+      text: '#2563eb', // content.brand.default (palette.blue.50)
+      border: '#2563eb' // border.brand.default (palette.blue.50)
+    },
   },
   brandSecondary: {
-    filled: { bg: '#dbeafe', bgPressed: '#bfdbfe', text: '#2563eb' },
-    outlined: { bg: '#ffffff', bgPressed: '#eff6ff', text: '#2563eb', border: '#93c5fd' },
+    filled: {
+      bg: '#dbeafe', // surface.brand.secondary (palette.blue.95)
+      bgPressed: '#bfdbfe', // surface.brand.secondaryPressed (palette.blue.90)
+      text: '#2563eb' // content.brand.default (palette.blue.50)
+    },
+    outlined: {
+      bg: '#ffffff', // surface.base.default (palette.static.white)
+      bgPressed: '#eff6ff', // surface.brand.secondary light hover (palette.blue.98)
+      text: '#2563eb', // content.brand.default (palette.blue.50)
+      border: '#93c5fd' // palette.blue.80
+    },
   },
   baseContainer: {
-    filled: { bg: '#f1f5f9', bgPressed: '#e2e8f0', text: '#334155' },
-    outlined: { bg: '#ffffff', bgPressed: '#f8fafc', text: '#334155', border: '#cbd5e1' },
+    filled: {
+      bg: '#f1f5f9', // surface.base.container (palette.grey.97)
+      bgPressed: '#e2e8f0', // surface.base.containerPressed (palette.grey.95)
+      text: '#334155' // content.base.default (palette.grey.30)
+    },
+    outlined: {
+      bg: '#ffffff', // surface.base.default (palette.static.white)
+      bgPressed: '#f8fafc', // palette.grey.99
+      text: '#334155', // content.base.default (palette.grey.30)
+      border: '#cbd5e1' // palette.grey.90
+    },
   },
   successDefault: {
-    filled: { bg: '#22c55e', bgPressed: '#16a34a', text: '#ffffff' },
-    outlined: { bg: '#ffffff', bgPressed: '#f0fdf4', text: '#16a34a', border: '#22c55e' },
+    filled: {
+      bg: '#22c55e', // palette.green.50
+      bgPressed: '#16a34a', // palette.green.45
+      text: '#ffffff' // content.base.onColor (palette.static.white)
+    },
+    outlined: {
+      bg: '#ffffff', // surface.base.default (palette.static.white)
+      bgPressed: '#f0fdf4', // palette.green.98
+      text: '#16a34a', // palette.green.45
+      border: '#22c55e' // palette.green.50
+    },
   },
   errorDefault: {
-    filled: { bg: '#ef4444', bgPressed: '#dc2626', text: '#ffffff' },
-    outlined: { bg: '#ffffff', bgPressed: '#fef2f2', text: '#dc2626', border: '#ef4444' },
+    filled: {
+      bg: '#ef4444', // palette.red.50
+      bgPressed: '#dc2626', // palette.red.45
+      text: '#ffffff' // content.base.onColor (palette.static.white)
+    },
+    outlined: {
+      bg: '#ffffff', // surface.base.default (palette.static.white)
+      bgPressed: '#fef2f2', // palette.red.98
+      text: '#dc2626', // palette.red.45
+      border: '#ef4444' // palette.red.50
+    },
   },
 };
 
@@ -111,20 +156,23 @@ export const Button = forwardRef<View, ButtonProps>(
     const colorStyle = colorConfig[color][buttonType];
     const isDisabled = disabled || isLoading;
 
+    // radius.semantic.button.sm = 8px (small, medium), radius.semantic.button.lg = 12px (large, xLarge)
+    const borderRadius = size === 'large' || size === 'xLarge' ? 12 : 8;
+
     const getContainerStyle = (pressed: boolean): ViewStyle => ({
       height: sizeStyle.height,
       paddingHorizontal: sizeStyle.paddingHorizontal,
-      borderRadius: 8,
+      borderRadius,
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
-      gap: 8,
+      gap: 8, // spacing.component.button.gap (spacing.primitive.2)
       backgroundColor: isDisabled
-        ? '#e2e8f0'
+        ? '#e2e8f0' // surface.disabled.default (palette.grey.95)
         : (pressed ? colorStyle.bgPressed : colorStyle.bg),
       ...(buttonType === 'outlined' && {
         borderWidth: 1,
-        borderColor: isDisabled ? '#e2e8f0' : (colorStyle as { border: string }).border,
+        borderColor: isDisabled ? '#e2e8f0' : (colorStyle as { border: string }).border, // border.disabled.default (palette.grey.95)
       }),
       ...(layout === 'fillWidth' && { width: '100%' }),
       opacity: isDisabled ? 0.5 : 1,
@@ -133,7 +181,7 @@ export const Button = forwardRef<View, ButtonProps>(
     const textStyle: TextStyle = {
       fontSize: sizeStyle.fontSize,
       fontWeight: '600',
-      color: isDisabled ? '#94a3b8' : colorStyle.text,
+      color: isDisabled ? '#94a3b8' : colorStyle.text, // content.disabled.default (palette.grey.80)
     };
 
     return (

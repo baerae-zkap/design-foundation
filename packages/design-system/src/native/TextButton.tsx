@@ -51,9 +51,21 @@ const sizeConfig: Record<TextButtonSize, number> = {
 };
 
 const colorConfig: Record<TextButtonColor, { default: string; pressed: string; pressedBg: string }> = {
-  brandDefault: { default: '#2563eb', pressed: '#1e40af', pressedBg: 'rgba(0, 0, 0, 0.06)' },
-  baseDefault: { default: '#334155', pressed: '#1e293b', pressedBg: 'rgba(0, 0, 0, 0.06)' },
-  errorDefault: { default: '#ef4444', pressed: '#b91c1c', pressedBg: 'rgba(0, 0, 0, 0.06)' },
+  brandDefault: {
+    default: '#2563eb', // content.brand.default (palette.blue.50)
+    pressed: '#1e40af', // content.brand.default pressed (palette.blue.45)
+    pressedBg: 'rgba(0, 0, 0, 0.06)' // surface overlay for pressed state
+  },
+  baseDefault: {
+    default: '#334155', // content.base.default (palette.grey.30)
+    pressed: '#1e293b', // content.base.strong (palette.grey.15)
+    pressedBg: 'rgba(0, 0, 0, 0.06)' // surface overlay for pressed state
+  },
+  errorDefault: {
+    default: '#ef4444', // content.error.default (palette.red.50)
+    pressed: '#b91c1c', // content.error.default pressed (palette.red.45)
+    pressedBg: 'rgba(0, 0, 0, 0.06)' // surface overlay for pressed state
+  },
 };
 
 export const TextButton = forwardRef<View, TextButtonProps>(
@@ -75,15 +87,17 @@ export const TextButton = forwardRef<View, TextButtonProps>(
     const getContainerStyle = (pressed: boolean): ViewStyle => ({
       flexDirection: 'row',
       alignItems: 'center',
-      gap: 4,
-      paddingVertical: 4,
-      paddingHorizontal: 8,
-      borderRadius: 6,
+      gap: 4, // spacing.primitive.1
+      paddingVertical: 4, // spacing.primitive.1
+      paddingHorizontal: 8, // spacing.primitive.2
+      borderRadius: 8, // radius.primitive.sm
       backgroundColor: pressed && !disabled ? colorStyle.pressedBg : 'transparent',
     });
 
     const getTextStyle = (pressed: boolean): TextStyle => {
-      const textColor = disabled ? '#94a3b8' : (pressed ? colorStyle.pressed : colorStyle.default);
+      const textColor = disabled
+        ? '#94a3b8' // content.disabled.default (palette.grey.80)
+        : (pressed ? colorStyle.pressed : colorStyle.default);
       return {
         fontSize,
         fontWeight: '500',
@@ -109,7 +123,10 @@ export const TextButton = forwardRef<View, TextButtonProps>(
               children
             )}
             {variant === 'arrow' && (
-              <ArrowIcon size={fontSize * 0.875} color={disabled ? '#94a3b8' : (pressed ? colorStyle.pressed : colorStyle.default)} />
+              <ArrowIcon
+                size={fontSize * 0.875}
+                color={disabled ? '#94a3b8' /* content.disabled.default (palette.grey.80) */ : (pressed ? colorStyle.pressed : colorStyle.default)}
+              />
             )}
           </>
         )}

@@ -41,9 +41,21 @@ const sizeStyles: Record<TextButtonSize, number> = {
 };
 
 const colorStyles: Record<TextButtonColor, { default: string; pressed: string; pressedBg: string }> = {
-  brandDefault: { default: '#2563eb', pressed: '#1e40af', pressedBg: 'rgba(0, 0, 0, 0.06)' },
-  baseDefault: { default: '#334155', pressed: '#1e293b', pressedBg: 'rgba(0, 0, 0, 0.06)' },
-  errorDefault: { default: '#ef4444', pressed: '#b91c1c', pressedBg: 'rgba(0, 0, 0, 0.06)' },
+  brandDefault: {
+    default: '#2563eb', // content.brand.default (palette.blue.50)
+    pressed: '#1e40af', // content.brand.default pressed (palette.blue.45)
+    pressedBg: 'rgba(0, 0, 0, 0.06)' // surface overlay for pressed state
+  },
+  baseDefault: {
+    default: '#334155', // content.base.default (palette.grey.30)
+    pressed: '#1e293b', // content.base.strong (palette.grey.15)
+    pressedBg: 'rgba(0, 0, 0, 0.06)' // surface overlay for pressed state
+  },
+  errorDefault: {
+    default: '#ef4444', // content.error.default (palette.red.50)
+    pressed: '#b91c1c', // content.error.default pressed (palette.red.45)
+    pressedBg: 'rgba(0, 0, 0, 0.06)' // surface overlay for pressed state
+  },
 };
 
 export const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(
@@ -84,14 +96,14 @@ export const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(
     const buttonStyle: React.CSSProperties = {
       display: 'inline-flex',
       alignItems: 'center',
-      gap: 4,
-      padding: '4px 8px',
+      gap: 4, // spacing.primitive.1
+      padding: '4px 8px', // spacing.primitive.1 and spacing.primitive.2
       fontSize,
       fontWeight: 500,
-      color: disabled ? '#94a3b8' : (isPressed ? colorStyle.pressed : colorStyle.default),
+      color: disabled ? '#94a3b8' /* content.disabled.default (palette.grey.80) */ : (isPressed ? colorStyle.pressed : colorStyle.default),
       background: isPressed && !disabled ? colorStyle.pressedBg : 'transparent',
       border: 'none',
-      borderRadius: 6,
+      borderRadius: 8, // radius.primitive.sm
       cursor: disabled ? 'not-allowed' : 'pointer',
       textDecoration: variant === 'underline' ? 'underline' : 'none',
       transition: 'color 150ms ease, background-color 150ms ease',

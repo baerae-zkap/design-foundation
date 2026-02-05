@@ -34,3 +34,24 @@ export type {
   IconButtonColor,
   IconButtonSize,
 } from './IconButton';
+
+export { Accordion } from './Accordion';
+export type {
+  AccordionProps,
+  AccordionSize,
+} from './Accordion';
+
+export { Card } from './Card';
+export type {
+  CardProps,
+  CardVariant,
+  CardPadding,
+} from './Card';
+
+export { ContentBadge } from './ContentBadge';
+export type {
+  ContentBadgeProps,
+  ContentBadgeVariant,
+  ContentBadgeColor,
+  ContentBadgeSize,
+} from './ContentBadge';

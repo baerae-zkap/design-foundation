@@ -105,11 +105,14 @@ function toTransparent(color: string): string {
 
 const tokens = {
   modal: {
-    padding: 24,
-    buttonGap: 12,
+    padding: 24,    // modal.padding
+    buttonGap: 12,  // modal.buttonGap
   },
   bottomSheet: {
-    padding: 20,
+    padding: 20,    // bottomSheet.padding
+  },
+  safeArea: {
+    bottom: 32,     // screen.safeAreaBottom (for useSafeAreaInsets fallback)
   },
 };
 
@@ -126,7 +129,7 @@ export const ActionArea = forwardRef<View, ActionAreaProps>(
       gradientHeight = 48,
       caption,
       useSafeArea = true,
-      backgroundColor = 'white',
+      backgroundColor = 'white', // surface.base.default (static.white)
       children,
       style,
       ...props
@@ -238,7 +241,7 @@ ActionArea.displayName = 'ActionArea';
 const styles = StyleSheet.create({
   caption: {
     fontSize: 14,
-    color: '#6b7280',
+    color: '#6b7280', // content.base.neutral (palette.grey.60)
     textAlign: 'center',
     lineHeight: 21,
     marginBottom: tokens.modal.buttonGap,
