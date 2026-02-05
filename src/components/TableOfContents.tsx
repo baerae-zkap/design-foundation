@@ -31,14 +31,26 @@ export function TableOfContents() {
     // Find only h2 elements in the main content (중제목만)
     const elements = document.querySelectorAll("main h2");
     const items: TocItem[] = [];
+    const idCounts: Record<string, number> = {};
 
     elements.forEach((el) => {
-      const id = el.id || el.textContent?.toLowerCase().replace(/\s+/g, "-") || "";
-      if (!el.id && id) {
-        el.id = id;
+      const baseId = el.id || el.textContent?.toLowerCase().replace(/\s+/g, "-") || "";
+
+      // Track duplicate ids and make them unique
+      if (idCounts[baseId] !== undefined) {
+        idCounts[baseId]++;
+      } else {
+        idCounts[baseId] = 0;
       }
+
+      const uniqueId = idCounts[baseId] > 0 ? `${baseId}-${idCounts[baseId]}` : baseId;
+
+      if (!el.id) {
+        el.id = uniqueId;
+      }
+
       items.push({
-        id,
+        id: uniqueId,
         text: el.textContent || "",
         level: el.tagName === "H2" ? 2 : 3,
       });
