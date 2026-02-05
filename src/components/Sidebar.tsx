@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 
 const foundationsNav = [
   { title: "Overview", href: "/foundations" },
+  { title: "Getting Started", href: "/getting-started" },
   { title: "Base material", isLabel: true },
   { title: "Colors", href: "/colors/palette" },
   { title: "Typography", href: "/typography" },
@@ -109,7 +110,7 @@ export function Sidebar() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  const isFoundations = pathname === "/" || pathname.startsWith("/foundations") || pathname.startsWith("/colors") || pathname.startsWith("/typography") || pathname.startsWith("/spacing") || pathname.startsWith("/radius") || pathname.startsWith("/shadow") || pathname.startsWith("/interaction");
+  const isFoundations = pathname === "/" || pathname.startsWith("/foundations") || pathname.startsWith("/getting-started") || pathname.startsWith("/colors") || pathname.startsWith("/typography") || pathname.startsWith("/spacing") || pathname.startsWith("/radius") || pathname.startsWith("/shadow") || pathname.startsWith("/interaction");
 
   const navigation = isFoundations ? foundationsNav : componentsNav;
 
