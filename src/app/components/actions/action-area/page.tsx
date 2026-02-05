@@ -39,9 +39,9 @@ export default function ActionAreaPage() {
 // Interactive Playground
 // ============================================
 function ActionAreaPlayground() {
-  const [variant, setVariant] = useState<ActionAreaVariant>("strong");
-  const [buttonCombo, setButtonCombo] = useState<"main+alt" | "main+sub" | "main">("main+alt");
-  const [hasCaption, setHasCaption] = useState(false);
+  const [variant, setVariant] = useState<ActionAreaVariant>("neutral");
+  const [combination, setCombination] = useState<"alternative" | "sub" | "main">("alternative");
+  const [subButtonOption, setSubButtonOption] = useState<"label" | "icon">("icon");
   const [codeType, setCodeType] = useState<"rn" | "web">("rn");
 
   const generateCode = () => {
@@ -49,24 +49,22 @@ function ActionAreaPlayground() {
     const size = variant === "compact" ? "medium" : "xLarge";
 
     // Determine flex direction based on variant
-    const flexDirection = variant === "strong" ? "column" : "row";
+    const isVertical = variant === "strong" || variant === "cancel";
+    const flexDirection = isVertical ? "column" : "row";
     const justifyContent = variant === "compact" ? ", justifyContent: 'flex-end'" : "";
-    const alignItems = buttonCombo === "main+sub" && variant === "strong" ? ", alignItems: 'center'" : "";
+    const alignItems = combination === "sub" && isVertical ? ", alignItems: 'center'" : "";
 
-    // Caption text
-    const captionCode = hasCaption ? `  <Text style={{ fontSize: 14, color: '#6b7280', textAlign: 'center', marginBottom: 6 }}>
-    변경 사항을 저장하시겠습니까?
-  </Text>\n` : "";
-
-    // Main button
+    // Main button - Cancel variant uses error color
+    const mainColor = variant === "cancel" ? "errorDefault" : "brandDefault";
+    const mainLabel = variant === "cancel" ? "삭제" : "Main action";
     const mainButton = `  <Button
     buttonType="filled"
-    color="brandDefault"
+    color="${mainColor}"
     size="${size}"
     layout="fillWidth"
     ${eventHandler}
   >
-    Main
+    ${mainLabel}
   </Button>`;
 
     // Alternative button
@@ -80,25 +78,37 @@ function ActionAreaPlayground() {
     Alternative
   </Button>`;
 
-    // Sub button (TextButton)
-    const subButton = `  <TextButton
+    // Sub button - Label or Icon
+    const subButton = subButtonOption === "icon"
+      ? `  <IconButton
+    icon="refresh"
+    buttonType="outlined"
+    color="baseContainer"
+    size="${size}"
+    ${eventHandler}
+  />`
+      : `  <TextButton
     color="brandDefault"
     ${eventHandler}
   >
-    Sub
+    Sub action
   </TextButton>`;
 
-    // Build buttons based on combo and variant
+    // Build buttons based on combination and variant
     let buttons = "";
-    if (buttonCombo === "main+alt") {
-      if (variant === "strong") {
+    if (combination === "alternative") {
+      if (isVertical) {
         buttons = `${mainButton}\n${altButton}`;
       } else {
         // neutral, compact: Alternative first, then Main
         buttons = `${altButton}\n${mainButton}`;
       }
-    } else if (buttonCombo === "main+sub") {
-      buttons = `${mainButton}\n${subButton}`;
+    } else if (combination === "sub") {
+      if (isVertical) {
+        buttons = `${mainButton}\n${subButton}`;
+      } else {
+        buttons = `${subButton}\n${mainButton}`;
+      }
     } else {
       buttons = mainButton;
     }
@@ -108,9 +118,12 @@ function ActionAreaPlayground() {
 
     return `{/* gap: modal.buttonGap(12), padding: bottomSheet.padding(20) or modal.padding(24) */}
 <View style={{ ${wrapperStyle} }}>
-${captionCode}${buttons}
+${buttons}
 </View>`;
   };
+
+  const isVertical = variant === "strong" || variant === "cancel";
+  const buttonSize = variant === "compact" ? "small" : "xLarge";
 
   return (
     <div style={{ marginBottom: 32 }}>
@@ -131,27 +144,50 @@ ${captionCode}${buttons}
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              minHeight: 280,
+              minHeight: 320,
               backgroundColor: "#fafbfc",
             }}
           >
-            <div style={{ width: "100%", maxWidth: 320 }}>
-              <ActionAreaDemo
-                variant={variant}
-                caption={hasCaption ? "변경 사항을 저장하시겠습니까?" : undefined}
-              >
-                <ActionAreaButtonDemo variant="main" size={variant === "compact" ? "small" : "xLarge"}>
-                  Main
-                </ActionAreaButtonDemo>
-                {buttonCombo === "main+alt" && (
-                  <ActionAreaButtonDemo variant="alternative" size={variant === "compact" ? "small" : "xLarge"}>
+            <div style={{ width: "100%", maxWidth: 340 }}>
+              <ActionAreaDemo variant={variant}>
+                {/* Sub action (left/top position for neutral/compact) */}
+                {combination === "sub" && !isVertical && (
+                  subButtonOption === "icon" ? (
+                    <IconButtonDemo size={buttonSize} />
+                  ) : (
+                    <ActionAreaButtonDemo variant="sub" size={buttonSize}>
+                      Sub action
+                    </ActionAreaButtonDemo>
+                  )
+                )}
+                {/* Alternative (left position for neutral/compact) */}
+                {combination === "alternative" && !isVertical && (
+                  <ActionAreaButtonDemo variant="alternative" size={buttonSize}>
                     Alternative
                   </ActionAreaButtonDemo>
                 )}
-                {buttonCombo === "main+sub" && (
-                  <ActionAreaButtonDemo variant="sub" size={variant === "compact" ? "small" : "xLarge"}>
-                    Sub
+                {/* Main button */}
+                <ActionAreaButtonDemo
+                  variant={variant === "cancel" ? "cancel" : "main"}
+                  size={buttonSize}
+                >
+                  {variant === "cancel" ? "삭제" : "Main action"}
+                </ActionAreaButtonDemo>
+                {/* Alternative (bottom position for strong/cancel) */}
+                {combination === "alternative" && isVertical && (
+                  <ActionAreaButtonDemo variant="alternative" size={buttonSize}>
+                    Alternative
                   </ActionAreaButtonDemo>
+                )}
+                {/* Sub action (bottom position for strong/cancel) */}
+                {combination === "sub" && isVertical && (
+                  subButtonOption === "icon" ? (
+                    <IconButtonDemo size={buttonSize} />
+                  ) : (
+                    <ActionAreaButtonDemo variant="sub" size={buttonSize}>
+                      Sub action
+                    </ActionAreaButtonDemo>
+                  )
                 )}
               </ActionAreaDemo>
             </div>
@@ -163,44 +199,47 @@ ${captionCode}${buttons}
               padding: 24,
               backgroundColor: "white",
               borderLeft: "1px solid #e5e5e5",
+              borderRadius: "0 20px 20px 0",
               display: "flex",
               flexDirection: "column",
               gap: 24,
             }}
           >
-            {/* Variant */}
+            {/* Variants */}
             <RadioGroup
-              label="Variant"
+              label="Variants"
               options={[
                 { value: "strong", label: "Strong" },
                 { value: "neutral", label: "Neutral" },
                 { value: "compact", label: "Compact" },
+                { value: "cancel", label: "Cancel" },
               ]}
               value={variant}
               onChange={(v) => setVariant(v as ActionAreaVariant)}
             />
 
-            {/* Button Combination */}
+            {/* Combination */}
             <RadioGroup
-              label="Buttons"
+              label="Combination"
               options={[
-                { value: "main+alt", label: "Main + Alternative" },
-                { value: "main+sub", label: "Main + Sub" },
+                { value: "alternative", label: "With alternative action" },
+                { value: "sub", label: "With sub action" },
                 { value: "main", label: "Main only" },
               ]}
-              value={buttonCombo}
-              onChange={(v) => setButtonCombo(v as "main+alt" | "main+sub" | "main")}
+              value={combination}
+              onChange={(v) => setCombination(v as "alternative" | "sub" | "main")}
             />
 
-            {/* Caption */}
+            {/* Sub button option - only show when "With sub action" is selected */}
             <RadioGroup
-              label="Caption"
+              label="Sub button option"
               options={[
-                { value: "false", label: "False" },
-                { value: "true", label: "True" },
+                { value: "label", label: "Label" },
+                { value: "icon", label: "With icon" },
               ]}
-              value={hasCaption ? "true" : "false"}
-              onChange={(v) => setHasCaption(v === "true")}
+              value={subButtonOption}
+              onChange={(v) => setSubButtonOption(v as "label" | "icon")}
+              disabled={combination !== "sub"}
             />
           </div>
         </div>
@@ -242,14 +281,15 @@ ${captionCode}${buttons}
   );
 }
 
-function RadioGroup({ label, options, value, onChange }: {
+function RadioGroup({ label, options, value, onChange, disabled = false }: {
   label: string;
   options: { value: string; label: string }[];
   value: string;
   onChange: (v: string) => void;
+  disabled?: boolean;
 }) {
   return (
-    <div>
+    <div style={{ opacity: disabled ? 0.4 : 1, pointerEvents: disabled ? "none" : "auto" }}>
       <div style={{ fontSize: 13, fontWeight: 500, color: "#9ca3af", marginBottom: 10 }}>
         {label}
       </div>
@@ -261,12 +301,12 @@ function RadioGroup({ label, options, value, onChange }: {
               display: "flex",
               alignItems: "center",
               gap: 12,
-              cursor: "pointer",
+              cursor: disabled ? "default" : "pointer",
               fontSize: 14,
               fontWeight: 500,
               color: "var(--text-primary)",
             }}
-            onClick={() => onChange(opt.value)}
+            onClick={() => !disabled && onChange(opt.value)}
           >
             <div
               style={{
@@ -1502,8 +1542,8 @@ function AnatomyDiagram() {
 // ============================================
 // Demo Components (matching Button page styling)
 // ============================================
-type ActionAreaVariant = "strong" | "neutral" | "compact";
-type ButtonVariant = "main" | "sub" | "alternative";
+type ActionAreaVariant = "strong" | "neutral" | "compact" | "cancel";
+type ButtonVariant = "main" | "sub" | "alternative" | "cancel";
 type ButtonSize = "small" | "xLarge";
 type ButtonType = "filled" | "outlined";
 type ButtonColor = "brandDefault" | "brandSecondary" | "baseContainer" | "successDefault" | "errorDefault" | "kakaoDefault" | "googleDefault";
@@ -1518,6 +1558,8 @@ function ActionAreaDemo({ variant, children, caption }: ActionAreaDemoProps) {
   const getLayout = () => {
     switch (variant) {
       case "strong":
+        return { flexDirection: "column" as const, gap: 12 };
+      case "cancel":
         return { flexDirection: "column" as const, gap: 12 };
       case "neutral":
         return { flexDirection: "row" as const, gap: 12 };
@@ -1608,6 +1650,14 @@ function ActionAreaButtonDemo({ variant, size, children }: ActionAreaButtonDemoP
           color: "white",
           border: "none",
         };
+      case "cancel":
+        // Button: buttonType="filled" color="errorDefault"
+        return {
+          ...baseStyles,
+          backgroundColor: isPressed ? "#b91c1c" : isHovered ? "#dc2626" : "#ef4444",
+          color: "white",
+          border: "none",
+        };
       case "alternative":
         // Button: buttonType="outlined" color="baseContainer"
         return {
@@ -1636,6 +1686,47 @@ function ActionAreaButtonDemo({ variant, size, children }: ActionAreaButtonDemoP
       style={getStyles()}
     >
       {children}
+    </button>
+  );
+}
+
+// IconButton Demo for sub action with icon
+function IconButtonDemo({ size }: { size: ButtonSize }) {
+  const [isPressed, setIsPressed] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const sizeMap: Record<ButtonSize, number> = { small: 36, xLarge: 48 };
+  const iconSize = size === "xLarge" ? 20 : 16;
+
+  return (
+    <button
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => { setIsHovered(false); setIsPressed(false); }}
+      onMouseDown={() => setIsPressed(true)}
+      onMouseUp={() => setIsPressed(false)}
+      style={{
+        width: sizeMap[size],
+        height: sizeMap[size],
+        padding: 0,
+        borderRadius: 8,
+        cursor: "pointer",
+        transition: "all 150ms ease",
+        transform: isPressed ? "scale(0.98)" : "scale(1)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: isPressed ? "#f1f5f9" : isHovered ? "#f8fafc" : "white",
+        border: "1px solid #cbd5e1",
+        flexShrink: 0,
+      }}
+    >
+      {/* Refresh icon */}
+      <svg width={iconSize} height={iconSize} viewBox="0 0 24 24" fill="none" stroke="#334155" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 2v6h-6" />
+        <path d="M3 12a9 9 0 0 1 15-6.7L21 8" />
+        <path d="M3 22v-6h6" />
+        <path d="M21 12a9 9 0 0 1-15 6.7L3 16" />
+      </svg>
     </button>
   );
 }
