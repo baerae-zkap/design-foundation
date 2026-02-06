@@ -70,6 +70,30 @@ export type {
   ListCardVariant,
 } from './components/ListCard';
 
+export { SectionHeader } from './components/SectionHeader';
+export type {
+  SectionHeaderProps,
+  SectionHeaderSize,
+} from './components/SectionHeader';
+
+export { Thumbnail } from './components/Thumbnail';
+export type {
+  ThumbnailProps,
+  ThumbnailAspectRatio,
+} from './components/Thumbnail';
+
+export { Table, TableHead, TableBody, TableRow, TableHeadCell, TableCell } from './components/Table';
+export type {
+  TableProps,
+  TableHeadProps,
+  TableBodyProps,
+  TableRowProps,
+  TableHeadCellProps,
+  TableCellProps,
+  TableVariant,
+  TableSize,
+} from './components/Table';
+
 // Design Tokens
 export { colors, palette } from './tokens';
 export type { ColorToken, PaletteToken } from './tokens';

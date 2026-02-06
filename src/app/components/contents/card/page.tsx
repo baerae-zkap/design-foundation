@@ -75,11 +75,11 @@ function CardPlayground() {
           backgroundColor: "#fafbfc",
         }}
       >
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", minHeight: 360 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
           {/* Preview Area */}
           <div
             style={{
-              padding: 40,
+              padding: 60,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -120,7 +120,7 @@ function CardPlayground() {
                 overflowY: "auto",
                 display: "flex",
                 flexDirection: "column",
-                gap: 24,
+                gap: 28,
                 backgroundColor: "white",
                 borderRadius: 16,
               }}
@@ -150,15 +150,16 @@ function CardPlayground() {
                 onChange={(v) => setPadding(v as CardPadding)}
               />
 
-              {/* Options */}
-              <div>
-                <label style={{ fontSize: 12, fontWeight: 600, color: "var(--text-secondary)", marginBottom: 8, display: "block" }}>
-                  Options
-                </label>
-                <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                  <CheckboxOption label="Clickable" checked={clickable} onChange={setClickable} />
-                </div>
-              </div>
+              {/* Clickable */}
+              <RadioGroup
+                label="Clickable"
+                options={[
+                  { value: "false", label: "False" },
+                  { value: "true", label: "True" },
+                ]}
+                value={clickable ? "true" : "false"}
+                onChange={(v) => setClickable(v === "true")}
+              />
             </div>
           </div>
         </div>
@@ -716,43 +717,68 @@ function PrincipleCard({ number, title, desc }: { number: number; title: string;
   );
 }
 
-function RadioGroup({ label, options, value, onChange }: { label: string; options: { value: string; label: string }[]; value: string; onChange: (v: string) => void }) {
+function RadioGroup({ label, options, value, onChange }: {
+  label: string;
+  options: { value: string; label: string }[];
+  value: string;
+  onChange: (v: string) => void;
+}) {
   return (
     <div>
-      <label style={{ fontSize: 12, fontWeight: 600, color: "var(--text-secondary)", marginBottom: 8, display: "block" }}>
+      <div style={{ fontSize: 14, fontWeight: 500, color: "#c4c4c4", marginBottom: 14 }}>
         {label}
-      </label>
-      <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-        {options.map((opt) => (
-          <button
-            key={opt.value}
-            onClick={() => onChange(opt.value)}
-            style={{
-              padding: "6px 12px",
-              fontSize: 12,
-              borderRadius: 6,
-              border: value === opt.value ? "2px solid #2563eb" : "1px solid #e2e8f0",
-              backgroundColor: value === opt.value ? "#eff6ff" : "white",
-              color: value === opt.value ? "#2563eb" : "#64748b",
-              cursor: "pointer",
-            }}
-          >
-            {opt.label}
-          </button>
-        ))}
+      </div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+        {options.map(opt => {
+          const isSelected = value === opt.value;
+          return (
+            <label
+              key={opt.value}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 12,
+                cursor: "pointer",
+                fontSize: 15,
+                fontWeight: 500,
+                color: isSelected ? "var(--text-primary)" : "#9ca3af",
+                transition: "color 0.15s ease",
+              }}
+              onClick={() => onChange(opt.value)}
+            >
+              <div
+                style={{
+                  width: 22,
+                  height: 22,
+                  borderRadius: "50%",
+                  border: isSelected ? "2px solid #3b82f6" : "2px solid #e5e5e5",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  transition: "all 0.15s ease",
+                  backgroundColor: "white",
+                }}
+              >
+                {isSelected && (
+                  <div
+                    style={{
+                      width: 12,
+                      height: 12,
+                      borderRadius: "50%",
+                      backgroundColor: "#3b82f6",
+                    }}
+                  />
+                )}
+              </div>
+              {opt.label}
+            </label>
+          );
+        })}
       </div>
     </div>
   );
 }
 
-function CheckboxOption({ label, checked, onChange }: { label: string; checked: boolean; onChange: (v: boolean) => void }) {
-  return (
-    <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: "var(--text-primary)", cursor: "pointer" }}>
-      <input type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)} style={{ width: 16, height: 16 }} />
-      {label}
-    </label>
-  );
-}
 
 function PropsTable({ props }: { props: { name: string; type: string; required: boolean; defaultVal?: string; description: string }[] }) {
   return (

@@ -184,7 +184,7 @@ function ChipPlayground() {
           backgroundColor: "#fafbfc",
         }}
       >
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", minHeight: 400 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
           {/* Preview Area */}
           <div
             style={{
@@ -226,7 +226,7 @@ function ChipPlayground() {
                 overflowY: "auto",
                 display: "flex",
                 flexDirection: "column",
-                gap: 24,
+                gap: 28,
                 backgroundColor: "white",
                 borderRadius: 16,
               }}
@@ -243,30 +243,18 @@ function ChipPlayground() {
               />
 
               {/* Color */}
-              <div>
-                <label style={{ fontSize: 12, fontWeight: 600, color: "var(--text-secondary)", marginBottom: 8, display: "block" }}>
-                  Color
-                </label>
-                <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-                  {(Object.keys(colorLabels) as ChipColor[]).map((c) => (
-                    <button
-                      key={c}
-                      onClick={() => setColor(c)}
-                      style={{
-                        padding: "6px 10px",
-                        fontSize: 12,
-                        borderRadius: 6,
-                        border: color === c ? "2px solid #2563eb" : "1px solid #e2e8f0",
-                        backgroundColor: color === c ? "#eff6ff" : "white",
-                        cursor: "pointer",
-                        fontWeight: color === c ? 600 : 400,
-                      }}
-                    >
-                      {colorLabels[c]}
-                    </button>
-                  ))}
-                </div>
-              </div>
+              <RadioGroup
+                label="Color"
+                options={[
+                  { value: "brandDefault", label: "Brand" },
+                  { value: "baseDefault", label: "Base" },
+                  { value: "successDefault", label: "Success" },
+                  { value: "errorDefault", label: "Error" },
+                  { value: "warningDefault", label: "Warning" },
+                ]}
+                value={color}
+                onChange={(v) => setColor(v as ChipColor)}
+              />
 
               {/* Size */}
               <RadioGroup
@@ -280,16 +268,27 @@ function ChipPlayground() {
                 onChange={(v) => setSize(v as ChipSize)}
               />
 
-              {/* Options */}
-              <div>
-                <label style={{ fontSize: 12, fontWeight: 600, color: "var(--text-secondary)", marginBottom: 8, display: "block" }}>
-                  Options
-                </label>
-                <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                  <CheckboxOption label="Selected" checked={selected} onChange={setSelected} />
-                  <CheckboxOption label="Show Close" checked={showClose} onChange={setShowClose} />
-                </div>
-              </div>
+              {/* Selected */}
+              <RadioGroup
+                label="Selected"
+                options={[
+                  { value: "false", label: "False" },
+                  { value: "true", label: "True" },
+                ]}
+                value={selected ? "true" : "false"}
+                onChange={(v) => setSelected(v === "true")}
+              />
+
+              {/* Show Close */}
+              <RadioGroup
+                label="Show Close"
+                options={[
+                  { value: "false", label: "False" },
+                  { value: "true", label: "True" },
+                ]}
+                value={showClose ? "true" : "false"}
+                onChange={(v) => setShowClose(v === "true")}
+              />
             </div>
           </div>
         </div>
@@ -1181,45 +1180,60 @@ function RadioGroup({ label, options, value, onChange }: {
 }) {
   return (
     <div>
-      <label style={{ fontSize: 12, fontWeight: 600, color: "var(--text-secondary)", marginBottom: 8, display: "block" }}>
+      <div style={{ fontSize: 14, fontWeight: 500, color: "#c4c4c4", marginBottom: 14 }}>
         {label}
-      </label>
-      <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-        {options.map((opt) => (
-          <button
-            key={opt.value}
-            onClick={() => onChange(opt.value)}
-            style={{
-              padding: "6px 12px",
-              fontSize: 12,
-              borderRadius: 6,
-              border: value === opt.value ? "2px solid #2563eb" : "1px solid #e2e8f0",
-              backgroundColor: value === opt.value ? "#eff6ff" : "white",
-              cursor: "pointer",
-              fontWeight: value === opt.value ? 600 : 400,
-            }}
-          >
-            {opt.label}
-          </button>
-        ))}
+      </div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+        {options.map(opt => {
+          const isSelected = value === opt.value;
+          return (
+            <label
+              key={opt.value}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 12,
+                cursor: "pointer",
+                fontSize: 15,
+                fontWeight: 500,
+                color: isSelected ? "var(--text-primary)" : "#9ca3af",
+                transition: "color 0.15s ease",
+              }}
+              onClick={() => onChange(opt.value)}
+            >
+              <div
+                style={{
+                  width: 22,
+                  height: 22,
+                  borderRadius: "50%",
+                  border: isSelected ? "2px solid #3b82f6" : "2px solid #e5e5e5",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  transition: "all 0.15s ease",
+                  backgroundColor: "white",
+                }}
+              >
+                {isSelected && (
+                  <div
+                    style={{
+                      width: 12,
+                      height: 12,
+                      borderRadius: "50%",
+                      backgroundColor: "#3b82f6",
+                    }}
+                  />
+                )}
+              </div>
+              {opt.label}
+            </label>
+          );
+        })}
       </div>
     </div>
   );
 }
 
-function CheckboxOption({ label, checked, onChange }: { label: string; checked: boolean; onChange: (v: boolean) => void }) {
-  return (
-    <label style={{ display: "flex", alignItems: "center", gap: 8, cursor: "pointer", fontSize: 13 }}>
-      <input
-        type="checkbox"
-        checked={checked}
-        onChange={(e) => onChange(e.target.checked)}
-        style={{ width: 16, height: 16 }}
-      />
-      {label}
-    </label>
-  );
-}
 
 function PropsTable({ props }: { props: { name: string; type: string; required: boolean; defaultVal?: string; description: string }[] }) {
   return (

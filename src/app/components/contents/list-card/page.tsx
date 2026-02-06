@@ -9,10 +9,10 @@ type ListCardSize = "small" | "medium" | "large";
 type ListCardVariant = "elevated" | "outlined" | "filled";
 
 // Size configurations
-const sizeConfig: Record<ListCardSize, { padding: number; thumbnailSize: number; gap: number; titleSize: number; subtitleSize: number; metaSize: number }> = {
-  small: { padding: 12, thumbnailSize: 56, gap: 12, titleSize: 14, subtitleSize: 12, metaSize: 13 },
-  medium: { padding: 16, thumbnailSize: 80, gap: 12, titleSize: 15, subtitleSize: 13, metaSize: 14 },
-  large: { padding: 16, thumbnailSize: 100, gap: 16, titleSize: 16, subtitleSize: 14, metaSize: 15 },
+const sizeConfig: Record<ListCardSize, { padding: number; thumbnailSize: number; gap: number; titleSize: number; subtitleSize: number; metaSize: number; minWidth: number }> = {
+  small: { padding: 12, thumbnailSize: 40, gap: 12, titleSize: 14, subtitleSize: 12, metaSize: 13, minWidth: 280 },
+  medium: { padding: 16, thumbnailSize: 48, gap: 12, titleSize: 15, subtitleSize: 13, metaSize: 14, minWidth: 320 },
+  large: { padding: 20, thumbnailSize: 56, gap: 16, titleSize: 16, subtitleSize: 14, metaSize: 15, minWidth: 360 },
 };
 
 export default function ListCardPage() {
@@ -43,29 +43,52 @@ export default function ListCardPage() {
 }
 
 function ListCardPlayground() {
-  const [variant, setVariant] = useState<ListCardVariant>("outlined");
+  const [variant, setVariant] = useState<ListCardVariant>("elevated");
   const [size, setSize] = useState<ListCardSize>("medium");
   const [hasThumbnail, setHasThumbnail] = useState(true);
-  const [hasBadge, setHasBadge] = useState(false);
+  const [hasBadge, setHasBadge] = useState(true);
   const [hasSubtitle, setHasSubtitle] = useState(true);
   const [hasMeta, setHasMeta] = useState(true);
+
+  const s = sizeConfig[size];
 
   return (
     <div style={{ marginBottom: 32 }}>
       <div style={{ borderRadius: 20, overflow: "hidden", backgroundColor: "#fafbfc" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", minHeight: 360 }}>
-          <div style={{ padding: 40, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <ExchangePriceCard
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
+          <div style={{ padding: 60, display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <ListCardDemo
               variant={variant}
-              exchange="bithumb"
-              amount="0.7788"
-              priceDiff="-1,600원"
+              size={size}
+              thumbnail={hasThumbnail ? <EthereumIcon size={s.thumbnailSize} /> : undefined}
+              badges={hasBadge ? <TrendBadge trend="up" value="+5.2%" /> : undefined}
+              title="Ethereum"
+              subtitle={hasSubtitle ? "0.7812 ETH" : undefined}
+              meta={hasMeta ? "₩3,245,000" : undefined}
               onClick={() => {}}
             />
           </div>
 
-          <div style={{ backgroundColor: "#fafbfc", padding: 16 }}>
-            <div style={{ padding: 24, backgroundColor: "white", borderRadius: 16, display: "flex", flexDirection: "column", gap: 24, height: "100%", boxSizing: "border-box" }}>
+          <div style={{
+            backgroundColor: "#fafbfc",
+            display: "flex",
+            flexDirection: "column",
+            padding: 16,
+            overflow: "hidden",
+            height: "100%",
+            boxSizing: "border-box",
+          }}>
+            <div style={{
+              flex: 1,
+              minHeight: 0,
+              padding: 24,
+              overflowY: "auto",
+              display: "flex",
+              flexDirection: "column",
+              gap: 28,
+              backgroundColor: "white",
+              borderRadius: 16,
+            }}>
               <RadioGroup
                 label="Variant"
                 options={[
@@ -86,15 +109,42 @@ function ListCardPlayground() {
                 value={size}
                 onChange={(v) => setSize(v as ListCardSize)}
               />
-              <div>
-                <label style={{ fontSize: 12, fontWeight: 600, color: "var(--text-secondary)", marginBottom: 8, display: "block" }}>Options</label>
-                <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                  <CheckboxOption label="Thumbnail" checked={hasThumbnail} onChange={setHasThumbnail} />
-                  <CheckboxOption label="Badge" checked={hasBadge} onChange={setHasBadge} />
-                  <CheckboxOption label="Subtitle" checked={hasSubtitle} onChange={setHasSubtitle} />
-                  <CheckboxOption label="Meta (Price Diff)" checked={hasMeta} onChange={setHasMeta} />
-                </div>
-              </div>
+              <RadioGroup
+                label="Thumbnail"
+                options={[
+                  { value: "false", label: "False" },
+                  { value: "true", label: "True" },
+                ]}
+                value={hasThumbnail ? "true" : "false"}
+                onChange={(v) => setHasThumbnail(v === "true")}
+              />
+              <RadioGroup
+                label="Badge"
+                options={[
+                  { value: "false", label: "False" },
+                  { value: "true", label: "True" },
+                ]}
+                value={hasBadge ? "true" : "false"}
+                onChange={(v) => setHasBadge(v === "true")}
+              />
+              <RadioGroup
+                label="Subtitle"
+                options={[
+                  { value: "false", label: "False" },
+                  { value: "true", label: "True" },
+                ]}
+                value={hasSubtitle ? "true" : "false"}
+                onChange={(v) => setHasSubtitle(v === "true")}
+              />
+              <RadioGroup
+                label="Meta"
+                options={[
+                  { value: "false", label: "False" },
+                  { value: "true", label: "True" },
+                ]}
+                value={hasMeta ? "true" : "false"}
+                onChange={(v) => setHasMeta(v === "true")}
+              />
             </div>
           </div>
         </div>
@@ -147,56 +197,23 @@ function DesignContent() {
         </div>
       </Section>
 
-      <Section title="ZKAP 거래소 가격 비교">
+      <Section title="Variants">
         <PreviewBox>
-          <div style={{ padding: 24, width: "100%", display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
-            <ExchangePriceCard exchange="zkap" amount="0.7812" isBest onClick={() => {}} />
-            <ExchangePriceCard exchange="bithumb" amount="0.7788" priceDiff="- 1,600원" onClick={() => {}} />
-            <ExchangePriceCard exchange="upbit" amount="0.7780" priceDiff="- 1,950원" status="warning" onClick={() => {}} />
-            <ExchangePriceCard exchange="coinone" amount="0.7852" priceDiff="- 2,000원" status="notice" onClick={() => {}} />
+          <div style={{ padding: 24, display: "flex", flexDirection: "column", gap: 12 }}>
+            <div>
+              <p style={{ fontSize: 11, color: "#64748b", marginBottom: 8 }}>Elevated - 그림자로 떠있는 느낌</p>
+              <ListCardDemo variant="elevated" size="small" thumbnail={<EthereumIcon size={40} />} title="Ethereum" subtitle="0.7812 ETH" meta="₩3,245,000" />
+            </div>
+            <div>
+              <p style={{ fontSize: 11, color: "#64748b", marginBottom: 8 }}>Outlined - 테두리로 영역 구분</p>
+              <ListCardDemo variant="outlined" size="small" thumbnail={<BitcoinIcon size={40} />} title="Bitcoin" subtitle="0.0234 BTC" meta="₩2,890,000" />
+            </div>
+            <div>
+              <p style={{ fontSize: 11, color: "#64748b", marginBottom: 8 }}>Filled - 배경색으로 영역 표시</p>
+              <ListCardDemo variant="filled" size="small" thumbnail={<EthereumIcon size={40} />} title="Ethereum" subtitle="0.5000 ETH" meta="₩2,100,000" />
+            </div>
           </div>
         </PreviewBox>
-      </Section>
-
-      <Section title="상태별 카드">
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
-          <VariantCard name="Best (추천)" description="보라색 테두리 + Best 뱃지">
-            <div style={{ padding: "8px 12px", border: "2px solid #8b5cf6", borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                <ZkapLogo size={24} />
-                <span style={{ fontSize: 13, fontWeight: 600 }}>ZKAP</span>
-              </div>
-              <span style={{ fontSize: 11, color: "#8b5cf6", fontWeight: 600 }}>👍 Best</span>
-            </div>
-          </VariantCard>
-          <VariantCard name="Normal (일반)" description="기본 테두리 + 가격 차이">
-            <div style={{ padding: "8px 12px", border: "1px solid #e2e8f0", borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                <BithumbLogo size={24} />
-                <span style={{ fontSize: 13, fontWeight: 600 }}>빗썸</span>
-              </div>
-              <span style={{ fontSize: 11, color: "#64748b" }}>- 1,600원</span>
-            </div>
-          </VariantCard>
-          <VariantCard name="Warning (경고)" description="빨간색 상태 텍스트">
-            <div style={{ padding: "8px 12px", border: "1px solid #e2e8f0", borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                <UpbitLogo size={24} />
-                <span style={{ fontSize: 13, fontWeight: 600 }}>업비트</span>
-                <span style={{ fontSize: 11, color: "#ef4444" }}>잔액이 부족해요</span>
-              </div>
-            </div>
-          </VariantCard>
-          <VariantCard name="Notice (안내)" description="회색 상태 텍스트">
-            <div style={{ padding: "8px 12px", border: "1px solid #e2e8f0", borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                <CoinoneLogo size={24} />
-                <span style={{ fontSize: 13, fontWeight: 600 }}>코인원</span>
-                <span style={{ fontSize: 11, color: "#94a3b8" }}>연동이 필요해요</span>
-              </div>
-            </div>
-          </VariantCard>
-        </div>
       </Section>
 
       <Section title="Sizes">
@@ -205,7 +222,7 @@ function DesignContent() {
             {(["small", "medium", "large"] as ListCardSize[]).map((s) => (
               <div key={s}>
                 <p style={{ fontSize: 11, color: "#64748b", marginBottom: 8 }}>{s} (thumbnail: {sizeConfig[s].thumbnailSize}px)</p>
-                <ListCardDemo variant="outlined" size={s} thumbnail={<ThumbnailDemo size={sizeConfig[s].thumbnailSize} />} title="상품명" subtitle="상품 설명" meta="₩59,000" onClick={() => {}} />
+                <ListCardDemo variant="elevated" size={s} thumbnail={<EthereumIcon size={sizeConfig[s].thumbnailSize} />} badges={<TrendBadge trend="up" value="+5.2%" />} title="Ethereum" subtitle="0.7812 ETH" meta="₩3,245,000" onClick={() => {}} />
               </div>
             ))}
           </div>
@@ -225,12 +242,13 @@ function DesignContent() {
             <tbody>
               {[
                 ["Border Radius", "radius.semantic.card.sm", "12px"],
-                ["Thumbnail Radius", "radius.primitive.sm", "8px"],
+                ["Thumbnail Radius", "radius.primitive.full", "50%"],
                 ["Padding (small)", "spacing.primitive.3", "12px"],
-                ["Padding (medium/large)", "spacing.primitive.4", "16px"],
-                ["Thumbnail (small)", "-", "56px"],
-                ["Thumbnail (medium)", "-", "80px"],
-                ["Thumbnail (large)", "-", "100px"],
+                ["Padding (medium)", "spacing.primitive.4", "16px"],
+                ["Padding (large)", "spacing.primitive.5", "20px"],
+                ["Thumbnail (small)", "-", "40px"],
+                ["Thumbnail (medium)", "-", "48px"],
+                ["Thumbnail (large)", "-", "56px"],
                 ["Gap", "spacing.primitive.3", "12px"],
               ].map(([prop, token, value], i) => (
                 <tr key={i} style={{ borderBottom: "1px solid var(--divider)" }}>
@@ -432,26 +450,60 @@ function PrincipleCard({ number, title, desc }: { number: number; title: string;
 function RadioGroup({ label, options, value, onChange }: { label: string; options: { value: string; label: string }[]; value: string; onChange: (v: string) => void }) {
   return (
     <div>
-      <label style={{ fontSize: 12, fontWeight: 600, color: "var(--text-secondary)", marginBottom: 8, display: "block" }}>{label}</label>
-      <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-        {options.map((opt) => (
-          <button key={opt.value} onClick={() => onChange(opt.value)} style={{ padding: "6px 12px", fontSize: 12, borderRadius: 6, border: value === opt.value ? "2px solid #2563eb" : "1px solid #e2e8f0", backgroundColor: value === opt.value ? "#eff6ff" : "white", color: value === opt.value ? "#2563eb" : "#64748b", cursor: "pointer" }}>
-            {opt.label}
-          </button>
-        ))}
+      <div style={{ fontSize: 14, fontWeight: 500, color: "#c4c4c4", marginBottom: 14 }}>
+        {label}
+      </div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+        {options.map(opt => {
+          const isSelected = value === opt.value;
+          return (
+            <label
+              key={opt.value}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 12,
+                cursor: "pointer",
+                fontSize: 15,
+                fontWeight: 500,
+                color: isSelected ? "var(--text-primary)" : "#9ca3af",
+                transition: "color 0.15s ease",
+              }}
+              onClick={() => onChange(opt.value)}
+            >
+              <div
+                style={{
+                  width: 22,
+                  height: 22,
+                  borderRadius: "50%",
+                  border: isSelected ? "2px solid #3b82f6" : "2px solid #e5e5e5",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  transition: "all 0.15s ease",
+                  backgroundColor: "white",
+                }}
+              >
+                {isSelected && (
+                  <div
+                    style={{
+                      width: 12,
+                      height: 12,
+                      borderRadius: "50%",
+                      backgroundColor: "#3b82f6",
+                    }}
+                  />
+                )}
+              </div>
+              {opt.label}
+            </label>
+          );
+        })}
       </div>
     </div>
   );
 }
 
-function CheckboxOption({ label, checked, onChange }: { label: string; checked: boolean; onChange: (v: boolean) => void }) {
-  return (
-    <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: "var(--text-primary)", cursor: "pointer" }}>
-      <input type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)} style={{ width: 16, height: 16 }} />
-      {label}
-    </label>
-  );
-}
 
 function PropsTable({ props }: { props: { name: string; type: string; required: boolean; defaultVal?: string; description: string }[] }) {
   return (
@@ -548,6 +600,26 @@ function ThumbnailDemo({ size = 80 }: { size?: number }) {
 function BadgeDemo() {
   return (
     <span style={{ display: "inline-flex", alignItems: "center", height: 18, padding: "0 6px", fontSize: 10, fontWeight: 600, color: "white", backgroundColor: "#2563eb", borderRadius: 4 }}>NEW</span>
+  );
+}
+
+function TrendBadge({ trend, value }: { trend: "up" | "down"; value: string }) {
+  const isUp = trend === "up";
+  return (
+    <span style={{
+      display: "inline-flex",
+      alignItems: "center",
+      gap: 2,
+      height: 20,
+      padding: "0 8px",
+      fontSize: 11,
+      fontWeight: 600,
+      color: isUp ? "#16a34a" : "#dc2626",
+      backgroundColor: isUp ? "#f0fdf4" : "#fef2f2",
+      borderRadius: 4
+    }}>
+      {isUp ? "▲" : "▼"} {value}
+    </span>
   );
 }
 
@@ -662,6 +734,128 @@ function ExchangePriceCard({
   );
 }
 
+// Playground용 ExchangePriceCard Demo (범용 props로 제어)
+function ExchangePriceCardDemo({
+  variant = "outlined",
+  size = "medium",
+  showThumbnail = true,
+  showBadge = true,
+  showSubtitle = true,
+  showMeta = false,
+  showFooter = true,
+  highlighted = true,
+  status,
+}: {
+  variant?: ListCardVariant;
+  size?: ListCardSize;
+  showThumbnail?: boolean;
+  showBadge?: boolean;
+  showSubtitle?: boolean;
+  showMeta?: boolean;
+  showFooter?: boolean;
+  highlighted?: boolean;
+  status?: "warning" | "notice";
+}) {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const sizeStyles = {
+    small: { padding: 12, logoSize: 24, titleSize: 13, subtitleSize: 20, metaSize: 11, width: 280, footerPadding: 8 },
+    medium: { padding: 16, logoSize: 28, titleSize: 15, subtitleSize: 24, metaSize: 13, width: 320, footerPadding: 10 },
+    large: { padding: 20, logoSize: 32, titleSize: 17, subtitleSize: 28, metaSize: 14, width: 360, footerPadding: 12 },
+  };
+
+  const s = sizeStyles[size];
+
+  const getVariantStyle = (): React.CSSProperties => {
+    const pressedBg = isHovered ? "rgba(0,0,0,0.02)" : undefined;
+    const highlightBorder = highlighted ? "2px solid #8b5cf6" : undefined;
+
+    switch (variant) {
+      case "elevated":
+        return {
+          backgroundColor: pressedBg || "white",
+          boxShadow: "0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06)",
+          border: highlightBorder || "none"
+        };
+      case "outlined":
+        return {
+          backgroundColor: pressedBg || "white",
+          border: highlightBorder || "1px solid #e2e8f0"
+        };
+      case "filled":
+        return {
+          backgroundColor: isHovered ? "#f1f5f9" : "#f8fafc",
+          border: highlightBorder || "none"
+        };
+      default:
+        return {};
+    }
+  };
+
+  const getStatusText = () => {
+    if (status === "warning") return <span style={{ color: "#ef4444", fontSize: s.metaSize, marginLeft: 8 }}>잔액이 부족해요</span>;
+    if (status === "notice") return <span style={{ color: "#94a3b8", fontSize: s.metaSize, marginLeft: 8 }}>연동이 필요해요</span>;
+    return null;
+  };
+
+  return (
+    <div
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      style={{
+        padding: s.padding,
+        borderRadius: 16,
+        cursor: "pointer",
+        transition: "all 0.15s ease",
+        width: s.width,
+        ...getVariantStyle(),
+      }}
+    >
+      {/* Header: Thumbnail + Title + Status + Badge/Meta */}
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: showSubtitle ? 8 : 0 }}>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          {showThumbnail && <ZkapLogo size={s.logoSize} />}
+          <span style={{ marginLeft: showThumbnail ? 8 : 0, fontSize: s.titleSize, fontWeight: 600, color: "#334155" }}>
+            ZKAP 최적구매
+          </span>
+          {getStatusText()}
+        </div>
+        {showBadge && (
+          <span style={{ display: "inline-flex", alignItems: "center", gap: 4, padding: "4px 10px", fontSize: 12, fontWeight: 600, color: "#8b5cf6", backgroundColor: "#f5f3ff", borderRadius: 20 }}>
+            👍 Best
+          </span>
+        )}
+        {showMeta && !showBadge && (
+          <span style={{ fontSize: s.metaSize, color: "#64748b", padding: "4px 10px", backgroundColor: "#f8fafc", borderRadius: 8 }}>- 1,600원</span>
+        )}
+      </div>
+
+      {/* Subtitle: 금액 */}
+      {showSubtitle && (
+        <div style={{ fontSize: s.subtitleSize, fontWeight: 700, color: highlighted ? "#3b82f6" : "#1e293b" }}>
+          0.7812 ETH
+        </div>
+      )}
+
+      {/* Footer: 추가 안내 */}
+      {showFooter && (
+        <div style={{
+          marginTop: 12,
+          padding: `${s.footerPadding}px 16px`,
+          backgroundColor: "#f5f3ff",
+          borderRadius: 8,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between"
+        }}>
+          <span style={{ fontSize: s.metaSize, color: "#8b5cf6" }}>나눠서 구매하면 최대 0.002ETH 더 받아요</span>
+          <span style={{ color: "#8b5cf6" }}>›</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function ListCardDemo({
   variant = "elevated",
   size = "medium",
@@ -685,14 +879,14 @@ function ListCardDemo({
   const s = sizeConfig[size];
 
   const getVariantStyle = (): React.CSSProperties => {
-    const pressedBg = isHovered && onClick ? "rgba(0,0,0,0.02)" : undefined;
+    const pressedBg = isHovered && onClick ? "rgba(0,0,0,0.04)" : undefined;
     switch (variant) {
       case "elevated":
         return { backgroundColor: pressedBg || "white", boxShadow: "0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06)" };
       case "outlined":
         return { backgroundColor: pressedBg || "white", border: "1px solid #e2e8f0" };
       case "filled":
-        return { backgroundColor: isHovered && onClick ? "#f1f5f9" : "#f8fafc" };
+        return { backgroundColor: isHovered && onClick ? "#f8fafc" : "white" };
       default:
         return {};
     }
@@ -705,16 +899,17 @@ function ListCardDemo({
       onMouseLeave={() => setIsHovered(false)}
       style={{
         display: "flex",
-        alignItems: "flex-start",
+        alignItems: "center",
         gap: s.gap,
         padding: s.padding,
         borderRadius: 12,
         cursor: onClick ? "pointer" : "default",
         transition: "all 0.15s ease",
+        minWidth: s.minWidth,
         ...getVariantStyle(),
       }}
     >
-      {thumbnail && <div style={{ width: s.thumbnailSize, height: s.thumbnailSize, borderRadius: 8, overflow: "hidden", flexShrink: 0 }}>{thumbnail}</div>}
+      {thumbnail && <div style={{ width: s.thumbnailSize, height: s.thumbnailSize, borderRadius: s.thumbnailSize / 2, overflow: "hidden", flexShrink: 0 }}>{thumbnail}</div>}
       <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: 4 }}>
         {badges && <div style={{ display: "flex", gap: 4, marginBottom: 4 }}>{badges}</div>}
         <div style={{ fontSize: s.titleSize, fontWeight: 600, color: "#334155", lineHeight: 1.4 }}>{title}</div>

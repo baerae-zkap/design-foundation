@@ -68,3 +68,27 @@ export type {
   ListCardSize,
   ListCardVariant,
 } from './ListCard';
+
+export { SectionHeader } from './SectionHeader';
+export type {
+  SectionHeaderProps,
+  SectionHeaderSize,
+} from './SectionHeader';
+
+export { Thumbnail } from './Thumbnail';
+export type {
+  ThumbnailProps,
+  ThumbnailAspectRatio,
+} from './Thumbnail';
+
+export { Table, TableHead, TableBody, TableRow, TableHeadCell, TableCell } from './Table';
+export type {
+  TableProps,
+  TableHeadProps,
+  TableBodyProps,
+  TableRowProps,
+  TableHeadCellProps,
+  TableCellProps,
+  TableVariant,
+  TableSize,
+} from './Table';

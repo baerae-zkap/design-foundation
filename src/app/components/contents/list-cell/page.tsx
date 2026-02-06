@@ -53,45 +53,69 @@ function ListCellPlayground() {
   const [hasLeading, setHasLeading] = useState(true);
   const [hasSubtitle, setHasSubtitle] = useState(true);
   const [hasTrailing, setHasTrailing] = useState(true);
-  const [divider, setDivider] = useState(true);
+  const [hasDivider, setHasDivider] = useState(true);
+  const [hasSectionHeader, setHasSectionHeader] = useState(true);
 
   return (
     <div style={{ marginBottom: 32 }}>
       <div style={{ borderRadius: 20, overflow: "hidden", backgroundColor: "#fafbfc" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", minHeight: 300 }}>
-          <div style={{ padding: 40, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <div style={{ width: 320, backgroundColor: "white", borderRadius: 16, overflow: "hidden" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
+          <div style={{ padding: 60, display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <div style={{ width: 320, backgroundColor: "white", borderRadius: 16, overflow: "hidden", boxShadow: "0 1px 3px rgba(0,0,0,0.1)" }}>
+              {hasSectionHeader && <SectionHeader title="내 자산" />}
               <ListCellDemo
                 size={size}
-                leading={hasLeading ? <TransactionIcon /> : undefined}
-                title="거래내역"
-                subtitle={hasSubtitle ? undefined : undefined}
-                trailing={hasTrailing ? <ChevronIcon /> : undefined}
-                divider={divider}
+                leading={hasLeading ? <CryptoIcon symbol="ETH" color="#627eea" /> : undefined}
+                title="Ethereum"
+                subtitle={hasSubtitle ? "0.7812 ETH" : undefined}
+                trailing={hasTrailing ? <span style={{ fontSize: 14, fontWeight: 600, color: "#334155" }}>₩3,245,000</span> : undefined}
+                divider={hasDivider}
                 onClick={() => {}}
               />
               <ListCellDemo
                 size={size}
-                leading={hasLeading ? <ExchangeIcon /> : undefined}
-                title="거래소 연동 관리"
-                subtitle={hasSubtitle ? undefined : undefined}
-                trailing={hasTrailing ? <ChevronIcon /> : undefined}
-                divider={divider}
+                leading={hasLeading ? <CryptoIcon symbol="BTC" color="#f7931a" /> : undefined}
+                title="Bitcoin"
+                subtitle={hasSubtitle ? "0.0234 BTC" : undefined}
+                trailing={hasTrailing ? <span style={{ fontSize: 14, fontWeight: 600, color: "#334155" }}>₩2,890,000</span> : undefined}
+                divider={hasDivider}
                 onClick={() => {}}
               />
               <ListCellDemo
                 size={size}
-                leading={hasLeading ? <SettingsIconDemo /> : undefined}
-                title="설정"
-                subtitle={hasSubtitle ? undefined : undefined}
-                trailing={hasTrailing ? <ChevronIcon /> : undefined}
+                leading={hasLeading ? <CryptoIcon symbol="SOL" color="#00d18c" /> : undefined}
+                title="Solana"
+                subtitle={hasSubtitle ? "12.5 SOL" : undefined}
+                trailing={hasTrailing ? <span style={{ fontSize: 14, fontWeight: 600, color: "#334155" }}>₩1,560,000</span> : undefined}
                 onClick={() => {}}
               />
             </div>
           </div>
 
-          <div style={{ backgroundColor: "#fafbfc", padding: 16 }}>
-            <div style={{ padding: 24, backgroundColor: "white", borderRadius: 16, display: "flex", flexDirection: "column", gap: 24 }}>
+          <div
+            style={{
+              backgroundColor: "#fafbfc",
+              display: "flex",
+              flexDirection: "column",
+              padding: 16,
+              overflow: "hidden",
+              height: "100%",
+              boxSizing: "border-box",
+            }}
+          >
+            <div
+              style={{
+                flex: 1,
+                minHeight: 0,
+                padding: 24,
+                overflowY: "auto",
+                display: "flex",
+                flexDirection: "column",
+                gap: 28,
+                backgroundColor: "white",
+                borderRadius: 16,
+              }}
+            >
               <RadioGroup
                 label="Size"
                 options={[
@@ -102,17 +126,51 @@ function ListCellPlayground() {
                 value={size}
                 onChange={(v) => setSize(v as ListCellSize)}
               />
-              <div>
-                <label style={{ fontSize: 12, fontWeight: 600, color: "var(--text-secondary)", marginBottom: 8, display: "block" }}>
-                  Options
-                </label>
-                <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                  <CheckboxOption label="Leading" checked={hasLeading} onChange={setHasLeading} />
-                  <CheckboxOption label="Subtitle" checked={hasSubtitle} onChange={setHasSubtitle} />
-                  <CheckboxOption label="Trailing" checked={hasTrailing} onChange={setHasTrailing} />
-                  <CheckboxOption label="Divider" checked={divider} onChange={setDivider} />
-                </div>
-              </div>
+              <RadioGroup
+                label="Section Header"
+                options={[
+                  { value: "false", label: "False" },
+                  { value: "true", label: "True" },
+                ]}
+                value={hasSectionHeader ? "true" : "false"}
+                onChange={(v) => setHasSectionHeader(v === "true")}
+              />
+              <RadioGroup
+                label="Leading"
+                options={[
+                  { value: "false", label: "False" },
+                  { value: "true", label: "True" },
+                ]}
+                value={hasLeading ? "true" : "false"}
+                onChange={(v) => setHasLeading(v === "true")}
+              />
+              <RadioGroup
+                label="Subtitle"
+                options={[
+                  { value: "false", label: "False" },
+                  { value: "true", label: "True" },
+                ]}
+                value={hasSubtitle ? "true" : "false"}
+                onChange={(v) => setHasSubtitle(v === "true")}
+              />
+              <RadioGroup
+                label="Trailing"
+                options={[
+                  { value: "false", label: "False" },
+                  { value: "true", label: "True" },
+                ]}
+                value={hasTrailing ? "true" : "false"}
+                onChange={(v) => setHasTrailing(v === "true")}
+              />
+              <RadioGroup
+                label="Divider"
+                options={[
+                  { value: "false", label: "False" },
+                  { value: "true", label: "True" },
+                ]}
+                value={hasDivider ? "true" : "false"}
+                onChange={(v) => setHasDivider(v === "true")}
+              />
             </div>
           </div>
         </div>
@@ -156,18 +214,16 @@ function DesignContent() {
         </div>
       </Section>
 
-      <Section title="ZKAP 설정 메뉴">
+      <Section title="With Section Headers">
         <PreviewBox>
           <div style={{ padding: 24, width: "100%" }}>
-            <div style={{ backgroundColor: "white", borderRadius: 16, overflow: "hidden", maxWidth: 360 }}>
-              <ListCellDemo leading={<TransactionIcon />} title="거래내역" trailing={<ChevronIcon />} divider onClick={() => {}} />
-              <ListCellDemo leading={<ExchangeIcon />} title="거래소 연동 관리" trailing={<ChevronIcon />} onClick={() => {}} />
-              <div style={{ padding: "20px 16px 8px", fontSize: 13, fontWeight: 500, color: "#94a3b8" }}>활동하기</div>
-              <ListCellDemo leading={<MissionIcon />} title="데일리 미션 & 혜택" trailing={<ChevronIcon />} divider onClick={() => {}} />
-              <ListCellDemo leading={<WalletIcon />} title="지갑 체험하기 (Beta)" trailing={<ChevronIcon />} onClick={() => {}} />
-              <div style={{ padding: "20px 16px 8px", fontSize: 13, fontWeight: 500, color: "#94a3b8" }}>시스템</div>
-              <ListCellDemo leading={<SettingsIconDemo />} title="설정" trailing={<ChevronIcon />} divider onClick={() => {}} />
-              <ListCellDemo leading={<LogoutIcon />} title="로그아웃" trailing={<ChevronIcon />} onClick={() => {}} />
+            <div style={{ backgroundColor: "white", borderRadius: 16, overflow: "hidden", maxWidth: 360, boxShadow: "0 1px 3px rgba(0,0,0,0.1)" }}>
+              <SectionHeader title="내 자산" />
+              <ListCellDemo leading={<CryptoIcon symbol="ETH" color="#627eea" />} title="Ethereum" subtitle="0.7812 ETH" trailing={<span style={{ fontSize: 14, fontWeight: 600, color: "#334155" }}>₩3,245,000</span>} divider onClick={() => {}} />
+              <ListCellDemo leading={<CryptoIcon symbol="BTC" color="#f7931a" />} title="Bitcoin" subtitle="0.0234 BTC" trailing={<span style={{ fontSize: 14, fontWeight: 600, color: "#334155" }}>₩2,890,000</span>} onClick={() => {}} />
+              <SectionHeader title="설정" />
+              <ListCellDemo leading={<SettingsIconDemo />} title="알림 설정" trailing={<ChevronIcon />} divider onClick={() => {}} />
+              <ListCellDemo leading={<SettingsIconDemo />} title="보안" trailing={<ChevronIcon />} onClick={() => {}} />
             </div>
           </div>
         </PreviewBox>
@@ -298,60 +354,48 @@ function RNContent() {
 />`} />
       </Section>
 
-      <Section title="ZKAP 설정 메뉴 예시">
-        <CodeBlock code={`// ZKAP 앱 더보기 메뉴
+      <Section title="With Section Headers">
+        <CodeBlock code={`// 섹션 헤더가 있는 리스트
 <View style={{ backgroundColor: 'white', borderRadius: 16 }}>
+  <SectionHeader title="내 자산" />
   <ListCell
-    leading={<TransactionIcon />}
-    title="거래내역"
-    trailing={<ChevronRight />}
-    onPress={() => navigate('transactions')}
+    leading={<CryptoIcon symbol="ETH" />}
+    title="Ethereum"
+    subtitle="0.7812 ETH"
+    trailing={<Text style={{ fontWeight: '600' }}>₩3,245,000</Text>}
+    onPress={() => navigate('eth-detail')}
     divider
   />
   <ListCell
-    leading={<ExchangeIcon />}
-    title="거래소 연동 관리"
-    trailing={<ChevronRight />}
-    onPress={() => navigate('exchanges')}
+    leading={<CryptoIcon symbol="BTC" />}
+    title="Bitcoin"
+    subtitle="0.0234 BTC"
+    trailing={<Text style={{ fontWeight: '600' }}>₩2,890,000</Text>}
+    onPress={() => navigate('btc-detail')}
   />
 
-  <SectionHeader title="활동하기" />
-  <ListCell
-    leading={<MissionIcon />}
-    title="데일리 미션 & 혜택"
-    trailing={<ChevronRight />}
-    onPress={() => navigate('missions')}
-    divider
-  />
-  <ListCell
-    leading={<WalletIcon />}
-    title="지갑 체험하기 (Beta)"
-    trailing={<ChevronRight />}
-    onPress={() => navigate('wallet')}
-  />
-
-  <SectionHeader title="시스템" />
+  <SectionHeader title="설정" />
   <ListCell
     leading={<SettingsIcon />}
-    title="설정"
+    title="알림 설정"
     trailing={<ChevronRight />}
-    onPress={() => navigate('settings')}
+    onPress={() => navigate('notifications')}
     divider
   />
   <ListCell
-    leading={<LogoutIcon />}
-    title="로그아웃"
+    leading={<SecurityIcon />}
+    title="보안"
     trailing={<ChevronRight />}
-    onPress={handleLogout}
+    onPress={() => navigate('security')}
   />
 </View>`} />
       </Section>
 
-      <Section title="거래소 연동 상태 예시">
-        <CodeBlock code={`// 거래소 연동 관리 화면
+      <Section title="With Status Trailing">
+        <CodeBlock code={`// 상태 표시가 있는 리스트
 <View style={{ backgroundColor: 'white', borderRadius: 16 }}>
   <ListCell
-    leading={<UpbitLogo />}
+    leading={<ExchangeIcon name="upbit" />}
     title="업비트"
     subtitle="연동됨"
     trailing={<Text style={{ color: '#22c55e' }}>연결됨</Text>}
@@ -359,7 +403,7 @@ function RNContent() {
     divider
   />
   <ListCell
-    leading={<BithumbLogo />}
+    leading={<ExchangeIcon name="bithumb" />}
     title="빗썸"
     subtitle="미연동"
     trailing={<Text style={{ color: '#3b82f6' }}>연결하기</Text>}
@@ -408,41 +452,68 @@ function PrincipleCard({ number, title, desc }: { number: number; title: string;
   );
 }
 
-function RadioGroup({ label, options, value, onChange }: { label: string; options: { value: string; label: string }[]; value: string; onChange: (v: string) => void }) {
+function RadioGroup({ label, options, value, onChange }: {
+  label: string;
+  options: { value: string; label: string }[];
+  value: string;
+  onChange: (v: string) => void;
+}) {
   return (
     <div>
-      <label style={{ fontSize: 12, fontWeight: 600, color: "var(--text-secondary)", marginBottom: 8, display: "block" }}>{label}</label>
-      <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-        {options.map((opt) => (
-          <button
-            key={opt.value}
-            onClick={() => onChange(opt.value)}
-            style={{
-              padding: "6px 12px",
-              fontSize: 12,
-              borderRadius: 6,
-              border: value === opt.value ? "2px solid #2563eb" : "1px solid #e2e8f0",
-              backgroundColor: value === opt.value ? "#eff6ff" : "white",
-              color: value === opt.value ? "#2563eb" : "#64748b",
-              cursor: "pointer",
-            }}
-          >
-            {opt.label}
-          </button>
-        ))}
+      <div style={{ fontSize: 14, fontWeight: 500, color: "#c4c4c4", marginBottom: 14 }}>
+        {label}
+      </div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+        {options.map(opt => {
+          const isSelected = value === opt.value;
+          return (
+            <label
+              key={opt.value}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 12,
+                cursor: "pointer",
+                fontSize: 15,
+                fontWeight: 500,
+                color: isSelected ? "var(--text-primary)" : "#9ca3af",
+                transition: "color 0.15s ease",
+              }}
+              onClick={() => onChange(opt.value)}
+            >
+              <div
+                style={{
+                  width: 22,
+                  height: 22,
+                  borderRadius: "50%",
+                  border: isSelected ? "2px solid #3b82f6" : "2px solid #e5e5e5",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  transition: "all 0.15s ease",
+                  backgroundColor: "white",
+                }}
+              >
+                {isSelected && (
+                  <div
+                    style={{
+                      width: 12,
+                      height: 12,
+                      borderRadius: "50%",
+                      backgroundColor: "#3b82f6",
+                    }}
+                  />
+                )}
+              </div>
+              {opt.label}
+            </label>
+          );
+        })}
       </div>
     </div>
   );
 }
 
-function CheckboxOption({ label, checked, onChange }: { label: string; checked: boolean; onChange: (v: boolean) => void }) {
-  return (
-    <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: "var(--text-primary)", cursor: "pointer" }}>
-      <input type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)} style={{ width: 16, height: 16 }} />
-      {label}
-    </label>
-  );
-}
 
 function PropsTable({ props }: { props: { name: string; type: string; required: boolean; defaultVal?: string; description: string }[] }) {
   return (
@@ -559,6 +630,33 @@ function ChevronIcon() {
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2">
       <path d="M9 18l6-6-6-6" />
     </svg>
+  );
+}
+
+function SectionHeader({ title }: { title: string }) {
+  return (
+    <div style={{ padding: "16px 16px 8px", fontSize: 13, fontWeight: 600, color: "#94a3b8" }}>
+      {title}
+    </div>
+  );
+}
+
+function CryptoIcon({ symbol, color }: { symbol: string; color: string }) {
+  return (
+    <div style={{
+      width: 36,
+      height: 36,
+      borderRadius: "50%",
+      backgroundColor: `${color}15`,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      fontSize: 12,
+      fontWeight: 700,
+      color: color
+    }}>
+      {symbol}
+    </div>
   );
 }
 

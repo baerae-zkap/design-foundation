@@ -19,9 +19,65 @@ const componentCategories = [
         thumbnail: "/design-foundation/thumbnails/button.png",
       },
       {
+        name: "Chip",
+        href: "/components/actions/chip",
+        thumbnail: "/design-foundation/thumbnails/chip.png",
+      },
+      {
+        name: "Icon button",
+        href: "/components/actions/icon-button",
+        thumbnail: "/design-foundation/thumbnails/icon-button.png",
+      },
+      {
         name: "Text button",
         href: "/components/actions/text-button",
         thumbnail: "/design-foundation/thumbnails/text-button.png",
+      },
+    ],
+  },
+  {
+    id: "contents",
+    title: "Contents",
+    components: [
+      {
+        name: "Accordion",
+        href: "/components/contents/accordion",
+        thumbnail: "/design-foundation/thumbnails/accordion.png",
+      },
+      {
+        name: "Card",
+        href: "/components/contents/card",
+        thumbnail: "/design-foundation/thumbnails/card.png",
+      },
+      {
+        name: "Content badge",
+        href: "/components/contents/content-badge",
+        thumbnail: "/design-foundation/thumbnails/content-badge.png",
+      },
+      {
+        name: "List card",
+        href: "/components/contents/list-card",
+        thumbnail: "/design-foundation/thumbnails/list-card.png",
+      },
+      {
+        name: "List cell",
+        href: "/components/contents/list-cell",
+        thumbnail: "/design-foundation/thumbnails/list-cell.png",
+      },
+      {
+        name: "Section header",
+        href: "/components/contents/section-header",
+        thumbnail: "/design-foundation/thumbnails/section-header.png",
+      },
+      {
+        name: "Table",
+        href: "/components/contents/table",
+        thumbnail: "/design-foundation/thumbnails/table.png",
+      },
+      {
+        name: "Thumbnail",
+        href: "/components/contents/thumbnail",
+        thumbnail: "/design-foundation/thumbnails/thumbnail.png",
       },
     ],
   },
