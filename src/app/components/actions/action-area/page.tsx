@@ -822,27 +822,150 @@ import { ActionArea, Button, TextButton } from '@baerae-zkap/design-system/nativ
 
       {/* Accessibility */}
       <Section title="Accessibility">
-        <div style={{ display: "grid", gap: 16 }}>
-          <PrincipleCard
-            number={1}
-            title="Focus Order"
-            desc="버튼 간 포커스 순서는 시각적 순서와 일치합니다. Strong variant에서는 Main → Alternative 순으로, Neutral/Compact에서는 좌측 → 우측 순으로 포커스가 이동합니다."
-          />
-          <PrincipleCard
-            number={2}
-            title="Keyboard Navigation"
-            desc="Tab 키로 버튼 간 이동, Enter 또는 Space 키로 활성화할 수 있습니다. 모달 내에서는 Tab이 Action Area 내에서 순환하도록 구현합니다."
-          />
-          <PrincipleCard
-            number={3}
-            title="Screen Reader Announcement"
-            desc="버튼 그룹의 컨텍스트를 role='group'과 aria-label로 전달합니다. caption이 있는 경우 aria-describedby로 연결하여 맥락을 제공합니다."
-          />
-          <PrincipleCard
-            number={4}
-            title="Loading State"
-            desc="로딩 상태에서는 aria-busy='true'를 설정하고, 완료 시 결과를 aria-live 영역으로 알립니다. 로딩 중에는 추가 상호작용이 방지됩니다."
-          />
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
+          ActionArea는 버튼 그룹으로서 웹 접근성 표준을 준수합니다.
+        </p>
+
+        <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)", marginBottom: 24 }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+            <thead>
+              <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>속성</th>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>설명</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><InlineCode>role=&quot;group&quot;</InlineCode></td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>스크린 리더가 버튼 그룹으로 인식</td>
+              </tr>
+              <tr>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><InlineCode>aria-label</InlineCode></td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>그룹의 용도를 설명하는 레이블 (예: &quot;결제 액션&quot;)</td>
+              </tr>
+              <tr>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><InlineCode>aria-describedby</InlineCode></td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>caption이 있는 경우 설명 텍스트와 연결</td>
+              </tr>
+              <tr>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><InlineCode>aria-disabled</InlineCode></td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>비활성화 상태를 보조 기술에 전달</td>
+              </tr>
+              <tr>
+                <td style={{ padding: "12px 16px" }}><InlineCode>aria-busy</InlineCode></td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>로딩 상태를 보조 기술에 전달</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <Subsection title="Keyboard Interaction">
+          <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+              <thead>
+                <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>키</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>동작</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--bg-secondary)", borderRadius: 4, fontSize: 12 }}>Tab</kbd></td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>그룹 내 다음 버튼으로 포커스 이동</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--bg-secondary)", borderRadius: 4, fontSize: 12 }}>Shift + Tab</kbd></td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>그룹 내 이전 버튼으로 포커스 이동</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--bg-secondary)", borderRadius: 4, fontSize: 12 }}>Enter</kbd></td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>포커스된 버튼 클릭 실행</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "12px 16px" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--bg-secondary)", borderRadius: 4, fontSize: 12 }}>Space</kbd></td>
+                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>포커스된 버튼 클릭 실행</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </Subsection>
+
+        <Subsection title="Design Principles">
+          <div style={{ display: "grid", gap: 16 }}>
+            <PrincipleCard
+              number={1}
+              title="Focus Order"
+              desc="버튼 간 포커스 순서는 시각적 순서와 일치합니다. Strong variant에서는 Main → Alternative 순으로, Neutral/Compact에서는 좌측 → 우측 순으로 포커스가 이동합니다."
+            />
+            <PrincipleCard
+              number={2}
+              title="Focus Trap in Modal"
+              desc="모달 내에서 ActionArea를 사용할 때, Tab 키는 모달 콘텐츠 내에서 순환합니다. 포커스가 모달 밖으로 빠져나가지 않도록 구현합니다."
+            />
+            <PrincipleCard
+              number={3}
+              title="Screen Reader Announcement"
+              desc="버튼 그룹의 컨텍스트를 role='group'과 aria-label로 전달합니다. caption이 있는 경우 aria-describedby로 연결하여 맥락을 제공합니다."
+            />
+            <PrincipleCard
+              number={4}
+              title="Loading State"
+              desc="로딩 상태에서는 aria-busy='true'를 설정하고, 완료 시 결과를 aria-live 영역으로 알립니다. 로딩 중에는 추가 상호작용이 방지됩니다."
+            />
+          </div>
+        </Subsection>
+      </Section>
+
+      {/* Best Practices */}
+      <Section title="Best Practices">
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+          <div>
+            <PreviewBox>
+              <div style={{ width: "100%", maxWidth: 260, padding: 8 }}>
+                <ActionAreaDemo variant="strong">
+                  <ActionAreaButtonDemo variant="main" size="xLarge">확인</ActionAreaButtonDemo>
+                  <ActionAreaButtonDemo variant="alternative" size="xLarge">취소</ActionAreaButtonDemo>
+                </ActionAreaDemo>
+              </div>
+            </PreviewBox>
+            <DoLabel>상황에 맞는 variant를 선택하고 기본 버튼 순서를 유지합니다.</DoLabel>
+          </div>
+          <div>
+            <PreviewBox>
+              <div style={{ width: "100%", maxWidth: 260, padding: 8 }}>
+                <ActionAreaDemo variant="strong">
+                  <ActionAreaButtonDemo variant="alternative" size="xLarge">취소</ActionAreaButtonDemo>
+                  <ActionAreaButtonDemo variant="main" size="xLarge">확인</ActionAreaButtonDemo>
+                </ActionAreaDemo>
+              </div>
+            </PreviewBox>
+            <DontLabel>Strong variant에서 Main 버튼을 아래에 배치하지 않습니다.</DontLabel>
+          </div>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 16 }}>
+          <div>
+            <PreviewBox>
+              <div style={{ width: "100%", maxWidth: 260, padding: 8 }}>
+                <ActionAreaDemo variant="neutral">
+                  <ActionAreaButtonDemo variant="alternative" size="xLarge">취소</ActionAreaButtonDemo>
+                  <ActionAreaButtonDemo variant="main" size="xLarge">확인</ActionAreaButtonDemo>
+                </ActionAreaDemo>
+              </div>
+            </PreviewBox>
+            <DoLabel>같은 유형의 다이얼로그에서는 동일한 variant와 조합을 사용합니다.</DoLabel>
+          </div>
+          <div>
+            <PreviewBox>
+              <div style={{ width: "100%", maxWidth: 260, padding: 8 }}>
+                <ActionAreaDemo variant="neutral">
+                  <ActionAreaButtonDemo variant="main" size="xLarge">확인</ActionAreaButtonDemo>
+                  <ActionAreaButtonDemo variant="main" size="xLarge">저장</ActionAreaButtonDemo>
+                </ActionAreaDemo>
+              </div>
+            </PreviewBox>
+            <DontLabel>동일한 역할의 버튼을 두 개 이상 배치하지 않습니다.</DontLabel>
+          </div>
         </div>
       </Section>
     </>
@@ -1097,19 +1220,67 @@ function WebContent() {
       </Section>
 
       <Section title="API Reference">
-        <Subsection title="Button">
+        <Subsection title="Common Props">
+          <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
+            ActionArea 패턴에서 사용되는 Button의 공통 props입니다.
+          </p>
           <PropsTable
             props={[
               { name: "children", type: "ReactNode", required: true, description: "버튼 텍스트 또는 콘텐츠" },
               { name: "buttonType", type: '"filled" | "outlined" | "plain"', required: false, defaultVal: '"filled"', description: "버튼 스타일 타입" },
-              { name: "color", type: '"brandDefault" | "baseContainer" | ...' , required: false, defaultVal: '"brandDefault"', description: "버튼 색상" },
+              { name: "color", type: '"brandDefault" | "baseContainer" | ...', required: false, defaultVal: '"brandDefault"', description: "버튼 색상" },
               { name: "size", type: '"small" | "medium" | "large" | "xLarge"', required: false, defaultVal: '"medium"', description: "버튼 크기" },
               { name: "layout", type: '"hug" | "fillWidth" | "fill"', required: false, defaultVal: '"hug"', description: "버튼 레이아웃" },
               { name: "disabled", type: "boolean", required: false, defaultVal: "false", description: "비활성화 상태" },
               { name: "isLoading", type: "boolean", required: false, defaultVal: "false", description: "로딩 상태" },
-              { name: "onClick", type: "() => void", required: false, description: "클릭 핸들러" },
             ]}
           />
+        </Subsection>
+
+        <Subsection title="Web 전용 Props">
+          <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
+            웹 환경에서 사용할 수 있는 추가 props입니다.
+          </p>
+          <PropsTable
+            props={[
+              { name: "onClick", type: "(event: MouseEvent) => void", required: false, description: "클릭 핸들러" },
+              { name: "type", type: '"button" | "submit" | "reset"', required: false, defaultVal: '"button"', description: "HTML button type 속성" },
+              { name: "aria-label", type: "string", required: false, description: "스크린 리더가 읽을 버튼 설명 텍스트" },
+              { name: "aria-describedby", type: "string", required: false, description: "caption 등 연결할 설명 요소의 ID" },
+              { name: "tabIndex", type: "number", required: false, description: "Tab 키 포커스 순서 지정" },
+            ]}
+          />
+        </Subsection>
+
+        <Subsection title="States">
+          <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+              <thead>
+                <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>State</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>설명</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>적용 방법</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontWeight: 500 }}>Enabled</td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>기본 상태</td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "#6366f1" }}>default</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontWeight: 500 }}>Disabled</td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>비활성화</td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "#6366f1" }}>disabled=true</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "12px 16px", fontWeight: 500 }}>Loading</td>
+                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>로딩 중</td>
+                  <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 12, color: "#6366f1" }}>isLoading=true</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </Subsection>
       </Section>
     </>
@@ -1573,6 +1744,24 @@ function PrincipleCard({ number, title, desc }: {
       </div>
       <p style={{ fontSize: 14, color: "var(--text-secondary)", margin: 0, lineHeight: 1.6, paddingLeft: 32 }}>{desc}</p>
     </div>
+  );
+}
+
+function DoLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <p style={{ fontSize: 13, color: "#22c55e", marginTop: 12, display: "flex", alignItems: "flex-start", gap: 8 }}>
+      <span style={{ fontWeight: 700, flexShrink: 0 }}>Do</span>
+      <span style={{ color: "var(--text-secondary)" }}>{children}</span>
+    </p>
+  );
+}
+
+function DontLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <p style={{ fontSize: 13, color: "#ef4444", marginTop: 12, display: "flex", alignItems: "flex-start", gap: 8 }}>
+      <span style={{ fontWeight: 700, flexShrink: 0 }}>Don&apos;t</span>
+      <span style={{ color: "var(--text-secondary)" }}>{children}</span>
+    </p>
   );
 }
 

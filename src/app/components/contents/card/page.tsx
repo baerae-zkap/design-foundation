@@ -382,6 +382,69 @@ function DesignContent() {
         </PreviewBox>
       </Section>
 
+      {/* Colors */}
+      <Section title="Colors">
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
+          Card의 배경색과 테두리는 variant에 따라 결정됩니다. 각 variant는 서로 다른 시각적 계층을 제공합니다.
+        </p>
+
+        <div style={{ marginBottom: 24, overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+            <thead>
+              <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Variant</th>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>배경색</th>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>테두리/그림자</th>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>용도</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 13, fontWeight: 500 }}>elevated</code></td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>white</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>box-shadow</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>기본값. 깊이감 있는 카드</td>
+              </tr>
+              <tr>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 13, fontWeight: 500 }}>outlined</code></td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>white</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>1px solid #e2e8f0</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>플랫한 디자인. 리스트 내 카드</td>
+              </tr>
+              <tr>
+                <td style={{ padding: "12px 16px" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 13, fontWeight: 500 }}>filled</code></td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>#f8fafc</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>없음</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>배경 구분. 섹션 내 그룹화</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <PreviewBox>
+          <div style={{ display: "flex", gap: 16, padding: 24 }}>
+            <div style={{ textAlign: "center" }}>
+              <CardDemo variant="elevated" padding="medium">
+                <p style={{ margin: 0, fontSize: 12, fontWeight: 600, color: "#334155" }}>Elevated</p>
+                <p style={{ margin: 0, fontSize: 11, color: "#64748b", marginTop: 4 }}>white + shadow</p>
+              </CardDemo>
+            </div>
+            <div style={{ textAlign: "center" }}>
+              <CardDemo variant="outlined" padding="medium">
+                <p style={{ margin: 0, fontSize: 12, fontWeight: 600, color: "#334155" }}>Outlined</p>
+                <p style={{ margin: 0, fontSize: 11, color: "#64748b", marginTop: 4 }}>white + border</p>
+              </CardDemo>
+            </div>
+            <div style={{ textAlign: "center" }}>
+              <CardDemo variant="filled" padding="medium">
+                <p style={{ margin: 0, fontSize: 12, fontWeight: 600, color: "#334155" }}>Filled</p>
+                <p style={{ margin: 0, fontSize: 11, color: "#64748b", marginTop: 4 }}>#f8fafc bg</p>
+              </CardDemo>
+            </div>
+          </div>
+        </PreviewBox>
+      </Section>
+
       {/* States */}
       <Section title="States">
         <PreviewBox>
@@ -400,6 +463,62 @@ function DesignContent() {
             </div>
           </div>
         </PreviewBox>
+      </Section>
+
+      {/* Usage Guidelines */}
+      <Section title="Usage Guidelines">
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 24, lineHeight: 1.6 }}>
+          일관된 UX를 위해 아래 권고 조합을 따르세요. <strong style={{ color: "var(--text-primary)" }}>권장 패턴</strong>을 사용하면 사용자가 예측 가능한 경험을 할 수 있습니다.
+        </p>
+
+        <Subsection title="Recommended Combinations">
+          <div style={{ display: "grid", gap: 12 }}>
+            <UsageCard
+              situation="콘텐츠 카드"
+              description="제목, 설명, 이미지를 포함하는 일반 콘텐츠 카드"
+              recommendation="elevated + medium padding"
+              examples={["상품 카드", "뉴스 카드", "블로그 포스트"]}
+            />
+            <UsageCard
+              situation="정보 카드"
+              description="사용자 프로필, 통계 등 정보를 표시하는 카드"
+              recommendation="outlined + medium padding"
+              examples={["프로필 카드", "대시보드 통계", "설정 항목"]}
+            />
+            <UsageCard
+              situation="리스트 아이템"
+              description="리스트 내에서 반복되는 카드 형태"
+              recommendation="outlined + small padding"
+              examples={["알림 목록", "댓글 목록", "주문 내역"]}
+            />
+            <UsageCard
+              situation="섹션 컨테이너"
+              description="관련 콘텐츠를 그룹화하는 배경 영역"
+              recommendation="filled + large padding"
+              examples={["설정 그룹", "카테고리 영역", "하이라이트 섹션"]}
+            />
+          </div>
+        </Subsection>
+
+        <Subsection title="Design Principles">
+          <div style={{ display: "grid", gap: 16 }}>
+            <PrincipleCard
+              number={1}
+              title="시각적 계층을 유지하세요"
+              desc="한 화면에서 elevated, outlined, filled를 적절히 조합하여 콘텐츠의 중요도를 시각적으로 표현합니다. 주요 콘텐츠에는 elevated를, 보조 콘텐츠에는 outlined 또는 filled를 사용합니다."
+            />
+            <PrincipleCard
+              number={2}
+              title="패딩을 일관되게 사용하세요"
+              desc="같은 영역 내 카드들은 동일한 padding 값을 사용합니다. 밀도 높은 리스트에서는 small을, 독립적인 콘텐츠 카드에는 medium 또는 large를 사용합니다."
+            />
+            <PrincipleCard
+              number={3}
+              title="클릭 가능 여부를 명확히 하세요"
+              desc="클릭 가능한 카드는 hover/press 상태 변화로 인터랙티브함을 시각적으로 표현합니다. 정보만 표시하는 카드에는 onClick을 사용하지 마세요."
+            />
+          </div>
+        </Subsection>
       </Section>
 
       {/* Design Tokens */}
@@ -468,6 +587,73 @@ function DesignContent() {
           <PrincipleCard number={1} title="Clickable Cards" desc="onClick/onPress가 있는 카드는 role='button'을 갖습니다." />
           <PrincipleCard number={2} title="Keyboard Support" desc="클릭 가능한 카드는 Enter/Space 키로 활성화됩니다." />
           <PrincipleCard number={3} title="Focus Indicator" desc="포커스 시 시각적 표시가 나타납니다." />
+        </div>
+      </Section>
+
+      {/* Best Practices */}
+      <Section title="Best Practices">
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+          <DoCard>
+            <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+              <CardDemo variant="elevated" padding="medium">
+                <p style={{ margin: 0, fontSize: 12, fontWeight: 600, color: "#334155" }}>제목</p>
+                <p style={{ margin: 0, fontSize: 11, color: "#64748b", marginTop: 4 }}>설명 텍스트</p>
+              </CardDemo>
+            </div>
+          </DoCard>
+          <DontCard>
+            <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+              <CardDemo variant="elevated" padding="none">
+                <div style={{ padding: "20px 12px 8px" }}>
+                  <p style={{ margin: 0, fontSize: 12, fontWeight: 600, color: "#334155" }}>제목</p>
+                  <p style={{ margin: 0, fontSize: 11, color: "#64748b", marginTop: 4 }}>내부 패딩 불일치</p>
+                </div>
+              </CardDemo>
+            </div>
+          </DontCard>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 8 }}>
+          <p style={{ fontSize: 13, color: "#22c55e", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
+            <span style={{ fontWeight: 700, flexShrink: 0 }}>Do</span>
+            <span style={{ color: "var(--text-secondary)" }}>일관된 padding 값을 사용합니다.</span>
+          </p>
+          <p style={{ fontSize: 13, color: "#ef4444", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
+            <span style={{ fontWeight: 700, flexShrink: 0 }}>Don&apos;t</span>
+            <span style={{ color: "var(--text-secondary)" }}>padding을 none으로 두고 내부에서 임의로 조절하지 마세요.</span>
+          </p>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 16 }}>
+          <DoCard>
+            <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+              <CardDemo variant="elevated" padding="small">
+                <p style={{ margin: 0, fontSize: 11, color: "#64748b" }}>Elevated</p>
+              </CardDemo>
+              <CardDemo variant="outlined" padding="small">
+                <p style={{ margin: 0, fontSize: 11, color: "#64748b" }}>Outlined</p>
+              </CardDemo>
+            </div>
+          </DoCard>
+          <DontCard>
+            <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+              <CardDemo variant="elevated" padding="small">
+                <p style={{ margin: 0, fontSize: 11, color: "#64748b" }}>Elevated</p>
+              </CardDemo>
+              <div style={{ padding: 12, backgroundColor: "white", borderRadius: 12, boxShadow: "0 1px 3px rgba(0,0,0,0.1)", border: "1px solid #e2e8f0" }}>
+                <p style={{ margin: 0, fontSize: 11, color: "#64748b" }}>Mixed</p>
+              </div>
+            </div>
+          </DontCard>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 8 }}>
+          <p style={{ fontSize: 13, color: "#22c55e", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
+            <span style={{ fontWeight: 700, flexShrink: 0 }}>Do</span>
+            <span style={{ color: "var(--text-secondary)" }}>같은 맥락에서 variant를 통일합니다.</span>
+          </p>
+          <p style={{ fontSize: 13, color: "#ef4444", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
+            <span style={{ fontWeight: 700, flexShrink: 0 }}>Don&apos;t</span>
+            <span style={{ color: "var(--text-secondary)" }}>같은 영역에서 elevated와 outlined을 혼용하지 마세요.</span>
+          </p>
         </div>
       </Section>
     </div>
@@ -690,6 +876,119 @@ function Section({ title, children }: { title: string; children: React.ReactNode
       </h2>
       {children}
     </section>
+  );
+}
+
+function Subsection({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div style={{ marginBottom: 32 }}>
+      <h3 style={{ fontSize: 16, fontWeight: 600, marginBottom: 12, color: "var(--text-primary)" }}>
+        {title}
+      </h3>
+      {children}
+    </div>
+  );
+}
+
+function UsageCard({ situation, description, recommendation, examples }: {
+  situation: string;
+  description: string;
+  recommendation: string;
+  examples: string[];
+}) {
+  return (
+    <div style={{
+      display: "grid",
+      gridTemplateColumns: "1fr auto",
+      gap: 16,
+      padding: 16,
+      backgroundColor: "white",
+      borderRadius: 12,
+      border: "1px solid var(--divider)",
+      alignItems: "center",
+    }}>
+      <div>
+        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
+          <span style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)" }}>{situation}</span>
+          <span style={{
+            fontSize: 11,
+            padding: "2px 6px",
+            backgroundColor: "#dbeafe",
+            color: "#1d4ed8",
+            borderRadius: 4,
+            fontWeight: 500,
+          }}>
+            {recommendation}
+          </span>
+        </div>
+        <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0, marginBottom: 6 }}>{description}</p>
+        <p style={{ fontSize: 12, color: "var(--text-tertiary)", margin: 0 }}>
+          예시: {examples.join(", ")}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function DoCard({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{ borderRadius: 12, overflow: "hidden", border: "1px solid var(--divider)" }}>
+      <div style={{
+        padding: 24,
+        backgroundColor: "#f8f9fa",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: 80,
+      }}>
+        {children}
+      </div>
+      <div style={{
+        padding: "12px 16px",
+        backgroundColor: "white",
+        borderTop: "1px solid var(--divider)",
+        display: "flex",
+        alignItems: "center",
+        gap: 6,
+      }}>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" fill="#22c55e"/>
+          <path d="M8 12l3 3 5-5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+        <span style={{ fontSize: 14, fontWeight: 600, color: "#16a34a" }}>Do</span>
+      </div>
+    </div>
+  );
+}
+
+function DontCard({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{ borderRadius: 12, overflow: "hidden", border: "1px solid var(--divider)" }}>
+      <div style={{
+        padding: 24,
+        backgroundColor: "#f8f9fa",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: 80,
+      }}>
+        {children}
+      </div>
+      <div style={{
+        padding: "12px 16px",
+        backgroundColor: "white",
+        borderTop: "1px solid var(--divider)",
+        display: "flex",
+        alignItems: "center",
+        gap: 6,
+      }}>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" fill="#ef4444"/>
+          <path d="M15 9l-6 6M9 9l6 6" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+        </svg>
+        <span style={{ fontSize: 14, fontWeight: 600, color: "#dc2626" }}>Don&apos;t</span>
+      </div>
+    </div>
   );
 }
 

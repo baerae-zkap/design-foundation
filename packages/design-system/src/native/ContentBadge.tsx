@@ -18,6 +18,10 @@ import {
   type ViewStyle,
   type TextStyle,
 } from 'react-native';
+import { colors, palette } from '../tokens/colors';
+import { spacing } from '../tokens/spacing';
+import { radius } from '../tokens/radius';
+import { typography } from '../tokens/typography';
 
 export type ContentBadgeVariant = 'filled' | 'outlined' | 'subtle';
 export type ContentBadgeColor = 'brandDefault' | 'baseDefault' | 'successDefault' | 'errorDefault' | 'warningDefault' | 'infoDefault';
@@ -38,13 +42,17 @@ export interface ContentBadgeProps extends Omit<ViewProps, 'style'> {
   children?: ReactNode;
   /** 커스텀 스타일 */
   style?: ViewStyle;
+  /** 테스트 식별자 */
+  testID?: string;
+  /** 접근성 라벨 */
+  accessibilityLabel?: string;
 }
 
 // Size configurations
 const sizeConfig: Record<ContentBadgeSize, { height: number; fontSize: number; paddingX: number; dotSize: number; iconSize: number }> = {
-  small: { height: 18, fontSize: 10, paddingX: 6, dotSize: 4, iconSize: 10 }, // primitive.2 (8px) padding, chip.height.sm style
-  medium: { height: 22, fontSize: 12, paddingX: 8, dotSize: 6, iconSize: 12 }, // primitive.2 (8px) padding
-  large: { height: 26, fontSize: 14, paddingX: 10, dotSize: 6, iconSize: 14 }, // primitive.2.5 (10px) padding
+  small: { height: 18, fontSize: typography.fontSize['3xs'], paddingX: spacing.primitive[2], dotSize: 4, iconSize: 10 }, // paddingX: 8px (was 6)
+  medium: { height: 22, fontSize: typography.fontSize.xs, paddingX: spacing.primitive[2], dotSize: 6, iconSize: 12 }, // 8px
+  large: { height: 26, fontSize: typography.fontSize.sm, paddingX: spacing.primitive[3], dotSize: 6, iconSize: 14 }, // paddingX: 12px (was 10)
 };
 
 // Color configurations
@@ -55,92 +63,92 @@ const colorConfig: Record<ContentBadgeColor, {
 }> = {
   brandDefault: {
     filled: {
-      bg: '#2563eb', // surface.brand.default (palette.blue.50)
-      text: '#ffffff', // content.base.onColor (palette.static.white)
+      bg: colors.surface.brand.default,      // palette.blue[50] = '#0066ff'
+      text: colors.content.base.onColor,     // palette.static.white = '#ffffff'
     },
     outlined: {
       bg: 'transparent',
-      border: '#2563eb', // border.brand.default (palette.blue.50)
-      text: '#2563eb', // content.brand.default (palette.blue.50)
+      border: colors.border.brand.default,   // palette.blue[50] = '#0066ff'
+      text: colors.content.brand.default,    // palette.blue[50] = '#0066ff'
     },
     subtle: {
-      bg: '#dbeafe', // surface.brand.secondary (palette.blue.95)
-      text: '#1e40af', // content.brand.strong (palette.blue.40)
+      bg: colors.surface.brand.secondary,    // palette.blue[95] = '#e3ecff'
+      text: palette.blue[40],                // More saturated blue
     },
   },
   baseDefault: {
     filled: {
-      bg: '#64748b', // surface.base.strong (palette.grey.50)
-      text: '#ffffff', // content.base.onColor (palette.static.white)
+      bg: palette.grey[50],                  // colors.content.base.secondary = '#68707a'
+      text: colors.content.base.onColor,     // palette.static.white = '#ffffff'
     },
     outlined: {
       bg: 'transparent',
-      border: '#94a3b8', // border.base.secondary (palette.grey.70)
-      text: '#475569', // content.base.secondary (palette.grey.40)
+      border: colors.border.secondary.default, // palette.grey[90] = '#bcc1c7'
+      text: palette.grey[40],                // Medium grey
     },
     subtle: {
-      bg: '#f1f5f9', // surface.base.container (palette.grey.97)
-      text: '#334155', // content.base.default (palette.grey.30)
+      bg: colors.surface.base.container,     // palette.grey[97] = '#eaebed'
+      text: colors.content.base.default,     // palette.grey[30] = '#3e4651'
     },
   },
   successDefault: {
     filled: {
-      bg: '#16a34a', // surface.success.strong (palette.green.45)
-      text: '#ffffff', // content.base.onColor (palette.static.white)
+      bg: palette.green[50],                 // colors.content.success.default = '#14b66b'
+      text: colors.content.base.onColor,     // palette.static.white = '#ffffff'
     },
     outlined: {
       bg: 'transparent',
-      border: '#22c55e', // border.success.default (palette.green.50)
-      text: '#16a34a', // content.success.default (palette.green.45)
+      border: colors.border.success.default, // palette.green[50] = '#14b66b'
+      text: colors.content.success.default,  // palette.green[50] = '#14b66b'
     },
     subtle: {
-      bg: '#dcfce7', // surface.success.secondary (palette.green.95)
-      text: '#166534', // content.success.strong (palette.green.30)
+      bg: colors.surface.success.default,    // palette.green[95] = '#dff8ef'
+      text: palette.green[30],               // Dark green
     },
   },
   errorDefault: {
     filled: {
-      bg: '#dc2626', // surface.error.strong (palette.red.45)
-      text: '#ffffff', // content.base.onColor (palette.static.white)
+      bg: palette.red[50],                   // colors.content.error.default = '#dc2f2f'
+      text: colors.content.base.onColor,     // palette.static.white = '#ffffff'
     },
     outlined: {
       bg: 'transparent',
-      border: '#ef4444', // border.error.default (palette.red.50)
-      text: '#dc2626', // content.error.default (palette.red.45)
+      border: colors.border.error.default,   // palette.red[50] = '#dc2f2f'
+      text: colors.content.error.default,    // palette.red[50] = '#dc2f2f'
     },
     subtle: {
-      bg: '#fee2e2', // surface.error.secondary (palette.red.95)
-      text: '#991b1b', // content.error.strong (palette.red.30)
+      bg: colors.surface.error.default,      // palette.red[95] = '#fce8e8'
+      text: palette.red[30],                 // Dark red
     },
   },
   warningDefault: {
     filled: {
-      bg: '#d97706', // surface.warning.strong (palette.orange.45)
-      text: '#ffffff', // content.base.onColor (palette.static.white)
+      bg: palette.orange[40],                // Darker orange for filled
+      text: colors.content.base.onColor,     // palette.static.white = '#ffffff'
     },
     outlined: {
       bg: 'transparent',
-      border: '#f59e0b', // border.warning.default (palette.orange.50)
-      text: '#d97706', // content.warning.default (palette.orange.45)
+      border: palette.orange[50],            // colors.content.warning.default = '#ff9900'
+      text: colors.content.warning.default,  // palette.orange[50] = '#ff9900'
     },
     subtle: {
-      bg: '#fef3c7', // surface.warning.secondary (palette.orange.95)
-      text: '#92400e', // content.warning.strong (palette.orange.30)
+      bg: colors.surface.warning.default,    // palette.orange[95] = '#fff2e3'
+      text: palette.orange[30],              // Dark orange
     },
   },
   infoDefault: {
     filled: {
-      bg: '#0891b2', // surface.info.strong (palette.cyan.45)
-      text: '#ffffff', // content.base.onColor (palette.static.white)
+      bg: palette.cyan[40],                  // Darker cyan for filled
+      text: colors.content.base.onColor,     // palette.static.white = '#ffffff'
     },
     outlined: {
       bg: 'transparent',
-      border: '#06b6d4', // border.info.default (palette.cyan.50)
-      text: '#0891b2', // content.info.default (palette.cyan.45)
+      border: palette.cyan[50],              // Light cyan
+      text: colors.content.info.default,     // palette.teal[50] = '#14b6a8'
     },
     subtle: {
-      bg: '#cffafe', // surface.info.secondary (palette.cyan.95)
-      text: '#155e75', // content.info.strong (palette.cyan.30)
+      bg: colors.surface.info.default,       // palette.blue[99] = '#f7f9ff'
+      text: palette.cyan[30],                // Dark cyan
     },
   },
 };
@@ -166,11 +174,11 @@ export const ContentBadge = forwardRef<View, ContentBadgeProps>(
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
-      gap: 4, // spacing.primitive.1 (4px)
+      gap: spacing.primitive[1], // 4px
       height: sizeStyle.height,
       paddingHorizontal: sizeStyle.paddingX,
       backgroundColor: colorStyle.bg,
-      borderRadius: 4, // radius.primitive.xs (4px)
+      borderRadius: radius.component.badge.default, // 4px
       ...(variant === 'outlined' && {
         borderWidth: 1,
         borderColor: (colorStyle as { border: string }).border,
@@ -178,8 +186,9 @@ export const ContentBadge = forwardRef<View, ContentBadgeProps>(
     };
 
     const textStyle: TextStyle = {
+      fontFamily: typography.fontFamily.base,
       fontSize: sizeStyle.fontSize,
-      fontWeight: '600',
+      fontWeight: typography.fontWeight.semibold,
       color: colorStyle.text,
     };
 

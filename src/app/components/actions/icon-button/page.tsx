@@ -324,21 +324,117 @@ function DesignContent() {
     <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
       {/* Anatomy */}
       <Section title="Anatomy">
-        <PreviewBox>
-          <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
-            <div style={{ position: "relative" }}>
-              <IconButtonDemo variant="ghost" color="baseDefault" size="large" />
-              <div style={{ position: "absolute", top: -24, left: "50%", transform: "translateX(-50%)", fontSize: 10, color: "#64748b", whiteSpace: "nowrap" }}>① Container</div>
-              <div style={{ position: "absolute", top: "50%", right: -50, transform: "translateY(-50%)", fontSize: 10, color: "#64748b" }}>② Icon</div>
-            </div>
-          </div>
-        </PreviewBox>
-        <div style={{ marginTop: 16, padding: 16, backgroundColor: "var(--bg-secondary)", borderRadius: 12, fontSize: 13 }}>
-          <p style={{ margin: 0, color: "var(--text-secondary)", lineHeight: 1.8 }}>
-            <strong style={{ color: "var(--text-primary)" }}>① Container:</strong> 원형 버튼 컨테이너<br />
-            <strong style={{ color: "var(--text-primary)" }}>② Icon:</strong> 아이콘 콘텐츠
-          </p>
+        <div style={{
+          backgroundColor: "#f5f5f7",
+          borderRadius: 16,
+          padding: "48px 40px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}>
+          <svg width="280" height="120" viewBox="0 0 280 120">
+            {/* Container circle */}
+            <circle cx="140" cy="60" r="28" fill="none" stroke="#2563eb" strokeWidth="2" strokeDasharray="4 3" />
+
+            {/* Icon inside */}
+            <line x1="140" y1="48" x2="140" y2="72" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" />
+            <line x1="128" y1="60" x2="152" y2="60" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" />
+
+            {/* Line from circle 1 to container */}
+            <line x1="50" y1="60" x2="112" y2="60" stroke="#374151" strokeWidth="1.5" />
+            <circle cx="112" cy="60" r="3" fill="#374151" />
+
+            {/* Line from circle 2 to icon */}
+            <line x1="140" y1="32" x2="140" y2="10" stroke="#374151" strokeWidth="1.5" />
+            <circle cx="140" cy="32" r="3" fill="#374151" />
+
+            {/* Numbered circles */}
+            <circle cx="35" cy="60" r="14" fill="#374151" />
+            <text x="35" y="65" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">1</text>
+
+            <circle cx="140" cy="10" r="14" fill="#374151" />
+            <text x="140" y="15" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">2</text>
+          </svg>
         </div>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: 16,
+          marginTop: 20,
+          fontSize: 14,
+          fontWeight: 500,
+          color: "var(--text-primary)",
+        }}>
+          <div>1. Container</div>
+          <div style={{ textAlign: "right" }}>2. Icon</div>
+        </div>
+      </Section>
+
+      {/* Usage Guidelines */}
+      <Section title="Usage Guidelines">
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 24, lineHeight: 1.6 }}>
+          일관된 UX를 위해 아래 권고 조합을 따르세요. Icon Button은 <strong style={{ color: "var(--text-primary)" }}>텍스트 없이 아이콘만으로 의미가 전달</strong>되어야 하는 상황에서 사용합니다.
+        </p>
+
+        <Subsection title="Recommended Combinations">
+          <div style={{ display: "grid", gap: 12 }}>
+            <UsageCard
+              situation="Navigation Actions"
+              desc="뒤로가기, 닫기, 메뉴 열기 등 네비게이션"
+              variant="ghost"
+              color="baseDefault"
+              iconType="menu"
+            />
+            <UsageCard
+              situation="Toolbar Buttons"
+              desc="에디터, 뷰어 등의 툴바 액션"
+              variant="ghost"
+              color="baseDefault"
+              iconType="edit"
+            />
+            <UsageCard
+              situation="Close / Dismiss"
+              desc="모달, 토스트, 패널 닫기"
+              variant="ghost"
+              color="baseDefault"
+              iconType="close"
+            />
+            <UsageCard
+              situation="Primary Action (Floating)"
+              desc="FAB 등 화면에서 가장 중요한 액션"
+              variant="filled"
+              color="brandDefault"
+              iconType="plus"
+            />
+            <UsageCard
+              situation="Destructive Action"
+              desc="삭제, 제거 등 위험한 액션"
+              variant="ghost"
+              color="errorDefault"
+              iconType="close"
+            />
+          </div>
+        </Subsection>
+
+        <Subsection title="Design Principles">
+          <div style={{ display: "grid", gap: 16 }}>
+            <PrincipleCard
+              number={1}
+              title="아이콘만으로 의미 전달이 충분할 때 사용"
+              desc="아이콘의 의미가 명확하지 않다면 텍스트 Button을 사용하세요. Icon Button은 보편적으로 인식되는 아이콘(닫기, 메뉴, 추가 등)에 적합합니다."
+            />
+            <PrincipleCard
+              number={2}
+              title="variant로 계층 구조 표현"
+              desc="filled는 가장 강조된 액션, ghost는 보조 액션, outlined는 중간 강조에 사용합니다. 화면당 filled Icon Button은 1-2개로 제한하세요."
+            />
+            <PrincipleCard
+              number={3}
+              title="반드시 접근성 레이블 제공"
+              desc="아이콘만 있으므로 aria-label (Web) 또는 accessibilityLabel (RN)을 필수로 제공해야 합니다. 스크린 리더 사용자가 버튼의 목적을 알 수 있어야 합니다."
+            />
+          </div>
+        </Subsection>
       </Section>
 
       {/* Variants */}
@@ -423,24 +519,63 @@ function DesignContent() {
         </PreviewBox>
       </Section>
 
+      {/* Best Practices */}
+      <Section title="Best Practices">
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+          <DoCard>
+            <div style={{ display: "flex", gap: 8 }}>
+              <IconButtonDemo variant="ghost" color="baseDefault" />
+              <IconButtonDemo variant="ghost" color="baseDefault" />
+            </div>
+          </DoCard>
+          <DontCard>
+            <div style={{ display: "flex", gap: 8 }}>
+              <IconButtonDemo variant="filled" color="brandDefault" />
+              <IconButtonDemo variant="filled" color="errorDefault" />
+              <IconButtonDemo variant="filled" color="baseDefault" />
+            </div>
+          </DontCard>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 4 }}>
+          <DoLabel>보조 액션에는 ghost variant를 사용합니다.</DoLabel>
+          <DontLabel>한 영역에 filled Icon Button을 과도하게 사용하지 않습니다.</DontLabel>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 16 }}>
+          <DoCard>
+            <IconButtonDemo variant="ghost" color="baseDefault" size="medium" />
+          </DoCard>
+          <DontCard>
+            <IconButtonDemo variant="ghost" color="baseDefault" size="small" />
+          </DontCard>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 4 }}>
+          <DoLabel>모바일에서는 medium 이상 사이즈를 사용하여 터치 영역을 확보합니다.</DoLabel>
+          <DontLabel>모바일에서 small 사이즈만 사용하면 터치 오류가 발생할 수 있습니다.</DontLabel>
+        </div>
+      </Section>
+
       {/* Design Tokens */}
       <Section title="Design Tokens">
-        <div style={{ overflowX: "auto" }}>
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
+          IconButton 컴포넌트에 적용된 Foundation 기반 디자인 토큰입니다.
+        </p>
+        <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)" }}>
           <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
             <thead>
               <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600 }}>Property</th>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600 }}>Small</th>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600 }}>Medium</th>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600 }}>Large</th>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Property</th>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Small</th>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Medium</th>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Large</th>
               </tr>
             </thead>
             <tbody>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                 <td style={{ padding: "12px 16px" }}>Button Size</td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>32px</td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>40px</td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>48px</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>32px (primitive.8)</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>40px (primitive.10)</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>48px (primitive.12)</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                 <td style={{ padding: "12px 16px" }}>Icon Size</td>
@@ -450,7 +585,7 @@ function DesignContent() {
               </tr>
               <tr>
                 <td style={{ padding: "12px 16px" }}>Border Radius</td>
-                <td colSpan={3} style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>9999px (circular)</td>
+                <td colSpan={3} style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>9999px (primitive.full)</td>
               </tr>
             </tbody>
           </table>
@@ -459,11 +594,90 @@ function DesignContent() {
 
       {/* Accessibility */}
       <Section title="Accessibility">
-        <div style={{ display: "grid", gap: 12 }}>
-          <PrincipleCard number={1} title="Touch Target" desc="최소 32px 이상의 터치 영역을 확보합니다." />
-          <PrincipleCard number={2} title="Accessibility Label" desc="아이콘만 있으므로 aria-label 또는 accessibilityLabel을 필수로 제공합니다." />
-          <PrincipleCard number={3} title="Disabled State" desc="비활성화 상태는 시각적으로 구분되며 스크린 리더에 전달됩니다." />
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
+          Icon Button은 텍스트 레이블이 없으므로 접근성에 특별한 주의가 필요합니다.
+        </p>
+
+        <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)", marginBottom: 24 }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+            <thead>
+              <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>속성</th>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>설명</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>role=&quot;button&quot;</code></td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>스크린 리더가 버튼으로 인식</td>
+              </tr>
+              <tr>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>aria-label</code> (필수)</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>아이콘의 목적을 설명하는 텍스트. Icon Button에서 필수</td>
+              </tr>
+              <tr>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>aria-disabled</code></td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>비활성화 상태를 보조 기술에 전달</td>
+              </tr>
+              <tr>
+                <td style={{ padding: "12px 16px" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>accessibilityLabel</code> (RN)</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>React Native에서의 접근성 레이블</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+
+        <Subsection title="Keyboard Interaction">
+          <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+              <thead>
+                <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>키</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>동작</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--bg-secondary)", borderRadius: 4, fontSize: 12 }}>Tab</kbd></td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>버튼으로 포커스 이동</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--bg-secondary)", borderRadius: 4, fontSize: 12 }}>Enter</kbd></td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>버튼 클릭 실행</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "12px 16px" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--bg-secondary)", borderRadius: 4, fontSize: 12 }}>Space</kbd></td>
+                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>버튼 클릭 실행</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </Subsection>
+
+        <Subsection title="Design Principles">
+          <div style={{ display: "grid", gap: 16 }}>
+            <PrincipleCard
+              number={1}
+              title="Accessibility Label 필수"
+              desc="텍스트 레이블이 없으므로 aria-label (Web) 또는 accessibilityLabel (RN)을 반드시 제공해야 합니다. 예: aria-label='메뉴 열기', aria-label='닫기'"
+            />
+            <PrincipleCard
+              number={2}
+              title="Minimum Touch Target"
+              desc="모든 Icon Button은 최소 32px 터치 영역을 확보합니다. small 사이즈(32px)는 데스크톱 전용으로 권장하며, 모바일에서는 medium(40px) 이상을 사용하세요."
+            />
+            <PrincipleCard
+              number={3}
+              title="Focus Visible"
+              desc="키보드 포커스 시 2px solid outline이 표시됩니다. 원형 버튼 외곽에 포커스 링이 표시되어 시인성을 확보합니다."
+            />
+            <PrincipleCard
+              number={4}
+              title="Color Contrast"
+              desc="WCAG 2.1 AA 기준(3:1)을 충족하는 아이콘 대비를 유지합니다. disabled 상태에서도 비활성화 상태가 인지 가능해야 합니다."
+            />
+          </div>
+        </Subsection>
       </Section>
     </div>
   );
@@ -639,8 +853,11 @@ function RNContent() {
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <section style={{ marginBottom: 0 }}>
-      <h2 style={{ fontSize: 20, fontWeight: 700, marginBottom: 20, color: "var(--text-primary)", letterSpacing: "-0.01em" }}>
+    <section style={{ marginBottom: 56 }}>
+      <h2
+        id={title.toLowerCase().replace(/\s+/g, "-")}
+        style={{ fontSize: 20, fontWeight: 700, marginBottom: 20, color: "var(--text-primary)", letterSpacing: "-0.01em" }}
+      >
         {title}
       </h2>
       {children}
@@ -650,7 +867,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 function Subsection({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div style={{ marginBottom: 24 }}>
+    <div style={{ marginBottom: 32 }}>
       <h3 style={{ fontSize: 16, fontWeight: 600, marginBottom: 12, color: "var(--text-primary)" }}>
         {title}
       </h3>
@@ -673,12 +890,166 @@ function VariantCard({ name, description, children }: { name: string; descriptio
 
 function PrincipleCard({ number, title, desc }: { number: number; title: string; desc: string }) {
   return (
-    <div style={{ padding: 20, backgroundColor: "white", borderRadius: 12, border: "1px solid var(--divider)" }}>
+    <div style={{
+      padding: 20,
+      backgroundColor: "white",
+      borderRadius: 12,
+      border: "1px solid var(--divider)",
+    }}>
       <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 8 }}>
-        <span style={{ width: 22, height: 22, borderRadius: "50%", backgroundColor: "#e5e7eb", color: "#6b7280", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 600 }}>{number}</span>
+        <span style={{
+          width: 22, height: 22, borderRadius: "50%",
+          backgroundColor: "#e5e7eb", color: "#6b7280",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          fontSize: 12, fontWeight: 600,
+        }}>{number}</span>
         <span style={{ fontSize: 15, fontWeight: 600, color: "var(--text-primary)" }}>{title}</span>
       </div>
       <p style={{ fontSize: 14, color: "var(--text-secondary)", margin: 0, lineHeight: 1.6, paddingLeft: 34 }}>{desc}</p>
+    </div>
+  );
+}
+
+function DoCard({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{ borderRadius: 12, overflow: "hidden", border: "1px solid var(--divider)" }}>
+      <div style={{
+        padding: 24,
+        backgroundColor: "#f8f9fa",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: 80,
+      }}>
+        {children}
+      </div>
+      <div style={{
+        padding: "12px 16px",
+        backgroundColor: "white",
+        borderTop: "1px solid var(--divider)",
+        display: "flex",
+        alignItems: "center",
+        gap: 6,
+      }}>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" fill="#22c55e"/>
+          <path d="M8 12l3 3 5-5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+        <span style={{ fontSize: 14, fontWeight: 600, color: "#16a34a" }}>Do</span>
+      </div>
+    </div>
+  );
+}
+
+function DontCard({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{ borderRadius: 12, overflow: "hidden", border: "1px solid var(--divider)" }}>
+      <div style={{
+        padding: 24,
+        backgroundColor: "#f8f9fa",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: 80,
+      }}>
+        {children}
+      </div>
+      <div style={{
+        padding: "12px 16px",
+        backgroundColor: "white",
+        borderTop: "1px solid var(--divider)",
+        display: "flex",
+        alignItems: "center",
+        gap: 6,
+      }}>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" fill="#ef4444"/>
+          <path d="M15 9l-6 6M9 9l6 6" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+        </svg>
+        <span style={{ fontSize: 14, fontWeight: 600, color: "#dc2626" }}>Don&apos;t</span>
+      </div>
+    </div>
+  );
+}
+
+function DoLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <p style={{ fontSize: 13, color: "#22c55e", marginTop: 12, display: "flex", alignItems: "flex-start", gap: 8 }}>
+      <span style={{ fontWeight: 700, flexShrink: 0 }}>Do</span>
+      <span style={{ color: "var(--text-secondary)" }}>{children}</span>
+    </p>
+  );
+}
+
+function DontLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <p style={{ fontSize: 13, color: "#ef4444", marginTop: 12, display: "flex", alignItems: "flex-start", gap: 8 }}>
+      <span style={{ fontWeight: 700, flexShrink: 0 }}>Don&apos;t</span>
+      <span style={{ color: "var(--text-secondary)" }}>{children}</span>
+    </p>
+  );
+}
+
+function UsageCard({ situation, desc, variant, color, iconType }: {
+  situation: string;
+  desc: string;
+  variant: IconButtonVariant;
+  color: IconButtonColor;
+  iconType: "plus" | "close" | "menu" | "edit";
+}) {
+  const iconPaths: Record<string, React.ReactNode> = {
+    plus: (
+      <>
+        <line x1="12" y1="5" x2="12" y2="19" />
+        <line x1="5" y1="12" x2="19" y2="12" />
+      </>
+    ),
+    close: (
+      <>
+        <line x1="18" y1="6" x2="6" y2="18" />
+        <line x1="6" y1="6" x2="18" y2="18" />
+      </>
+    ),
+    menu: (
+      <>
+        <line x1="4" y1="7" x2="20" y2="7" />
+        <line x1="4" y1="12" x2="20" y2="12" />
+        <line x1="4" y1="17" x2="20" y2="17" />
+      </>
+    ),
+    edit: (
+      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" fill="none" />
+    ),
+  };
+
+  return (
+    <div style={{
+      display: "grid",
+      gridTemplateColumns: "1fr auto",
+      gap: 16,
+      padding: 16,
+      backgroundColor: "white",
+      borderRadius: 12,
+      border: "1px solid var(--divider)",
+      alignItems: "center",
+    }}>
+      <div>
+        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
+          <span style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)" }}>{situation}</span>
+          <span style={{
+            fontSize: 11,
+            padding: "2px 6px",
+            backgroundColor: variant === "filled" ? "#dbeafe" : "#f1f5f9",
+            color: variant === "filled" ? "#1d4ed8" : "#475569",
+            borderRadius: 4,
+            fontWeight: 500,
+          }}>
+            {variant} + {color}
+          </span>
+        </div>
+        <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0 }}>{desc}</p>
+      </div>
+      <IconButtonDemo variant={variant} color={color} size="small" />
     </div>
   );
 }

@@ -6,7 +6,7 @@
  *
  * @example
  * <Chip
- *   color="brandDefault"
+ *   color="primary"
  *   selected={isSelected}
  *   onPress={() => toggleFilter()}
  * >
@@ -23,13 +23,18 @@ import {
   type ViewStyle,
   type TextStyle,
 } from 'react-native';
+import { Check, X } from 'lucide-react-native';
+import { colors } from '../tokens/colors';
+import { spacing } from '../tokens/spacing';
+import { radius } from '../tokens/radius';
+import { typography } from '../tokens/typography';
 
-export type ChipVariant = 'filled' | 'outlined';
-export type ChipColor = 'brandDefault' | 'baseDefault' | 'successDefault' | 'errorDefault' | 'warningDefault';
+export type ChipVariant = 'solid' | 'outlined';
+export type ChipColor = 'primary' | 'secondary' | 'success' | 'danger';
 export type ChipSize = 'small' | 'medium' | 'large';
 
 export interface ChipProps extends Omit<PressableProps, 'style'> {
-  /** 스타일 변형 - filled(채움), outlined(테두리) */
+  /** 스타일 변형 - solid(채움), outlined(테두리) */
   variant?: ChipVariant;
   /** 색상 테마 */
   color?: ChipColor;
@@ -37,115 +42,108 @@ export interface ChipProps extends Omit<PressableProps, 'style'> {
   size?: ChipSize;
   /** 선택 상태 - 체크 아이콘 표시 (onClose가 없을 때) */
   selected?: boolean;
-  /** 왼쪽 아이콘 */
-  leftIcon?: ReactNode;
-  /** 아바타 (leftIcon과 배타적) */
+  /** 왼쪽 아이콘 (Leading icon) */
+  leadingIcon?: ReactNode;
+  /** 아바타 (leadingIcon과 배타적) */
   avatar?: ReactNode;
   /** 닫기 버튼 핸들러 - 제공 시 X 버튼 표시 */
   onClose?: () => void;
   /** 닫기 아이콘 커스텀 */
   closeIcon?: ReactNode;
+  /** 커스텀 텍스트/아이콘 색상 (Montage Customize) */
+  contentColor?: string;
+  /** 커스텀 배경 색상 (Montage Customize) */
+  backgroundColor?: string;
+  /** 커스텀 선택/활성 배경 색상 (Montage Customize) */
+  activeColor?: string;
   /** Chip 텍스트 */
   children?: ReactNode;
   /** 커스텀 스타일 */
   style?: ViewStyle;
+  /** Test ID for testing */
+  testID?: string;
+  /** Accessibility label */
+  accessibilityLabel?: string;
 }
 
 // Size configurations
 const sizeConfig: Record<ChipSize, { height: number; fontSize: number; paddingX: number; iconSize: number }> = {
-  small: { height: 24, fontSize: 12, paddingX: 8, iconSize: 14 },
-  medium: { height: 32, fontSize: 14, paddingX: 12, iconSize: 18 },
-  large: { height: 40, fontSize: 16, paddingX: 16, iconSize: 22 },
+  small: { height: 30, fontSize: typography.fontSize.xs, paddingX: 10, iconSize: 14 },
+  medium: { height: 34, fontSize: typography.fontSize.sm, paddingX: 12, iconSize: 18 },
+  large: { height: 38, fontSize: typography.fontSize.md, paddingX: 16, iconSize: 22 },
 };
 
-// Color configurations
+// Color configurations - using Foundation tokens
 const colorConfig: Record<ChipColor, {
-  filled: { bg: string; bgPressed: string; bgSelected: string; text: string; textSelected: string };
+  solid: { bg: string; bgPressed: string; bgSelected: string; text: string; textSelected: string };
   outlined: { bg: string; bgPressed: string; bgSelected: string; border: string; text: string; textSelected: string };
 }> = {
-  brandDefault: {
-    filled: {
-      bg: '#dbeafe', // surface.brand.secondary (palette.blue.95)
-      bgPressed: '#bfdbfe', // surface.brand.secondaryPressed (palette.blue.90)
-      bgSelected: '#2563eb', // surface.brand.default (palette.blue.50)
-      text: '#1e40af', // content.brand.strong (palette.blue.30)
-      textSelected: '#ffffff', // content.base.onColor (palette.static.white)
+  primary: {
+    solid: {
+      bg: colors.surface.brand.secondary, // #e3ecff (palette.blue.95)
+      bgPressed: colors.surface.brand.secondaryPressed, // #c7dbff (palette.blue.90)
+      bgSelected: colors.surface.brand.default, // #0066ff (palette.blue.50)
+      text: colors.content.brand.default, // #0066ff (palette.blue.50)
+      textSelected: colors.content.base.onColor, // #ffffff
     },
     outlined: {
       bg: 'transparent',
-      bgPressed: 'rgba(37, 99, 235, 0.08)', // brand pressed overlay
-      bgSelected: '#2563eb', // surface.brand.default (palette.blue.50)
-      border: '#2563eb', // border.brand.default (palette.blue.50)
-      text: '#2563eb', // content.brand.default (palette.blue.50)
-      textSelected: '#ffffff', // content.base.onColor (palette.static.white)
+      bgPressed: 'rgba(0, 102, 255, 0.06)', // subtle brand pressed overlay
+      bgSelected: colors.surface.brand.default, // #0066ff
+      border: colors.border.solid.alternative, // lighter border
+      text: colors.content.brand.default, // #0066ff
+      textSelected: colors.content.base.onColor, // #ffffff
     },
   },
-  baseDefault: {
-    filled: {
-      bg: '#f1f5f9', // surface.base.container (palette.grey.97)
-      bgPressed: '#e2e8f0', // surface.base.containerPressed (palette.grey.95)
-      bgSelected: '#334155', // content.base.default filled (palette.grey.30)
-      text: '#334155', // content.base.default (palette.grey.30)
-      textSelected: '#ffffff', // content.base.onColor (palette.static.white)
+  secondary: {
+    solid: {
+      bg: colors.surface.base.container, // #eaebed (palette.grey.97)
+      bgPressed: colors.surface.base.containerPressed, // #d6d9dd (palette.grey.95)
+      bgSelected: colors.content.base.default, // #3e4651 (palette.grey.30)
+      text: colors.content.base.default, // #3e4651
+      textSelected: colors.content.base.onColor, // #ffffff
     },
     outlined: {
       bg: 'transparent',
       bgPressed: 'rgba(0, 0, 0, 0.04)', // base pressed overlay
-      bgSelected: '#334155', // content.base.default filled (palette.grey.30)
-      border: '#cbd5e1', // border.base.default (palette.grey.90)
-      text: '#334155', // content.base.default (palette.grey.30)
-      textSelected: '#ffffff', // content.base.onColor (palette.static.white)
+      bgSelected: colors.content.base.default, // #3e4651
+      border: colors.border.solid.alternative, // lighter border
+      text: colors.content.base.default, // #3e4651
+      textSelected: colors.content.base.onColor, // #ffffff
     },
   },
-  successDefault: {
-    filled: {
-      bg: '#dcfce7', // surface.success.default (palette.green.95)
-      bgPressed: '#bbf7d0', // surface.success.defaultPressed (palette.green.90)
-      bgSelected: '#16a34a', // content.success.strong (palette.green.40)
-      text: '#166534', // content.success.dark (palette.green.30)
-      textSelected: '#ffffff', // content.base.onColor (palette.static.white)
+  success: {
+    solid: {
+      bg: colors.surface.success.default, // #dff8ef (palette.green.95)
+      bgPressed: colors.surface.success.defaultPressed, // #b8f0da (palette.green.90)
+      bgSelected: colors.content.success.default, // #14b66b (palette.green.50)
+      text: colors.content.success.default, // #14b66b
+      textSelected: colors.content.base.onColor, // #ffffff
     },
     outlined: {
       bg: 'transparent',
-      bgPressed: 'rgba(34, 197, 94, 0.08)', // success pressed overlay
-      bgSelected: '#16a34a', // content.success.strong (palette.green.40)
-      border: '#22c55e', // border.success.default (palette.green.50)
-      text: '#166534', // content.success.dark (palette.green.30)
-      textSelected: '#ffffff', // content.base.onColor (palette.static.white)
+      bgPressed: 'rgba(20, 182, 107, 0.08)', // success pressed overlay
+      bgSelected: colors.content.success.default, // #14b66b
+      border: colors.border.success.default, // #14b66b (palette.green.50)
+      text: colors.content.success.default, // #14b66b
+      textSelected: colors.content.base.onColor, // #ffffff
     },
   },
-  errorDefault: {
-    filled: {
-      bg: '#fee2e2', // surface.error.default (palette.red.95)
-      bgPressed: '#fecaca', // surface.error.defaultPressed (palette.red.90)
-      bgSelected: '#dc2626', // content.error.strong (palette.red.40)
-      text: '#991b1b', // content.error.dark (palette.red.30)
-      textSelected: '#ffffff', // content.base.onColor (palette.static.white)
+  danger: {
+    solid: {
+      bg: colors.surface.error.default, // #fce8e8 (palette.red.95)
+      bgPressed: colors.surface.error.defaultPressed, // #f8d1d1 (palette.red.90)
+      bgSelected: colors.content.error.default, // #dc2f2f (palette.red.50)
+      text: colors.content.error.default, // #dc2f2f
+      textSelected: colors.content.base.onColor, // #ffffff
     },
     outlined: {
       bg: 'transparent',
-      bgPressed: 'rgba(239, 68, 68, 0.08)', // error pressed overlay
-      bgSelected: '#dc2626', // content.error.strong (palette.red.40)
-      border: '#ef4444', // border.error.default (palette.red.50)
-      text: '#991b1b', // content.error.dark (palette.red.30)
-      textSelected: '#ffffff', // content.base.onColor (palette.static.white)
-    },
-  },
-  warningDefault: {
-    filled: {
-      bg: '#fef9c3', // surface.warning.default (palette.yellow.95)
-      bgPressed: '#fef08a', // surface.warning.defaultPressed (palette.yellow.90)
-      bgSelected: '#ca8a04', // content.warning.strong (palette.yellow.40)
-      text: '#854d0e', // content.warning.dark (palette.yellow.30)
-      textSelected: '#ffffff', // content.base.onColor (palette.static.white)
-    },
-    outlined: {
-      bg: 'transparent',
-      bgPressed: 'rgba(234, 179, 8, 0.08)', // warning pressed overlay
-      bgSelected: '#ca8a04', // content.warning.strong (palette.yellow.40)
-      border: '#eab308', // border.warning.default (palette.yellow.50)
-      text: '#854d0e', // content.warning.dark (palette.yellow.30)
-      textSelected: '#ffffff', // content.base.onColor (palette.static.white)
+      bgPressed: 'rgba(220, 47, 47, 0.08)', // error pressed overlay
+      bgSelected: colors.content.error.default, // #dc2f2f
+      border: colors.border.error.default, // #dc2f2f (palette.red.50)
+      text: colors.content.error.default, // #dc2f2f
+      textSelected: colors.content.base.onColor, // #ffffff
     },
   },
 };
@@ -153,15 +151,18 @@ const colorConfig: Record<ChipColor, {
 export const Chip = forwardRef<View, ChipProps>(
   (
     {
-      variant = 'filled',
-      color = 'baseDefault',
+      variant = 'solid',
+      color = 'secondary',
       size = 'medium',
       selected = false,
       disabled = false,
-      leftIcon,
+      leadingIcon,
       avatar,
       onClose,
       closeIcon,
+      contentColor,
+      backgroundColor: customBackgroundColor,
+      activeColor,
       children,
       style,
       ...props
@@ -175,7 +176,12 @@ export const Chip = forwardRef<View, ChipProps>(
     const getContainerStyle = (pressed: boolean): ViewStyle => {
       let backgroundColor: string;
 
-      if (selected) {
+      // Custom color logic
+      if (customBackgroundColor && !selected) {
+        backgroundColor = customBackgroundColor;
+      } else if (activeColor && selected) {
+        backgroundColor = activeColor;
+      } else if (selected) {
         backgroundColor = colorStyle.bgSelected;
       } else if (pressed && !isDisabled) {
         backgroundColor = colorStyle.bgPressed;
@@ -186,15 +192,15 @@ export const Chip = forwardRef<View, ChipProps>(
       return {
         height: sizeStyle.height,
         paddingHorizontal: sizeStyle.paddingX,
-        borderRadius: sizeStyle.height / 2, // radius.primitive.full (9999px for pill shape)
+        borderRadius: radius.component.chip.pill, // 9999 for pill shape
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: 4, // spacing.primitive.1 (4px)
+        gap: spacing.primitive[1], // 4px
         backgroundColor,
         ...(variant === 'outlined' && !selected && {
           borderWidth: 1,
-          borderColor: isDisabled ? '#cbd5e1' : (colorStyle as { border: string }).border, // disabled: border.disabled.default (palette.grey.90)
+          borderColor: isDisabled ? colors.border.disabled.default : (colorStyle as { border: string }).border,
         }),
         opacity: isDisabled ? 0.5 : 1,
       };
@@ -202,14 +208,16 @@ export const Chip = forwardRef<View, ChipProps>(
 
     const getTextStyle = (): TextStyle => ({
       fontSize: sizeStyle.fontSize,
-      fontWeight: '500',
-      color: isDisabled
-        ? '#94a3b8' // content.disabled.default (palette.grey.70)
-        : (selected ? colorStyle.textSelected : colorStyle.text),
+      fontWeight: typography.fontWeight.medium,
+      fontFamily: typography.fontFamily.base,
+      color: contentColor || (isDisabled
+        ? colors.content.disabled.default // palette.grey.80 (#a7adb5)
+        : (selected ? colorStyle.textSelected : colorStyle.text)),
     });
 
     const getIconColor = (): string => {
-      if (isDisabled) return '#94a3b8'; // content.disabled.default (palette.grey.70)
+      if (contentColor) return contentColor;
+      if (isDisabled) return colors.content.disabled.default; // palette.grey.80 (#a7adb5)
       return selected ? colorStyle.textSelected : colorStyle.text;
     };
 
@@ -217,25 +225,27 @@ export const Chip = forwardRef<View, ChipProps>(
       <Pressable
         ref={ref}
         disabled={isDisabled}
+        testID={props.testID}
         accessibilityRole="button"
+        accessibilityLabel={props.accessibilityLabel}
         accessibilityState={{ disabled: isDisabled ?? undefined, selected: selected ? true : undefined }}
         style={({ pressed }) => [getContainerStyle(pressed), style]}
         {...props}
       >
-        {/* Avatar or Left Icon */}
+        {/* Avatar or Leading Icon */}
         {avatar && (
-          <View style={{ marginLeft: -4 }}>
+          <View style={{ marginLeft: -spacing.primitive[1] }}>
             {avatar}
           </View>
         )}
-        {!avatar && leftIcon && (
+        {!avatar && leadingIcon && (
           <View style={{ width: sizeStyle.iconSize, height: sizeStyle.iconSize }}>
-            {React.isValidElement(leftIcon)
-              ? React.cloneElement(leftIcon as React.ReactElement<{ color?: string; size?: number }>, {
+            {React.isValidElement(leadingIcon)
+              ? React.cloneElement(leadingIcon as React.ReactElement<{ color?: string; size?: number }>, {
                   color: getIconColor(),
                   size: sizeStyle.iconSize,
                 })
-              : leftIcon}
+              : leadingIcon}
           </View>
         )}
 
@@ -248,9 +258,7 @@ export const Chip = forwardRef<View, ChipProps>(
 
         {/* Selected Check Icon (for filter type) */}
         {selected && !onClose && (
-          <View style={{ width: sizeStyle.iconSize, height: sizeStyle.iconSize, justifyContent: 'center', alignItems: 'center' }}>
-            <Text style={{ color: getIconColor(), fontSize: sizeStyle.iconSize * 0.8 }}>✓</Text>
-          </View>
+          <Check size={sizeStyle.iconSize * 0.8} color={getIconColor()} strokeWidth={2.5} />
         )}
 
         {/* Close Button (for input type) */}
@@ -260,18 +268,16 @@ export const Chip = forwardRef<View, ChipProps>(
               e.stopPropagation();
               onClose();
             }}
-            hitSlop={{ top: 8, bottom: 8, left: 4, right: 8 }}
-            style={{ marginRight: -4 }}
+            hitSlop={{
+              top: spacing.primitive[2],
+              bottom: spacing.primitive[2],
+              left: spacing.primitive[1],
+              right: spacing.primitive[2]
+            }}
+            style={{ marginRight: -spacing.primitive[1] }}
           >
             {closeIcon || (
-              <View style={{
-                width: sizeStyle.iconSize,
-                height: sizeStyle.iconSize,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-                <Text style={{ color: getIconColor(), fontSize: sizeStyle.iconSize * 0.7 }}>✕</Text>
-              </View>
+              <X size={sizeStyle.iconSize * 0.7} color={getIconColor()} strokeWidth={2.5} />
             )}
           </Pressable>
         )}

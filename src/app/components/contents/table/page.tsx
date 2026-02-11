@@ -11,7 +11,7 @@ type TableSize = "small" | "medium" | "large";
 // Shared Components
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <section style={{ marginBottom: 0 }}>
+    <section style={{ marginBottom: 56 }}>
       <h2 style={{ fontSize: 20, fontWeight: 700, marginBottom: 20, color: "var(--text-primary)", letterSpacing: "-0.01em" }}>{title}</h2>
       {children}
     </section>
@@ -163,42 +163,189 @@ function PropsTable({ props }: { props: { name: string; type: string; required: 
   );
 }
 
+// Helper: UsageCard for Recommended Combinations
+function UsageCard({ situation, description, example }: {
+  situation: string;
+  description: string;
+  example: string;
+}) {
+  return (
+    <div style={{
+      display: "grid",
+      gridTemplateColumns: "1fr",
+      gap: 4,
+      padding: 16,
+      backgroundColor: "white",
+      borderRadius: 12,
+      border: "1px solid var(--divider)",
+    }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
+        <span style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)" }}>{situation}</span>
+      </div>
+      <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0, marginBottom: 6 }}>{description}</p>
+      <p style={{ fontSize: 12, color: "var(--text-tertiary)", margin: 0 }}>
+        {example}
+      </p>
+    </div>
+  );
+}
+
+// Helper: DoCard
+function DoCard({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{ borderRadius: 12, overflow: "hidden", border: "1px solid var(--divider)" }}>
+      <div style={{
+        padding: 24,
+        backgroundColor: "#f8f9fa",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: 80,
+      }}>
+        {children}
+      </div>
+      <div style={{
+        padding: "12px 16px",
+        backgroundColor: "white",
+        borderTop: "1px solid var(--divider)",
+        display: "flex",
+        alignItems: "center",
+        gap: 6,
+      }}>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" fill="#22c55e"/>
+          <path d="M8 12l3 3 5-5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+        <span style={{ fontSize: 14, fontWeight: 600, color: "#16a34a" }}>Do</span>
+      </div>
+    </div>
+  );
+}
+
+// Helper: DontCard
+function DontCard({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{ borderRadius: 12, overflow: "hidden", border: "1px solid var(--divider)" }}>
+      <div style={{
+        padding: 24,
+        backgroundColor: "#f8f9fa",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: 80,
+      }}>
+        {children}
+      </div>
+      <div style={{
+        padding: "12px 16px",
+        backgroundColor: "white",
+        borderTop: "1px solid var(--divider)",
+        display: "flex",
+        alignItems: "center",
+        gap: 6,
+      }}>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" fill="#ef4444"/>
+          <path d="M15 9l-6 6M9 9l6 6" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+        </svg>
+        <span style={{ fontSize: 14, fontWeight: 600, color: "#dc2626" }}>Don&apos;t</span>
+      </div>
+    </div>
+  );
+}
+
 // Design Tab Content
 function DesignContent() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
+      {/* Anatomy - SVG Diagram */}
       <Section title="Anatomy">
-        <p style={{ color: "var(--text-secondary)", lineHeight: 1.7, marginBottom: 20 }}>
-          Table 컴포넌트는 다음과 같은 하위 컴포넌트로 구성됩니다:
-        </p>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 16, marginBottom: 20 }}>
-          <div style={{ padding: 16, backgroundColor: "var(--bg-secondary)", borderRadius: 8 }}>
-            <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 8 }}>1. Table</div>
-            <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0 }}>전체 테이블 컨테이너</p>
-          </div>
-          <div style={{ padding: 16, backgroundColor: "var(--bg-secondary)", borderRadius: 8 }}>
-            <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 8 }}>2. TableHead</div>
-            <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0 }}>헤더 섹션</p>
-          </div>
-          <div style={{ padding: 16, backgroundColor: "var(--bg-secondary)", borderRadius: 8 }}>
-            <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 8 }}>3. TableBody</div>
-            <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0 }}>본문 섹션</p>
-          </div>
-          <div style={{ padding: 16, backgroundColor: "var(--bg-secondary)", borderRadius: 8 }}>
-            <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 8 }}>4. TableRow</div>
-            <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0 }}>행</p>
-          </div>
-          <div style={{ padding: 16, backgroundColor: "var(--bg-secondary)", borderRadius: 8 }}>
-            <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 8 }}>5. TableHeadCell</div>
-            <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0 }}>헤더 셀</p>
-          </div>
-          <div style={{ padding: 16, backgroundColor: "var(--bg-secondary)", borderRadius: 8 }}>
-            <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 8 }}>6. TableCell</div>
-            <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0 }}>데이터 셀</p>
-          </div>
+        <div style={{
+          backgroundColor: "#f5f5f7",
+          borderRadius: 16,
+          padding: "48px 40px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}>
+          <svg width="480" height="180" viewBox="0 0 480 180">
+            {/* Table container outline */}
+            <rect x="40" y="20" width="400" height="140" rx="12" fill="white" stroke="#e2e8f0" strokeWidth="1.5" />
+
+            {/* Header row */}
+            <rect x="40" y="20" width="400" height="36" rx="12" fill="#f8fafc" stroke="#e2e8f0" strokeWidth="1" />
+            <rect x="40" y="44" width="400" height="12" fill="#f8fafc" />
+            <text x="80" y="43" fill="#64748b" fontSize="12" fontWeight="600">Column A</text>
+            <text x="200" y="43" fill="#64748b" fontSize="12" fontWeight="600">Column B</text>
+            <text x="340" y="43" fill="#64748b" fontSize="12" fontWeight="600">Column C</text>
+
+            {/* Header / body divider */}
+            <line x1="40" y1="56" x2="440" y2="56" stroke="#e2e8f0" strokeWidth="1" />
+
+            {/* Data row 1 */}
+            <text x="80" y="80" fill="#334155" fontSize="12">Data 1</text>
+            <text x="200" y="80" fill="#334155" fontSize="12">Data 2</text>
+            <text x="340" y="80" fill="#334155" fontSize="12">Data 3</text>
+
+            {/* Row divider */}
+            <line x1="40" y1="96" x2="440" y2="96" stroke="#f1f5f9" strokeWidth="1" />
+
+            {/* Data row 2 */}
+            <text x="80" y="118" fill="#334155" fontSize="12">Data 4</text>
+            <text x="200" y="118" fill="#334155" fontSize="12">Data 5</text>
+            <text x="340" y="118" fill="#334155" fontSize="12">Data 6</text>
+
+            {/* Row divider */}
+            <line x1="40" y1="134" x2="440" y2="134" stroke="#f1f5f9" strokeWidth="1" />
+
+            {/* Data row 3 */}
+            <text x="80" y="152" fill="#334155" fontSize="12">Data 7</text>
+            <text x="200" y="152" fill="#334155" fontSize="12">Data 8</text>
+            <text x="340" y="152" fill="#334155" fontSize="12">Data 9</text>
+
+            {/* Column dividers */}
+            <line x1="175" y1="20" x2="175" y2="160" stroke="#f1f5f9" strokeWidth="1" strokeDasharray="4 3" />
+            <line x1="310" y1="20" x2="310" y2="160" stroke="#f1f5f9" strokeWidth="1" strokeDasharray="4 3" />
+
+            {/* Numbered annotations */}
+            {/* 1 - Header Row */}
+            <line x1="460" y1="38" x2="445" y2="38" stroke="#374151" strokeWidth="1.5" />
+            <circle cx="468" cy="38" r="12" fill="#374151" />
+            <text x="468" y="42" textAnchor="middle" fill="white" fontSize="11" fontWeight="600">1</text>
+
+            {/* 2 - Data Row */}
+            <line x1="460" y1="76" x2="445" y2="76" stroke="#374151" strokeWidth="1.5" />
+            <circle cx="468" cy="76" r="12" fill="#374151" />
+            <text x="468" y="80" textAnchor="middle" fill="white" fontSize="11" fontWeight="600">2</text>
+
+            {/* 3 - Cell */}
+            <line x1="130" y1="170" x2="130" y2="162" stroke="#374151" strokeWidth="1.5" />
+            <circle cx="130" cy="176" r="12" fill="#374151" />
+            <text x="130" y="180" textAnchor="middle" fill="white" fontSize="11" fontWeight="600">3</text>
+
+            {/* 4 - Border */}
+            <line x1="16" y1="90" x2="38" y2="90" stroke="#374151" strokeWidth="1.5" />
+            <circle cx="12" cy="90" r="12" fill="#374151" />
+            <text x="12" y="94" textAnchor="middle" fill="white" fontSize="11" fontWeight="600">4</text>
+          </svg>
+        </div>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr 1fr 1fr",
+          gap: 16,
+          marginTop: 20,
+          fontSize: 14,
+          fontWeight: 500,
+          color: "var(--text-primary)",
+        }}>
+          <div>1. Header Row</div>
+          <div>2. Data Row</div>
+          <div>3. Cell</div>
+          <div>4. Border</div>
         </div>
       </Section>
 
+      {/* Variants */}
       <Section title="Variants">
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
           <VariantCard
@@ -216,6 +363,7 @@ function DesignContent() {
         </div>
       </Section>
 
+      {/* Sizes */}
       <Section title="Sizes">
         <Subsection title="Small">
           <PreviewBox>
@@ -242,21 +390,242 @@ function DesignContent() {
         </Subsection>
       </Section>
 
+      {/* Colors */}
+      <Section title="Colors">
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
+          Table 컴포넌트는 요소별로 다른 색상을 사용하여 시각적 계층을 만듭니다.
+        </p>
+        <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+            <thead>
+              <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Element</th>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Color</th>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Token</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>헤더 배경</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "#f8fafc", border: "1px solid #e2e8f0" }} />
+                    <code style={{ fontSize: 12 }}>#f8fafc</code>
+                  </div>
+                </td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "#6366f1" }}>surface.base.alternative</td>
+              </tr>
+              <tr>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>데이터 행 배경</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "#ffffff", border: "1px solid #e2e8f0" }} />
+                    <code style={{ fontSize: 12 }}>#ffffff</code>
+                  </div>
+                </td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "#6366f1" }}>surface.base.default</td>
+              </tr>
+              <tr>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>Striped 행 배경</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "#f8fafc", border: "1px solid #e2e8f0" }} />
+                    <code style={{ fontSize: 12 }}>#f8fafc</code>
+                  </div>
+                </td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "#6366f1" }}>surface.base.alternative</td>
+              </tr>
+              <tr>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>Hover 행 배경</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "#f1f5f9" }} />
+                    <code style={{ fontSize: 12 }}>#f1f5f9</code>
+                  </div>
+                </td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "#6366f1" }}>surface.base.hover</td>
+              </tr>
+              <tr>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>테두리</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "#e2e8f0" }} />
+                    <code style={{ fontSize: 12 }}>#e2e8f0</code>
+                  </div>
+                </td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "#6366f1" }}>border.base.default</td>
+              </tr>
+              <tr>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>헤더 텍스트</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "#64748b" }} />
+                    <code style={{ fontSize: 12 }}>#64748b</code>
+                  </div>
+                </td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "#6366f1" }}>content.base.tertiary</td>
+              </tr>
+              <tr>
+                <td style={{ padding: "12px 16px" }}>셀 텍스트</td>
+                <td style={{ padding: "12px 16px" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "#334155" }} />
+                    <code style={{ fontSize: 12 }}>#334155</code>
+                  </div>
+                </td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 12, color: "#6366f1" }}>content.base.default</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </Section>
+
+      {/* States */}
+      <Section title="States">
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
+          Table의 행은 사용자 상호작용에 따라 다양한 상태를 가집니다.
+        </p>
+
+        <Subsection title="Default">
+          <PreviewBox>
+            <div style={{ padding: 24 }}>
+              <TableDemo variant="default" size="medium" />
+            </div>
+          </PreviewBox>
+          <div style={{ marginTop: 12, padding: 12, backgroundColor: "var(--bg-secondary)", borderRadius: 8, fontSize: 13, color: "var(--text-secondary)" }}>
+            기본 상태. 행간 구분선으로 데이터를 구분합니다.
+          </div>
+        </Subsection>
+
+        <Subsection title="Hover Row">
+          <PreviewBox>
+            <div style={{ padding: 24 }}>
+              <div style={{
+                borderRadius: 12,
+                overflow: "hidden",
+                border: "1px solid #e2e8f0",
+                maxWidth: 600,
+              }}>
+                <table style={{ width: "100%", borderCollapse: "collapse", backgroundColor: "white" }}>
+                  <thead>
+                    <tr style={{ backgroundColor: "#f8fafc", borderBottom: "1px solid #e2e8f0" }}>
+                      <th style={{ padding: "8px 20px", textAlign: "left", fontSize: 14, fontWeight: 600, color: "#64748b" }}>Name</th>
+                      <th style={{ padding: "8px 20px", textAlign: "left", fontSize: 14, fontWeight: 600, color: "#64748b" }}>Value</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr style={{ backgroundColor: "#f1f5f9", borderBottom: "1px solid #e2e8f0" }}>
+                      <td style={{ padding: "16px 20px", fontSize: 14, color: "#334155" }}>ETH</td>
+                      <td style={{ padding: "16px 20px", fontSize: 14, color: "#334155" }}>₩3,245,000</td>
+                    </tr>
+                    <tr>
+                      <td style={{ padding: "16px 20px", fontSize: 14, color: "#334155" }}>BTC</td>
+                      <td style={{ padding: "16px 20px", fontSize: 14, color: "#334155" }}>₩1,850,000</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </PreviewBox>
+          <div style={{ marginTop: 12, padding: 12, backgroundColor: "var(--bg-secondary)", borderRadius: 8, fontSize: 13, color: "var(--text-secondary)" }}>
+            마우스 오버 시 행 배경이 <code style={{ fontSize: 12 }}>#f1f5f9</code>로 변경됩니다.
+          </div>
+        </Subsection>
+
+        <Subsection title="Selected Row">
+          <PreviewBox>
+            <div style={{ padding: 24 }}>
+              <div style={{
+                borderRadius: 12,
+                overflow: "hidden",
+                border: "1px solid #e2e8f0",
+                maxWidth: 600,
+              }}>
+                <table style={{ width: "100%", borderCollapse: "collapse", backgroundColor: "white" }}>
+                  <thead>
+                    <tr style={{ backgroundColor: "#f8fafc", borderBottom: "1px solid #e2e8f0" }}>
+                      <th style={{ padding: "8px 20px", textAlign: "left", fontSize: 14, fontWeight: 600, color: "#64748b" }}>Name</th>
+                      <th style={{ padding: "8px 20px", textAlign: "left", fontSize: 14, fontWeight: 600, color: "#64748b" }}>Value</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr style={{ backgroundColor: "#eff6ff", borderBottom: "1px solid #e2e8f0" }}>
+                      <td style={{ padding: "16px 20px", fontSize: 14, color: "#1d4ed8", fontWeight: 500 }}>ETH</td>
+                      <td style={{ padding: "16px 20px", fontSize: 14, color: "#1d4ed8", fontWeight: 500 }}>₩3,245,000</td>
+                    </tr>
+                    <tr>
+                      <td style={{ padding: "16px 20px", fontSize: 14, color: "#334155" }}>BTC</td>
+                      <td style={{ padding: "16px 20px", fontSize: 14, color: "#334155" }}>₩1,850,000</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </PreviewBox>
+          <div style={{ marginTop: 12, padding: 12, backgroundColor: "var(--bg-secondary)", borderRadius: 8, fontSize: 13, color: "var(--text-secondary)" }}>
+            선택된 행은 브랜드 컬러 배경(<code style={{ fontSize: 12 }}>#eff6ff</code>)과 강조 텍스트로 표시됩니다.
+          </div>
+        </Subsection>
+
+        <Subsection title="Loading">
+          <PreviewBox>
+            <div style={{ padding: 24 }}>
+              <div style={{
+                borderRadius: 12,
+                overflow: "hidden",
+                border: "1px solid #e2e8f0",
+                maxWidth: 600,
+              }}>
+                <table style={{ width: "100%", borderCollapse: "collapse", backgroundColor: "white" }}>
+                  <thead>
+                    <tr style={{ backgroundColor: "#f8fafc", borderBottom: "1px solid #e2e8f0" }}>
+                      <th style={{ padding: "8px 20px", textAlign: "left", fontSize: 14, fontWeight: 600, color: "#64748b" }}>Name</th>
+                      <th style={{ padding: "8px 20px", textAlign: "left", fontSize: 14, fontWeight: 600, color: "#64748b" }}>Value</th>
+                      <th style={{ padding: "8px 20px", textAlign: "left", fontSize: 14, fontWeight: 600, color: "#64748b" }}>Change</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[0, 1, 2].map((i) => (
+                      <tr key={i} style={{ borderBottom: i < 2 ? "1px solid #e2e8f0" : "none" }}>
+                        <td style={{ padding: "16px 20px" }}>
+                          <div style={{ width: 60, height: 14, borderRadius: 4, backgroundColor: "#e2e8f0", animation: "pulse 1.5s ease-in-out infinite" }} />
+                        </td>
+                        <td style={{ padding: "16px 20px" }}>
+                          <div style={{ width: 80, height: 14, borderRadius: 4, backgroundColor: "#e2e8f0", animation: "pulse 1.5s ease-in-out infinite", animationDelay: "0.2s" }} />
+                        </td>
+                        <td style={{ padding: "16px 20px" }}>
+                          <div style={{ width: 40, height: 14, borderRadius: 4, backgroundColor: "#e2e8f0", animation: "pulse 1.5s ease-in-out infinite", animationDelay: "0.4s" }} />
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                <style>{`@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }`}</style>
+              </div>
+            </div>
+          </PreviewBox>
+          <div style={{ marginTop: 12, padding: 12, backgroundColor: "var(--bg-secondary)", borderRadius: 8, fontSize: 13, color: "var(--text-secondary)" }}>
+            데이터 로딩 중에는 Skeleton 애니메이션으로 로딩 상태를 표시합니다.
+          </div>
+        </Subsection>
+      </Section>
+
+      {/* Design Tokens */}
       <Section title="Design Tokens">
         <Subsection title="Border Radius">
-          <div style={{ overflowX: "auto" }}>
-            <table style={{ width: "100%", borderCollapse: "collapse", border: "1px solid var(--divider)", borderRadius: 8 }}>
+          <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
               <thead>
                 <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600 }}>Token</th>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600 }}>Value</th>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600 }}>Usage</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Token</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Value</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Usage</th>
                 </tr>
               </thead>
               <tbody>
-                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 13 }}>card.sm</td>
-                  <td style={{ padding: "12px 16px" }}>12px</td>
+                <tr>
+                  <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 13, color: "#6366f1" }}>card.sm</td>
+                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>12px</td>
                   <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>테이블 외곽 모서리</td>
                 </tr>
               </tbody>
@@ -265,128 +634,34 @@ function DesignContent() {
         </Subsection>
 
         <Subsection title="Spacing">
-          <div style={{ overflowX: "auto" }}>
-            <table style={{ width: "100%", borderCollapse: "collapse", border: "1px solid var(--divider)", borderRadius: 8 }}>
+          <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
               <thead>
                 <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600 }}>Size</th>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600 }}>Token</th>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600 }}>Value</th>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600 }}>Usage</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Size</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Header Padding</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Cell Padding</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Font Size</th>
                 </tr>
               </thead>
               <tbody>
-                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                  <td style={{ padding: "12px 16px", fontWeight: 600 }}>Small</td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 13 }}>-</td>
-                  <td style={{ padding: "12px 16px" }}>16px / 6px</td>
-                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>헤더 셀 패딩 (좌우/상하)</td>
-                </tr>
-                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                  <td style={{ padding: "12px 16px" }}></td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 13 }}>-</td>
-                  <td style={{ padding: "12px 16px" }}>16px / 12px</td>
-                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>데이터 셀 패딩 (좌우/상하)</td>
-                </tr>
-                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                  <td style={{ padding: "12px 16px", fontWeight: 600 }}>Medium</td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 13 }}>-</td>
-                  <td style={{ padding: "12px 16px" }}>20px / 8px</td>
-                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>헤더 셀 패딩 (좌우/상하)</td>
-                </tr>
-                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                  <td style={{ padding: "12px 16px" }}></td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 13 }}>-</td>
-                  <td style={{ padding: "12px 16px" }}>20px / 16px</td>
-                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>데이터 셀 패딩 (좌우/상하)</td>
-                </tr>
-                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                  <td style={{ padding: "12px 16px", fontWeight: 600 }}>Large</td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 13 }}>-</td>
-                  <td style={{ padding: "12px 16px" }}>24px / 10px</td>
-                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>헤더 셀 패딩 (좌우/상하)</td>
+                <tr>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontWeight: 500 }}>Small</td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>16px / 6px</td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>16px / 12px</td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>13px</td>
                 </tr>
                 <tr>
-                  <td style={{ padding: "12px 16px" }}></td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 13 }}>-</td>
-                  <td style={{ padding: "12px 16px" }}>24px / 20px</td>
-                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>데이터 셀 패딩 (좌우/상하)</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </Subsection>
-
-        <Subsection title="Colors">
-          <div style={{ overflowX: "auto" }}>
-            <table style={{ width: "100%", borderCollapse: "collapse", border: "1px solid var(--divider)", borderRadius: 8 }}>
-              <thead>
-                <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600 }}>Element</th>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600 }}>Color</th>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600 }}>Token</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                  <td style={{ padding: "12px 16px" }}>테이블 배경</td>
-                  <td style={{ padding: "12px 16px" }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                      <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "#ffffff", border: "1px solid #e2e8f0" }} />
-                      <code style={{ fontSize: 12 }}>#ffffff</code>
-                    </div>
-                  </td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 13, color: "var(--text-secondary)" }}>surface.base.default</td>
-                </tr>
-                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                  <td style={{ padding: "12px 16px" }}>테이블 테두리</td>
-                  <td style={{ padding: "12px 16px" }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                      <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "#e2e8f0" }} />
-                      <code style={{ fontSize: 12 }}>#e2e8f0</code>
-                    </div>
-                  </td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 13, color: "var(--text-secondary)" }}>border.base.default</td>
-                </tr>
-                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                  <td style={{ padding: "12px 16px" }}>헤더 배경</td>
-                  <td style={{ padding: "12px 16px" }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                      <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "#f8fafc" }} />
-                      <code style={{ fontSize: 12 }}>#f8fafc</code>
-                    </div>
-                  </td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 13, color: "var(--text-secondary)" }}>surface.base.alternative</td>
-                </tr>
-                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                  <td style={{ padding: "12px 16px" }}>헤더 텍스트</td>
-                  <td style={{ padding: "12px 16px" }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                      <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "#64748b" }} />
-                      <code style={{ fontSize: 12 }}>#64748b</code>
-                    </div>
-                  </td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 13, color: "var(--text-secondary)" }}>content.base.tertiary</td>
-                </tr>
-                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                  <td style={{ padding: "12px 16px" }}>셀 텍스트</td>
-                  <td style={{ padding: "12px 16px" }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                      <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "#334155" }} />
-                      <code style={{ fontSize: 12 }}>#334155</code>
-                    </div>
-                  </td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 13, color: "var(--text-secondary)" }}>content.base.default</td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontWeight: 500 }}>Medium</td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>20px / 8px</td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>20px / 16px</td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>14px</td>
                 </tr>
                 <tr>
-                  <td style={{ padding: "12px 16px" }}>Striped 행 배경</td>
-                  <td style={{ padding: "12px 16px" }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                      <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "#f8fafc" }} />
-                      <code style={{ fontSize: 12 }}>#f8fafc</code>
-                    </div>
-                  </td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 13, color: "var(--text-secondary)" }}>surface.base.alternative</td>
+                  <td style={{ padding: "12px 16px", fontWeight: 500 }}>Large</td>
+                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>24px / 10px</td>
+                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>24px / 20px</td>
+                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>15px</td>
                 </tr>
               </tbody>
             </table>
@@ -394,29 +669,34 @@ function DesignContent() {
         </Subsection>
       </Section>
 
+      {/* Usage Guidelines */}
       <Section title="Usage Guidelines">
-        <div style={{ display: "grid", gap: 16, marginBottom: 24 }}>
-          <div style={{ padding: 20, backgroundColor: "#f0fdf4", borderRadius: 12, border: "1px solid #86efac" }}>
-            <div style={{ fontSize: 14, fontWeight: 600, color: "#16a34a", marginBottom: 8 }}>✅ DO</div>
-            <ul style={{ margin: 0, paddingLeft: 20, color: "#15803d" }}>
-              <li>구조화된 데이터를 표시할 때 사용</li>
-              <li>헤더에는 명확한 컬럼명 표시</li>
-              <li>데이터는 왼쪽 정렬, 숫자는 오른쪽 정렬 고려</li>
-              <li>많은 행이 있을 때는 striped variant 사용</li>
-              <li>Desktop 환경에서 사용</li>
-            </ul>
-          </div>
-          <div style={{ padding: 20, backgroundColor: "#fef2f2", borderRadius: 12, border: "1px solid #fca5a5" }}>
-            <div style={{ fontSize: 14, fontWeight: 600, color: "#dc2626", marginBottom: 8 }}>❌ DON&apos;T</div>
-            <ul style={{ margin: 0, paddingLeft: 20, color: "#b91c1c" }}>
-              <li>모바일에서 사용 (대신 ListCard나 ListCell 사용)</li>
-              <li>레이아웃 목적으로 사용</li>
-              <li>너무 많은 컬럼 (가독성 저하)</li>
-              <li>헤더 없이 사용</li>
-            </ul>
-          </div>
-        </div>
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 24, lineHeight: 1.6 }}>
+          일관된 UX를 위해 아래 권고 패턴을 따르세요. 테이블은 <strong style={{ color: "var(--text-primary)" }}>Desktop 전용</strong>으로 설계되었습니다.
+        </p>
 
+        {/* Recommended Combinations */}
+        <Subsection title="Recommended Combinations">
+          <div style={{ display: "grid", gap: 12 }}>
+            <UsageCard
+              situation="Data Display"
+              description="자산 포트폴리오, 거래 내역 등 구조화된 데이터를 표시할 때"
+              example="예시: 자산명, 보유량, 평가금액, 등락률"
+            />
+            <UsageCard
+              situation="Comparison Table"
+              description="플랜/옵션 간 기능을 비교할 때 사용"
+              example="예시: 요금제 비교, 기능 비교표"
+            />
+            <UsageCard
+              situation="Pricing Table"
+              description="가격 정보와 세부 항목을 정리할 때 사용"
+              example="예시: 구독 플랜, 수수료 테이블"
+            />
+          </div>
+        </Subsection>
+
+        {/* Design Principles */}
         <Subsection title="Design Principles">
           <div style={{ display: "grid", gap: 16 }}>
             <PrincipleCard
@@ -438,23 +718,123 @@ function DesignContent() {
         </Subsection>
       </Section>
 
+      {/* Accessibility */}
       <Section title="Accessibility">
-        <div style={{ display: "grid", gap: 16 }}>
-          <PrincipleCard
-            number={1}
-            title="시맨틱 HTML"
-            desc="Web에서는 실제 <table>, <thead>, <tbody>, <tr>, <th>, <td> 태그를 사용하여 스크린 리더가 테이블 구조를 이해할 수 있습니다."
-          />
-          <PrincipleCard
-            number={2}
-            title="헤더 구분"
-            desc="<th> 태그로 헤더 셀을 명확히 구분하여 각 컬럼의 의미를 전달합니다."
-          />
-          <PrincipleCard
-            number={3}
-            title="충분한 간격"
-            desc="각 셀에 충분한 padding을 제공하여 터치/클릭 타겟을 확보하고 가독성을 높입니다."
-          />
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
+          Table 컴포넌트는 웹 접근성 표준을 준수합니다.
+        </p>
+
+        <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)", marginBottom: 24 }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+            <thead>
+              <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Attribute</th>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 13 }}>role=&quot;table&quot;</code></td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>스크린 리더가 테이블 구조로 인식</td>
+              </tr>
+              <tr>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 13 }}>scope=&quot;col&quot;</code></td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>헤더 셀의 범위를 컬럼으로 명시</td>
+              </tr>
+              <tr>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 13 }}>aria-sort</code></td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>정렬 상태를 보조 기술에 전달</td>
+              </tr>
+              <tr>
+                <td style={{ padding: "12px 16px" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 13 }}>aria-selected</code></td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>선택된 행 상태를 전달</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <Subsection title="Keyboard Interaction">
+          <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+              <thead>
+                <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Key</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--bg-secondary)", borderRadius: 4, fontSize: 12 }}>Tab</kbd></td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>테이블 내 인터랙티브 요소로 포커스 이동</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--bg-secondary)", borderRadius: 4, fontSize: 12 }}>Arrow Up/Down</kbd></td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>행 간 이동</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--bg-secondary)", borderRadius: 4, fontSize: 12 }}>Arrow Left/Right</kbd></td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>셀 간 이동</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "12px 16px" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--bg-secondary)", borderRadius: 4, fontSize: 12 }}>Space / Enter</kbd></td>
+                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>행 선택 또는 셀 내 액션 실행</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </Subsection>
+
+        <Subsection title="Design Principles">
+          <div style={{ display: "grid", gap: 16 }}>
+            <PrincipleCard
+              number={1}
+              title="Semantic HTML"
+              desc="Web에서는 실제 <table>, <thead>, <tbody>, <tr>, <th>, <td> 태그를 사용하여 스크린 리더가 테이블 구조를 이해할 수 있습니다."
+            />
+            <PrincipleCard
+              number={2}
+              title="Header Scope"
+              desc="<th> 태그에 scope='col'을 사용하여 헤더 셀이 어떤 컬럼에 해당하는지 명확히 전달합니다."
+            />
+            <PrincipleCard
+              number={3}
+              title="Sufficient Spacing"
+              desc="각 셀에 충분한 padding을 제공하여 터치/클릭 타겟을 확보하고 가독성을 높입니다."
+            />
+          </div>
+        </Subsection>
+      </Section>
+
+      {/* Best Practices - 2x2 Do/Don't Grid */}
+      <Section title="Best Practices">
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+          <DoCard>
+            <div style={{ fontSize: 13, color: "var(--text-secondary)", textAlign: "center" }}>
+              <strong style={{ color: "var(--text-primary)" }}>4 columns</strong>
+              <div style={{ marginTop: 4 }}>구조화된 데이터에 적절한 컬럼 수 사용</div>
+            </div>
+          </DoCard>
+          <DontCard>
+            <div style={{ fontSize: 13, color: "var(--text-secondary)", textAlign: "center" }}>
+              <strong style={{ color: "var(--text-primary)" }}>10+ columns</strong>
+              <div style={{ marginTop: 4 }}>너무 많은 컬럼으로 가독성 저하</div>
+            </div>
+          </DontCard>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 16 }}>
+          <DoCard>
+            <div style={{ fontSize: 13, color: "var(--text-secondary)", textAlign: "center" }}>
+              <strong style={{ color: "var(--text-primary)" }}>Desktop</strong>에서 사용
+              <div style={{ marginTop: 4 }}>충분한 화면 너비에서 테이블 사용</div>
+            </div>
+          </DoCard>
+          <DontCard>
+            <div style={{ fontSize: 13, color: "var(--text-secondary)", textAlign: "center" }}>
+              <strong style={{ color: "var(--text-primary)" }}>Mobile</strong>에서 사용
+              <div style={{ marginTop: 4 }}>모바일에서는 ListCard/ListCell 사용</div>
+            </div>
+          </DontCard>
         </div>
       </Section>
     </div>

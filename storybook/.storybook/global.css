@@ -1,0 +1,15 @@
+/* Fix browser default gray tap highlight on Pressable/clickable elements */
+* {
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none !important;
+}
+
+[role="button"],
+[tabindex],
+[data-testid] {
+  -webkit-tap-highlight-color: transparent !important;
+  outline: none !important;
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+}

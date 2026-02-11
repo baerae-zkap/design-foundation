@@ -22,7 +22,12 @@
  */
 
 import { forwardRef, type ReactNode, createContext, useContext } from 'react';
-import { View, Text, type ViewStyle, type TextStyle, type ViewProps } from 'react-native';
+import { View, Text, Pressable, type ViewStyle, type TextStyle, type ViewProps, type TextProps } from 'react-native';
+import { ChevronUp, ChevronDown, ChevronsUpDown } from 'lucide-react-native';
+import { colors, palette } from '../tokens/colors';
+import { spacing } from '../tokens/spacing';
+import { radius } from '../tokens/radius';
+import { typography } from '../tokens/typography';
 
 export type TableVariant = 'default' | 'striped';
 export type TableSize = 'small' | 'medium' | 'large';
@@ -46,14 +51,32 @@ export interface TableBodyProps extends Omit<ViewProps, 'children'> {
 
 export interface TableRowProps extends Omit<ViewProps, 'children'> {
   children: ReactNode;
+  /** 행 클릭 이벤트 */
+  onPress?: () => void;
+  /** 선택 상태 */
+  selected?: boolean;
 }
 
 export interface TableHeadCellProps extends Omit<ViewProps, 'children'> {
   children: ReactNode;
+  /** 정렬 방향 - left(왼쪽), center(중앙), right(오른쪽) */
+  align?: 'left' | 'center' | 'right';
+  /** 정렬 가능 여부 */
+  sortable?: boolean;
+  /** 정렬 방향 */
+  sortDirection?: 'asc' | 'desc' | 'none';
+  /** 정렬 클릭 이벤트 */
+  onSort?: () => void;
+  /** 고정 너비 (flex 대신 사용) */
+  width?: number;
 }
 
 export interface TableCellProps extends Omit<ViewProps, 'children'> {
   children: ReactNode;
+  /** 정렬 방향 - left(왼쪽), center(중앙), right(오른쪽) */
+  align?: 'left' | 'center' | 'right';
+  /** 고정 너비 (flex 대신 사용) */
+  width?: number;
 }
 
 interface TableContextValue {
@@ -77,26 +100,26 @@ const sizeStyles: Record<TableSize, {
   minHeight: number;
 }> = {
   small: {
-    headCellPaddingX: 16,
-    headCellPaddingY: 6,
-    dataCellPaddingX: 16,
-    dataCellPaddingY: 12,
+    headCellPaddingX: spacing.primitive[4],     // 16
+    headCellPaddingY: spacing.primitive[1] + 2, // 6
+    dataCellPaddingX: spacing.primitive[4],     // 16
+    dataCellPaddingY: spacing.primitive[3],     // 12
     fontSize: 13,
     minHeight: 40,
   },
   medium: {
-    headCellPaddingX: 20,
-    headCellPaddingY: 8,
-    dataCellPaddingX: 20,
-    dataCellPaddingY: 16,
+    headCellPaddingX: spacing.primitive[5],     // 20
+    headCellPaddingY: spacing.primitive[2],     // 8
+    dataCellPaddingX: spacing.primitive[5],     // 20
+    dataCellPaddingY: spacing.primitive[4],     // 16
     fontSize: 14,
     minHeight: 44,
   },
   large: {
-    headCellPaddingX: 24,
-    headCellPaddingY: 10,
-    dataCellPaddingX: 24,
-    dataCellPaddingY: 20,
+    headCellPaddingX: spacing.primitive[6],     // 24
+    headCellPaddingY: spacing.primitive[2] + 2, // 10
+    dataCellPaddingX: spacing.primitive[6],     // 24
+    dataCellPaddingY: spacing.primitive[5],     // 20
     fontSize: 15,
     minHeight: 48,
   },
@@ -106,10 +129,10 @@ const sizeStyles: Record<TableSize, {
 export const Table = forwardRef<View, TableProps>(
   ({ variant = 'default', size = 'medium', children, style, ...props }, ref) => {
     const tableStyle: ViewStyle = {
-      borderRadius: 12, // card.sm
+      borderRadius: radius.component.card.sm,  // 12
       borderWidth: 1,
-      borderColor: '#e2e8f0', // border.base.default (palette.grey.95)
-      backgroundColor: 'white', // surface.base.default
+      borderColor: colors.border.base.default, // palette.grey[95] = #d6d9dd
+      backgroundColor: colors.surface.base.default, // palette.static.white = #ffffff
       overflow: 'hidden',
     };
 
@@ -166,19 +189,44 @@ TableBody.displayName = 'TableBody';
 
 // TableRow
 export const TableRow = forwardRef<View, TableRowProps>(
-  ({ children, style, ...props }, ref) => {
+  ({ children, style, onPress, selected, ...props }, ref) => {
     const { variant } = useContext(TableContext);
     const { rowIndex } = useContext(TableBodyContext);
 
     const rowStyle: ViewStyle = {
       flexDirection: 'row',
       borderBottomWidth: 1,
-      borderBottomColor: '#e2e8f0', // border.base.default
+      borderBottomColor: colors.border.base.default, // palette.grey[95] = #d6d9dd
     };
 
     // Striped variant - add background to even rows
     if (variant === 'striped' && rowIndex % 2 === 1) {
-      rowStyle.backgroundColor = '#f8fafc'; // surface.base.alternative (palette.grey.99)
+      rowStyle.backgroundColor = colors.surface.base.alternative; // palette.grey[99] = #f7f8f9
+    }
+
+    // Selected state - light brand background
+    if (selected) {
+      rowStyle.backgroundColor = 'rgba(37, 99, 235, 0.06)';
+    }
+
+    // If onPress is provided, wrap in Pressable
+    if (onPress) {
+      return (
+        <Pressable
+          ref={ref as any}
+          onPress={onPress}
+          style={({ pressed }) => [
+            rowStyle,
+            pressed && {
+              backgroundColor: colors.surface.base.alternative, // palette.grey[99] = #f7f8f9
+            },
+            style,
+          ]}
+          {...props}
+        >
+          {children}
+        </Pressable>
+      );
     }
 
     return (
@@ -193,34 +241,78 @@ TableRow.displayName = 'TableRow';
 
 // TableHeadCell
 export const TableHeadCell = forwardRef<View, TableHeadCellProps>(
-  ({ children, style, ...props }, ref) => {
+  ({ children, style, align = 'left', sortable, sortDirection = 'none', onSort, width, ...props }, ref) => {
     const { size } = useContext(TableContext);
     const sizeStyle = sizeStyles[size];
 
     const headCellStyle: ViewStyle = {
-      flex: 1,
+      ...(width ? { width } : { flex: 1 }),
       paddingVertical: sizeStyle.headCellPaddingY,
       paddingHorizontal: sizeStyle.headCellPaddingX,
-      backgroundColor: '#f8fafc', // surface.base.alternative (palette.grey.99)
+      backgroundColor: colors.surface.base.alternative, // palette.grey[99] = #f7f8f9
       borderBottomWidth: 1,
-      borderBottomColor: '#e2e8f0', // border.base.default
+      borderBottomColor: colors.border.base.default, // palette.grey[95] = #d6d9dd
       minHeight: sizeStyle.minHeight,
       justifyContent: 'center',
+      alignItems: align === 'center' ? 'center' : align === 'right' ? 'flex-end' : 'flex-start',
     };
 
     const textStyle: TextStyle = {
+      fontFamily: typography.fontFamily.base,
       fontSize: sizeStyle.fontSize,
-      fontWeight: '600',
-      color: '#64748b', // content.base.tertiary (palette.grey.60)
+      fontWeight: typography.fontWeight.semibold,
+      color: colors.content.base.secondary, // palette.grey[50] = #68707a
+      textAlign: align,
     };
 
-    return (
-      <View ref={ref} style={[headCellStyle, style]} {...props}>
+    // Render sort indicator
+    const renderSortIcon = () => {
+      if (!sortable) return null;
+
+      const iconSize = 16;
+      const iconColor = colors.content.base.secondary;
+
+      if (sortDirection === 'asc') {
+        return <ChevronUp size={iconSize} color={iconColor} />;
+      } else if (sortDirection === 'desc') {
+        return <ChevronDown size={iconSize} color={iconColor} />;
+      } else {
+        return <ChevronsUpDown size={iconSize} color={iconColor} style={{ opacity: 0.5 }} />;
+      }
+    };
+
+    const content = (
+      <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.primitive[1] }}>
         {typeof children === 'string' ? (
           <Text style={textStyle}>{children}</Text>
         ) : (
           children
         )}
+        {renderSortIcon()}
+      </View>
+    );
+
+    // If sortable and onSort provided, wrap in Pressable
+    if (sortable && onSort) {
+      return (
+        <Pressable
+          ref={ref as any}
+          onPress={onSort}
+          style={({ pressed }) => [
+            headCellStyle,
+            pressed && { backgroundColor: colors.border.base.default }, // palette.grey[95] = #d6d9dd
+            style,
+          ]}
+          {...props}
+        >
+          {content}
+        </Pressable>
+      );
+    }
+
+    return (
+      <View ref={ref} style={[headCellStyle, style]} {...props}>
+        {content}
       </View>
     );
   }
@@ -230,21 +322,25 @@ TableHeadCell.displayName = 'TableHeadCell';
 
 // TableCell
 export const TableCell = forwardRef<View, TableCellProps>(
-  ({ children, style, ...props }, ref) => {
+  ({ children, style, align = 'left', width, ...props }, ref) => {
     const { size } = useContext(TableContext);
     const sizeStyle = sizeStyles[size];
 
     const cellStyle: ViewStyle = {
-      flex: 1,
+      ...(width ? { width } : { flex: 1 }),
       paddingVertical: sizeStyle.dataCellPaddingY,
       paddingHorizontal: sizeStyle.dataCellPaddingX,
       minHeight: sizeStyle.minHeight,
       justifyContent: 'center',
+      alignItems: align === 'center' ? 'center' : align === 'right' ? 'flex-end' : 'flex-start',
     };
 
     const textStyle: TextStyle = {
+      fontFamily: typography.fontFamily.base,
       fontSize: sizeStyle.fontSize,
-      color: '#334155', // content.base.default (palette.grey.20)
+      fontWeight: typography.fontWeight.regular,
+      color: colors.content.base.default, // palette.grey[30] = #3e4651
+      textAlign: align,
     };
 
     return (

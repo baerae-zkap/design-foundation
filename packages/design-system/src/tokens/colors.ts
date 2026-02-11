@@ -259,7 +259,7 @@ export const colors = {
       defaultPressed: palette.green[90],       // hsla(149, 65%, 81%, 1)
     },
     info: {
-      default: palette.grey[97],               // hsla(218, 11%, 92%, 1)
+      default: palette.blue[99],               // hsla(220, 100%, 98%, 1) → #f7f9ff
     },
     disabled: {
       default: palette.grey[95],               // hsla(216, 10%, 86%, 1)
@@ -364,6 +364,15 @@ export const colors = {
     heavy: hslaToHex(222, 33, 11, 0.85),       // grey.15 + 85% alpha
   },
 } as const;
+
+/**
+ * Convenience exports for common use cases
+ */
+export const brandColors = colors.surface.brand;
+export const errorColors = colors.surface.error;
+export const successColors = colors.surface.success;
+export const warningColors = colors.surface.warning;
+export const infoColors = colors.surface.info;
 
 /**
  * Type exports for better DX

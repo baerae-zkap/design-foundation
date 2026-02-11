@@ -43,3 +43,11 @@ next-env.d.ts
 
 # build output
 dist/
+storybook-static/
+
+# temporary work files
+*_COMPLETE.md
+*_COMPLETE.txt
+ALERT_FALLBACKVIEW_ANALYSIS.md
+SELECT_UPGRADE_COMPLETE.md
+test-*.tsx

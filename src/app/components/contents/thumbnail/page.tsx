@@ -141,35 +141,163 @@ function PlatformContent({ platform }: { platform: Platform }) {
   return <RNContent />;
 }
 
+// Helper: UsageCard
+function UsageCard({ situation, description, example }: {
+  situation: string;
+  description: string;
+  example: string;
+}) {
+  return (
+    <div style={{
+      display: "grid",
+      gridTemplateColumns: "1fr",
+      gap: 4,
+      padding: 16,
+      backgroundColor: "white",
+      borderRadius: 12,
+      border: "1px solid var(--divider)",
+    }}>
+      <span style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)" }}>{situation}</span>
+      <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0, marginBottom: 2 }}>{description}</p>
+      <p style={{ fontSize: 12, color: "var(--text-tertiary)", margin: 0 }}>{example}</p>
+    </div>
+  );
+}
+
+// Helper: DoCard
+function DoCard({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{ borderRadius: 12, overflow: "hidden", border: "1px solid var(--divider)" }}>
+      <div style={{
+        padding: 24,
+        backgroundColor: "#f8f9fa",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: 80,
+      }}>
+        {children}
+      </div>
+      <div style={{
+        padding: "12px 16px",
+        backgroundColor: "white",
+        borderTop: "1px solid var(--divider)",
+        display: "flex",
+        alignItems: "center",
+        gap: 6,
+      }}>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" fill="#22c55e"/>
+          <path d="M8 12l3 3 5-5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+        <span style={{ fontSize: 14, fontWeight: 600, color: "#16a34a" }}>Do</span>
+      </div>
+    </div>
+  );
+}
+
+// Helper: DontCard
+function DontCard({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{ borderRadius: 12, overflow: "hidden", border: "1px solid var(--divider)" }}>
+      <div style={{
+        padding: 24,
+        backgroundColor: "#f8f9fa",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: 80,
+      }}>
+        {children}
+      </div>
+      <div style={{
+        padding: "12px 16px",
+        backgroundColor: "white",
+        borderTop: "1px solid var(--divider)",
+        display: "flex",
+        alignItems: "center",
+        gap: 6,
+      }}>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" fill="#ef4444"/>
+          <path d="M15 9l-6 6M9 9l6 6" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+        </svg>
+        <span style={{ fontSize: 14, fontWeight: 600, color: "#dc2626" }}>Don&apos;t</span>
+      </div>
+    </div>
+  );
+}
+
 function DesignContent() {
   return (
     <div>
+      {/* Anatomy - SVG Diagram */}
       <Section title="Anatomy">
-        <div style={{ backgroundColor: "#fafbfc", borderRadius: 12, padding: 32, marginBottom: 20 }}>
-          <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-            <div style={{ position: "relative", width: 240 }}>
-              <ThumbnailDemo
-                src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400"
-                aspectRatio="16:9"
-                radius
-              />
-              <div style={{ position: "absolute", top: -20, left: -60, fontSize: 12, color: "#6b7280" }}>
-                Container
-              </div>
-              <div style={{ position: "absolute", bottom: -20, right: -60, fontSize: 12, color: "#6b7280" }}>
-                Image
-              </div>
-            </div>
-          </div>
+        <div style={{
+          backgroundColor: "#f5f5f7",
+          borderRadius: 16,
+          padding: "48px 40px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          marginBottom: 20,
+        }}>
+          <svg width="360" height="240" viewBox="0 0 360 240">
+            {/* Container outline */}
+            <rect x="60" y="20" width="240" height="160" rx="12" fill="#e2e8f0" stroke="#cbd5e1" strokeWidth="1.5" strokeDasharray="6 3" />
+
+            {/* Image area */}
+            <rect x="64" y="24" width="232" height="152" rx="10" fill="#94a3b8" />
+            <text x="180" y="100" textAnchor="middle" fill="white" fontSize="14" fontWeight="500" opacity="0.8">Image Area</text>
+
+            {/* Play icon overlay */}
+            <circle cx="180" cy="100" r="24" fill="rgba(0,0,0,0.5)" />
+            <polygon points="174,88 174,112 194,100" fill="white" />
+
+            {/* Overlay bar at bottom */}
+            <rect x="64" y="144" width="232" height="32" rx="0" fill="rgba(0,0,0,0.5)" />
+            <text x="180" y="164" textAnchor="middle" fill="white" fontSize="11" fontWeight="500">Overlay</text>
+
+            {/* Numbered annotations */}
+            {/* 1 - Container */}
+            <line x1="40" y1="40" x2="58" y2="40" stroke="#374151" strokeWidth="1.5" />
+            <circle cx="30" cy="40" r="12" fill="#374151" />
+            <text x="30" y="44" textAnchor="middle" fill="white" fontSize="11" fontWeight="600">1</text>
+
+            {/* 2 - Image */}
+            <line x1="310" y1="60" x2="298" y2="60" stroke="#374151" strokeWidth="1.5" />
+            <circle cx="320" cy="60" r="12" fill="#374151" />
+            <text x="320" y="64" textAnchor="middle" fill="white" fontSize="11" fontWeight="600">2</text>
+
+            {/* 3 - Play Icon */}
+            <line x1="210" y1="100" x2="230" y2="100" stroke="#374151" strokeWidth="1.5" />
+            <line x1="230" y1="100" x2="230" y2="210" stroke="#374151" strokeWidth="1.5" />
+            <circle cx="230" cy="220" r="12" fill="#374151" />
+            <text x="230" y="224" textAnchor="middle" fill="white" fontSize="11" fontWeight="600">3</text>
+
+            {/* 4 - Overlay */}
+            <line x1="310" y1="160" x2="330" y2="160" stroke="#374151" strokeWidth="1.5" />
+            <line x1="330" y1="160" x2="330" y2="210" stroke="#374151" strokeWidth="1.5" />
+            <circle cx="330" cy="220" r="12" fill="#374151" />
+            <text x="330" y="224" textAnchor="middle" fill="white" fontSize="11" fontWeight="600">4</text>
+          </svg>
         </div>
-        <ul style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.8, paddingLeft: 20 }}>
-          <li><strong>Container</strong>: 종횡비와 크기를 정의하는 래퍼</li>
-          <li><strong>Image</strong>: 실제 이미지 콘텐츠 (object-fit: cover)</li>
-          <li><strong>Overlay</strong>: (선택) 이미지 위에 표시되는 콘텐츠</li>
-          <li><strong>Play Icon</strong>: (선택) 비디오 콘텐츠 인디케이터</li>
-        </ul>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr 1fr 1fr",
+          gap: 16,
+          fontSize: 14,
+          fontWeight: 500,
+          color: "var(--text-primary)",
+        }}>
+          <div>1. Container</div>
+          <div>2. Image</div>
+          <div>3. Play Icon</div>
+          <div>4. Overlay</div>
+        </div>
       </Section>
 
+      {/* Aspect Ratios */}
       <Section title="Aspect Ratios">
         <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 20 }}>
           <AspectRatioCard name="1:1" description="정사각형 (프로필, NFT)">
@@ -187,6 +315,7 @@ function DesignContent() {
         </div>
       </Section>
 
+      {/* Sizes */}
       <Section title="Sizes">
         <div style={{ backgroundColor: "#fafbfc", borderRadius: 12, padding: 32 }}>
           <div style={{ display: "flex", gap: 24, alignItems: "flex-end", justifyContent: "center" }}>
@@ -210,6 +339,7 @@ function DesignContent() {
         </div>
       </Section>
 
+      {/* Styles */}
       <Section title="Styles">
         <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 20 }}>
           <StyleCard name="Default" description="라운드 모서리 (12px)">
@@ -227,6 +357,144 @@ function DesignContent() {
         </div>
       </Section>
 
+      {/* States */}
+      <Section title="States">
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
+          Thumbnail은 이미지 로드 상태에 따라 다양한 시각적 상태를 가집니다.
+        </p>
+
+        <Subsection title="Loading / Skeleton">
+          <PreviewBox>
+            <div style={{ display: "flex", gap: 24, justifyContent: "center", padding: 24 }}>
+              <div style={{
+                width: 160,
+                borderRadius: 12,
+                overflow: "hidden",
+              }}>
+                <div style={{
+                  width: "100%",
+                  paddingBottom: "56.25%",
+                  backgroundColor: "#e2e8f0",
+                  position: "relative",
+                }}>
+                  <div style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    background: "linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%)",
+                    backgroundSize: "200% 100%",
+                    animation: "shimmer 1.5s ease-in-out infinite",
+                  }} />
+                </div>
+              </div>
+              <div style={{
+                width: 160,
+                borderRadius: 12,
+                overflow: "hidden",
+              }}>
+                <div style={{
+                  width: "100%",
+                  paddingBottom: "100%",
+                  backgroundColor: "#e2e8f0",
+                  position: "relative",
+                }}>
+                  <div style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    background: "linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%)",
+                    backgroundSize: "200% 100%",
+                    animation: "shimmer 1.5s ease-in-out infinite",
+                  }} />
+                </div>
+              </div>
+              <style>{`@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }`}</style>
+            </div>
+          </PreviewBox>
+          <div style={{ marginTop: 12, padding: 12, backgroundColor: "var(--bg-secondary)", borderRadius: 8, fontSize: 13, color: "var(--text-secondary)" }}>
+            이미지 로딩 중 Skeleton 애니메이션으로 로딩 상태를 표시합니다.
+          </div>
+        </Subsection>
+
+        <Subsection title="Error / Fallback">
+          <PreviewBox>
+            <div style={{ display: "flex", gap: 24, justifyContent: "center", padding: 24 }}>
+              <div style={{
+                width: 160,
+                borderRadius: 12,
+                overflow: "hidden",
+              }}>
+                <div style={{
+                  width: "100%",
+                  paddingBottom: "56.25%",
+                  backgroundColor: "#f1f5f9",
+                  position: "relative",
+                }}>
+                  <div style={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    gap: 8,
+                  }}>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                      <circle cx="8.5" cy="8.5" r="1.5" />
+                      <polyline points="21 15 16 10 5 21" />
+                    </svg>
+                    <span style={{ fontSize: 11, color: "#94a3b8" }}>Unavailable</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </PreviewBox>
+          <div style={{ marginTop: 12, padding: 12, backgroundColor: "var(--bg-secondary)", borderRadius: 8, fontSize: 13, color: "var(--text-secondary)" }}>
+            이미지 로드 실패 시 fallback UI를 표시합니다. 배경색은 <code style={{ fontSize: 12 }}>#f1f5f9</code>입니다.
+          </div>
+        </Subsection>
+
+        <Subsection title="Hover Overlay">
+          <PreviewBox>
+            <div style={{ display: "flex", gap: 24, justifyContent: "center", padding: 24 }}>
+              <div style={{ position: "relative", width: 160, borderRadius: 12, overflow: "hidden" }}>
+                <ThumbnailDemo
+                  src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400"
+                  aspectRatio="16:9"
+                  size={160}
+                  radius
+                  overlay={
+                    <div style={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      backgroundColor: "rgba(0,0,0,0.3)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}>
+                      <span style={{ color: "white", fontSize: 13, fontWeight: 600 }}>View Detail</span>
+                    </div>
+                  }
+                />
+              </div>
+            </div>
+          </PreviewBox>
+          <div style={{ marginTop: 12, padding: 12, backgroundColor: "var(--bg-secondary)", borderRadius: 8, fontSize: 13, color: "var(--text-secondary)" }}>
+            클릭 가능한 썸네일에 hover 시 반투명 오버레이로 상호작용 가능성을 표시합니다.
+          </div>
+        </Subsection>
+      </Section>
+
+      {/* Design Tokens */}
       <Section title="Design Tokens">
         <DesignTokensTable
           tokens={[
@@ -239,27 +507,31 @@ function DesignContent() {
         />
       </Section>
 
+      {/* Usage Guidelines with Recommended Combinations */}
       <Section title="Usage Guidelines">
-        <GuidelinesTable
-          guidelines={[
-            {
-              do: "콘텐츠 타입에 맞는 aspectRatio 선택",
-              dont: "모든 썸네일에 동일한 비율 사용",
-            },
-            {
-              do: "비디오 콘텐츠에는 playIcon 활성화",
-              dont: "이미지에 playIcon 사용",
-            },
-            {
-              do: "로드 실패를 고려한 fallback 제공",
-              dont: "에러 처리 없이 썸네일 사용",
-            },
-            {
-              do: "같은 컨텍스트에서 일관된 크기 유지",
-              dont: "무작위 크기의 썸네일 배치",
-            },
-          ]}
-        />
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 24, lineHeight: 1.6 }}>
+          일관된 UX를 위해 아래 권고 패턴을 따르세요. 콘텐츠 타입에 맞는 <strong style={{ color: "var(--text-primary)" }}>적절한 종횡비와 크기</strong>를 선택합니다.
+        </p>
+
+        <Subsection title="Recommended Combinations">
+          <div style={{ display: "grid", gap: 12 }}>
+            <UsageCard
+              situation="Content Thumbnail"
+              description="글, 뉴스, 블로그 등 콘텐츠 목록에서 미리보기 이미지로 사용"
+              example="예시: 16:9 비율, 120-160px, radius=true"
+            />
+            <UsageCard
+              situation="Video Thumbnail"
+              description="비디오 콘텐츠의 포스터 이미지로 사용"
+              example="예시: 16:9 비율, playIcon=true, onClick으로 재생"
+            />
+            <UsageCard
+              situation="Product Image"
+              description="상품/NFT 등의 대표 이미지로 사용"
+              example="예시: 1:1 비율, border=true, 80-120px"
+            />
+          </div>
+        </Subsection>
 
         <Subsection title="Design Principles">
           <div style={{ display: "grid", gap: 16 }}>
@@ -282,6 +554,7 @@ function DesignContent() {
         </Subsection>
       </Section>
 
+      {/* Accessibility */}
       <Section title="Accessibility">
         <div style={{ display: "grid", gap: 16 }}>
           <PrincipleCard
@@ -299,6 +572,45 @@ function DesignContent() {
             title="오버레이 대비"
             desc="오버레이 텍스트는 WCAG 2.1 AA 기준 (4.5:1) 이상의 대비를 유지합니다."
           />
+        </div>
+      </Section>
+
+      {/* Best Practices - 2x2 Do/Don't Grid */}
+      <Section title="Best Practices">
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+          <DoCard>
+            <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+              <ThumbnailDemo src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400" aspectRatio="16:9" size={80} radius />
+              <ThumbnailDemo src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400" aspectRatio="16:9" size={80} radius />
+            </div>
+          </DoCard>
+          <DontCard>
+            <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+              <ThumbnailDemo src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400" aspectRatio="16:9" size={80} radius />
+              <ThumbnailDemo src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400" aspectRatio="1:1" size={60} radius={false} />
+            </div>
+          </DontCard>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 4 }}>
+          <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0, paddingLeft: 4 }}>같은 목록에서 일관된 비율과 크기 유지</p>
+          <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0, paddingLeft: 4 }}>무작위 비율과 크기로 시각적 혼란 유발</p>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 16 }}>
+          <DoCard>
+            <div style={{ textAlign: "center" }}>
+              <ThumbnailDemo src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400" aspectRatio="16:9" size={100} radius playIcon />
+            </div>
+          </DoCard>
+          <DontCard>
+            <div style={{ textAlign: "center" }}>
+              <ThumbnailDemo src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400" aspectRatio="16:9" size={100} radius />
+            </div>
+          </DontCard>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 4 }}>
+          <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0, paddingLeft: 4 }}>비디오 콘텐츠에 playIcon을 표시</p>
+          <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0, paddingLeft: 4 }}>비디오인지 구분할 수 없는 썸네일</p>
         </div>
       </Section>
     </div>

@@ -1,6 +1,6 @@
 {
   "name": "@baerae-zkap/design-system",
-  "version": "0.1.8",
+  "version": "0.1.13",
   "description": "ZKAP Design System - React & React Native Components with AI-readable documentation",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -46,20 +46,32 @@
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
+    "lucide-react-native": ">=0.300.0",
     "react": ">=18.0.0",
-    "react-native": ">=0.70.0"
+    "react-native": ">=0.70.0",
+    "react-native-svg": ">=13.0.0"
   },
   "peerDependenciesMeta": {
     "react-native": {
       "optional": true
+    },
+    "react-native-svg": {
+      "optional": true
+    },
+    "lucide-react-native": {
+      "optional": true
     }
   },
   "devDependencies": {
+    "@react-native-community/datetimepicker": "^8.2.0",
     "@types/react": "^19",
+    "lucide-react-native": "^0.563.0",
     "react": "^19",
     "react-native": "^0.81.0",
     "react-native-linear-gradient": "^2.8.3",
+    "react-native-reanimated": "^4.2.1",
     "react-native-safe-area-context": "^5.6.2",
+    "react-native-svg": "^15.15.2",
     "tsup": "^8",
     "typescript": "^5"
   },

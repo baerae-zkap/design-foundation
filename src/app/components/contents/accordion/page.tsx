@@ -338,6 +338,49 @@ function DesignContent() {
         </div>
       </Section>
 
+      {/* Variants */}
+      <Section title="Variants">
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
+          Accordion은 사용 맥락에 따라 두 가지 동작 모드를 지원합니다.
+        </p>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+          <VariantCard name="Single Expand" description="하나의 항목만 펼칠 수 있습니다. 다른 항목을 열면 이전 항목이 자동으로 닫힙니다.">
+            <div style={{ display: "flex", flexDirection: "column", gap: 2, width: "100%" }}>
+              <div style={{ height: 14, backgroundColor: "#2563eb", borderRadius: 3, opacity: 0.8 }} />
+              <div style={{ height: 14, backgroundColor: "#e2e8f0", borderRadius: 3 }} />
+              <div style={{ height: 14, backgroundColor: "#e2e8f0", borderRadius: 3 }} />
+            </div>
+          </VariantCard>
+          <VariantCard name="Multi Expand" description="여러 항목을 동시에 펼칠 수 있습니다. 각 항목이 독립적으로 열리고 닫힙니다.">
+            <div style={{ display: "flex", flexDirection: "column", gap: 2, width: "100%" }}>
+              <div style={{ height: 14, backgroundColor: "#2563eb", borderRadius: 3, opacity: 0.8 }} />
+              <div style={{ height: 14, backgroundColor: "#2563eb", borderRadius: 3, opacity: 0.6 }} />
+              <div style={{ height: 14, backgroundColor: "#e2e8f0", borderRadius: 3 }} />
+            </div>
+          </VariantCard>
+        </div>
+        <Subsection title="Single Expand">
+          <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
+            FAQ 섹션처럼 <strong style={{ color: "var(--text-primary)" }}>한 번에 하나의 답변만 표시</strong>해야 하는 경우에 적합합니다.
+          </p>
+          <PreviewBox>
+            <div style={{ width: "100%", maxWidth: 400, padding: 24 }}>
+              <AccordionGroupDemo mode="single" />
+            </div>
+          </PreviewBox>
+        </Subsection>
+        <Subsection title="Multi Expand">
+          <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
+            설정 패널처럼 <strong style={{ color: "var(--text-primary)" }}>여러 섹션을 동시에 참조</strong>해야 하는 경우에 적합합니다.
+          </p>
+          <PreviewBox>
+            <div style={{ width: "100%", maxWidth: 400, padding: 24 }}>
+              <AccordionGroupDemo mode="multi" />
+            </div>
+          </PreviewBox>
+        </Subsection>
+      </Section>
+
       {/* Sizes */}
       <Section title="Sizes">
         <PreviewBox>
@@ -350,6 +393,29 @@ function DesignContent() {
             <div style={{ textAlign: "center" }}>
               <AccordionDemo title="Large (56px)" size="large" defaultExpanded={false}>
                 <p style={{ margin: 0, fontSize: 14, color: "#64748b" }}>Content</p>
+              </AccordionDemo>
+            </div>
+          </div>
+        </PreviewBox>
+      </Section>
+
+      {/* Colors */}
+      <Section title="Colors">
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
+          Accordion의 테두리, 헤더 배경, 텍스트 색상은 Foundation 토큰에 따라 결정됩니다.
+        </p>
+        <PreviewBox>
+          <div style={{ display: "flex", flexDirection: "column", gap: 16, width: "100%", maxWidth: 400, padding: 24 }}>
+            <div>
+              <p style={{ fontSize: 11, color: "#64748b", marginBottom: 8 }}>Default Border (#e2e8f0)</p>
+              <AccordionDemo title="Default border color" defaultExpanded={false}>
+                <p style={{ margin: 0, fontSize: 14, color: "#64748b" }}>Content area</p>
+              </AccordionDemo>
+            </div>
+            <div>
+              <p style={{ fontSize: 11, color: "#64748b", marginBottom: 8 }}>Expanded Header Background (#fafbfc)</p>
+              <AccordionDemo title="Expanded header color" defaultExpanded={true}>
+                <p style={{ margin: 0, fontSize: 14, color: "#64748b" }}>Header turns to #fafbfc when expanded</p>
               </AccordionDemo>
             </div>
           </div>
@@ -380,6 +446,62 @@ function DesignContent() {
             </div>
           </div>
         </PreviewBox>
+      </Section>
+
+      {/* Usage Guidelines */}
+      <Section title="Usage Guidelines">
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 24, lineHeight: 1.6 }}>
+          일관된 UX를 위해 아래 권고 조합을 따르세요. <strong style={{ color: "var(--text-primary)" }}>권장 패턴</strong>을 사용하면 사용자가 예측 가능한 경험을 할 수 있습니다.
+        </p>
+
+        <Subsection title="Recommended Combinations">
+          <div style={{ display: "grid", gap: 12 }}>
+            <UsageCard
+              situation="FAQ 섹션"
+              description="자주 묻는 질문과 답변을 정리할 때 사용합니다."
+              recommendation="Single expand + medium"
+              examples={["고객센터 FAQ", "상품 Q&A"]}
+            />
+            <UsageCard
+              situation="설정 패널"
+              description="여러 설정 그룹을 동시에 확인해야 하는 경우에 사용합니다."
+              recommendation="Multi expand + large"
+              examples={["알림 설정", "프로필 설정", "보안 설정"]}
+            />
+            <UsageCard
+              situation="콘텐츠 정리"
+              description="긴 콘텐츠를 카테고리별로 접어서 표시할 때 사용합니다."
+              recommendation="Single expand + medium"
+              examples={["이용약관", "개인정보 처리방침"]}
+            />
+            <UsageCard
+              situation="필터 패널"
+              description="검색 필터를 그룹별로 접어서 표시할 때 사용합니다."
+              recommendation="Multi expand + medium"
+              examples={["가격 필터", "카테고리 필터", "정렬 옵션"]}
+            />
+          </div>
+        </Subsection>
+
+        <Subsection title="Design Principles">
+          <div style={{ display: "grid", gap: 16 }}>
+            <PrincipleCard
+              number={1}
+              title="콘텐츠 우선순위를 반영하세요"
+              desc="가장 중요한 항목을 상단에 배치하고, defaultExpanded로 처음부터 열린 상태로 제공하여 사용자가 핵심 정보를 빠르게 확인할 수 있도록 합니다."
+            />
+            <PrincipleCard
+              number={2}
+              title="적절한 확장 모드를 선택하세요"
+              desc="비교가 필요 없는 콘텐츠에는 Single expand를, 동시에 여러 항목을 참조해야 하는 경우에는 Multi expand를 사용합니다."
+            />
+            <PrincipleCard
+              number={3}
+              title="헤더 텍스트는 명확하게"
+              desc="헤더만 보고도 내용을 예측할 수 있어야 합니다. 모호한 제목은 사용자가 모든 항목을 열어봐야 하므로 Accordion의 장점을 잃게 됩니다."
+            />
+          </div>
+        </Subsection>
       </Section>
 
       {/* Design Tokens */}
@@ -439,10 +561,130 @@ function DesignContent() {
 
       {/* Accessibility */}
       <Section title="Accessibility">
-        <div style={{ display: "grid", gap: 12 }}>
-          <PrincipleCard number={1} title="Keyboard Navigation" desc="Enter 또는 Space 키로 펼침/접힘을 제어할 수 있습니다." />
-          <PrincipleCard number={2} title="ARIA Attributes" desc="aria-expanded 속성으로 현재 상태를 스크린 리더에 전달합니다." />
-          <PrincipleCard number={3} title="Focus Management" desc="헤더에 포커스가 표시되어 키보드 사용자가 인지할 수 있습니다." />
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
+          Accordion 컴포넌트는 웹 접근성 표준을 준수합니다.
+        </p>
+
+        <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)", marginBottom: 24 }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+            <thead>
+              <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>속성</th>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>설명</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 13, fontWeight: 500 }}>role=&quot;button&quot;</code></td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>헤더가 버튼으로 인식됨</td>
+              </tr>
+              <tr>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 13, fontWeight: 500 }}>aria-expanded</code></td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>현재 펼침/접힘 상태를 스크린 리더에 전달</td>
+              </tr>
+              <tr>
+                <td style={{ padding: "12px 16px" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 13, fontWeight: 500 }}>aria-controls</code></td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>헤더가 제어하는 콘텐츠 영역을 연결</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <Subsection title="Keyboard Interaction">
+          <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)", marginBottom: 24 }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+              <thead>
+                <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>키</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>동작</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--bg-secondary)", borderRadius: 4, fontSize: 12 }}>Tab</kbd></td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>헤더로 포커스 이동</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--bg-secondary)", borderRadius: 4, fontSize: 12 }}>Enter</kbd></td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>펼침/접힘 토글</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "12px 16px" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--bg-secondary)", borderRadius: 4, fontSize: 12 }}>Space</kbd></td>
+                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>펼침/접힘 토글</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </Subsection>
+
+        <Subsection title="Design Principles">
+          <div style={{ display: "grid", gap: 16 }}>
+            <PrincipleCard number={1} title="Keyboard Navigation" desc="Enter 또는 Space 키로 펼침/접힘을 제어할 수 있습니다. Tab으로 각 헤더 사이를 이동합니다." />
+            <PrincipleCard number={2} title="ARIA Attributes" desc="aria-expanded 속성으로 현재 상태를 스크린 리더에 전달합니다. aria-controls로 헤더와 콘텐츠 영역을 연결합니다." />
+            <PrincipleCard number={3} title="Focus Visible" desc="키보드 포커스 시 헤더에 시각적 포커스 링이 표시되어 키보드 사용자가 현재 위치를 인지할 수 있습니다." />
+          </div>
+        </Subsection>
+      </Section>
+
+      {/* Best Practices */}
+      <Section title="Best Practices">
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+          <DoCard>
+            <div style={{ width: "100%", maxWidth: 200 }}>
+              <AccordionDemo title="배송 안내" size="medium" defaultExpanded={false}>
+                <p style={{ margin: 0, fontSize: 13, color: "#64748b" }}>2-3일 이내 배송</p>
+              </AccordionDemo>
+            </div>
+          </DoCard>
+          <DontCard>
+            <div style={{ width: "100%", maxWidth: 200 }}>
+              <div style={{ border: "1px solid #e2e8f0", borderRadius: 12, overflow: "hidden" }}>
+                <div style={{ height: 48, padding: "0 16px", display: "flex", alignItems: "center", fontSize: 14, fontWeight: 500, color: "#334155" }}>
+                  A
+                </div>
+              </div>
+            </div>
+          </DontCard>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 8 }}>
+          <p style={{ fontSize: 13, color: "#22c55e", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
+            <span style={{ fontWeight: 700, flexShrink: 0 }}>Do</span>
+            <span style={{ color: "var(--text-secondary)" }}>헤더 텍스트로 내용을 명확히 설명합니다.</span>
+          </p>
+          <p style={{ fontSize: 13, color: "#ef4444", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
+            <span style={{ fontWeight: 700, flexShrink: 0 }}>Don&apos;t</span>
+            <span style={{ color: "var(--text-secondary)" }}>헤더에 의미 없는 짧은 텍스트를 사용하지 마세요.</span>
+          </p>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 16 }}>
+          <DoCard>
+            <div style={{ width: "100%", maxWidth: 200, display: "flex", flexDirection: "column", gap: 4 }}>
+              <AccordionDemo title="자주 묻는 질문" size="medium" defaultExpanded={true}>
+                <p style={{ margin: 0, fontSize: 13, color: "#64748b" }}>관련 콘텐츠</p>
+              </AccordionDemo>
+              <AccordionDemo title="이용 약관" size="medium" defaultExpanded={false}>
+                <p style={{ margin: 0, fontSize: 13, color: "#64748b" }}>관련 콘텐츠</p>
+              </AccordionDemo>
+            </div>
+          </DoCard>
+          <DontCard>
+            <div style={{ width: "100%", maxWidth: 200 }}>
+              <AccordionDemo title="항목 1개만 있는 아코디언" size="medium" defaultExpanded={false}>
+                <p style={{ margin: 0, fontSize: 13, color: "#64748b" }}>콘텐츠가 하나뿐이면 Accordion을 사용하지 마세요.</p>
+              </AccordionDemo>
+            </div>
+          </DontCard>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 8 }}>
+          <p style={{ fontSize: 13, color: "#22c55e", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
+            <span style={{ fontWeight: 700, flexShrink: 0 }}>Do</span>
+            <span style={{ color: "var(--text-secondary)" }}>관련 콘텐츠를 그룹화하여 여러 항목을 제공합니다.</span>
+          </p>
+          <p style={{ fontSize: 13, color: "#ef4444", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
+            <span style={{ fontWeight: 700, flexShrink: 0 }}>Don&apos;t</span>
+            <span style={{ color: "var(--text-secondary)" }}>항목이 1개뿐이면 Accordion 대신 직접 표시하세요.</span>
+          </p>
         </div>
       </Section>
     </div>
@@ -629,6 +871,17 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   );
 }
 
+function Subsection({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div style={{ marginBottom: 32 }}>
+      <h3 style={{ fontSize: 16, fontWeight: 600, marginBottom: 12, color: "var(--text-primary)" }}>
+        {title}
+      </h3>
+      {children}
+    </div>
+  );
+}
+
 function PrincipleCard({ number, title, desc }: { number: number; title: string; desc: string }) {
   return (
     <div style={{ padding: 20, backgroundColor: "white", borderRadius: 12, border: "1px solid var(--divider)" }}>
@@ -637,6 +890,174 @@ function PrincipleCard({ number, title, desc }: { number: number; title: string;
         <span style={{ fontSize: 15, fontWeight: 600, color: "var(--text-primary)" }}>{title}</span>
       </div>
       <p style={{ fontSize: 14, color: "var(--text-secondary)", margin: 0, lineHeight: 1.6, paddingLeft: 34 }}>{desc}</p>
+    </div>
+  );
+}
+
+function VariantCard({ name, description, children }: { name: string; description: string; children: React.ReactNode }) {
+  return (
+    <div style={{ padding: 20, backgroundColor: "white", borderRadius: 12, border: "1px solid var(--divider)" }}>
+      <div style={{ height: 80, display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "#fafbfc", borderRadius: 8, marginBottom: 16, padding: "0 20px" }}>
+        {children}
+      </div>
+      <div style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", marginBottom: 4 }}>{name}</div>
+      <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0, lineHeight: 1.5 }}>{description}</p>
+    </div>
+  );
+}
+
+function UsageCard({ situation, description, recommendation, examples }: {
+  situation: string;
+  description: string;
+  recommendation: string;
+  examples: string[];
+}) {
+  return (
+    <div style={{
+      display: "grid",
+      gridTemplateColumns: "1fr auto",
+      gap: 16,
+      padding: 16,
+      backgroundColor: "white",
+      borderRadius: 12,
+      border: "1px solid var(--divider)",
+      alignItems: "center",
+    }}>
+      <div>
+        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
+          <span style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)" }}>{situation}</span>
+          <span style={{
+            fontSize: 11,
+            padding: "2px 6px",
+            backgroundColor: "#dbeafe",
+            color: "#1d4ed8",
+            borderRadius: 4,
+            fontWeight: 500,
+          }}>
+            {recommendation}
+          </span>
+        </div>
+        <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0, marginBottom: 6 }}>{description}</p>
+        <p style={{ fontSize: 12, color: "var(--text-tertiary)", margin: 0 }}>
+          예시: {examples.join(", ")}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function DoCard({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{ borderRadius: 12, overflow: "hidden", border: "1px solid var(--divider)" }}>
+      <div style={{
+        padding: 24,
+        backgroundColor: "#f8f9fa",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: 80,
+      }}>
+        {children}
+      </div>
+      <div style={{
+        padding: "12px 16px",
+        backgroundColor: "white",
+        borderTop: "1px solid var(--divider)",
+        display: "flex",
+        alignItems: "center",
+        gap: 6,
+      }}>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" fill="#22c55e"/>
+          <path d="M8 12l3 3 5-5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+        <span style={{ fontSize: 14, fontWeight: 600, color: "#16a34a" }}>Do</span>
+      </div>
+    </div>
+  );
+}
+
+function DontCard({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{ borderRadius: 12, overflow: "hidden", border: "1px solid var(--divider)" }}>
+      <div style={{
+        padding: 24,
+        backgroundColor: "#f8f9fa",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: 80,
+      }}>
+        {children}
+      </div>
+      <div style={{
+        padding: "12px 16px",
+        backgroundColor: "white",
+        borderTop: "1px solid var(--divider)",
+        display: "flex",
+        alignItems: "center",
+        gap: 6,
+      }}>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" fill="#ef4444"/>
+          <path d="M15 9l-6 6M9 9l6 6" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+        </svg>
+        <span style={{ fontSize: 14, fontWeight: 600, color: "#dc2626" }}>Don&apos;t</span>
+      </div>
+    </div>
+  );
+}
+
+function AccordionGroupDemo({ mode }: { mode: "single" | "multi" }) {
+  const [expandedItems, setExpandedItems] = useState<number[]>(mode === "multi" ? [0] : [0]);
+
+  const toggleItem = (index: number) => {
+    if (mode === "single") {
+      setExpandedItems(prev => prev.includes(index) ? [] : [index]);
+    } else {
+      setExpandedItems(prev =>
+        prev.includes(index) ? prev.filter(i => i !== index) : [...prev, index]
+      );
+    }
+  };
+
+  const items = [
+    { title: "Section 1", content: "First section content" },
+    { title: "Section 2", content: "Second section content" },
+    { title: "Section 3", content: "Third section content" },
+  ];
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+      {items.map((item, index) => (
+        <div key={index} style={{ border: "1px solid #e2e8f0", borderRadius: 12, overflow: "hidden" }}>
+          <button
+            onClick={() => toggleItem(index)}
+            style={{
+              width: "100%",
+              height: 48,
+              padding: "0 16px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              backgroundColor: expandedItems.includes(index) ? "#fafbfc" : "white",
+              border: "none",
+              cursor: "pointer",
+              transition: "background-color 0.15s ease",
+            }}
+          >
+            <span style={{ fontSize: 14, fontWeight: 500, color: "#334155" }}>{item.title}</span>
+            <svg width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="#64748b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transform: expandedItems.includes(index) ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.2s ease" }}>
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </button>
+          <div style={{ maxHeight: expandedItems.includes(index) ? 100 : 0, overflow: "hidden", transition: "max-height 0.2s ease" }}>
+            <div style={{ padding: 16, borderTop: "1px solid #e2e8f0" }}>
+              <p style={{ margin: 0, fontSize: 14, color: "#64748b" }}>{item.content}</p>
+            </div>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }

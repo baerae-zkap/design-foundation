@@ -665,25 +665,227 @@ function DesignContent() {
         </Subsection>
       </Section>
 
+      {/* Usage Guidelines */}
+      <Section title="Usage Guidelines">
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 24, lineHeight: 1.6 }}>
+          일관된 UX를 위해 아래 권고 조합을 따르세요. Chip은 <strong style={{ color: "var(--text-primary)" }}>컴팩트한 정보 표현과 인터랙션</strong>이 필요한 상황에서 사용합니다.
+        </p>
+
+        <Subsection title="Recommended Combinations">
+          <div style={{ display: "grid", gap: 12 }}>
+            <UsageCard
+              situation="Filter Chips"
+              desc="카테고리, 태그 등 필터 선택/해제"
+              variant="filled"
+              color="brandDefault"
+              chipLabel="전자제품"
+              selected
+            />
+            <UsageCard
+              situation="Selection Chips"
+              desc="여러 옵션 중 하나 또는 다수 선택"
+              variant="outlined"
+              color="brandDefault"
+              chipLabel="옵션 A"
+            />
+            <UsageCard
+              situation="Input Chips"
+              desc="태그 입력, 이메일 수신자 등 제거 가능한 항목"
+              variant="filled"
+              color="baseDefault"
+              chipLabel="React"
+              showClose
+            />
+            <UsageCard
+              situation="Status Indicator"
+              desc="상태 표시 (성공, 에러, 경고)"
+              variant="filled"
+              color="successDefault"
+              chipLabel="완료"
+            />
+          </div>
+        </Subsection>
+
+        <Subsection title="Do / Don&apos;t">
+          <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)", marginBottom: 16 }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+              <thead>
+                <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)", color: "#16a34a" }}>Do</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)", color: "#dc2626" }}>Don&apos;t</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>짧고 간결한 라벨을 사용하세요 (2-4글자)</td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>긴 문장을 Chip에 넣지 마세요</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>필터/선택 용도로 사용하세요</td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>주요 CTA 액션에 Chip을 사용하지 마세요</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>의미에 맞는 색상을 사용하세요</td>
+                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>한 영역에 5개 이상의 색상을 혼용하지 마세요</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </Subsection>
+
+        <Subsection title="Design Principles">
+          <div style={{ display: "grid", gap: 16 }}>
+            <PrincipleCard
+              number={1}
+              title="컴팩트한 정보 전달"
+              desc="Chip은 짧은 텍스트로 상태, 카테고리, 속성을 나타냅니다. 긴 텍스트가 필요하면 Button이나 Badge를 사용하세요."
+            />
+            <PrincipleCard
+              number={2}
+              title="선택 상태의 명확한 시각적 피드백"
+              desc="selected 상태는 배경색 변화와 체크 아이콘으로 사용자에게 명확히 전달됩니다. 선택/해제가 즉시 반영되어야 합니다."
+            />
+            <PrincipleCard
+              number={3}
+              title="제거 가능한 Chip은 onClose 사용"
+              desc="태그 입력 등 사용자가 제거할 수 있는 Chip에는 onClose를 제공하세요. X 버튼은 별도의 클릭 영역으로 접근 가능해야 합니다."
+            />
+          </div>
+        </Subsection>
+      </Section>
+
+      {/* Best Practices */}
+      <Section title="Best Practices">
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+          <DoCard>
+            <div style={{ display: "flex", gap: 8 }}>
+              <ChipDemo color="brandDefault">전체</ChipDemo>
+              <ChipDemo color="brandDefault" selected>전자제품</ChipDemo>
+              <ChipDemo color="brandDefault">의류</ChipDemo>
+            </div>
+          </DoCard>
+          <DontCard>
+            <div style={{ display: "flex", gap: 8 }}>
+              <ChipDemo color="brandDefault" selected>전자제품 카테고리 전체 보기</ChipDemo>
+            </div>
+          </DontCard>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 4 }}>
+          <DoLabel>Chip 라벨은 간결하게 작성합니다.</DoLabel>
+          <DontLabel>긴 텍스트를 Chip에 사용하지 않습니다.</DontLabel>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 16 }}>
+          <DoCard>
+            <div style={{ display: "flex", gap: 8 }}>
+              <ChipDemo color="brandDefault" selected>React</ChipDemo>
+              <ChipDemo color="brandDefault">TypeScript</ChipDemo>
+            </div>
+          </DoCard>
+          <DontCard>
+            <div style={{ display: "flex", gap: 8 }}>
+              <ChipDemo color="brandDefault" selected>React</ChipDemo>
+              <ChipDemo color="successDefault" selected>TypeScript</ChipDemo>
+              <ChipDemo color="errorDefault" selected>Vue</ChipDemo>
+            </div>
+          </DontCard>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 4 }}>
+          <DoLabel>같은 용도의 Chip 그룹에는 동일한 색상을 사용합니다.</DoLabel>
+          <DontLabel>같은 그룹에서 여러 색상을 혼용하지 않습니다.</DontLabel>
+        </div>
+      </Section>
+
       {/* Accessibility */}
       <Section title="Accessibility">
-        <div style={{ display: "grid", gap: 16 }}>
-          <PrincipleCard
-            number={1}
-            title="aria-pressed"
-            desc="selected 상태를 스크린 리더에 전달합니다."
-          />
-          <PrincipleCard
-            number={2}
-            title="Close Button"
-            desc="닫기 버튼은 별도의 탭 타겟으로 접근 가능하며, Enter/Space로 삭제할 수 있습니다."
-          />
-          <PrincipleCard
-            number={3}
-            title="Color Contrast"
-            desc="WCAG 2.1 AA 기준(4.5:1)을 충족하는 색상 대비를 유지합니다."
-          />
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
+          Chip 컴포넌트는 선택 상태와 제거 기능의 접근성을 보장합니다.
+        </p>
+
+        <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)", marginBottom: 24 }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+            <thead>
+              <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>속성</th>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>설명</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>role=&quot;button&quot;</code></td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>스크린 리더가 버튼으로 인식</td>
+              </tr>
+              <tr>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>aria-pressed</code></td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>selected 상태를 보조 기술에 전달</td>
+              </tr>
+              <tr>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>aria-label</code> (Close)</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>닫기 버튼에 목적을 설명하는 레이블 제공</td>
+              </tr>
+              <tr>
+                <td style={{ padding: "12px 16px" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>aria-disabled</code></td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>비활성화 상태를 보조 기술에 전달</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+
+        <Subsection title="Keyboard Interaction">
+          <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+              <thead>
+                <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>키</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>동작</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--bg-secondary)", borderRadius: 4, fontSize: 12 }}>Tab</kbd></td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>Chip으로 포커스 이동</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--bg-secondary)", borderRadius: 4, fontSize: 12 }}>Enter</kbd> / <kbd style={{ padding: "2px 6px", backgroundColor: "var(--bg-secondary)", borderRadius: 4, fontSize: 12 }}>Space</kbd></td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>Chip 선택/해제 토글</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--bg-secondary)", borderRadius: 4, fontSize: 12 }}>Tab</kbd> (Close)</td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>닫기 버튼으로 포커스 이동 (별도 탭 타겟)</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "12px 16px" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--bg-secondary)", borderRadius: 4, fontSize: 12 }}>Delete</kbd> / <kbd style={{ padding: "2px 6px", backgroundColor: "var(--bg-secondary)", borderRadius: 4, fontSize: 12 }}>Backspace</kbd></td>
+                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>onClose가 있는 Chip 제거</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </Subsection>
+
+        <Subsection title="Design Principles">
+          <div style={{ display: "grid", gap: 16 }}>
+            <PrincipleCard
+              number={1}
+              title="aria-pressed로 선택 상태 전달"
+              desc="selected 상태는 aria-pressed 속성을 통해 스크린 리더에 전달됩니다. 사용자가 현재 선택 상태를 인지할 수 있어야 합니다."
+            />
+            <PrincipleCard
+              number={2}
+              title="Close Button 접근성"
+              desc="닫기 버튼은 별도의 탭 타겟으로 접근 가능하며, Enter/Space 키로 제거할 수 있습니다. aria-label='삭제'를 제공합니다."
+            />
+            <PrincipleCard
+              number={3}
+              title="Color Contrast"
+              desc="WCAG 2.1 AA 기준(4.5:1)을 충족하는 색상 대비를 유지합니다. selected 상태에서도 텍스트 가독성을 보장합니다."
+            />
+            <PrincipleCard
+              number={4}
+              title="Chip Group Navigation"
+              desc="Chip 그룹 내에서 Tab 키로 순차 이동이 가능해야 합니다. 선택된 Chip의 상태가 스크린 리더에 즉시 반영됩니다."
+            />
+          </div>
+        </Subsection>
       </Section>
     </div>
   );
@@ -1099,14 +1301,17 @@ function InputChipDemo() {
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <section style={{ marginBottom: 0 }}>
-      <h2 style={{
-        fontSize: 20,
-        fontWeight: 700,
-        marginBottom: 20,
-        color: "var(--text-primary)",
-        letterSpacing: "-0.01em"
-      }}>
+    <section style={{ marginBottom: 56 }}>
+      <h2
+        id={title.toLowerCase().replace(/\s+/g, "-")}
+        style={{
+          fontSize: 20,
+          fontWeight: 700,
+          marginBottom: 20,
+          color: "var(--text-primary)",
+          letterSpacing: "-0.01em"
+        }}
+      >
         {title}
       </h2>
       {children}
@@ -1116,7 +1321,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 function Subsection({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div style={{ marginBottom: 24 }}>
+    <div style={{ marginBottom: 32 }}>
       <h3 style={{ fontSize: 16, fontWeight: 600, marginBottom: 12, color: "var(--text-primary)" }}>
         {title}
       </h3>
@@ -1168,6 +1373,135 @@ function PrincipleCard({ number, title, desc }: { number: number; title: string;
         <span style={{ fontSize: 15, fontWeight: 600, color: "var(--text-primary)" }}>{title}</span>
       </div>
       <p style={{ fontSize: 14, color: "var(--text-secondary)", margin: 0, lineHeight: 1.6, paddingLeft: 34 }}>{desc}</p>
+    </div>
+  );
+}
+
+function DoCard({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{ borderRadius: 12, overflow: "hidden", border: "1px solid var(--divider)" }}>
+      <div style={{
+        padding: 24,
+        backgroundColor: "#f8f9fa",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: 80,
+      }}>
+        {children}
+      </div>
+      <div style={{
+        padding: "12px 16px",
+        backgroundColor: "white",
+        borderTop: "1px solid var(--divider)",
+        display: "flex",
+        alignItems: "center",
+        gap: 6,
+      }}>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" fill="#22c55e"/>
+          <path d="M8 12l3 3 5-5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+        <span style={{ fontSize: 14, fontWeight: 600, color: "#16a34a" }}>Do</span>
+      </div>
+    </div>
+  );
+}
+
+function DontCard({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{ borderRadius: 12, overflow: "hidden", border: "1px solid var(--divider)" }}>
+      <div style={{
+        padding: 24,
+        backgroundColor: "#f8f9fa",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: 80,
+      }}>
+        {children}
+      </div>
+      <div style={{
+        padding: "12px 16px",
+        backgroundColor: "white",
+        borderTop: "1px solid var(--divider)",
+        display: "flex",
+        alignItems: "center",
+        gap: 6,
+      }}>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" fill="#ef4444"/>
+          <path d="M15 9l-6 6M9 9l6 6" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+        </svg>
+        <span style={{ fontSize: 14, fontWeight: 600, color: "#dc2626" }}>Don&apos;t</span>
+      </div>
+    </div>
+  );
+}
+
+function DoLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <p style={{ fontSize: 13, color: "#22c55e", marginTop: 12, display: "flex", alignItems: "flex-start", gap: 8 }}>
+      <span style={{ fontWeight: 700, flexShrink: 0 }}>Do</span>
+      <span style={{ color: "var(--text-secondary)" }}>{children}</span>
+    </p>
+  );
+}
+
+function DontLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <p style={{ fontSize: 13, color: "#ef4444", marginTop: 12, display: "flex", alignItems: "flex-start", gap: 8 }}>
+      <span style={{ fontWeight: 700, flexShrink: 0 }}>Don&apos;t</span>
+      <span style={{ color: "var(--text-secondary)" }}>{children}</span>
+    </p>
+  );
+}
+
+function UsageCard({ situation, desc, variant = "filled", color, chipLabel, selected = false, showClose = false }: {
+  situation: string;
+  desc: string;
+  variant?: ChipVariant;
+  color: ChipColor;
+  chipLabel: string;
+  selected?: boolean;
+  showClose?: boolean;
+}) {
+  return (
+    <div style={{
+      display: "grid",
+      gridTemplateColumns: "1fr auto",
+      gap: 16,
+      padding: 16,
+      backgroundColor: "white",
+      borderRadius: 12,
+      border: "1px solid var(--divider)",
+      alignItems: "center",
+    }}>
+      <div>
+        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
+          <span style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)" }}>{situation}</span>
+          <span style={{
+            fontSize: 11,
+            padding: "2px 6px",
+            backgroundColor: variant === "filled" ? "#dbeafe" : "#f1f5f9",
+            color: variant === "filled" ? "#1d4ed8" : "#475569",
+            borderRadius: 4,
+            fontWeight: 500,
+          }}>
+            {variant} + {color}
+          </span>
+        </div>
+        <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0 }}>{desc}</p>
+      </div>
+      <ChipDemo
+        variant={variant}
+        color={color}
+        size="small"
+        selected={selected}
+        onClose={showClose ? () => {} : undefined}
+      >
+        {chipLabel}
+      </ChipDemo>
     </div>
   );
 }

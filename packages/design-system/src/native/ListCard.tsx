@@ -23,6 +23,10 @@ import {
   type ViewStyle,
   type TextStyle,
 } from 'react-native';
+import { colors, palette } from '../tokens/colors';
+import { spacing } from '../tokens/spacing';
+import { radius } from '../tokens/radius';
+import { typography } from '../tokens/typography';
 
 export type ListCardSize = 'small' | 'medium' | 'large';
 export type ListCardVariant = 'elevated' | 'outlined' | 'filled';
@@ -44,12 +48,20 @@ export interface ListCardProps extends Omit<ViewProps, 'style'> {
   action?: ReactNode;
   /** 상단 뱃지 영역 */
   badges?: ReactNode;
+  /** 하단 커스텀 콘텐츠 */
+  bottomContent?: ReactNode;
+  /** 하단 구분선 표시 */
+  divider?: boolean;
   /** 탭 핸들러 */
   onPress?: () => void;
   /** 비활성화 */
   disabled?: boolean;
   /** 커스텀 스타일 */
   style?: ViewStyle;
+  /** 테스트 ID */
+  testID?: string;
+  /** 접근성 라벨 */
+  accessibilityLabel?: string;
 }
 
 // Size configurations
@@ -62,40 +74,40 @@ const sizeConfig: Record<ListCardSize, {
   metaSize: number;
 }> = {
   small: {
-    padding: 12,      // primitive.3
+    padding: spacing.primitive[3], // 12px
     thumbnailSize: 56,
-    gap: 12,          // primitive.3
+    gap: spacing.primitive[3], // 12px
     titleSize: 14,
-    subtitleSize: 12,
-    metaSize: 13,
-  },
-  medium: {
-    padding: 16,      // primitive.4
-    thumbnailSize: 80,
-    gap: 12,          // primitive.3
-    titleSize: 15,
-    subtitleSize: 13,
+    subtitleSize: typography.fontSize.xs, // 12px
     metaSize: 14,
   },
-  large: {
-    padding: 16,      // primitive.4
-    thumbnailSize: 100,
-    gap: 16,          // primitive.4
-    titleSize: 16,
+  medium: {
+    padding: spacing.component.list.itemPaddingY, // 16px
+    thumbnailSize: 80,
+    gap: spacing.primitive[3], // 12px
+    titleSize: typography.fontSize.md, // 16px
     subtitleSize: 14,
-    metaSize: 15,
+    metaSize: typography.fontSize.md, // 16px for price
+  },
+  large: {
+    padding: spacing.component.list.itemPaddingY, // 16px
+    thumbnailSize: 100,
+    gap: spacing.primitive[4], // 16px
+    titleSize: 17,
+    subtitleSize: 14,
+    metaSize: 17,
   },
 };
 
 // Variant styles
 const getVariantStyle = (variant: ListCardVariant, pressed: boolean = false): ViewStyle => {
-  const pressedBg = pressed ? 'rgba(0,0,0,0.02)' : undefined;
+  const pressedBg = pressed ? colors.fill.alternative : undefined;
 
   switch (variant) {
     case 'elevated':
       return {
-        backgroundColor: pressedBg || 'white',
-        shadowColor: '#000',
+        backgroundColor: pressedBg || colors.surface.base.default,
+        shadowColor: palette.static.black,
         shadowOffset: { width: 0, height: 1 },
         shadowOpacity: 0.1,
         shadowRadius: 3,
@@ -103,13 +115,13 @@ const getVariantStyle = (variant: ListCardVariant, pressed: boolean = false): Vi
       };
     case 'outlined':
       return {
-        backgroundColor: pressedBg || 'white',
+        backgroundColor: pressedBg || colors.surface.base.default,
         borderWidth: 1,
-        borderColor: '#e2e8f0', // border.base.default
+        borderColor: colors.border.base.default,
       };
     case 'filled':
       return {
-        backgroundColor: pressed ? '#f1f5f9' : '#f8fafc', // surface.base.alternative
+        backgroundColor: pressed ? colors.surface.base.alternative : colors.surface.base.default,
       };
     default:
       return {};
@@ -119,7 +131,7 @@ const getVariantStyle = (variant: ListCardVariant, pressed: boolean = false): Vi
 export const ListCard = forwardRef<View, ListCardProps>(
   (
     {
-      variant = 'elevated',
+      variant = 'filled',
       size = 'medium',
       thumbnail,
       title,
@@ -127,6 +139,8 @@ export const ListCard = forwardRef<View, ListCardProps>(
       meta,
       action,
       badges,
+      bottomContent,
+      divider = false,
       onPress,
       disabled = false,
       style,
@@ -142,44 +156,50 @@ export const ListCard = forwardRef<View, ListCardProps>(
       alignItems: 'flex-start',
       gap: sizeStyle.gap,
       padding: sizeStyle.padding,
-      borderRadius: 12, // radius.semantic.card.sm
+      borderRadius: radius.component.card.sm,
       opacity: disabled ? 0.5 : 1,
     };
 
     const thumbnailContainerStyle: ViewStyle = {
       width: sizeStyle.thumbnailSize,
       height: sizeStyle.thumbnailSize,
-      borderRadius: 8, // primitive.sm
+      borderRadius: radius.primitive.sm,
       overflow: 'hidden',
-      backgroundColor: '#f1f5f9', // surface.base.container
+      backgroundColor: colors.surface.base.container,
       alignItems: 'center',
       justifyContent: 'center',
     };
 
     const contentStyle: ViewStyle = {
       flex: 1,
-      gap: 4, // primitive.1
+      justifyContent: 'center',
     };
 
     const titleStyle: TextStyle = {
+      fontFamily: typography.fontFamily.base,
       fontSize: sizeStyle.titleSize,
-      fontWeight: '600',
-      color: '#334155', // content.base.default
-      lineHeight: sizeStyle.titleSize * 1.4,
+      fontWeight: typography.fontWeight.bold,
+      color: colors.content.base.default,
+      lineHeight: sizeStyle.titleSize * 1.35,
+      letterSpacing: -0.2,
     };
 
     const subtitleStyle: TextStyle = {
+      fontFamily: typography.fontFamily.base,
       fontSize: sizeStyle.subtitleSize,
-      fontWeight: '400',
-      color: '#64748b', // content.base.secondary
+      fontWeight: typography.fontWeight.medium,
+      color: colors.content.base.secondary,
       lineHeight: sizeStyle.subtitleSize * 1.4,
+      letterSpacing: -0.1,
     };
 
     const metaStyle: TextStyle = {
+      fontFamily: typography.fontFamily.base,
       fontSize: sizeStyle.metaSize,
-      fontWeight: '700',
-      color: '#334155', // content.base.default
-      marginTop: 4,
+      fontWeight: typography.fontWeight.bold,
+      color: colors.content.base.default,
+      lineHeight: sizeStyle.metaSize * 1.3,
+      letterSpacing: -0.2,
     };
 
     const content = (
@@ -195,13 +215,13 @@ export const ListCard = forwardRef<View, ListCardProps>(
         <View style={contentStyle}>
           {/* Badges */}
           {badges && (
-            <View style={{ flexDirection: 'row', gap: 4, marginBottom: 4 }}>
+            <View style={{ flexDirection: 'row', gap: spacing.primitive[1], marginBottom: spacing.primitive[1] }}>
               {badges}
             </View>
           )}
 
           {typeof title === 'string' ? (
-            <Text style={titleStyle} numberOfLines={2}>{title}</Text>
+            <Text style={[titleStyle, { marginBottom: subtitle ? 2 : 0 }]} numberOfLines={2}>{title}</Text>
           ) : (
             title
           )}
@@ -213,11 +233,18 @@ export const ListCard = forwardRef<View, ListCardProps>(
             )
           )}
           {meta && (
-            typeof meta === 'string' ? (
-              <Text style={metaStyle}>{meta}</Text>
-            ) : (
-              meta
-            )
+            <View style={{ marginTop: spacing.primitive[2] }}>
+              {typeof meta === 'string' ? (
+                <Text style={metaStyle}>{meta}</Text>
+              ) : (
+                meta
+              )}
+            </View>
+          )}
+          {bottomContent && (
+            <View style={{ marginTop: spacing.primitive[3] }}>
+              {bottomContent}
+            </View>
           )}
         </View>
 
@@ -230,29 +257,40 @@ export const ListCard = forwardRef<View, ListCardProps>(
       </>
     );
 
-    if (isInteractive) {
-      return (
-        <Pressable
-          ref={ref as React.Ref<View>}
-          onPress={onPress}
-          disabled={disabled}
-          style={({ pressed }) => [
-            containerStyle,
-            getVariantStyle(variant, pressed),
-            style,
-          ]}
-          {...props}
-        >
-          {content}
-        </Pressable>
-      );
-    }
-
-    return (
+    const card = isInteractive ? (
+      <Pressable
+        ref={ref as React.Ref<View>}
+        onPress={onPress}
+        disabled={disabled}
+        style={({ pressed }) => [
+          containerStyle,
+          getVariantStyle(variant, pressed),
+          style,
+        ]}
+        {...props}
+      >
+        {content}
+      </Pressable>
+    ) : (
       <View ref={ref} style={[containerStyle, getVariantStyle(variant), style]} {...props}>
         {content}
       </View>
     );
+
+    if (divider) {
+      return (
+        <View>
+          {card}
+          <View style={{
+            height: 1,
+            backgroundColor: colors.border.base.default,
+            marginLeft: sizeStyle.padding + (thumbnail ? sizeStyle.thumbnailSize + sizeStyle.gap : 0),
+          }} />
+        </View>
+      );
+    }
+
+    return card;
   }
 );
 

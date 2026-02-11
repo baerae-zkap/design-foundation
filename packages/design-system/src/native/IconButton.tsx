@@ -6,115 +6,159 @@
  *
  * @example
  * <IconButton
- *   variant="filled"
- *   color="brandDefault"
+ *   variant="solid"
+ *   color="primary"
  *   size="medium"
  *   onPress={() => {}}
+ *   testID="my-icon-button"
+ *   accessibilityLabel="Add item"
  * >
  *   <PlusIcon />
  * </IconButton>
  */
 
-import { forwardRef, type ReactNode } from 'react';
-import { Pressable, View, type PressableProps, type ViewStyle } from 'react-native';
+import React, { forwardRef, useRef, useCallback, type ReactNode } from 'react';
+import { Pressable, View, Animated, StyleSheet, type PressableProps, type ViewStyle } from 'react-native';
+import { colors } from '../tokens/colors';
+import { radius } from '../tokens/radius';
+import { spacing } from '../tokens/spacing';
 
-export type IconButtonVariant = 'filled' | 'ghost' | 'outlined';
-export type IconButtonColor = 'brandDefault' | 'baseDefault' | 'errorDefault';
+export type IconButtonVariant = 'ghost' | 'solid' | 'outlined';
+export type IconButtonColor = 'primary' | 'secondary' | 'danger';
 export type IconButtonSize = 'small' | 'medium' | 'large';
 
 export interface IconButtonProps extends Omit<PressableProps, 'children' | 'style'> {
-  /** 버튼 스타일 - filled(채워진), ghost(투명), outlined(테두리) */
+  /** 버튼 스타일 - ghost(투명), solid(채워진), outlined(테두리) */
   variant?: IconButtonVariant;
   /** 색상 테마 */
   color?: IconButtonColor;
   /** 버튼 크기 */
   size?: IconButtonSize;
+  /** 커스텀 아이콘 색상 (Montage Customize) */
+  iconColor?: string;
+  /** 커스텀 배경 색상 (Montage Customize) */
+  backgroundColor?: string;
+  /** 커스텀 테두리 색상 (Montage Customize) - outlined variant용 */
+  borderColor?: string;
+  /** 커스텀 아이콘 크기 (Toss pattern) */
+  iconSize?: number;
   /** 아이콘 콘텐츠 */
   children: ReactNode;
   /** 커스텀 스타일 */
   style?: ViewStyle;
+  /** 테스트 ID */
+  testID?: string;
+  /** 접근성 라벨 */
+  accessibilityLabel?: string;
 }
 
-// Size: button size, icon size
-const sizeStyles: Record<IconButtonSize, { size: number; iconSize: number }> = {
-  small: { size: 32, iconSize: 18 },
-  medium: { size: 40, iconSize: 22 },
-  large: { size: 48, iconSize: 26 },
+// Size: button size, icon size, border radius
+const sizeStyles: Record<IconButtonSize, { size: number; iconSize: number; borderRadius: number }> = {
+  small: { size: 32, iconSize: 18, borderRadius: radius.primitive.sm },   // 8px
+  medium: { size: 40, iconSize: 22, borderRadius: radius.primitive.md },  // 12px
+  large: { size: 48, iconSize: 26, borderRadius: radius.primitive.lg },   // 16px
 };
 
 const colorStyles: Record<IconButtonColor, {
-  filled: { bg: string; bgPressed: string; color: string };
+  solid: { bg: string; bgPressed: string; color: string };
   ghost: { bg: string; bgPressed: string; color: string; colorPressed: string };
   outlined: { bg: string; bgPressed: string; color: string; border: string };
 }> = {
-  brandDefault: {
-    filled: {
-      bg: '#2563eb', // surface.brand.default (palette.blue.50)
-      bgPressed: '#1d4ed8', // surface.brand.defaultPressed (palette.blue.45)
-      color: 'white' // content.base.onColor (palette.static.white)
+  primary: {
+    solid: {
+      bg: colors.surface.brand.default,
+      bgPressed: colors.surface.brand.defaultPressed,
+      color: colors.content.base.onColor,
     },
     ghost: {
       bg: 'transparent',
-      bgPressed: 'rgba(37, 99, 235, 0.12)', // brand pressed overlay
-      color: '#2563eb', // content.brand.default (palette.blue.50)
-      colorPressed: '#1d4ed8' // content.brand.pressed (palette.blue.45)
+      bgPressed: colors.fill.alternative, // grey.50 + 12% opacity
+      color: colors.content.brand.default,
+      colorPressed: colors.surface.brand.defaultPressed,
     },
     outlined: {
-      bg: 'white', // surface.base.default (palette.static.white)
-      bgPressed: '#eff6ff', // surface.brand.secondary light (palette.blue.98)
-      color: '#2563eb', // content.brand.default (palette.blue.50)
-      border: '#2563eb' // border.brand.default (palette.blue.50)
+      bg: colors.surface.base.default,
+      bgPressed: colors.surface.brand.secondary,
+      color: colors.content.brand.default,
+      border: colors.border.brand.default,
     },
   },
-  baseDefault: {
-    filled: {
-      bg: '#334155', // surface.base.default filled (palette.grey.30)
-      bgPressed: '#1e293b', // surface.base.defaultPressed (palette.grey.20)
-      color: 'white' // content.base.onColor (palette.static.white)
+  secondary: {
+    solid: {
+      bg: colors.content.base.default,
+      bgPressed: colors.content.base.strong,
+      color: colors.content.base.onColor,
     },
     ghost: {
       bg: 'transparent',
-      bgPressed: 'rgba(0, 0, 0, 0.08)', // base pressed overlay
-      color: '#334155', // content.base.default (palette.grey.30)
-      colorPressed: '#1e293b' // content.base.pressed (palette.grey.20)
+      bgPressed: colors.fill.alternative, // grey.50 + 12% opacity
+      color: colors.content.base.default,
+      colorPressed: colors.content.base.strong,
     },
     outlined: {
-      bg: 'white', // surface.base.default (palette.static.white)
-      bgPressed: '#f8fafc', // surface.base.alternative (palette.grey.99)
-      color: '#334155', // content.base.default (palette.grey.30)
-      border: '#cbd5e1' // border.base.default (palette.grey.90)
+      bg: colors.surface.base.default,
+      bgPressed: colors.surface.base.alternative,
+      color: colors.content.base.default,
+      border: colors.border.base.default,
     },
   },
-  errorDefault: {
-    filled: {
-      bg: '#ef4444', // surface.error.default (palette.red.50)
-      bgPressed: '#dc2626', // surface.error.defaultPressed (palette.red.45)
-      color: 'white' // content.base.onColor (palette.static.white)
+  danger: {
+    solid: {
+      bg: colors.content.error.default,
+      bgPressed: colors.border.error.defaultPressed,
+      color: colors.content.base.onColor,
     },
     ghost: {
       bg: 'transparent',
-      bgPressed: 'rgba(239, 68, 68, 0.12)', // error pressed overlay
-      color: '#ef4444', // content.error.default (palette.red.50)
-      colorPressed: '#dc2626' // content.error.pressed (palette.red.45)
+      bgPressed: colors.fill.alternative, // grey.50 + 12% opacity
+      color: colors.content.error.default,
+      colorPressed: colors.border.error.defaultPressed,
     },
     outlined: {
-      bg: 'white', // surface.base.default (palette.static.white)
-      bgPressed: '#fef2f2', // surface.error.secondary (palette.red.98)
-      color: '#dc2626', // content.error.strong (palette.red.45)
-      border: '#ef4444' // border.error.default (palette.red.50)
+      bg: colors.surface.base.default,
+      bgPressed: colors.surface.error.default,
+      color: colors.content.error.default,
+      border: colors.border.error.default,
     },
   },
 };
+
+// Helper to darken a color for pressed state
+function darkenColor(color: string, amount: number = 0.1): string {
+  // Simple darkening for pressed custom backgrounds
+  // For hex colors, reduce RGB by amount
+  if (color.startsWith('#')) {
+    const hex = color.replace('#', '');
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+
+    const darkenValue = (val: number) => Math.max(0, Math.floor(val * (1 - amount)));
+
+    const newR = darkenValue(r).toString(16).padStart(2, '0');
+    const newG = darkenValue(g).toString(16).padStart(2, '0');
+    const newB = darkenValue(b).toString(16).padStart(2, '0');
+
+    return `#${newR}${newG}${newB}`;
+  }
+  return color;
+}
 
 export const IconButton = forwardRef<View, IconButtonProps>(
   (
     {
       variant = 'ghost',
-      color = 'baseDefault',
+      color = 'secondary',
       size = 'medium',
       disabled = false,
+      iconColor: customIconColor,
+      backgroundColor: customBackgroundColor,
+      borderColor: customBorderColor,
+      iconSize: customIconSize,
       children,
       style,
+      testID,
+      accessibilityLabel,
       ...props
     },
     ref
@@ -122,68 +166,154 @@ export const IconButton = forwardRef<View, IconButtonProps>(
     const sizeStyle = sizeStyles[size];
     const colorStyle = colorStyles[color][variant];
 
+    // Animation value for pressed state
+    const pressAnim = useRef(new Animated.Value(0)).current;
+
+    // Animated scale interpolation (1 → 0.97)
+    const animatedScale = pressAnim.interpolate({
+      inputRange: [0, 1],
+      outputRange: [1, 0.97],
+    });
+
+    const handlePressIn = useCallback(() => {
+      if (!disabled) {
+        Animated.timing(pressAnim, {
+          toValue: 1,
+          duration: 120,
+          useNativeDriver: false,
+        }).start();
+      }
+    }, [disabled, pressAnim]);
+
+    const handlePressOut = useCallback(() => {
+      if (!disabled) {
+        Animated.timing(pressAnim, {
+          toValue: 0,
+          duration: 180,
+          useNativeDriver: false,
+        }).start();
+      }
+    }, [disabled, pressAnim]);
+
     return (
       <Pressable
         ref={ref}
         disabled={disabled}
         accessibilityRole="button"
-        accessibilityState={{ disabled: disabled ?? undefined }}
-        hitSlop={8}
-        style={({ pressed }) => {
-          // Determine background color based on state
-          let backgroundColor: string;
-          if (variant === 'ghost') {
-            const ghostStyle = colorStyle as typeof colorStyles.brandDefault.ghost;
-            backgroundColor = pressed ? ghostStyle.bgPressed : ghostStyle.bg;
-          } else if (variant === 'filled') {
-            const filledStyle = colorStyle as typeof colorStyles.brandDefault.filled;
-            backgroundColor = pressed ? filledStyle.bgPressed : filledStyle.bg;
-          } else {
-            const outlinedStyle = colorStyle as typeof colorStyles.brandDefault.outlined;
-            backgroundColor = pressed ? outlinedStyle.bgPressed : outlinedStyle.bg;
-          }
-
-          const borderStyle = variant === 'outlined'
-            ? { borderWidth: 1, borderColor: (colorStyle as typeof colorStyles.brandDefault.outlined).border }
-            : {};
-
-          return [
-            {
-              width: sizeStyle.size,
-              height: sizeStyle.size,
-              borderRadius: 9999, // radius.primitive.full (perfect circle)
-              backgroundColor,
-              alignItems: 'center' as const,
-              justifyContent: 'center' as const,
-              opacity: disabled ? 0.5 : 1,
-              ...borderStyle,
-            },
-            style,
-          ];
-        }}
+        accessibilityState={{ disabled: !!disabled }}
+        accessibilityLabel={accessibilityLabel}
+        testID={testID}
+        hitSlop={spacing.primitive[2]} // 8px
+        onPressIn={handlePressIn}
+        onPressOut={handlePressOut}
+        style={style}
         {...props}
       >
         {({ pressed }) => {
-          // Determine icon color based on state
-          let iconColor: string;
-          if (variant === 'ghost') {
-            const ghostStyle = colorStyle as typeof colorStyles.brandDefault.ghost;
-            iconColor = pressed ? ghostStyle.colorPressed : ghostStyle.color;
+          // Determine base background color (non-pressed)
+          let baseBgColor: string;
+          let pressedBgColor: string;
+
+          if (customBackgroundColor) {
+            // Custom background
+            baseBgColor = customBackgroundColor;
+            pressedBgColor = darkenColor(customBackgroundColor);
+          } else if (disabled) {
+            // Disabled state
+            if (variant === 'ghost') {
+              baseBgColor = 'transparent';
+              pressedBgColor = 'transparent';
+            } else {
+              baseBgColor = colors.surface.disabled.default;
+              pressedBgColor = colors.surface.disabled.default;
+            }
+          } else if (variant === 'ghost') {
+            const ghostStyle = colorStyle as typeof colorStyles.primary.ghost;
+            baseBgColor = ghostStyle.bg;
+            pressedBgColor = ghostStyle.bgPressed;
+          } else if (variant === 'solid') {
+            const solidStyle = colorStyle as typeof colorStyles.primary.solid;
+            baseBgColor = solidStyle.bg;
+            pressedBgColor = solidStyle.bgPressed;
           } else {
-            iconColor = (colorStyle as typeof colorStyles.brandDefault.filled).color;
+            const outlinedStyle = colorStyle as typeof colorStyles.primary.outlined;
+            baseBgColor = outlinedStyle.bg;
+            pressedBgColor = outlinedStyle.bgPressed;
           }
 
+          const borderStyle = variant === 'outlined'
+            ? {
+                borderWidth: 1,
+                borderColor: customBorderColor || (colorStyle as typeof colorStyles.primary.outlined).border
+              }
+            : {};
+
+          const baseContainerStyle = {
+            width: sizeStyle.size,
+            height: sizeStyle.size,
+            borderRadius: sizeStyle.borderRadius,
+            backgroundColor: baseBgColor,
+            alignItems: 'center' as const,
+            justifyContent: 'center' as const,
+            ...borderStyle,
+          };
+
+          // Determine icon color based on state
+          let resolvedIconColor: string;
+
+          if (customIconColor) {
+            // Custom icon color
+            resolvedIconColor = customIconColor;
+          } else if (disabled) {
+            // Disabled state
+            resolvedIconColor = colors.content.disabled.default;
+          } else if (variant === 'ghost' && pressed) {
+            // Ghost pressed state
+            const ghostStyle = colorStyle as typeof colorStyles.primary.ghost;
+            resolvedIconColor = ghostStyle.colorPressed;
+          } else {
+            // Normal state
+            resolvedIconColor = (colorStyle as typeof colorStyles.primary.solid).color;
+          }
+
+          const resolvedIconSize = customIconSize || sizeStyle.iconSize;
+
           return (
-            <View
-              style={{
-                width: sizeStyle.iconSize,
-                height: sizeStyle.iconSize,
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
+            <Animated.View
+              style={[
+                baseContainerStyle,
+                {
+                  transform: [{ scale: !disabled ? animatedScale : 1 }],
+                  overflow: 'hidden',
+                },
+              ]}
             >
-              {children}
-            </View>
+              {/* Pressed background overlay */}
+              <Animated.View
+                style={{
+                  ...StyleSheet.absoluteFillObject,
+                  backgroundColor: pressedBgColor,
+                  opacity: !disabled ? pressAnim : 0,
+                }}
+              />
+
+              {/* Icon */}
+              <View
+                style={{
+                  width: resolvedIconSize,
+                  height: resolvedIconSize,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                {React.isValidElement(children)
+                  ? React.cloneElement(children as React.ReactElement<{ color?: string; size?: number }>, {
+                      color: resolvedIconColor,
+                      size: resolvedIconSize,
+                    })
+                  : children}
+              </View>
+            </Animated.View>
           );
         }}
       </Pressable>

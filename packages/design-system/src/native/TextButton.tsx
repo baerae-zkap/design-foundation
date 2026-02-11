@@ -7,7 +7,7 @@
  * @example
  * <TextButton
  *   variant="clear"
- *   color="brandDefault"
+ *   color="primary"
  *   size="medium"
  *   onPress={() => {}}
  * >
@@ -15,19 +15,27 @@
  * </TextButton>
  */
 
-import React, { forwardRef, type ReactNode } from 'react';
+import React, { forwardRef, useRef, useCallback, type ReactNode } from 'react';
 import {
   Pressable,
   Text,
   View,
+  Animated,
+  StyleSheet,
   type PressableProps,
   type ViewStyle,
   type TextStyle,
 } from 'react-native';
+import { ArrowRight } from 'lucide-react-native';
+import { LoadingDots } from './LoadingDots';
+import { colors } from '../tokens/colors';
+import { spacing } from '../tokens/spacing';
+import { radius } from '../tokens/radius';
+import { typography } from '../tokens/typography';
 
 export type TextButtonVariant = 'clear' | 'underline' | 'arrow';
-export type TextButtonColor = 'brandDefault' | 'baseDefault' | 'errorDefault';
-export type TextButtonSize = 'xSmall' | 'small' | 'medium' | 'large' | 'xLarge';
+export type TextButtonColor = 'primary' | 'secondary' | 'danger';
+export type TextButtonSize = 'xsmall' | 'small' | 'medium' | 'large' | 'xlarge' | 'xxlarge';
 
 export interface TextButtonProps extends Omit<PressableProps, 'style'> {
   /** 버튼 스타일 - clear(기본), underline(밑줄), arrow(화살표) */
@@ -36,35 +44,46 @@ export interface TextButtonProps extends Omit<PressableProps, 'style'> {
   color?: TextButtonColor;
   /** 텍스트 크기 */
   size?: TextButtonSize;
+  /** 로딩 상태 */
+  loading?: boolean;
+  /** 선행 아이콘 (Montage anatomy) */
+  leadingIcon?: ReactNode;
+  /** 커스텀 컨텐츠 색상 - 텍스트와 아이콘 색상을 함께 오버라이드 (Montage Customize) */
+  contentColor?: string;
   /** 버튼 텍스트 */
   children?: ReactNode;
   /** 커스텀 스타일 */
   style?: ViewStyle;
+  /** 테스트 ID */
+  testID?: string;
+  /** 접근성 라벨 */
+  accessibilityLabel?: string;
 }
 
-const sizeConfig: Record<TextButtonSize, number> = {
-  xSmall: 12,
-  small: 14,
-  medium: 16,
-  large: 18,
-  xLarge: 20,
+const sizeConfig: Record<TextButtonSize, { fontSize: number; lineHeight: number; iconSize: number }> = {
+  xsmall: { fontSize: typography.fontSize.xs, lineHeight: typography.lineHeight.xs, iconSize: 14 },
+  small: { fontSize: typography.fontSize.sm, lineHeight: typography.lineHeight.sm, iconSize: 16 },
+  medium: { fontSize: typography.fontSize.md, lineHeight: typography.lineHeight.md, iconSize: 18 },
+  large: { fontSize: typography.fontSize.lg, lineHeight: typography.lineHeight.lg, iconSize: 20 },
+  xlarge: { fontSize: typography.fontSize.xl, lineHeight: typography.lineHeight.xl, iconSize: 22 },
+  xxlarge: { fontSize: typography.fontSize['2xl'], lineHeight: typography.lineHeight['2xl'], iconSize: 24 },
 };
 
 const colorConfig: Record<TextButtonColor, { default: string; pressed: string; pressedBg: string }> = {
-  brandDefault: {
-    default: '#2563eb', // content.brand.default (palette.blue.50)
-    pressed: '#1e40af', // content.brand.default pressed (palette.blue.45)
-    pressedBg: 'rgba(0, 0, 0, 0.06)' // surface overlay for pressed state
+  primary: {
+    default: colors.content.brand.default,
+    pressed: colors.surface.brand.defaultPressed,
+    pressedBg: colors.surface.brand.secondary,          // light blue
   },
-  baseDefault: {
-    default: '#334155', // content.base.default (palette.grey.30)
-    pressed: '#1e293b', // content.base.strong (palette.grey.15)
-    pressedBg: 'rgba(0, 0, 0, 0.06)' // surface overlay for pressed state
+  secondary: {
+    default: colors.content.base.default,
+    pressed: colors.content.base.strong,
+    pressedBg: colors.surface.base.alternative,          // light gray
   },
-  errorDefault: {
-    default: '#ef4444', // content.error.default (palette.red.50)
-    pressed: '#b91c1c', // content.error.default pressed (palette.red.45)
-    pressedBg: 'rgba(0, 0, 0, 0.06)' // surface overlay for pressed state
+  danger: {
+    default: colors.content.error.default,
+    pressed: colors.border.error.defaultPressed,
+    pressedBg: colors.surface.error.default,             // light red
   },
 };
 
@@ -72,63 +91,134 @@ export const TextButton = forwardRef<View, TextButtonProps>(
   (
     {
       variant = 'clear',
-      color = 'brandDefault',
+      color = 'primary',
       size = 'medium',
       disabled = false,
+      loading = false,
+      leadingIcon,
+      contentColor,
       children,
       style,
+      testID,
+      accessibilityLabel,
       ...props
     },
     ref
   ) => {
-    const fontSize = sizeConfig[size];
+    const sizeStyle = sizeConfig[size];
     const colorStyle = colorConfig[color];
+    const pressAnim = useRef(new Animated.Value(0)).current;
 
-    const getContainerStyle = (pressed: boolean): ViewStyle => ({
-      flexDirection: 'row',
-      alignItems: 'center',
-      gap: 4, // spacing.primitive.1
-      paddingVertical: 4, // spacing.primitive.1
-      paddingHorizontal: 8, // spacing.primitive.2
-      borderRadius: 8, // radius.primitive.sm
-      backgroundColor: pressed && !disabled ? colorStyle.pressedBg : 'transparent',
+    const handlePressIn = useCallback(() => {
+      Animated.timing(pressAnim, {
+        toValue: 1,
+        duration: 120,
+        useNativeDriver: false,
+      }).start();
+    }, [pressAnim]);
+
+    const handlePressOut = useCallback(() => {
+      Animated.timing(pressAnim, {
+        toValue: 0,
+        duration: 180,
+        useNativeDriver: false,
+      }).start();
+    }, [pressAnim]);
+
+    const animatedScale = pressAnim.interpolate({
+      inputRange: [0, 1],
+      outputRange: [1, 0.97],
     });
-
-    const getTextStyle = (pressed: boolean): TextStyle => {
-      const textColor = disabled
-        ? '#94a3b8' // content.disabled.default (palette.grey.80)
-        : (pressed ? colorStyle.pressed : colorStyle.default);
-      return {
-        fontSize,
-        fontWeight: '500',
-        color: textColor,
-        textDecorationLine: variant === 'underline' ? 'underline' : 'none',
-      };
-    };
 
     return (
       <Pressable
-        disabled={disabled}
+        ref={ref}
+        disabled={disabled || loading}
+        testID={testID}
+        accessibilityLabel={accessibilityLabel}
         accessibilityRole="button"
-        accessibilityState={{ disabled: !!disabled }}
+        accessibilityState={{ disabled: !!(disabled || loading), busy: !!loading }}
         hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-        style={({ pressed }) => [getContainerStyle(pressed), style as ViewStyle]}
+        onPressIn={handlePressIn}
+        onPressOut={handlePressOut}
+        style={style}
         {...props}
       >
         {({ pressed }) => (
-          <>
-            {typeof children === 'string' ? (
-              <Text style={getTextStyle(pressed)}>{children}</Text>
-            ) : (
-              children
-            )}
-            {variant === 'arrow' && (
-              <ArrowIcon
-                size={fontSize * 0.875}
-                color={disabled ? '#94a3b8' /* content.disabled.default (palette.grey.80) */ : (pressed ? colorStyle.pressed : colorStyle.default)}
-              />
-            )}
-          </>
+          <Animated.View
+            style={{
+              flexDirection: 'row' as const,
+              alignItems: 'center' as const,
+              gap: spacing.primitive[1],
+              paddingVertical: spacing.primitive[1],
+              paddingHorizontal: spacing.primitive[2],
+              borderRadius: radius.primitive.sm,
+              overflow: 'hidden' as const,
+              transform: [{ scale: disabled ? 1 : animatedScale }],
+            }}
+          >
+            {/* Background layer with opacity animation */}
+            <Animated.View
+              style={{
+                ...StyleSheet.absoluteFillObject,
+                backgroundColor: colorStyle.pressedBg,
+                opacity: disabled ? 0 : pressAnim,
+              }}
+            />
+        {(() => {
+          const resolvedColor = disabled
+            ? colors.content.disabled.default
+            : contentColor
+            ? contentColor
+            : (pressed ? colorStyle.pressed : colorStyle.default);
+
+          return (
+            <>
+              {loading ? (
+                <LoadingDots
+                  color={contentColor || colorStyle.default}
+                  size={sizeStyle.fontSize * 0.3}
+                  gap={sizeStyle.fontSize * 0.2}
+                />
+              ) : (
+                <>
+                  {leadingIcon && (
+                    React.isValidElement(leadingIcon)
+                      ? React.cloneElement(leadingIcon as React.ReactElement<{ color?: string; size?: number }>, {
+                          color: resolvedColor,
+                          size: sizeStyle.iconSize,
+                        })
+                      : leadingIcon
+                  )}
+                  {typeof children === 'string' ? (
+                    <Text
+                      style={{
+                        fontSize: sizeStyle.fontSize,
+                        lineHeight: sizeStyle.lineHeight,
+                        fontWeight: typography.fontWeight.medium,
+                        fontFamily: typography.fontFamily.base,
+                        color: resolvedColor,
+                        textDecorationLine: variant === 'underline' ? 'underline' : 'none',
+                      }}
+                    >
+                      {children}
+                    </Text>
+                  ) : (
+                    children
+                  )}
+                  {variant === 'arrow' && (
+                    <ArrowRight
+                      size={sizeStyle.fontSize * 0.875}
+                      color={resolvedColor}
+                      strokeWidth={2}
+                    />
+                  )}
+                </>
+              )}
+            </>
+          );
+        })()}
+          </Animated.View>
         )}
       </Pressable>
     );
@@ -136,12 +226,3 @@ export const TextButton = forwardRef<View, TextButtonProps>(
 );
 
 TextButton.displayName = 'TextButton';
-
-// Simple arrow icon component
-function ArrowIcon({ size, color }: { size: number; color: string }) {
-  return (
-    <View style={{ width: size, height: size, justifyContent: 'center', alignItems: 'center' }}>
-      <Text style={{ fontSize: size, color, fontWeight: '300' }}>→</Text>
-    </View>
-  );
-}

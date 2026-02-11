@@ -1,6 +1,7 @@
 # Accordion Component
 
 > 펼침/접힘 가능한 콘텐츠 컨테이너입니다.
+> Montage 디자인 시스템 패턴을 따르며, 플랫한 리스트형 구조를 사용합니다.
 
 ## Quick Reference
 
@@ -9,8 +10,9 @@
 import { Accordion } from '@baerae-zkap/design-system';
 <Accordion
   title="제목"
-  defaultExpanded={false}
-  size="medium"
+  verticalPadding="medium"
+  fillWidth={false}
+  showDivider
 >
   콘텐츠
 </Accordion>
@@ -19,8 +21,9 @@ import { Accordion } from '@baerae-zkap/design-system';
 import { Accordion } from '@baerae-zkap/design-system/native';
 <Accordion
   title="제목"
-  defaultExpanded={false}
-  size="medium"
+  verticalPadding="medium"
+  fillWidth={false}
+  showDivider
 >
   <Text>콘텐츠</Text>
 </Accordion>
@@ -30,108 +33,189 @@ import { Accordion } from '@baerae-zkap/design-system/native';
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `title` | `ReactNode` | - | ✅ | 헤더 제목 |
-| `children` | `ReactNode` | - | ✅ | 콘텐츠 |
+| `title` | `ReactNode` | - | Yes | 헤더 제목 |
+| `children` | `ReactNode` | - | Yes | 콘텐츠 |
 | `defaultExpanded` | `boolean` | `false` | | 기본 펼침 상태 (비제어) |
 | `expanded` | `boolean` | - | | 펼침 상태 (제어) |
 | `onChange` | `(expanded: boolean) => void` | - | | 펼침 상태 변경 핸들러 |
 | `disabled` | `boolean` | `false` | | 비활성화 상태 |
-| `size` | `"medium"` \| `"large"` | `"medium"` | | 크기 |
+| `fillWidth` | `boolean` | `false` | | 전체 너비 모드 |
+| `verticalPadding` | `"small"` \| `"medium"` \| `"large"` | `"medium"` | | 상하 여백 크기 |
+| `leadingIcon` | `ReactNode` | - | | 제목 좌측 아이콘 |
+| `trailingContent` | `ReactNode` | - | | 우측 커스텀 콘텐츠 (chevron 대체) |
+| `showDivider` | `boolean` | `false` | | 하단 구분선 표시 |
 
-### Web-specific Props
-| Prop | Type | Description |
-|------|------|-------------|
-| `onClick` | `() => void` | 헤더 클릭 핸들러 (기본 토글 동작 오버라이드) |
+## Vertical Padding
 
-### React Native-specific Props
-| Prop | Type | Description |
-|------|------|-------------|
-| `onPress` | `() => void` | 헤더 탭 핸들러 (기본 토글 동작 오버라이드) |
+상하 여백은 화면 내 배치와 정보의 계층 구조에 맞춰 유연하게 사용할 수 있습니다.
 
-## Usage Modes
+| Size | Value | Token | Use Case |
+|------|-------|-------|----------|
+| `small` | 8px | `spacing.primitive[2]` | 밀도 높은 목록, 중첩 아코디언 |
+| `medium` | 12px | `spacing.primitive[3]` | 기본 사용 (설정, FAQ) |
+| `large` | 16px | `spacing.primitive[4]` | 넉넉한 여백, 주요 섹션 |
 
-| Mode | 용도 | 특징 |
-|------|------|------|
-| Uncontrolled | 기본 사용 | `defaultExpanded` 사용, 내부 상태 관리 |
-| Controlled | 외부 상태 제어 | `expanded` + `onChange` 사용 |
+## Fill Width
+
+| Mode | Description |
+|------|-------------|
+| `fillWidth={false}` | 헤더가 콘텐츠에 맞춰 너비 결정 |
+| `fillWidth={true}` | 헤더가 부모 컨테이너 전체 너비 차지 |
 
 ## Design Tokens
 
 | Property | Token | Value |
 |----------|-------|-------|
-| Header Height (medium) | - | 48px |
-| Header Height (large) | - | 56px |
-| Padding (horizontal) | - | 16px |
-| Content Padding | - | 16px |
-| Icon Size | - | 16px |
-| Border Radius | - | 8px |
-| Border | - | 1px solid #e2e8f0 |
+| Header padding (horizontal) | `spacing.primitive[3]` | 12px |
+| Header gap | `spacing.primitive[2]` | 8px |
+| Pressed background | `colors.surface.base.alternative` | - |
+| Interaction border-radius | `radius.component.card.sm` | 12px |
+| Icon size | - | 20px |
+| Title font size | `typography.fontSize.md` | 16px |
+| Title font weight | `typography.fontWeight.semibold` | 600 |
+| Title color | `colors.content.base.default` | - |
+| Icon color | `colors.content.base.secondary` | - |
+| Divider color | `colors.border.solid.alternative` | - |
+| Divider height | - | 1px |
+| Content padding top | `spacing.primitive[1]` | 4px |
+| Content padding bottom | `spacing.primitive[4]` | 16px |
+| Disabled opacity | - | 0.38 |
+| Animation duration | - | 200ms |
 
 ## Color Values
 
 | Element | State | Color |
 |---------|-------|-------|
-| Background | Collapsed | `white` |
-| Background | Expanded (header) | `#fafbfc` |
-| Title | - | `#334155` |
-| Icon | - | `#64748b` |
-| Border | - | `#e2e8f0` |
+| Background | Default | transparent |
+| Background | Pressed | `surface.base.alternative` |
+| Title | Default | `content.base.default` |
+| Icon (chevron) | Default | `content.base.secondary` |
+| Divider | - | `border.solid.alternative` |
 
 ## States
 
 | State | Description | Visual Change |
 |-------|-------------|---------------|
-| Default | 기본 상태 | - |
-| Expanded | 펼쳐진 상태 | 헤더 배경 #fafbfc, 아이콘 180° 회전, 콘텐츠 표시 |
-| Pressed | 헤더 누르는 상태 (Native) | 배경 #f8fafc |
-| Disabled | 비활성화 | opacity: 0.5 |
+| Default | 기본 상태 | 투명 배경 |
+| Pressed | 헤더 누름 (Native) | 배경 `surface.base.alternative`, 12px radius |
+| Expanded | 펼쳐진 상태 | Chevron 180° 회전, 콘텐츠 표시 |
+| Disabled | 비활성화 | opacity 0.38 |
 
 ## Animations
 
 | Element | Property | Duration | Easing |
 |---------|----------|----------|--------|
-| Content Height | height | 200ms | ease |
-| Icon Rotation | transform | 200ms | ease |
-| Header Background | background-color | 200ms | ease |
+| Content Height | maxHeight | 200ms | linear |
+| Content Opacity | opacity | 200ms | linear |
+| Chevron Rotation | transform.rotate | 200ms | linear |
 
 ## Usage Guidelines
 
-### 사용 시기
-- 긴 콘텐츠를 접어서 공간 절약
-- FAQ, 설정 패널, 필터 옵션 등
-- 단계별 정보 표시
-
-### Size 선택 기준
+### Vertical Padding 선택 기준
 | 상황 | Size | 예시 |
 |------|------|------|
-| 일반적인 경우 | `medium` | FAQ, 설정 |
-| 중요한 섹션 | `large` | 주요 카테고리 헤더 |
+| 밀도 높은 목록 | `small` | 중첩 아코디언, 사이드 메뉴 |
+| 일반적인 경우 | `medium` | FAQ, 설정, 필터 |
+| 넉넉한 레이아웃 | `large` | 주요 섹션 헤더 |
+
+### Fill Width 선택 기준
+| 상황 | Fill Width | 예시 |
+|------|------------|------|
+| 카드/컨테이너 내부 | `false` | 설정 그룹 |
+| 전체 화면 너비 사용 | `true` | 전체 화면 설정 목록 |
+
+## Features
+
+### Leading Icon
+Heading 좌측에 아이콘을 배치하여 항목의 성격이나 카테고리를 시각적으로 표현합니다.
+
+### Trailing Content
+Heading 우측에 커스텀 요소를 배치합니다. 기본 Chevron 대신 아이콘 버튼, 화살표 등을 사용할 수 있습니다.
+
+### Divider
+구분선을 사용해 각 항목을 명확하게 구분합니다. 마지막 항목에는 구분선을 사용하지 않습니다.
+
+### Nested Accordions
+Accordion 하위에 또 다른 Accordion을 배치하여 계층 구조를 표현할 수 있습니다. 하위 항목은 좌측에 추가적인 여백(들여 쓰기)을 주어 시각적 위계를 구분합니다.
+
+### Text Overflow
+Heading과 콘텐츠의 길이가 길어지는 경우 제한 없이 여러 줄로 나타납니다.
 
 ## Accessibility
 
-1. **Keyboard Navigation**: 헤더에 키보드 포커스 가능
-2. **Screen Reader**: `accessibilityRole="button"`, `accessibilityState.expanded` 설정
-3. **Focus Indicator**: 키보드 포커스 시 아웃라인 표시
-4. **Clear Action**: 헤더 클릭으로 토글 가능
+1. **Screen Reader**: `accessibilityRole="button"`, `accessibilityState.expanded` 설정
+2. **Focus Indicator**: 키보드 포커스 시 12px radius 아웃라인 표시
+3. **Clear Action**: 헤더 전체 영역이 탭 가능
+4. **Disabled State**: opacity 0.38, 탭 불가
 
 ## Do & Don't
 
-### ✅ Do
-- 관련 콘텐츠를 그룹화
-- 명확한 제목 사용
-- 기본 상태는 접힌 상태 권장
+### Do
+- Accordion이 포함한 콘텐츠를 예상할 수 있도록 명확하고 간결한 Heading 사용
+- 한 페이지 내에서 열림/닫힘 아이콘 스타일 통일 (Chevron 또는 Arrow)
+- 관련 콘텐츠를 그룹화하여 정보 탐색 용이하게
 
-### ❌ Don't
-- 너무 많은 Accordion 중첩 금지 (최대 1단계)
-- 중요한 정보를 접힌 상태로 숨기지 말기
-- 너무 긴 콘텐츠는 분할 고려
+### Don't
+- 한 페이지나 시스템 내에서 열림/닫힘 아이콘을 여러 스타일로 혼용하지 않기
+- 너무 많은 Accordion 중첩 금지 (최대 2단계)
+- 중요한 정보를 접힌 상태로 숨기지 않기
 
 ## Code Examples
 
-### Basic Usage (Uncontrolled)
+### Basic Usage
 ```tsx
-<Accordion title="자주 묻는 질문">
+<Accordion title="자주 묻는 질문" verticalPadding="medium">
   <Text>답변 내용이 여기에 들어갑니다.</Text>
+</Accordion>
+```
+
+### With Dividers (FAQ Pattern)
+```tsx
+<View>
+  <Accordion title="상업적 사용이 가능한가요?" showDivider>
+    <Text>네, 가능합니다.</Text>
+  </Accordion>
+  <Accordion title="커스터마이징해도 되나요?" showDivider>
+    <Text>자유롭게 수정 가능합니다.</Text>
+  </Accordion>
+  <Accordion title="오류 신고는 어떻게?">
+    <Text>GitHub 이슈에 등록해주세요.</Text>
+  </Accordion>
+</View>
+```
+
+### With Leading Icon
+```tsx
+<Accordion
+  title="계정"
+  leadingIcon={<User size={20} color="#6b7684" />}
+  showDivider
+>
+  <Text>계정 관리 메뉴</Text>
+</Accordion>
+```
+
+### With Trailing Content
+```tsx
+<Accordion
+  title="조직"
+  trailingContent={<MoreVertical size={20} color="#6b7684" />}
+>
+  <Text>조직 관리 메뉴</Text>
+</Accordion>
+```
+
+### Nested Accordions
+```tsx
+<Accordion title="디자인" showDivider defaultExpanded>
+  <View style={{ paddingLeft: 8 }}>
+    <Accordion title="브랜드" verticalPadding="small" showDivider>
+      <Text>브랜드 디자인</Text>
+    </Accordion>
+    <Accordion title="UX/UI" verticalPadding="small">
+      <Text>UX/UI 디자인</Text>
+    </Accordion>
+  </View>
 </Accordion>
 ```
 
@@ -148,43 +232,9 @@ const [expanded, setExpanded] = useState(false);
 </Accordion>
 ```
 
-### Sizes
+### Fill Width
 ```tsx
-<View style={{ gap: 16 }}>
-  <Accordion title="Medium (기본)" size="medium">
-    <Text>콘텐츠</Text>
-  </Accordion>
-  <Accordion title="Large" size="large">
-    <Text>콘텐츠</Text>
-  </Accordion>
-</View>
-```
-
-### Default Expanded
-```tsx
-<Accordion title="기본으로 펼쳐짐" defaultExpanded>
-  <Text>기본으로 보이는 콘텐츠</Text>
+<Accordion fillWidth title="전체 너비 아코디언" showDivider>
+  <Text>전체 너비를 차지하는 아코디언입니다.</Text>
 </Accordion>
-```
-
-### Disabled
-```tsx
-<Accordion title="비활성화됨" disabled>
-  <Text>접근 불가</Text>
-</Accordion>
-```
-
-### Multiple Accordions
-```tsx
-<View style={{ gap: 12 }}>
-  <Accordion title="섹션 1">
-    <Text>내용 1</Text>
-  </Accordion>
-  <Accordion title="섹션 2">
-    <Text>내용 2</Text>
-  </Accordion>
-  <Accordion title="섹션 3">
-    <Text>내용 3</Text>
-  </Accordion>
-</View>
 ```

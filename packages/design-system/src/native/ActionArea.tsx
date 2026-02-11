@@ -18,28 +18,35 @@
  * </ActionArea>
  */
 
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import {
   View,
   Text,
   StyleSheet,
+  Animated,
+  Keyboard,
+  Platform,
   type ViewProps,
   type ViewStyle,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
+import { colors } from '../tokens/colors';
+import { spacing } from '../tokens/spacing';
+import { typography } from '../tokens/typography';
 
 // ============================================
 // Types
 // ============================================
 
 export type ActionAreaVariant = 'strong' | 'neutral' | 'compact';
-export type ActionAreaPosition = 'static' | 'absolute';
+export type ActionAreaPosition = 'static' | 'absolute' | 'fixed';
+export type ActionAreaAnimation = 'slide' | 'fade' | 'scale';
 
 export interface ActionAreaProps extends ViewProps {
   /** 레이아웃 variant - strong(세로/메인상단), neutral(가로/균등), compact(가로/우측정렬) */
   variant?: ActionAreaVariant;
-  /** 위치 설정 - static(기본), absolute(하단고정) */
+  /** 위치 설정 - static(기본), absolute(하단고정), fixed(하단고정 + 전체폭) */
   position?: ActionAreaPosition;
   /** 상단 그라데이션 표시 여부 */
   showGradient?: boolean;
@@ -53,6 +60,25 @@ export interface ActionAreaProps extends ViewProps {
   backgroundColor?: string;
   /** 버튼 요소들 (Button, TextButton 컴포넌트) */
   children: React.ReactNode;
+  /** 테스트 ID */
+  testID?: string;
+  /** 접근성 라벨 */
+  accessibilityLabel?: string;
+  /** 스크롤 시 숨김 (스크롤 다운: 숨김, 스크롤 업: 표시) */
+  hideOnScroll?: boolean;
+  /** hideOnScroll 사용 시 필요한 스크롤 Y 위치 Animated.Value */
+  scrollY?: Animated.Value;
+  /** 키보드 위에 고정 (키보드가 나타나면 그 위로 이동) */
+  fixedAboveKeyboard?: boolean;
+  /** 지연 후 애니메이션과 함께 표시 */
+  showAfterDelay?: {
+    animation: ActionAreaAnimation;
+    delay: number;
+  };
+  /** 상단 추가 콘텐츠 (버튼 위에 표시, 예: 가격 요약) */
+  topAccessory?: React.ReactNode;
+  /** 하단 추가 콘텐츠 (버튼 아래에 표시, 예: 면책 조항) */
+  bottomAccessory?: React.ReactNode;
 }
 
 // ============================================
@@ -99,22 +125,7 @@ function toTransparent(color: string): string {
   return 'rgba(255,255,255,0)';
 }
 
-// ============================================
-// Spacing Tokens (from Foundation)
-// ============================================
-
-const tokens = {
-  modal: {
-    padding: 24,    // modal.padding
-    buttonGap: 12,  // modal.buttonGap
-  },
-  bottomSheet: {
-    padding: 20,    // bottomSheet.padding
-  },
-  safeArea: {
-    bottom: 32,     // screen.safeAreaBottom (for useSafeAreaInsets fallback)
-  },
-};
+// Tokens are imported from '../tokens/spacing'
 
 // ============================================
 // ActionArea Component
@@ -129,36 +140,145 @@ export const ActionArea = forwardRef<View, ActionAreaProps>(
       gradientHeight = 48,
       caption,
       useSafeArea = true,
-      backgroundColor = 'white', // surface.base.default (static.white)
+      backgroundColor = colors.surface.base.default,
       children,
       style,
+      testID,
+      accessibilityLabel,
+      hideOnScroll = false,
+      scrollY,
+      fixedAboveKeyboard = false,
+      showAfterDelay,
+      topAccessory,
+      bottomAccessory,
       ...props
     },
     ref
   ) => {
     const insets = useSafeArea ? useSafeAreaInsets() : { bottom: 0 };
-
     const isVertical = variant === 'strong';
     const isCompact = variant === 'compact';
+    const isFixed = position === 'fixed' || position === 'absolute';
+
+    // Animation values
+    const translateY = useRef(new Animated.Value(0)).current;
+    const opacity = useRef(new Animated.Value(showAfterDelay ? 0 : 1)).current;
+    const scale = useRef(new Animated.Value(showAfterDelay ? 0.8 : 1)).current;
+    const [keyboardHeight, setKeyboardHeight] = useState(0);
+    const lastScrollY = useRef(0);
+
+    // Entry animation
+    useEffect(() => {
+      if (showAfterDelay) {
+        const timer = setTimeout(() => {
+          const animations: Animated.CompositeAnimation[] = [];
+
+          if (showAfterDelay.animation === 'slide') {
+            translateY.setValue(100);
+            animations.push(
+              Animated.timing(translateY, {
+                toValue: 0,
+                duration: 300,
+                useNativeDriver: true,
+              })
+            );
+          }
+
+          if (showAfterDelay.animation === 'fade' || showAfterDelay.animation === 'scale') {
+            animations.push(
+              Animated.timing(opacity, {
+                toValue: 1,
+                duration: 300,
+                useNativeDriver: true,
+              })
+            );
+          }
+
+          if (showAfterDelay.animation === 'scale') {
+            animations.push(
+              Animated.spring(scale, {
+                toValue: 1,
+                useNativeDriver: true,
+                damping: 15,
+                stiffness: 150,
+              })
+            );
+          }
+
+          Animated.parallel(animations).start();
+        }, showAfterDelay.delay);
+
+        return () => clearTimeout(timer);
+      }
+    }, [showAfterDelay, translateY, opacity, scale]);
+
+    // Scroll hide/show behavior
+    useEffect(() => {
+      if (hideOnScroll && scrollY) {
+        const listenerId = scrollY.addListener(({ value }) => {
+          const diff = value - lastScrollY.current;
+          lastScrollY.current = value;
+
+          if (diff > 5) {
+            // Scrolling down - hide
+            Animated.timing(translateY, {
+              toValue: 100,
+              duration: 200,
+              useNativeDriver: true,
+            }).start();
+          } else if (diff < -5) {
+            // Scrolling up - show
+            Animated.timing(translateY, {
+              toValue: 0,
+              duration: 200,
+              useNativeDriver: true,
+            }).start();
+          }
+        });
+
+        return () => scrollY.removeListener(listenerId);
+      }
+    }, [hideOnScroll, scrollY, translateY]);
+
+    // Keyboard avoidance
+    useEffect(() => {
+      if (fixedAboveKeyboard && isFixed) {
+        const showEvent = Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow';
+        const hideEvent = Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide';
+
+        const showListener = Keyboard.addListener(showEvent, (e) => {
+          setKeyboardHeight(e.endCoordinates.height);
+        });
+
+        const hideListener = Keyboard.addListener(hideEvent, () => {
+          setKeyboardHeight(0);
+        });
+
+        return () => {
+          showListener.remove();
+          hideListener.remove();
+        };
+      }
+    }, [fixedAboveKeyboard, isFixed]);
 
     const containerStyle: ViewStyle = {
-      ...(position === 'absolute' && {
+      ...(isFixed && {
         position: 'absolute',
-        bottom: 0,
+        bottom: keyboardHeight,
         left: 0,
         right: 0,
       }),
     };
 
     const innerStyle: ViewStyle = {
-      padding: tokens.bottomSheet.padding,
-      paddingBottom: tokens.bottomSheet.padding + insets.bottom,
+      padding: spacing.component.bottomSheet.padding,
+      paddingBottom: spacing.component.bottomSheet.padding + insets.bottom,
       backgroundColor,
     };
 
     const buttonContainerStyle: ViewStyle = {
       flexDirection: isVertical ? 'column' : 'row',
-      gap: tokens.modal.buttonGap,
+      gap: spacing.component.modal.buttonGap,
       ...(isCompact && { justifyContent: 'flex-end' }),
     };
 
@@ -200,10 +320,24 @@ export const ActionArea = forwardRef<View, ActionAreaProps>(
       return child;
     });
 
+    const animatedStyle: Animated.AnimatedProps<ViewStyle> = {
+      transform: [
+        { translateY },
+        ...(showAfterDelay?.animation === 'scale' ? [{ scale }] : []),
+      ],
+      opacity,
+    };
+
     return (
-      <View ref={ref} style={[containerStyle, style]} {...props}>
+      <Animated.View
+        ref={ref}
+        style={[containerStyle, animatedStyle, style]}
+        testID={testID}
+        accessibilityLabel={accessibilityLabel}
+        {...props}
+      >
         {/* Gradient Overlay */}
-        {showGradient && position === 'absolute' && (
+        {showGradient && (
           <LinearGradient
             colors={[toTransparent(backgroundColor), backgroundColor]}
             style={{
@@ -219,6 +353,13 @@ export const ActionArea = forwardRef<View, ActionAreaProps>(
 
         {/* Content Area */}
         <View style={innerStyle}>
+          {/* Top Accessory */}
+          {topAccessory && (
+            <View style={{ marginBottom: spacing.component.modal.buttonGap }}>
+              {topAccessory}
+            </View>
+          )}
+
           {/* Caption */}
           {caption && (
             <Text style={styles.caption}>{caption}</Text>
@@ -226,8 +367,15 @@ export const ActionArea = forwardRef<View, ActionAreaProps>(
 
           {/* Buttons */}
           <View style={buttonContainerStyle}>{processedChildren}</View>
+
+          {/* Bottom Accessory */}
+          {bottomAccessory && (
+            <View style={{ marginTop: spacing.component.modal.buttonGap }}>
+              {bottomAccessory}
+            </View>
+          )}
         </View>
-      </View>
+      </Animated.View>
     );
   }
 );
@@ -240,10 +388,12 @@ ActionArea.displayName = 'ActionArea';
 
 const styles = StyleSheet.create({
   caption: {
-    fontSize: 14,
-    color: '#6b7280', // content.base.neutral (palette.grey.60)
+    fontSize: typography.fontSize.sm,
+    fontWeight: typography.fontWeight.regular,
+    fontFamily: typography.fontFamily.base,
+    color: colors.content.base.secondary,
     textAlign: 'center',
     lineHeight: 21,
-    marginBottom: tokens.modal.buttonGap,
+    marginBottom: spacing.component.modal.buttonGap,
   },
 });

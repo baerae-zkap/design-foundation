@@ -13,37 +13,124 @@
 
 | 항목 | 상태 | 내용 |
 |------|------|------|
-| 패키지명 | ✅ | `@baerae-zkap/design-system@0.1.7` |
+| 패키지명 | ✅ | `@baerae-zkap/design-system@0.1.8` |
 | 레지스트리 | ✅ | Google Artifact Registry |
 | zkap-rn-mvp 통합 | ✅ | 타입 충돌 없이 설치됨 |
 | iOS/Android 테스트 | ✅ | 시뮬레이터에서 검증됨 |
-| Storybook | ✅ | zkap-rn-mvp에서 컴포넌트 테스트 |
+| Storybook | ✅ | `design-foundation/storybook/stories/baerae-design-system/`에서 관리 (52개 스토리) |
+| Foundation 토큰 시스템 | ✅ | colors, typography, spacing, radius 완전 구축 |
 
 ### 완성된 컴포넌트
 
-| 컴포넌트 | Web | React Native | Storybook | 문서 |
-|----------|-----|--------------|-----------|------|
+| 컴포넌트 | React Native | Storybook | AI 문서 | 토큰 사용 |
+|----------|--------------|-----------|---------|----------|
+| **Actions** | | | | |
 | Button | ✅ | ✅ | ✅ | ✅ |
 | TextButton | ✅ | ✅ | ✅ | ✅ |
-| ActionArea | ✅ | ✅ | ✅ | ✅ |
-| Chip | ✅ | ✅ | ✅ | ✅ |
 | IconButton | ✅ | ✅ | ✅ | ✅ |
+| Chip | ✅ | ✅ | ✅ | ✅ |
+| ActionArea | ✅ | ✅ | ✅ | ✅ |
+| **Contents** | | | | |
 | Accordion | ✅ | ✅ | ✅ | ✅ |
 | Card | ✅ | ✅ | ✅ | ✅ |
 | ContentBadge | ✅ | ✅ | ✅ | ✅ |
 | ListCell | ✅ | ✅ | ✅ | ✅ |
 | ListCard | ✅ | ✅ | ✅ | ✅ |
+| PlayBadge | ✅ | ✅ | ✅ | ✅ |
+| SectionHeader | ✅ | ✅ | ✅ | ✅ |
+| Table | ✅ | ✅ | ✅ | ✅ |
+| Thumbnail | ✅ | ✅ | ✅ | ✅ |
+| **Feedback** | | | | |
+| Alert | ✅ | ✅ | ✅ | ✅ |
+| FallbackView | ✅ | ✅ | ✅ | ✅ |
+| PushBadge | ✅ | ✅ | ✅ | ✅ |
+| SectionMessage | ✅ | ✅ | ✅ | ✅ |
+| Snackbar | ✅ | ✅ | ✅ | ✅ |
+| Toast | ✅ | ✅ | ✅ | ✅ |
+| **Loading** | | | | |
+| Loading | ✅ | ✅ | ✅ | ✅ |
+| LoadingDots | ✅ | ✅ | ✅ | ✅ |
+| Skeleton | ✅ | ✅ | ✅ | ✅ |
+| **Navigations** | | | | |
+| BottomNavigation | ✅ | ✅ | ✅ | ✅ |
+| TopNavigation | ✅ | ✅ | ✅ | ✅ |
+| Category | ✅ | ✅ | ✅ | ✅ |
+| Tab | ✅ | ✅ | ✅ | ✅ |
+| Pagination | ✅ | ✅ | ✅ | ✅ |
+| PaginationDots | ✅ | ✅ | ✅ | ✅ |
+| PageCounter | ✅ | ✅ | ✅ | ✅ |
+| ProgressIndicator | ✅ | ✅ | ✅ | ✅ |
+| ProgressTracker | ✅ | ✅ | ✅ | ✅ |
+| **Presentation** | | | | |
+| Autocomplete | ✅ | ✅ | ✅ | ✅ |
+| BottomSheet | ✅ | ✅ | ✅ | ✅ |
+| Menu | ✅ | ✅ | ✅ | ✅ |
+| Popover | ✅ | ✅ | ✅ | ✅ |
+| Popup | ✅ | ✅ | ✅ | ✅ |
+| Tooltip | ✅ | ✅ | ✅ | ✅ |
+| Divider | ✅ | ✅ | ✅ | ✅ |
+| **Selection & Input** | | | | |
+| CheckMark | ✅ | ✅ | ✅ | ✅ |
+| Checkbox | ✅ | ✅ | ✅ | ✅ |
+| Radio | ✅ | ✅ | ✅ | ✅ |
+| DatePicker | ✅ | ✅ | ✅ | ✅ |
+| TimePicker | ✅ | ✅ | ✅ | ✅ |
+| FilterButton | ✅ | ✅ | ✅ | ✅ |
+| FramedStyle | ✅ | ✅ | ✅ | ✅ |
+| SearchField | ✅ | ✅ | ✅ | ✅ |
+| SegmentedControl | ✅ | ✅ | ✅ | ✅ |
+| Select | ✅ | ✅ | ✅ | ✅ |
+| Slider | ✅ | ✅ | ✅ | ✅ |
+| Switch | ✅ | ✅ | ✅ | ✅ |
+| TextArea | ✅ | ✅ | ✅ | ✅ |
+| TextField | ✅ | ✅ | ✅ | ✅ |
+
+### Feedback 카테고리 완성 (2025-02-06)
+
+Ultrapilot으로 5개 Feedback 컴포넌트 생성 완료:
+- ✅ Foundation 토큰 시스템 구축 (colors, typography, spacing, radius)
+- ✅ 모든 하드코딩 제거, 토큰 기반 컴포넌트로 마이그레이션
+- ⏳ 퀄리티 개선 진행 중 (Montage/Toss 분석 완료)
+
+### 컴포넌트 개발 원칙 (2025-02-06)
+
+**모든 컴포넌트 개발 시 필수 준수사항:**
+
+1. ✅ **existing-components 참조하되 Montage, Toss를 참조하여 더 개선**
+   - 기존 패턴 유지하되 디자인 시스템 표준으로 업그레이드
+
+2. ✅ **Foundation 토큰 필수 사용**
+   - 하드코딩 절대 금지
+   - colors, typography, spacing, radius 토큰 사용
+
+3. ✅ **Props는 Montage 디자인 시스템과 비슷하게 구성**
+   - Montage API 참조하여 props 설계
+   - 표준 네이밍 준수
+
+4. ✅ **최고의 디자인 시스템 컴포넌트 구축**
+   - 업계 베스트 프랙티스 적용
+   - 접근성, 사용성, 확장성 고려
+
+5. ✅ **AI 참조용 MD 파일 작성**
+   - 각 컴포넌트마다 `packages/design-system/docs/components/[Name].md` 생성
+   - Props, 사용 예제, 디자인 토큰 포함
+
+6. ✅ **스토리북 완성을 최우선 목표**
+   - 완벽한 Storybook 스토리 작성
+   - 모든 변형, 상태, 사이즈 시각화
 
 ### 다음 작업 우선순위
 
-Montage 디자인 시스템 기준 우선순위:
+Montage 디자인 시스템 기준 우선순위 (Avatar/Avatar Group은 서비스에 불필요하여 제외):
 
-1. **Avatar / Avatar Group** - 사용자 프로필
-2. **Alert** - 경고 메시지
-3. **Radio** - 라디오 버튼
-4. **Select** - 드롭다운 선택
-5. **Play Badge** - 재생 뱃지
-6. **Section Header** - 섹션 헤더
+1. ~~**Play Badge**~~ ✅ 완료
+2. ~~**Loading (Spinner)**~~ ✅ 완료
+3. ~~**Skeleton**~~ ✅ 완료
+4. ~~**Bottom Sheet**~~ ✅ 완료
+5. ~~**Popup**~~ ✅ 완료
+6. ~~**Tab**~~ ✅ 완료
+7. **Bottom Navigation** - 하단 네비게이션
+8. **Top Navigation** - 상단 네비게이션
 
 ### 새 컴포넌트 추가 방법
 
@@ -60,7 +147,7 @@ Montage 디자인 시스템 기준 우선순위:
 # - packages/design-system/docs/components/[Name].md
 
 # 4. Storybook 스토리 추가
-# - zkap-rn-mvp/stories/baerae-design-system/[Name].stories.tsx
+# - design-foundation/storybook/stories/baerae-design-system/[Name].stories.tsx
 
 # 5. 빌드 & 배포
 cd packages/design-system
@@ -255,7 +342,7 @@ import docs from '@baerae-zkap/design-system/docs';
 | 2 | **RN 컴포넌트** | `packages/design-system/src/native/Button.tsx` | React Native 실제 코드 |
 | 3 | **AI 문서** | `packages/design-system/docs/components/Button.md` | AI 참조 문서 |
 | 4 | **문서 Demo** | `src/app/components/actions/button/page.tsx` | 문서 사이트 시각화 |
-| 5 | **Storybook** | `zkap-rn-mvp/stories/baerae-design-system/Button.stories.tsx` | 컴포넌트 테스트 |
+| 5 | **Storybook** | `design-foundation/storybook/stories/baerae-design-system/Button.stories.tsx` | 컴포넌트 테스트 |
 
 ### 싱크 작업 순서
 
@@ -274,7 +361,7 @@ import docs from '@baerae-zkap/design-system/docs';
    └── src/app/components/*/page.tsx
 
 5. Storybook 스토리 업데이트
-   └── zkap-rn-mvp/stories/baerae-design-system/
+   └── design-foundation/storybook/stories/baerae-design-system/
 
 6. 패키지 빌드 & 배포
    └── cd packages/design-system && npm run build && npm version patch && npm publish
@@ -287,11 +374,17 @@ import docs from '@baerae-zkap/design-system/docs';
 > ⚠️ **모든 컴포넌트는 Web, Native, Storybook에서 동일하게 동작해야 합니다.**
 
 ### Storybook 위치
+
+> **중요**: 스토리북 파일은 `design-foundation/storybook/stories/baerae-design-system/`에서 관리합니다.
+> 스토리북은 `design-foundation/storybook/`에서 관리합니다. `pnpm storybook`으로 실행.
+
 ```
-zkap-rn-mvp/stories/baerae-design-system/
-├── Button.stories.tsx      # Button 스토리
-├── TextButton.stories.tsx  # TextButton 스토리
-└── ActionArea.stories.tsx  # ActionArea 스토리
+design-foundation/storybook/stories/baerae-design-system/  ← 여기서 관리
+├── Button.stories.tsx
+├── TextButton.stories.tsx
+├── ActionArea.stories.tsx
+├── ... (총 33개 스토리)
+└── TimePicker.stories.tsx
 ```
 
 ### 일관성 규칙
@@ -364,7 +457,7 @@ ActionArea는 Button, TextButton을 children으로 조합합니다:
 | `packages/design-system/src/native/` | **React Native** | 실제 배포용 RN 컴포넌트 |
 | `packages/design-system/docs/` | **마크다운** | AI 참조용 문서 |
 | `src/app/` | **Next.js** | 문서 사이트 + Demo 컴포넌트 |
-| `zkap-rn-mvp/stories/baerae-design-system/` | **Storybook** | 컴포넌트 테스트 & 문서화 |
+| `design-foundation/storybook/stories/baerae-design-system/` | **Storybook** | 컴포넌트 테스트 & 문서화 |
 | `existing-components/` | **참고용** | 기존 컨벤션 참조 (사용 X) |
 
 **실제 React Native 컴포넌트**:
