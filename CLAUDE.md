@@ -1111,5 +1111,27 @@ function PropsTable({ props }: { props: { name: string; type: string; required: 
 
 ---
 
+## TODO (시연 후 정리 작업)
+
+### 1. 웹 컴포넌트 패키지 연결
+- `packages/design-system/src/components/` 에 웹 컴포넌트 13개 존재 (Button, TextButton, IconButton, Chip, ActionArea, Accordion, Card, ContentBadge, ListCard, ListCell, SectionHeader, Table, Thumbnail)
+- **현재 상태**: `index.ts`에서 토큰만 export, 웹 컴포넌트는 export 안 됨 (dead code)
+- **할 일**: `index.ts`에서 웹 컴포넌트도 export 추가
+
+### 2. 문서 사이트 실제 컴포넌트 import로 교체
+- `src/app/components/` 의 문서 페이지들이 인라인 Demo 코드로 시각화 중
+- `@baerae-zkap/design-system`에서 import한 것처럼 보이지만 전부 `<CodeBlock>` 안의 텍스트 예시
+- **할 일**: 실제 웹 컴포넌트를 패키지에서 import해서 렌더링하도록 교체
+
+### 3. 인라인 Demo 코드 제거
+- 각 page.tsx 안의 ButtonPlayground 등 인라인 Demo 컴포넌트 삭제
+- 실제 패키지 컴포넌트로 대체 완료 후 진행
+
+### 4. Storybook 배포
+- Vercel CLI로 배포 완료: https://design-foundation.vercel.app
+- 재배포 명령: `cd /Users/jaden/design-foundation && vercel deploy --prod --yes`
+
+---
+
 > 이 파일을 읽고 프로젝트 컨텍스트를 파악한 후 작업을 진행하세요.
 > 작업 전 항상 참조 디자인 시스템 URL과 existing-components를 확인하세요.
