@@ -47,6 +47,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
+      - name: Build design-system package
+        run: pnpm --filter @baerae-zkap/design-system build
+
       - name: Build
         run: pnpm build
         env:
