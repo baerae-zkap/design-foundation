@@ -1,18 +1,18 @@
 # Design Foundation & Components Library
 
-**@baerae-zkap/design-system** - baerae-zkap 회사의 React & React Native 컴포넌트 라이브러리
+**@baerae-zkap/design-system** - baerae-zkap 회사의 React Native 컴포넌트 라이브러리
 
 ---
 
 ## 개요
 
-Design Foundation은 baerae-zkap 서비스에서 사용할 통합 디자인 시스템입니다. 53개의 React Native 컴포넌트와 13개의 Web 컴포넌트로 구성되어 있으며, Storybook과 AI 문서화를 통해 체계적으로 관리됩니다.
+Design Foundation은 baerae-zkap 서비스에서 사용할 통합 디자인 시스템입니다. 53개의 React Native 컴포넌트로 구성되어 있으며, Storybook과 AI 문서화를 통해 체계적으로 관리됩니다.
 
 - **패키지명**: `@baerae-zkap/design-system`
 - **현재 버전**: 0.1.13
 - **배포 위치**: Google Artifact Registry
-- **컴포넌트**: 53개 (React Native) + 13개 (Web)
-- **기술 스택**: Next.js 16, React 19, TypeScript, Tailwind CSS 4
+- **컴포넌트**: 53개 (React Native)
+- **기술 스택**: React Native, TypeScript
 
 ---
 
@@ -22,11 +22,10 @@ Design Foundation은 baerae-zkap 서비스에서 사용할 통합 디자인 시�
 design-foundation/
 ├── packages/design-system/            # NPM 패키지 (@baerae-zkap/design-system)
 │   ├── src/native/                    # React Native 컴포넌트 (53개) - 실제 배포용
-│   │   ├── Button.tsx
-│   │   ├── Chip.tsx
-│   │   ├── Card.tsx
+│   │   ├── Button/Button.tsx
+│   │   ├── Chip/Chip.tsx
+│   │   ├── Card/Card.tsx
 │   │   └── ... (53개 컴포넌트)
-│   ├── src/components/                # Web 컴포넌트 (13개) - 배포 예정
 │   ├── src/tokens/                    # Foundation 디자인 토큰
 │   ├── docs/                          # AI 참조 문서
 │   │   ├── COMPONENTS.md
@@ -250,24 +249,11 @@ pnpm storybook
 
 | 항목 | 설명 |
 |------|------|
-| **프레임워크** | Next.js 16, React 19 |
-| **스타일링** | Tailwind CSS 4 + Custom Recipe 시스템 |
+| **컴포넌트 라이브러리** | React Native |
 | **언어** | TypeScript |
-| **컴포넌트 라이브러리** | React Native (모바일) |
-| **문서화** | Next.js 기반 문서 사이트 + Storybook |
+| **문서화** | Storybook |
 | **패키지 관리** | pnpm |
 | **배포** | Google Artifact Registry |
-
----
-
-## 참조 디자인 시스템
-
-이 프로젝트는 업계 모범 사례를 참조하여 설계되었습니다:
-
-| 시스템 | 설명 |
-|--------|------|
-| **Toss Design System (TDS Mobile)** | 모바일 퍼스트 설계, 시멘틱 토큰 시스템 |
-| **Wanted Montage Design System** | 체계적 카테고리, 상세한 문서화 방식 |
 
 ---
 
@@ -331,7 +317,7 @@ pnpm storybook
 ### 컴포넌트 개발 원칙
 
 - **Foundation 토큰 필수 사용**: 하드코딩 금지
-- **Montage/Toss 참조**: 업계 표준 따르기
+- **업계 표준 참조**: 검증된 디자인 패턴 따르기
 - **AI 문서화**: 각 컴포넌트마다 마크다운 가이드 작성
 - **Storybook 완성**: 모든 변형, 상태, 크기 포함
 
@@ -346,7 +332,6 @@ pnpm storybook
 ```
 packages/design-system/
 ├── src/native/                # React Native 컴포넌트 (배포용)
-├── src/components/            # Web 컴포넌트 (배포용)
 ├── src/tokens/                # Design Token 정의
 ├── docs/                      # AI 참조 문서 (마크다운)
 ├── dist/                      # 빌드 결과물
@@ -407,11 +392,9 @@ npm publish
 
 | # | 위치 | 파일 | 설명 |
 |---|------|------|------|
-| 1 | **React Native 코드** | `packages/design-system/src/native/[Name].tsx` | 실제 컴포넌트 구현 |
-| 2 | **Web 코드** | `packages/design-system/src/components/[Name]/` | 웹 버전 (배포 예정) |
-| 3 | **AI 문서** | `packages/design-system/docs/components/[Name].md` | AI 참조용 마크다운 |
-| 4 | **문서 사이트** | `src/app/components/*/page.tsx` | 공식 문서 페이지 |
-| 5 | **Storybook** | `storybook/stories/baerae-design-system/[Name].stories.tsx` | 컴포넌트 테스트 |
+| 1 | **React Native 코드** | `packages/design-system/src/native/[Name]/[Name].tsx` | 실제 컴포넌트 구현 |
+| 2 | **AI 문서** | `packages/design-system/src/native/[Name]/[Name].md` | AI 참조용 마크다운 |
+| 3 | **Storybook** | `storybook/stories/baerae-design-system/[Name].stories.tsx` | 컴포넌트 테스트 |
 
 ---
 
@@ -434,8 +417,6 @@ baerae-zkap 회사 내부 사용
 - **Design Tokens**: `/public/spacing-tokens.json`, `/public/radius-tokens.json`
 - **컴포넌트 문서**: `/packages/design-system/docs/`
 - **개발 가이드**: `CLAUDE.md` (프로젝트 상세 설명서)
-- **Montage Design System**: https://montage.wanted.co.kr
-- **Toss Design System**: https://tossmini-docs.toss.im/tds-mobile/components
 
 ---
 

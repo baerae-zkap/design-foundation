@@ -206,10 +206,19 @@ const colorConfig: Record<ButtonVariant, Record<ButtonColor, ColorConfigItem>> =
 };
 
 /**
- * Apply rgba(0, 0, 0, 0.1) overlay for custom color pressed state
+ * Apply darkening overlay for custom color pressed state
+ * hex 색상을 파싱하여 10% 어둡게 처리
  */
 function applyPressedOverlay(color: string): string {
-  // Simple darkening - in production, you'd parse the color properly
+  // hex 색상 파싱
+  const hex = color.replace('#', '');
+  if (hex.length === 6) {
+    const r = Math.max(0, parseInt(hex.slice(0, 2), 16) - 25);
+    const g = Math.max(0, parseInt(hex.slice(2, 4), 16) - 25);
+    const b = Math.max(0, parseInt(hex.slice(4, 6), 16) - 25);
+    return `rgb(${r}, ${g}, ${b})`;
+  }
+  // hex가 아닌 경우 그대로 반환
   return color;
 }
 

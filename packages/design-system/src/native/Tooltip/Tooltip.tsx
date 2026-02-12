@@ -20,6 +20,7 @@ import {
   Animated,
   StyleSheet,
   Platform,
+  Dimensions,
   type ViewStyle,
 } from 'react-native';
 import { colors, palette } from '../../tokens/colors';
@@ -117,12 +118,31 @@ export const Tooltip = forwardRef<View, TooltipProps>(
     ref
   ) => {
     const [internalVisible, setInternalVisible] = useState(defaultVisible);
+    const [resolvedPlacement, setResolvedPlacement] = useState(placement);
     const fadeAnim = useRef(new Animated.Value(defaultVisible ? 1 : 0)).current;
     const scaleAnim = useRef(new Animated.Value(defaultVisible ? 1 : 0.95)).current;
+    const triggerRef = useRef<View>(null);
 
     const isControlled = controlledVisible !== undefined;
     const isVisible = isControlled ? controlledVisible : internalVisible;
     const sizeStyle = sizeConfig[size];
+
+    // autoFlip: 화면 가장자리 감지 시 placement 자동 전환
+    useEffect(() => {
+      if (!autoFlip || !isVisible || !triggerRef.current) {
+        setResolvedPlacement(placement);
+        return;
+      }
+      triggerRef.current.measureInWindow((x, y, width, height) => {
+        if (placement === 'top' && y < 80) {
+          setResolvedPlacement('bottom');
+        } else if (placement === 'bottom' && y + height > Dimensions.get('window').height - 80) {
+          setResolvedPlacement('top');
+        } else {
+          setResolvedPlacement(placement);
+        }
+      });
+    }, [autoFlip, isVisible, placement]);
 
     const handlePress = useCallback(() => {
       if (isControlled) return;
@@ -192,13 +212,13 @@ export const Tooltip = forwardRef<View, TooltipProps>(
 
     // Tooltip vertical position (relative to trigger)
     const tooltipPositionStyle: ViewStyle =
-      placement === 'top'
+      resolvedPlacement === 'top'
         ? { bottom: '100%' as any, marginBottom: totalOffset, ...horizontalSpread }
         : { top: '100%' as any, marginTop: totalOffset, ...horizontalSpread };
 
     // Arrow vertical position
     const arrowVerticalStyle: ViewStyle =
-      placement === 'top'
+      resolvedPlacement === 'top'
         ? { bottom: -ARROW_SIZE / 2 }
         : { top: -ARROW_SIZE / 2 };
 
@@ -214,7 +234,13 @@ export const Tooltip = forwardRef<View, TooltipProps>(
 
     return (
       <View
-        ref={ref}
+        ref={(node) => {
+          // triggerRef for autoFlip measurement
+          (triggerRef as any).current = node;
+          // Forward ref
+          if (typeof ref === 'function') ref(node);
+          else if (ref) (ref as any).current = node;
+        }}
         style={[styles.container, style]}
         testID={testID}
       >

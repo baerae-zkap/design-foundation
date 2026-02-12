@@ -90,21 +90,21 @@
 Ultrapilot으로 5개 Feedback 컴포넌트 생성 완료:
 - ✅ Foundation 토큰 시스템 구축 (colors, typography, spacing, radius)
 - ✅ 모든 하드코딩 제거, 토큰 기반 컴포넌트로 마이그레이션
-- ⏳ 퀄리티 개선 진행 중 (Montage/Toss 분석 완료)
+- ⏳ 퀄리티 개선 진행 중
 
 ### 컴포넌트 개발 원칙 (2025-02-06)
 
 **모든 컴포넌트 개발 시 필수 준수사항:**
 
-1. ✅ **existing-components 참조하되 Montage, Toss를 참조하여 더 개선**
+1. ✅ **existing-components 참조하여 개선**
    - 기존 패턴 유지하되 디자인 시스템 표준으로 업그레이드
 
 2. ✅ **Foundation 토큰 필수 사용**
    - 하드코딩 절대 금지
    - colors, typography, spacing, radius 토큰 사용
 
-3. ✅ **Props는 Montage 디자인 시스템과 비슷하게 구성**
-   - Montage API 참조하여 props 설계
+3. ✅ **Props 설계 표준화**
+   - 업계 표준 API 패턴 참조
    - 표준 네이밍 준수
 
 4. ✅ **최고의 디자인 시스템 컴포넌트 구축**
@@ -121,7 +121,7 @@ Ultrapilot으로 5개 Feedback 컴포넌트 생성 완료:
 
 ### 다음 작업 우선순위
 
-Montage 디자인 시스템 기준 우선순위 (Avatar/Avatar Group은 서비스에 불필요하여 제외):
+우선순위 (Avatar/Avatar Group은 서비스에 불필요하여 제외):
 
 1. ~~**Play Badge**~~ ✅ 완료
 2. ~~**Loading (Spinner)**~~ ✅ 완료
@@ -167,12 +167,11 @@ pnpm storybook  # 스토리북에서 확인
 
 > **시간 단축을 위한 전략적 접근**
 
-1. **Montage 디자인 시스템 웹 콘텐츠를 그대로 가져옴** (구조, 문서화 방식 참조)
-2. **Toss 디자인 시스템과 비교 분석**하여 우리 서비스에 맞게 조정
-3. **기존 existing-components를 개선**하면서 새 컴포넌트 추가
-4. 필요시 우리 서비스에 맞게 **내용 교체 및 커스터마이징**
+1. **업계 표준 디자인 시스템 패턴 참조** (구조, 문서화 방식)
+2. **기존 existing-components를 개선**하면서 새 컴포넌트 추가
+3. 필요시 우리 서비스에 맞게 **내용 교체 및 커스터마이징**
 
-즉, 바퀴를 새로 발명하지 않고 검증된 디자인 시스템을 참조하여 빠르게 구축.
+즉, 바퀴를 새로 발명하지 않고 검증된 패턴을 참조하여 빠르게 구축.
 
 ## Tech Stack
 
@@ -182,63 +181,6 @@ pnpm storybook  # 스토리북에서 확인
 - **Documentation**: Next.js 기반 문서 사이트
 
 ---
-
-## 참조 디자인 시스템
-
-### 1. Toss Design System (TDS Mobile)
-
-**URL**: https://tossmini-docs.toss.im/tds-mobile/components
-
-**특징**:
-- 모바일 퍼스트 설계
-- 간결하고 직관적인 인터랙션
-- 시멘틱 컬러 토큰 시스템
-- React Native 기반
-
-**참조 포인트**:
-- 컬러 토큰 구조 (content, surface, border 계층)
-- 컴포넌트 상태 처리 (pressed, disabled, focused)
-- 모바일 최적화된 터치 타겟 사이즈
-
----
-
-### 2. Wanted Montage Design System
-
-**URL**:
-- 메인: https://montage.wanted.co.kr
-- 컴포넌트: https://montage.wanted.co.kr/docs/components
-- Foundations: https://montage.wanted.co.kr/docs/foundations
-
-**철학**: "From Separate Core Blocks To a Seamless Flow"
-> 일관된 디자인을 통해 사용자 경험을 통합
-
-**구조**:
-- Getting Started - 시작 가이드
-- Foundations - 디자인 기초 원칙
-- Components - 컴포넌트 라이브러리
-- Utilities - 유틸리티 기능
-
-#### Montage 컴포넌트 전체 목록 (53개)
-
-| 카테고리 | 컴포넌트 | 설명 |
-|---------|---------|------|
-| **Actions (5)** | Action area, Button, Chip, Icon button, Text button | 사용자 상호작용 처리 |
-| **Contents (11)** | Accordion, Avatar, Avatar group, Card, List card, Content badge, Play badge, List cell, Section header, Table, Thumbnail | 정보 표시 및 콘텐츠 구성 |
-| **Feedback (6)** | Alert, Section message, Fallback view, Push, Toast, Snackbar | 사용자 피드백 및 알림 |
-| **Loading (2)** | Loading, Skeleton | 로딩 상태 표시 |
-| **Navigations (9)** | Bottom navigation, Top navigation, Category, Tab, Pagination, Pagination dots, Page counter, Progress indicator, Progress tracker | 페이지 이동 및 탐색 |
-| **Presentation (6)** | Autocomplete, Menu, Popover, Bottom sheet, Popup, Tooltip | 정보 표현 및 오버레이 |
-| **Selection & Input (14)** | Check mark, Checkbox, Radio, Date picker, Time picker, Filter button, Framed style, Search field, Segmented control, Select, Slider, Switch, Text area, Text field | 사용자 입력 및 선택 |
-
-**리소스**:
-- Figma UI KIT (2025.06.04 업데이트)
-- Native Platform UI KIT
-- Pretendard JP Dynamic Font
-
-**참조 포인트**:
-- 체계적인 카테고리 분류
-- 상세한 문서화 방식
-- 플랫폼별 구분 (Web, iOS, Android)
 
 ## 폴더 구조
 
@@ -795,9 +737,9 @@ borderRadius: 24  // modal.default(24)
 
 ## 컴포넌트 매핑 & Gap 분석
 
-### 보유 vs 필요 (Montage 기준 비교)
+### 보유 vs 필요 비교
 
-| Montage 카테고리 | Montage 컴포넌트 | 기존 보유 | 상태 |
+| 카테고리 | 컴포넌트 | 기존 보유 | 상태 |
 |-----------------|-----------------|----------|------|
 | **Actions** | Button | Button | ✅ 보유 |
 | | Icon button | Button (variant) | ✅ 개선 필요 |
@@ -848,7 +790,7 @@ borderRadius: 24  // modal.default(24)
 ## 작업 우선순위 가이드
 
 ### Phase 1: 기존 컴포넌트 개선
-기존 existing-components를 Montage/TDS 수준으로 업그레이드
+기존 existing-components를 디자인 시스템 수준으로 업그레이드
 
 1. **Button** - variant 확장 (Icon button, Text button)
 2. **Input** - Search field variant 추가
@@ -881,10 +823,9 @@ borderRadius: 24  // modal.default(24)
 
 ### 새 컴포넌트 만들 때
 
-1. **Montage 문서 확인**: https://montage.wanted.co.kr/docs/components/{컴포넌트명}
-2. **TDS 문서 확인**: https://tossmini-docs.toss.im/tds-mobile/components (접근 가능 시)
-3. **existing-components 컨벤션 적용**: 파일 구조, recipe 패턴, 타입 정의
-4. **우리 서비스에 맞게 커스터마이징**
+1. **existing-components 컨벤션 적용**: 파일 구조, recipe 패턴, 타입 정의
+2. **업계 표준 디자인 시스템 패턴 참조**
+3. **우리 서비스에 맞게 커스터마이징**
 
 ### 문서 페이지 만들 때
 
@@ -1097,12 +1038,11 @@ function PropsTable({ props }: { props: { name: string; type: string; required: 
 이 파일을 읽은 후:
 
 1. **컴포넌트 작업 요청 시**
-   - 먼저 Montage/TDS 참조 URL 확인
    - existing-components에서 유사 컴포넌트 패턴 참조
    - recipe 스타일링 패턴 준수
 
 2. **문서 작업 요청 시**
-   - Montage 문서 구조 참조하여 작성
+   - 기존 문서 구조 참조하여 작성
    - src/app 내에 페이지 생성
 
 3. **개선 작업 요청 시**

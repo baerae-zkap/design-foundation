@@ -122,7 +122,7 @@ export const Loading = forwardRef<View, LoadingProps>(
     const spinnerColor = disabled
       ? colors.content.disabled.default  // #a7adb5
       : color === 'inherit'
-      ? 'currentColor'
+      ? colors.content.base.default      // inherit fallback - RN에서 currentColor 미지원
       : colorMap[color];
 
     const trackColor = disabled
