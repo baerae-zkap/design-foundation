@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { PlatformTabs, CodeBlock, PreviewBox, Platform, highlightCode } from "@/components/PlatformTabs";
+import { Thumbnail } from '@baerae-zkap/design-system';
+import type { ThumbnailAspectRatio } from '@baerae-zkap/design-system';
 
 // GitHub source URLs
 const GITHUB_BASE = "https://github.com/baerae-zkap/design-foundation/blob/main/packages/design-system";
@@ -1140,8 +1142,6 @@ function RadioGroup({ label, options, value, onChange }: { label: string; option
 
 
 // Demo Component
-type ThumbnailAspectRatio = '1:1' | '16:9' | '4:3' | '3:2' | '2:1' | '9:16' | '3:4';
-
 function ThumbnailDemo({
   src,
   aspectRatio = '1:1',
@@ -1159,102 +1159,16 @@ function ThumbnailDemo({
   playIcon?: boolean;
   overlay?: React.ReactNode;
 }) {
-  const [hasError, setHasError] = useState(false);
-
-  const aspectRatioMap: Record<ThumbnailAspectRatio, string> = {
-    '1:1': '100%',
-    '16:9': '56.25%',
-    '4:3': '75%',
-    '3:2': '66.67%',
-    '2:1': '50%',
-    '9:16': '177.78%',
-    '3:4': '133.33%',
-  };
-
-  const containerStyle: React.CSSProperties = {
-    position: 'relative',
-    width: size ? `${size}px` : '100%',
-    overflow: 'hidden',
-    borderRadius: radius ? 12 : 0,
-    border: border ? '1px solid rgba(0, 0, 0, 0.08)' : 'none',
-  };
-
-  const aspectBoxStyle: React.CSSProperties = {
-    position: 'relative',
-    width: '100%',
-    paddingBottom: aspectRatioMap[aspectRatio],
-  };
-
-  const imageStyle: React.CSSProperties = {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
-  };
-
-  const playIconStyle: React.CSSProperties = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 48,
-    height: 48,
-    borderRadius: '50%',
-    backgroundColor: 'rgba(0, 0, 0, 0.6)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: 'white',
-    pointerEvents: 'none',
-  };
-
-  const triangleStyle: React.CSSProperties = {
-    width: 0,
-    height: 0,
-    borderLeft: '12px solid white',
-    borderTop: '8px solid transparent',
-    borderBottom: '8px solid transparent',
-    marginLeft: 3,
-  };
-
-  const fallbackStyle: React.CSSProperties = {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#f1f5f9',
-    color: '#94a3b8',
-    fontSize: 14,
-  };
-
   return (
-    <div style={containerStyle}>
-      <div style={aspectBoxStyle}>
-        {hasError ? (
-          <div style={fallbackStyle}>Image unavailable</div>
-        ) : (
-          <>
-            <img
-              src={src}
-              alt="Thumbnail"
-              style={imageStyle}
-              onError={() => setHasError(true)}
-            />
-            {overlay}
-            {playIcon && (
-              <div style={playIconStyle}>
-                <div style={triangleStyle} />
-              </div>
-            )}
-          </>
-        )}
-      </div>
-    </div>
+    <Thumbnail
+      src={src}
+      alt="Thumbnail"
+      aspectRatio={aspectRatio}
+      size={size}
+      radius={radius}
+      border={border}
+      playIcon={playIcon}
+      overlay={overlay}
+    />
   );
 }

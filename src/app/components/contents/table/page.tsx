@@ -3,10 +3,8 @@
 import { useState } from "react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { PlatformTabs, CodeBlock, PreviewBox, Platform } from "@/components/PlatformTabs";
-
-// Types
-type TableVariant = "default" | "striped";
-type TableSize = "small" | "medium" | "large";
+import { Table, TableHead, TableBody, TableRow, TableHeadCell, TableCell } from '@baerae-zkap/design-system';
+import type { TableVariant, TableSize } from '@baerae-zkap/design-system';
 
 // Shared Components
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
@@ -1232,17 +1230,10 @@ function TableDemo({
   size = "medium",
   compact = false
 }: {
-  variant?: "default" | "striped";
-  size?: "small" | "medium" | "large";
+  variant?: TableVariant;
+  size?: TableSize;
   compact?: boolean;
 }) {
-  const sizeStyles = {
-    small: { headPaddingX: 16, headPaddingY: 6, dataPaddingX: 16, dataPaddingY: 12, fontSize: 13 },
-    medium: { headPaddingX: 20, headPaddingY: 8, dataPaddingX: 20, dataPaddingY: 16, fontSize: 14 },
-    large: { headPaddingX: 24, headPaddingY: 10, dataPaddingX: 24, dataPaddingY: 20, fontSize: 15 },
-  };
-
-  const style = sizeStyles[size];
   const data = compact ? [
     { asset: "ETH", amount: "0.7812", value: "₩3,245,000", change: "+5.2%", changeColor: "#22c55e" },
   ] : [
@@ -1252,79 +1243,40 @@ function TableDemo({
   ];
 
   return (
-    <div style={{
-      borderRadius: 12,
-      overflow: "hidden",
-      border: "1px solid #e2e8f0",
-      width: compact ? 300 : "100%",
-      maxWidth: compact ? 300 : 600,
-    }}>
-      <table style={{ width: "100%", borderCollapse: "collapse", backgroundColor: "white" }}>
-        <thead>
-          <tr style={{ backgroundColor: "#f8fafc", borderBottom: "1px solid #e2e8f0" }}>
-            <th style={{
-              padding: `${style.headPaddingY}px ${style.headPaddingX}px`,
-              textAlign: "left",
-              fontSize: style.fontSize,
-              fontWeight: 600,
-              color: "#64748b"
-            }}>자산명</th>
-            <th style={{
-              padding: `${style.headPaddingY}px ${style.headPaddingX}px`,
-              textAlign: "left",
-              fontSize: style.fontSize,
-              fontWeight: 600,
-              color: "#64748b"
-            }}>보유량</th>
+    <div style={{ width: compact ? 300 : "100%", maxWidth: compact ? 300 : 600 }}>
+      <Table variant={variant} size={size}>
+        <TableHead>
+          <TableRow>
+            <TableHeadCell>자산명</TableHeadCell>
+            <TableHeadCell>보유량</TableHeadCell>
             {!compact && (
               <>
-                <th style={{
-                  padding: `${style.headPaddingY}px ${style.headPaddingX}px`,
-                  textAlign: "left",
-                  fontSize: style.fontSize,
-                  fontWeight: 600,
-                  color: "#64748b"
-                }}>평가금액</th>
-                <th style={{
-                  padding: `${style.headPaddingY}px ${style.headPaddingX}px`,
-                  textAlign: "left",
-                  fontSize: style.fontSize,
-                  fontWeight: 600,
-                  color: "#64748b"
-                }}>등락률</th>
+                <TableHeadCell>평가금액</TableHeadCell>
+                <TableHeadCell>등락률</TableHeadCell>
               </>
             )}
-          </tr>
-        </thead>
-        <tbody>
+          </TableRow>
+        </TableHead>
+        <TableBody>
           {data.map((row, idx) => (
-            <tr
+            <TableRow
               key={idx}
               style={{
                 backgroundColor: variant === "striped" && idx % 2 === 1 ? "#f8fafc" : "white",
-                borderBottom: idx < data.length - 1 ? "1px solid #e2e8f0" : "none"
               }}
             >
-              <td style={{ padding: `${style.dataPaddingY}px ${style.dataPaddingX}px`, fontSize: style.fontSize, color: "#334155" }}>
-                {row.asset}
-              </td>
-              <td style={{ padding: `${style.dataPaddingY}px ${style.dataPaddingX}px`, fontSize: style.fontSize, color: "#334155" }}>
-                {row.amount}
-              </td>
+              <TableCell>{row.asset}</TableCell>
+              <TableCell>{row.amount}</TableCell>
               {!compact && (
                 <>
-                  <td style={{ padding: `${style.dataPaddingY}px ${style.dataPaddingX}px`, fontSize: style.fontSize, color: "#334155" }}>
-                    {row.value}
-                  </td>
-                  <td style={{ padding: `${style.dataPaddingY}px ${style.dataPaddingX}px`, fontSize: style.fontSize, color: row.changeColor }}>
-                    {row.change}
-                  </td>
+                  <TableCell>{row.value}</TableCell>
+                  <TableCell style={{ color: row.changeColor }}>{row.change}</TableCell>
                 </>
               )}
-            </tr>
+            </TableRow>
           ))}
-        </tbody>
-      </table>
+        </TableBody>
+      </Table>
     </div>
   );
 }

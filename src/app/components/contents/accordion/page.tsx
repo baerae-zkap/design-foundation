@@ -3,15 +3,10 @@
 import { useState } from "react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { PlatformTabs, CodeBlock, PreviewBox, Platform, highlightCode } from "@/components/PlatformTabs";
+import { Accordion } from '@baerae-zkap/design-system';
 
 // Types
 type AccordionSize = "medium" | "large";
-
-// Size configurations
-const sizeConfig: Record<AccordionSize, { height: number; fontSize: number; iconSize: number }> = {
-  medium: { height: 48, fontSize: 14, iconSize: 20 },
-  large: { height: 56, fontSize: 16, iconSize: 24 },
-};
 
 export default function AccordionPage() {
   return (
@@ -1164,75 +1159,14 @@ function AccordionDemo({
   defaultExpanded?: boolean;
   children: React.ReactNode;
 }) {
-  const [expanded, setExpanded] = useState(defaultExpanded);
-  const [isHovered, setIsHovered] = useState(false);
-
-  const config = sizeConfig[size];
-
-  const handleToggle = () => {
-    if (!disabled) {
-      setExpanded(!expanded);
-    }
-  };
-
   return (
-    <div
-      style={{
-        border: "1px solid #e2e8f0",
-        borderRadius: 12, // card.sm token
-        overflow: "hidden",
-        opacity: disabled ? 0.5 : 1,
-      }}
+    <Accordion
+      title={title}
+      size={size}
+      disabled={disabled}
+      defaultExpanded={defaultExpanded}
     >
-      <button
-        onClick={handleToggle}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        disabled={disabled}
-        style={{
-          width: "100%",
-          height: config.height,
-          padding: "0 16px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          backgroundColor: expanded ? "#fafbfc" : isHovered ? "#fafbfc" : "white",
-          border: "none",
-          cursor: disabled ? "not-allowed" : "pointer",
-          transition: "background-color 0.15s ease",
-        }}
-      >
-        <span style={{ fontSize: config.fontSize, fontWeight: 500, color: "#334155" }}>
-          {title}
-        </span>
-        <svg
-          width={config.iconSize}
-          height={config.iconSize}
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="#64748b"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          style={{
-            transform: expanded ? "rotate(180deg)" : "rotate(0deg)",
-            transition: "transform 0.2s ease",
-          }}
-        >
-          <polyline points="6 9 12 15 18 9" />
-        </svg>
-      </button>
-      <div
-        style={{
-          maxHeight: expanded ? 500 : 0,
-          overflow: "hidden",
-          transition: "max-height 0.2s ease",
-        }}
-      >
-        <div style={{ padding: 16, borderTop: "1px solid #e2e8f0" }}>
-          {children}
-        </div>
-      </div>
-    </div>
+      {children}
+    </Accordion>
   );
 }

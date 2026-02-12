@@ -3,56 +3,12 @@
 import { useState } from "react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { PlatformTabs, CodeBlock, PreviewBox, Platform, highlightCode } from "@/components/PlatformTabs";
+import { ContentBadge } from '@baerae-zkap/design-system';
 
 // Types
 type ContentBadgeVariant = "filled" | "outlined" | "subtle";
 type ContentBadgeColor = "brandDefault" | "baseDefault" | "successDefault" | "errorDefault" | "warningDefault" | "infoDefault";
 type ContentBadgeSize = "small" | "medium" | "large";
-
-// Size configurations (from Foundation tokens)
-const sizeConfig: Record<ContentBadgeSize, { height: number; fontSize: number; paddingX: number; dotSize: number; iconSize: number }> = {
-  small: { height: 18, fontSize: 10, paddingX: 6, dotSize: 4, iconSize: 10 },
-  medium: { height: 22, fontSize: 12, paddingX: 8, dotSize: 6, iconSize: 12 },
-  large: { height: 26, fontSize: 14, paddingX: 10, dotSize: 6, iconSize: 14 },
-};
-
-// Color configurations
-const colorConfig: Record<ContentBadgeColor, {
-  filled: { bg: string; text: string };
-  outlined: { bg: string; border: string; text: string };
-  subtle: { bg: string; text: string };
-}> = {
-  brandDefault: {
-    filled: { bg: '#2563eb', text: '#ffffff' },
-    outlined: { bg: 'transparent', border: '#2563eb', text: '#2563eb' },
-    subtle: { bg: '#dbeafe', text: '#1e40af' },
-  },
-  baseDefault: {
-    filled: { bg: '#64748b', text: '#ffffff' },
-    outlined: { bg: 'transparent', border: '#94a3b8', text: '#475569' },
-    subtle: { bg: '#f1f5f9', text: '#334155' },
-  },
-  successDefault: {
-    filled: { bg: '#16a34a', text: '#ffffff' },
-    outlined: { bg: 'transparent', border: '#22c55e', text: '#16a34a' },
-    subtle: { bg: '#dcfce7', text: '#166534' },
-  },
-  errorDefault: {
-    filled: { bg: '#dc2626', text: '#ffffff' },
-    outlined: { bg: 'transparent', border: '#ef4444', text: '#dc2626' },
-    subtle: { bg: '#fee2e2', text: '#991b1b' },
-  },
-  warningDefault: {
-    filled: { bg: '#d97706', text: '#ffffff' },
-    outlined: { bg: 'transparent', border: '#f59e0b', text: '#d97706' },
-    subtle: { bg: '#fef3c7', text: '#92400e' },
-  },
-  infoDefault: {
-    filled: { bg: '#0891b2', text: '#ffffff' },
-    outlined: { bg: 'transparent', border: '#06b6d4', text: '#0891b2' },
-    subtle: { bg: '#cffafe', text: '#155e75' },
-  },
-};
 
 export default function ContentBadgePage() {
   return (
@@ -1208,38 +1164,14 @@ function ContentBadgeDemo({
   dot?: boolean;
   children: React.ReactNode;
 }) {
-  const sizeStyle = sizeConfig[size];
-  const colorStyle = colorConfig[color][variant];
-
-  const badgeStyle: React.CSSProperties = {
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 4, // spacing.primitive.1 (4px)
-    height: sizeStyle.height,
-    padding: `0 ${sizeStyle.paddingX}px`,
-    fontSize: sizeStyle.fontSize,
-    fontWeight: 600,
-    lineHeight: 1,
-    color: colorStyle.text,
-    backgroundColor: colorStyle.bg,
-    border: variant === "outlined" ? `1px solid ${(colorStyle as { border: string }).border}` : "none",
-    borderRadius: 4, // radius.primitive.xs (4px)
-    whiteSpace: "nowrap",
-  };
-
-  const dotStyle: React.CSSProperties = {
-    width: sizeStyle.dotSize,
-    height: sizeStyle.dotSize,
-    borderRadius: "50%",
-    backgroundColor: colorStyle.text,
-    flexShrink: 0,
-  };
-
   return (
-    <span style={badgeStyle}>
-      {dot && <span style={dotStyle} />}
+    <ContentBadge
+      variant={variant}
+      color={color}
+      size={size}
+      dot={dot}
+    >
       {children}
-    </span>
+    </ContentBadge>
   );
 }

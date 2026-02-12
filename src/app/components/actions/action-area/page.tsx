@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { PlatformTabs, CodeBlock, PreviewBox, Platform, highlightCode } from "@/components/PlatformTabs";
+import { ActionArea, Button, TextButton, IconButton } from '@baerae-zkap/design-system';
 
 export default function ActionAreaPage() {
   return (
@@ -1844,20 +1845,8 @@ interface ActionAreaDemoProps {
 }
 
 function ActionAreaDemo({ variant, children, caption }: ActionAreaDemoProps) {
-  const getLayout = () => {
-    switch (variant) {
-      case "strong":
-        return { flexDirection: "column" as const, gap: 12 };
-      case "cancel":
-        return { flexDirection: "column" as const, gap: 12 };
-      case "neutral":
-        return { flexDirection: "row" as const, gap: 12 };
-      case "compact":
-        return { flexDirection: "row" as const, gap: 12, justifyContent: "flex-end" as const };
-    }
-  };
-
-  const layout = getLayout();
+  // Map page-level variant (includes "cancel") to real ActionArea variant
+  const realVariant = variant === "cancel" ? "strong" : variant;
 
   return (
     <div
@@ -1870,22 +1859,16 @@ function ActionAreaDemo({ variant, children, caption }: ActionAreaDemoProps) {
         backgroundColor: "white",
       }}
     >
-      {/* Action Area content */}
-      <div
-        style={{
-          padding: 20,
-          backgroundColor: "white",
-        }}
+      {/* Action Area using real component */}
+      <ActionArea
+        variant={realVariant}
+        position="static"
+        showGradient={false}
+        useSafeArea={false}
+        caption={caption}
       >
-        {caption && (
-          <p style={{ fontSize: 14, color: "#6b7280", marginBottom: 16, textAlign: "center", lineHeight: 1.5 }}>
-            {caption}
-          </p>
-        )}
-        <div style={{ display: "flex", ...layout }}>
-          {children}
-        </div>
-      </div>
+        {children}
+      </ActionArea>
 
       {/* Home indicator */}
       <div style={{ padding: "8px 0 12px", backgroundColor: "white", display: "flex", justifyContent: "center" }}>
@@ -1903,126 +1886,56 @@ interface ActionAreaButtonDemoProps {
 }
 
 function ActionAreaButtonDemo({ variant, size, children, compact = false }: ActionAreaButtonDemoProps & { compact?: boolean }) {
-  const [isPressed, setIsPressed] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
+  const buttonSize = size === "xLarge" ? "xLarge" : "small";
+  const layout = compact ? "hug" as const : "fillWidth" as const;
 
-  // Size heights matching Button component
-  const sizeHeights: Record<ButtonSize, number> = { small: 36, xLarge: 48 };
-
-  // Color definitions matching Button component exactly
-  const getStyles = () => {
-    const height = sizeHeights[size];
-    const fontSize = size === "xLarge" ? 15 : 14;
-
-    // In compact mode, buttons should hug content, not fill width
-    const shouldFill = !compact && variant !== "sub";
-
-    const baseStyles = {
-      height,
-      padding: variant === "sub" ? "10px 12px" : "10px 20px",
-      fontSize,
-      fontWeight: 600,
-      borderRadius: 12,
-      cursor: "pointer",
-      transition: "all 150ms ease",
-      transform: isPressed ? "scale(0.98)" : "scale(1)",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      width: shouldFill ? "100%" : "auto",
-      flex: shouldFill ? 1 : "0 0 auto",
-      whiteSpace: "nowrap" as const,
-    };
-
-    switch (variant) {
-      case "main":
-        // Button: buttonType="filled" color="brandDefault"
-        return {
-          ...baseStyles,
-          backgroundColor: isPressed ? "#1e40af" : isHovered ? "#1d4ed8" : "#2563eb",
-          color: "white",
-          border: "none",
-        };
-      case "cancel":
-        // Button: buttonType="outlined" - Cancel is a dismiss action, outlined style
-        return {
-          ...baseStyles,
-          backgroundColor: isPressed ? "#f1f5f9" : isHovered ? "#f8fafc" : "white",
-          color: "#334155",
-          border: "1px solid #cbd5e1",
-          width: "100%",
-          flex: 1,
-        };
-      case "alternative":
-        // Button: buttonType="filled" color="baseContainer" - filled gray style
-        return {
-          ...baseStyles,
-          backgroundColor: isPressed ? "#d1d5db" : isHovered ? "#e5e7eb" : "#f3f4f6",
-          color: "#374151",
-          border: "none",
-        };
-      case "sub":
-        // TextButton: color="brandDefault" - plain text, no border
-        return {
-          ...baseStyles,
-          backgroundColor: isPressed ? "rgba(37, 99, 235, 0.08)" : isHovered ? "rgba(37, 99, 235, 0.04)" : "transparent",
-          color: isPressed ? "#1e40af" : isHovered ? "#1d4ed8" : "#2563eb",
-          border: "none",
-        };
-    }
-  };
-
-  return (
-    <button
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => { setIsHovered(false); setIsPressed(false); }}
-      onMouseDown={() => setIsPressed(true)}
-      onMouseUp={() => setIsPressed(false)}
-      style={getStyles()}
-    >
-      {children}
-    </button>
-  );
+  switch (variant) {
+    case "main":
+      return (
+        <Button buttonType="filled" color="brandDefault" size={buttonSize} layout={layout}>
+          {children}
+        </Button>
+      );
+    case "cancel":
+      return (
+        <Button buttonType="outlined" color="baseContainer" size={buttonSize} layout="fillWidth">
+          {children}
+        </Button>
+      );
+    case "alternative":
+      return (
+        <Button buttonType="filled" color="baseContainer" size={buttonSize} layout={layout}>
+          {children}
+        </Button>
+      );
+    case "sub":
+      return (
+        <TextButton color="brandDefault">
+          {children}
+        </TextButton>
+      );
+  }
 }
 
 // IconButton Demo for sub action with icon
 function IconButtonDemo({ size }: { size: ButtonSize }) {
-  const [isPressed, setIsPressed] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-
-  const sizeMap: Record<ButtonSize, number> = { small: 36, xLarge: 48 };
+  const iconButtonSize = size === "xLarge" ? "large" as const : "small" as const;
   const iconSize = size === "xLarge" ? 20 : 16;
 
   return (
-    <button
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => { setIsHovered(false); setIsPressed(false); }}
-      onMouseDown={() => setIsPressed(true)}
-      onMouseUp={() => setIsPressed(false)}
-      style={{
-        width: sizeMap[size],
-        height: sizeMap[size],
-        padding: 0,
-        borderRadius: 12,
-        cursor: "pointer",
-        transition: "all 150ms ease",
-        transform: isPressed ? "scale(0.98)" : "scale(1)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: isPressed ? "#f1f5f9" : isHovered ? "#f8fafc" : "white",
-        border: "1px solid #cbd5e1",
-        flexShrink: 0,
-      }}
+    <IconButton
+      variant="outlined"
+      color="baseDefault"
+      size={iconButtonSize}
     >
       {/* Refresh icon */}
-      <svg width={iconSize} height={iconSize} viewBox="0 0 24 24" fill="none" stroke="#334155" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg width={iconSize} height={iconSize} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M21 2v6h-6" />
         <path d="M3 12a9 9 0 0 1 15-6.7L21 8" />
         <path d="M3 22v-6h6" />
         <path d="M21 12a9 9 0 0 1-15 6.7L3 16" />
       </svg>
-    </button>
+    </IconButton>
   );
 }
 
@@ -2046,81 +1959,17 @@ function ButtonDemo({
   disabled = false,
   isLoading = false,
 }: ButtonDemoProps) {
-  const [isPressed, setIsPressed] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-
-  const sizeHeights: Record<string, number> = { small: 36, medium: 40, large: 44, xLarge: 48 };
-
-  const getColors = () => {
-    if (disabled && !isLoading) {
-      return { bg: "#e2e8f0", text: "#94a3b8", border: "#e2e8f0" };
-    }
-
-    const colorMap: Record<ButtonColor, { bg: string; bgHover: string; bgPressed: string; text: string; border: string }> = {
-      brandDefault: { bg: "#2563eb", bgHover: "#1d4ed8", bgPressed: "#1e40af", text: "white", border: "#2563eb" },
-      brandSecondary: { bg: "#dbeafe", bgHover: "#bfdbfe", bgPressed: "#93c5fd", text: "#2563eb", border: "#93c5fd" },
-      baseContainer: { bg: "#f1f5f9", bgHover: "#e2e8f0", bgPressed: "#cbd5e1", text: "#334155", border: "#cbd5e1" },
-      successDefault: { bg: "#22c55e", bgHover: "#16a34a", bgPressed: "#15803d", text: "white", border: "#22c55e" },
-      errorDefault: { bg: "#ef4444", bgHover: "#dc2626", bgPressed: "#b91c1c", text: "white", border: "#ef4444" },
-      kakaoDefault: { bg: "#FEE500", bgHover: "#E8D000", bgPressed: "#D4BF00", text: "#191919", border: "#FEE500" },
-      googleDefault: { bg: "white", bgHover: "#f8fafc", bgPressed: "#f1f5f9", text: "#334155", border: "#d1d5db" },
-    };
-
-    const c = colorMap[color];
-    const getBg = () => {
-      if (isPressed) return c.bgPressed;
-      if (isHovered) return c.bgHover;
-      return c.bg;
-    };
-
-    if (buttonType === "filled") {
-      return { bg: getBg(), text: c.text, border: "transparent" };
-    } else {
-      const getOutlinedText = () => {
-        if (color === "brandDefault" || color === "brandSecondary") return "#2563eb";
-        if (color === "successDefault") return "#16a34a";
-        if (color === "errorDefault") return "#dc2626";
-        return "#334155";
-      };
-      return {
-        bg: isPressed ? "#f1f5f9" : isHovered ? "#f8fafc" : "white",
-        text: getOutlinedText(),
-        border: c.border,
-      };
-    }
-  };
-
-  const colors = getColors();
-
   return (
-    <button
-      disabled={disabled || isLoading}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => { setIsHovered(false); setIsPressed(false); }}
-      onMouseDown={() => !disabled && !isLoading && setIsPressed(true)}
-      onMouseUp={() => setIsPressed(false)}
-      style={{
-        padding: size === "xLarge" ? "14px 24px" : size === "large" ? "12px 20px" : size === "medium" ? "10px 20px" : "8px 16px",
-        fontSize: size === "xLarge" ? 15 : 14,
-        fontWeight: 600,
-        backgroundColor: colors.bg,
-        color: colors.text,
-        border: buttonType === "outlined" ? `1px solid ${colors.border}` : "none",
-        borderRadius: (size === "large" || size === "xLarge") ? 12 : 8,
-        cursor: disabled || isLoading ? "not-allowed" : "pointer",
-        transition: "all 150ms ease",
-        transform: isPressed ? "scale(0.98)" : "scale(1)",
-        display: "inline-flex",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: 8,
-        width: layout === "fillWidth" ? "100%" : "auto",
-        minWidth: 80,
-        height: sizeHeights[size],
-      }}
+    <Button
+      buttonType={buttonType}
+      color={color}
+      size={size}
+      layout={layout === "fill" ? "fillWidth" : layout}
+      disabled={disabled}
+      isLoading={isLoading}
     >
       {children}
-    </button>
+    </Button>
   );
 }
 
@@ -2144,79 +1993,18 @@ function TextButtonDemo({
   disabled = false,
   children
 }: TextButtonDemoProps) {
-  const [isHovered, setIsHovered] = useState(false);
-  const [isPressed, setIsPressed] = useState(false);
-
-  const getColor = () => {
-    if (disabled) return "#9ca3af";
-    switch (color) {
-      case "brandDefault": return "#2563eb";
-      case "baseDefault": return "#374151";
-      case "errorDefault": return "#dc2626";
-    }
-  };
-
-  const getFontSize = () => {
-    switch (size) {
-      case "xSmall": return 12;
-      case "small": return 14;
-      case "medium": return 16;
-      case "large": return 18;
-      case "xLarge": return 20;
-    }
-  };
-
-  const getBackgroundColor = () => {
-    if (disabled) return "transparent";
-    const colorMap = {
-      brandDefault: {
-        pressed: "rgba(37, 99, 235, 0.12)",
-        hovered: "rgba(37, 99, 235, 0.06)",
-        default: "transparent",
-      },
-      baseDefault: {
-        pressed: "rgba(55, 65, 81, 0.12)",
-        hovered: "rgba(55, 65, 81, 0.06)",
-        default: "transparent",
-      },
-      errorDefault: {
-        pressed: "rgba(220, 38, 38, 0.12)",
-        hovered: "rgba(220, 38, 38, 0.06)",
-        default: "transparent",
-      },
-    };
-    const colors = colorMap[color];
-    if (isPressed) return colors.pressed;
-    if (isHovered) return colors.hovered;
-    return colors.default;
-  };
+  // Map page-level variant ("default" | "underline") to real TextButton variant ("clear" | "underline" | "arrow")
+  const realVariant = variant === "underline" ? "underline" as const : "clear" as const;
 
   return (
-    <button
+    <TextButton
+      variant={realVariant}
+      color={color}
+      size={size}
       disabled={disabled}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => { setIsHovered(false); setIsPressed(false); }}
-      onMouseDown={() => setIsPressed(true)}
-      onMouseUp={() => setIsPressed(false)}
-      style={{
-        display: "inline-flex",
-        alignItems: "center",
-        gap: 4,
-        padding: "4px 8px",
-        border: "none",
-        borderRadius: 6,
-        backgroundColor: getBackgroundColor(),
-        color: getColor(),
-        fontSize: getFontSize(),
-        fontWeight: 500,
-        cursor: disabled ? "not-allowed" : "pointer",
-        opacity: disabled ? 0.38 : 1,
-        textDecoration: variant === "underline" ? "underline" : "none",
-        transition: "background-color 0.15s ease, opacity 0.15s ease",
-      }}
     >
       {children}
-    </button>
+    </TextButton>
   );
 }
 
@@ -2226,74 +2014,20 @@ function StateButtonDemo({ state, variant, children }: {
   variant: "main" | "alternative";
   children: React.ReactNode;
 }) {
-  const getStyles = () => {
-    const baseStyles = {
-      height: 48,
-      padding: "10px 16px",
-      fontSize: 15,
-      fontWeight: 600,
-      borderRadius: 12,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: 8,
-      width: "100%",
-      flex: 1,
-      transition: "all 150ms ease",
-    };
-
-    if (state === "disabled") {
-      return {
-        ...baseStyles,
-        backgroundColor: "#e2e8f0",
-        color: "#94a3b8",
-        border: variant === "alternative" ? "1px solid #e2e8f0" : "none",
-        cursor: "not-allowed",
-      };
-    }
-
-    if (state === "loading") {
-      return {
-        ...baseStyles,
-        backgroundColor: variant === "main" ? "#2563eb" : "white",
-        color: variant === "main" ? "white" : "#334155",
-        border: variant === "alternative" ? "1px solid #cbd5e1" : "none",
-        cursor: "wait",
-        opacity: 0.8,
-      };
-    }
-
-    // pressed state
-    if (variant === "main") {
-      return {
-        ...baseStyles,
-        backgroundColor: "#1e40af",
-        color: "white",
-        border: "none",
-        transform: "scale(0.98)",
-        cursor: "pointer",
-      };
-    } else {
-      return {
-        ...baseStyles,
-        backgroundColor: "#f1f5f9",
-        color: "#334155",
-        border: "1px solid #cbd5e1",
-        transform: "scale(0.98)",
-        cursor: "pointer",
-      };
-    }
-  };
+  const buttonType = variant === "main" ? "filled" as const : "filled" as const;
+  const color = variant === "main" ? "brandDefault" as const : "baseContainer" as const;
 
   return (
-    <button style={getStyles()} disabled={state === "disabled" || state === "loading"}>
-      {state === "loading" && (
-        <svg width="16" height="16" viewBox="0 0 24 24" style={{ animation: "spin 1s linear infinite" }}>
-          <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" fill="none" strokeDasharray="32" strokeLinecap="round" />
-        </svg>
-      )}
+    <Button
+      buttonType={buttonType}
+      color={color}
+      size="xLarge"
+      layout="fillWidth"
+      disabled={state === "disabled"}
+      isLoading={state === "loading"}
+    >
       {children}
-    </button>
+    </Button>
   );
 }
 

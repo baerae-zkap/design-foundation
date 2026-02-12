@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { PlatformTabs, CodeBlock, PreviewBox, Platform } from "@/components/PlatformTabs";
+import { ListCard, ContentBadge } from '@baerae-zkap/design-system';
 
 // GitHub source URLs
 const GITHUB_BASE = "https://github.com/baerae-zkap/design-foundation/blob/main/src/source/components/ListCard";
@@ -1168,7 +1169,7 @@ function ThumbnailDemo({ size = 80 }: { size?: number }) {
 
 function BadgeDemo() {
   return (
-    <span style={{ display: "inline-flex", alignItems: "center", height: 18, padding: "0 6px", fontSize: 10, fontWeight: 600, color: "white", backgroundColor: "#2563eb", borderRadius: 4 }}>NEW</span>
+    <ContentBadge color="brandDefault" size="small">NEW</ContentBadge>
   );
 }
 
@@ -1211,47 +1212,16 @@ function ListCardDemo({
   meta?: React.ReactNode;
   onClick?: () => void;
 }) {
-  const [isHovered, setIsHovered] = useState(false);
-  const s = sizeConfig[size];
-
-  const getVariantStyle = (): React.CSSProperties => {
-    const pressedBg = isHovered && onClick ? "rgba(0,0,0,0.04)" : undefined;
-    switch (variant) {
-      case "elevated":
-        return { backgroundColor: pressedBg || "white", boxShadow: "0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06)" };
-      case "outlined":
-        return { backgroundColor: pressedBg || "white", border: "1px solid #e2e8f0" };
-      case "filled":
-        return { backgroundColor: isHovered && onClick ? "#f1f5f9" : "#f8fafc" };
-      default:
-        return {};
-    }
-  };
-
   return (
-    <div
+    <ListCard
+      variant={variant}
+      size={size}
+      thumbnail={thumbnail}
+      badges={badges}
+      title={title}
+      subtitle={subtitle}
+      meta={meta}
       onClick={onClick}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: s.gap,
-        padding: s.padding,
-        borderRadius: 12,
-        cursor: onClick ? "pointer" : "default",
-        transition: "all 0.15s ease",
-        minWidth: s.minWidth,
-        ...getVariantStyle(),
-      }}
-    >
-      {thumbnail && <div style={{ width: s.thumbnailSize, height: s.thumbnailSize, borderRadius: s.thumbnailSize / 2, overflow: "hidden", flexShrink: 0 }}>{thumbnail}</div>}
-      <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: 4 }}>
-        {badges && <div style={{ display: "flex", gap: 4, marginBottom: 4 }}>{badges}</div>}
-        <div style={{ fontSize: s.titleSize, fontWeight: 600, color: "#334155", lineHeight: 1.4 }}>{title}</div>
-        {subtitle && <div style={{ fontSize: s.subtitleSize, color: "#64748b" }}>{subtitle}</div>}
-        {meta && <div style={{ fontSize: s.metaSize, fontWeight: 700, color: "#334155", marginTop: 4 }}>{meta}</div>}
-      </div>
-    </div>
+    />
   );
 }

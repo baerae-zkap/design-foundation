@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { PlatformTabs, CodeBlock, PreviewBox, Platform, highlightCode } from "@/components/PlatformTabs";
+import { Chip } from '@baerae-zkap/design-system';
 
 // Types
 type ChipVariant = "filled" | "outlined";
@@ -1150,102 +1151,17 @@ function ChipDemo({
   onClose,
   children,
 }: ChipDemoProps) {
-  const [isPressed, setIsPressed] = useState(false);
-  const sizeStyle = sizeConfig[size];
-  const colorStyle = colorConfig[color][variant];
-
-  const getBackgroundColor = (): string => {
-    if (selected) return colorStyle.bgSelected;
-    if (isPressed && !disabled) return colorStyle.bgPressed;
-    return colorStyle.bg;
-  };
-
-  const getTextColor = (): string => {
-    if (disabled) return '#94a3b8';
-    return selected ? colorStyle.textSelected : colorStyle.text;
-  };
-
   return (
-    <button
+    <Chip
+      variant={variant}
+      color={color}
+      size={size}
+      selected={selected}
       disabled={disabled}
-      onMouseDown={() => setIsPressed(true)}
-      onMouseUp={() => setIsPressed(false)}
-      onMouseLeave={() => setIsPressed(false)}
-      style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: 4,
-        height: sizeStyle.height,
-        padding: `0 ${sizeStyle.paddingX}px`,
-        fontSize: sizeStyle.fontSize,
-        fontWeight: 500,
-        color: getTextColor(),
-        backgroundColor: getBackgroundColor(),
-        border: variant === 'outlined' && !selected
-          ? `1px solid ${disabled ? '#cbd5e1' : (colorStyle as { border: string }).border}`
-          : 'none',
-        borderRadius: sizeStyle.height / 2,
-        cursor: disabled ? 'not-allowed' : 'pointer',
-        opacity: disabled ? 0.5 : 1,
-        transition: 'background-color 150ms ease, color 150ms ease',
-      }}
+      onClose={onClose}
     >
       {children}
-
-      {/* Selected Check Icon */}
-      {selected && !onClose && (
-        <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <svg
-            width={sizeStyle.iconSize * 0.7}
-            height={sizeStyle.iconSize * 0.7}
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="3"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <polyline points="20 6 9 17 4 12" />
-          </svg>
-        </span>
-      )}
-
-      {/* Close Button */}
-      {onClose && (
-        <span
-          role="button"
-          tabIndex={0}
-          onClick={(e) => {
-            e.stopPropagation();
-            onClose();
-          }}
-          style={{
-            marginRight: -4,
-            padding: 2,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer',
-            borderRadius: '50%',
-          }}
-        >
-          <svg
-            width={sizeStyle.iconSize * 0.7}
-            height={sizeStyle.iconSize * 0.7}
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <line x1="18" y1="6" x2="6" y2="18" />
-            <line x1="6" y1="6" x2="18" y2="18" />
-          </svg>
-        </span>
-      )}
-    </button>
+    </Chip>
   );
 }
 

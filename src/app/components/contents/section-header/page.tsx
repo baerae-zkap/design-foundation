@@ -3,21 +3,8 @@
 import { useState } from "react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { PlatformTabs, CodeBlock, PreviewBox, Platform } from "@/components/PlatformTabs";
-
-// Types
-type SectionHeaderSize = "small" | "medium" | "large";
-
-// Size configurations
-const sizeConfig: Record<SectionHeaderSize, {
-  fontSize: number;
-  paddingX: number;
-  paddingTop: number;
-  paddingBottom: number;
-}> = {
-  small: { fontSize: 13, paddingX: 16, paddingTop: 16, paddingBottom: 8 },
-  medium: { fontSize: 14, paddingX: 16, paddingTop: 16, paddingBottom: 8 },
-  large: { fontSize: 15, paddingX: 16, paddingTop: 16, paddingBottom: 8 },
-};
+import { SectionHeader } from '@baerae-zkap/design-system';
+import type { SectionHeaderSize } from '@baerae-zkap/design-system';
 
 export default function SectionHeaderPage() {
   return (
@@ -959,29 +946,8 @@ function RadioGroup({ label, options, value, onChange }: { label: string; option
 
 // Demo Components
 function SectionHeaderDemo({ title, action, size = "medium" }: { title: string; action?: React.ReactNode; size?: SectionHeaderSize }) {
-  const sizeStyle = sizeConfig[size];
   return (
-    <div style={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      paddingLeft: sizeStyle.paddingX,
-      paddingRight: sizeStyle.paddingX,
-      paddingTop: sizeStyle.paddingTop,
-      paddingBottom: sizeStyle.paddingBottom,
-    }}>
-      <div style={{
-        fontSize: sizeStyle.fontSize,
-        fontWeight: 600,
-        color: "#94a3b8",
-        lineHeight: 1.4,
-        textTransform: "uppercase",
-        letterSpacing: "0.02em",
-      }}>
-        {title}
-      </div>
-      {action && <div>{action}</div>}
-    </div>
+    <SectionHeader title={title} action={action} size={size} />
   );
 }
 

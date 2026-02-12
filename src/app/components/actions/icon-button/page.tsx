@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { PlatformTabs, CodeBlock, PreviewBox, Platform, highlightCode } from "@/components/PlatformTabs";
+import { IconButton } from '@baerae-zkap/design-system';
 
 // Types
 type IconButtonVariant = "filled" | "ghost" | "outlined";
@@ -1154,61 +1155,18 @@ function IconButtonDemo({
   size?: IconButtonSize;
   disabled?: boolean;
 }) {
-  const [isPressed, setIsPressed] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-
-  const sizeStyle = sizeConfig[size];
-  const colorStyle = colorConfig[color][variant];
-
-  // Determine background color based on state
-  let backgroundColor: string;
-  if (variant === "ghost") {
-    const ghostStyle = colorStyle as typeof colorConfig.brandDefault.ghost;
-    backgroundColor = isPressed ? ghostStyle.bgPressed : isHovered ? ghostStyle.bgHover : ghostStyle.bg;
-  } else if (variant === "filled") {
-    const filledStyle = colorStyle as typeof colorConfig.brandDefault.filled;
-    backgroundColor = isPressed ? filledStyle.bgPressed : filledStyle.bg;
-  } else {
-    const outlinedStyle = colorStyle as typeof colorConfig.brandDefault.outlined;
-    backgroundColor = isPressed ? outlinedStyle.bgPressed : outlinedStyle.bg;
-  }
-
-  // Determine icon color
-  let iconColor: string;
-  if (variant === "ghost") {
-    const ghostStyle = colorStyle as typeof colorConfig.brandDefault.ghost;
-    iconColor = isPressed ? ghostStyle.colorPressed : ghostStyle.color;
-  } else {
-    iconColor = (colorStyle as typeof colorConfig.brandDefault.filled).color;
-  }
+  const iconSize = sizeConfig[size].iconSize;
 
   return (
-    <button
+    <IconButton
+      variant={variant}
+      color={color}
+      size={size}
       disabled={disabled}
-      onMouseDown={() => !disabled && setIsPressed(true)}
-      onMouseUp={() => setIsPressed(false)}
-      onMouseLeave={() => { setIsPressed(false); setIsHovered(false); }}
-      onMouseEnter={() => !disabled && setIsHovered(true)}
-      style={{
-        display: "inline-flex",
-        alignItems: "center",
-        justifyContent: "center",
-        width: sizeStyle.size,
-        height: sizeStyle.size,
-        borderRadius: 9999,
-        border: variant === "outlined" ? `1px solid ${(colorStyle as typeof colorConfig.brandDefault.outlined).border}` : "none",
-        backgroundColor,
-        color: iconColor,
-        cursor: disabled ? "not-allowed" : "pointer",
-        opacity: disabled ? 0.5 : 1,
-        transition: "background-color 0.15s ease, color 0.15s ease",
-        padding: 0,
-        outline: "none",
-      }}
     >
       <svg
-        width={sizeStyle.iconSize}
-        height={sizeStyle.iconSize}
+        width={iconSize}
+        height={iconSize}
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
@@ -1219,6 +1177,6 @@ function IconButtonDemo({
         <line x1="12" y1="5" x2="12" y2="19" />
         <line x1="5" y1="12" x2="19" y2="12" />
       </svg>
-    </button>
+    </IconButton>
   );
 }

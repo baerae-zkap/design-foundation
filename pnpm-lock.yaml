@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@baerae-zkap/design-system':
+        specifier: link:packages/design-system
+        version: link:packages/design-system
       lucide-react-native:
         specifier: ^0.563.0
         version: 0.563.0(react-native-svg@15.15.2(react-native@0.83.1(@babel/core@7.29.0)(@types/react@19.2.13)(react@19.2.3))(react@19.2.3))(react-native@0.83.1(@babel/core@7.29.0)(@types/react@19.2.13)(react@19.2.3))(react@19.2.3)

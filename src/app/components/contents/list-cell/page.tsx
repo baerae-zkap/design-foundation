@@ -3,26 +3,18 @@
 import { useState } from "react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { PlatformTabs, CodeBlock, PreviewBox, Platform } from "@/components/PlatformTabs";
+import { ListCell, SectionHeader } from '@baerae-zkap/design-system';
+import type { ListCellSize } from '@baerae-zkap/design-system';
 
 // GitHub source URLs
 const GITHUB_BASE = "https://github.com/baerae-zkap/design-foundation/blob/main/src/source/components/ListCell";
 const LISTCELL_SOURCE = `${GITHUB_BASE}/ListCell.tsx`;
 
-// Types
-type ListCellSize = "small" | "medium" | "large";
-
-// Size configurations
-const sizeConfig: Record<ListCellSize, {
-  minHeight: number;
-  paddingY: number;
-  paddingX: number;
-  titleSize: number;
-  subtitleSize: number;
-  gap: number;
-}> = {
-  small: { minHeight: 44, paddingY: 8, paddingX: 16, titleSize: 14, subtitleSize: 12, gap: 12 },
-  medium: { minHeight: 56, paddingY: 12, paddingX: 16, titleSize: 15, subtitleSize: 13, gap: 12 },
-  large: { minHeight: 72, paddingY: 16, paddingX: 16, titleSize: 16, subtitleSize: 14, gap: 16 },
+// Size display info (for documentation labels only)
+const sizeInfo: Record<ListCellSize, { minHeight: number }> = {
+  small: { minHeight: 44 },
+  medium: { minHeight: 56 },
+  large: { minHeight: 72 },
 };
 
 export default function ListCellPage() {
@@ -411,7 +403,7 @@ function DesignContent() {
                   size={s}
                   leading={<AvatarDemo />}
                   title={`${s.charAt(0).toUpperCase() + s.slice(1)} Size`}
-                  subtitle={`minHeight: ${sizeConfig[s].minHeight}px`}
+                  subtitle={`minHeight: ${sizeInfo[s].minHeight}px`}
                   trailing={<ChevronIcon />}
                   divider={i < arr.length - 1}
                   onClick={() => {}}
@@ -754,7 +746,7 @@ function WebContent() {
                   size={s}
                   leading={<AvatarDemo />}
                   title={`${s.charAt(0).toUpperCase() + s.slice(1)} Size`}
-                  subtitle={`minHeight: ${sizeConfig[s].minHeight}px`}
+                  subtitle={`minHeight: ${sizeInfo[s].minHeight}px`}
                   trailing={<ChevronIcon />}
                   divider={i < arr.length - 1}
                   onClick={() => {}}
@@ -1342,14 +1334,6 @@ function SettingsIconDemo() {
   );
 }
 
-function SectionHeader({ title }: { title: string }) {
-  return (
-    <div style={{ padding: "16px 16px 8px", fontSize: 13, fontWeight: 600, color: "#94a3b8" }}>
-      {title}
-    </div>
-  );
-}
-
 function ListCellDemo({
   size = "medium",
   leading,
@@ -1367,32 +1351,15 @@ function ListCellDemo({
   divider?: boolean;
   onClick?: () => void;
 }) {
-  const [isHovered, setIsHovered] = useState(false);
-  const s = sizeConfig[size];
-
   return (
-    <div
+    <ListCell
+      size={size}
+      leading={leading}
+      title={title}
+      subtitle={subtitle}
+      trailing={trailing}
+      divider={divider}
       onClick={onClick}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: s.gap,
-        minHeight: s.minHeight,
-        padding: `${s.paddingY}px ${s.paddingX}px`,
-        backgroundColor: isHovered && onClick ? "rgba(0,0,0,0.02)" : "transparent",
-        cursor: onClick ? "pointer" : "default",
-        borderBottom: divider ? "1px solid #e2e8f0" : "none",
-        transition: "background-color 0.15s ease",
-      }}
-    >
-      {leading}
-      <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{ fontSize: s.titleSize, fontWeight: 500, color: "#334155", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{title}</div>
-        {subtitle && <div style={{ fontSize: s.subtitleSize, color: "#64748b", marginTop: 2 }}>{subtitle}</div>}
-      </div>
-      {trailing}
-    </div>
+    />
   );
 }

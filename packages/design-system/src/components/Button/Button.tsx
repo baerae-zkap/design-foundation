@@ -23,7 +23,9 @@ export type ButtonColor =
   | 'brandSecondary'
   | 'baseContainer'
   | 'successDefault'
-  | 'errorDefault';
+  | 'errorDefault'
+  | 'kakaoDefault'
+  | 'googleDefault';
 export type ButtonSize = 'small' | 'medium' | 'large' | 'xLarge';
 export type ButtonLayout = 'hug' | 'fillWidth';
 
@@ -120,6 +122,32 @@ const colorStyles: Record<ButtonColor, {
       bgPressed: '#fef2f2', // palette.red.98
       color: '#dc2626', // palette.red.45
       border: '#ef4444' // palette.red.50
+    },
+  },
+  kakaoDefault: {
+    filled: {
+      bg: '#FEE500',
+      bgPressed: '#D4BF00',
+      color: '#191919'
+    },
+    outlined: {
+      bg: 'white',
+      bgPressed: '#FFFDE6',
+      color: '#191919',
+      border: '#FEE500'
+    },
+  },
+  googleDefault: {
+    filled: {
+      bg: 'white',
+      bgPressed: '#f1f5f9',
+      color: '#334155'
+    },
+    outlined: {
+      bg: 'white',
+      bgPressed: '#f8fafc',
+      color: '#334155',
+      border: '#d1d5db'
     },
   },
 };

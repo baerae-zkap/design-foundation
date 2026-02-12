@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { PlatformTabs, CodeBlock, PreviewBox, Platform, highlightCode } from "@/components/PlatformTabs";
+import { Button } from '@baerae-zkap/design-system';
 
 // GitHub source URLs (design-foundation repo)
 const GITHUB_BASE = "https://github.com/baerae-zkap/design-foundation/blob/main/src/source/components/Button";
@@ -1926,126 +1927,42 @@ function ButtonDemo({
   iconOnly,
   forcePressed = false,
 }: ButtonDemoProps) {
-  const [isPressed, setIsPressed] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-  const actualPressed = forcePressed || isPressed;
-
-  const sizeHeights: Record<ButtonSize, number> = { small: 36, medium: 40, large: 44, xLarge: 48 };
-
-  const getColors = () => {
-    if (disabled && !isLoading) {
-      return { bg: "#e2e8f0", text: "#94a3b8", border: "#e2e8f0" };
-    }
-
-    const colorMap: Record<ButtonColor, { bg: string; bgHover: string; bgPressed: string; text: string; border: string; borderHover: string }> = {
-      brandDefault: { bg: "#2563eb", bgHover: "#1d4ed8", bgPressed: "#1e40af", text: "white", border: "#2563eb", borderHover: "#1d4ed8" },
-      brandSecondary: { bg: "#dbeafe", bgHover: "#bfdbfe", bgPressed: "#93c5fd", text: "#2563eb", border: "#93c5fd", borderHover: "#60a5fa" },
-      baseContainer: { bg: "#f1f5f9", bgHover: "#e2e8f0", bgPressed: "#cbd5e1", text: "#334155", border: "#cbd5e1", borderHover: "#94a3b8" },
-      successDefault: { bg: "#22c55e", bgHover: "#16a34a", bgPressed: "#15803d", text: "white", border: "#22c55e", borderHover: "#16a34a" },
-      errorDefault: { bg: "#ef4444", bgHover: "#dc2626", bgPressed: "#b91c1c", text: "white", border: "#ef4444", borderHover: "#dc2626" },
-      kakaoDefault: { bg: "#FEE500", bgHover: "#E8D000", bgPressed: "#D4BF00", text: "#191919", border: "#FEE500", borderHover: "#E8D000" },
-      googleDefault: { bg: "white", bgHover: "#f8fafc", bgPressed: "#f1f5f9", text: "#334155", border: "#d1d5db", borderHover: "#9ca3af" },
-    };
-
-    const c = colorMap[color];
-    const getBg = () => {
-      if (actualPressed) return c.bgPressed;
-      if (isHovered) return c.bgHover;
-      return c.bg;
-    };
-
-    if (buttonType === "filled") {
-      return { bg: getBg(), text: c.text, border: "transparent" };
-    } else {
-      // outlined 버튼은 텍스트 색상 유지, 배경만 살짝 어두워짐
-      const getOutlinedText = () => {
-        if (color === "brandDefault" || color === "brandSecondary") return "#2563eb";
-        if (color === "successDefault") return "#16a34a";
-        if (color === "errorDefault") return "#dc2626";
-        return "#334155";
-      };
-      return {
-        bg: actualPressed ? "#f1f5f9" : isHovered ? "#f8fafc" : "white",
-        text: getOutlinedText(),
-        border: c.border,
-      };
-    }
-  };
-
-  const colors = getColors();
-
   const getIcon = (type: string) => {
-    switch (type) {
-      case "plus":
-        return <path d="M12 5v14M5 12h14" />;
-      case "download":
-        return <><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></>;
-      case "edit":
-        return <><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" /></>;
-      case "close":
-        return <><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></>;
-      case "external":
-        return <><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" /></>;
-      default:
-        return <path d="M9 18l6-6-6-6" />;
-    }
+    const paths: Record<string, React.ReactNode> = {
+      plus: <path d="M12 5v14M5 12h14" />,
+      download: <><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></>,
+      edit: <><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" /></>,
+      close: <><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></>,
+      external: <><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" /></>,
+    };
+    return (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        {paths[type] || <path d="M9 18l6-6-6-6" />}
+      </svg>
+    );
   };
+
+  const leftContent = leadingIcon
+    ? getIcon(typeof leadingIcon === "string" ? leadingIcon : "plus")
+    : undefined;
+
+  const rightContent = trailingIcon
+    ? getIcon(typeof trailingIcon === "string" ? trailingIcon : "chevron")
+    : undefined;
 
   return (
-    <button
-      disabled={disabled || isLoading}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => { setIsHovered(false); setIsPressed(false); }}
-      onMouseDown={() => !disabled && !isLoading && setIsPressed(true)}
-      onMouseUp={() => setIsPressed(false)}
-      style={{
-        padding: iconOnly
-          ? (size === "xLarge" ? "14px" : size === "large" ? "12px" : size === "medium" ? "10px" : "8px")
-          : (size === "xLarge" ? "14px 24px" : size === "large" ? "12px 20px" : size === "medium" ? "10px 20px" : "8px 16px"),
-        fontSize: size === "xLarge" ? 15 : 14,
-        fontWeight: 600,
-        backgroundColor: colors.bg,
-        color: colors.text,
-        border: buttonType === "outlined" ? `1px solid ${colors.border}` : "none",
-        borderRadius: (size === "large" || size === "xLarge") ? 12 : 8,
-        cursor: disabled || isLoading ? "not-allowed" : "pointer",
-        transition: "all 150ms ease",
-        transform: actualPressed ? "scale(0.98)" : "scale(1)",
-        display: "inline-flex",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: 8,
-        width: layout === "fillWidth" ? "100%" : "auto",
-        minWidth: iconOnly ? "auto" : 80,
-        height: sizeHeights[size],
-        opacity: disabled && !isLoading ? 1 : 1,
-        position: "relative",
-      }}
+    <Button
+      buttonType={buttonType}
+      color={color}
+      size={size}
+      layout={layout === "fill" ? "fillWidth" : layout}
+      disabled={disabled}
+      isLoading={isLoading}
+      leftContent={leftContent}
+      rightContent={rightContent}
     >
-      {isLoading ? (
-        <LoadingDots />
-      ) : (
-        <>
-          {leadingIcon && (
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              {getIcon(typeof leadingIcon === "string" ? leadingIcon : "plus")}
-            </svg>
-          )}
-          {iconOnly ? (
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              {getIcon(iconOnly)}
-            </svg>
-          ) : (
-            children
-          )}
-          {trailingIcon && (
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              {getIcon(typeof trailingIcon === "string" ? trailingIcon : "chevron")}
-            </svg>
-          )}
-        </>
-      )}
-    </button>
+      {iconOnly ? getIcon(iconOnly) : children}
+    </Button>
   );
 }
 
@@ -2058,59 +1975,14 @@ function LoadingButtonDemo() {
   };
 
   return (
-    <button
+    <Button
+      buttonType="filled"
+      color="brandDefault"
+      isLoading={isLoading}
       onClick={handleClick}
-      disabled={isLoading}
-      style={{
-        padding: "10px 20px",
-        fontSize: 14,
-        fontWeight: 600,
-        backgroundColor: "#2563eb",
-        color: "white",
-        border: "none",
-        borderRadius: 12,
-        cursor: isLoading ? "not-allowed" : "pointer",
-        transition: "all 150ms ease",
-        display: "inline-flex",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: 8,
-        minWidth: 140,
-        height: 40,
-      }}
     >
-      {isLoading ? (
-        <LoadingDots />
-      ) : (
-        "Click to Load"
-      )}
-    </button>
-  );
-}
-
-function LoadingDots({ color = "currentColor" }: { color?: string }) {
-  return (
-    <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
-      <style>{`
-        @keyframes dotPulse {
-          0%, 100% { transform: scale(0.6); opacity: 0.4; }
-          50% { transform: scale(1); opacity: 1; }
-        }
-      `}</style>
-      {[0, 1, 2, 3].map((i) => (
-        <div
-          key={i}
-          style={{
-            width: 6,
-            height: 6,
-            borderRadius: "50%",
-            backgroundColor: color,
-            animation: `dotPulse 1.2s ease-in-out infinite`,
-            animationDelay: `${i * 0.15}s`,
-          }}
-        />
-      ))}
-    </div>
+      Click to Load
+    </Button>
   );
 }
 

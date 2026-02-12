@@ -3,18 +3,11 @@
 import { useState } from "react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { PlatformTabs, CodeBlock, PreviewBox, Platform, highlightCode } from "@/components/PlatformTabs";
+import { Card } from '@baerae-zkap/design-system';
 
 // Types
 type CardVariant = "elevated" | "outlined" | "filled";
 type CardPadding = "none" | "small" | "medium" | "large";
-
-// Padding configurations (from Foundation tokens)
-const paddingConfig: Record<CardPadding, number> = {
-  none: 0,
-  small: 12,   // primitive.3
-  medium: 20,  // card.padding.md
-  large: 24,   // card.padding.lg
-};
 
 export default function CardPage() {
   return (
@@ -1121,50 +1114,13 @@ function CardDemo({
   onClick?: () => void;
   children: React.ReactNode;
 }) {
-  const [isPressed, setIsPressed] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-
-  const paddingValue = paddingConfig[padding];
-
-  const getVariantStyle = (): React.CSSProperties => {
-    const pressedBg = isPressed ? "rgba(0,0,0,0.04)" : isHovered && onClick ? "rgba(0,0,0,0.02)" : undefined;
-
-    switch (variant) {
-      case "elevated":
-        return {
-          backgroundColor: pressedBg || "white",
-          boxShadow: "0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06)",
-        };
-      case "outlined":
-        return {
-          backgroundColor: pressedBg || "white",
-          border: "1px solid #e2e8f0",
-        };
-      case "filled":
-        return {
-          backgroundColor: isPressed ? "#f1f5f9" : isHovered && onClick ? "#f1f5f9" : "#f8fafc",
-        };
-      default:
-        return {};
-    }
-  };
-
   return (
-    <div
+    <Card
+      variant={variant}
+      padding={padding}
       onClick={onClick}
-      onMouseDown={() => onClick && setIsPressed(true)}
-      onMouseUp={() => setIsPressed(false)}
-      onMouseLeave={() => { setIsPressed(false); setIsHovered(false); }}
-      onMouseEnter={() => setIsHovered(true)}
-      style={{
-        padding: paddingValue,
-        borderRadius: 12,
-        cursor: onClick ? "pointer" : "default",
-        transition: "all 0.15s ease",
-        ...getVariantStyle(),
-      }}
     >
       {children}
-    </div>
+    </Card>
   );
 }

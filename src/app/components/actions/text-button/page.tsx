@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { PlatformTabs, CodeBlock, PreviewBox, Platform, highlightCode } from "@/components/PlatformTabs";
+import { TextButton } from '@baerae-zkap/design-system';
 
 // Types
 type TextButtonSize = "xSmall" | "small" | "medium" | "large" | "xLarge";
@@ -1744,96 +1745,35 @@ interface TextButtonDemoProps {
 }
 
 function TextButtonDemo({ variant, color, size, disabled, isHovered, isPressed, children }: TextButtonDemoProps) {
-  const [hovered, setHovered] = useState(false);
-  const [pressed, setPressed] = useState(false);
-
-  const actualHovered = isHovered ?? hovered;
-  const actualPressed = isPressed ?? pressed;
-
-  const getColor = () => {
-    if (disabled) return "#9ca3af";
-    switch (color) {
-      case "brandDefault": return "#2563eb";
-      case "baseDefault": return "#374151";
-      case "errorDefault": return "#dc2626";
-    }
-  };
-
-  const getFontSize = () => {
-    switch (size) {
-      case "xSmall": return 12;
-      case "small": return 14;
-      case "medium": return 16;
-      case "large": return 18;
-      case "xLarge": return 20;
-    }
-  };
-
-  const getBackgroundColor = () => {
-    if (disabled) return "transparent";
-
-    // 각 컬러별 배경색 (pressed > hovered > default)
-    const colorMap = {
-      brandDefault: {
-        pressed: "rgba(37, 99, 235, 0.12)",
-        hovered: "rgba(37, 99, 235, 0.06)",
-        default: "transparent",
-      },
-      baseDefault: {
-        pressed: "rgba(55, 65, 81, 0.12)",
-        hovered: "rgba(55, 65, 81, 0.06)",
-        default: "transparent",
-      },
-      errorDefault: {
-        pressed: "rgba(220, 38, 38, 0.12)",
-        hovered: "rgba(220, 38, 38, 0.06)",
-        default: "transparent",
-      },
+  // For forced hover/pressed states (used in States section previews),
+  // apply background overlay styles manually since the real component
+  // manages its own hover/pressed states internally.
+  const forcedStyle: React.CSSProperties = {};
+  if (isPressed) {
+    const pressedBgMap: Record<TextButtonColor, string> = {
+      brandDefault: "rgba(37, 99, 235, 0.12)",
+      baseDefault: "rgba(55, 65, 81, 0.12)",
+      errorDefault: "rgba(220, 38, 38, 0.12)",
     };
-
-    const colors = colorMap[color];
-    if (actualPressed) return colors.pressed;
-    if (actualHovered) return colors.hovered;
-    return colors.default;
-  };
+    forcedStyle.backgroundColor = pressedBgMap[color];
+  } else if (isHovered) {
+    const hoverBgMap: Record<TextButtonColor, string> = {
+      brandDefault: "rgba(37, 99, 235, 0.06)",
+      baseDefault: "rgba(55, 65, 81, 0.06)",
+      errorDefault: "rgba(220, 38, 38, 0.06)",
+    };
+    forcedStyle.backgroundColor = hoverBgMap[color];
+  }
 
   return (
-    <button
+    <TextButton
+      variant={variant}
+      color={color}
+      size={size}
       disabled={disabled}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => { setHovered(false); setPressed(false); }}
-      onMouseDown={() => setPressed(true)}
-      onMouseUp={() => setPressed(false)}
-      style={{
-        display: "inline-flex",
-        alignItems: "center",
-        gap: 4,
-        padding: "4px 8px",
-        border: "none",
-        borderRadius: 6,
-        backgroundColor: getBackgroundColor(),
-        color: getColor(),
-        fontSize: getFontSize(),
-        fontWeight: 500,
-        cursor: disabled ? "not-allowed" : "pointer",
-        opacity: disabled ? 0.38 : 1,
-        textDecoration: variant === "underline" ? "underline" : "none",
-        transition: "background-color 0.15s ease, opacity 0.15s ease",
-      }}
+      style={forcedStyle}
     >
       {children}
-      {variant === "arrow" && (
-        <svg
-          width={getFontSize() * 0.75}
-          height={getFontSize() * 0.75}
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.5"
-        >
-          <polyline points="9 18 15 12 9 6" />
-        </svg>
-      )}
-    </button>
+    </TextButton>
   );
 }
