@@ -18,6 +18,11 @@
     "react-native-svg": "15.12.1",
     "react-native-web": "^0.21.0"
   },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  },
   "devDependencies": {
     "@storybook/react-native-web-vite": "^9.0.15",
     "storybook": "^9.0.15",
