@@ -19,6 +19,9 @@
  */
 
 import React, { forwardRef, type HTMLAttributes, type ReactNode, Children, isValidElement, cloneElement } from 'react';
+import { colors, palette } from '../../tokens/colors';
+import { spacing } from '../../tokens/spacing';
+import { typography } from '../../tokens/typography';
 
 // ============================================
 // Types
@@ -91,38 +94,21 @@ function toTransparent(color: string): string {
 }
 
 // ============================================
-// Spacing Tokens (from Foundation)
-// ============================================
-
-const tokens = {
-  modal: {
-    padding: 24,    // modal.padding
-    buttonGap: 12,  // modal.buttonGap
-  },
-  bottomSheet: {
-    padding: 20,    // bottomSheet.padding
-  },
-  safeArea: {
-    bottom: 32,     // screen.safeAreaBottom
-  },
-};
-
-// ============================================
 // Variant Layouts
 // ============================================
 
 const variantLayouts: Record<ActionAreaVariant, React.CSSProperties> = {
   strong: {
     flexDirection: 'column',
-    gap: tokens.modal.buttonGap,
+    gap: spacing.component.modal.buttonGap,
   },
   neutral: {
     flexDirection: 'row',
-    gap: tokens.modal.buttonGap,
+    gap: spacing.component.modal.buttonGap,
   },
   compact: {
     flexDirection: 'row',
-    gap: tokens.modal.buttonGap,
+    gap: spacing.component.modal.buttonGap,
     justifyContent: 'flex-end',
   },
 };
@@ -140,7 +126,7 @@ export const ActionArea = forwardRef<HTMLDivElement, ActionAreaProps>(
       gradientHeight = 48,
       caption,
       useSafeArea = true,
-      backgroundColor = 'white', // surface.base.default (static.white)
+      backgroundColor = colors.surface.base.default,
       children,
       style,
       ...props
@@ -162,10 +148,10 @@ export const ActionArea = forwardRef<HTMLDivElement, ActionAreaProps>(
     };
 
     const innerStyle: React.CSSProperties = {
-      padding: tokens.bottomSheet.padding,
+      padding: spacing.component.bottomSheet.padding,
       paddingBottom: useSafeArea
-        ? tokens.bottomSheet.padding + tokens.safeArea.bottom
-        : tokens.bottomSheet.padding,
+        ? spacing.component.bottomSheet.padding + spacing.semantic.screen.safeAreaBottom
+        : spacing.component.bottomSheet.padding,
       backgroundColor,
     };
 
@@ -232,12 +218,12 @@ export const ActionArea = forwardRef<HTMLDivElement, ActionAreaProps>(
           {caption && (
             <p
               style={{
-                fontSize: 14,
-                color: '#6b7280', // content.base.neutral (palette.grey.60)
+                fontSize: typography.fontSize.sm,
+                color: palette.grey[60],
                 textAlign: 'center',
                 lineHeight: 1.5,
                 margin: 0,
-                marginBottom: tokens.modal.buttonGap,
+                marginBottom: spacing.component.modal.buttonGap,
               }}
             >
               {caption}

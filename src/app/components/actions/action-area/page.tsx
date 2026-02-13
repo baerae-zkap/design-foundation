@@ -4,6 +4,11 @@ import { useState } from "react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { PlatformTabs, CodeBlock, PreviewBox, Platform, highlightCode } from "@/components/PlatformTabs";
 import { ActionArea, Button, TextButton, IconButton } from '@baerae-zkap/design-system';
+import { Section, Subsection, InlineCode } from "@/components/docs/Section";
+import { PropsTable } from "@/components/docs/PropsTable";
+import { PrincipleCard } from "@/components/docs/Cards";
+import { RadioGroup, CodeTypeTab, CopyButton } from "@/components/docs/Playground";
+import { NumberBadge, DoLabel, DontLabel } from "@/components/docs/Labels";
 
 export default function ActionAreaPage() {
   return (
@@ -317,122 +322,6 @@ ${buttons}
         </pre>
       </div>
     </div>
-  );
-}
-
-function RadioGroup({ label, options, value, onChange, disabled = false }: {
-  label: string;
-  options: { value: string; label: string }[];
-  value: string;
-  onChange: (v: string) => void;
-  disabled?: boolean;
-}) {
-  return (
-    <div style={{ opacity: disabled ? 0.4 : 1, pointerEvents: disabled ? "none" : "auto" }}>
-      <div style={{ fontSize: 14, fontWeight: 500, color: "#c4c4c4", marginBottom: 14 }}>
-        {label}
-      </div>
-      <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-        {options.map(opt => {
-          const isSelected = value === opt.value;
-          return (
-            <label
-              key={opt.value}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 12,
-                cursor: "pointer",
-                fontSize: 15,
-                fontWeight: 500,
-                color: isSelected ? "var(--text-primary)" : "#9ca3af",
-                transition: "color 0.15s ease",
-              }}
-              onClick={() => onChange(opt.value)}
-            >
-              <div
-                style={{
-                  width: 22,
-                  height: 22,
-                  borderRadius: "50%",
-                  border: isSelected ? "2px solid #3b82f6" : "2px solid #e5e5e5",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  transition: "all 0.15s ease",
-                  backgroundColor: "white",
-                }}
-              >
-                {isSelected && (
-                  <div
-                    style={{
-                      width: 12,
-                      height: 12,
-                      borderRadius: "50%",
-                      backgroundColor: "#3b82f6",
-                    }}
-                  />
-                )}
-              </div>
-              {opt.label}
-            </label>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-
-function CodeTypeTab({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
-  return (
-    <button
-      onClick={onClick}
-      style={{
-        padding: "4px 12px",
-        fontSize: 12,
-        fontWeight: 500,
-        color: active ? "#e4e4e7" : "#71717a",
-        backgroundColor: active ? "#27272a" : "transparent",
-        border: "none",
-        borderRadius: 4,
-        cursor: "pointer",
-        transition: "all 0.15s ease",
-      }}
-    >
-      {children}
-    </button>
-  );
-}
-
-function CopyButton({ text }: { text: string }) {
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = async () => {
-    await navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  return (
-    <button
-      onClick={handleCopy}
-      style={{
-        padding: "4px 10px",
-        fontSize: 11,
-        fontWeight: 500,
-        color: copied ? "#22c55e" : "#71717a",
-        backgroundColor: "transparent",
-        border: "1px solid #3f3f46",
-        borderRadius: 4,
-        cursor: "pointer",
-        display: "flex",
-        alignItems: "center",
-        gap: 4,
-        transition: "all 0.15s ease",
-      }}
-    >
-      {copied ? "Copied!" : "Copy"}
-    </button>
   );
 }
 
@@ -1585,92 +1474,6 @@ import { View, Text } from 'react-native';`} />
 }
 
 // ============================================
-// Layout Components
-// ============================================
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <section style={{ marginBottom: 56 }}>
-      <h2
-        id={title.toLowerCase().replace(/\s+/g, "-")}
-        style={{ fontSize: 20, fontWeight: 700, marginBottom: 20, color: "var(--text-primary)", letterSpacing: "-0.01em" }}
-      >
-        {title}
-      </h2>
-      {children}
-    </section>
-  );
-}
-
-function Subsection({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div style={{ marginBottom: 32 }}>
-      <h3 style={{ fontSize: 16, fontWeight: 600, marginBottom: 12, color: "var(--text-primary)" }}>
-        {title}
-      </h3>
-      {children}
-    </div>
-  );
-}
-
-function InlineCode({ children }: { children: React.ReactNode }) {
-  return (
-    <code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 13, fontWeight: 500 }}>
-      {children}
-    </code>
-  );
-}
-
-function NumberBadge({ children }: { children: React.ReactNode }) {
-  return (
-    <span
-      style={{
-        display: "inline-flex",
-        alignItems: "center",
-        justifyContent: "center",
-        width: 24,
-        height: 24,
-        backgroundColor: "#374151",
-        color: "white",
-        borderRadius: "50%",
-        fontSize: 12,
-        fontWeight: 600,
-      }}
-    >
-      {children}
-    </span>
-  );
-}
-
-function PropsTable({ props }: { props: { name: string; type: string; required: boolean; defaultVal?: string; description: string }[] }) {
-  return (
-    <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)" }}>
-      <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
-        <thead>
-          <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
-            <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)", color: "var(--text-primary)" }}>Name</th>
-            <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)", color: "var(--text-primary)" }}>Type</th>
-            <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)", color: "var(--text-primary)" }}>Default</th>
-            <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)", color: "var(--text-primary)" }}>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          {props.map((prop, i) => (
-            <tr key={prop.name}>
-              <td style={{ padding: "12px 16px", borderBottom: i === props.length - 1 ? "none" : "1px solid var(--divider)", verticalAlign: "top" }}>
-                <code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 8px", borderRadius: 4, fontSize: 13, fontWeight: 500 }}>{prop.name}</code>
-              </td>
-              <td style={{ padding: "12px 16px", borderBottom: i === props.length - 1 ? "none" : "1px solid var(--divider)", color: "#6366f1", fontFamily: "monospace", fontSize: 12, verticalAlign: "top", maxWidth: 180, wordBreak: "break-word" }}>{prop.type}</td>
-              <td style={{ padding: "12px 16px", borderBottom: i === props.length - 1 ? "none" : "1px solid var(--divider)", color: "var(--text-tertiary)", fontSize: 13, verticalAlign: "top" }}>{prop.defaultVal || "-"}</td>
-              <td style={{ padding: "12px 16px", borderBottom: i === props.length - 1 ? "none" : "1px solid var(--divider)", color: "var(--text-secondary)", verticalAlign: "top" }}>{prop.description}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-}
-
-// ============================================
 // Usage Guidelines Components
 // ============================================
 function UsageCard({ situation, desc, variant, buttons, examples }: {
@@ -1711,58 +1514,6 @@ function UsageCard({ situation, desc, variant, buttons, examples }: {
         </p>
       </div>
     </div>
-  );
-}
-
-function PrincipleCard({ number, title, desc }: {
-  number: number;
-  title: string;
-  desc: string;
-}) {
-  return (
-    <div style={{
-      padding: 20,
-      backgroundColor: "white",
-      borderRadius: 12,
-      border: "1px solid var(--divider)",
-    }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 8 }}>
-        <span style={{
-          width: 22,
-          height: 22,
-          borderRadius: "50%",
-          backgroundColor: "#e5e7eb",
-          color: "#6b7280",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontSize: 12,
-          fontWeight: 600,
-        }}>
-          {number}
-        </span>
-        <span style={{ fontSize: 15, fontWeight: 600, color: "var(--text-primary)" }}>{title}</span>
-      </div>
-      <p style={{ fontSize: 14, color: "var(--text-secondary)", margin: 0, lineHeight: 1.6, paddingLeft: 32 }}>{desc}</p>
-    </div>
-  );
-}
-
-function DoLabel({ children }: { children: React.ReactNode }) {
-  return (
-    <p style={{ fontSize: 13, color: "#22c55e", marginTop: 12, display: "flex", alignItems: "flex-start", gap: 8 }}>
-      <span style={{ fontWeight: 700, flexShrink: 0 }}>Do</span>
-      <span style={{ color: "var(--text-secondary)" }}>{children}</span>
-    </p>
-  );
-}
-
-function DontLabel({ children }: { children: React.ReactNode }) {
-  return (
-    <p style={{ fontSize: 13, color: "#ef4444", marginTop: 12, display: "flex", alignItems: "flex-start", gap: 8 }}>
-      <span style={{ fontWeight: 700, flexShrink: 0 }}>Don&apos;t</span>
-      <span style={{ color: "var(--text-secondary)" }}>{children}</span>
-    </p>
   );
 }
 

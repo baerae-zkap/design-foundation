@@ -15,7 +15,13 @@
  * </TextButton>
  */
 
-import { forwardRef, useState, type ButtonHTMLAttributes, type ReactNode } from 'react';
+import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
+import { colors, palette } from '../../tokens/colors';
+import { spacing } from '../../tokens/spacing';
+import { radius } from '../../tokens/radius';
+import { typography } from '../../tokens/typography';
+import { usePressable } from '../../utils/usePressable';
+import { transitions } from '../../utils/styles';
 
 export type TextButtonVariant = 'clear' | 'underline' | 'arrow';
 export type TextButtonColor = 'brandDefault' | 'baseDefault' | 'errorDefault';
@@ -34,27 +40,27 @@ export interface TextButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonEle
 
 const sizeStyles: Record<TextButtonSize, number> = {
   xSmall: 12,
-  small: 14,
-  medium: 16,
+  small: typography.fontSize.sm,
+  medium: typography.fontSize.md,
   large: 18,
   xLarge: 20,
 };
 
 const colorStyles: Record<TextButtonColor, { default: string; pressed: string; pressedBg: string }> = {
   brandDefault: {
-    default: '#2563eb', // content.brand.default (palette.blue.50)
-    pressed: '#1e40af', // content.brand.default pressed (palette.blue.45)
-    pressedBg: 'rgba(0, 0, 0, 0.06)' // surface overlay for pressed state
+    default: colors.content.brand.default,
+    pressed: palette.blue[30],
+    pressedBg: 'rgba(0, 0, 0, 0.06)'
   },
   baseDefault: {
-    default: '#334155', // content.base.default (palette.grey.30)
-    pressed: '#1e293b', // content.base.strong (palette.grey.15)
-    pressedBg: 'rgba(0, 0, 0, 0.06)' // surface overlay for pressed state
+    default: colors.content.base.default,
+    pressed: palette.grey[15],
+    pressedBg: 'rgba(0, 0, 0, 0.06)'
   },
   errorDefault: {
-    default: '#ef4444', // content.error.default (palette.red.50)
-    pressed: '#b91c1c', // content.error.default pressed (palette.red.45)
-    pressedBg: 'rgba(0, 0, 0, 0.06)' // surface overlay for pressed state
+    default: colors.content.error.default,
+    pressed: palette.red[30],
+    pressedBg: 'rgba(0, 0, 0, 0.06)'
   },
 };
 
@@ -74,39 +80,30 @@ export const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(
     },
     ref
   ) => {
-    const [isPressed, setIsPressed] = useState(false);
+    const { isPressed, handlers } = usePressable<HTMLButtonElement>({
+      disabled,
+      onMouseDown,
+      onMouseUp,
+      onMouseLeave,
+    });
+
     const fontSize = sizeStyles[size];
     const colorStyle = colorStyles[color];
-
-    const handleMouseDown = (e: React.MouseEvent<HTMLButtonElement>) => {
-      setIsPressed(true);
-      onMouseDown?.(e);
-    };
-
-    const handleMouseUp = (e: React.MouseEvent<HTMLButtonElement>) => {
-      setIsPressed(false);
-      onMouseUp?.(e);
-    };
-
-    const handleMouseLeave = (e: React.MouseEvent<HTMLButtonElement>) => {
-      setIsPressed(false);
-      onMouseLeave?.(e);
-    };
 
     const buttonStyle: React.CSSProperties = {
       display: 'inline-flex',
       alignItems: 'center',
-      gap: 4, // spacing.primitive.1
-      padding: '4px 8px', // spacing.primitive.1 and spacing.primitive.2
+      gap: spacing.primitive[1],
+      padding: `${spacing.primitive[1]}px ${spacing.primitive[2]}px`,
       fontSize,
-      fontWeight: 500,
-      color: disabled ? '#94a3b8' /* content.disabled.default (palette.grey.80) */ : (isPressed ? colorStyle.pressed : colorStyle.default),
+      fontWeight: typography.fontWeight.medium,
+      color: disabled ? colors.content.disabled.default : (isPressed ? colorStyle.pressed : colorStyle.default),
       background: isPressed && !disabled ? colorStyle.pressedBg : 'transparent',
       border: 'none',
-      borderRadius: 8, // radius.primitive.sm
+      borderRadius: radius.primitive.sm,
       cursor: disabled ? 'not-allowed' : 'pointer',
       textDecoration: variant === 'underline' ? 'underline' : 'none',
-      transition: 'color 150ms ease, background-color 150ms ease',
+      transition: transitions.all,
       ...style,
     };
 
@@ -116,9 +113,7 @@ export const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(
         disabled={disabled}
         aria-disabled={disabled}
         style={buttonStyle}
-        onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseLeave}
+        {...handlers}
         {...props}
       >
         {children}

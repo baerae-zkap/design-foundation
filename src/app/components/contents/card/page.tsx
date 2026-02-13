@@ -4,6 +4,10 @@ import { useState } from "react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { PlatformTabs, CodeBlock, PreviewBox, Platform, highlightCode } from "@/components/PlatformTabs";
 import { Card } from '@baerae-zkap/design-system';
+import { Section, Subsection } from "@/components/docs/Section";
+import { PropsTable } from "@/components/docs/PropsTable";
+import { PrincipleCard, VariantCard, DoCard, DontCard } from "@/components/docs/Cards";
+import { RadioGroup, CodeTypeTab, CopyButton } from "@/components/docs/Playground";
 
 // Types
 type CardVariant = "elevated" | "outlined" | "filled";
@@ -194,58 +198,6 @@ function CardPlayground() {
   );
 }
 
-function CodeTypeTab({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
-  return (
-    <button
-      onClick={onClick}
-      style={{
-        padding: "4px 12px",
-        fontSize: 12,
-        fontWeight: 500,
-        color: active ? "#e4e4e7" : "#71717a",
-        backgroundColor: active ? "#27272a" : "transparent",
-        border: "none",
-        borderRadius: 4,
-        cursor: "pointer",
-        transition: "all 0.15s ease",
-      }}
-    >
-      {children}
-    </button>
-  );
-}
-
-function CopyButton({ text }: { text: string }) {
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = async () => {
-    await navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  return (
-    <button
-      onClick={handleCopy}
-      style={{
-        padding: "4px 10px",
-        fontSize: 11,
-        fontWeight: 500,
-        color: copied ? "#22c55e" : "#71717a",
-        backgroundColor: "transparent",
-        border: "1px solid #3f3f46",
-        borderRadius: 4,
-        cursor: "pointer",
-        display: "flex",
-        alignItems: "center",
-        gap: 4,
-        transition: "all 0.15s ease",
-      }}
-    >
-      {copied ? "Copied!" : "Copy"}
-    </button>
-  );
-}
 
 function PlatformContent({ platform }: { platform: Platform }) {
   if (platform === "design") {
@@ -861,28 +813,6 @@ function RNContent() {
 // Shared Components
 // ============================================
 
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <section style={{ marginBottom: 0 }}>
-      <h2 style={{ fontSize: 20, fontWeight: 700, marginBottom: 20, color: "var(--text-primary)", letterSpacing: "-0.01em" }}>
-        {title}
-      </h2>
-      {children}
-    </section>
-  );
-}
-
-function Subsection({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div style={{ marginBottom: 32 }}>
-      <h3 style={{ fontSize: 16, fontWeight: 600, marginBottom: 12, color: "var(--text-primary)" }}>
-        {title}
-      </h3>
-      {children}
-    </div>
-  );
-}
-
 function UsageCard({ situation, description, recommendation, examples }: {
   situation: string;
   description: string;
@@ -919,182 +849,6 @@ function UsageCard({ situation, description, recommendation, examples }: {
           예시: {examples.join(", ")}
         </p>
       </div>
-    </div>
-  );
-}
-
-function DoCard({ children }: { children: React.ReactNode }) {
-  return (
-    <div style={{ borderRadius: 12, overflow: "hidden", border: "1px solid var(--divider)" }}>
-      <div style={{
-        padding: 24,
-        backgroundColor: "#f8f9fa",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        minHeight: 80,
-      }}>
-        {children}
-      </div>
-      <div style={{
-        padding: "12px 16px",
-        backgroundColor: "white",
-        borderTop: "1px solid var(--divider)",
-        display: "flex",
-        alignItems: "center",
-        gap: 6,
-      }}>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-          <circle cx="12" cy="12" r="10" fill="#22c55e"/>
-          <path d="M8 12l3 3 5-5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-        <span style={{ fontSize: 14, fontWeight: 600, color: "#16a34a" }}>Do</span>
-      </div>
-    </div>
-  );
-}
-
-function DontCard({ children }: { children: React.ReactNode }) {
-  return (
-    <div style={{ borderRadius: 12, overflow: "hidden", border: "1px solid var(--divider)" }}>
-      <div style={{
-        padding: 24,
-        backgroundColor: "#f8f9fa",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        minHeight: 80,
-      }}>
-        {children}
-      </div>
-      <div style={{
-        padding: "12px 16px",
-        backgroundColor: "white",
-        borderTop: "1px solid var(--divider)",
-        display: "flex",
-        alignItems: "center",
-        gap: 6,
-      }}>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-          <circle cx="12" cy="12" r="10" fill="#ef4444"/>
-          <path d="M15 9l-6 6M9 9l6 6" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-        </svg>
-        <span style={{ fontSize: 14, fontWeight: 600, color: "#dc2626" }}>Don&apos;t</span>
-      </div>
-    </div>
-  );
-}
-
-function VariantCard({ name, description, children }: { name: string; description: string; children: React.ReactNode }) {
-  return (
-    <div style={{ padding: 20, backgroundColor: "white", borderRadius: 12, border: "1px solid var(--divider)" }}>
-      <div style={{ height: 60, display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "#fafbfc", borderRadius: 8, marginBottom: 16 }}>
-        {children}
-      </div>
-      <div style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", marginBottom: 4 }}>{name}</div>
-      <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0, lineHeight: 1.5 }}>{description}</p>
-    </div>
-  );
-}
-
-function PrincipleCard({ number, title, desc }: { number: number; title: string; desc: string }) {
-  return (
-    <div style={{ padding: 20, backgroundColor: "white", borderRadius: 12, border: "1px solid var(--divider)" }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 8 }}>
-        <span style={{ width: 22, height: 22, borderRadius: "50%", backgroundColor: "#e5e7eb", color: "#6b7280", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 600 }}>{number}</span>
-        <span style={{ fontSize: 15, fontWeight: 600, color: "var(--text-primary)" }}>{title}</span>
-      </div>
-      <p style={{ fontSize: 14, color: "var(--text-secondary)", margin: 0, lineHeight: 1.6, paddingLeft: 34 }}>{desc}</p>
-    </div>
-  );
-}
-
-function RadioGroup({ label, options, value, onChange }: {
-  label: string;
-  options: { value: string; label: string }[];
-  value: string;
-  onChange: (v: string) => void;
-}) {
-  return (
-    <div>
-      <div style={{ fontSize: 14, fontWeight: 500, color: "#c4c4c4", marginBottom: 14 }}>
-        {label}
-      </div>
-      <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-        {options.map(opt => {
-          const isSelected = value === opt.value;
-          return (
-            <label
-              key={opt.value}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 12,
-                cursor: "pointer",
-                fontSize: 15,
-                fontWeight: 500,
-                color: isSelected ? "var(--text-primary)" : "#9ca3af",
-                transition: "color 0.15s ease",
-              }}
-              onClick={() => onChange(opt.value)}
-            >
-              <div
-                style={{
-                  width: 22,
-                  height: 22,
-                  borderRadius: "50%",
-                  border: isSelected ? "2px solid #3b82f6" : "2px solid #e5e5e5",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  transition: "all 0.15s ease",
-                  backgroundColor: "white",
-                }}
-              >
-                {isSelected && (
-                  <div
-                    style={{
-                      width: 12,
-                      height: 12,
-                      borderRadius: "50%",
-                      backgroundColor: "#3b82f6",
-                    }}
-                  />
-                )}
-              </div>
-              {opt.label}
-            </label>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-
-
-function PropsTable({ props }: { props: { name: string; type: string; required: boolean; defaultVal?: string; description: string }[] }) {
-  return (
-    <div style={{ overflowX: "auto" }}>
-      <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
-        <thead>
-          <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
-            <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600 }}>Prop</th>
-            <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600 }}>Type</th>
-            <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600 }}>Default</th>
-            <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600 }}>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          {props.map((prop) => (
-            <tr key={prop.name} style={{ borderBottom: "1px solid var(--divider)" }}>
-              <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>{prop.name}{prop.required && <span style={{ color: "#ef4444" }}>*</span>}</td>
-              <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 12, color: "#64748b" }}>{prop.type}</td>
-              <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 12 }}>{prop.defaultVal || "-"}</td>
-              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>{prop.description}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
     </div>
   );
 }

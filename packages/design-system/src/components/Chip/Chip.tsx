@@ -14,7 +14,11 @@
  * </Chip>
  */
 
-import { forwardRef, useState, type ButtonHTMLAttributes, type ReactNode } from 'react';
+import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
+import { colors, palette } from '../../tokens/colors';
+import { typography } from '../../tokens/typography';
+import { usePressable } from '../../utils/usePressable';
+import { transitions } from '../../utils/styles';
 
 export type ChipVariant = 'filled' | 'outlined';
 export type ChipColor = 'brandDefault' | 'baseDefault' | 'successDefault' | 'errorDefault' | 'warningDefault';
@@ -44,8 +48,8 @@ export interface ChipProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>,
 // Size configurations
 const sizeConfig: Record<ChipSize, { height: number; fontSize: number; paddingX: number; iconSize: number }> = {
   small: { height: 24, fontSize: 12, paddingX: 8, iconSize: 14 },
-  medium: { height: 32, fontSize: 14, paddingX: 12, iconSize: 18 },
-  large: { height: 40, fontSize: 16, paddingX: 16, iconSize: 22 },
+  medium: { height: 32, fontSize: typography.fontSize.sm, paddingX: 12, iconSize: 18 },
+  large: { height: 40, fontSize: typography.fontSize.md, paddingX: 16, iconSize: 22 },
 };
 
 // Color configurations
@@ -55,87 +59,87 @@ const colorConfig: Record<ChipColor, {
 }> = {
   brandDefault: {
     filled: {
-      bg: '#dbeafe', // surface.brand.secondary (palette.blue.95)
-      bgPressed: '#bfdbfe', // surface.brand.secondaryPressed (palette.blue.90)
-      bgSelected: '#2563eb', // surface.brand.default (palette.blue.50)
-      text: '#1e40af', // content.brand.strong (palette.blue.30)
-      textSelected: '#ffffff', // content.base.onColor (palette.static.white)
+      bg: colors.surface.brand.secondary,
+      bgPressed: colors.surface.brand.secondaryPressed,
+      bgSelected: colors.surface.brand.default,
+      text: palette.blue[30],
+      textSelected: colors.content.base.onColor,
     },
     outlined: {
       bg: 'transparent',
-      bgPressed: 'rgba(37, 99, 235, 0.08)', // brand pressed overlay
-      bgSelected: '#2563eb', // surface.brand.default (palette.blue.50)
-      border: '#2563eb', // border.brand.default (palette.blue.50)
-      text: '#2563eb', // content.brand.default (palette.blue.50)
-      textSelected: '#ffffff', // content.base.onColor (palette.static.white)
+      bgPressed: 'rgba(37, 99, 235, 0.08)',
+      bgSelected: colors.surface.brand.default,
+      border: colors.border.brand.default,
+      text: colors.content.brand.default,
+      textSelected: colors.content.base.onColor,
     },
   },
   baseDefault: {
     filled: {
-      bg: '#f1f5f9', // surface.base.container (palette.grey.97)
-      bgPressed: '#e2e8f0', // surface.base.containerPressed (palette.grey.95)
-      bgSelected: '#334155', // content.base.default filled (palette.grey.30)
-      text: '#334155', // content.base.default (palette.grey.30)
-      textSelected: '#ffffff', // content.base.onColor (palette.static.white)
+      bg: colors.surface.base.container,
+      bgPressed: colors.surface.base.containerPressed,
+      bgSelected: colors.content.base.default,
+      text: colors.content.base.default,
+      textSelected: colors.content.base.onColor,
     },
     outlined: {
       bg: 'transparent',
-      bgPressed: 'rgba(0, 0, 0, 0.04)', // base pressed overlay
-      bgSelected: '#334155', // content.base.default filled (palette.grey.30)
-      border: '#cbd5e1', // border.base.default (palette.grey.90)
-      text: '#334155', // content.base.default (palette.grey.30)
-      textSelected: '#ffffff', // content.base.onColor (palette.static.white)
+      bgPressed: 'rgba(0, 0, 0, 0.04)',
+      bgSelected: colors.content.base.default,
+      border: colors.border.secondary.default,
+      text: colors.content.base.default,
+      textSelected: colors.content.base.onColor,
     },
   },
   successDefault: {
     filled: {
-      bg: '#dcfce7', // surface.success.default (palette.green.95)
-      bgPressed: '#bbf7d0', // surface.success.defaultPressed (palette.green.90)
-      bgSelected: '#16a34a', // content.success.strong (palette.green.40)
-      text: '#166534', // content.success.dark (palette.green.30)
-      textSelected: '#ffffff', // content.base.onColor (palette.static.white)
+      bg: palette.green[95],
+      bgPressed: palette.green[90],
+      bgSelected: palette.green[40],
+      text: palette.green[30],
+      textSelected: colors.content.base.onColor,
     },
     outlined: {
       bg: 'transparent',
-      bgPressed: 'rgba(34, 197, 94, 0.08)', // success pressed overlay
-      bgSelected: '#16a34a', // content.success.strong (palette.green.40)
-      border: '#22c55e', // border.success.default (palette.green.50)
-      text: '#166534', // content.success.dark (palette.green.30)
-      textSelected: '#ffffff', // content.base.onColor (palette.static.white)
+      bgPressed: 'rgba(34, 197, 94, 0.08)',
+      bgSelected: palette.green[40],
+      border: colors.border.success.default,
+      text: palette.green[30],
+      textSelected: colors.content.base.onColor,
     },
   },
   errorDefault: {
     filled: {
-      bg: '#fee2e2', // surface.error.default (palette.red.95)
-      bgPressed: '#fecaca', // surface.error.defaultPressed (palette.red.90)
-      bgSelected: '#dc2626', // content.error.strong (palette.red.40)
-      text: '#991b1b', // content.error.dark (palette.red.30)
-      textSelected: '#ffffff', // content.base.onColor (palette.static.white)
+      bg: palette.red[95],
+      bgPressed: palette.red[90],
+      bgSelected: palette.red[45],
+      text: palette.red[30],
+      textSelected: colors.content.base.onColor,
     },
     outlined: {
       bg: 'transparent',
-      bgPressed: 'rgba(239, 68, 68, 0.08)', // error pressed overlay
-      bgSelected: '#dc2626', // content.error.strong (palette.red.40)
-      border: '#ef4444', // border.error.default (palette.red.50)
-      text: '#991b1b', // content.error.dark (palette.red.30)
-      textSelected: '#ffffff', // content.base.onColor (palette.static.white)
+      bgPressed: 'rgba(239, 68, 68, 0.08)',
+      bgSelected: palette.red[45],
+      border: colors.border.error.default,
+      text: palette.red[30],
+      textSelected: colors.content.base.onColor,
     },
   },
   warningDefault: {
     filled: {
-      bg: '#fef9c3', // surface.warning.default (palette.yellow.95)
-      bgPressed: '#fef08a', // surface.warning.defaultPressed (palette.yellow.90)
-      bgSelected: '#ca8a04', // content.warning.strong (palette.yellow.40)
-      text: '#854d0e', // content.warning.dark (palette.yellow.30)
-      textSelected: '#ffffff', // content.base.onColor (palette.static.white)
+      bg: palette.yellow[95],
+      bgPressed: palette.yellow[90],
+      bgSelected: palette.yellow[40],
+      text: palette.yellow[30],
+      textSelected: colors.content.base.onColor,
     },
     outlined: {
       bg: 'transparent',
-      bgPressed: 'rgba(234, 179, 8, 0.08)', // warning pressed overlay
-      bgSelected: '#ca8a04', // content.warning.strong (palette.yellow.40)
-      border: '#eab308', // border.warning.default (palette.yellow.50)
-      text: '#854d0e', // content.warning.dark (palette.yellow.30)
-      textSelected: '#ffffff', // content.base.onColor (palette.static.white)
+      bgPressed: 'rgba(234, 179, 8, 0.08)',
+      bgSelected: palette.yellow[40],
+      border: palette.yellow[50],
+      text: palette.yellow[30],
+      textSelected: colors.content.base.onColor,
     },
   },
 };
@@ -161,24 +165,15 @@ export const Chip = forwardRef<HTMLButtonElement, ChipProps>(
     },
     ref
   ) => {
-    const [isPressed, setIsPressed] = useState(false);
+    const { isPressed, handlers } = usePressable<HTMLButtonElement>({
+      disabled,
+      onMouseDown,
+      onMouseUp,
+      onMouseLeave,
+    });
+
     const sizeStyle = sizeConfig[size];
     const colorStyle = colorConfig[color][variant];
-
-    const handleMouseDown = (e: React.MouseEvent<HTMLButtonElement>) => {
-      setIsPressed(true);
-      onMouseDown?.(e);
-    };
-
-    const handleMouseUp = (e: React.MouseEvent<HTMLButtonElement>) => {
-      setIsPressed(false);
-      onMouseUp?.(e);
-    };
-
-    const handleMouseLeave = (e: React.MouseEvent<HTMLButtonElement>) => {
-      setIsPressed(false);
-      onMouseLeave?.(e);
-    };
 
     const getBackgroundColor = (): string => {
       if (selected) return colorStyle.bgSelected;
@@ -187,7 +182,7 @@ export const Chip = forwardRef<HTMLButtonElement, ChipProps>(
     };
 
     const getTextColor = (): string => {
-      if (disabled) return '#94a3b8'; // content.disabled.default (palette.grey.70)
+      if (disabled) return colors.content.disabled.default;
       return selected ? colorStyle.textSelected : colorStyle.text;
     };
 
@@ -199,16 +194,16 @@ export const Chip = forwardRef<HTMLButtonElement, ChipProps>(
       height: sizeStyle.height,
       padding: `0 ${sizeStyle.paddingX}px`,
       fontSize: sizeStyle.fontSize,
-      fontWeight: 500,
+      fontWeight: typography.fontWeight.medium,
       color: getTextColor(),
       backgroundColor: getBackgroundColor(),
       border: variant === 'outlined' && !selected
-        ? `1px solid ${disabled ? '#cbd5e1' : (colorStyle as { border: string }).border}` // disabled border: border.disabled.default (palette.grey.90)
+        ? `1px solid ${disabled ? colors.border.disabled.default : (colorStyle as { border: string }).border}`
         : 'none',
-      borderRadius: sizeStyle.height / 2, // radius.primitive.full (9999px for pill shape)
+      borderRadius: sizeStyle.height / 2,
       cursor: disabled ? 'not-allowed' : 'pointer',
       opacity: disabled ? 0.5 : 1,
-      transition: 'background-color 150ms ease, color 150ms ease',
+      transition: transitions.all,
       ...style,
     };
 
@@ -219,9 +214,7 @@ export const Chip = forwardRef<HTMLButtonElement, ChipProps>(
         aria-pressed={selected || undefined}
         aria-disabled={disabled}
         style={chipStyle}
-        onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseLeave}
+        {...handlers}
         {...props}
       >
         {/* Avatar or Left Icon */}

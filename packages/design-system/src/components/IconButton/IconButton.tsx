@@ -16,6 +16,9 @@
  */
 
 import { forwardRef, useState, type ButtonHTMLAttributes, type ReactNode } from 'react';
+import { colors, palette } from '../../tokens/colors';
+import { radius } from '../../tokens/radius';
+import { transitions } from '../../utils/styles';
 
 export type IconButtonVariant = 'filled' | 'ghost' | 'outlined';
 export type IconButtonColor = 'brandDefault' | 'baseDefault' | 'errorDefault';
@@ -46,62 +49,62 @@ const colorStyles: Record<IconButtonColor, {
 }> = {
   brandDefault: {
     filled: {
-      bg: '#2563eb', // surface.brand.default (palette.blue.50)
-      bgPressed: '#1d4ed8', // surface.brand.defaultPressed (palette.blue.45)
-      color: 'white' // content.base.onColor (palette.static.white)
+      bg: colors.surface.brand.default,
+      bgPressed: colors.surface.brand.defaultPressed,
+      color: colors.content.base.onColor
     },
     ghost: {
       bg: 'transparent',
-      bgHover: 'rgba(37, 99, 235, 0.08)', // brand hover overlay
-      bgPressed: 'rgba(37, 99, 235, 0.12)', // brand pressed overlay
-      color: '#2563eb', // content.brand.default (palette.blue.50)
-      colorPressed: '#1d4ed8' // content.brand.pressed (palette.blue.45)
+      bgHover: 'rgba(37, 99, 235, 0.08)',
+      bgPressed: 'rgba(37, 99, 235, 0.12)',
+      color: colors.content.brand.default,
+      colorPressed: colors.surface.brand.defaultPressed
     },
     outlined: {
-      bg: 'white', // surface.base.default (palette.static.white)
-      bgPressed: '#eff6ff', // surface.brand.secondary light (palette.blue.98)
-      color: '#2563eb', // content.brand.default (palette.blue.50)
-      border: '#2563eb' // border.brand.default (palette.blue.50)
+      bg: colors.surface.base.default,
+      bgPressed: palette.blue[98],
+      color: colors.content.brand.default,
+      border: colors.border.brand.default
     },
   },
   baseDefault: {
     filled: {
-      bg: '#334155', // surface.base.default filled (palette.grey.30)
-      bgPressed: '#1e293b', // surface.base.defaultPressed (palette.grey.20)
-      color: 'white' // content.base.onColor (palette.static.white)
+      bg: colors.content.base.default,
+      bgPressed: palette.grey[20],
+      color: colors.content.base.onColor
     },
     ghost: {
       bg: 'transparent',
-      bgHover: 'rgba(0, 0, 0, 0.04)', // base hover overlay
-      bgPressed: 'rgba(0, 0, 0, 0.08)', // base pressed overlay
-      color: '#334155', // content.base.default (palette.grey.30)
-      colorPressed: '#1e293b' // content.base.pressed (palette.grey.20)
+      bgHover: 'rgba(0, 0, 0, 0.04)',
+      bgPressed: 'rgba(0, 0, 0, 0.08)',
+      color: colors.content.base.default,
+      colorPressed: palette.grey[20]
     },
     outlined: {
-      bg: 'white', // surface.base.default (palette.static.white)
-      bgPressed: '#f8fafc', // surface.base.alternative (palette.grey.99)
-      color: '#334155', // content.base.default (palette.grey.30)
-      border: '#cbd5e1' // border.base.default (palette.grey.90)
+      bg: colors.surface.base.default,
+      bgPressed: colors.surface.base.alternative,
+      color: colors.content.base.default,
+      border: colors.border.secondary.default
     },
   },
   errorDefault: {
     filled: {
-      bg: '#ef4444', // surface.error.default (palette.red.50)
-      bgPressed: '#dc2626', // surface.error.defaultPressed (palette.red.45)
-      color: 'white' // content.base.onColor (palette.static.white)
+      bg: colors.surface.error.solid,
+      bgPressed: colors.surface.error.solidPressed,
+      color: colors.content.base.onColor
     },
     ghost: {
       bg: 'transparent',
-      bgHover: 'rgba(239, 68, 68, 0.08)', // error hover overlay
-      bgPressed: 'rgba(239, 68, 68, 0.12)', // error pressed overlay
-      color: '#ef4444', // content.error.default (palette.red.50)
-      colorPressed: '#dc2626' // content.error.pressed (palette.red.45)
+      bgHover: 'rgba(239, 68, 68, 0.08)',
+      bgPressed: 'rgba(239, 68, 68, 0.12)',
+      color: colors.content.error.default,
+      colorPressed: colors.surface.error.solidPressed
     },
     outlined: {
-      bg: 'white', // surface.base.default (palette.static.white)
-      bgPressed: '#fef2f2', // surface.error.secondary (palette.red.98)
-      color: '#dc2626', // content.error.strong (palette.red.45)
-      border: '#ef4444' // border.error.default (palette.red.50)
+      bg: colors.surface.base.default,
+      bgPressed: palette.red[98],
+      color: palette.red[45],
+      border: colors.border.error.default
     },
   },
 };
@@ -178,13 +181,13 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
       justifyContent: 'center',
       width: sizeStyle.size,
       height: sizeStyle.size,
-      borderRadius: 9999, // radius.primitive.full (perfect circle)
+      borderRadius: radius.primitive.full,
       border: variant === 'outlined' ? `1px solid ${(colorStyle as typeof colorStyles.brandDefault.outlined).border}` : 'none',
       backgroundColor,
       color: iconColor,
       cursor: disabled ? 'not-allowed' : 'pointer',
       opacity: disabled ? 0.5 : 1,
-      transition: 'background-color 0.15s ease, color 0.15s ease',
+      transition: transitions.all,
       padding: 0,
       outline: 'none',
       ...style,

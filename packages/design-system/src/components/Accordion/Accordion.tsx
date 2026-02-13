@@ -11,6 +11,11 @@
  */
 
 import { forwardRef, useState, useEffect, useRef, type HTMLAttributes, type ReactNode } from 'react';
+import { colors, palette } from '../../tokens/colors';
+import { spacing } from '../../tokens/spacing';
+import { radius } from '../../tokens/radius';
+import { typography } from '../../tokens/typography';
+import { transitions } from '../../utils/styles';
 
 export type AccordionSize = 'medium' | 'large';
 
@@ -77,30 +82,30 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
     const sizeStyle = sizeStyles[size];
 
     const containerStyle: React.CSSProperties = {
-      borderRadius: 12, // card.sm (radius.semantic.card.sm)
-      border: '1px solid #e2e8f0', // border.base.default (palette.grey.95)
-      backgroundColor: 'white', // surface.base.default (static.white)
+      borderRadius: radius.component.card.sm,
+      border: `1px solid ${colors.border.base.default}`,
+      backgroundColor: colors.surface.base.default,
       overflow: 'hidden',
       ...style,
     };
 
     const headerStyle: React.CSSProperties = {
       height: sizeStyle.height,
-      paddingLeft: 16, // primitive.4
-      paddingRight: 16, // primitive.4
+      paddingLeft: spacing.primitive[4],
+      paddingRight: spacing.primitive[4],
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
       cursor: disabled ? 'not-allowed' : 'pointer',
-      backgroundColor: expanded ? '#fafbfc' : 'white', // surface.elevated.alternative (palette.grey.99) : surface.base.default (static.white)
-      transition: 'background-color 0.2s ease',
+      backgroundColor: expanded ? colors.surface.elevated.alternative : colors.surface.base.default,
+      transition: transitions.background,
       opacity: disabled ? 0.5 : 1,
     };
 
     const titleStyle: React.CSSProperties = {
-      fontSize: 15,
-      fontWeight: 600,
-      color: '#334155', // content.base.default (palette.grey.30)
+      fontSize: typography.fontSize.md,
+      fontWeight: typography.fontWeight.semibold,
+      color: colors.content.base.default,
       margin: 0,
       flex: 1,
     };
@@ -109,18 +114,18 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
       width: sizeStyle.iconSize,
       height: sizeStyle.iconSize,
       transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)',
-      transition: 'transform 0.2s ease',
-      color: '#64748b', // content.base.secondary (palette.grey.50)
+      transition: transitions.all,
+      color: colors.content.base.secondary,
     };
 
     const contentWrapperStyle: React.CSSProperties = {
       height: expanded ? contentHeight : 0,
       overflow: 'hidden',
-      transition: 'height 0.2s ease',
+      transition: transitions.all,
     };
 
     const contentStyle: React.CSSProperties = {
-      padding: 16, // primitive.4
+      padding: spacing.primitive[4],
     };
 
     return (

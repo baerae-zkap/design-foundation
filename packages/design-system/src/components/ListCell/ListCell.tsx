@@ -15,6 +15,11 @@
  */
 
 import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
+import { colors, palette } from '../../tokens/colors';
+import { spacing } from '../../tokens/spacing';
+import { typography } from '../../tokens/typography';
+import { usePressable } from '../../utils/usePressable';
+import { transitions } from '../../utils/styles';
 
 export type ListCellSize = 'small' | 'medium' | 'large';
 
@@ -48,27 +53,27 @@ const sizeConfig: Record<ListCellSize, {
 }> = {
   small: {
     minHeight: 44,
-    paddingY: 8,   // primitive.2
-    paddingX: 16,  // primitive.4
-    titleSize: 14,
-    subtitleSize: 12,
-    gap: 12,       // primitive.3
+    paddingY: spacing.primitive[2],
+    paddingX: spacing.primitive[4],
+    titleSize: typography.fontSize.sm,
+    subtitleSize: typography.fontSize.xs,
+    gap: spacing.primitive[3],
   },
   medium: {
     minHeight: 56,
-    paddingY: 12,  // primitive.3
-    paddingX: 16,  // primitive.4
-    titleSize: 15,
-    subtitleSize: 13,
-    gap: 12,       // primitive.3
+    paddingY: spacing.primitive[3],
+    paddingX: spacing.primitive[4],
+    titleSize: typography.fontSize.md,
+    subtitleSize: typography.fontSize.sm,
+    gap: spacing.primitive[3],
   },
   large: {
     minHeight: 72,
-    paddingY: 16,  // primitive.4
-    paddingX: 16,  // primitive.4
-    titleSize: 16,
-    subtitleSize: 14,
-    gap: 16,       // primitive.4
+    paddingY: spacing.primitive[4],
+    paddingX: spacing.primitive[4],
+    titleSize: typography.fontSize.md,
+    subtitleSize: typography.fontSize.sm,
+    gap: spacing.primitive[4],
   },
 };
 
@@ -84,6 +89,9 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
       disabled = false,
       divider = false,
       style,
+      onMouseDown,
+      onMouseUp,
+      onMouseLeave,
       ...props
     },
     ref
@@ -91,23 +99,30 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
     const sizeStyle = sizeConfig[size];
     const isInteractive = !!onClick && !disabled;
 
+    const { isPressed, isHovered, handlers } = usePressable<HTMLDivElement>({
+      disabled: !isInteractive,
+      onMouseDown,
+      onMouseUp,
+      onMouseLeave,
+    });
+
     const containerStyle: React.CSSProperties = {
       display: 'flex',
       alignItems: 'center',
       gap: sizeStyle.gap,
       minHeight: sizeStyle.minHeight,
       padding: `${sizeStyle.paddingY}px ${sizeStyle.paddingX}px`,
-      backgroundColor: 'transparent',
+      backgroundColor: isHovered && isInteractive ? 'rgba(0,0,0,0.02)' : 'transparent',
       cursor: isInteractive ? 'pointer' : 'default',
       opacity: disabled ? 0.5 : 1,
-      borderBottom: divider ? '1px solid #e2e8f0' : 'none', // border.base.default
-      transition: 'background-color 0.15s ease',
+      borderBottom: divider ? `1px solid ${colors.border.base.default}` : 'none',
+      transition: transitions.background,
       ...style,
     };
 
     const contentStyle: React.CSSProperties = {
       flex: 1,
-      minWidth: 0, // Enable text truncation
+      minWidth: 0,
       display: 'flex',
       flexDirection: 'column',
       gap: 2,
@@ -115,8 +130,8 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
 
     const titleStyle: React.CSSProperties = {
       fontSize: sizeStyle.titleSize,
-      fontWeight: 500,
-      color: '#334155', // content.base.default
+      fontWeight: typography.fontWeight.medium,
+      color: colors.content.base.default,
       lineHeight: 1.4,
       overflow: 'hidden',
       textOverflow: 'ellipsis',
@@ -125,8 +140,8 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
 
     const subtitleStyle: React.CSSProperties = {
       fontSize: sizeStyle.subtitleSize,
-      fontWeight: 400,
-      color: '#64748b', // content.base.secondary
+      fontWeight: typography.fontWeight.regular,
+      color: colors.content.base.secondary,
       lineHeight: 1.4,
       overflow: 'hidden',
       textOverflow: 'ellipsis',
@@ -139,24 +154,12 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
       }
     };
 
-    const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
-      if (isInteractive) {
-        e.currentTarget.style.backgroundColor = 'rgba(0,0,0,0.02)';
-      }
-    };
-
-    const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
-      e.currentTarget.style.backgroundColor = 'transparent';
-    };
-
     return (
       <div
         ref={ref}
         role={isInteractive ? 'button' : undefined}
         tabIndex={isInteractive ? 0 : undefined}
         onClick={handleClick}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
         onKeyDown={(e) => {
           if (isInteractive && (e.key === 'Enter' || e.key === ' ')) {
             e.preventDefault();
@@ -164,6 +167,7 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
           }
         }}
         style={containerStyle}
+        {...handlers}
         {...props}
       >
         {/* Leading */}
@@ -181,7 +185,7 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
 
         {/* Trailing */}
         {trailing && (
-          <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center', color: '#94a3b8' }}>
+          <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center', color: colors.content.disabled.default }}>
             {trailing}
           </div>
         )}

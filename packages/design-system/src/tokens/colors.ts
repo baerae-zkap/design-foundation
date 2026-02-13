@@ -76,6 +76,7 @@ export const palette = {
   },
   blue: {
     99: hslaToHex(220, 100, 98, 1),   // #f7f9ff
+    98: hslaToHex(221, 100, 97, 1),   // #f0f5ff
     95: hslaToHex(222, 100, 94, 1),   // #e3ecff
     90: hslaToHex(224, 100, 87, 1),   // #c7dbff
     80: hslaToHex(226, 100, 77, 1),   // #99c0ff
@@ -92,12 +93,14 @@ export const palette = {
   },
   red: {
     99: hslaToHex(0, 86, 98, 1),      // #fef7f7
+    98: hslaToHex(0, 85, 97, 1),      // #fef4f4
     95: hslaToHex(0, 84, 93, 1),      // #fce8e8
     90: hslaToHex(0, 80, 85, 1),      // #f8d1d1
     80: hslaToHex(0, 75, 73, 1),      // #f1a6a6
     70: hslaToHex(0, 72, 62, 1),      // #e87c7c
     60: hslaToHex(1, 78, 54, 1),      // #e35555
     50: hslaToHex(2, 85, 48, 1),      // #dc2f2f
+    45: hslaToHex(2, 85, 44, 1),      // #ca2b2b
     40: hslaToHex(3, 85, 40, 1),      // #b92626
     30: hslaToHex(4, 85, 32, 1),      // #961e1e
     20: hslaToHex(5, 85, 22, 1),      // #681616
@@ -131,12 +134,14 @@ export const palette = {
   },
   green: {
     99: hslaToHex(145, 70, 97, 1),    // #f4fcf9
+    98: hslaToHex(146, 69, 95, 1),    // #ecfaf4
     95: hslaToHex(147, 68, 91, 1),    // #dff8ef
     90: hslaToHex(149, 65, 81, 1),    // #b8f0da
     80: hslaToHex(150, 60, 68, 1),    // #7ee3ba
     70: hslaToHex(151, 58, 55, 1),    // #48d69a
     60: hslaToHex(152, 70, 44, 1),    // #1fc97b
     50: hslaToHex(153, 78, 37, 1),    // #14b66b
+    45: hslaToHex(153, 79, 33, 1),    // #12a45f
     40: hslaToHex(154, 80, 30, 1),    // #109458
     30: hslaToHex(155, 82, 24, 1),    // #0d7447
     20: hslaToHex(156, 84, 16, 1),    // #094f31
@@ -224,6 +229,208 @@ export const palette = {
     white: '#ffffff',
     black: '#000000',
   },
+  // 서비스 특화 색상
+  kakao: {
+    default: '#FEE500',
+    pressed: '#D4BF00',
+    text: '#191919',
+    light: '#FFFDE6',
+  },
+  google: {
+    border: '#dadce0',
+    text: '#3c4043',
+    pressed: '#f1f3f4',
+    light: '#f8f9fa',
+  },
+} as const;
+
+/**
+ * Dark Palette Colors (v3.2)
+ *
+ * ZKAP reversed numbering: 99=darkest background, 5=lightest foreground
+ * Grey hue: ~285° (cool blue-purple tint, matching Toss style)
+ * Primary blue: #2c7aff (unchanged from light)
+ */
+export const darkPalette = {
+  grey: {
+    99: '#17171c',
+    98: '#1c1c21',
+    97: '#202027',
+    96: '#25252e',
+    95: '#2d2d37',
+    90: '#34343d',
+    80: '#3d3d48',
+    70: '#4c4c58',
+    60: '#62626e',
+    50: '#7f7f89',
+    40: '#a0a0a6',
+    30: '#c2c2c5',
+    25: '#d4d4d6',
+    23: '#d7d7db',
+    22: '#d8d8d9',
+    20: '#e4e4e5',
+    17: '#eeeeef',
+    15: '#f0f0f1',
+    10: '#f5f5f7',
+    7: '#fafafb',
+    5: '#fbfcfd',
+  },
+  blue: {
+    99: '#0f192f',
+    98: '#0f192f',
+    95: '#101a32',
+    90: '#141f3c',
+    80: '#1f2c56',
+    70: '#2f4378',
+    65: '#39528c',
+    60: '#43629f',
+    55: '#2d6bdd',
+    50: '#2c7aff',
+    45: '#4d8aff',
+    40: '#5799ff',
+    30: '#84a8fc',
+    20: '#b3c7fd',
+    10: '#ced9fe',
+    secondary: '#5f95f1',
+  },
+  red: {
+    99: '#2d1111',
+    98: '#2d1111',
+    95: '#301313',
+    90: '#3c1a1a',
+    80: '#5b2d2d',
+    70: '#804444',
+    60: '#b93a35',
+    50: '#e9483f',
+    45: '#ff3e32',
+    40: '#f36159',
+    30: '#fc877f',
+    20: '#fdb5ae',
+    10: '#fed3ce',
+  },
+  orange: {
+    99: '#2f230f',
+    95: '#332510',
+    90: '#412e16',
+    80: '#634625',
+    70: '#885f37',
+    60: '#fb7500',
+    50: '#ff7202',
+    40: '#fc9550',
+    30: '#fcb084',
+    20: '#fdccb3',
+    10: '#feded1',
+  },
+  yellow: {
+    99: '#2f2a0f',
+    95: '#342d11',
+    90: '#433917',
+    80: '#635525',
+    70: '#847035',
+    60: '#a38a46',
+    50: '#ffbb0f',
+    40: '#fdc032',
+    30: '#fbce74',
+    20: '#fddfaa',
+    10: '#feeacb',
+  },
+  green: {
+    99: '#142b1d',
+    98: '#152c1f',
+    95: '#173022',
+    90: '#234232',
+    80: '#3c6651',
+    70: '#31be7a',
+    60: '#32dd8d',
+    50: '#6fefb5',
+    45: '#7ef7c0',
+    40: '#8bfaca',
+    30: '#a6fdd9',
+    20: '#c5fee7',
+    10: '#d6feef',
+  },
+  teal: {
+    99: '#142a28',
+    95: '#182f2d',
+    90: '#25403f',
+    80: '#406866',
+    70: '#37c4c2',
+    60: '#3cdede',
+    50: '#77f3f3',
+    40: '#8efafc',
+    30: '#aafafd',
+    20: '#c5fbfe',
+    10: '#d6fbfe',
+  },
+  purple: {
+    99: '#21122c',
+    95: '#23152e',
+    90: '#2d1c3a',
+    80: '#432e55',
+    70: '#604678',
+    60: '#7e2ad1',
+    50: '#9a6ce5',
+    40: '#a366e7',
+    30: '#b886f4',
+    20: '#d1b0fb',
+    10: '#e0cbfe',
+  },
+  navy: {
+    99: '#172327',
+    95: '#1b282b',
+    90: '#28383d',
+    80: '#43585f',
+    70: '#546e79',
+    60: '#4499bd',
+    50: '#76b8d6',
+    40: '#8ac7e5',
+    30: '#a4d6f0',
+    20: '#bfe3f8',
+    10: '#d4ecfa',
+  },
+  pink: {
+    99: '#29151c',
+    95: '#2b181f',
+    90: '#351f28',
+    80: '#4e303d',
+    70: '#79405a',
+    60: '#d31c78',
+    50: '#e9328e',
+    40: '#f05cb0',
+    30: '#fb7fca',
+    20: '#fdaee0',
+    10: '#fecbed',
+  },
+  cyan: {
+    99: '#11292d',
+    95: '#142c31',
+    90: '#1c373e',
+    80: '#2f535e',
+    70: '#497787',
+    60: '#20aae6',
+    50: '#59c0f3',
+    40: '#79ccfc',
+    30: '#9dd6fc',
+    20: '#bee2fd',
+    10: '#d3eafe',
+  },
+  lime: {
+    99: '#212b13',
+    95: '#253016',
+    90: '#314021',
+    80: '#4e6538',
+    70: '#70c728',
+    60: '#74e226',
+    50: '#9cf167',
+    40: '#aff987',
+    30: '#c2faa8',
+    20: '#d6fcc7',
+    10: '#e0fdd7',
+  },
+  static: {
+    white: '#ffffff',
+    black: '#000000',
+  },
 } as const;
 
 /**
@@ -248,21 +455,33 @@ export const colors = {
       secondaryPressed: palette.blue[90],      // hsla(224, 100%, 87%, 1) → #c7dbff
     },
     error: {
-      default: palette.red[95],                // hsla(0, 84%, 93%, 1)
-      defaultPressed: palette.red[90],         // hsla(0, 80%, 85%, 1)
+      default: palette.red[95],                // hsla(0, 84%, 93%, 1) — light bg
+      defaultPressed: palette.red[90],         // hsla(0, 80%, 85%, 1) — light bg pressed
+      solid: palette.red[50],                  // hsla(2, 85%, 48%, 1) — filled button
+      solidPressed: palette.red[45],           // filled button pressed
     },
     warning: {
       default: palette.orange[95],             // hsla(36, 100%, 93%, 1)
     },
     success: {
-      default: palette.green[95],              // hsla(147, 68%, 91%, 1)
-      defaultPressed: palette.green[90],       // hsla(149, 65%, 81%, 1)
+      default: palette.green[95],              // hsla(147, 68%, 91%, 1) — light bg
+      defaultPressed: palette.green[90],       // hsla(149, 65%, 81%, 1) — light bg pressed
+      solid: palette.green[50],                // hsla(153, 78%, 37%, 1) — filled button
+      solidPressed: palette.green[45],         // filled button pressed
     },
     info: {
       default: palette.blue[99],               // hsla(220, 100%, 98%, 1) → #f7f9ff
     },
     disabled: {
       default: palette.grey[95],               // hsla(216, 10%, 86%, 1)
+    },
+    kakao: {
+      default: '#FEE500',
+      defaultPressed: '#D4BF00',
+    },
+    google: {
+      default: palette.static.white,
+      defaultPressed: '#f1f3f4',
     },
   },
   content: {
@@ -366,6 +585,157 @@ export const colors = {
 } as const;
 
 /**
+ * Dark Theme Semantic Colors
+ */
+export const darkColors = {
+  surface: {
+    base: {
+      default: darkPalette.grey[99],
+      alternative: darkPalette.grey[98],
+      container: darkPalette.grey[97],
+      containerPressed: darkPalette.grey[96],
+    },
+    elevated: {
+      default: darkPalette.grey[98],
+      alternative: darkPalette.grey[97],
+    },
+    brand: {
+      default: darkPalette.blue[50],
+      defaultPressed: darkPalette.blue[45],
+      secondary: darkPalette.blue[90],
+      secondaryPressed: darkPalette.blue[80],
+    },
+    error: {
+      default: darkPalette.red[90],
+      defaultPressed: darkPalette.red[80],
+      solid: darkPalette.red[50],
+      solidPressed: darkPalette.red[45],
+    },
+    warning: {
+      default: darkPalette.orange[90],
+    },
+    success: {
+      default: darkPalette.green[90],
+      defaultPressed: darkPalette.green[80],
+      solid: darkPalette.green[50],
+      solidPressed: darkPalette.green[45],
+    },
+    info: {
+      default: darkPalette.blue[99],
+    },
+    disabled: {
+      default: darkPalette.grey[97],
+    },
+    kakao: {
+      default: '#FEE500',
+      defaultPressed: '#D4BF00',
+    },
+    google: {
+      default: darkPalette.grey[97],
+      defaultPressed: darkPalette.grey[96],
+    },
+  },
+  content: {
+    base: {
+      strong: darkPalette.grey[5],
+      default: darkPalette.grey[15],
+      secondary: darkPalette.grey[50],
+      neutral: darkPalette.grey[60],
+      alternative: darkPalette.grey[40],
+      placeholder: darkPalette.grey[60],
+      assistive: darkPalette.grey[70],
+      disable: darkPalette.grey[80],
+      onColor: darkPalette.static.white,
+    },
+    brand: {
+      default: darkPalette.blue[50],
+    },
+    error: {
+      default: darkPalette.red[50],
+    },
+    warning: {
+      default: darkPalette.orange[50],
+    },
+    success: {
+      default: darkPalette.green[50],
+    },
+    info: {
+      default: darkPalette.teal[50],
+    },
+    profit: {
+      default: darkPalette.red[50],
+    },
+    loss: {
+      default: darkPalette.blue[50],
+    },
+    disabled: {
+      default: darkPalette.grey[70],
+    },
+  },
+  border: {
+    base: {
+      default: darkPalette.grey[95],
+      defaultPressed: darkPalette.grey[90],
+    },
+    secondary: {
+      default: darkPalette.grey[90],
+      defaultPressed: darkPalette.grey[80],
+    },
+    solid: {
+      default: darkPalette.grey[90],
+      neutral: darkPalette.grey[95],
+      alternative: darkPalette.grey[97],
+    },
+    brand: {
+      default: darkPalette.blue[50],
+      defaultPressed: darkPalette.blue[45],
+    },
+    disabled: {
+      default: darkPalette.grey[90],
+    },
+    error: {
+      default: darkPalette.red[50],
+      defaultPressed: darkPalette.red[40],
+    },
+    success: {
+      default: darkPalette.green[50],
+      defaultPressed: darkPalette.green[40],
+    },
+  },
+  fill: {
+    normal: '#7f7f8938',
+    strong: '#7f7f8947',
+    alternative: '#7f7f891f',
+  },
+  interaction: {
+    inactive: darkPalette.grey[60],
+    disable: darkPalette.grey[80],
+  },
+  visualization: {
+    categorical: {
+      1: darkPalette.blue[50],
+      2: darkPalette.blue[65],
+      3: darkPalette.blue[80],
+      4: darkPalette.teal[50],
+      5: darkPalette.green[50],
+      6: darkPalette.purple[50],
+      7: darkPalette.orange[50],
+      8: darkPalette.grey[50],
+    },
+  },
+  icon: {
+    default: darkPalette.grey[50],
+    secondary: darkPalette.grey[60],
+    disabled: darkPalette.grey[70],
+    brand: darkPalette.blue[50],
+  },
+  overlay: {
+    dim: '#17171c66',
+    heavy: '#17171cd9',
+  },
+} as const;
+
+/**
  * Convenience exports for common use cases
  */
 export const brandColors = colors.surface.brand;
@@ -374,8 +744,16 @@ export const successColors = colors.surface.success;
 export const warningColors = colors.surface.warning;
 export const infoColors = colors.surface.info;
 
+export const darkBrandColors = darkColors.surface.brand;
+export const darkErrorColors = darkColors.surface.error;
+export const darkSuccessColors = darkColors.surface.success;
+export const darkWarningColors = darkColors.surface.warning;
+export const darkInfoColors = darkColors.surface.info;
+
 /**
  * Type exports for better DX
  */
 export type ColorToken = typeof colors;
+export type DarkColorToken = typeof darkColors;
 export type PaletteToken = typeof palette;
+export type DarkPaletteToken = typeof darkPalette;

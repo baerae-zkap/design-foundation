@@ -15,6 +15,8 @@
  */
 
 import { forwardRef, useState, type HTMLAttributes, type ReactNode } from 'react';
+import { colors, palette } from '../../tokens/colors';
+import { radius } from '../../tokens/radius';
 
 export type ThumbnailAspectRatio = '1:1' | '16:9' | '4:3' | '3:2' | '2:1' | '9:16' | '3:4';
 
@@ -76,7 +78,7 @@ export const Thumbnail = forwardRef<HTMLDivElement, ThumbnailProps>(
       width: typeof size === 'number' ? `${size}px` : size || '100%',
       overflow: 'hidden',
       borderRadius: radius ? 12 : 0,
-      border: border ? '1px solid rgba(0, 0, 0, 0.08)' : 'none',
+      border: border ? `1px solid ${colors.border.base.default}` : 'none',
       cursor: onClick ? 'pointer' : 'default',
       ...style,
     };
@@ -141,8 +143,8 @@ export const Thumbnail = forwardRef<HTMLDivElement, ThumbnailProps>(
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: '#f1f5f9',
-      color: '#94a3b8',
+      backgroundColor: colors.surface.base.container,
+      color: palette.grey[60],
       fontSize: 14,
     };
 

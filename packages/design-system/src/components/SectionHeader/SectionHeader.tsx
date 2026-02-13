@@ -14,6 +14,9 @@
  */
 
 import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
+import { colors, palette } from '../../tokens/colors';
+import { spacing } from '../../tokens/spacing';
+import { typography } from '../../tokens/typography';
 
 export type SectionHeaderSize = 'small' | 'medium' | 'large';
 
@@ -35,21 +38,21 @@ const sizeConfig: Record<SectionHeaderSize, {
 }> = {
   small: {
     fontSize: 13,
-    paddingX: 16,  // primitive.4
-    paddingTop: 16, // primitive.4
-    paddingBottom: 8, // primitive.2
+    paddingX: spacing.primitive[4],
+    paddingTop: spacing.primitive[4],
+    paddingBottom: spacing.primitive[2],
   },
   medium: {
-    fontSize: 14,
-    paddingX: 16,  // primitive.4
-    paddingTop: 16, // primitive.4
-    paddingBottom: 8, // primitive.2
+    fontSize: typography.fontSize.sm,
+    paddingX: spacing.primitive[4],
+    paddingTop: spacing.primitive[4],
+    paddingBottom: spacing.primitive[2],
   },
   large: {
-    fontSize: 15,
-    paddingX: 16,  // primitive.4
-    paddingTop: 16, // primitive.4
-    paddingBottom: 8, // primitive.2
+    fontSize: typography.fontSize.md,
+    paddingX: spacing.primitive[4],
+    paddingTop: spacing.primitive[4],
+    paddingBottom: spacing.primitive[2],
   },
 };
 
@@ -79,8 +82,8 @@ export const SectionHeader = forwardRef<HTMLDivElement, SectionHeaderProps>(
 
     const titleStyle: React.CSSProperties = {
       fontSize: sizeStyle.fontSize,
-      fontWeight: 600,
-      color: '#94a3b8', // content.base.tertiary
+      fontWeight: typography.fontWeight.semibold,
+      color: palette.grey[60],
       lineHeight: 1.4,
       textTransform: 'uppercase',
       letterSpacing: '0.02em',

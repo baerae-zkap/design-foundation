@@ -81,6 +81,82 @@ const componentCategories = [
       },
     ],
   },
+  {
+    id: "selection-input",
+    title: "Selection & Input",
+    components: [
+      {
+        name: "Checkbox",
+        href: "/components/selection-input/checkbox",
+        thumbnail: "/design-foundation/thumbnails/checkbox.png",
+      },
+      {
+        name: "CheckMark",
+        href: "/components/selection-input/check-mark",
+        thumbnail: "/design-foundation/thumbnails/check-mark.png",
+      },
+      {
+        name: "DatePicker",
+        href: "/components/selection-input/date-picker",
+        thumbnail: "/design-foundation/thumbnails/date-picker.png",
+      },
+      {
+        name: "FilterButton",
+        href: "/components/selection-input/filter-button",
+        thumbnail: "/design-foundation/thumbnails/filter-button.png",
+      },
+      {
+        name: "FramedStyle",
+        href: "/components/selection-input/framed-style",
+        thumbnail: "/design-foundation/thumbnails/framed-style.png",
+      },
+      {
+        name: "Radio",
+        href: "/components/selection-input/radio",
+        thumbnail: "/design-foundation/thumbnails/radio.png",
+      },
+      {
+        name: "SearchField",
+        href: "/components/selection-input/search-field",
+        thumbnail: "/design-foundation/thumbnails/search-field.png",
+      },
+      {
+        name: "SegmentedControl",
+        href: "/components/selection-input/segmented-control",
+        thumbnail: "/design-foundation/thumbnails/segmented-control.png",
+      },
+      {
+        name: "Select",
+        href: "/components/selection-input/select",
+        thumbnail: "/design-foundation/thumbnails/select.png",
+      },
+      {
+        name: "Slider",
+        href: "/components/selection-input/slider",
+        thumbnail: "/design-foundation/thumbnails/slider.png",
+      },
+      {
+        name: "Switch",
+        href: "/components/selection-input/switch",
+        thumbnail: "/design-foundation/thumbnails/switch.png",
+      },
+      {
+        name: "TextArea",
+        href: "/components/selection-input/text-area",
+        thumbnail: "/design-foundation/thumbnails/text-area.png",
+      },
+      {
+        name: "TextField",
+        href: "/components/selection-input/text-field",
+        thumbnail: "/design-foundation/thumbnails/text-field.png",
+      },
+      {
+        name: "TimePicker",
+        href: "/components/selection-input/time-picker",
+        thumbnail: "/design-foundation/thumbnails/time-picker.png",
+      },
+    ],
+  },
 ];
 
 export default function ComponentsPage() {

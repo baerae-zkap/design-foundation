@@ -7,7 +7,38 @@
 
 ---
 
-## 현재 상태 (2025-02-06)
+## 시연 이후 스냅샷 (2026-02-13)
+
+### 현재 합의된 범위
+- RN 컴포넌트 + Storybook + 패키지화: **완료** (개발자 개선 트랙)
+- 현재 내 작업 범위: **Next.js 홈페이지 완성 + Web 컴포넌트 완성**
+- 토큰 작업 우선순위: **색상(Color) 우선**
+- 다크 팔레트: **v3.2 완료** (`colors.ts`에 `darkPalette` + `darkColors` 적용됨)
+- 다크 시멘틱 세부 조정: 추후 필요 시 진행
+
+### 완료된 항목 (최근 정리 기준)
+- Foundation 토큰 체계 존재 및 색상 토큰 구조 검토 완료 (`public/palette.json`, `public/semantic-tokens.json`)
+- semantic -> palette 깨진 참조 수정 완료
+- `disable`/`disabled` 네이밍 혼선 1차 정리 완료 (semantic 기준)
+- 색상 개선 TODO 4건(사유 + 수정안) 문서화 완료 (`TODO (Color Tokens - Light 우선)` 섹션)
+
+### 지금 당장 할 일 (실행 순서)
+1. Disabled 텍스트 축 단일화: `content.disabled.default` 중심으로 규칙 고정, 중복 축은 deprecated 처리
+2. 상태 텍스트 strong 추가: `content.warning|success|info.strong` 추가 (`weak`는 보류)
+3. 대비 자동 검증 추가: 본문 4.5:1 / 큰 텍스트·아이콘 3.0:1 기준 스크립트화
+4. 문서 규칙 통일: 색상 표기는 HSLA 기준, 네이밍은 `disabled`로 통일
+
+### 완료된 추가 항목
+- 다크 컬러 팔레트 v3.2 설계 완료 (Toss 레퍼런스 기반, OKLab 색상 과학 적용, Codex CLI 검증 통과)
+- `colors.ts`에 `darkPalette` (12색 팔레트) + `darkColors` (시멘틱 매핑) 통합 완료
+
+### 보류/중단 항목
+- 다크 시멘틱 세부 조정 (실제 UI 적용 후 미세 튜닝)
+- 색상 외 토큰(typography/spacing/radius) 신규 개편
+
+---
+
+## 현재 상태 (기록, 2025-02-06)
 
 ### 배포 완료
 
@@ -1048,6 +1079,40 @@ function PropsTable({ props }: { props: { name: string; type: string; required: 
 3. **개선 작업 요청 시**
    - Gap 분석 테이블 참조
    - 기존 컴포넌트 코드 먼저 확인 후 개선안 제시
+
+---
+
+## TODO (Color Tokens - Light 우선)
+
+> 범위: **라이트 시멘틱 토큰 정리**. 다크 팔레트 v3.2는 완료됨 (`colors.ts` → `darkPalette` + `darkColors`).
+
+### 1) Disabled 토큰 축 단일화
+- 사유: `content.base.disabled`와 `content.disabled.default`가 동시 존재해 의미 중복이 발생하고, 실제 사용은 `content.disabled.default` 중심으로 쏠려 있음.
+- 수정:
+  - `content.base.disabled`를 deprecated 처리
+  - `content.disabled.default`를 단일 disabled 텍스트 토큰으로 고정
+  - 가이드에 "disabled 텍스트는 항상 `content.disabled.default` 사용" 명시
+
+### 2) 상태 텍스트 strong 계층 추가 (weak는 보류)
+- 사유: 라이트 배경에서 `content.warning/success/info.default` 대비가 본문 텍스트 기준으로 약함(약 3.08~3.15:1).
+- 수정:
+  - `content.warning.strong`, `content.success.strong`, `content.info.strong` 추가
+  - 기본은 `default`, 본문/핵심 라벨은 `strong` 사용 규칙 추가
+  - `weak` 계층은 실제 요구가 생길 때까지 추가하지 않음
+
+### 3) 대비(접근성) 검증 자동화
+- 사유: 토큰 수정 시 가독성 회귀를 사람이 매번 수동 점검하기 어려움.
+- 수정:
+  - 토큰 검증 스크립트 추가 (`public/palette.json`, `public/semantic-tokens.json` 기준)
+  - 기준: 본문 텍스트 4.5:1, 큰 텍스트/아이콘 3.0:1 (역할별 분리 체크)
+  - CI 또는 배포 전 체크 단계에 포함
+
+### 4) 네이밍/포맷 일관성 정리 (HSLA 기준)
+- 사유: 문서/코드에 `disable` vs `disabled`, HSLA/HEX 혼용 흔적이 남아 혼란을 유발함.
+- 수정:
+  - 색상 토큰 네이밍은 `disabled`로 통일
+  - 색상 표기 기준은 HSLA로 통일 (문서 예시 포함)
+  - semantic -> palette 참조 무결성 체크를 정기 실행하여 깨진 참조 재발 방지
 
 ---
 

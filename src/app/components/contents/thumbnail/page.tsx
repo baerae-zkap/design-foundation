@@ -5,6 +5,10 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { PlatformTabs, CodeBlock, PreviewBox, Platform, highlightCode } from "@/components/PlatformTabs";
 import { Thumbnail } from '@baerae-zkap/design-system';
 import type { ThumbnailAspectRatio } from '@baerae-zkap/design-system';
+import { Section, Subsection } from "@/components/docs/Section";
+import { PropsTable } from "@/components/docs/PropsTable";
+import { PrincipleCard, DoCard, DontCard } from "@/components/docs/Cards";
+import { RadioGroup } from "@/components/docs/Playground";
 
 // GitHub source URLs
 const GITHUB_BASE = "https://github.com/baerae-zkap/design-foundation/blob/main/packages/design-system";
@@ -166,69 +170,6 @@ function UsageCard({ situation, description, example }: {
   );
 }
 
-// Helper: DoCard
-function DoCard({ children }: { children: React.ReactNode }) {
-  return (
-    <div style={{ borderRadius: 12, overflow: "hidden", border: "1px solid var(--divider)" }}>
-      <div style={{
-        padding: 24,
-        backgroundColor: "#f8f9fa",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        minHeight: 80,
-      }}>
-        {children}
-      </div>
-      <div style={{
-        padding: "12px 16px",
-        backgroundColor: "white",
-        borderTop: "1px solid var(--divider)",
-        display: "flex",
-        alignItems: "center",
-        gap: 6,
-      }}>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-          <circle cx="12" cy="12" r="10" fill="#22c55e"/>
-          <path d="M8 12l3 3 5-5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-        <span style={{ fontSize: 14, fontWeight: 600, color: "#16a34a" }}>Do</span>
-      </div>
-    </div>
-  );
-}
-
-// Helper: DontCard
-function DontCard({ children }: { children: React.ReactNode }) {
-  return (
-    <div style={{ borderRadius: 12, overflow: "hidden", border: "1px solid var(--divider)" }}>
-      <div style={{
-        padding: 24,
-        backgroundColor: "#f8f9fa",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        minHeight: 80,
-      }}>
-        {children}
-      </div>
-      <div style={{
-        padding: "12px 16px",
-        backgroundColor: "white",
-        borderTop: "1px solid var(--divider)",
-        display: "flex",
-        alignItems: "center",
-        gap: 6,
-      }}>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-          <circle cx="12" cy="12" r="10" fill="#ef4444"/>
-          <path d="M15 9l-6 6M9 9l6 6" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-        </svg>
-        <span style={{ fontSize: 14, fontWeight: 600, color: "#dc2626" }}>Don&apos;t</span>
-      </div>
-    </div>
-  );
-}
 
 function DesignContent() {
   return (
@@ -905,33 +846,6 @@ import { View, Text } from 'react-native';`} />
 }
 
 // Helper Components
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <section style={{ marginBottom: 56 }}>
-      <h2 style={{
-        fontSize: 20,
-        fontWeight: 700,
-        marginBottom: 20,
-        color: "var(--text-primary)",
-        letterSpacing: "-0.01em"
-      }}>
-        {title}
-      </h2>
-      {children}
-    </section>
-  );
-}
-
-function Subsection({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div style={{ marginBottom: 32 }}>
-      <h3 style={{ fontSize: 16, fontWeight: 600, marginBottom: 12, color: "var(--text-primary)" }}>
-        {title}
-      </h3>
-      {children}
-    </div>
-  );
-}
 
 function AspectRatioCard({ name, description, children }: { name: string; description: string; children: React.ReactNode }) {
   return (
@@ -974,33 +888,6 @@ function StyleCard({ name, description, children }: { name: string; description:
   );
 }
 
-function PrincipleCard({ number, title, desc }: { number: number; title: string; desc: string }) {
-  return (
-    <div style={{
-      padding: 20,
-      backgroundColor: "white",
-      borderRadius: 12,
-      border: "1px solid var(--divider)",
-    }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 8 }}>
-        <span style={{
-          width: 22,
-          height: 22,
-          borderRadius: "50%",
-          backgroundColor: "#e5e7eb",
-          color: "#6b7280",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontSize: 12,
-          fontWeight: 600,
-        }}>{number}</span>
-        <span style={{ fontSize: 15, fontWeight: 600, color: "var(--text-primary)" }}>{title}</span>
-      </div>
-      <p style={{ fontSize: 14, color: "var(--text-secondary)", margin: 0, lineHeight: 1.6, paddingLeft: 34 }}>{desc}</p>
-    </div>
-  );
-}
 
 function DesignTokensTable({ tokens }: { tokens: { name: string; value: string; usage: string }[] }) {
   return (
@@ -1053,93 +940,6 @@ function GuidelinesTable({ guidelines }: { guidelines: { do: string; dont: strin
     </div>
   );
 }
-
-function PropsTable({ props }: { props: { name: string; type: string; required: boolean; defaultVal?: string; description: string }[] }) {
-  return (
-    <div style={{ overflowX: "auto", marginBottom: 32 }}>
-      <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
-        <thead>
-          <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
-            <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600 }}>Prop</th>
-            <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600 }}>Type</th>
-            <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600 }}>Required</th>
-            <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600 }}>Default</th>
-            <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600 }}>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          {props.map((prop, i) => (
-            <tr key={i} style={{ borderBottom: "1px solid var(--divider)" }}>
-              <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 13, color: "#6366f1" }}>{prop.name}</td>
-              <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 12, color: "#6b7280" }}>{prop.type}</td>
-              <td style={{ padding: "12px 16px" }}>{prop.required ? "✅" : "❌"}</td>
-              <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 12, color: "#6b7280" }}>{prop.defaultVal || "-"}</td>
-              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>{prop.description}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-}
-
-function RadioGroup({ label, options, value, onChange }: { label: string; options: { value: string; label: string }[]; value: string; onChange: (v: string) => void }) {
-  return (
-    <div>
-      <div style={{ fontSize: 14, fontWeight: 500, color: "#c4c4c4", marginBottom: 14 }}>
-        {label}
-      </div>
-      <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-        {options.map(opt => {
-          const isSelected = value === opt.value;
-          return (
-            <label
-              key={opt.value}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 12,
-                cursor: "pointer",
-                fontSize: 15,
-                fontWeight: 500,
-                color: isSelected ? "var(--text-primary)" : "#9ca3af",
-                transition: "color 0.15s ease",
-              }}
-              onClick={() => onChange(opt.value)}
-            >
-              <div
-                style={{
-                  width: 22,
-                  height: 22,
-                  borderRadius: "50%",
-                  border: isSelected ? "2px solid #3b82f6" : "2px solid #e5e5e5",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  transition: "all 0.15s ease",
-                  backgroundColor: "white",
-                }}
-              >
-                {isSelected && (
-                  <div
-                    style={{
-                      width: 12,
-                      height: 12,
-                      borderRadius: "50%",
-                      backgroundColor: "#3b82f6",
-                    }}
-                  />
-                )}
-              </div>
-              {opt.label}
-            </label>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-
 
 // Demo Component
 function ThumbnailDemo({

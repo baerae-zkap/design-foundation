@@ -34,6 +34,21 @@ const componentsNav = [
   { title: "Section Header", href: "/components/contents/section-header" },
   { title: "Table", href: "/components/contents/table" },
   { title: "Thumbnail", href: "/components/contents/thumbnail" },
+  { title: "Selection & Input", isLabel: true },
+  { title: "Checkbox", href: "/components/selection-input/checkbox" },
+  { title: "CheckMark", href: "/components/selection-input/check-mark" },
+  { title: "DatePicker", href: "/components/selection-input/date-picker" },
+  { title: "FilterButton", href: "/components/selection-input/filter-button" },
+  { title: "FramedStyle", href: "/components/selection-input/framed-style" },
+  { title: "Radio", href: "/components/selection-input/radio" },
+  { title: "SearchField", href: "/components/selection-input/search-field" },
+  { title: "SegmentedControl", href: "/components/selection-input/segmented-control" },
+  { title: "Select", href: "/components/selection-input/select" },
+  { title: "Slider", href: "/components/selection-input/slider" },
+  { title: "Switch", href: "/components/selection-input/switch" },
+  { title: "TextArea", href: "/components/selection-input/text-area" },
+  { title: "TextField", href: "/components/selection-input/text-field" },
+  { title: "TimePicker", href: "/components/selection-input/time-picker" },
 ];
 
 interface SidebarItemProps {

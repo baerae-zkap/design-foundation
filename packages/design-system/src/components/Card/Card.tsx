@@ -15,7 +15,12 @@
  * </Card>
  */
 
-import { forwardRef, useState, type HTMLAttributes, type ReactNode } from 'react';
+import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
+import { colors, palette } from '../../tokens/colors';
+import { spacing } from '../../tokens/spacing';
+import { radius } from '../../tokens/radius';
+import { usePressable } from '../../utils/usePressable';
+import { transitions } from '../../utils/styles';
 
 export type CardVariant = 'elevated' | 'outlined' | 'filled';
 export type CardPadding = 'none' | 'small' | 'medium' | 'large';
@@ -35,9 +40,9 @@ export interface CardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onClick
 
 const paddingStyles: Record<CardPadding, number> = {
   none: 0,
-  small: 12,   // primitive.3
-  medium: 20,  // card.padding.md
-  large: 24,   // card.padding.lg
+  small: spacing.primitive[3],
+  medium: spacing.semantic.inset.md,
+  large: spacing.semantic.inset.lg,
 };
 
 const variantStyles: Record<CardVariant, {
@@ -47,18 +52,18 @@ const variantStyles: Record<CardVariant, {
   shadow?: string;
 }> = {
   elevated: {
-    bg: 'white', // surface.base.default (static.white)
-    bgPressed: '#f8fafc', // surface.base.alternative (palette.grey.99)
-    shadow: '0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06)', // card.shadow.default
+    bg: colors.surface.base.default,
+    bgPressed: colors.surface.base.alternative,
+    shadow: '0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06)',
   },
   outlined: {
-    bg: 'white', // surface.base.default (static.white)
-    bgPressed: '#f8fafc', // surface.base.alternative (palette.grey.99)
-    border: '#e2e8f0', // border.base.default (palette.grey.95)
+    bg: colors.surface.base.default,
+    bgPressed: colors.surface.base.alternative,
+    border: colors.border.base.default,
   },
   filled: {
-    bg: '#f8fafc', // surface.base.alternative (palette.grey.99)
-    bgPressed: '#e2e8f0', // border.base.default (palette.grey.95) - pressed state darker
+    bg: colors.surface.base.alternative,
+    bgPressed: colors.surface.base.containerPressed,
   },
 };
 
@@ -78,28 +83,13 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
     },
     ref
   ) => {
-    const [isPressed, setIsPressed] = useState(false);
-
     const isClickable = !!onClick && !disabled;
-
-    const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
-      if (isClickable) setIsPressed(true);
-      onMouseDown?.(e);
-    };
-
-    const handleMouseUp = (e: React.MouseEvent<HTMLDivElement>) => {
-      setIsPressed(false);
-      onMouseUp?.(e);
-    };
-
-    const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
-      setIsPressed(false);
-      onMouseLeave?.(e);
-    };
-
-    const handleClick = () => {
-      if (isClickable) onClick();
-    };
+    const { isPressed, handlers } = usePressable<HTMLDivElement>({
+      disabled: !isClickable,
+      onMouseDown,
+      onMouseUp,
+      onMouseLeave,
+    });
 
     const variantStyle = variantStyles[variant];
     const backgroundColor = isPressed && isClickable ? variantStyle.bgPressed : variantStyle.bg;
@@ -107,25 +97,27 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
     const cardStyle: React.CSSProperties = {
       display: 'flex',
       flexDirection: 'column',
-      borderRadius: 12, // card.sm (radius.semantic.card.sm)
+      borderRadius: radius.component.card.sm,
       backgroundColor,
       padding: paddingStyles[padding],
       border: variant === 'outlined' ? `1px solid ${variantStyle.border}` : 'none',
       boxShadow: variant === 'elevated' ? variantStyle.shadow : 'none',
       cursor: isClickable ? 'pointer' : 'default',
       opacity: disabled ? 0.5 : 1,
-      transition: 'background-color 0.15s ease, box-shadow 0.15s ease',
+      transition: transitions.all,
       ...style,
+    };
+
+    const handleClick = () => {
+      if (isClickable) onClick();
     };
 
     return (
       <div
         ref={ref}
         style={cardStyle}
-        onMouseDown={isClickable ? handleMouseDown : undefined}
-        onMouseUp={isClickable ? handleMouseUp : undefined}
-        onMouseLeave={isClickable ? handleMouseLeave : undefined}
         onClick={isClickable ? handleClick : undefined}
+        {...handlers}
         {...props}
       >
         {children}

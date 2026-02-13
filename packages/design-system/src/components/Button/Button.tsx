@@ -15,7 +15,13 @@
  * </Button>
  */
 
-import { forwardRef, useState, type ButtonHTMLAttributes, type ReactNode } from 'react';
+import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
+import { colors, palette } from '../../tokens/colors';
+import { spacing } from '../../tokens/spacing';
+import { radius } from '../../tokens/radius';
+import { typography } from '../../tokens/typography';
+import { usePressable } from '../../utils/usePressable';
+import { transitions } from '../../utils/styles';
 
 export type ButtonType = 'filled' | 'outlined';
 export type ButtonColor =
@@ -49,10 +55,10 @@ export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement
 }
 
 const sizeStyles: Record<ButtonSize, { height: number; fontSize: number; padding: string }> = {
-  small: { height: 36, fontSize: 14, padding: '0 16px' }, // button.paddingX.sm (spacing.component.button.paddingX.sm)
-  medium: { height: 40, fontSize: 14, padding: '0 16px' }, // button.paddingX.sm (spacing.component.button.paddingX.sm)
-  large: { height: 44, fontSize: 14, padding: '0 20px' }, // button.paddingX.md (spacing.component.button.paddingX.md)
-  xLarge: { height: 48, fontSize: 16, padding: '0 24px' }, // button.paddingX.lg (spacing.component.button.paddingX.lg)
+  small: { height: 36, fontSize: typography.fontSize.sm, padding: `0 ${spacing.component.button.paddingX.sm}px` },
+  medium: { height: 40, fontSize: typography.fontSize.sm, padding: `0 ${spacing.component.button.paddingX.sm}px` },
+  large: { height: 44, fontSize: typography.fontSize.sm, padding: `0 ${spacing.component.button.paddingX.md}px` },
+  xLarge: { height: 48, fontSize: typography.fontSize.md, padding: `0 ${spacing.component.button.paddingX.lg}px` },
 };
 
 const colorStyles: Record<ButtonColor, {
@@ -61,93 +67,93 @@ const colorStyles: Record<ButtonColor, {
 }> = {
   brandDefault: {
     filled: {
-      bg: '#2563eb', // surface.brand.default (palette.blue.50)
-      bgPressed: '#1d4ed8', // surface.brand.defaultPressed (palette.blue.45)
-      color: 'white' // content.base.onColor (palette.static.white)
+      bg: colors.surface.brand.default,
+      bgPressed: colors.surface.brand.defaultPressed,
+      color: colors.content.base.onColor,
     },
     outlined: {
-      bg: 'white', // surface.base.default (palette.static.white)
-      bgPressed: '#eff6ff', // surface.brand.secondary light hover (palette.blue.98)
-      color: '#2563eb', // content.brand.default (palette.blue.50)
-      border: '#2563eb' // border.brand.default (palette.blue.50)
+      bg: colors.surface.base.default,
+      bgPressed: palette.blue[98],
+      color: colors.content.brand.default,
+      border: colors.border.brand.default,
     },
   },
   brandSecondary: {
     filled: {
-      bg: '#dbeafe', // surface.brand.secondary (palette.blue.95)
-      bgPressed: '#bfdbfe', // surface.brand.secondaryPressed (palette.blue.90)
-      color: '#2563eb' // content.brand.default (palette.blue.50)
+      bg: colors.surface.brand.secondary,
+      bgPressed: colors.surface.brand.secondaryPressed,
+      color: colors.content.brand.default,
     },
     outlined: {
-      bg: 'white', // surface.base.default (palette.static.white)
-      bgPressed: '#eff6ff', // surface.brand.secondary light hover (palette.blue.98)
-      color: '#2563eb', // content.brand.default (palette.blue.50)
-      border: '#93c5fd' // palette.blue.80
+      bg: colors.surface.base.default,
+      bgPressed: palette.blue[98],
+      color: colors.content.brand.default,
+      border: palette.blue[80],
     },
   },
   baseContainer: {
     filled: {
-      bg: '#f1f5f9', // surface.base.container (palette.grey.97)
-      bgPressed: '#e2e8f0', // surface.base.containerPressed (palette.grey.95)
-      color: '#334155' // content.base.default (palette.grey.30)
+      bg: colors.surface.base.container,
+      bgPressed: colors.surface.base.containerPressed,
+      color: colors.content.base.default,
     },
     outlined: {
-      bg: 'white', // surface.base.default (palette.static.white)
-      bgPressed: '#f8fafc', // palette.grey.99
-      color: '#334155', // content.base.default (palette.grey.30)
-      border: '#cbd5e1' // palette.grey.90
+      bg: colors.surface.base.default,
+      bgPressed: colors.surface.base.alternative,
+      color: colors.content.base.default,
+      border: colors.border.secondary.default,
     },
   },
   successDefault: {
     filled: {
-      bg: '#22c55e', // palette.green.50
-      bgPressed: '#16a34a', // palette.green.45
-      color: 'white' // content.base.onColor (palette.static.white)
+      bg: colors.surface.success.solid,
+      bgPressed: colors.surface.success.solidPressed,
+      color: colors.content.base.onColor,
     },
     outlined: {
-      bg: 'white', // surface.base.default (palette.static.white)
-      bgPressed: '#f0fdf4', // palette.green.98
-      color: '#16a34a', // palette.green.45
-      border: '#22c55e' // palette.green.50
+      bg: colors.surface.base.default,
+      bgPressed: palette.green[98],
+      color: palette.green[45],
+      border: colors.border.success.default,
     },
   },
   errorDefault: {
     filled: {
-      bg: '#ef4444', // palette.red.50
-      bgPressed: '#dc2626', // palette.red.45
-      color: 'white' // content.base.onColor (palette.static.white)
+      bg: colors.surface.error.solid,
+      bgPressed: colors.surface.error.solidPressed,
+      color: colors.content.base.onColor,
     },
     outlined: {
-      bg: 'white', // surface.base.default (palette.static.white)
-      bgPressed: '#fef2f2', // palette.red.98
-      color: '#dc2626', // palette.red.45
-      border: '#ef4444' // palette.red.50
+      bg: colors.surface.base.default,
+      bgPressed: palette.red[98],
+      color: palette.red[45],
+      border: colors.border.error.default,
     },
   },
   kakaoDefault: {
     filled: {
-      bg: '#FEE500',
-      bgPressed: '#D4BF00',
-      color: '#191919'
+      bg: palette.kakao.default,
+      bgPressed: palette.kakao.pressed,
+      color: palette.kakao.text,
     },
     outlined: {
-      bg: 'white',
-      bgPressed: '#FFFDE6',
-      color: '#191919',
-      border: '#FEE500'
+      bg: colors.surface.base.default,
+      bgPressed: palette.kakao.light,
+      color: palette.kakao.text,
+      border: palette.kakao.default,
     },
   },
   googleDefault: {
     filled: {
-      bg: 'white',
-      bgPressed: '#f1f5f9',
-      color: '#334155'
+      bg: colors.surface.base.default,
+      bgPressed: palette.google.pressed,
+      color: palette.google.text,
     },
     outlined: {
-      bg: 'white',
-      bgPressed: '#f8fafc',
-      color: '#334155',
-      border: '#d1d5db'
+      bg: colors.surface.base.default,
+      bgPressed: palette.google.light,
+      color: palette.google.text,
+      border: palette.google.border,
     },
   },
 };
@@ -172,49 +178,40 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
-    const [isPressed, setIsPressed] = useState(false);
+    const isDisabled = disabled || isLoading;
+    const { isPressed, handlers } = usePressable<HTMLButtonElement>({
+      disabled: isDisabled,
+      onMouseDown,
+      onMouseUp,
+      onMouseLeave,
+    });
+
     const sizeStyle = sizeStyles[size];
     const colorStyle = colorStyles[color][buttonType];
-    const isDisabled = disabled || isLoading;
-
-    const handleMouseDown = (e: React.MouseEvent<HTMLButtonElement>) => {
-      setIsPressed(true);
-      onMouseDown?.(e);
-    };
-
-    const handleMouseUp = (e: React.MouseEvent<HTMLButtonElement>) => {
-      setIsPressed(false);
-      onMouseUp?.(e);
-    };
-
-    const handleMouseLeave = (e: React.MouseEvent<HTMLButtonElement>) => {
-      setIsPressed(false);
-      onMouseLeave?.(e);
-    };
-
-    // radius.semantic.button.sm = 8px (small, medium), radius.semantic.button.lg = 12px (large, xLarge)
-    const borderRadius = size === 'large' || size === 'xLarge' ? 12 : 8;
+    const borderRadiusValue = size === 'large' || size === 'xLarge'
+      ? radius.component.button.lg
+      : radius.component.button.sm;
 
     const buttonStyle: React.CSSProperties = {
       display: 'inline-flex',
       alignItems: 'center',
       justifyContent: 'center',
-      gap: 8, // spacing.component.button.gap (spacing.primitive.2)
+      gap: spacing.component.button.gap,
       height: sizeStyle.height,
       padding: sizeStyle.padding,
       fontSize: sizeStyle.fontSize,
-      fontWeight: 600,
-      borderRadius,
+      fontWeight: typography.fontWeight.semibold,
+      borderRadius: borderRadiusValue,
       cursor: isDisabled ? 'not-allowed' : 'pointer',
-      transition: 'background-color 150ms ease',
+      transition: transitions.background,
       width: layout === 'fillWidth' ? '100%' : 'auto',
       opacity: isDisabled ? 0.5 : 1,
       background: isDisabled
-        ? '#e2e8f0' // surface.disabled.default (palette.grey.95)
+        ? colors.surface.disabled.default
         : (isPressed ? colorStyle.bgPressed : colorStyle.bg),
-      color: isDisabled ? '#94a3b8' : colorStyle.color, // content.disabled.default (palette.grey.80)
+      color: isDisabled ? colors.content.disabled.default : colorStyle.color,
       border: buttonType === 'outlined'
-        ? `1px solid ${isDisabled ? '#e2e8f0' : (colorStyle as { border: string }).border}` // border.disabled.default (palette.grey.95)
+        ? `1px solid ${isDisabled ? colors.border.disabled.default : (colorStyle as { border: string }).border}`
         : 'none',
       ...style,
     };
@@ -226,9 +223,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         aria-busy={isLoading}
         aria-disabled={isDisabled}
         style={buttonStyle}
-        onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseLeave}
+        {...handlers}
         {...props}
       >
         {isLoading ? (
@@ -249,7 +244,7 @@ Button.displayName = 'Button';
 
 function LoadingDots() {
   return (
-    <span style={{ display: 'flex', gap: 4 }}>
+    <span style={{ display: 'flex', gap: spacing.primitive[1] }}>
       {[0, 1, 2].map((i) => (
         <span
           key={i}

@@ -15,6 +15,12 @@
  */
 
 import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
+import { colors, palette } from '../../tokens/colors';
+import { spacing } from '../../tokens/spacing';
+import { radius } from '../../tokens/radius';
+import { typography } from '../../tokens/typography';
+import { usePressable } from '../../utils/usePressable';
+import { transitions } from '../../utils/styles';
 
 export type ListCardSize = 'small' | 'medium' | 'large';
 export type ListCardVariant = 'elevated' | 'outlined' | 'filled';
@@ -52,45 +58,45 @@ const sizeConfig: Record<ListCardSize, {
   metaSize: number;
 }> = {
   small: {
-    padding: 12,      // primitive.3
+    padding: spacing.primitive[3],
     thumbnailSize: 56,
-    gap: 12,          // primitive.3
-    titleSize: 14,
+    gap: spacing.primitive[3],
+    titleSize: typography.fontSize.sm,
     subtitleSize: 12,
     metaSize: 13,
   },
   medium: {
-    padding: 16,      // primitive.4
+    padding: spacing.primitive[4],
     thumbnailSize: 80,
-    gap: 12,          // primitive.3
-    titleSize: 15,
+    gap: spacing.primitive[3],
+    titleSize: typography.fontSize.md,
     subtitleSize: 13,
-    metaSize: 14,
+    metaSize: typography.fontSize.sm,
   },
   large: {
-    padding: 16,      // primitive.4
+    padding: spacing.primitive[4],
     thumbnailSize: 100,
-    gap: 16,          // primitive.4
-    titleSize: 16,
-    subtitleSize: 14,
-    metaSize: 15,
+    gap: spacing.primitive[4],
+    titleSize: typography.fontSize.md,
+    subtitleSize: typography.fontSize.sm,
+    metaSize: typography.fontSize.md,
   },
 };
 
 // Variant styles
 const variantStyles: Record<ListCardVariant, React.CSSProperties> = {
   elevated: {
-    backgroundColor: 'white',
+    backgroundColor: colors.surface.base.default,
     boxShadow: '0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06)',
     border: 'none',
   },
   outlined: {
-    backgroundColor: 'white',
+    backgroundColor: colors.surface.base.default,
     boxShadow: 'none',
-    border: '1px solid #e2e8f0', // border.base.default
+    border: `1px solid ${colors.border.base.default}`,
   },
   filled: {
-    backgroundColor: '#f8fafc', // surface.base.alternative
+    backgroundColor: colors.surface.base.alternative,
     boxShadow: 'none',
     border: 'none',
   },
@@ -118,26 +124,42 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
     const variantStyle = variantStyles[variant];
     const isInteractive = !!onClick && !disabled;
 
+    const { isPressed, handlers } = usePressable<HTMLDivElement>({
+      disabled: !isInteractive,
+      onMouseDown: undefined,
+      onMouseUp: undefined,
+      onMouseLeave: undefined,
+    });
+
+    const getPressedBackground = () => {
+      if (variant === 'filled') {
+        return colors.surface.base.container;
+      } else {
+        return palette.grey[99];
+      }
+    };
+
     const containerStyle: React.CSSProperties = {
       display: 'flex',
       alignItems: 'flex-start',
       gap: sizeStyle.gap,
       padding: sizeStyle.padding,
-      borderRadius: 12, // radius.semantic.card.sm
+      borderRadius: radius.component.card.sm,
       cursor: isInteractive ? 'pointer' : 'default',
       opacity: disabled ? 0.5 : 1,
-      transition: 'all 0.15s ease',
+      transition: transitions.background,
       ...variantStyle,
+      ...(isPressed && isInteractive ? { backgroundColor: getPressedBackground() } : {}),
       ...style,
     };
 
     const thumbnailContainerStyle: React.CSSProperties = {
       width: sizeStyle.thumbnailSize,
       height: sizeStyle.thumbnailSize,
-      borderRadius: 8, // primitive.sm
+      borderRadius: radius.primitive.sm,
       overflow: 'hidden',
       flexShrink: 0,
-      backgroundColor: '#f1f5f9', // surface.base.container
+      backgroundColor: colors.surface.base.container,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -148,13 +170,13 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
       minWidth: 0,
       display: 'flex',
       flexDirection: 'column',
-      gap: 4, // primitive.1
+      gap: spacing.primitive[1],
     };
 
     const titleStyle: React.CSSProperties = {
       fontSize: sizeStyle.titleSize,
-      fontWeight: 600,
-      color: '#334155', // content.base.default
+      fontWeight: typography.fontWeight.semibold,
+      color: colors.content.base.default,
       lineHeight: 1.4,
       overflow: 'hidden',
       textOverflow: 'ellipsis',
@@ -165,8 +187,8 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
 
     const subtitleStyle: React.CSSProperties = {
       fontSize: sizeStyle.subtitleSize,
-      fontWeight: 400,
-      color: '#64748b', // content.base.secondary
+      fontWeight: typography.fontWeight.regular,
+      color: colors.content.base.secondary,
       lineHeight: 1.4,
       overflow: 'hidden',
       textOverflow: 'ellipsis',
@@ -175,9 +197,9 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
 
     const metaStyle: React.CSSProperties = {
       fontSize: sizeStyle.metaSize,
-      fontWeight: 700,
-      color: '#334155', // content.base.default
-      marginTop: 4,
+      fontWeight: typography.fontWeight.bold,
+      color: colors.content.base.default,
+      marginTop: spacing.primitive[1],
     };
 
     const handleClick = () => {
@@ -186,28 +208,12 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
       }
     };
 
-    const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
-      if (isInteractive) {
-        if (variant === 'filled') {
-          e.currentTarget.style.backgroundColor = '#f1f5f9';
-        } else {
-          e.currentTarget.style.backgroundColor = 'rgba(0,0,0,0.02)';
-        }
-      }
-    };
-
-    const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
-      e.currentTarget.style.backgroundColor = variant === 'filled' ? '#f8fafc' : 'white';
-    };
-
     return (
       <div
         ref={ref}
         role={isInteractive ? 'button' : undefined}
         tabIndex={isInteractive ? 0 : undefined}
         onClick={handleClick}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
         onKeyDown={(e) => {
           if (isInteractive && (e.key === 'Enter' || e.key === ' ')) {
             e.preventDefault();
@@ -215,6 +221,7 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
           }
         }}
         style={containerStyle}
+        {...handlers}
         {...props}
       >
         {/* Thumbnail */}
@@ -228,7 +235,7 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
         <div style={contentStyle}>
           {/* Badges */}
           {badges && (
-            <div style={{ display: 'flex', gap: 4, marginBottom: 4 }}>
+            <div style={{ display: 'flex', gap: spacing.primitive[1], marginBottom: spacing.primitive[1] }}>
               {badges}
             </div>
           )}

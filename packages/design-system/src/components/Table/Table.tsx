@@ -22,6 +22,10 @@
  */
 
 import { forwardRef, createContext, useContext, type ReactNode, type HTMLAttributes, type TdHTMLAttributes, type ThHTMLAttributes } from 'react';
+import { colors, palette } from '../../tokens/colors';
+import { spacing } from '../../tokens/spacing';
+import { radius } from '../../tokens/radius';
+import { typography } from '../../tokens/typography';
 
 export type TableVariant = 'default' | 'striped';
 export type TableSize = 'small' | 'medium' | 'large';
@@ -75,27 +79,27 @@ const sizeStyles: Record<TableSize, {
   minHeight: number;
 }> = {
   small: {
-    headCellPaddingX: 16,
+    headCellPaddingX: spacing.primitive[4],
     headCellPaddingY: 6,
-    dataCellPaddingX: 16,
-    dataCellPaddingY: 12,
+    dataCellPaddingX: spacing.primitive[4],
+    dataCellPaddingY: spacing.primitive[3],
     fontSize: 13,
     minHeight: 40,
   },
   medium: {
-    headCellPaddingX: 20,
-    headCellPaddingY: 8,
-    dataCellPaddingX: 20,
-    dataCellPaddingY: 16,
-    fontSize: 14,
+    headCellPaddingX: spacing.primitive[5],
+    headCellPaddingY: spacing.primitive[2],
+    dataCellPaddingX: spacing.primitive[5],
+    dataCellPaddingY: spacing.primitive[4],
+    fontSize: typography.fontSize.sm,
     minHeight: 44,
   },
   large: {
-    headCellPaddingX: 24,
+    headCellPaddingX: spacing.primitive[6],
     headCellPaddingY: 10,
-    dataCellPaddingX: 24,
-    dataCellPaddingY: 20,
-    fontSize: 15,
+    dataCellPaddingX: spacing.primitive[6],
+    dataCellPaddingY: spacing.primitive[5],
+    fontSize: typography.fontSize.md,
     minHeight: 48,
   },
 };
@@ -107,16 +111,16 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
       width: '100%',
       borderCollapse: 'separate',
       borderSpacing: 0,
-      borderRadius: 12, // card.sm
+      borderRadius: radius.component.card.sm,
       border: 'none',
       overflow: 'hidden',
-      backgroundColor: 'white', // surface.base.default
+      backgroundColor: colors.surface.base.default,
       ...style,
     };
 
     return (
       <TableContext.Provider value={{ variant, size }}>
-        <div style={{ borderRadius: 12, overflow: 'hidden', border: '1px solid #e2e8f0' }}>
+        <div style={{ borderRadius: radius.component.card.sm, overflow: 'hidden', border: `1px solid ${colors.border.base.default}` }}>
           <table
             ref={ref}
             data-variant={variant}
@@ -164,7 +168,7 @@ TableBody.displayName = 'TableBody';
 export const TableRow = forwardRef<HTMLTableRowElement, TableRowProps>(
   ({ children, style, ...props }, ref) => {
     const rowStyle: React.CSSProperties = {
-      borderBottom: '1px solid #e2e8f0', // border.base.default
+      borderBottom: `1px solid ${colors.border.base.default}`,
       ...style,
     };
 
@@ -188,10 +192,10 @@ export const TableHeadCell = forwardRef<HTMLTableCellElement, TableHeadCellProps
       padding: `${sizeStyle.headCellPaddingY}px ${sizeStyle.headCellPaddingX}px`,
       textAlign: 'left',
       fontSize: sizeStyle.fontSize,
-      fontWeight: 600,
-      color: '#64748b', // content.base.tertiary (palette.grey.60)
-      backgroundColor: '#f8fafc', // surface.base.alternative (palette.grey.99)
-      borderBottom: '1px solid #e2e8f0', // border.base.default
+      fontWeight: typography.fontWeight.semibold,
+      color: palette.grey[60],
+      backgroundColor: colors.surface.base.alternative,
+      borderBottom: `1px solid ${colors.border.base.default}`,
       minHeight: sizeStyle.minHeight,
       ...style,
     };
@@ -215,7 +219,7 @@ export const TableCell = forwardRef<HTMLTableCellElement, TableCellProps>(
     const cellStyle: React.CSSProperties = {
       padding: `${sizeStyle.dataCellPaddingY}px ${sizeStyle.dataCellPaddingX}px`,
       fontSize: sizeStyle.fontSize,
-      color: '#334155', // content.base.default (palette.grey.20)
+      color: colors.content.base.default,
       minHeight: sizeStyle.minHeight,
       ...style,
     };

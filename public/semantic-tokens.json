@@ -83,8 +83,8 @@
         "placeholder_comment": "플레이스홀더",
         "assistive": "{palette.grey.80}",
         "assistive_comment": "보조 텍스트. 비활성에 가까움",
-        "disable": "{palette.grey.90}",
-        "disable_comment": "비활성 텍스트",
+        "disabled": "{palette.grey.90}",
+        "disabled_comment": "비활성 텍스트",
         "onColor": "{palette.static.white}",
         "onColor_comment": "컬러 배경 위 텍스트"
       },
@@ -158,7 +158,7 @@
       "error": {
         "default": "{palette.red.50}",
         "default_comment": "에러 테두리",
-        "defaultPressed": "{palette.red.45}",
+        "defaultPressed": "{palette.red.40}",
         "defaultPressed_comment": "에러 테두리 눌림"
       },
       "success": {
@@ -183,8 +183,8 @@
       "_description": "인터랙션 상태 컬러",
       "inactive": "{palette.grey.70}",
       "inactive_comment": "비활성 인터랙션 (토글 OFF 등)",
-      "disable": "{palette.grey.90}",
-      "disable_comment": "비활성화된 상태"
+      "disabled": "{palette.grey.90}",
+      "disabled_comment": "비활성화된 상태"
     },
 
     "visualization": {
@@ -304,8 +304,8 @@
         "placeholder_comment": "플레이스홀더",
         "assistive": "{palette.grey.40}",
         "assistive_comment": "보조 텍스트",
-        "disable": "{palette.grey.30}",
-        "disable_comment": "비활성 텍스트",
+        "disabled": "{palette.grey.30}",
+        "disabled_comment": "비활성 텍스트",
         "onColor": "{palette.static.white}",
         "onColor_comment": "컬러 배경 위 텍스트"
       },
@@ -377,13 +377,13 @@
         "default_comment": "비활성 테두리"
       },
       "error": {
-        "default": "{palette.red.55}",
+        "default": "{palette.red.60}",
         "default_comment": "에러 테두리",
         "defaultPressed": "{palette.red.60}",
         "defaultPressed_comment": "에러 테두리 눌림"
       },
       "success": {
-        "default": "{palette.green.55}",
+        "default": "{palette.green.60}",
         "default_comment": "성공 테두리",
         "defaultPressed": "{palette.green.60}",
         "defaultPressed_comment": "성공 테두리 눌림"
@@ -404,8 +404,8 @@
       "_description": "인터랙션 상태 컬러 - 다크모드",
       "inactive": "{palette.grey.40}",
       "inactive_comment": "비활성 인터랙션 (토글 OFF 등)",
-      "disable": "{palette.grey.25}",
-      "disable_comment": "비활성화된 상태"
+      "disabled": "{palette.grey.25}",
+      "disabled_comment": "비활성화된 상태"
     },
 
     "visualization": {
