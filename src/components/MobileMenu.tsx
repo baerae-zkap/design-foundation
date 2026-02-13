@@ -11,7 +11,8 @@ const mainNavigation = [
 
 const foundationsNav = [
   { title: "Overview", href: "/foundations" },
-  { title: "Colors", href: "/colors/palette" },
+  { title: "Color Palette", href: "/colors/palette" },
+  { title: "Color Semantic", href: "/colors/semantic" },
   { title: "Typography", href: "/typography" },
   { title: "Spacing", href: "/spacing" },
   { title: "Radius", href: "/radius" },
@@ -73,8 +74,8 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   }, [isOpen]);
 
   const isActive = (href: string) => {
-    if (href === "/colors/palette") {
-      return pathname.startsWith("/colors");
+    if (href.startsWith("/colors/")) {
+      return pathname === href;
     }
     return pathname === href;
   };

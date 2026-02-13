@@ -8,7 +8,8 @@ const foundationsNav = [
   { title: "Overview", href: "/foundations" },
   { title: "Getting Started", href: "/getting-started" },
   { title: "Base material", isLabel: true },
-  { title: "Colors", href: "/colors/palette" },
+  { title: "Color Palette", href: "/colors/palette" },
+  { title: "Color Semantic", href: "/colors/semantic" },
   { title: "Typography", href: "/typography" },
   { title: "Spacing", href: "/spacing" },
   { title: "Radius", href: "/radius" },
@@ -142,8 +143,8 @@ export function Sidebar() {
   const navigation = isFoundations ? foundationsNav : componentsNav;
 
   const isActive = (href: string) => {
-    if (href === "/colors/palette") {
-      return pathname.startsWith("/colors");
+    if (href.startsWith("/colors/")) {
+      return pathname === href;
     }
     return pathname === href;
   };
