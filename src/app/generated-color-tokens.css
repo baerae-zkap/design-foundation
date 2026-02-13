@@ -309,8 +309,11 @@
   --content-brand-default: var(--blue-60);
   --content-error-default: var(--red-60);
   --content-warning-default: var(--orange-60);
+  --content-warning-strong: var(--orange-80);
   --content-success-default: var(--green-60);
+  --content-success-strong: var(--green-80);
   --content-info-default: var(--teal-60);
+  --content-info-strong: var(--teal-80);
   --content-profit-default: var(--red-60);
   --content-loss-default: var(--blue-60);
   --content-disabled-default: var(--grey-40);
@@ -325,9 +328,9 @@
   --border-brand-defaultPressed: var(--blue-60);
   --border-disabled-default: var(--grey-30);
   --border-error-default: var(--red-60);
-  --border-error-defaultPressed: var(--red-60);
+  --border-error-defaultPressed: var(--red-70);
   --border-success-default: var(--green-60);
-  --border-success-defaultPressed: var(--green-60);
+  --border-success-defaultPressed: var(--green-70);
   --fill-normal: hsla(216, 9%, 77%, 0.22);
   --fill-strong: hsla(216, 9%, 77%, 0.28);
   --fill-alternative: hsla(216, 9%, 77%, 0.12);
@@ -335,8 +338,8 @@
   --interaction-disabled: var(--grey-25);
   --visualization-categorical-1: var(--blue-60);
   --visualization-categorical-2: var(--blue-70);
-  --visualization-categorical-3: var(--teal-60);
-  --visualization-categorical-4: var(--teal-70);
+  --visualization-categorical-3: var(--blue-80);
+  --visualization-categorical-4: var(--teal-60);
   --visualization-categorical-5: var(--green-60);
   --visualization-categorical-6: var(--purple-60);
   --visualization-categorical-7: var(--orange-60);

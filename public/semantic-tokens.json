@@ -365,15 +365,21 @@
       },
       "warning": {
         "default": "{palette.orange.60}",
-        "default_comment": "경고 텍스트"
+        "default_comment": "경고 텍스트",
+        "strong": "{palette.orange.80}",
+        "strong_comment": "강한 경고 텍스트. 다크 배경 본문 가독성 확보"
       },
       "success": {
         "default": "{palette.green.60}",
-        "default_comment": "성공 텍스트"
+        "default_comment": "성공 텍스트",
+        "strong": "{palette.green.80}",
+        "strong_comment": "강한 성공 텍스트. 다크 배경 본문 가독성 확보"
       },
       "info": {
         "default": "{palette.teal.60}",
-        "default_comment": "정보 텍스트"
+        "default_comment": "정보 텍스트",
+        "strong": "{palette.teal.80}",
+        "strong_comment": "강한 정보 텍스트. 다크 배경 본문 가독성 확보"
       },
       "profit": {
         "default": "{palette.red.60}",
@@ -425,13 +431,13 @@
       "error": {
         "default": "{palette.red.60}",
         "default_comment": "에러 테두리",
-        "defaultPressed": "{palette.red.60}",
+        "defaultPressed": "{palette.red.70}",
         "defaultPressed_comment": "에러 테두리 눌림"
       },
       "success": {
         "default": "{palette.green.60}",
         "default_comment": "성공 테두리",
-        "defaultPressed": "{palette.green.60}",
+        "defaultPressed": "{palette.green.70}",
         "defaultPressed_comment": "성공 테두리 눌림"
       }
     },
@@ -461,9 +467,9 @@
         "1_comment": "차트 색상 1 (주요)",
         "2": "{palette.blue.70}",
         "2_comment": "차트 색상 2",
-        "3": "{palette.teal.60}",
+        "3": "{palette.blue.80}",
         "3_comment": "차트 색상 3",
-        "4": "{palette.teal.70}",
+        "4": "{palette.teal.60}",
         "4_comment": "차트 색상 4",
         "5": "{palette.green.60}",
         "5_comment": "차트 색상 5",
