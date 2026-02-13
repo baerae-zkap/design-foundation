@@ -105,7 +105,8 @@ function EffectSwatch({ value, label }: { value: string; label: string }) {
     >
       <div
         style={{
-          height: "44px",
+          width: "48px",
+          height: "48px",
           borderRadius: "8px",
           border: "1px solid var(--border-base-default)",
           background: value,
