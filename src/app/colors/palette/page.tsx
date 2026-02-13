@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { TokenDownload } from "@/components/TokenDownload";
 import paletteJson from "../../../../public/palette.json";
@@ -116,53 +115,6 @@ export default function PalettePage() {
           숫자가 클수록 밝은 색상입니다 (99 = 거의 흰색, 5 = 거의 검정). 테마 분기는 Semantic에서 관리합니다.
         </span>
       </p>
-
-      <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
-        <Link
-          href="/colors/palette"
-          style={{
-            padding: '6px 12px',
-            borderRadius: '9999px',
-            backgroundColor: 'var(--surface-base-container)',
-            color: 'var(--content-base-strong)',
-            fontSize: '12px',
-            fontWeight: 600,
-            textDecoration: 'none',
-          }}
-        >
-          Palette
-        </Link>
-        <Link
-          href="/colors/semantic"
-          style={{
-            padding: '6px 12px',
-            borderRadius: '9999px',
-            backgroundColor: 'var(--surface-base-default)',
-            color: 'var(--content-base-secondary)',
-            border: '1px solid var(--border-base-default)',
-            fontSize: '12px',
-            fontWeight: 500,
-            textDecoration: 'none',
-          }}
-        >
-          Semantic
-        </Link>
-        <Link
-          href="/colors/effects"
-          style={{
-            padding: '6px 12px',
-            borderRadius: '9999px',
-            backgroundColor: 'var(--surface-base-default)',
-            color: 'var(--content-base-secondary)',
-            border: '1px solid var(--border-base-default)',
-            fontSize: '12px',
-            fontWeight: 500,
-            textDecoration: 'none',
-          }}
-        >
-          Effects
-        </Link>
-      </div>
 
       <TokenDownload files={[
         { name: 'palette.json', path: '/palette.json' },

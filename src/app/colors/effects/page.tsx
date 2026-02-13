@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { TokenDownload } from "@/components/TokenDownload";
@@ -12,6 +11,7 @@ type JsonMap = Record<string, unknown>;
 type FlatToken = {
   name: string;
   value: string;
+  source: string;
 };
 
 const isSkippableKey = (key: string) => key.startsWith("_") || key.endsWith("_comment");
@@ -34,6 +34,18 @@ function resolvePaletteRefs(value: string): string {
   });
 }
 
+function extractPaletteLabels(source: string): string[] {
+  const refs = source.match(/\{palette\.([^.}]+\.[^.}]+)\}/g) ?? [];
+  return refs.map((ref) => ref.slice(1, -1));
+}
+
+function toSourceLabel(source: string): string {
+  const labels = extractPaletteLabels(source);
+  if (labels.length === 0) return source;
+  if (labels.length <= 2) return labels.join(" · ");
+  return `${labels.slice(0, 2).join(" · ")} +${labels.length - 2}`;
+}
+
 function flattenTokens(input: JsonMap, path: string[] = []): FlatToken[] {
   const results: FlatToken[] = [];
 
@@ -53,6 +65,7 @@ function flattenTokens(input: JsonMap, path: string[] = []): FlatToken[] {
       results.push({
         name: nextPath.join("."),
         value: resolvePaletteRefs(rawValue),
+        source: rawValue,
       });
     }
   }
@@ -60,7 +73,7 @@ function flattenTokens(input: JsonMap, path: string[] = []): FlatToken[] {
   return results;
 }
 
-function EffectSwatch({ value, theme }: { value: string; theme: "light" | "dark" }) {
+function EffectSwatch({ value, theme, label }: { value: string; theme: "light" | "dark"; label: string }) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -97,9 +110,10 @@ function EffectSwatch({ value, theme }: { value: string; theme: "light" | "dark"
           fontFamily: "var(--font-mono)",
           color: copied ? "var(--content-brand-default)" : "var(--content-base-secondary)",
           textAlign: "center",
+          wordBreak: "break-word",
         }}
       >
-        {copied ? "Copied!" : theme}
+        {copied ? "Copied!" : label}
       </div>
     </button>
   );
@@ -118,7 +132,7 @@ function EffectSection({
   lightTokens: FlatToken[];
   darkTokens: FlatToken[];
 }) {
-  const darkMap = new Map(darkTokens.map((token) => [token.name, token.value]));
+  const darkMap = new Map(darkTokens.map((token) => [token.name, token]));
 
   return (
     <section style={{ marginBottom: "var(--space-8)" }}>
@@ -138,7 +152,9 @@ function EffectSection({
         }}
       >
         {lightTokens.map((lightToken, index) => {
-          const darkValue = darkMap.get(lightToken.name) ?? lightToken.value;
+          const darkToken = darkMap.get(lightToken.name);
+          const darkValue = darkToken?.value ?? lightToken.value;
+          const darkSource = darkToken?.source ?? lightToken.source;
           return (
             <div
               key={lightToken.name}
@@ -167,8 +183,8 @@ function EffectSection({
               </div>
 
               <div style={{ display: "flex", gap: "8px", flexShrink: 0 }}>
-                <EffectSwatch value={lightToken.value} theme="light" />
-                <EffectSwatch value={darkValue} theme="dark" />
+                <EffectSwatch value={lightToken.value} theme="light" label={toSourceLabel(lightToken.source)} />
+                <EffectSwatch value={darkValue} theme="dark" label={toSourceLabel(darkSource)} />
               </div>
             </div>
           );
@@ -209,53 +225,6 @@ export default function EffectsPage() {
       <p className="mb-6 leading-relaxed" style={{ color: "var(--content-base-default)" }}>
         Gradient와 Alpha 계열을 별도 레이어로 관리합니다. 컴포넌트에서는 의미 색상은 Semantic, 복합 표현은 Effects를 사용하세요.
       </p>
-
-      <div style={{ display: "flex", gap: "8px", marginBottom: "16px" }}>
-        <Link
-          href="/colors/palette"
-          style={{
-            padding: "6px 12px",
-            borderRadius: "9999px",
-            backgroundColor: "var(--surface-base-default)",
-            color: "var(--content-base-secondary)",
-            border: "1px solid var(--border-base-default)",
-            fontSize: "12px",
-            fontWeight: 500,
-            textDecoration: "none",
-          }}
-        >
-          Palette
-        </Link>
-        <Link
-          href="/colors/semantic"
-          style={{
-            padding: "6px 12px",
-            borderRadius: "9999px",
-            backgroundColor: "var(--surface-base-default)",
-            color: "var(--content-base-secondary)",
-            border: "1px solid var(--border-base-default)",
-            fontSize: "12px",
-            fontWeight: 500,
-            textDecoration: "none",
-          }}
-        >
-          Semantic
-        </Link>
-        <Link
-          href="/colors/effects"
-          style={{
-            padding: "6px 12px",
-            borderRadius: "9999px",
-            backgroundColor: "var(--surface-base-container)",
-            color: "var(--content-base-strong)",
-            fontSize: "12px",
-            fontWeight: 600,
-            textDecoration: "none",
-          }}
-        >
-          Effects
-        </Link>
-      </div>
 
       <TokenDownload files={[{ name: "effects-tokens.json", path: "/effects-tokens.json" }]} />
 

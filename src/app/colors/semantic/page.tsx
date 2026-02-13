@@ -1,11 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { TokenDownload } from "@/components/TokenDownload";
 import paletteJson from "../../../../public/palette.json";
 import semanticJson from "../../../../public/semantic-tokens.json";
+
+type SemanticItem = {
+  name: string;
+  value: string;
+  source: string;
+  description: string;
+};
 
 // Palette 참조 해석: "{palette.blue.500}" → "hsla(...)"
 function resolveRef(ref: string): string {
@@ -19,9 +25,15 @@ function resolveRef(ref: string): string {
   return typeof value === "string" ? value : ref;
 }
 
+function toPaletteLabel(source: string): string {
+  const match = source.match(/^\{palette\.([^.}]+)\.([^.}]+)\}$/);
+  if (!match) return source;
+  return `palette.${match[1]}.${match[2]}`;
+}
+
 // Semantic 카테고리 처리 (중첩 구조 flatten)
-function processSemanticCategory(category: Record<string, unknown>): Array<{ name: string; value: string; description: string }> {
-  const result: Array<{ name: string; value: string; description: string }> = [];
+function processSemanticCategory(category: Record<string, unknown>): SemanticItem[] {
+  const result: SemanticItem[] = [];
 
   for (const [key, val] of Object.entries(category)) {
     if (key.startsWith("_")) continue;
@@ -32,6 +44,7 @@ function processSemanticCategory(category: Record<string, unknown>): Array<{ nam
       result.push({
         name: key,
         value: resolveRef(val),
+        source: val,
         description: (category[commentKey] as string) || "",
       });
     } else if (typeof val === "object" && val !== null) {
@@ -44,6 +57,7 @@ function processSemanticCategory(category: Record<string, unknown>): Array<{ nam
           result.push({
             name: `${key}.${subKey}`,
             value: resolveRef(subVal),
+            source: subVal,
             description: ((val as Record<string, unknown>)[commentKey] as string) || "",
           });
         }
@@ -54,7 +68,7 @@ function processSemanticCategory(category: Record<string, unknown>): Array<{ nam
   return result;
 }
 
-function ColorSwatch({ value, theme }: { value: string; theme: 'light' | 'dark' }) {
+function ColorSwatch({ value, label }: { value: string; label: string }) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async (e: React.MouseEvent) => {
@@ -80,7 +94,7 @@ function ColorSwatch({ value, theme }: { value: string; theme: 'light' | 'dark' 
         transition: 'background-color 0.15s',
         minWidth: '80px',
       }}
-      title={`Copy ${theme} value`}
+      title="Copy color value"
     >
       <div
         style={{
@@ -88,7 +102,7 @@ function ColorSwatch({ value, theme }: { value: string; theme: 'light' | 'dark' 
           height: '48px',
           backgroundColor: value,
           borderRadius: 'var(--radius-md)',
-          border: '1px solid rgba(128, 128, 128, 0.4)',
+          border: '1px solid var(--border-base-default)',
         }}
       />
       <span
@@ -101,7 +115,7 @@ function ColorSwatch({ value, theme }: { value: string; theme: 'light' | 'dark' 
           maxWidth: '80px',
         }}
       >
-        {copied ? 'Copied!' : theme}
+        {copied ? 'Copied!' : label}
       </span>
     </button>
   );
@@ -111,11 +125,15 @@ function SemanticColorRow({
   name,
   lightValue,
   darkValue,
+  lightSource,
+  darkSource,
   description
 }: {
   name: string;
   lightValue: string;
   darkValue: string;
+  lightSource: string;
+  darkSource: string;
   description: string;
 }) {
   return (
@@ -160,11 +178,11 @@ function SemanticColorRow({
             flexDirection: 'column',
             alignItems: 'center',
             padding: '8px 12px',
-            backgroundColor: '#FFFFFF',
+            backgroundColor: 'var(--static-white)',
             borderRadius: 'var(--radius-md)',
           }}
         >
-          <ColorSwatch value={lightValue} theme="light" />
+          <ColorSwatch value={lightValue} label={toPaletteLabel(lightSource)} />
         </div>
         <div
           style={{
@@ -172,11 +190,11 @@ function SemanticColorRow({
             flexDirection: 'column',
             alignItems: 'center',
             padding: '8px 12px',
-            backgroundColor: '#1A1A1A',
+            backgroundColor: 'var(--grey-15)',
             borderRadius: 'var(--radius-md)',
           }}
         >
-          <ColorSwatch value={darkValue} theme="dark" />
+          <ColorSwatch value={darkValue} label={toPaletteLabel(darkSource)} />
         </div>
       </div>
     </div>
@@ -192,8 +210,8 @@ function SemanticSection({
 }: {
   title: string;
   description: string;
-  lightItems: Array<{ name: string; value: string; description: string }>;
-  darkItems: Array<{ name: string; value: string; description: string }>;
+  lightItems: SemanticItem[];
+  darkItems: SemanticItem[];
   prefix: string;
 }) {
   // Merge light and dark items by name
@@ -203,6 +221,8 @@ function SemanticSection({
       name: lightItem.name,
       lightValue: lightItem.value,
       darkValue: darkItem?.value || lightItem.value,
+      lightSource: lightItem.source,
+      darkSource: darkItem?.source || lightItem.source,
       description: lightItem.description,
     };
   });
@@ -282,6 +302,8 @@ function SemanticSection({
               name={`${prefix}.${item.name}`}
               lightValue={item.lightValue}
               darkValue={item.darkValue}
+              lightSource={item.lightSource}
+              darkSource={item.darkSource}
               description={item.description}
             />
           </div>
@@ -306,55 +328,9 @@ export default function SemanticPage() {
         용도에 따라 정의된 색상입니다. 컴포넌트 개발 시 <strong style={{ color: 'var(--content-base-strong)' }}>Semantic 토큰을 우선</strong> 사용해주세요.
         <br />
         <span style={{ fontSize: '14px', color: 'var(--content-base-secondary)' }}>
-          각 색상을 클릭하면 값이 복사됩니다.
+          각 색상을 클릭하면 값이 복사되며, 하단 라벨은 참조 중인 palette 토큰입니다.
         </span>
       </p>
-      <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
-        <Link
-          href="/colors/palette"
-          style={{
-            padding: '6px 12px',
-            borderRadius: '9999px',
-            backgroundColor: 'var(--surface-base-default)',
-            color: 'var(--content-base-secondary)',
-            border: '1px solid var(--border-base-default)',
-            fontSize: '12px',
-            fontWeight: 500,
-            textDecoration: 'none',
-          }}
-        >
-          Palette
-        </Link>
-        <Link
-          href="/colors/semantic"
-          style={{
-            padding: '6px 12px',
-            borderRadius: '9999px',
-            backgroundColor: 'var(--surface-base-container)',
-            color: 'var(--content-base-strong)',
-            fontSize: '12px',
-            fontWeight: 600,
-            textDecoration: 'none',
-          }}
-        >
-          Semantic
-        </Link>
-        <Link
-          href="/colors/effects"
-          style={{
-            padding: '6px 12px',
-            borderRadius: '9999px',
-            backgroundColor: 'var(--surface-base-default)',
-            color: 'var(--content-base-secondary)',
-            border: '1px solid var(--border-base-default)',
-            fontSize: '12px',
-            fontWeight: 500,
-            textDecoration: 'none',
-          }}
-        >
-          Effects
-        </Link>
-      </div>
       <TokenDownload files={[
         { name: 'semantic-tokens.json', path: '/semantic-tokens.json' },
       ]} />
