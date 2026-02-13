@@ -12,6 +12,7 @@ type FlatToken = {
   name: string;
   value: string;
   source: string;
+  description: string;
 };
 
 const isSkippableKey = (key: string) => key.startsWith("_") || key.endsWith("_comment");
@@ -62,10 +63,13 @@ function flattenTokens(input: JsonMap, path: string[] = []): FlatToken[] {
     }
 
     if (typeof rawValue === "string") {
+      const commentKey = `${key}_comment`;
+      const description = typeof input[commentKey] === "string" ? String(input[commentKey]) : "";
       results.push({
         name: nextPath.join("."),
         value: resolvePaletteRefs(rawValue),
         source: rawValue,
+        description,
       });
     }
   }
@@ -73,7 +77,7 @@ function flattenTokens(input: JsonMap, path: string[] = []): FlatToken[] {
   return results;
 }
 
-function EffectSwatch({ value, theme, label }: { value: string; theme: "light" | "dark"; label: string }) {
+function EffectSwatch({ value, label }: { value: string; label: string }) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -86,12 +90,16 @@ function EffectSwatch({ value, theme, label }: { value: string; theme: "light" |
     <button
       onClick={handleCopy}
       style={{
-        width: "108px",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: "6px",
         padding: "8px",
-        border: "1px solid var(--border-base-default)",
-        borderRadius: "var(--radius-md)",
-        backgroundColor: theme === "light" ? "var(--static-white)" : "var(--grey-15)",
+        background: "none",
+        border: "none",
         cursor: "pointer",
+        borderRadius: "var(--radius-md)",
+        minWidth: "80px",
       }}
       title="Copy token value"
     >
@@ -136,55 +144,94 @@ function EffectSection({
 
   return (
     <section style={{ marginBottom: "var(--space-8)" }}>
-      <h3 className="text-sm font-semibold uppercase tracking-wider" style={{ color: "var(--content-base-strong)" }}>
+      <h3 className="text-sm font-semibold uppercase tracking-wider" style={{ color: "var(--content-base-strong)", marginBottom: "4px" }}>
         {title}
       </h3>
-      <p className="text-xs" style={{ color: "var(--content-base-secondary)", marginTop: "4px", marginBottom: "12px" }}>
+      <p className="text-xs" style={{ color: "var(--content-base-secondary)", marginBottom: "12px" }}>
         {description}
       </p>
 
       <div
         style={{
+          display: "flex",
+          alignItems: "center",
+          padding: "8px 16px",
+          backgroundColor: "var(--surface-base-container)",
+          borderRadius: "var(--radius-lg) var(--radius-lg) 0 0",
           border: "1px solid var(--border-base-default)",
-          borderRadius: "var(--radius-lg)",
-          overflow: "hidden",
+          borderBottom: "none",
+        }}
+      >
+        <div style={{ flex: 1, fontSize: "12px", fontWeight: 500, color: "var(--content-base-secondary)" }}>Token</div>
+        <div style={{ display: "flex", gap: "8px", flexShrink: 0 }}>
+          <div style={{ width: "104px", textAlign: "center", fontSize: "12px", fontWeight: 500, color: "var(--content-base-secondary)" }}>
+            Light
+          </div>
+          <div style={{ width: "104px", textAlign: "center", fontSize: "12px", fontWeight: 500, color: "var(--content-base-secondary)" }}>
+            Dark
+          </div>
+        </div>
+      </div>
+
+      <div
+        style={{
           backgroundColor: "var(--surface-base-default)",
+          borderRadius: "0 0 var(--radius-lg) var(--radius-lg)",
+          border: "1px solid var(--border-base-default)",
+          overflow: "hidden",
         }}
       >
         {lightTokens.map((lightToken, index) => {
           const darkToken = darkMap.get(lightToken.name);
           const darkValue = darkToken?.value ?? lightToken.value;
           const darkSource = darkToken?.source ?? lightToken.source;
+          const tokenDescription = lightToken.description || darkToken?.description || "";
+
           return (
             <div
               key={lightToken.name}
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: "12px",
                 padding: "12px 16px",
+                gap: "16px",
                 borderBottom: index < lightTokens.length - 1 ? "1px solid var(--border-base-default)" : "none",
               }}
             >
               <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ fontSize: "14px", fontWeight: 500, color: "var(--content-base-strong)", marginBottom: "3px" }}>
+                <div style={{ fontSize: "14px", fontWeight: 500, color: "var(--content-base-strong)", marginBottom: "2px" }}>
                   {`${prefix}.${lightToken.name}`}
                 </div>
-                <div
-                  style={{
-                    fontSize: "11px",
-                    fontFamily: "var(--font-mono)",
-                    color: "var(--content-base-secondary)",
-                    wordBreak: "break-all",
-                  }}
-                >
-                  {lightToken.value}
-                </div>
+                {tokenDescription && (
+                  <div style={{ fontSize: "12px", color: "var(--content-base-secondary)", lineHeight: 1.4 }}>{tokenDescription}</div>
+                )}
               </div>
 
               <div style={{ display: "flex", gap: "8px", flexShrink: 0 }}>
-                <EffectSwatch value={lightToken.value} theme="light" label={toSourceLabel(lightToken.source)} />
-                <EffectSwatch value={darkValue} theme="dark" label={toSourceLabel(darkSource)} />
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    padding: "8px 12px",
+                    backgroundColor: "var(--static-white)",
+                    borderRadius: "var(--radius-md)",
+                  }}
+                >
+                  <EffectSwatch value={lightToken.value} label={toSourceLabel(lightToken.source)} />
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    padding: "8px 12px",
+                    backgroundColor: "var(--grey-15)",
+                    borderRadius: "var(--radius-md)",
+                  }}
+                >
+                  <EffectSwatch value={darkValue} label={toSourceLabel(darkSource)} />
+                </div>
               </div>
             </div>
           );
@@ -223,7 +270,7 @@ export default function EffectsPage() {
         Color Effects
       </h1>
       <p className="mb-6 leading-relaxed" style={{ color: "var(--content-base-default)" }}>
-        Gradient와 Alpha 계열을 별도 레이어로 관리합니다. 컴포넌트에서는 의미 색상은 Semantic, 복합 표현은 Effects를 사용하세요.
+        Gradient와 Alpha 계열을 별도 레이어로 관리합니다. 각 토큰은 목적 설명과 함께 제공되며, 색상 카드를 클릭하면 값이 복사됩니다.
       </p>
 
       <TokenDownload files={[{ name: "effects-tokens.json", path: "/effects-tokens.json" }]} />

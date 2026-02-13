@@ -12,31 +12,44 @@
     "_description": "라이트 테마 이펙트 토큰",
     "alpha": {
       "brand": {
-        "selection": "{palette.alphaComposite.brandSelectionLight}"
+        "selection": "{palette.alphaComposite.brandSelectionLight}",
+        "selection_comment": "선택 영역 및 포커스 하이라이트 배경"
       },
       "fill": {
         "normal": "{palette.alphaComposite.fillLightNormal}",
+        "normal_comment": "기본 fill 레이어 (카드/아이템 subtle 강조)",
         "strong": "{palette.alphaComposite.fillLightStrong}",
-        "alternative": "{palette.alphaComposite.fillLightAlternative}"
+        "strong_comment": "강한 fill 레이어 (pressed/active 상태)",
+        "alternative": "{palette.alphaComposite.fillLightAlternative}",
+        "alternative_comment": "약한 fill 레이어 (hover/미세 강조)"
       },
       "overlay": {
         "transparent": "{palette.alphaComposite.overlayLightTransparent}",
+        "transparent_comment": "오버레이 gradient 시작용 투명 베이스",
         "dim": "{palette.alphaComposite.overlayLightDim}",
-        "heavy": "{palette.alphaComposite.overlayLightHeavy}"
+        "dim_comment": "기본 딤 오버레이",
+        "heavy": "{palette.alphaComposite.overlayLightHeavy}",
+        "heavy_comment": "강한 딤 오버레이 (모달/집중 모드)"
       }
     },
     "gradient": {
       "brand": {
         "primary": "linear-gradient(135deg, {palette.blue.65} 0%, {palette.blue.45} 100%)",
-        "subtle": "linear-gradient(180deg, {palette.blue.99} 0%, {palette.blue.90} 100%)"
+        "primary_comment": "브랜드 CTA/히어로용 주 그라디언트",
+        "subtle": "linear-gradient(180deg, {palette.blue.99} 0%, {palette.blue.90} 100%)",
+        "subtle_comment": "브랜드 정보 영역용 약한 배경 그라디언트"
       },
       "surface": {
         "elevated": "linear-gradient(180deg, {palette.static.white} 0%, {palette.grey.99} 100%)",
-        "container": "linear-gradient(180deg, {palette.grey.99} 0%, {palette.grey.97} 100%)"
+        "elevated_comment": "카드/패널 elevation 표현용 서피스 그라디언트",
+        "container": "linear-gradient(180deg, {palette.grey.99} 0%, {palette.grey.97} 100%)",
+        "container_comment": "컨테이너 영역 구분용 서피스 그라디언트"
       },
       "overlay": {
         "topScrim": "linear-gradient(0deg, {palette.alphaComposite.overlayLightHeavy} 0%, {palette.alphaComposite.overlayLightTransparent} 100%)",
-        "bottomScrim": "linear-gradient(180deg, {palette.alphaComposite.overlayLightTransparent} 0%, {palette.alphaComposite.overlayLightHeavy} 100%)"
+        "topScrim_comment": "상단 가독성 확보용 스크림",
+        "bottomScrim": "linear-gradient(180deg, {palette.alphaComposite.overlayLightTransparent} 0%, {palette.alphaComposite.overlayLightHeavy} 100%)",
+        "bottomScrim_comment": "하단 가독성 확보용 스크림"
       }
     }
   },
@@ -44,31 +57,44 @@
     "_description": "다크 테마 이펙트 토큰",
     "alpha": {
       "brand": {
-        "selection": "{palette.alphaComposite.brandSelectionDark}"
+        "selection": "{palette.alphaComposite.brandSelectionDark}",
+        "selection_comment": "선택 영역 및 포커스 하이라이트 배경"
       },
       "fill": {
         "normal": "{palette.alphaComposite.fillDarkNormal}",
+        "normal_comment": "기본 fill 레이어 (카드/아이템 subtle 강조)",
         "strong": "{palette.alphaComposite.fillDarkStrong}",
-        "alternative": "{palette.alphaComposite.fillDarkAlternative}"
+        "strong_comment": "강한 fill 레이어 (pressed/active 상태)",
+        "alternative": "{palette.alphaComposite.fillDarkAlternative}",
+        "alternative_comment": "약한 fill 레이어 (hover/미세 강조)"
       },
       "overlay": {
         "transparent": "{palette.alphaComposite.overlayDarkTransparent}",
+        "transparent_comment": "오버레이 gradient 시작용 투명 베이스",
         "dim": "{palette.alphaComposite.overlayDarkDim}",
-        "heavy": "{palette.alphaComposite.overlayDarkHeavy}"
+        "dim_comment": "기본 딤 오버레이",
+        "heavy": "{palette.alphaComposite.overlayDarkHeavy}",
+        "heavy_comment": "강한 딤 오버레이 (모달/집중 모드)"
       }
     },
     "gradient": {
       "brand": {
         "primary": "linear-gradient(135deg, {palette.blue.70} 0%, {palette.blue.50} 100%)",
-        "subtle": "linear-gradient(180deg, {palette.blue.30} 0%, {palette.blue.20} 100%)"
+        "primary_comment": "브랜드 CTA/히어로용 주 그라디언트",
+        "subtle": "linear-gradient(180deg, {palette.blue.30} 0%, {palette.blue.20} 100%)",
+        "subtle_comment": "브랜드 정보 영역용 약한 배경 그라디언트"
       },
       "surface": {
         "elevated": "linear-gradient(180deg, {palette.grey.17} 0%, {palette.grey.20} 100%)",
-        "container": "linear-gradient(180deg, {palette.grey.20} 0%, {palette.grey.23} 100%)"
+        "elevated_comment": "카드/패널 elevation 표현용 서피스 그라디언트",
+        "container": "linear-gradient(180deg, {palette.grey.20} 0%, {palette.grey.23} 100%)",
+        "container_comment": "컨테이너 영역 구분용 서피스 그라디언트"
       },
       "overlay": {
         "topScrim": "linear-gradient(0deg, {palette.alphaComposite.overlayDarkHeavy} 0%, {palette.alphaComposite.overlayDarkTransparent} 100%)",
-        "bottomScrim": "linear-gradient(180deg, {palette.alphaComposite.overlayDarkTransparent} 0%, {palette.alphaComposite.overlayDarkHeavy} 100%)"
+        "topScrim_comment": "상단 가독성 확보용 스크림",
+        "bottomScrim": "linear-gradient(180deg, {palette.alphaComposite.overlayDarkTransparent} 0%, {palette.alphaComposite.overlayDarkHeavy} 100%)",
+        "bottomScrim_comment": "하단 가독성 확보용 스크림"
       }
     }
   }
