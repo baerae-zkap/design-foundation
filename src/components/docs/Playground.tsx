@@ -2,11 +2,12 @@
 
 import React, { useState } from "react";
 
-export function RadioGroup({ label, options, value, onChange }: {
+export function RadioGroup({ label, options, value, onChange, disabled }: {
   label: string;
   options: { value: string; label: string }[];
   value: string;
   onChange: (v: string) => void;
+  disabled?: boolean;
 }) {
   return (
     <div>
@@ -23,13 +24,14 @@ export function RadioGroup({ label, options, value, onChange }: {
                 display: "flex",
                 alignItems: "center",
                 gap: 12,
-                cursor: "pointer",
+                cursor: disabled ? "not-allowed" : "pointer",
                 fontSize: 15,
                 fontWeight: 500,
-                color: isSelected ? "var(--text-primary)" : "#9ca3af",
+                color: disabled ? "#555" : isSelected ? "var(--text-primary)" : "#9ca3af",
+                opacity: disabled ? 0.5 : 1,
                 transition: "color 0.15s ease",
               }}
-              onClick={() => onChange(opt.value)}
+              onClick={() => !disabled && onChange(opt.value)}
             >
               <div
                 style={{
