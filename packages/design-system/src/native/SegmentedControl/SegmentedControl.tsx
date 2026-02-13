@@ -334,7 +334,7 @@ export const SegmentedControl = Object.assign(
           fontWeight: isSelected ? typography.fontWeight.semibold : typography.fontWeight.medium,
           fontFamily: typography.fontFamily.base,
           color: isDisabled
-            ? colors.content.base.disable           // grey[90]
+            ? colors.content.base.disabled          // grey[80]
             : isSelected
               ? colors.content.brand.default        // blue - 선택된 텍스트
               : colors.content.base.secondary,      // grey[50]
@@ -346,7 +346,7 @@ export const SegmentedControl = Object.assign(
         const segment = segments[index];
         const isDisabled = disabled || segment.disabled;
 
-        if (isDisabled) return colors.content.base.disable;
+        if (isDisabled) return colors.content.base.disabled;
         if (isSelected) return colors.content.brand.default;  // blue
         return colors.content.base.secondary;
       };

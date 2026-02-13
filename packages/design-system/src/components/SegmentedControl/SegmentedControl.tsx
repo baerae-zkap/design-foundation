@@ -240,7 +240,7 @@ export const SegmentedControl = forwardRef<HTMLDivElement, SegmentedControlProps
         fontWeight: isSelected ? typography.fontWeight.semibold : typography.fontWeight.medium,
         fontFamily: typography.fontFamily.base,
         color: isDisabled
-          ? colors.content.base.disable
+          ? colors.content.base.disabled
           : isSelected
             ? colors.content.brand.default
             : colors.content.base.secondary,

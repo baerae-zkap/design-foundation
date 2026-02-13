@@ -493,7 +493,7 @@ export const colors = {
       alternative: palette.grey[70],           // hsla(214, 7%, 60%, 1)
       placeholder: palette.grey[70],           // hsla(214, 7%, 60%, 1)
       assistive: palette.grey[80],             // hsla(214, 8%, 69%, 1)
-      disable: palette.grey[90],               // hsla(216, 9%, 77%, 1)
+      disabled: palette.grey[80],              // hsla(214, 8%, 69%, 1)
       onColor: palette.static.white,           // hsla(0, 0%, 100%, 1)
     },
     brand: {
@@ -504,12 +504,15 @@ export const colors = {
     },
     warning: {
       default: palette.orange[50],             // hsla(26, 100%, 47%, 1)
+      strong: palette.orange[30],              // hsla(22, 90%, 31%, 1)
     },
     success: {
       default: palette.green[50],              // hsla(153, 78%, 37%, 1)
+      strong: palette.green[30],               // hsla(155, 82%, 24%, 1)
     },
     info: {
       default: palette.teal[50],               // hsla(180, 82%, 35%, 1)
+      strong: palette.teal[30],                // hsla(182, 86%, 23%, 1)
     },
     profit: {
       default: palette.red[50],                // hsla(2, 85%, 48%, 1) - 한국 컨벤션
@@ -558,7 +561,7 @@ export const colors = {
   },
   interaction: {
     inactive: palette.grey[70],                // hsla(214, 7%, 60%, 1)
-    disable: palette.grey[90],                 // hsla(216, 9%, 77%, 1)
+    disabled: palette.grey[90],                // hsla(216, 9%, 77%, 1)
   },
   visualization: {
     categorical: {
@@ -644,7 +647,7 @@ export const darkColors = {
       alternative: darkPalette.grey[40],
       placeholder: darkPalette.grey[60],
       assistive: darkPalette.grey[70],
-      disable: darkPalette.grey[80],
+      disabled: darkPalette.grey[80],
       onColor: darkPalette.static.white,
     },
     brand: {
@@ -709,7 +712,7 @@ export const darkColors = {
   },
   interaction: {
     inactive: darkPalette.grey[60],
-    disable: darkPalette.grey[80],
+    disabled: darkPalette.grey[80],
   },
   visualization: {
     categorical: {

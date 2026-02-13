@@ -67,13 +67,16 @@
   --content-base-alternative: var(--grey-70);
   --content-base-placeholder: var(--grey-70);
   --content-base-assistive: var(--grey-80);
-  --content-base-disable: var(--grey-90);
+  --content-base-disabled: var(--grey-80);
   --content-base-onColor: hsla(0, 0%, 100%, 1);
   --content-brand-default: var(--blue-50);
   --content-error-default: hsla(2, 85%, 48%, 1);
   --content-warning-default: hsla(26, 100%, 47%, 1);
+  --content-warning-strong: hsla(22, 90%, 31%, 1);
   --content-success-default: hsla(153, 78%, 37%, 1);
+  --content-success-strong: hsla(155, 82%, 24%, 1);
   --content-info-default: hsla(180, 82%, 35%, 1);
+  --content-info-strong: hsla(182, 86%, 23%, 1);
   --content-profit-default: hsla(2, 85%, 48%, 1);
   --content-loss-default: var(--blue-50);
   --content-disabled-default: var(--grey-80);
@@ -99,7 +102,7 @@
 
   /* Semantic - Interaction */
   --interaction-inactive: var(--grey-70);
-  --interaction-disable: var(--grey-90);
+  --interaction-disabled: var(--grey-90);
 
   /* Legacy aliases for backwards compatibility */
   --bg-primary: var(--surface-base-default);

@@ -4,7 +4,7 @@
     "name": "zkap-design-system",
     "type": "semantic-tokens",
     "created": "2025-02-03",
-    "updated": "2025-02-04",
+    "updated": "2026-02-13",
     "paletteRef": "./palette.json",
     "_naming": "Target(surface/content/border/fill) + Role(base/brand/error) + Variant(default/strong/secondary)"
   },
@@ -83,8 +83,8 @@
         "placeholder_comment": "플레이스홀더",
         "assistive": "{palette.grey.80}",
         "assistive_comment": "보조 텍스트. 비활성에 가까움",
-        "disabled": "{palette.grey.90}",
-        "disabled_comment": "비활성 텍스트",
+        "disabled": "{palette.grey.80}",
+        "disabled_comment": "[Deprecated] content.disabled.default 사용 권장",
         "onColor": "{palette.static.white}",
         "onColor_comment": "컬러 배경 위 텍스트"
       },
@@ -98,15 +98,21 @@
       },
       "warning": {
         "default": "{palette.orange.50}",
-        "default_comment": "경고 텍스트"
+        "default_comment": "경고 텍스트",
+        "strong": "{palette.orange.30}",
+        "strong_comment": "강한 경고 텍스트. 라이트 배경 본문 가독성 확보"
       },
       "success": {
         "default": "{palette.green.50}",
-        "default_comment": "성공 텍스트"
+        "default_comment": "성공 텍스트",
+        "strong": "{palette.green.30}",
+        "strong_comment": "강한 성공 텍스트. 라이트 배경 본문 가독성 확보"
       },
       "info": {
         "default": "{palette.teal.50}",
-        "default_comment": "정보 텍스트"
+        "default_comment": "정보 텍스트",
+        "strong": "{palette.teal.30}",
+        "strong_comment": "강한 정보 텍스트. 라이트 배경 본문 가독성 확보"
       },
       "profit": {
         "default": "{palette.red.50}",
@@ -118,7 +124,7 @@
       },
       "disabled": {
         "default": "{palette.grey.80}",
-        "default_comment": "비활성 텍스트"
+        "default_comment": "비활성 텍스트 (표준)"
       }
     },
 
