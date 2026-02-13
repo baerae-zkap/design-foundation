@@ -92,7 +92,8 @@ function ColorSwatch({ value, label }: { value: string; label: string }) {
         cursor: 'pointer',
         borderRadius: 'var(--radius-md)',
         transition: 'background-color 0.15s',
-        minWidth: '80px',
+        width: '80px',
+        boxSizing: 'border-box',
       }}
       title="Copy color value"
     >
@@ -111,8 +112,15 @@ function ColorSwatch({ value, label }: { value: string; label: string }) {
           fontFamily: 'var(--font-mono)',
           color: copied ? 'var(--content-brand-default)' : 'var(--content-base-placeholder)',
           textAlign: 'center',
-          wordBreak: 'break-all',
-          maxWidth: '80px',
+          width: '80px',
+          minHeight: '24px',
+          lineHeight: '12px',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          display: '-webkit-box',
+          WebkitLineClamp: 2,
+          WebkitBoxOrient: 'vertical',
+          wordBreak: 'break-word',
         }}
       >
         {copied ? 'Copied!' : label}
@@ -180,6 +188,8 @@ function SemanticColorRow({
             padding: '8px 12px',
             backgroundColor: 'var(--static-white)',
             borderRadius: 'var(--radius-md)',
+            width: '104px',
+            boxSizing: 'border-box',
           }}
         >
           <ColorSwatch value={lightValue} label={toPaletteLabel(lightSource)} />
@@ -192,6 +202,8 @@ function SemanticColorRow({
             padding: '8px 12px',
             backgroundColor: 'var(--grey-15)',
             borderRadius: 'var(--radius-md)',
+            width: '104px',
+            boxSizing: 'border-box',
           }}
         >
           <ColorSwatch value={darkValue} label={toPaletteLabel(darkSource)} />
