@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { TokenDownload } from "@/components/TokenDownload";
 import paletteJson from "../../../../public/palette.json";
-import darkPaletteJson from "../../../../public/dark-palette.json";
 
 function ColorBar({ name, value, fullName }: { name: string; value: string; fullName: string }) {
   const [copied, setCopied] = useState(false);
@@ -95,10 +94,7 @@ function isLightColor(color: string): boolean {
 }
 
 export default function PalettePage() {
-  const [mode, setMode] = useState<'light' | 'dark'>('light');
-  const activePalette = mode === 'light' ? paletteJson : darkPaletteJson;
-
-  const paletteColors = Object.entries(activePalette).filter(
+  const paletteColors = Object.entries(paletteJson).filter(
     ([name]) => name !== "static" && name !== "_meta" && name !== "opacity"
   );
 
@@ -116,52 +112,12 @@ export default function PalettePage() {
         기본 색상 팔레트입니다. 직접 사용보다는 <strong style={{ color: 'var(--content-base-strong)' }}>Semantic 토큰</strong>을 통해 참조하세요.
         <br />
         <span style={{ fontSize: '14px', color: 'var(--content-base-secondary)' }}>
-          {mode === 'light'
-            ? '숫자가 클수록 밝은 색상입니다 (99 = 거의 흰색, 5 = 거의 검정).'
-            : '다크 모드: 숫자가 클수록 어두운 색상입니다 (99 = 가장 어두운 배경, 5 = 가장 밝은 전경).'}
+          숫자가 클수록 밝은 색상입니다 (99 = 거의 흰색, 5 = 거의 검정). 테마 분기는 Semantic에서 관리합니다.
         </span>
       </p>
 
-      <div style={{
-        display: 'inline-flex',
-        borderRadius: 'var(--radius-md)',
-        border: '1px solid var(--border-base-default)',
-        overflow: 'hidden',
-        marginBottom: '16px'
-      }}>
-        <button
-          onClick={() => setMode('light')}
-          style={{
-            padding: '8px 20px',
-            fontSize: '14px',
-            fontWeight: 500,
-            border: 'none',
-            cursor: 'pointer',
-            backgroundColor: mode === 'light' ? 'var(--content-base-strong)' : 'transparent',
-            color: mode === 'light' ? 'var(--surface-base-default)' : 'var(--content-base-secondary)',
-          }}
-        >
-          Light
-        </button>
-        <button
-          onClick={() => setMode('dark')}
-          style={{
-            padding: '8px 20px',
-            fontSize: '14px',
-            fontWeight: 500,
-            border: 'none',
-            cursor: 'pointer',
-            backgroundColor: mode === 'dark' ? 'var(--content-base-strong)' : 'transparent',
-            color: mode === 'dark' ? 'var(--surface-base-default)' : 'var(--content-base-secondary)',
-          }}
-        >
-          Dark
-        </button>
-      </div>
-
       <TokenDownload files={[
         { name: 'palette.json', path: '/palette.json' },
-        { name: 'dark-palette.json', path: '/dark-palette.json' },
       ]} />
 
       {paletteColors.map(([colorName, shades]) => {
@@ -193,8 +149,8 @@ export default function PalettePage() {
       <div style={{ marginBottom: 'var(--space-8)' }}>
         <h3 className="text-sm font-semibold mb-3" style={{ color: 'var(--content-base-strong)' }}>Static</h3>
         <div className="space-y-2">
-          <ColorBar name="white" value={(activePalette as any).static?.white ?? '#ffffff'} fullName="static.white" />
-          <ColorBar name="black" value={(activePalette as any).static?.black ?? '#000000'} fullName="static.black" />
+          <ColorBar name="white" value={paletteJson.static?.white ?? '#ffffff'} fullName="static.white" />
+          <ColorBar name="black" value={paletteJson.static?.black ?? '#000000'} fullName="static.black" />
         </div>
       </div>
     </div>

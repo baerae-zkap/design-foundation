@@ -44,20 +44,46 @@
   - `npm run build` 성공
   - semantic palette ref 검사: invalid 0
 
+### 3) Palette 문서 방향 재정의 (Atomic 단일화)
+- 결론: Palette는 **테마 분리하지 않고 단일(primitive) 기준**으로 운영
+- 반영:
+  - `/colors/palette`에서 Light/Dark 탭 제거
+  - `dark-palette.json` 다운로드/표시 분기 제거
+  - 안내 문구를 “테마 분기는 Semantic에서 관리”로 변경
+  - 실험용 `/colors/palette-compare-proposal` 라우트 제거
+- 검증:
+  - `npm run build` 성공
+
 ## 현재 상태 요약
-- 색상 문서 페이지에서 Light/Dark 팔레트/시멘틱 비교는 가능
+- Palette: 단일(primitive) 뷰로 정리 완료
+- Semantic: Light/Dark 분리 비교가 핵심 역할
 - 사이트 전체 다크모드(전역 테마 스위치)는 아직 미구현
 - 다크 팔레트 v3.2는 준비됐고, 다크 시멘틱의 실제 UI 미세조정은 남아있음
 
 ## 지금 당장 할 일 (우선순위)
-1. **시멘틱 strong 실제 사용처 반영**
+1. **시멘틱 토큰 정리 본작업 시작**
+   - role/variant 체계 점검 (`surface/content/border/fill/interaction/icon/overlay`)
+2. **시멘틱 strong 실제 사용처 반영**
    - strong 토큰이 필요한 본문/핵심 라벨 컴포넌트에 선택 적용
-2. **문서 표기 정리 (HSLA 기준)**
+3. **문서 표기 정리 (HSLA 기준)**
    - 문서 내 HEX/구버전 설명 잔존 부분 정리
-3. **토큰 검증 자동화 스크립트 추가**
+4. **토큰 검증 자동화 스크립트 추가**
    - 참조 무결성 + 대비 기준(본문 4.5:1, 대형 텍스트/아이콘 3.0:1)
-4. **Next.js 사이트 품질 정리**
-   - 컴포넌트 문서 페이지의 데모/토큰 표와 실제 구현 일치 검수
+
+## 시멘틱 토큰 시작 준비 (Checklist)
+- 기준 파일 확정:
+  - `public/palette.json` (atomic source of truth)
+  - `public/semantic-tokens.json` (theme mapping source of truth)
+- 동기화 대상:
+  - `packages/design-system/src/tokens/colors.ts`
+  - `src/app/globals.css`
+- 시작 전 확인:
+  - 네이밍 규칙 준수 (`disabled`, `strong/default`)
+  - semantic -> palette 참조 무결성 검사
+  - 주요 문서 페이지 토큰 표기(HSLA 우선) 확인
+- 시작 후 검증:
+  - `npm run build`
+  - semantic reference invalid 0 유지
 
 ## 보류/후속
 - 전역 다크모드 CSS 변수/테마 스위치 (`data-theme` 또는 `prefers-color-scheme`) 설계
