@@ -4,7 +4,7 @@
     "name": "zkap-design-system",
     "type": "palette",
     "created": "2025-02-03",
-    "updated": "2025-02-04",
+    "updated": "2026-02-13",
     "format": "hsla",
     "_usage": "Alpha 값만 변경하여 opacity 조절 가능. 예: hsla(221, 43%, 11%, 0.5)",
     "_scale": "숫자가 클수록 밝음 (99=거의 흰색, 5=거의 검정). 원티드 스타일 넘버링."
@@ -206,6 +206,31 @@
   "static": {
     "white": "hsla(0, 0%, 100%, 1)",
     "black": "hsla(0, 0%, 0%, 1)"
+  },
+
+  "brandExternal": {
+    "_description": "외부 브랜드 원시 색상",
+    "kakao": "#FEE500",
+    "kakaoPressed": "#D4BF00",
+    "googlePressed": "#f1f3f4"
+  },
+
+  "alphaComposite": {
+    "_description": "알파 합성 원시 색상 (fill/overlay)",
+    "brandSelectionLight": "hsla(216, 100%, 47%, 0.15)",
+    "brandSelectionDark": "hsla(220, 100%, 57%, 0.20)",
+    "fillLightNormal": "hsla(216, 9%, 45%, 0.22)",
+    "fillLightStrong": "hsla(216, 9%, 45%, 0.28)",
+    "fillLightAlternative": "hsla(216, 9%, 45%, 0.12)",
+    "fillDarkNormal": "hsla(216, 9%, 77%, 0.22)",
+    "fillDarkStrong": "hsla(216, 9%, 77%, 0.28)",
+    "fillDarkAlternative": "hsla(216, 9%, 77%, 0.12)",
+    "overlayLightTransparent": "hsla(222, 33%, 11%, 0)",
+    "overlayLightDim": "hsla(222, 33%, 11%, 0.40)",
+    "overlayLightHeavy": "hsla(222, 33%, 11%, 0.85)",
+    "overlayDarkTransparent": "hsla(222, 33%, 11%, 0)",
+    "overlayDarkDim": "hsla(222, 33%, 11%, 0.72)",
+    "overlayDarkHeavy": "hsla(222, 33%, 11%, 0.93)"
   },
 
   "opacity": {

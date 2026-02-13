@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { TokenDownload } from "@/components/TokenDownload";
 import paletteJson from "../../../../public/palette.json";
@@ -308,6 +309,52 @@ export default function SemanticPage() {
           각 색상을 클릭하면 값이 복사됩니다.
         </span>
       </p>
+      <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
+        <Link
+          href="/colors/palette"
+          style={{
+            padding: '6px 12px',
+            borderRadius: '9999px',
+            backgroundColor: 'var(--surface-base-default)',
+            color: 'var(--content-base-secondary)',
+            border: '1px solid var(--border-base-default)',
+            fontSize: '12px',
+            fontWeight: 500,
+            textDecoration: 'none',
+          }}
+        >
+          Palette
+        </Link>
+        <Link
+          href="/colors/semantic"
+          style={{
+            padding: '6px 12px',
+            borderRadius: '9999px',
+            backgroundColor: 'var(--surface-base-container)',
+            color: 'var(--content-base-strong)',
+            fontSize: '12px',
+            fontWeight: 600,
+            textDecoration: 'none',
+          }}
+        >
+          Semantic
+        </Link>
+        <Link
+          href="/colors/effects"
+          style={{
+            padding: '6px 12px',
+            borderRadius: '9999px',
+            backgroundColor: 'var(--surface-base-default)',
+            color: 'var(--content-base-secondary)',
+            border: '1px solid var(--border-base-default)',
+            fontSize: '12px',
+            fontWeight: 500,
+            textDecoration: 'none',
+          }}
+        >
+          Effects
+        </Link>
+      </div>
       <TokenDownload files={[
         { name: 'semantic-tokens.json', path: '/semantic-tokens.json' },
       ]} />

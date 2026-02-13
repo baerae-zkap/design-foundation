@@ -1,0 +1,75 @@
+{
+  "_meta": {
+    "version": "3.0",
+    "name": "zkap-design-system",
+    "type": "effects-tokens",
+    "created": "2026-02-13",
+    "updated": "2026-02-13",
+    "paletteRef": "./palette.json",
+    "_naming": "Effects(gradient/alpha) + Category(brand/surface/overlay) + Variant(primary/subtle/scrim)"
+  },
+  "light": {
+    "_description": "라이트 테마 이펙트 토큰",
+    "alpha": {
+      "brand": {
+        "selection": "{palette.alphaComposite.brandSelectionLight}"
+      },
+      "fill": {
+        "normal": "{palette.alphaComposite.fillLightNormal}",
+        "strong": "{palette.alphaComposite.fillLightStrong}",
+        "alternative": "{palette.alphaComposite.fillLightAlternative}"
+      },
+      "overlay": {
+        "transparent": "{palette.alphaComposite.overlayLightTransparent}",
+        "dim": "{palette.alphaComposite.overlayLightDim}",
+        "heavy": "{palette.alphaComposite.overlayLightHeavy}"
+      }
+    },
+    "gradient": {
+      "brand": {
+        "primary": "linear-gradient(135deg, {palette.blue.65} 0%, {palette.blue.45} 100%)",
+        "subtle": "linear-gradient(180deg, {palette.blue.99} 0%, {palette.blue.90} 100%)"
+      },
+      "surface": {
+        "elevated": "linear-gradient(180deg, {palette.static.white} 0%, {palette.grey.99} 100%)",
+        "container": "linear-gradient(180deg, {palette.grey.99} 0%, {palette.grey.97} 100%)"
+      },
+      "overlay": {
+        "topScrim": "linear-gradient(0deg, {palette.alphaComposite.overlayLightHeavy} 0%, {palette.alphaComposite.overlayLightTransparent} 100%)",
+        "bottomScrim": "linear-gradient(180deg, {palette.alphaComposite.overlayLightTransparent} 0%, {palette.alphaComposite.overlayLightHeavy} 100%)"
+      }
+    }
+  },
+  "dark": {
+    "_description": "다크 테마 이펙트 토큰",
+    "alpha": {
+      "brand": {
+        "selection": "{palette.alphaComposite.brandSelectionDark}"
+      },
+      "fill": {
+        "normal": "{palette.alphaComposite.fillDarkNormal}",
+        "strong": "{palette.alphaComposite.fillDarkStrong}",
+        "alternative": "{palette.alphaComposite.fillDarkAlternative}"
+      },
+      "overlay": {
+        "transparent": "{palette.alphaComposite.overlayDarkTransparent}",
+        "dim": "{palette.alphaComposite.overlayDarkDim}",
+        "heavy": "{palette.alphaComposite.overlayDarkHeavy}"
+      }
+    },
+    "gradient": {
+      "brand": {
+        "primary": "linear-gradient(135deg, {palette.blue.70} 0%, {palette.blue.50} 100%)",
+        "subtle": "linear-gradient(180deg, {palette.blue.30} 0%, {palette.blue.20} 100%)"
+      },
+      "surface": {
+        "elevated": "linear-gradient(180deg, {palette.grey.17} 0%, {palette.grey.20} 100%)",
+        "container": "linear-gradient(180deg, {palette.grey.20} 0%, {palette.grey.23} 100%)"
+      },
+      "overlay": {
+        "topScrim": "linear-gradient(0deg, {palette.alphaComposite.overlayDarkHeavy} 0%, {palette.alphaComposite.overlayDarkTransparent} 100%)",
+        "bottomScrim": "linear-gradient(180deg, {palette.alphaComposite.overlayDarkTransparent} 0%, {palette.alphaComposite.overlayDarkHeavy} 100%)"
+      }
+    }
+  }
+}

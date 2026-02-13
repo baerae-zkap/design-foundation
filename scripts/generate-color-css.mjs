@@ -1,4 +1,4 @@
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -7,13 +7,14 @@ const rootDir = resolve(__dirname, '..');
 
 const palettePath = resolve(rootDir, 'public/palette.json');
 const semanticPath = resolve(rootDir, 'public/semantic-tokens.json');
+const effectsPath = resolve(rootDir, 'public/effects-tokens.json');
 const outputPath = resolve(rootDir, 'src/app/generated-color-tokens.css');
 
 const palette = JSON.parse(readFileSync(palettePath, 'utf8'));
 const semantic = JSON.parse(readFileSync(semanticPath, 'utf8'));
+const effects = existsSync(effectsPath) ? JSON.parse(readFileSync(effectsPath, 'utf8')) : {};
 
 const isSkippableKey = (key) => key.startsWith('_') || key.endsWith('_comment');
-
 const toPaletteVar = (group, token) => `--${group}-${token}`;
 
 const paletteTokenSet = new Set();
@@ -35,26 +36,22 @@ for (const [group, tokens] of Object.entries(palette)) {
   }
 }
 
-const resolvePaletteReference = (value, tokenPath) => {
+const resolvePaletteReferences = (value, tokenPath) => {
   if (typeof value !== 'string') {
     return String(value);
   }
 
-  const match = value.match(/^\{palette\.([^.}]+)\.([^.}]+)\}$/);
-  if (!match) {
-    return value;
-  }
+  return value.replace(/\{palette\.([^.}]+)\.([^.}]+)\}/g, (_, group, token) => {
+    const paletteKey = `${group}.${token}`;
 
-  const [, group, token] = match;
-  const paletteKey = `${group}.${token}`;
+    if (!paletteTokenSet.has(paletteKey)) {
+      throw new Error(
+        `Invalid token reference at "${tokenPath}": {palette.${paletteKey}} is missing in palette.json`,
+      );
+    }
 
-  if (!paletteTokenSet.has(paletteKey)) {
-    throw new Error(
-      `Invalid semantic token reference at "${tokenPath}": {palette.${paletteKey}} is missing in palette.json`,
-    );
-  }
-
-  return `var(${toPaletteVar(group, token)})`;
+    return `var(${toPaletteVar(group, token)})`;
+  });
 };
 
 const buildPaletteLines = (paletteTokens) => {
@@ -91,7 +88,7 @@ const buildPaletteLines = (paletteTokens) => {
   return lines;
 };
 
-const flattenSemanticTokens = (tokens, path = []) => {
+const flattenTokenValues = (tokens, path = []) => {
   const pairs = [];
 
   for (const [key, value] of Object.entries(tokens)) {
@@ -102,35 +99,58 @@ const flattenSemanticTokens = (tokens, path = []) => {
     const nextPath = [...path, key];
 
     if (value && typeof value === 'object' && !Array.isArray(value)) {
-      pairs.push(...flattenSemanticTokens(value, nextPath));
+      pairs.push(...flattenTokenValues(value, nextPath));
       continue;
     }
 
     if (typeof value === 'string' || typeof value === 'number') {
       const tokenPath = nextPath.join('.');
-      pairs.push([`--${nextPath.join('-')}`, resolvePaletteReference(value, tokenPath)]);
+      pairs.push([nextPath, resolvePaletteReferences(value, tokenPath)]);
     }
   }
 
   return pairs;
 };
 
-const buildSemanticLines = (themeTokens) =>
-  flattenSemanticTokens(themeTokens).map(([name, value]) => `  ${name}: ${value};`);
+const buildTokenLines = (themeTokens, options = {}) => {
+  const { prefix = '' } = options;
+  return flattenTokenValues(themeTokens).map(([path, value]) => {
+    const variableName = `--${prefix}${path.join('-')}`;
+    return `  ${variableName}: ${value};`;
+  });
+};
 
-const css = [
-  '/* AUTO-GENERATED FILE. DO NOT EDIT DIRECTLY. */',
-  '/* Source: public/palette.json + public/semantic-tokens.json */',
-  ':root {',
+const lightSemanticLines = buildTokenLines(semantic.light ?? {});
+const darkSemanticLines = buildTokenLines(semantic.dark ?? {});
+const lightEffectsLines = buildTokenLines(effects.light ?? {}, { prefix: 'effect-' });
+const darkEffectsLines = buildTokenLines(effects.dark ?? {}, { prefix: 'effect-' });
+
+const rootSections = [
   ...buildPaletteLines(palette),
   '',
   '  /* Semantic tokens (light) */',
-  ...buildSemanticLines(semantic.light ?? {}),
+  ...lightSemanticLines,
+];
+
+if (lightEffectsLines.length > 0) {
+  rootSections.push('', '  /* Effects tokens (light) */', ...lightEffectsLines);
+}
+
+const darkSections = ['  /* Semantic tokens (dark overrides) */', ...darkSemanticLines];
+
+if (darkEffectsLines.length > 0) {
+  darkSections.push('', '  /* Effects tokens (dark overrides) */', ...darkEffectsLines);
+}
+
+const css = [
+  '/* AUTO-GENERATED FILE. DO NOT EDIT DIRECTLY. */',
+  '/* Source: public/palette.json + public/semantic-tokens.json + public/effects-tokens.json */',
+  ':root {',
+  ...rootSections,
   '}',
   '',
   '[data-theme="dark"] {',
-  '  /* Semantic tokens (dark overrides) */',
-  ...buildSemanticLines(semantic.dark ?? {}),
+  ...darkSections,
   '}',
   '',
 ].join('\n');

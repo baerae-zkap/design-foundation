@@ -23,18 +23,14 @@ export function PlatformTabs({ children, defaultPlatform = "design" }: PlatformT
 
   const handleTabChange = (platform: Platform) => {
     setActivePlatform(platform);
-    // Dispatch custom event after a small delay to allow DOM to update
-    setTimeout(() => {
-      window.dispatchEvent(new CustomEvent(PLATFORM_TAB_CHANGE_EVENT, { detail: { platform } }));
-    }, 50);
   };
 
-  // Dispatch initial event on mount
+  // Keep external listeners in sync with current tab.
   useEffect(() => {
     setTimeout(() => {
       window.dispatchEvent(new CustomEvent(PLATFORM_TAB_CHANGE_EVENT, { detail: { platform: activePlatform } }));
-    }, 100);
-  }, []);
+    }, 50);
+  }, [activePlatform]);
 
   return (
     <div>
@@ -122,7 +118,7 @@ export function highlightCode(code: string): React.ReactNode[] {
       // Comments
       const commentMatch = remaining.match(/^(\/\/.*)/);
       if (commentMatch) {
-        parts.push(<span key={key++} style={{ color: '#6b7280' }}>{commentMatch[1]}</span>);
+        parts.push(<span key={key++} style={{ color: 'var(--docs-syntax-comment)' }}>{commentMatch[1]}</span>);
         remaining = remaining.slice(commentMatch[1].length);
         continue;
       }
@@ -130,7 +126,7 @@ export function highlightCode(code: string): React.ReactNode[] {
       // Strings (double quotes)
       const stringMatch = remaining.match(/^("[^"]*")/);
       if (stringMatch) {
-        parts.push(<span key={key++} style={{ color: '#a5d6ff' }}>{stringMatch[1]}</span>);
+        parts.push(<span key={key++} style={{ color: 'var(--docs-syntax-string)' }}>{stringMatch[1]}</span>);
         remaining = remaining.slice(stringMatch[1].length);
         continue;
       }
@@ -138,7 +134,7 @@ export function highlightCode(code: string): React.ReactNode[] {
       // Strings (single quotes)
       const singleStringMatch = remaining.match(/^('[^']*')/);
       if (singleStringMatch) {
-        parts.push(<span key={key++} style={{ color: '#a5d6ff' }}>{singleStringMatch[1]}</span>);
+        parts.push(<span key={key++} style={{ color: 'var(--docs-syntax-string)' }}>{singleStringMatch[1]}</span>);
         remaining = remaining.slice(singleStringMatch[1].length);
         continue;
       }
@@ -146,7 +142,7 @@ export function highlightCode(code: string): React.ReactNode[] {
       // Template literals
       const templateMatch = remaining.match(/^(`[^`]*`)/);
       if (templateMatch) {
-        parts.push(<span key={key++} style={{ color: '#a5d6ff' }}>{templateMatch[1]}</span>);
+        parts.push(<span key={key++} style={{ color: 'var(--docs-syntax-string)' }}>{templateMatch[1]}</span>);
         remaining = remaining.slice(templateMatch[1].length);
         continue;
       }
@@ -154,7 +150,7 @@ export function highlightCode(code: string): React.ReactNode[] {
       // JSX closing tags </Component>
       const closingTagMatch = remaining.match(/^(<\/[A-Z][a-zA-Z]*>)/);
       if (closingTagMatch) {
-        parts.push(<span key={key++} style={{ color: '#7dd3fc' }}>{closingTagMatch[1]}</span>);
+        parts.push(<span key={key++} style={{ color: 'var(--docs-syntax-tag)' }}>{closingTagMatch[1]}</span>);
         remaining = remaining.slice(closingTagMatch[1].length);
         continue;
       }
@@ -162,7 +158,7 @@ export function highlightCode(code: string): React.ReactNode[] {
       // JSX self-closing tags <Component ... />
       const selfClosingMatch = remaining.match(/^(<[A-Z][a-zA-Z]*)/);
       if (selfClosingMatch) {
-        parts.push(<span key={key++} style={{ color: '#7dd3fc' }}>{selfClosingMatch[1]}</span>);
+        parts.push(<span key={key++} style={{ color: 'var(--docs-syntax-tag)' }}>{selfClosingMatch[1]}</span>);
         remaining = remaining.slice(selfClosingMatch[1].length);
         continue;
       }
@@ -170,7 +166,7 @@ export function highlightCode(code: string): React.ReactNode[] {
       // JSX closing bracket />
       const closeBracketMatch = remaining.match(/^(\/?>)/);
       if (closeBracketMatch) {
-        parts.push(<span key={key++} style={{ color: '#7dd3fc' }}>{closeBracketMatch[1]}</span>);
+        parts.push(<span key={key++} style={{ color: 'var(--docs-syntax-tag)' }}>{closeBracketMatch[1]}</span>);
         remaining = remaining.slice(closeBracketMatch[1].length);
         continue;
       }
@@ -178,7 +174,7 @@ export function highlightCode(code: string): React.ReactNode[] {
       // Keywords
       const keywordMatch = remaining.match(/^(import|export|from|const|let|var|function|return|if|else|true|false|null|undefined)(?![a-zA-Z])/);
       if (keywordMatch) {
-        parts.push(<span key={key++} style={{ color: '#f472b6' }}>{keywordMatch[1]}</span>);
+        parts.push(<span key={key++} style={{ color: 'var(--docs-syntax-keyword)' }}>{keywordMatch[1]}</span>);
         remaining = remaining.slice(keywordMatch[1].length);
         continue;
       }
@@ -186,7 +182,7 @@ export function highlightCode(code: string): React.ReactNode[] {
       // Props/attributes (word followed by =)
       const propMatch = remaining.match(/^([a-zA-Z][a-zA-Z0-9]*)(?==)/);
       if (propMatch) {
-        parts.push(<span key={key++} style={{ color: '#c4b5fd' }}>{propMatch[1]}</span>);
+        parts.push(<span key={key++} style={{ color: 'var(--docs-syntax-prop)' }}>{propMatch[1]}</span>);
         remaining = remaining.slice(propMatch[1].length);
         continue;
       }
@@ -194,7 +190,7 @@ export function highlightCode(code: string): React.ReactNode[] {
       // Arrow functions
       const arrowMatch = remaining.match(/^(=>)/);
       if (arrowMatch) {
-        parts.push(<span key={key++} style={{ color: '#f472b6' }}>{arrowMatch[1]}</span>);
+        parts.push(<span key={key++} style={{ color: 'var(--docs-syntax-keyword)' }}>{arrowMatch[1]}</span>);
         remaining = remaining.slice(arrowMatch[1].length);
         continue;
       }
@@ -235,7 +231,7 @@ export function CodeBlock({ code, title, sourceUrl, language }: CodeBlockProps) 
         borderRadius: 12,
         border: "1px solid var(--divider)",
         overflow: "hidden",
-        backgroundColor: "#18181b",
+        backgroundColor: "var(--docs-code-surface)",
       }}
     >
       {/* Header */}
@@ -245,9 +241,9 @@ export function CodeBlock({ code, title, sourceUrl, language }: CodeBlockProps) 
             padding: "10px 16px",
             fontSize: 13,
             fontWeight: 500,
-            color: "#a1a1aa",
-            borderBottom: "1px solid #27272a",
-            backgroundColor: "#18181b",
+            color: "var(--docs-code-muted)",
+            borderBottom: "1px solid var(--docs-code-border)",
+            backgroundColor: "var(--docs-code-surface)",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
@@ -264,12 +260,12 @@ export function CodeBlock({ code, title, sourceUrl, language }: CodeBlockProps) 
                 alignItems: "center",
                 gap: 4,
                 fontSize: 12,
-                color: "#71717a",
+                color: "var(--docs-code-muted)",
                 textDecoration: "none",
                 transition: "color 0.15s ease",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "#a1a1aa")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "#71717a")}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--docs-code-muted-strong)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--docs-code-muted)")}
             >
               <GithubIcon />
               View Source
@@ -288,9 +284,9 @@ export function CodeBlock({ code, title, sourceUrl, language }: CodeBlockProps) 
             maxHeight: maxHeight,
             fontSize: 13,
             lineHeight: 1.7,
-            color: "#e4e4e7",
+            color: "var(--docs-code-text)",
             fontFamily: "'SF Mono', 'Fira Code', 'Consolas', monospace",
-            backgroundColor: "#18181b",
+            backgroundColor: "var(--docs-code-surface)",
           }}
         >
           <code>{highlightedCode}</code>
@@ -305,7 +301,7 @@ export function CodeBlock({ code, title, sourceUrl, language }: CodeBlockProps) 
               left: 0,
               right: 0,
               height: 80,
-              background: "linear-gradient(transparent, #18181b)",
+              background: "var(--effect-gradient-overlay-bottomScrim)",
               pointerEvents: "none",
             }}
           />
@@ -320,8 +316,8 @@ export function CodeBlock({ code, title, sourceUrl, language }: CodeBlockProps) 
           justifyContent: "flex-end",
           gap: 8,
           padding: "8px 12px",
-          borderTop: "1px solid #27272a",
-          backgroundColor: "#18181b",
+          borderTop: "1px solid var(--docs-code-border)",
+          backgroundColor: "var(--docs-code-surface)",
         }}
       >
         {shouldShowExpand && (
@@ -403,8 +399,8 @@ export function ExpoSnack({
                 fontWeight: 500,
                 padding: "2px 8px",
                 borderRadius: 10,
-                backgroundColor: "#dcfce7",
-                color: "#166534",
+                backgroundColor: "var(--docs-interactive-badge-bg)",
+                color: "var(--docs-interactive-badge-text)",
               }}
             >
               Interactive
@@ -441,7 +437,7 @@ export function ExpoSnack({
       </div>
 
       {/* Snack Embed */}
-      <div style={{ position: "relative", backgroundColor: "#1a1a1a" }}>
+      <div style={{ position: "relative", backgroundColor: "var(--docs-code-surface-elevated)" }}>
         {isLoading && (
           <div
             style={{
@@ -451,12 +447,12 @@ export function ExpoSnack({
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              backgroundColor: "#1a1a1a",
+              backgroundColor: "var(--docs-code-surface-elevated)",
               zIndex: 1,
             }}
           >
             <LoadingSpinner />
-            <p style={{ fontSize: 13, color: "#71717a", marginTop: 12 }}>Loading Expo Snack...</p>
+            <p style={{ fontSize: 13, color: "var(--docs-code-muted)", marginTop: 12 }}>Loading Expo Snack...</p>
           </div>
         )}
         {hasError ? (
@@ -467,7 +463,7 @@ export function ExpoSnack({
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              backgroundColor: "#fafafa",
+              backgroundColor: "var(--surface-base-container)",
             }}
           >
             <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 12 }}>
@@ -481,7 +477,7 @@ export function ExpoSnack({
                 padding: "8px 16px",
                 fontSize: 13,
                 fontWeight: 500,
-                color: "white",
+                color: "var(--content-base-onColor)",
                 backgroundColor: "var(--brand-primary)",
                 borderRadius: 6,
                 textDecoration: "none",
@@ -580,8 +576,8 @@ export function ExpoSnackInline({
             fontWeight: 500,
             padding: "2px 6px",
             borderRadius: 8,
-            backgroundColor: "#dbeafe",
-            color: "#1e40af",
+            backgroundColor: "var(--docs-live-badge-bg)",
+            color: "var(--docs-live-badge-text)",
           }}
         >
           Live
@@ -617,9 +613,9 @@ function ActionButton({ onClick, children }: { onClick: () => void; children: Re
         padding: "6px 12px",
         fontSize: 12,
         fontWeight: 500,
-        color: isHovered ? "#e4e4e7" : "#a1a1aa",
-        backgroundColor: isHovered ? "#27272a" : "transparent",
-        border: "1px solid #3f3f46",
+        color: isHovered ? "var(--docs-code-text)" : "var(--docs-code-muted)",
+        backgroundColor: isHovered ? "var(--docs-code-hover-bg)" : "transparent",
+        border: "1px solid var(--docs-code-border)",
         borderRadius: 6,
         cursor: "pointer",
         transition: "all 0.15s ease",
@@ -649,7 +645,7 @@ export function PreviewBox({ children, padding = 40 }: PreviewBoxProps) {
       <div
         style={{
           padding: padding,
-          backgroundColor: "#fafafa",
+          backgroundColor: "var(--surface-base-container)",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -718,7 +714,7 @@ function LoadingSpinner() {
       height="24"
       viewBox="0 0 24 24"
       fill="none"
-      stroke="#71717a"
+      stroke="var(--docs-code-muted)"
       strokeWidth="2"
       style={{ animation: "spin 1s linear infinite" }}
     >

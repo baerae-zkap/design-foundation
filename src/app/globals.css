@@ -5,23 +5,23 @@
   /* Docs UI - Code/Playground */
   --docs-code-surface: var(--grey-15);
   --docs-code-surface-elevated: var(--grey-10);
-  --docs-code-border: hsla(216, 9%, 77%, 0.2);
+  --docs-code-border: var(--effect-alpha-fill-normal);
   --docs-code-text: var(--grey-97);
   --docs-code-muted: var(--grey-80);
   --docs-code-muted-strong: var(--grey-90);
   --docs-code-active-bg: var(--grey-30);
   --docs-code-active-text: var(--grey-99);
   --docs-code-hover-bg: var(--grey-25);
-  --docs-code-success: hsla(153, 78%, 37%, 1);
+  --docs-code-success: var(--content-success-default);
   --docs-syntax-comment: var(--grey-70);
-  --docs-syntax-string: hsla(222, 100%, 87%, 1);
-  --docs-syntax-tag: hsla(200, 85%, 70%, 1);
-  --docs-syntax-keyword: hsla(328, 80%, 70%, 1);
-  --docs-syntax-prop: hsla(269, 70%, 75%, 1);
-  --docs-live-badge-bg: hsla(222, 100%, 94%, 1);
-  --docs-live-badge-text: hsla(220, 100%, 39%, 1);
-  --docs-interactive-badge-bg: hsla(147, 68%, 91%, 1);
-  --docs-interactive-badge-text: hsla(154, 80%, 30%, 1);
+  --docs-syntax-string: var(--blue-90);
+  --docs-syntax-tag: var(--cyan-70);
+  --docs-syntax-keyword: var(--pink-70);
+  --docs-syntax-prop: var(--purple-80);
+  --docs-live-badge-bg: var(--surface-brand-secondary);
+  --docs-live-badge-text: var(--content-brand-default);
+  --docs-interactive-badge-bg: var(--surface-success-default);
+  --docs-interactive-badge-text: var(--content-success-strong);
 
   /* Legacy aliases for backwards compatibility */
   --bg-primary: var(--surface-base-default);
@@ -99,7 +99,7 @@ body {
 
 /* Selection */
 ::selection {
-  background-color: rgba(0, 79, 255, 0.15);
+  background-color: var(--effect-alpha-brand-selection);
 }
 
 /* Code blocks - using tokens */

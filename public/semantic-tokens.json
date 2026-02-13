@@ -73,15 +73,15 @@
         "default_comment": "비활성 배경"
       },
       "kakao": {
-        "default": "#FEE500",
+        "default": "{palette.brandExternal.kakao}",
         "default_comment": "카카오 브랜드 배경",
-        "defaultPressed": "#D4BF00",
+        "defaultPressed": "{palette.brandExternal.kakaoPressed}",
         "defaultPressed_comment": "카카오 브랜드 배경 눌림 상태"
       },
       "google": {
         "default": "{palette.static.white}",
         "default_comment": "구글 브랜드 배경",
-        "defaultPressed": "#f1f3f4",
+        "defaultPressed": "{palette.brandExternal.googlePressed}",
         "defaultPressed_comment": "구글 브랜드 배경 눌림 상태"
       }
     },
@@ -197,11 +197,11 @@
 
     "fill": {
       "_description": "컴포넌트 채움 (버튼, 칩 등) - opacity 활용",
-      "normal": "hsla(216, 9%, 45%, 0.22)",
+      "normal": "{palette.alphaComposite.fillLightNormal}",
       "normal_comment": "기본 채움 (grey.50 + 22% opacity)",
-      "strong": "hsla(216, 9%, 45%, 0.28)",
+      "strong": "{palette.alphaComposite.fillLightStrong}",
       "strong_comment": "강한 채움 (grey.50 + 28% opacity)",
-      "alternative": "hsla(216, 9%, 45%, 0.12)",
+      "alternative": "{palette.alphaComposite.fillLightAlternative}",
       "alternative_comment": "약한 채움 (grey.50 + 12% opacity)"
     },
 
@@ -249,9 +249,9 @@
 
     "overlay": {
       "_description": "오버레이/딤 배경",
-      "dim": "hsla(222, 33%, 11%, 0.40)",
+      "dim": "{palette.alphaComposite.overlayLightDim}",
       "dim_comment": "기본 딤 배경 (grey.15 + 40% alpha)",
-      "heavy": "hsla(222, 33%, 11%, 0.85)",
+      "heavy": "{palette.alphaComposite.overlayLightHeavy}",
       "heavy_comment": "강한 딤 배경 (grey.15 + 85% alpha)"
     }
   },
@@ -320,9 +320,9 @@
         "default_comment": "비활성 배경"
       },
       "kakao": {
-        "default": "#FEE500",
+        "default": "{palette.brandExternal.kakao}",
         "default_comment": "카카오 브랜드 배경",
-        "defaultPressed": "#D4BF00",
+        "defaultPressed": "{palette.brandExternal.kakaoPressed}",
         "defaultPressed_comment": "카카오 브랜드 배경 눌림 상태"
       },
       "google": {
@@ -444,11 +444,11 @@
 
     "fill": {
       "_description": "컴포넌트 채움 - 다크모드",
-      "normal": "hsla(216, 9%, 77%, 0.22)",
+      "normal": "{palette.alphaComposite.fillDarkNormal}",
       "normal_comment": "기본 채움 (grey.90 + 22% opacity)",
-      "strong": "hsla(216, 9%, 77%, 0.28)",
+      "strong": "{palette.alphaComposite.fillDarkStrong}",
       "strong_comment": "강한 채움 (grey.90 + 28% opacity)",
-      "alternative": "hsla(216, 9%, 77%, 0.12)",
+      "alternative": "{palette.alphaComposite.fillDarkAlternative}",
       "alternative_comment": "약한 채움 (grey.90 + 12% opacity)"
     },
 
@@ -496,9 +496,9 @@
 
     "overlay": {
       "_description": "오버레이/딤 배경 - 다크모드",
-      "dim": "hsla(222, 33%, 11%, 0.72)",
+      "dim": "{palette.alphaComposite.overlayDarkDim}",
       "dim_comment": "기본 딤 배경 (grey.15 + 72% alpha)",
-      "heavy": "hsla(222, 33%, 11%, 0.93)",
+      "heavy": "{palette.alphaComposite.overlayDarkHeavy}",
       "heavy_comment": "강한 딤 배경 (grey.15 + 93% alpha)"
     }
   }

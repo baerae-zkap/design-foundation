@@ -13,6 +13,7 @@ const foundationsNav = [
   { title: "Overview", href: "/foundations" },
   { title: "Color Palette", href: "/colors/palette" },
   { title: "Color Semantic", href: "/colors/semantic" },
+  { title: "Color Effects", href: "/colors/effects" },
   { title: "Typography", href: "/typography" },
   { title: "Spacing", href: "/spacing" },
   { title: "Radius", href: "/radius" },
