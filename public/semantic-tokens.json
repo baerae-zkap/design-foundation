@@ -44,7 +44,11 @@
         "default": "{palette.red.95}",
         "default_comment": "에러 배경",
         "defaultPressed": "{palette.red.90}",
-        "defaultPressed_comment": "에러 배경 눌림 상태"
+        "defaultPressed_comment": "에러 배경 눌림 상태",
+        "solid": "{palette.red.50}",
+        "solid_comment": "에러 solid 배경 (filled 액션)",
+        "solidPressed": "{palette.red.40}",
+        "solidPressed_comment": "에러 solid 배경 눌림 상태"
       },
       "warning": {
         "default": "{palette.orange.95}",
@@ -54,7 +58,11 @@
         "default": "{palette.green.95}",
         "default_comment": "성공 배경",
         "defaultPressed": "{palette.green.90}",
-        "defaultPressed_comment": "성공 배경 눌림 상태"
+        "defaultPressed_comment": "성공 배경 눌림 상태",
+        "solid": "{palette.green.50}",
+        "solid_comment": "성공 solid 배경 (filled 액션)",
+        "solidPressed": "{palette.green.40}",
+        "solidPressed_comment": "성공 solid 배경 눌림 상태"
       },
       "info": {
         "default": "{palette.grey.97}",
@@ -63,6 +71,18 @@
       "disabled": {
         "default": "{palette.grey.95}",
         "default_comment": "비활성 배경"
+      },
+      "kakao": {
+        "default": "#FEE500",
+        "default_comment": "카카오 브랜드 배경",
+        "defaultPressed": "#D4BF00",
+        "defaultPressed_comment": "카카오 브랜드 배경 눌림 상태"
+      },
+      "google": {
+        "default": "{palette.static.white}",
+        "default_comment": "구글 브랜드 배경",
+        "defaultPressed": "#f1f3f4",
+        "defaultPressed_comment": "구글 브랜드 배경 눌림 상태"
       }
     },
 
@@ -271,7 +291,11 @@
         "default": "{palette.red.20}",
         "default_comment": "에러 배경",
         "defaultPressed": "{palette.red.30}",
-        "defaultPressed_comment": "에러 배경 눌림 상태"
+        "defaultPressed_comment": "에러 배경 눌림 상태",
+        "solid": "{palette.red.60}",
+        "solid_comment": "에러 solid 배경 (filled 액션)",
+        "solidPressed": "{palette.red.70}",
+        "solidPressed_comment": "에러 solid 배경 눌림 상태"
       },
       "warning": {
         "default": "{palette.orange.20}",
@@ -281,7 +305,11 @@
         "default": "{palette.green.20}",
         "default_comment": "성공 배경",
         "defaultPressed": "{palette.green.30}",
-        "defaultPressed_comment": "성공 배경 눌림 상태"
+        "defaultPressed_comment": "성공 배경 눌림 상태",
+        "solid": "{palette.green.60}",
+        "solid_comment": "성공 solid 배경 (filled 액션)",
+        "solidPressed": "{palette.green.70}",
+        "solidPressed_comment": "성공 solid 배경 눌림 상태"
       },
       "info": {
         "default": "{palette.grey.20}",
@@ -290,6 +318,18 @@
       "disabled": {
         "default": "{palette.grey.22}",
         "default_comment": "비활성 배경"
+      },
+      "kakao": {
+        "default": "#FEE500",
+        "default_comment": "카카오 브랜드 배경",
+        "defaultPressed": "#D4BF00",
+        "defaultPressed_comment": "카카오 브랜드 배경 눌림 상태"
+      },
+      "google": {
+        "default": "{palette.grey.17}",
+        "default_comment": "구글 브랜드 배경",
+        "defaultPressed": "{palette.grey.20}",
+        "defaultPressed_comment": "구글 브랜드 배경 눌림 상태"
       }
     },
 

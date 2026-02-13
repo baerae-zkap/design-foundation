@@ -1,108 +1,27 @@
 @import "tailwindcss";
+@import "./generated-color-tokens.css";
 
-/* ZKAP Design System Tokens v3.0 - HSLA format */
-/* 숫자가 클수록 밝음 (99=거의 흰색, 5=거의 검정) */
 :root {
-  /* Grey (coolNeutral - 블루 틴트 그레이) */
-  --grey-99: hsla(220, 14%, 97%, 1);
-  --grey-98: hsla(220, 12%, 96%, 1);
-  --grey-97: hsla(218, 11%, 92%, 1);
-  --grey-96: hsla(216, 10%, 89%, 1);
-  --grey-95: hsla(216, 10%, 86%, 1);
-  --grey-90: hsla(216, 9%, 77%, 1);
-  --grey-80: hsla(214, 8%, 69%, 1);
-  --grey-70: hsla(214, 7%, 60%, 1);
-  --grey-60: hsla(215, 8%, 54%, 1);
-  --grey-50: hsla(216, 9%, 45%, 1);
-  --grey-40: hsla(217, 11%, 36%, 1);
-  --grey-30: hsla(218, 14%, 28%, 1);
-  --grey-25: hsla(219, 17%, 23%, 1);
-  --grey-23: hsla(220, 19%, 21%, 1);
-  --grey-22: hsla(220, 21%, 19%, 1);
-  --grey-20: hsla(221, 24%, 16%, 1);
-  --grey-17: hsla(221, 29%, 14%, 1);
-  --grey-15: hsla(222, 33%, 11%, 1);
-  --grey-10: hsla(222, 39%, 9%, 1);
-  --grey-7: hsla(223, 43%, 8%, 1);
-  --grey-5: hsla(224, 47%, 6%, 1);
-
-  /* Blue (Brand) */
-  --blue-99: hsla(220, 100%, 98%, 1);
-  --blue-95: hsla(222, 100%, 94%, 1);
-  --blue-90: hsla(224, 100%, 87%, 1);
-  --blue-80: hsla(226, 100%, 77%, 1);
-  --blue-70: hsla(224, 100%, 67%, 1);
-  --blue-65: hsla(222, 100%, 62%, 1);
-  --blue-60: hsla(220, 100%, 57%, 1);
-  --blue-55: hsla(218, 100%, 52%, 1);
-  --blue-50: hsla(216, 100%, 47%, 1);
-  --blue-45: hsla(218, 100%, 43%, 1);
-  --blue-40: hsla(220, 100%, 39%, 1);
-  --blue-30: hsla(222, 100%, 31%, 1);
-  --blue-20: hsla(224, 100%, 21%, 1);
-  --blue-10: hsla(226, 100%, 13%, 1);
-
-  /* Semantic - Surface */
-  --surface-base-default: hsla(0, 0%, 100%, 1);
-  --surface-base-alternative: var(--grey-99);
-  --surface-base-container: var(--grey-97);
-  --surface-base-containerPressed: var(--grey-95);
-  --surface-elevated-default: hsla(0, 0%, 100%, 1);
-  --surface-elevated-alternative: var(--grey-99);
-  --surface-brand-default: var(--blue-50);
-  --surface-brand-defaultPressed: var(--blue-45);
-  --surface-brand-secondary: var(--blue-95);
-  --surface-brand-secondaryPressed: var(--blue-90);
-  --surface-error-default: hsla(0, 86%, 93%, 1);
-  --surface-warning-default: hsla(36, 100%, 93%, 1);
-  --surface-success-default: hsla(147, 68%, 91%, 1);
-  --surface-info-default: var(--grey-97);
-  --surface-disabled-default: var(--grey-95);
-
-  /* Semantic - Content */
-  --content-base-strong: var(--grey-15);
-  --content-base-default: var(--grey-30);
-  --content-base-secondary: var(--grey-50);
-  --content-base-neutral: var(--grey-60);
-  --content-base-alternative: var(--grey-70);
-  --content-base-placeholder: var(--grey-70);
-  --content-base-assistive: var(--grey-80);
-  --content-base-disabled: var(--grey-80);
-  --content-base-onColor: hsla(0, 0%, 100%, 1);
-  --content-brand-default: var(--blue-50);
-  --content-error-default: hsla(2, 85%, 48%, 1);
-  --content-warning-default: hsla(26, 100%, 47%, 1);
-  --content-warning-strong: hsla(22, 90%, 31%, 1);
-  --content-success-default: hsla(153, 78%, 37%, 1);
-  --content-success-strong: hsla(155, 82%, 24%, 1);
-  --content-info-default: hsla(180, 82%, 35%, 1);
-  --content-info-strong: hsla(182, 86%, 23%, 1);
-  --content-profit-default: hsla(2, 85%, 48%, 1);
-  --content-loss-default: var(--blue-50);
-  --content-disabled-default: var(--grey-80);
-
-  /* Semantic - Border */
-  --border-base-default: var(--grey-95);
-  --border-base-defaultPressed: var(--grey-90);
-  --border-secondary-default: var(--grey-90);
-  --border-secondary-defaultPressed: var(--grey-80);
-  --border-solid-default: var(--grey-90);
-  --border-solid-neutral: var(--grey-95);
-  --border-solid-alternative: var(--grey-97);
-  --border-brand-default: var(--blue-50);
-  --border-brand-defaultPressed: var(--blue-45);
-  --border-disabled-default: var(--grey-90);
-  --border-error-default: hsla(2, 85%, 48%, 1);
-  --border-success-default: hsla(153, 78%, 37%, 1);
-
-  /* Semantic - Fill (opacity-based) */
-  --fill-normal: hsla(216, 9%, 45%, 0.22);
-  --fill-strong: hsla(216, 9%, 45%, 0.28);
-  --fill-alternative: hsla(216, 9%, 45%, 0.12);
-
-  /* Semantic - Interaction */
-  --interaction-inactive: var(--grey-70);
-  --interaction-disabled: var(--grey-90);
+  /* Docs UI - Code/Playground */
+  --docs-code-surface: var(--grey-15);
+  --docs-code-surface-elevated: var(--grey-10);
+  --docs-code-border: hsla(216, 9%, 77%, 0.2);
+  --docs-code-text: var(--grey-97);
+  --docs-code-muted: var(--grey-80);
+  --docs-code-muted-strong: var(--grey-90);
+  --docs-code-active-bg: var(--grey-30);
+  --docs-code-active-text: var(--grey-99);
+  --docs-code-hover-bg: var(--grey-25);
+  --docs-code-success: hsla(153, 78%, 37%, 1);
+  --docs-syntax-comment: var(--grey-70);
+  --docs-syntax-string: hsla(222, 100%, 87%, 1);
+  --docs-syntax-tag: hsla(200, 85%, 70%, 1);
+  --docs-syntax-keyword: hsla(328, 80%, 70%, 1);
+  --docs-syntax-prop: hsla(269, 70%, 75%, 1);
+  --docs-live-badge-bg: hsla(222, 100%, 94%, 1);
+  --docs-live-badge-text: hsla(220, 100%, 39%, 1);
+  --docs-interactive-badge-bg: hsla(147, 68%, 91%, 1);
+  --docs-interactive-badge-text: hsla(154, 80%, 30%, 1);
 
   /* Legacy aliases for backwards compatibility */
   --bg-primary: var(--surface-base-default);
