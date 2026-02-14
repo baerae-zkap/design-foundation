@@ -20,6 +20,7 @@ import { forwardRef, useState, useRef, useEffect, useCallback, type HTMLAttribut
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { colors } from '../../tokens/colors';
+import { shadow } from '../../tokens/shadow';
 import { typography } from '../../tokens/typography';
 import { transitions } from '../../utils/styles';
 
@@ -285,7 +286,7 @@ export const SegmentedControl = forwardRef<HTMLDivElement, SegmentedControlProps
         transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1)',
         ...(variant === 'solid'
           ? {
-              boxShadow: `0 1px 3px ${colors.fill.normal}`,
+              boxShadow: shadow.semantic.button.pressed,
             }
           : {
               border: `1px solid ${colors.border.brand.default}`,

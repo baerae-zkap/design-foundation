@@ -19,6 +19,7 @@
 
 import { forwardRef, useState, useEffect, useRef, type ReactNode } from 'react';
 import { colors } from '../../tokens/colors';
+import { shadow } from '../../tokens/shadow';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
@@ -423,7 +424,7 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
               marginTop: spacing.primitive[1],
               backgroundColor: colors.surface.base.default,
               borderRadius: radius.component.card.sm,
-              boxShadow: `0 4px 12px ${colors.overlay.dim}`,
+              boxShadow: shadow.semantic.dropdown.default,
               maxHeight: 400,
               overflowY: 'auto',
               zIndex: 1000,

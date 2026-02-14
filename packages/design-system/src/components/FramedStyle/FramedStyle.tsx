@@ -12,6 +12,7 @@
 
 import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
 import { colors } from '../../tokens/colors';
+import { shadow } from '../../tokens/shadow';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { usePressable } from '../../utils/usePressable';
@@ -94,7 +95,7 @@ export const FramedStyle = forwardRef<HTMLDivElement, FramedStyleProps>(
       cursor: isInteractive ? 'pointer' : 'default',
       transition: transitions.all,
       ...(selected && {
-        boxShadow: `0 2px 8px ${colors.fill.normal}`,
+        boxShadow: shadow.semantic.card.floating,
       }),
       ...style,
     };

@@ -16,6 +16,7 @@
 
 import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
 import { colors } from '../../tokens/colors';
+import { shadow } from '../../tokens/shadow';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
@@ -87,7 +88,7 @@ const sizeConfig: Record<ListCardSize, {
 const variantStyles: Record<ListCardVariant, React.CSSProperties> = {
   elevated: {
     backgroundColor: colors.surface.base.default,
-    boxShadow: `0 1px 3px ${colors.fill.normal}, 0 1px 2px ${colors.fill.alternative}`,
+    boxShadow: shadow.semantic.card.elevated,
     border: 'none',
   },
   outlined: {

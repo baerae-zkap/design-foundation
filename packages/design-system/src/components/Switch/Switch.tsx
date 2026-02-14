@@ -14,6 +14,7 @@
 
 import { forwardRef, useState, type ButtonHTMLAttributes, type ReactNode } from 'react';
 import { colors } from '../../tokens/colors';
+import { shadow } from '../../tokens/shadow';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
@@ -143,7 +144,7 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(
       height: config.thumbSize,
       borderRadius: radius.primitive.full,
       backgroundColor: colors.surface.base.default,
-      boxShadow: `0 1px 3px ${colors.fill.normal}`,
+      boxShadow: shadow.semantic.button.pressed,
       transition: 'transform 200ms cubic-bezier(0.4, 0, 0.2, 1)',
       transform: `translateX(${thumbTranslateX}px)`,
       display: 'flex',

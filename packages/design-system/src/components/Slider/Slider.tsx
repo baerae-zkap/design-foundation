@@ -16,6 +16,7 @@
 
 import { forwardRef, useState, useRef, useEffect, type HTMLAttributes } from 'react';
 import { colors } from '../../tokens/colors';
+import { shadow } from '../../tokens/shadow';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
@@ -194,7 +195,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
       height: config.thumbSize,
       borderRadius: radius.primitive.full,
       backgroundColor: colors.surface.base.default,
-      boxShadow: `0 2px 6px ${colors.fill.strong}`,
+      boxShadow: shadow.semantic.button.elevated,
     };
 
     const tooltipStyle: React.CSSProperties = {
