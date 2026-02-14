@@ -16,7 +16,7 @@
  */
 
 import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
-import { colors, palette } from '../../tokens/colors';
+import { colors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
@@ -73,7 +73,7 @@ const colorStyles: Record<ButtonColor, {
     },
     outlined: {
       bg: colors.surface.base.default,
-      bgPressed: palette.blue[98],
+      bgPressed: colors.surface.brand.secondary,
       color: colors.content.brand.default,
       border: colors.border.brand.default,
     },
@@ -86,9 +86,9 @@ const colorStyles: Record<ButtonColor, {
     },
     outlined: {
       bg: colors.surface.base.default,
-      bgPressed: palette.blue[98],
+      bgPressed: colors.surface.brand.secondary,
       color: colors.content.brand.default,
-      border: palette.blue[80],
+      border: colors.border.brand.default,
     },
   },
   baseContainer: {
@@ -112,8 +112,8 @@ const colorStyles: Record<ButtonColor, {
     },
     outlined: {
       bg: colors.surface.base.default,
-      bgPressed: palette.green[98],
-      color: palette.green[45],
+      bgPressed: colors.surface.success.default,
+      color: colors.content.success.default,
       border: colors.border.success.default,
     },
   },
@@ -125,35 +125,35 @@ const colorStyles: Record<ButtonColor, {
     },
     outlined: {
       bg: colors.surface.base.default,
-      bgPressed: palette.red[98],
-      color: palette.red[45],
+      bgPressed: colors.surface.error.default,
+      color: colors.content.error.default,
       border: colors.border.error.default,
     },
   },
   kakaoDefault: {
     filled: {
-      bg: palette.kakao.default,
-      bgPressed: palette.kakao.pressed,
-      color: palette.kakao.text,
+      bg: colors.surface.kakao.default,
+      bgPressed: colors.surface.kakao.defaultPressed,
+      color: colors.content.base.strong,
     },
     outlined: {
       bg: colors.surface.base.default,
-      bgPressed: palette.kakao.light,
-      color: palette.kakao.text,
-      border: palette.kakao.default,
+      bgPressed: colors.surface.kakao.defaultPressed,
+      color: colors.content.base.strong,
+      border: colors.surface.kakao.default,
     },
   },
   googleDefault: {
     filled: {
-      bg: colors.surface.base.default,
-      bgPressed: palette.google.pressed,
-      color: palette.google.text,
+      bg: colors.surface.google.default,
+      bgPressed: colors.surface.google.defaultPressed,
+      color: colors.content.base.default,
     },
     outlined: {
       bg: colors.surface.base.default,
-      bgPressed: palette.google.light,
-      color: palette.google.text,
-      border: palette.google.border,
+      bgPressed: colors.surface.google.defaultPressed,
+      color: colors.content.base.default,
+      border: colors.border.base.default,
     },
   },
 };

@@ -10,7 +10,7 @@ Design Foundation은 baerae-zkap 서비스에서 사용할 통합 디자인 시�
 
 - **패키지명**: `@baerae-zkap/design-system`
 - **현재 버전**: 0.1.13
-- **배포 위치**: Google Artifact Registry
+- **배포 위치**: npm 패키지 (`@baerae-zkap/design-system`) 및 문서 사이트
 - **컴포넌트**: 53개 (React Native)
 - **기술 스택**: React Native, TypeScript
 
@@ -71,40 +71,34 @@ Design Foundation은 baerae-zkap 서비스에서 사용할 통합 디자인 시�
 
 ```
 design-foundation/
-├── packages/design-system/            # NPM 패키지 (@baerae-zkap/design-system)
-│   ├── src/native/                    # React Native 컴포넌트 (53개) - 실제 배포용
-│   │   ├── Button/Button.tsx
-│   │   ├── Chip/Chip.tsx
-│   │   ├── Card/Card.tsx
-│   │   └── ... (53개 컴포넌트)
-│   ├── src/tokens/                    # Foundation 디자인 토큰
-│   ├── docs/                          # AI 참조 문서
-│   │   ├── COMPONENTS.md
-│   │   └── components/
-│   │       ├── Button.md
-│   │       └── ... (컴포넌트 가이드)
-│   └── package.json                   # 패키지 정보
-│
-├── storybook/                         # Storybook (RN 컴포넌트 시각화/테스트)
-│   ├── stories/baerae-design-system/  # 53개 스토리
-│   │   ├── Button.stories.tsx
-│   │   ├── Chip.stories.tsx
-│   │   └── ... (53개)
-│   └── .storybook/                    # Storybook 설정
-│
-├── src/                               # Next.js 문서 사이트
-│   ├── app/                           # 문서 페이지 (App Router)
-│   │   └── components/
-│   │       ├── actions/button/
-│   │       ├── contents/card/
-│   │       └── ... (카테고리별 페이지)
-│   └── components/                    # 문서 사이트 UI 컴포넌트
-│
-├── existing-components/               # 레거시 컴포넌트 (컨벤션 참조용, 사용 X)
-├── public/                            # Foundation 토큰 JSON 파일
+├── packages/design-system/              # 배포 패키지 (@baerae-zkap/design-system)
+│   ├── src/native/                      # React Native 컴포넌트
+│   ├── src/tokens/                      # 패키지 토큰 export
+│   ├── docs/                            # AI 참조 문서
+│   └── package.json
+├── src/
+│   ├── app/                             # Next.js 문서 페이지
+│   │   ├── colors/                      # palette / semantic / effects
+│   │   ├── generated-color-tokens.css   # 토큰 생성 결과물
+│   │   └── generated-foundation-tokens.css
+│   ├── components/                      # 문서 사이트 UI 컴포넌트
+│   └── tokens/brandExternal.ts          # 외부 브랜드 컬러 예외
+├── public/                              # 토큰 단일 소스(JSON)
+│   ├── palette.json
+│   ├── semantic-tokens.json
+│   ├── effects-tokens.json
 │   ├── spacing-tokens.json
-│   └── radius-tokens.json
-└── vercel.json                        # Storybook Vercel 배포 설정
+│   ├── radius-tokens.json
+│   ├── typography-tokens.json
+│   ├── shadow-tokens.json
+│   └── interaction-tokens.json
+├── scripts/
+│   ├── generate-color-css.mjs
+│   ├── generate-colors-ts.mjs
+│   ├── generate-foundation-css.mjs
+│   └── check-no-raw-colors.mjs
+├── storybook/
+└── existing-components/
 ```
 
 ---
@@ -113,22 +107,29 @@ design-foundation/
 
 ### 설치
 
-각 디렉토리에서 `pnpm install` 실행:
+루트 및 하위 패키지에서 의존성을 설치합니다.
 
 ```bash
-# 문서 사이트
-pnpm install
+# 루트 (문서 사이트)
+npm install
 
 # 패키지
 cd packages/design-system
-pnpm install
+npm install
+```
+
+### 토큰 생성
+
+```bash
+# 루트에서 실행
+npm run tokens
 ```
 
 ### Storybook 실행 (로컬)
 
 ```bash
 cd storybook
-pnpm storybook
+npm run storybook
 ```
 
 `http://localhost:6006`에서 모든 컴포넌트의 시각화 및 테스트 가능합니다.
@@ -137,16 +138,20 @@ pnpm storybook
 
 ```bash
 # 루트 디렉토리에서
-pnpm dev
+npm run dev
 ```
 
 `http://localhost:3000`에서 문서 사이트 확인 가능합니다.
 
-### 패키지 빌드
+### 빌드 및 검증
 
 ```bash
+# 루트: 토큰 생성 + raw color 검사 포함
+npm run build
+
+# 패키지
 cd packages/design-system
-pnpm build
+npm run build
 ```
 
 ---
@@ -202,7 +207,7 @@ https://design-foundation.vercel.app
 
 ```bash
 cd storybook
-pnpm storybook
+npm run storybook
 ```
 
 - 모든 컴포넌트의 변형, 상태, 크기를 대화형으로 확인
@@ -303,21 +308,44 @@ pnpm storybook
 | **컴포넌트 라이브러리** | React Native |
 | **언어** | TypeScript |
 | **문서화** | Storybook |
-| **패키지 관리** | pnpm |
-| **배포** | Google Artifact Registry |
+| **문서 사이트** | Next.js (App Router) |
+| **패키지 관리** | npm (pnpm 사용 가능) |
+| **배포** | npm 패키지 + Vercel 문서 사이트 |
 
 ---
 
 ## Foundation Design Tokens
 
-모든 컴포넌트는 Foundation Design Tokens를 기반으로 설계되었습니다.
+모든 컴포넌트/문서 페이지는 Foundation Token(JSON)을 단일 소스로 사용합니다.
 
 ### 토큰 파일
 
 | 파일 | 내용 |
 |------|------|
+| `public/palette.json` | 원자 색상 팔레트 |
+| `public/semantic-tokens.json` | 시멘틱 색상(light/dark, inverse/status/component 포함) |
+| `public/effects-tokens.json` | alpha/overlay/gradient/effect 계층 |
 | `public/spacing-tokens.json` | 간격, 패딩, gap, 높이 토큰 |
 | `public/radius-tokens.json` | border-radius 토큰 |
+| `public/typography-tokens.json` | 타이포그래피 스케일/스타일 |
+| `public/shadow-tokens.json` | 그림자 primitive/semantic |
+| `public/interaction-tokens.json` | 인터랙션 시간/곡선/모션 토큰 |
+
+### 생성 결과물
+
+| 파일 | 생성 스크립트 | 용도 |
+|------|------|------|
+| `src/app/generated-color-tokens.css` | `scripts/generate-color-css.mjs` | 문서 사이트 CSS 변수 |
+| `packages/design-system/src/tokens/colors.ts` | `scripts/generate-colors-ts.mjs` | 패키지 color token export |
+| `src/app/generated-foundation-tokens.css` | `scripts/generate-foundation-css.mjs` | spacing/radius/typography/shadow/interaction CSS 변수 |
+
+### 실행 명령
+
+```bash
+npm run tokens            # 전체 토큰 생성
+npm run check:raw-colors  # src/app, src/components 하드코딩 색상 검사
+npm run build             # 토큰 생성 + 검사 + Next 빌드
+```
 
 ### 주요 토큰
 
@@ -330,6 +358,14 @@ pnpm storybook
 **Radius (모서리)**
 - `primitive.none` = 0px ~ `primitive.full` = 9999px
 - Component 토큰: `button.sm` = 8px, `button.lg` = 12px, `card.md` = 16px 등
+
+**Semantic Color (의미 기반 색상)**
+- Surface/Content/Border/Status/Inverse/Component 계층으로 light/dark 분리
+- 팔레트 직접 참조 대신 시멘틱 참조를 기본 원칙으로 사용
+
+**Effect Color (알파/오버레이)**
+- `effect.alpha.*` 계층으로 selection/fill/overlay 통합
+- 문서 시각화/상태 레이어도 effect 토큰으로 사용
 
 ---
 
@@ -360,7 +396,7 @@ pnpm storybook
 5. **패키지 빌드 & 배포**
    ```bash
    cd packages/design-system
-   pnpm build
+   npm run build
    npm version patch
    npm publish
    ```
@@ -406,11 +442,12 @@ storybook/
 
 ```
 src/
-├── app/components/             # 문서 페이지
-│   ├── actions/button/
-│   ├── contents/card/
-│   └── ... (카테고리별)
-└── components/                 # 문서 사이트 UI 컴포넌트
+├── app/                        # 문서 페이지 + generated token css
+│   ├── colors/
+│   ├── components/
+│   └── generated-*.css
+├── components/                 # 문서 사이트 UI 컴포넌트
+└── tokens/                     # 외부 브랜드 예외 컬러
 ```
 
 ---
@@ -426,11 +463,11 @@ vercel deploy --prod --yes
 
 라이브: https://design-foundation.vercel.app
 
-### NPM 패키지 배포 (Google Artifact Registry)
+### NPM 패키지 배포
 
 ```bash
 cd packages/design-system
-pnpm build
+npm run build
 npm version patch
 npm publish
 ```
@@ -439,21 +476,21 @@ npm publish
 
 ## 동기화 체크리스트
 
-컴포넌트 수정 시 다음 5개 위치를 반드시 동기화해야 합니다:
+컴포넌트 수정 시 다음 4개 위치를 반드시 동기화해야 합니다:
 
 | # | 위치 | 파일 | 설명 |
 |---|------|------|------|
 | 1 | **React Native 코드** | `packages/design-system/src/native/[Name]/[Name].tsx` | 실제 컴포넌트 구현 |
 | 2 | **AI 문서** | `packages/design-system/src/native/[Name]/[Name].md` | AI 참조용 마크다운 |
 | 3 | **Storybook** | `storybook/stories/baerae-design-system/[Name].stories.tsx` | 컴포넌트 테스트 |
+| 4 | **문서 사이트** | `src/app/components/.../page.tsx` | 사용법/토큰 매핑 문서 반영 |
 
 ---
 
 ## 시스템 요구사항
 
 - **Node.js**: 18.17 이상
-- **pnpm**: 8.0 이상
-- **npm**: 배포 시 필요
+- **npm**: 10 이상
 
 ---
 
@@ -465,7 +502,9 @@ baerae-zkap 회사 내부 사용
 
 ## 참고 자료
 
-- **Design Tokens**: `/public/spacing-tokens.json`, `/public/radius-tokens.json`
+- **Design Tokens(JSON)**: `/public/palette.json`, `/public/semantic-tokens.json`, `/public/effects-tokens.json`, `/public/spacing-tokens.json`, `/public/radius-tokens.json`, `/public/typography-tokens.json`, `/public/shadow-tokens.json`, `/public/interaction-tokens.json`
+- **토큰 생성 스크립트**: `/scripts/generate-color-css.mjs`, `/scripts/generate-colors-ts.mjs`, `/scripts/generate-foundation-css.mjs`
+- **토큰 가드 스크립트**: `/scripts/check-no-raw-colors.mjs`
 - **컴포넌트 문서**: `/packages/design-system/docs/`
 - **개발 가이드**: `CLAUDE.md` (프로젝트 상세 설명서)
 

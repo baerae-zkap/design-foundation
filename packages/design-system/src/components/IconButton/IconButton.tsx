@@ -16,7 +16,7 @@
  */
 
 import { forwardRef, useState, type ButtonHTMLAttributes, type ReactNode } from 'react';
-import { colors, palette } from '../../tokens/colors';
+import { colors } from '../../tokens/colors';
 import { radius } from '../../tokens/radius';
 import { transitions } from '../../utils/styles';
 
@@ -55,14 +55,14 @@ const colorStyles: Record<IconButtonColor, {
     },
     ghost: {
       bg: 'transparent',
-      bgHover: 'rgba(37, 99, 235, 0.08)',
-      bgPressed: 'rgba(37, 99, 235, 0.12)',
+      bgHover: colors.fill.alternative,
+      bgPressed: colors.fill.normal,
       color: colors.content.brand.default,
       colorPressed: colors.surface.brand.defaultPressed
     },
     outlined: {
       bg: colors.surface.base.default,
-      bgPressed: palette.blue[98],
+      bgPressed: colors.surface.brand.secondary,
       color: colors.content.brand.default,
       border: colors.border.brand.default
     },
@@ -70,15 +70,15 @@ const colorStyles: Record<IconButtonColor, {
   baseDefault: {
     filled: {
       bg: colors.content.base.default,
-      bgPressed: palette.grey[20],
+      bgPressed: colors.inverse.surface.default,
       color: colors.content.base.onColor
     },
     ghost: {
       bg: 'transparent',
-      bgHover: 'rgba(0, 0, 0, 0.04)',
-      bgPressed: 'rgba(0, 0, 0, 0.08)',
+      bgHover: colors.fill.alternative,
+      bgPressed: colors.fill.normal,
       color: colors.content.base.default,
-      colorPressed: palette.grey[20]
+      colorPressed: colors.inverse.surface.default
     },
     outlined: {
       bg: colors.surface.base.default,
@@ -95,15 +95,15 @@ const colorStyles: Record<IconButtonColor, {
     },
     ghost: {
       bg: 'transparent',
-      bgHover: 'rgba(239, 68, 68, 0.08)',
-      bgPressed: 'rgba(239, 68, 68, 0.12)',
+      bgHover: colors.status.negative.surface,
+      bgPressed: colors.status.negative.surface,
       color: colors.content.error.default,
       colorPressed: colors.surface.error.solidPressed
     },
     outlined: {
       bg: colors.surface.base.default,
-      bgPressed: palette.red[98],
-      color: palette.red[45],
+      bgPressed: colors.surface.error.default,
+      color: colors.content.error.default,
       border: colors.border.error.default
     },
   },

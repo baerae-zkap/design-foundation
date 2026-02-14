@@ -112,14 +112,14 @@ const colorConfig: Record<ChipColor, {
     filled: {
       bg: palette.red[95],
       bgPressed: palette.red[90],
-      bgSelected: palette.red[45],
+      bgSelected: colors.surface.error.solid,
       text: palette.red[30],
       textSelected: colors.content.base.onColor,
     },
     outlined: {
       bg: 'transparent',
       bgPressed: 'rgba(239, 68, 68, 0.08)',
-      bgSelected: palette.red[45],
+      bgSelected: colors.surface.error.solid,
       border: colors.border.error.default,
       text: palette.red[30],
       textSelected: colors.content.base.onColor,

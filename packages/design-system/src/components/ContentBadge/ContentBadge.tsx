@@ -80,7 +80,7 @@ const colorConfig: Record<ContentBadgeColor, {
   },
   successDefault: {
     filled: {
-      bg: palette.green[45],
+      bg: colors.surface.success.solid,
       text: colors.content.base.onColor,
     },
     outlined: {
@@ -95,7 +95,7 @@ const colorConfig: Record<ContentBadgeColor, {
   },
   errorDefault: {
     filled: {
-      bg: palette.red[45],
+      bg: colors.surface.error.solid,
       text: colors.content.base.onColor,
     },
     outlined: {
