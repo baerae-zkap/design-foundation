@@ -282,6 +282,9 @@ export const colors = {
     },
     warning: {
       default: palette.orange["95"],
+      defaultPressed: palette.orange["90"],
+      solid: palette.orange["50"],
+      solidPressed: palette.orange["40"],
     },
     success: {
       default: palette.green["95"],
@@ -291,6 +294,9 @@ export const colors = {
     },
     info: {
       default: palette.grey["97"],
+      defaultPressed: palette.grey["95"],
+      solid: palette.teal["50"],
+      solidPressed: palette.teal["40"],
     },
     disabled: {
       default: palette.grey["95"],
@@ -373,6 +379,14 @@ export const colors = {
       default: palette.green["50"],
       defaultPressed: palette.green["40"],
     },
+    warning: {
+      default: palette.orange["50"],
+      defaultPressed: palette.orange["40"],
+    },
+    info: {
+      default: palette.teal["50"],
+      defaultPressed: palette.teal["40"],
+    },
   },
   fill: {
     normal: palette.alphaComposite.fillLightNormal,
@@ -400,6 +414,8 @@ export const colors = {
     secondary: palette.grey["60"],
     disabled: palette.grey["80"],
     brand: palette.blue["50"],
+    warning: palette.orange["50"],
+    info: palette.teal["50"],
   },
   overlay: {
     dim: palette.alphaComposite.overlayLightDim,
@@ -437,6 +453,11 @@ export const colors = {
       surface: palette.red["95"],
       content: palette.red["50"],
       border: palette.red["50"],
+    },
+    informational: {
+      surface: palette.teal["95"],
+      content: palette.teal["50"],
+      border: palette.teal["50"],
     },
   },
   component: {
@@ -497,6 +518,9 @@ export const darkColors = {
     },
     warning: {
       default: palette.orange["20"],
+      defaultPressed: palette.orange["30"],
+      solid: palette.orange["60"],
+      solidPressed: palette.orange["70"],
     },
     success: {
       default: palette.green["20"],
@@ -506,6 +530,9 @@ export const darkColors = {
     },
     info: {
       default: palette.grey["20"],
+      defaultPressed: palette.grey["22"],
+      solid: palette.teal["60"],
+      solidPressed: palette.teal["70"],
     },
     disabled: {
       default: palette.grey["22"],
@@ -588,6 +615,14 @@ export const darkColors = {
       default: palette.green["60"],
       defaultPressed: palette.green["70"],
     },
+    warning: {
+      default: palette.orange["60"],
+      defaultPressed: palette.orange["70"],
+    },
+    info: {
+      default: palette.teal["60"],
+      defaultPressed: palette.teal["70"],
+    },
   },
   fill: {
     normal: palette.alphaComposite.fillDarkNormal,
@@ -615,6 +650,8 @@ export const darkColors = {
     secondary: palette.grey["60"],
     disabled: palette.grey["40"],
     brand: palette.blue["60"],
+    warning: palette.orange["60"],
+    info: palette.teal["60"],
   },
   overlay: {
     dim: palette.alphaComposite.overlayDarkDim,
@@ -653,6 +690,11 @@ export const darkColors = {
       content: palette.red["60"],
       border: palette.red["60"],
     },
+    informational: {
+      surface: palette.teal["20"],
+      content: palette.teal["60"],
+      border: palette.teal["60"],
+    },
   },
   component: {
     button: {
@@ -686,6 +728,246 @@ export const darkColors = {
 } as const;
 
 /**
+ * CSS Variable reference map for web components.
+ * Same shape as `colors` but values are CSS variable strings.
+ * Use this instead of `colors` in web components for theme-aware rendering.
+ */
+export const cssVarColors = {
+  surface: {
+    base: {
+      default: 'var(--surface-base-default)' as const,
+      alternative: 'var(--surface-base-alternative)' as const,
+      container: 'var(--surface-base-container)' as const,
+      containerPressed: 'var(--surface-base-containerPressed)' as const,
+    },
+    elevated: {
+      default: 'var(--surface-elevated-default)' as const,
+      alternative: 'var(--surface-elevated-alternative)' as const,
+    },
+    brand: {
+      default: 'var(--surface-brand-default)' as const,
+      defaultPressed: 'var(--surface-brand-defaultPressed)' as const,
+      secondary: 'var(--surface-brand-secondary)' as const,
+      secondaryPressed: 'var(--surface-brand-secondaryPressed)' as const,
+    },
+    error: {
+      default: 'var(--surface-error-default)' as const,
+      defaultPressed: 'var(--surface-error-defaultPressed)' as const,
+      solid: 'var(--surface-error-solid)' as const,
+      solidPressed: 'var(--surface-error-solidPressed)' as const,
+    },
+    warning: {
+      default: 'var(--surface-warning-default)' as const,
+      defaultPressed: 'var(--surface-warning-defaultPressed)' as const,
+      solid: 'var(--surface-warning-solid)' as const,
+      solidPressed: 'var(--surface-warning-solidPressed)' as const,
+    },
+    success: {
+      default: 'var(--surface-success-default)' as const,
+      defaultPressed: 'var(--surface-success-defaultPressed)' as const,
+      solid: 'var(--surface-success-solid)' as const,
+      solidPressed: 'var(--surface-success-solidPressed)' as const,
+    },
+    info: {
+      default: 'var(--surface-info-default)' as const,
+      defaultPressed: 'var(--surface-info-defaultPressed)' as const,
+      solid: 'var(--surface-info-solid)' as const,
+      solidPressed: 'var(--surface-info-solidPressed)' as const,
+    },
+    disabled: {
+      default: 'var(--surface-disabled-default)' as const,
+    },
+    kakao: {
+      default: 'var(--surface-kakao-default)' as const,
+      defaultPressed: 'var(--surface-kakao-defaultPressed)' as const,
+    },
+    google: {
+      default: 'var(--surface-google-default)' as const,
+      defaultPressed: 'var(--surface-google-defaultPressed)' as const,
+    },
+  },
+  content: {
+    base: {
+      strong: 'var(--content-base-strong)' as const,
+      default: 'var(--content-base-default)' as const,
+      secondary: 'var(--content-base-secondary)' as const,
+      neutral: 'var(--content-base-neutral)' as const,
+      alternative: 'var(--content-base-alternative)' as const,
+      placeholder: 'var(--content-base-placeholder)' as const,
+      assistive: 'var(--content-base-assistive)' as const,
+      disabled: 'var(--content-base-disabled)' as const,
+      onColor: 'var(--content-base-onColor)' as const,
+    },
+    brand: {
+      default: 'var(--content-brand-default)' as const,
+    },
+    error: {
+      default: 'var(--content-error-default)' as const,
+    },
+    warning: {
+      default: 'var(--content-warning-default)' as const,
+      strong: 'var(--content-warning-strong)' as const,
+    },
+    success: {
+      default: 'var(--content-success-default)' as const,
+      strong: 'var(--content-success-strong)' as const,
+    },
+    info: {
+      default: 'var(--content-info-default)' as const,
+      strong: 'var(--content-info-strong)' as const,
+    },
+    profit: {
+      default: 'var(--content-profit-default)' as const,
+    },
+    loss: {
+      default: 'var(--content-loss-default)' as const,
+    },
+    disabled: {
+      default: 'var(--content-disabled-default)' as const,
+    },
+  },
+  border: {
+    base: {
+      default: 'var(--border-base-default)' as const,
+      defaultPressed: 'var(--border-base-defaultPressed)' as const,
+    },
+    secondary: {
+      default: 'var(--border-secondary-default)' as const,
+      defaultPressed: 'var(--border-secondary-defaultPressed)' as const,
+    },
+    solid: {
+      default: 'var(--border-solid-default)' as const,
+      neutral: 'var(--border-solid-neutral)' as const,
+      alternative: 'var(--border-solid-alternative)' as const,
+    },
+    brand: {
+      default: 'var(--border-brand-default)' as const,
+      defaultPressed: 'var(--border-brand-defaultPressed)' as const,
+    },
+    disabled: {
+      default: 'var(--border-disabled-default)' as const,
+    },
+    error: {
+      default: 'var(--border-error-default)' as const,
+      defaultPressed: 'var(--border-error-defaultPressed)' as const,
+    },
+    success: {
+      default: 'var(--border-success-default)' as const,
+      defaultPressed: 'var(--border-success-defaultPressed)' as const,
+    },
+    warning: {
+      default: 'var(--border-warning-default)' as const,
+      defaultPressed: 'var(--border-warning-defaultPressed)' as const,
+    },
+    info: {
+      default: 'var(--border-info-default)' as const,
+      defaultPressed: 'var(--border-info-defaultPressed)' as const,
+    },
+  },
+  fill: {
+    normal: 'var(--fill-normal)' as const,
+    strong: 'var(--fill-strong)' as const,
+    alternative: 'var(--fill-alternative)' as const,
+  },
+  interaction: {
+    inactive: 'var(--interaction-inactive)' as const,
+    disabled: 'var(--interaction-disabled)' as const,
+  },
+  visualization: {
+    categorical: {
+      "1": 'var(--visualization-categorical-1)' as const,
+      "2": 'var(--visualization-categorical-2)' as const,
+      "3": 'var(--visualization-categorical-3)' as const,
+      "4": 'var(--visualization-categorical-4)' as const,
+      "5": 'var(--visualization-categorical-5)' as const,
+      "6": 'var(--visualization-categorical-6)' as const,
+      "7": 'var(--visualization-categorical-7)' as const,
+      "8": 'var(--visualization-categorical-8)' as const,
+    },
+  },
+  icon: {
+    default: 'var(--icon-default)' as const,
+    secondary: 'var(--icon-secondary)' as const,
+    disabled: 'var(--icon-disabled)' as const,
+    brand: 'var(--icon-brand)' as const,
+    warning: 'var(--icon-warning)' as const,
+    info: 'var(--icon-info)' as const,
+  },
+  overlay: {
+    dim: 'var(--overlay-dim)' as const,
+    heavy: 'var(--overlay-heavy)' as const,
+  },
+  inverse: {
+    surface: {
+      default: 'var(--inverse-surface-default)' as const,
+      alternative: 'var(--inverse-surface-alternative)' as const,
+    },
+    content: {
+      default: 'var(--inverse-content-default)' as const,
+      secondary: 'var(--inverse-content-secondary)' as const,
+    },
+    border: {
+      default: 'var(--inverse-border-default)' as const,
+      secondary: 'var(--inverse-border-secondary)' as const,
+    },
+    icon: {
+      default: 'var(--inverse-icon-default)' as const,
+    },
+  },
+  status: {
+    positive: {
+      surface: 'var(--status-positive-surface)' as const,
+      content: 'var(--status-positive-content)' as const,
+      border: 'var(--status-positive-border)' as const,
+    },
+    cautionary: {
+      surface: 'var(--status-cautionary-surface)' as const,
+      content: 'var(--status-cautionary-content)' as const,
+      border: 'var(--status-cautionary-border)' as const,
+    },
+    negative: {
+      surface: 'var(--status-negative-surface)' as const,
+      content: 'var(--status-negative-content)' as const,
+      border: 'var(--status-negative-border)' as const,
+    },
+    informational: {
+      surface: 'var(--status-informational-surface)' as const,
+      content: 'var(--status-informational-content)' as const,
+      border: 'var(--status-informational-border)' as const,
+    },
+  },
+  component: {
+    button: {
+      primarySurface: 'var(--component-button-primarySurface)' as const,
+      primarySurfacePressed: 'var(--component-button-primarySurfacePressed)' as const,
+      primaryContent: 'var(--component-button-primaryContent)' as const,
+      secondarySurface: 'var(--component-button-secondarySurface)' as const,
+      secondarySurfacePressed: 'var(--component-button-secondarySurfacePressed)' as const,
+      secondaryContent: 'var(--component-button-secondaryContent)' as const,
+      secondaryBorder: 'var(--component-button-secondaryBorder)' as const,
+      destructiveSurface: 'var(--component-button-destructiveSurface)' as const,
+      destructiveSurfacePressed: 'var(--component-button-destructiveSurfacePressed)' as const,
+      destructiveContent: 'var(--component-button-destructiveContent)' as const,
+    },
+    input: {
+      surface: 'var(--component-input-surface)' as const,
+      border: 'var(--component-input-border)' as const,
+      focusBorder: 'var(--component-input-focusBorder)' as const,
+      content: 'var(--component-input-content)' as const,
+      placeholder: 'var(--component-input-placeholder)' as const,
+      focusRing: 'var(--component-input-focusRing)' as const,
+    },
+    chip: {
+      neutralSurface: 'var(--component-chip-neutralSurface)' as const,
+      neutralContent: 'var(--component-chip-neutralContent)' as const,
+      neutralBorder: 'var(--component-chip-neutralBorder)' as const,
+      selectedSurface: 'var(--component-chip-selectedSurface)' as const,
+      selectedContent: 'var(--component-chip-selectedContent)' as const,
+    },
+  },
+} as const;
+
+/**
  * @deprecated Legacy alias for compatibility. Use darkColors for theme mapping.
  */
 export const darkPalette = palette;
@@ -706,3 +988,4 @@ export type ColorToken = typeof colors;
 export type DarkColorToken = typeof darkColors;
 export type PaletteToken = typeof palette;
 export type DarkPaletteToken = typeof darkPalette;
+export type CssVarColorToken = typeof cssVarColors;

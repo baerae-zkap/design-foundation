@@ -23,6 +23,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: `
+          (function() {
+            try {
+              var theme = localStorage.getItem('theme');
+              if (!theme) {
+                theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+              }
+              document.documentElement.setAttribute('data-theme', theme);
+            } catch(e) {}
+          })();
+        `}} />
+      </head>
       <body className={`${geist.variable} antialiased`} style={{ fontFamily: 'var(--font-base)', backgroundColor: 'var(--bg-primary)' }}>
         <LayoutWrapper>{children}</LayoutWrapper>
       </body>

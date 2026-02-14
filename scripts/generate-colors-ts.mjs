@@ -171,9 +171,42 @@ function buildSemanticThemeLines(theme) {
   return walk(theme);
 }
 
+function buildCssVarLines(themeData) {
+  const walk = (node, path = []) => {
+    const lines = ['{'];
+
+    for (const [key, value] of Object.entries(node)) {
+      if (isSkippableKey(key)) {
+        continue;
+      }
+
+      const nextPath = [...path, key];
+      const renderedKey = formatKey(key);
+
+      if (isObject(value)) {
+        const nestedLines = walk(value, nextPath);
+        lines.push(`  ${renderedKey}: ${nestedLines[0]}`);
+        lines.push(...nestedLines.slice(1).map((line) => `  ${line}`));
+        lines[lines.length - 1] += ',';
+        continue;
+      }
+
+      // Generate CSS var reference from the path
+      const cssVarName = nextPath.join('-');
+      lines.push(`  ${renderedKey}: 'var(--${cssVarName})' as const,`);
+    }
+
+    lines.push('}');
+    return lines;
+  };
+
+  return walk(themeData);
+}
+
 const paletteLines = buildPaletteLines();
 const colorsLines = buildSemanticThemeLines(semanticJson.light ?? {});
 const darkColorsLines = buildSemanticThemeLines(semanticJson.dark ?? {});
+const cssVarColorsLines = buildCssVarLines(semanticJson.light ?? {});
 
 const content = [
   '/**',
@@ -230,6 +263,13 @@ const content = [
   `export const darkColors = ${darkColorsLines.join('\n')} as const;`,
   '',
   '/**',
+  ' * CSS Variable reference map for web components.',
+  ' * Same shape as `colors` but values are CSS variable strings.',
+  ' * Use this instead of `colors` in web components for theme-aware rendering.',
+  ' */',
+  `export const cssVarColors = ${cssVarColorsLines.join('\n')} as const;`,
+  '',
+  '/**',
   ' * @deprecated Legacy alias for compatibility. Use darkColors for theme mapping.',
   ' */',
   'export const darkPalette = palette;',
@@ -250,6 +290,7 @@ const content = [
   'export type DarkColorToken = typeof darkColors;',
   'export type PaletteToken = typeof palette;',
   'export type DarkPaletteToken = typeof darkPalette;',
+  'export type CssVarColorToken = typeof cssVarColors;',
   '',
 ].join('\n');
 

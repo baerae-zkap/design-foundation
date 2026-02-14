@@ -16,7 +16,7 @@
  */
 
 import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
-import { colors } from '../../tokens/colors';
+import { cssVarColors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
@@ -67,93 +67,93 @@ const colorStyles: Record<ButtonColor, {
 }> = {
   brandDefault: {
     filled: {
-      bg: colors.surface.brand.default,
-      bgPressed: colors.surface.brand.defaultPressed,
-      color: colors.content.base.onColor,
+      bg: cssVarColors.component.button.primarySurface,
+      bgPressed: cssVarColors.component.button.primarySurfacePressed,
+      color: cssVarColors.component.button.primaryContent,
     },
     outlined: {
-      bg: colors.surface.base.default,
-      bgPressed: colors.surface.brand.secondary,
-      color: colors.content.brand.default,
-      border: colors.border.brand.default,
+      bg: cssVarColors.surface.base.default,
+      bgPressed: cssVarColors.surface.brand.secondary,
+      color: cssVarColors.content.brand.default,
+      border: cssVarColors.border.brand.default,
     },
   },
   brandSecondary: {
     filled: {
-      bg: colors.surface.brand.secondary,
-      bgPressed: colors.surface.brand.secondaryPressed,
-      color: colors.content.brand.default,
+      bg: cssVarColors.component.button.secondarySurface,
+      bgPressed: cssVarColors.component.button.secondarySurfacePressed,
+      color: cssVarColors.component.button.secondaryContent,
     },
     outlined: {
-      bg: colors.surface.base.default,
-      bgPressed: colors.surface.brand.secondary,
-      color: colors.content.brand.default,
-      border: colors.border.brand.default,
+      bg: cssVarColors.surface.base.default,
+      bgPressed: cssVarColors.surface.brand.secondary,
+      color: cssVarColors.content.brand.default,
+      border: cssVarColors.component.button.secondaryBorder,
     },
   },
   baseContainer: {
     filled: {
-      bg: colors.surface.base.container,
-      bgPressed: colors.surface.base.containerPressed,
-      color: colors.content.base.default,
+      bg: cssVarColors.surface.base.container,
+      bgPressed: cssVarColors.surface.base.containerPressed,
+      color: cssVarColors.content.base.default,
     },
     outlined: {
-      bg: colors.surface.base.default,
-      bgPressed: colors.surface.base.alternative,
-      color: colors.content.base.default,
-      border: colors.border.secondary.default,
+      bg: cssVarColors.surface.base.default,
+      bgPressed: cssVarColors.surface.base.alternative,
+      color: cssVarColors.content.base.default,
+      border: cssVarColors.border.secondary.default,
     },
   },
   successDefault: {
     filled: {
-      bg: colors.surface.success.solid,
-      bgPressed: colors.surface.success.solidPressed,
-      color: colors.content.base.onColor,
+      bg: cssVarColors.surface.success.solid,
+      bgPressed: cssVarColors.surface.success.solidPressed,
+      color: cssVarColors.content.base.onColor,
     },
     outlined: {
-      bg: colors.surface.base.default,
-      bgPressed: colors.surface.success.default,
-      color: colors.content.success.default,
-      border: colors.border.success.default,
+      bg: cssVarColors.surface.base.default,
+      bgPressed: cssVarColors.surface.success.default,
+      color: cssVarColors.content.success.default,
+      border: cssVarColors.border.success.default,
     },
   },
   errorDefault: {
     filled: {
-      bg: colors.surface.error.solid,
-      bgPressed: colors.surface.error.solidPressed,
-      color: colors.content.base.onColor,
+      bg: cssVarColors.component.button.destructiveSurface,
+      bgPressed: cssVarColors.component.button.destructiveSurfacePressed,
+      color: cssVarColors.component.button.destructiveContent,
     },
     outlined: {
-      bg: colors.surface.base.default,
-      bgPressed: colors.surface.error.default,
-      color: colors.content.error.default,
-      border: colors.border.error.default,
+      bg: cssVarColors.surface.base.default,
+      bgPressed: cssVarColors.surface.error.default,
+      color: cssVarColors.content.error.default,
+      border: cssVarColors.border.error.default,
     },
   },
   kakaoDefault: {
     filled: {
-      bg: colors.surface.kakao.default,
-      bgPressed: colors.surface.kakao.defaultPressed,
-      color: colors.content.base.strong,
+      bg: cssVarColors.surface.kakao.default,
+      bgPressed: cssVarColors.surface.kakao.defaultPressed,
+      color: cssVarColors.content.base.strong,
     },
     outlined: {
-      bg: colors.surface.base.default,
-      bgPressed: colors.surface.kakao.defaultPressed,
-      color: colors.content.base.strong,
-      border: colors.surface.kakao.default,
+      bg: cssVarColors.surface.base.default,
+      bgPressed: cssVarColors.surface.kakao.defaultPressed,
+      color: cssVarColors.content.base.strong,
+      border: cssVarColors.surface.kakao.default,
     },
   },
   googleDefault: {
     filled: {
-      bg: colors.surface.google.default,
-      bgPressed: colors.surface.google.defaultPressed,
-      color: colors.content.base.default,
+      bg: cssVarColors.surface.google.default,
+      bgPressed: cssVarColors.surface.google.defaultPressed,
+      color: cssVarColors.content.base.default,
     },
     outlined: {
-      bg: colors.surface.base.default,
-      bgPressed: colors.surface.google.defaultPressed,
-      color: colors.content.base.default,
-      border: colors.border.base.default,
+      bg: cssVarColors.surface.base.default,
+      bgPressed: cssVarColors.surface.google.defaultPressed,
+      color: cssVarColors.content.base.default,
+      border: cssVarColors.border.base.default,
     },
   },
 };
@@ -207,11 +207,11 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       width: layout === 'fillWidth' ? '100%' : 'auto',
       opacity: isDisabled ? 0.5 : 1,
       background: isDisabled
-        ? colors.surface.disabled.default
+        ? cssVarColors.surface.disabled.default
         : (isPressed ? colorStyle.bgPressed : colorStyle.bg),
-      color: isDisabled ? colors.content.disabled.default : colorStyle.color,
+      color: isDisabled ? cssVarColors.content.disabled.default : colorStyle.color,
       border: buttonType === 'outlined'
-        ? `1px solid ${isDisabled ? colors.border.disabled.default : (colorStyle as { border: string }).border}`
+        ? `1px solid ${isDisabled ? cssVarColors.border.disabled.default : (colorStyle as { border: string }).border}`
         : 'none',
       ...style,
     };

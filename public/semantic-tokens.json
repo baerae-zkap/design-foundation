@@ -52,7 +52,13 @@
       },
       "warning": {
         "default": "{palette.orange.95}",
-        "default_comment": "경고 배경"
+        "default_comment": "경고 배경",
+        "defaultPressed": "{palette.orange.90}",
+        "defaultPressed_comment": "경고 배경 눌림 상태",
+        "solid": "{palette.orange.50}",
+        "solid_comment": "경고 solid 배경 (filled 액션)",
+        "solidPressed": "{palette.orange.40}",
+        "solidPressed_comment": "경고 solid 배경 눌림 상태"
       },
       "success": {
         "default": "{palette.green.95}",
@@ -66,7 +72,13 @@
       },
       "info": {
         "default": "{palette.grey.97}",
-        "default_comment": "정보 배경"
+        "default_comment": "정보 배경",
+        "defaultPressed": "{palette.grey.95}",
+        "defaultPressed_comment": "정보 배경 눌림 상태",
+        "solid": "{palette.teal.50}",
+        "solid_comment": "정보 solid 배경 (filled 액션)",
+        "solidPressed": "{palette.teal.40}",
+        "solidPressed_comment": "정보 solid 배경 눌림 상태"
       },
       "disabled": {
         "default": "{palette.grey.95}",
@@ -192,6 +204,18 @@
         "default_comment": "성공 테두리",
         "defaultPressed": "{palette.green.40}",
         "defaultPressed_comment": "성공 테두리 눌림"
+      },
+      "warning": {
+        "default": "{palette.orange.50}",
+        "default_comment": "경고 테두리",
+        "defaultPressed": "{palette.orange.40}",
+        "defaultPressed_comment": "경고 테두리 눌림"
+      },
+      "info": {
+        "default": "{palette.teal.50}",
+        "default_comment": "정보 테두리",
+        "defaultPressed": "{palette.teal.40}",
+        "defaultPressed_comment": "정보 테두리 눌림"
       }
     },
 
@@ -244,7 +268,11 @@
       "disabled": "{palette.grey.80}",
       "disabled_comment": "비활성 아이콘",
       "brand": "{palette.blue.50}",
-      "brand_comment": "브랜드 아이콘"
+      "brand_comment": "브랜드 아이콘",
+      "warning": "{palette.orange.50}",
+      "warning_comment": "경고 아이콘",
+      "info": "{palette.teal.50}",
+      "info_comment": "정보 아이콘"
     },
 
     "overlay": {
@@ -306,6 +334,14 @@
         "content_comment": "에러/부정 텍스트 alias",
         "border": "{palette.red.50}",
         "border_comment": "에러/부정 경계선 alias"
+      },
+      "informational": {
+        "surface": "{palette.teal.95}",
+        "surface_comment": "정보 배경 alias",
+        "content": "{palette.teal.50}",
+        "content_comment": "정보 텍스트 alias",
+        "border": "{palette.teal.50}",
+        "border_comment": "정보 경계선 alias"
       }
     },
 
@@ -405,7 +441,13 @@
       },
       "warning": {
         "default": "{palette.orange.20}",
-        "default_comment": "경고 배경"
+        "default_comment": "경고 배경",
+        "defaultPressed": "{palette.orange.30}",
+        "defaultPressed_comment": "경고 배경 눌림 상태",
+        "solid": "{palette.orange.60}",
+        "solid_comment": "경고 solid 배경 (filled 액션)",
+        "solidPressed": "{palette.orange.70}",
+        "solidPressed_comment": "경고 solid 배경 눌림 상태"
       },
       "success": {
         "default": "{palette.green.20}",
@@ -419,7 +461,13 @@
       },
       "info": {
         "default": "{palette.grey.20}",
-        "default_comment": "정보 배경"
+        "default_comment": "정보 배경",
+        "defaultPressed": "{palette.grey.22}",
+        "defaultPressed_comment": "정보 배경 눌림 상태",
+        "solid": "{palette.teal.60}",
+        "solid_comment": "정보 solid 배경 (filled 액션)",
+        "solidPressed": "{palette.teal.70}",
+        "solidPressed_comment": "정보 solid 배경 눌림 상태"
       },
       "disabled": {
         "default": "{palette.grey.22}",
@@ -545,6 +593,18 @@
         "default_comment": "성공 테두리",
         "defaultPressed": "{palette.green.70}",
         "defaultPressed_comment": "성공 테두리 눌림"
+      },
+      "warning": {
+        "default": "{palette.orange.60}",
+        "default_comment": "경고 테두리",
+        "defaultPressed": "{palette.orange.70}",
+        "defaultPressed_comment": "경고 테두리 눌림"
+      },
+      "info": {
+        "default": "{palette.teal.60}",
+        "default_comment": "정보 테두리",
+        "defaultPressed": "{palette.teal.70}",
+        "defaultPressed_comment": "정보 테두리 눌림"
       }
     },
 
@@ -597,7 +657,11 @@
       "disabled": "{palette.grey.40}",
       "disabled_comment": "비활성 아이콘",
       "brand": "{palette.blue.60}",
-      "brand_comment": "브랜드 아이콘"
+      "brand_comment": "브랜드 아이콘",
+      "warning": "{palette.orange.60}",
+      "warning_comment": "경고 아이콘",
+      "info": "{palette.teal.60}",
+      "info_comment": "정보 아이콘"
     },
 
     "overlay": {
@@ -659,6 +723,14 @@
         "content_comment": "에러/부정 텍스트 alias",
         "border": "{palette.red.60}",
         "border_comment": "에러/부정 경계선 alias"
+      },
+      "informational": {
+        "surface": "{palette.teal.20}",
+        "surface_comment": "정보 배경 alias",
+        "content": "{palette.teal.60}",
+        "content_comment": "정보 텍스트 alias",
+        "border": "{palette.teal.60}",
+        "border_comment": "정보 경계선 alias"
       }
     },
 
