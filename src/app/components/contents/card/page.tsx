@@ -69,7 +69,7 @@ function CardPlayground() {
         style={{
           borderRadius: 20,
           overflow: "hidden",
-          backgroundColor: "#fafbfc",
+          backgroundColor: "var(--surface-base-alternative)",
         }}
       >
         <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
@@ -80,7 +80,7 @@ function CardPlayground() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              backgroundColor: variant === "filled" ? "white" : "#fafbfc",
+              backgroundColor: variant === "filled" ? "white" : "var(--surface-base-alternative)",
             }}
           >
             <CardDemo
@@ -88,10 +88,10 @@ function CardPlayground() {
               padding={padding}
               onClick={clickable ? () => {} : undefined}
             >
-              <p style={{ margin: 0, fontWeight: 600, fontSize: 16, color: "#334155", marginBottom: 8 }}>
+              <p style={{ margin: 0, fontWeight: 600, fontSize: 16, color: "var(--content-base-strong)", marginBottom: 8 }}>
                 Card Title
               </p>
-              <p style={{ margin: 0, fontSize: 14, color: "#64748b", lineHeight: 1.6 }}>
+              <p style={{ margin: 0, fontSize: 14, color: "var(--content-base-secondary)", lineHeight: 1.6 }}>
                 This is the card content. It can contain any elements.
               </p>
             </CardDemo>
@@ -100,7 +100,7 @@ function CardPlayground() {
           {/* Control Panel */}
           <div
             style={{
-              backgroundColor: "#fafbfc",
+              backgroundColor: "var(--surface-base-alternative)",
               display: "flex",
               flexDirection: "column",
               padding: 16,
@@ -167,7 +167,7 @@ function CardPlayground() {
         <div
           style={{
             padding: "10px 16px",
-            backgroundColor: "#18181b",
+            backgroundColor: "var(--inverse-surface-default)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
@@ -185,8 +185,8 @@ function CardPlayground() {
             padding: 16,
             fontSize: 13,
             lineHeight: 1.6,
-            color: "#e4e4e7",
-            backgroundColor: "#18181b",
+            color: "var(--border-secondary-default)",
+            backgroundColor: "var(--inverse-surface-default)",
             fontFamily: "'SF Mono', 'Fira Code', monospace",
             overflow: "auto",
           }}
@@ -215,7 +215,7 @@ function DesignContent() {
       {/* Anatomy */}
       <Section title="Anatomy">
         <div style={{
-          backgroundColor: "#f5f5f7",
+          backgroundColor: "var(--surface-base-alternative)",
           borderRadius: 16,
           padding: "48px 40px",
           display: "flex",
@@ -224,7 +224,7 @@ function DesignContent() {
         }}>
           <svg width="400" height="180" viewBox="0 0 400 180">
             {/* Card Container */}
-            <rect x="100" y="30" width="200" height="120" rx="12" fill="white" stroke="#e2e8f0" strokeWidth="1.5" filter="url(#cardShadow)" />
+            <rect x="100" y="30" width="200" height="120" rx="12" fill="white" stroke="var(--border-base-default)" strokeWidth="1.5" filter="url(#cardShadow)" />
 
             {/* Shadow definition */}
             <defs>
@@ -234,30 +234,30 @@ function DesignContent() {
             </defs>
 
             {/* Content placeholders */}
-            <rect x="120" y="50" width="160" height="12" rx="4" fill="#e2e8f0" />
-            <rect x="120" y="70" width="120" height="8" rx="4" fill="#f1f5f9" />
-            <rect x="120" y="86" width="140" height="8" rx="4" fill="#f1f5f9" />
-            <rect x="120" y="110" width="80" height="24" rx="6" fill="#2563eb" />
+            <rect x="120" y="50" width="160" height="12" rx="4" fill="var(--border-base-default)" />
+            <rect x="120" y="70" width="120" height="8" rx="4" fill="var(--surface-base-alternative)" />
+            <rect x="120" y="86" width="140" height="8" rx="4" fill="var(--surface-base-alternative)" />
+            <rect x="120" y="110" width="80" height="24" rx="6" fill="var(--content-brand-default)" />
             <text x="160" y="126" textAnchor="middle" fill="white" fontSize="11" fontWeight="600">Action</text>
 
             {/* Lines to labels */}
-            <line x1="50" y1="90" x2="100" y2="90" stroke="#374151" strokeWidth="1.5" />
-            <circle cx="100" cy="90" r="3" fill="#374151" />
+            <line x1="50" y1="90" x2="100" y2="90" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <circle cx="100" cy="90" r="3" fill="var(--content-base-default)" />
 
-            <line x1="200" y1="150" x2="200" y2="170" stroke="#374151" strokeWidth="1.5" />
-            <circle cx="200" cy="150" r="3" fill="#374151" />
+            <line x1="200" y1="150" x2="200" y2="170" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <circle cx="200" cy="150" r="3" fill="var(--content-base-default)" />
 
             {/* Numbered circles */}
-            <circle cx="35" cy="90" r="14" fill="#374151" />
+            <circle cx="35" cy="90" r="14" fill="var(--content-base-default)" />
             <text x="35" y="95" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">1</text>
 
-            <circle cx="200" cy="170" r="14" fill="#374151" />
+            <circle cx="200" cy="170" r="14" fill="var(--content-base-default)" />
             <text x="200" y="175" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">2</text>
 
             {/* Padding indicator */}
-            <line x1="102" y1="32" x2="102" y2="48" stroke="#3b82f6" strokeWidth="1" strokeDasharray="2 2" />
-            <line x1="118" y1="32" x2="118" y2="48" stroke="#3b82f6" strokeWidth="1" strokeDasharray="2 2" />
-            <text x="110" y="20" textAnchor="middle" fill="#3b82f6" fontSize="9">padding</text>
+            <line x1="102" y1="32" x2="102" y2="48" stroke="var(--content-brand-default)" strokeWidth="1" strokeDasharray="2 2" />
+            <line x1="118" y1="32" x2="118" y2="48" stroke="var(--content-brand-default)" strokeWidth="1" strokeDasharray="2 2" />
+            <text x="110" y="20" textAnchor="middle" fill="var(--content-brand-default)" fontSize="9">padding</text>
           </svg>
         </div>
         <div style={{
@@ -279,17 +279,17 @@ function DesignContent() {
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16 }}>
           <VariantCard name="Elevated" description="그림자로 깊이감 표현">
             <CardDemo variant="elevated" padding="small">
-              <p style={{ margin: 0, fontSize: 12, color: "#64748b" }}>Shadow</p>
+              <p style={{ margin: 0, fontSize: 12, color: "var(--content-base-secondary)" }}>Shadow</p>
             </CardDemo>
           </VariantCard>
           <VariantCard name="Outlined" description="테두리로 영역 구분">
             <CardDemo variant="outlined" padding="small">
-              <p style={{ margin: 0, fontSize: 12, color: "#64748b" }}>Border</p>
+              <p style={{ margin: 0, fontSize: 12, color: "var(--content-base-secondary)" }}>Border</p>
             </CardDemo>
           </VariantCard>
           <VariantCard name="Filled" description="배경색으로 구분">
             <CardDemo variant="filled" padding="small">
-              <p style={{ margin: 0, fontSize: 12, color: "#64748b" }}>Background</p>
+              <p style={{ margin: 0, fontSize: 12, color: "var(--content-base-secondary)" }}>Background</p>
             </CardDemo>
           </VariantCard>
         </div>
@@ -301,27 +301,27 @@ function DesignContent() {
           <div style={{ display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "center" }}>
             <div style={{ textAlign: "center" }}>
               <CardDemo variant="outlined" padding="none">
-                <div style={{ width: 60, height: 40, backgroundColor: "#e2e8f0", borderRadius: 4 }} />
+                <div style={{ width: 60, height: 40, backgroundColor: "var(--border-base-default)", borderRadius: 4 }} />
               </CardDemo>
-              <p style={{ fontSize: 11, color: "#64748b", marginTop: 8 }}>None (0)</p>
+              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginTop: 8 }}>None (0)</p>
             </div>
             <div style={{ textAlign: "center" }}>
               <CardDemo variant="outlined" padding="small">
-                <div style={{ width: 60, height: 40, backgroundColor: "#e2e8f0", borderRadius: 4 }} />
+                <div style={{ width: 60, height: 40, backgroundColor: "var(--border-base-default)", borderRadius: 4 }} />
               </CardDemo>
-              <p style={{ fontSize: 11, color: "#64748b", marginTop: 8 }}>Small (12)</p>
+              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginTop: 8 }}>Small (12)</p>
             </div>
             <div style={{ textAlign: "center" }}>
               <CardDemo variant="outlined" padding="medium">
-                <div style={{ width: 60, height: 40, backgroundColor: "#e2e8f0", borderRadius: 4 }} />
+                <div style={{ width: 60, height: 40, backgroundColor: "var(--border-base-default)", borderRadius: 4 }} />
               </CardDemo>
-              <p style={{ fontSize: 11, color: "#64748b", marginTop: 8 }}>Medium (20)</p>
+              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginTop: 8 }}>Medium (20)</p>
             </div>
             <div style={{ textAlign: "center" }}>
               <CardDemo variant="outlined" padding="large">
-                <div style={{ width: 60, height: 40, backgroundColor: "#e2e8f0", borderRadius: 4 }} />
+                <div style={{ width: 60, height: 40, backgroundColor: "var(--border-base-default)", borderRadius: 4 }} />
               </CardDemo>
-              <p style={{ fontSize: 11, color: "#64748b", marginTop: 8 }}>Large (24)</p>
+              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginTop: 8 }}>Large (24)</p>
             </div>
           </div>
         </PreviewBox>
@@ -353,12 +353,12 @@ function DesignContent() {
               <tr>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 13, fontWeight: 500 }}>outlined</code></td>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>white</td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>1px solid #e2e8f0</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>1px solid var(--border-base-default)</td>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>플랫한 디자인. 리스트 내 카드</td>
               </tr>
               <tr>
                 <td style={{ padding: "12px 16px" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 13, fontWeight: 500 }}>filled</code></td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>#f8fafc</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>var(--surface-base-alternative)</td>
                 <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>없음</td>
                 <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>배경 구분. 섹션 내 그룹화</td>
               </tr>
@@ -370,20 +370,20 @@ function DesignContent() {
           <div style={{ display: "flex", gap: 16, padding: 24 }}>
             <div style={{ textAlign: "center" }}>
               <CardDemo variant="elevated" padding="medium">
-                <p style={{ margin: 0, fontSize: 12, fontWeight: 600, color: "#334155" }}>Elevated</p>
-                <p style={{ margin: 0, fontSize: 11, color: "#64748b", marginTop: 4 }}>white + shadow</p>
+                <p style={{ margin: 0, fontSize: 12, fontWeight: 600, color: "var(--content-base-strong)" }}>Elevated</p>
+                <p style={{ margin: 0, fontSize: 11, color: "var(--content-base-secondary)", marginTop: 4 }}>white + shadow</p>
               </CardDemo>
             </div>
             <div style={{ textAlign: "center" }}>
               <CardDemo variant="outlined" padding="medium">
-                <p style={{ margin: 0, fontSize: 12, fontWeight: 600, color: "#334155" }}>Outlined</p>
-                <p style={{ margin: 0, fontSize: 11, color: "#64748b", marginTop: 4 }}>white + border</p>
+                <p style={{ margin: 0, fontSize: 12, fontWeight: 600, color: "var(--content-base-strong)" }}>Outlined</p>
+                <p style={{ margin: 0, fontSize: 11, color: "var(--content-base-secondary)", marginTop: 4 }}>white + border</p>
               </CardDemo>
             </div>
             <div style={{ textAlign: "center" }}>
               <CardDemo variant="filled" padding="medium">
-                <p style={{ margin: 0, fontSize: 12, fontWeight: 600, color: "#334155" }}>Filled</p>
-                <p style={{ margin: 0, fontSize: 11, color: "#64748b", marginTop: 4 }}>#f8fafc bg</p>
+                <p style={{ margin: 0, fontSize: 12, fontWeight: 600, color: "var(--content-base-strong)" }}>Filled</p>
+                <p style={{ margin: 0, fontSize: 11, color: "var(--content-base-secondary)", marginTop: 4 }}>var(--surface-base-alternative) bg</p>
               </CardDemo>
             </div>
           </div>
@@ -396,15 +396,15 @@ function DesignContent() {
           <div style={{ display: "flex", gap: 24, alignItems: "center" }}>
             <div style={{ textAlign: "center" }}>
               <CardDemo variant="elevated" padding="medium">
-                <p style={{ margin: 0, fontSize: 12, color: "#64748b" }}>Default</p>
+                <p style={{ margin: 0, fontSize: 12, color: "var(--content-base-secondary)" }}>Default</p>
               </CardDemo>
-              <p style={{ fontSize: 11, color: "#64748b", marginTop: 8 }}>Default</p>
+              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginTop: 8 }}>Default</p>
             </div>
             <div style={{ textAlign: "center" }}>
               <CardDemo variant="elevated" padding="medium" onClick={() => {}}>
-                <p style={{ margin: 0, fontSize: 12, color: "#64748b" }}>Clickable</p>
+                <p style={{ margin: 0, fontSize: 12, color: "var(--content-base-secondary)" }}>Clickable</p>
               </CardDemo>
-              <p style={{ fontSize: 11, color: "#64748b", marginTop: 8 }}>Hover/Press</p>
+              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginTop: 8 }}>Hover/Press</p>
             </div>
           </div>
         </PreviewBox>
@@ -484,42 +484,42 @@ function DesignContent() {
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                 <td style={{ padding: "12px 16px" }}>Border Radius</td>
                 <td style={{ padding: "12px 16px" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>radius.semantic.card.sm</code></td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>12px</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>12px</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                 <td style={{ padding: "12px 16px" }}>Shadow (elevated)</td>
                 <td style={{ padding: "12px 16px" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>shadow.sm</code></td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>0 1px 3px rgba(0,0,0,0.1)</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>0 1px 3px var(--shadow-primitive-xs)</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                 <td style={{ padding: "12px 16px" }}>Border (outlined)</td>
                 <td style={{ padding: "12px 16px" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>border.base.default</code></td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>#e2e8f0 (palette.grey.95)</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>var(--border-base-default) (palette.grey.95)</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                 <td style={{ padding: "12px 16px" }}>Background (filled)</td>
                 <td style={{ padding: "12px 16px" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>surface.base.alternative</code></td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>#f8fafc (palette.grey.99)</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>var(--surface-base-alternative) (palette.grey.99)</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                 <td style={{ padding: "12px 16px" }}>Padding none</td>
                 <td style={{ padding: "12px 16px" }}>-</td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>0</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>0</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                 <td style={{ padding: "12px 16px" }}>Padding small</td>
                 <td style={{ padding: "12px 16px" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>spacing.primitive.3</code></td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>12px</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>12px</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                 <td style={{ padding: "12px 16px" }}>Padding medium</td>
                 <td style={{ padding: "12px 16px" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>spacing.component.card.padding.md</code></td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>20px</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>20px</td>
               </tr>
               <tr>
                 <td style={{ padding: "12px 16px" }}>Padding large</td>
                 <td style={{ padding: "12px 16px" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>spacing.component.card.padding.lg</code></td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>24px</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>24px</td>
               </tr>
             </tbody>
           </table>
@@ -541,8 +541,8 @@ function DesignContent() {
           <DoCard>
             <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
               <CardDemo variant="elevated" padding="medium">
-                <p style={{ margin: 0, fontSize: 12, fontWeight: 600, color: "#334155" }}>제목</p>
-                <p style={{ margin: 0, fontSize: 11, color: "#64748b", marginTop: 4 }}>설명 텍스트</p>
+                <p style={{ margin: 0, fontSize: 12, fontWeight: 600, color: "var(--content-base-strong)" }}>제목</p>
+                <p style={{ margin: 0, fontSize: 11, color: "var(--content-base-secondary)", marginTop: 4 }}>설명 텍스트</p>
               </CardDemo>
             </div>
           </DoCard>
@@ -550,19 +550,19 @@ function DesignContent() {
             <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
               <CardDemo variant="elevated" padding="none">
                 <div style={{ padding: "20px 12px 8px" }}>
-                  <p style={{ margin: 0, fontSize: 12, fontWeight: 600, color: "#334155" }}>제목</p>
-                  <p style={{ margin: 0, fontSize: 11, color: "#64748b", marginTop: 4 }}>내부 패딩 불일치</p>
+                  <p style={{ margin: 0, fontSize: 12, fontWeight: 600, color: "var(--content-base-strong)" }}>제목</p>
+                  <p style={{ margin: 0, fontSize: 11, color: "var(--content-base-secondary)", marginTop: 4 }}>내부 패딩 불일치</p>
                 </div>
               </CardDemo>
             </div>
           </DontCard>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 8 }}>
-          <p style={{ fontSize: 13, color: "#22c55e", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
+          <p style={{ fontSize: 13, color: "var(--status-positive-content)", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
             <span style={{ fontWeight: 700, flexShrink: 0 }}>Do</span>
             <span style={{ color: "var(--text-secondary)" }}>일관된 padding 값을 사용합니다.</span>
           </p>
-          <p style={{ fontSize: 13, color: "#ef4444", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
+          <p style={{ fontSize: 13, color: "var(--status-negative-content)", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
             <span style={{ fontWeight: 700, flexShrink: 0 }}>Don&apos;t</span>
             <span style={{ color: "var(--text-secondary)" }}>padding을 none으로 두고 내부에서 임의로 조절하지 마세요.</span>
           </p>
@@ -572,30 +572,30 @@ function DesignContent() {
           <DoCard>
             <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
               <CardDemo variant="elevated" padding="small">
-                <p style={{ margin: 0, fontSize: 11, color: "#64748b" }}>Elevated</p>
+                <p style={{ margin: 0, fontSize: 11, color: "var(--content-base-secondary)" }}>Elevated</p>
               </CardDemo>
               <CardDemo variant="outlined" padding="small">
-                <p style={{ margin: 0, fontSize: 11, color: "#64748b" }}>Outlined</p>
+                <p style={{ margin: 0, fontSize: 11, color: "var(--content-base-secondary)" }}>Outlined</p>
               </CardDemo>
             </div>
           </DoCard>
           <DontCard>
             <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
               <CardDemo variant="elevated" padding="small">
-                <p style={{ margin: 0, fontSize: 11, color: "#64748b" }}>Elevated</p>
+                <p style={{ margin: 0, fontSize: 11, color: "var(--content-base-secondary)" }}>Elevated</p>
               </CardDemo>
-              <div style={{ padding: 12, backgroundColor: "white", borderRadius: 12, boxShadow: "0 1px 3px rgba(0,0,0,0.1)", border: "1px solid #e2e8f0" }}>
-                <p style={{ margin: 0, fontSize: 11, color: "#64748b" }}>Mixed</p>
+              <div style={{ padding: 12, backgroundColor: "white", borderRadius: 12, boxShadow: "0 1px 3px var(--shadow-primitive-xs)", border: "1px solid var(--border-base-default)" }}>
+                <p style={{ margin: 0, fontSize: 11, color: "var(--content-base-secondary)" }}>Mixed</p>
               </div>
             </div>
           </DontCard>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 8 }}>
-          <p style={{ fontSize: 13, color: "#22c55e", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
+          <p style={{ fontSize: 13, color: "var(--status-positive-content)", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
             <span style={{ fontWeight: 700, flexShrink: 0 }}>Do</span>
             <span style={{ color: "var(--text-secondary)" }}>같은 맥락에서 variant를 통일합니다.</span>
           </p>
-          <p style={{ fontSize: 13, color: "#ef4444", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
+          <p style={{ fontSize: 13, color: "var(--status-negative-content)", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
             <span style={{ fontWeight: 700, flexShrink: 0 }}>Don&apos;t</span>
             <span style={{ color: "var(--text-secondary)" }}>같은 영역에서 elevated와 outlined을 혼용하지 마세요.</span>
           </p>
@@ -631,7 +631,7 @@ function WebContent() {
               fontSize: 13,
               fontWeight: 500,
               color: "white",
-              backgroundColor: "#24292f",
+              backgroundColor: "var(--inverse-surface-default)",
               borderRadius: 12,
               textDecoration: "none",
             }}
@@ -654,10 +654,10 @@ function WebContent() {
         <PreviewBox>
           <div style={{ padding: 24 }}>
             <CardDemo variant="elevated" padding="medium">
-              <p style={{ margin: 0, fontWeight: 600, fontSize: 16, color: "#334155", marginBottom: 8 }}>
+              <p style={{ margin: 0, fontWeight: 600, fontSize: 16, color: "var(--content-base-strong)", marginBottom: 8 }}>
                 Card Title
               </p>
-              <p style={{ margin: 0, fontSize: 14, color: "#64748b" }}>
+              <p style={{ margin: 0, fontSize: 14, color: "var(--content-base-secondary)" }}>
                 Card content goes here.
               </p>
             </CardDemo>
@@ -694,10 +694,10 @@ function WebContent() {
         <PreviewBox>
           <div style={{ padding: 24 }}>
             <CardDemo variant="elevated" padding="medium" onClick={() => alert('Card clicked!')}>
-              <p style={{ margin: 0, fontWeight: 600, fontSize: 14, color: "#334155" }}>
+              <p style={{ margin: 0, fontWeight: 600, fontSize: 14, color: "var(--content-base-strong)" }}>
                 Click me
               </p>
-              <p style={{ margin: 0, fontSize: 13, color: "#64748b", marginTop: 4 }}>
+              <p style={{ margin: 0, fontSize: 13, color: "var(--content-base-secondary)", marginTop: 4 }}>
                 This card is interactive
               </p>
             </CardDemo>
@@ -747,7 +747,7 @@ function RNContent() {
               fontSize: 13,
               fontWeight: 500,
               color: "white",
-              backgroundColor: "#24292f",
+              backgroundColor: "var(--inverse-surface-default)",
               borderRadius: 12,
               textDecoration: "none",
             }}
@@ -770,10 +770,10 @@ function RNContent() {
         <PreviewBox>
           <div style={{ padding: 24 }}>
             <CardDemo variant="elevated" padding="medium">
-              <p style={{ margin: 0, fontWeight: 600, fontSize: 16, color: "#334155", marginBottom: 8 }}>
+              <p style={{ margin: 0, fontWeight: 600, fontSize: 16, color: "var(--content-base-strong)", marginBottom: 8 }}>
                 Card Title
               </p>
-              <p style={{ margin: 0, fontSize: 14, color: "#64748b" }}>
+              <p style={{ margin: 0, fontSize: 14, color: "var(--content-base-secondary)" }}>
                 Card content goes here.
               </p>
             </CardDemo>
@@ -836,8 +836,8 @@ function UsageCard({ situation, description, recommendation, examples }: {
           <span style={{
             fontSize: 11,
             padding: "2px 6px",
-            backgroundColor: "#dbeafe",
-            color: "#1d4ed8",
+            backgroundColor: "var(--surface-brand-secondary)",
+            color: "var(--surface-brand-defaultPressed)",
             borderRadius: 4,
             fontWeight: 500,
           }}>

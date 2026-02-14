@@ -25,7 +25,7 @@ function Modal({ isOpen, onClose, title, children, size = "md" }: ModalProps) {
       style={{
         position: "fixed",
         inset: 0,
-        backgroundColor: "rgba(0, 0, 0, 0.5)",
+        backgroundColor: "var(--effect-alpha-overlay-dim)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -166,7 +166,7 @@ export default function ModalPage() {
                 fontWeight: 500,
                 borderRadius: "var(--radius-md)",
                 border: "none",
-                backgroundColor: "#EF4444",
+                backgroundColor: "var(--status-negative-content)",
                 color: "white",
                 cursor: "pointer",
               }}

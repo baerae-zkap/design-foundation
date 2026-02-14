@@ -123,7 +123,7 @@ function DurationRow({ name, token, isLast }: { name: string; token: { value: st
             top: 4,
             width: 32,
             height: 32,
-            backgroundColor: '#2563eb',
+            backgroundColor: 'var(--content-brand-default)',
             borderRadius: 'var(--radius-sm)',
             transition: `left ${ms}ms ease-out`,
           }}
@@ -165,7 +165,7 @@ function EasingRow({ name, token, isLast }: { name: string; token: { value: stri
             top: 4,
             width: 32,
             height: 32,
-            backgroundColor: '#2563eb',
+            backgroundColor: 'var(--content-brand-default)',
             borderRadius: 'var(--radius-sm)',
             transition: `left 500ms ${token.value}`,
           }}
@@ -249,7 +249,7 @@ function InteractiveDemo() {
               padding: '10px 24px',
               fontSize: 14,
               fontWeight: 600,
-              backgroundColor: '#2563eb',
+              backgroundColor: 'var(--content-brand-default)',
               color: 'white',
               border: 'none',
               borderRadius: 'var(--radius-md)',
@@ -269,7 +269,7 @@ function InteractiveDemo() {
             top: 8,
             width: 64,
             height: 64,
-            backgroundColor: '#2563eb',
+            backgroundColor: 'var(--content-brand-default)',
             borderRadius: 'var(--radius-md)',
             transition: `left ${durationValue} ${easingValue}`,
             display: 'flex',
@@ -332,17 +332,17 @@ function LiveExamples() {
             padding: '12px 24px',
             fontSize: 14,
             fontWeight: 600,
-            backgroundColor: '#2563eb',
+            backgroundColor: 'var(--content-brand-default)',
             color: 'white',
             border: 'none',
             borderRadius: 8,
             cursor: 'pointer',
             transition: 'all 200ms cubic-bezier(0.16, 1, 0.3, 1)',
           }}
-          onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#1d4ed8'; }}
-          onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#2563eb'; e.currentTarget.style.transform = 'scale(1)'; }}
-          onMouseDown={(e) => { e.currentTarget.style.backgroundColor = '#1e40af'; e.currentTarget.style.transform = 'scale(0.97)'; }}
-          onMouseUp={(e) => { e.currentTarget.style.backgroundColor = '#1d4ed8'; e.currentTarget.style.transform = 'scale(1)'; }}
+          onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--surface-brand-defaultPressed)'; }}
+          onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--content-brand-default)'; e.currentTarget.style.transform = 'scale(1)'; }}
+          onMouseDown={(e) => { e.currentTarget.style.backgroundColor = 'var(--blue-40)'; e.currentTarget.style.transform = 'scale(0.97)'; }}
+          onMouseUp={(e) => { e.currentTarget.style.backgroundColor = 'var(--surface-brand-defaultPressed)'; e.currentTarget.style.transform = 'scale(1)'; }}
         >
           Hover & Press
         </button>
@@ -359,7 +359,7 @@ function LiveExamples() {
             height: 28,
             borderRadius: 14,
             border: 'none',
-            backgroundColor: toggleOn ? '#2563eb' : '#cbd5e1',
+            backgroundColor: toggleOn ? 'var(--content-brand-default)' : 'var(--border-base-default)',
             cursor: 'pointer',
             position: 'relative',
             transition: 'background-color 200ms cubic-bezier(0.34, 1.56, 0.64, 1)',
@@ -373,7 +373,7 @@ function LiveExamples() {
             height: 24,
             borderRadius: '50%',
             backgroundColor: 'white',
-            boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
+            boxShadow: '0 2px 4px var(--shadow-primitive-md)',
             transition: 'left 200ms cubic-bezier(0.34, 1.56, 0.64, 1)',
           }} />
         </button>
@@ -413,7 +413,7 @@ function LiveExamples() {
             backgroundColor: 'white',
             border: '1px solid var(--divider)',
             borderRadius: 8,
-            boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+            boxShadow: '0 4px 12px var(--shadow-primitive-xs)',
             overflow: 'hidden',
             opacity: dropdownOpen ? 1 : 0,
             transform: dropdownOpen ? 'translateY(0) scale(1)' : 'translateY(-8px) scale(0.95)',
@@ -441,17 +441,17 @@ function LiveExamples() {
             padding: '10px 20px',
             fontSize: 14,
             fontWeight: 500,
-            backgroundColor: '#2563eb',
+            backgroundColor: 'var(--content-brand-default)',
             color: 'white',
             border: 'none',
             borderRadius: 8,
             cursor: 'pointer',
             transition: 'all 200ms cubic-bezier(0.16, 1, 0.3, 1)',
           }}
-          onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#1d4ed8'; }}
-          onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#2563eb'; e.currentTarget.style.transform = 'scale(1)'; }}
-          onMouseDown={(e) => { e.currentTarget.style.backgroundColor = '#1e40af'; e.currentTarget.style.transform = 'scale(0.97)'; }}
-          onMouseUp={(e) => { e.currentTarget.style.backgroundColor = '#1d4ed8'; e.currentTarget.style.transform = 'scale(1)'; }}
+          onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--surface-brand-defaultPressed)'; }}
+          onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--content-brand-default)'; e.currentTarget.style.transform = 'scale(1)'; }}
+          onMouseDown={(e) => { e.currentTarget.style.backgroundColor = 'var(--blue-40)'; e.currentTarget.style.transform = 'scale(0.97)'; }}
+          onMouseUp={(e) => { e.currentTarget.style.backgroundColor = 'var(--surface-brand-defaultPressed)'; e.currentTarget.style.transform = 'scale(1)'; }}
         >
           Open Modal
         </button>
@@ -467,17 +467,17 @@ function LiveExamples() {
             padding: '10px 20px',
             fontSize: 14,
             fontWeight: 500,
-            backgroundColor: '#22c55e',
+            backgroundColor: 'var(--status-positive-content)',
             color: 'white',
             border: 'none',
             borderRadius: 8,
             cursor: 'pointer',
             transition: 'all 200ms cubic-bezier(0.16, 1, 0.3, 1)',
           }}
-          onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#16a34a'; }}
-          onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#22c55e'; e.currentTarget.style.transform = 'scale(1)'; }}
-          onMouseDown={(e) => { e.currentTarget.style.backgroundColor = '#15803d'; e.currentTarget.style.transform = 'scale(0.97)'; }}
-          onMouseUp={(e) => { e.currentTarget.style.backgroundColor = '#16a34a'; e.currentTarget.style.transform = 'scale(1)'; }}
+          onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--status-positive-content)'; }}
+          onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--status-positive-content)'; e.currentTarget.style.transform = 'scale(1)'; }}
+          onMouseDown={(e) => { e.currentTarget.style.backgroundColor = 'var(--surface-success-solidPressed)'; e.currentTarget.style.transform = 'scale(0.97)'; }}
+          onMouseUp={(e) => { e.currentTarget.style.backgroundColor = 'var(--status-positive-content)'; e.currentTarget.style.transform = 'scale(1)'; }}
         >
           Show Toast
         </button>
@@ -502,7 +502,7 @@ function LiveExamples() {
           }}
           onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)'; }}
           onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--bg-secondary)'; e.currentTarget.style.transform = 'scale(1)'; }}
-          onMouseDown={(e) => { e.currentTarget.style.backgroundColor = '#d1d5db'; e.currentTarget.style.transform = 'scale(0.97)'; }}
+          onMouseDown={(e) => { e.currentTarget.style.backgroundColor = 'var(--border-base-default)'; e.currentTarget.style.transform = 'scale(0.97)'; }}
           onMouseUp={(e) => { e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)'; e.currentTarget.style.transform = 'scale(1)'; }}
         >
           Open Sheet
@@ -516,7 +516,7 @@ function LiveExamples() {
           style={{
             position: 'fixed',
             inset: 0,
-            backgroundColor: 'rgba(0,0,0,0.5)',
+            backgroundColor: 'var(--effect-alpha-overlay-dim)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -535,24 +535,24 @@ function LiveExamples() {
             }}
           >
             <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>Modal Title</h3>
-            <p style={{ fontSize: 14, color: '#64748b', marginBottom: 24 }}>This modal uses 300ms easeOut for enter animation.</p>
+            <p style={{ fontSize: 14, color: 'var(--content-base-secondary)', marginBottom: 24 }}>This modal uses 300ms easeOut for enter animation.</p>
             <button
               onClick={() => setModalOpen(false)}
               style={{
                 padding: '10px 20px',
                 fontSize: 14,
                 fontWeight: 500,
-                backgroundColor: '#2563eb',
+                backgroundColor: 'var(--content-brand-default)',
                 color: 'white',
                 border: 'none',
                 borderRadius: 8,
                 cursor: 'pointer',
                 transition: 'all 200ms cubic-bezier(0.16, 1, 0.3, 1)',
               }}
-              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#1d4ed8'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#2563eb'; e.currentTarget.style.transform = 'scale(1)'; }}
-              onMouseDown={(e) => { e.currentTarget.style.backgroundColor = '#1e40af'; e.currentTarget.style.transform = 'scale(0.97)'; }}
-              onMouseUp={(e) => { e.currentTarget.style.backgroundColor = '#1d4ed8'; e.currentTarget.style.transform = 'scale(1)'; }}
+              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--surface-brand-defaultPressed)'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--content-brand-default)'; e.currentTarget.style.transform = 'scale(1)'; }}
+              onMouseDown={(e) => { e.currentTarget.style.backgroundColor = 'var(--blue-40)'; e.currentTarget.style.transform = 'scale(0.97)'; }}
+              onMouseUp={(e) => { e.currentTarget.style.backgroundColor = 'var(--surface-brand-defaultPressed)'; e.currentTarget.style.transform = 'scale(1)'; }}
             >
               Close
             </button>
@@ -566,14 +566,14 @@ function LiveExamples() {
           <div
             key={toast.id}
             style={{
-              backgroundColor: '#1e293b',
+              backgroundColor: 'var(--inverse-surface-default)',
               color: 'white',
               padding: '14px 20px',
               borderRadius: 12,
               display: 'flex',
               alignItems: 'center',
               gap: 12,
-              boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+              boxShadow: '0 4px 12px var(--shadow-primitive-sm)',
               animation: toast.exiting
                 ? 'toastOut 200ms cubic-bezier(0.7, 0, 0.84, 0) forwards'
                 : 'toastIn 300ms cubic-bezier(0.34, 1.56, 0.64, 1)',
@@ -581,7 +581,7 @@ function LiveExamples() {
               transition: 'transform 200ms cubic-bezier(0.16, 1, 0.3, 1)',
             }}
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="#22c55e">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--status-positive-content)">
               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
             </svg>
             <span style={{ fontSize: 14, fontWeight: 500 }}>Successfully saved!</span>
@@ -590,13 +590,13 @@ function LiveExamples() {
               style={{
                 background: 'none',
                 border: 'none',
-                color: '#94a3b8',
+                color: 'var(--content-base-placeholder)',
                 cursor: 'pointer',
                 marginLeft: 8,
                 transition: 'color 150ms',
               }}
-              onMouseEnter={(e) => { e.currentTarget.style.color = '#ffffff'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.color = '#94a3b8'; }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--static-white)'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--content-base-placeholder)'; }}
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M18 6L6 18M6 6l12 12"/>
@@ -613,7 +613,7 @@ function LiveExamples() {
           style={{
             position: 'fixed',
             inset: 0,
-            backgroundColor: 'rgba(0,0,0,0.5)',
+            backgroundColor: 'var(--effect-alpha-overlay-dim)',
             zIndex: 1000,
             animation: 'fadeIn 400ms cubic-bezier(0.16, 1, 0.3, 1)',
           }}
@@ -633,9 +633,9 @@ function LiveExamples() {
               animation: 'sheetIn 400ms cubic-bezier(0.16, 1, 0.3, 1)',
             }}
           >
-            <div style={{ width: 40, height: 4, backgroundColor: '#cbd5e1', borderRadius: 2, margin: '0 auto 20px' }} />
+            <div style={{ width: 40, height: 4, backgroundColor: 'var(--border-base-default)', borderRadius: 2, margin: '0 auto 20px' }} />
             <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>Bottom Sheet</h3>
-            <p style={{ fontSize: 14, color: '#64748b', marginBottom: 24 }}>This sheet uses 400ms easeOut for enter animation.</p>
+            <p style={{ fontSize: 14, color: 'var(--content-base-secondary)', marginBottom: 24 }}>This sheet uses 400ms easeOut for enter animation.</p>
             <button
               onClick={() => setBottomSheetOpen(false)}
               style={{
@@ -652,7 +652,7 @@ function LiveExamples() {
               }}
               onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)'; }}
               onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--bg-secondary)'; e.currentTarget.style.transform = 'scale(1)'; }}
-              onMouseDown={(e) => { e.currentTarget.style.backgroundColor = '#d1d5db'; e.currentTarget.style.transform = 'scale(0.98)'; }}
+              onMouseDown={(e) => { e.currentTarget.style.backgroundColor = 'var(--border-base-default)'; e.currentTarget.style.transform = 'scale(0.98)'; }}
               onMouseUp={(e) => { e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)'; e.currentTarget.style.transform = 'scale(1)'; }}
             >
               Close

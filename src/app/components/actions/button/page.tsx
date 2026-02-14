@@ -9,9 +9,10 @@ import { PropsTable, ColorTableRow } from "@/components/docs/PropsTable";
 import { PrincipleCard, DoCard, DontCard } from "@/components/docs/Cards";
 import { RadioGroup, CodeTypeTab, CopyButton } from "@/components/docs/Playground";
 import { NumberBadge, DoLabel, DontLabel } from "@/components/docs/Labels";
+import { BRAND_EXTERNAL_COLORS } from "@/tokens/brandExternal";
 
 // GitHub source URLs (design-foundation repo)
-const GITHUB_BASE = "https://github.com/baerae-zkap/design-foundation/blob/main/src/source/components/Button";
+const GITHUB_BASE = "https://github.com/baerae-zkap/design-foundation/tree/main/packages/design-system/src/components/Button";
 const BUTTON_SOURCE = `${GITHUB_BASE}/Button.tsx`;
 const BUTTON_STYLES = `${GITHUB_BASE}/Button.css.ts`;
 
@@ -95,7 +96,7 @@ function ButtonPlayground() {
         style={{
           borderRadius: 20,
           overflow: "hidden",
-          backgroundColor: "#fafbfc",
+          backgroundColor: "var(--surface-base-alternative)",
         }}
       >
         <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
@@ -106,7 +107,7 @@ function ButtonPlayground() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              backgroundColor: "#fafbfc",
+              backgroundColor: "var(--surface-base-alternative)",
             }}
           >
             <ButtonDemo
@@ -125,7 +126,7 @@ function ButtonPlayground() {
           {/* Control Panel */}
           <div
             style={{
-              backgroundColor: "#fafbfc",
+              backgroundColor: "var(--surface-base-alternative)",
               display: "flex",
               flexDirection: "column",
               padding: 16,
@@ -144,7 +145,7 @@ function ButtonPlayground() {
                 display: "flex",
                 flexDirection: "column",
                 gap: 28,
-                backgroundColor: "white",
+                backgroundColor: "var(--surface-base-default)",
                 borderRadius: 16,
               }}
             >
@@ -232,7 +233,7 @@ function ButtonPlayground() {
         <div
           style={{
             padding: "10px 16px",
-            backgroundColor: "#18181b",
+            backgroundColor: "var(--docs-code-surface)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
@@ -250,8 +251,8 @@ function ButtonPlayground() {
             padding: 16,
             fontSize: 13,
             lineHeight: 1.6,
-            color: "#e4e4e7",
-            backgroundColor: "#18181b",
+            color: "var(--docs-code-text)",
+            backgroundColor: "var(--docs-code-surface)",
             fontFamily: "'SF Mono', 'Fira Code', monospace",
             overflow: "auto",
           }}
@@ -789,8 +790,8 @@ function DesignContent() {
               <button
                 style={{
                   padding: "10px 24px",
-                  backgroundColor: "#2563eb",
-                  color: "white",
+                  backgroundColor: "var(--surface-brand-default)",
+                  color: "var(--content-base-onColor)",
                   border: "none",
                   borderRadius: 20,
                   fontSize: 14,
@@ -977,8 +978,8 @@ function WebContent() {
               padding: "8px 16px",
               fontSize: 13,
               fontWeight: 500,
-              color: "white",
-              backgroundColor: "#24292f",
+              color: "var(--content-base-onColor)",
+              backgroundColor: "var(--docs-code-surface)",
               borderRadius: 12,
               textDecoration: "none",
             }}
@@ -1180,8 +1181,8 @@ function RNContent() {
               padding: "8px 16px",
               fontSize: 13,
               fontWeight: 500,
-              color: "white",
-              backgroundColor: "#24292f",
+              color: "var(--content-base-onColor)",
+              backgroundColor: "var(--docs-code-surface)",
               borderRadius: 12,
               textDecoration: "none",
             }}
@@ -1413,8 +1414,8 @@ function UsageCard({ situation, desc, buttonType, color, examples }: {
       gridTemplateColumns: "1fr auto",
       gap: 16,
       padding: 16,
-      backgroundColor: "white",
-      borderRadius: 12,
+      backgroundColor: "var(--surface-base-default)",
+      borderRadius: 8,
       border: "1px solid var(--divider)",
       alignItems: "center",
     }}>
@@ -1424,8 +1425,8 @@ function UsageCard({ situation, desc, buttonType, color, examples }: {
           <span style={{
             fontSize: 11,
             padding: "2px 6px",
-            backgroundColor: buttonType === "filled" ? "#dbeafe" : "#f1f5f9",
-            color: buttonType === "filled" ? "#1d4ed8" : "#475569",
+            backgroundColor: buttonType === "filled" ? "var(--surface-brand-secondary)" : "var(--surface-base-alternative)",
+            color: buttonType === "filled" ? "var(--content-brand-default)" : "var(--content-base-secondary)",
             borderRadius: 4,
             fontWeight: 500,
           }}>
@@ -1453,7 +1454,7 @@ function PlacementExample({ title, left, right, note }: {
   return (
     <div style={{
       padding: 20,
-      backgroundColor: "white",
+      backgroundColor: "var(--surface-base-default)",
       borderRadius: 12,
       border: "1px solid var(--divider)",
     }}>
@@ -1463,7 +1464,7 @@ function PlacementExample({ title, left, right, note }: {
         justifyContent: "flex-end",
         gap: 8,
         padding: 20,
-        backgroundColor: "#f8f9fa",
+        backgroundColor: "var(--surface-base-alternative)",
         borderRadius: 12,
       }}>
         <ButtonDemo buttonType={left.type} color={left.color} size="small">{left.label}</ButtonDemo>
@@ -1480,7 +1481,7 @@ function PlacementExample({ title, left, right, note }: {
 function AnatomyDiagram() {
   return (
     <div style={{
-      backgroundColor: "#f5f5f7",
+      backgroundColor: "var(--surface-base-container)",
       borderRadius: 16,
       padding: "60px 40px",
       display: "flex",
@@ -1490,39 +1491,39 @@ function AnatomyDiagram() {
       <svg width="400" height="120" viewBox="0 0 400 120">
         {/* Lines */}
         {/* Line from circle 1 to leading icon */}
-        <line x1="60" y1="50" x2="120" y2="50" stroke="#374151" strokeWidth="1.5" />
-        <circle cx="120" cy="50" r="3" fill="#374151" />
+        <line x1="60" y1="50" x2="120" y2="50" stroke="var(--content-base-default)" strokeWidth="1.5" />
+        <circle cx="120" cy="50" r="3" fill="var(--content-base-default)" />
 
         {/* Line from circle 2 to label (vertical) */}
-        <line x1="200" y1="50" x2="200" y2="85" stroke="#374151" strokeWidth="1.5" />
-        <circle cx="200" cy="50" r="3" fill="#374151" />
+        <line x1="200" y1="50" x2="200" y2="85" stroke="var(--content-base-default)" strokeWidth="1.5" />
+        <circle cx="200" cy="50" r="3" fill="var(--content-base-default)" />
 
         {/* Line from circle 3 to trailing icon */}
-        <line x1="280" y1="50" x2="340" y2="50" stroke="#374151" strokeWidth="1.5" />
-        <circle cx="280" cy="50" r="3" fill="#374151" />
+        <line x1="280" y1="50" x2="340" y2="50" stroke="var(--content-base-default)" strokeWidth="1.5" />
+        <circle cx="280" cy="50" r="3" fill="var(--content-base-default)" />
 
         {/* Numbered circles */}
         {/* Circle 1 */}
-        <circle cx="45" cy="50" r="16" fill="#374151" />
-        <text x="45" y="55" textAnchor="middle" fill="white" fontSize="13" fontWeight="600">1</text>
+        <circle cx="45" cy="50" r="16" fill="var(--content-base-default)" />
+        <text x="45" y="55" textAnchor="middle" fill="var(--content-base-onColor)" fontSize="13" fontWeight="600">1</text>
 
         {/* Circle 2 */}
-        <circle cx="200" cy="100" r="16" fill="#374151" />
-        <text x="200" y="105" textAnchor="middle" fill="white" fontSize="13" fontWeight="600">2</text>
+        <circle cx="200" cy="100" r="16" fill="var(--content-base-default)" />
+        <text x="200" y="105" textAnchor="middle" fill="var(--content-base-onColor)" fontSize="13" fontWeight="600">2</text>
 
         {/* Circle 3 */}
-        <circle cx="355" cy="50" r="16" fill="#374151" />
-        <text x="355" y="55" textAnchor="middle" fill="white" fontSize="13" fontWeight="600">3</text>
+        <circle cx="355" cy="50" r="16" fill="var(--content-base-default)" />
+        <text x="355" y="55" textAnchor="middle" fill="var(--content-base-onColor)" fontSize="13" fontWeight="600">3</text>
 
         {/* Button content */}
         {/* Leading icon placeholder (dashed box) */}
-        <rect x="125" y="38" width="24" height="24" rx="4" fill="none" stroke="#3b82f6" strokeWidth="1.5" strokeDasharray="3 2" />
+        <rect x="125" y="38" width="24" height="24" rx="4" fill="none" stroke="var(--border-brand-default)" strokeWidth="1.5" strokeDasharray="3 2" />
 
         {/* Text button label */}
-        <text x="200" y="55" textAnchor="middle" fill="#3b82f6" fontSize="16" fontWeight="600">Text button</text>
+        <text x="200" y="55" textAnchor="middle" fill="var(--content-brand-default)" fontSize="16" fontWeight="600">Text button</text>
 
         {/* Trailing icon placeholder (dashed box) */}
-        <rect x="251" y="38" width="24" height="24" rx="4" fill="none" stroke="#3b82f6" strokeWidth="1.5" strokeDasharray="3 2" />
+        <rect x="251" y="38" width="24" height="24" rx="4" fill="none" stroke="var(--border-brand-default)" strokeWidth="1.5" strokeDasharray="3 2" />
       </svg>
     </div>
   );
@@ -1546,15 +1547,15 @@ function StateDemo({ label, state }: { label: string; state: "default" | "hover"
 
     switch (state) {
       case "default":
-        return { ...base, backgroundColor: "#2563eb", color: "white" };
+        return { ...base, backgroundColor: "var(--surface-brand-default)", color: "var(--content-base-onColor)" };
       case "hover":
-        return { ...base, backgroundColor: "#1d4ed8", color: "white" };
+        return { ...base, backgroundColor: "var(--surface-brand-defaultPressed)", color: "var(--content-base-onColor)" };
       case "pressed":
-        return { ...base, backgroundColor: "#1e40af", color: "white", transform: "scale(0.98)" };
+        return { ...base, backgroundColor: "var(--surface-brand-defaultPressed)", color: "var(--content-base-onColor)", transform: "scale(0.98)" };
       case "focus":
-        return { ...base, backgroundColor: "#2563eb", color: "white", boxShadow: "0 0 0 3px rgba(37, 99, 235, 0.4)" };
+        return { ...base, backgroundColor: "var(--surface-brand-default)", color: "var(--content-base-onColor)", boxShadow: "0 0 0 3px var(--surface-brand-secondary)" };
       case "disabled":
-        return { ...base, backgroundColor: "#e2e8f0", color: "#94a3b8" };
+        return { ...base, backgroundColor: "var(--surface-disabled-default)", color: "var(--content-disabled-default)" };
     }
   };
 
@@ -1671,10 +1672,10 @@ function KakaoIcon() {
 function GoogleIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" style={{ marginRight: 4 }}>
-      <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-      <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-      <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-      <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+      <path fill={BRAND_EXTERNAL_COLORS.google.blue} d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+      <path fill={BRAND_EXTERNAL_COLORS.google.green} d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+      <path fill={BRAND_EXTERNAL_COLORS.google.yellow} d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+      <path fill={BRAND_EXTERNAL_COLORS.google.red} d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
     </svg>
   );
 }

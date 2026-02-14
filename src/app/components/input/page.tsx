@@ -37,7 +37,7 @@ function Input({ label, placeholder, value, onChange, error, disabled, type = "t
           padding: "0 14px",
           fontSize: 14,
           borderRadius: "var(--radius-md)",
-          border: `1px solid ${error ? "var(--red-500, #EF4444)" : focused ? "var(--brand-primary)" : "var(--divider)"}`,
+          border: `1px solid ${error ? "var(--status-negative-border)" : focused ? "var(--brand-primary)" : "var(--divider)"}`,
           backgroundColor: disabled ? "var(--bg-secondary)" : "var(--bg-primary)",
           color: disabled ? "var(--text-tertiary)" : "var(--text-primary)",
           outline: "none",
@@ -46,7 +46,7 @@ function Input({ label, placeholder, value, onChange, error, disabled, type = "t
         }}
       />
       {(error || helperText) && (
-        <span className="text-xs" style={{ color: error ? "var(--red-500, #EF4444)" : "var(--text-tertiary)" }}>
+        <span className="text-xs" style={{ color: error ? "var(--status-negative-content)" : "var(--text-tertiary)" }}>
           {error || helperText}
         </span>
       )}

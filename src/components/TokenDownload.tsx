@@ -25,7 +25,7 @@ export function TokenDownload({ files }: TokenDownloadProps) {
             alignItems: 'center',
             gap: 'var(--space-3)',
             padding: 'var(--space-3) var(--space-6)',
-            backgroundColor: '#fff',
+            backgroundColor: 'var(--surface-base-default)',
             borderRadius: 'var(--radius-md)',
             textDecoration: 'none',
             border: '1px solid var(--brand-primary)',
@@ -36,7 +36,7 @@ export function TokenDownload({ files }: TokenDownloadProps) {
             e.currentTarget.style.borderColor = 'var(--brand-hover)';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = '#fff';
+            e.currentTarget.style.backgroundColor = 'var(--surface-base-default)';
             e.currentTarget.style.borderColor = 'var(--brand-primary)';
           }}
         >

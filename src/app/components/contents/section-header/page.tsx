@@ -43,10 +43,10 @@ function SectionHeaderPlayground() {
 
   return (
     <div style={{ marginBottom: 32 }}>
-      <div style={{ borderRadius: 20, overflow: "hidden", backgroundColor: "#fafbfc" }}>
+      <div style={{ borderRadius: 20, overflow: "hidden", backgroundColor: "var(--surface-base-alternative)" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
           <div style={{ padding: 60, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <div style={{ width: 320, backgroundColor: "white", borderRadius: 16, overflow: "hidden", boxShadow: "0 1px 3px rgba(0,0,0,0.1)" }}>
+            <div style={{ width: 320, backgroundColor: "var(--surface-base-default)", borderRadius: 16, overflow: "hidden", boxShadow: "0 1px 3px var(--shadow-primitive-xs)" }}>
               <SectionHeaderDemo
                 size={size}
                 title="내 자산"
@@ -59,7 +59,7 @@ function SectionHeaderPlayground() {
           </div>
 
           <div style={{
-            backgroundColor: "#fafbfc",
+            backgroundColor: "var(--surface-base-alternative)",
             display: "flex",
             flexDirection: "column",
             padding: 16,
@@ -75,7 +75,7 @@ function SectionHeaderPlayground() {
               display: "flex",
               flexDirection: "column",
               gap: 28,
-              backgroundColor: "white",
+              backgroundColor: "var(--surface-base-default)",
               borderRadius: 16,
             }}>
               <RadioGroup
@@ -123,7 +123,7 @@ function UsageCard({ situation, description, example }: {
       gridTemplateColumns: "1fr",
       gap: 4,
       padding: 16,
-      backgroundColor: "white",
+      backgroundColor: "var(--surface-base-default)",
       borderRadius: 12,
       border: "1px solid var(--divider)",
     }}>
@@ -139,17 +139,17 @@ function DesignContent() {
     <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
       {/* Anatomy */}
       <Section title="Anatomy">
-        <div style={{ backgroundColor: "#f5f5f7", borderRadius: 16, padding: "48px 40px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div style={{ backgroundColor: "var(--surface-base-container)", borderRadius: 16, padding: "48px 40px", display: "flex", alignItems: "center", justifyContent: "center" }}>
           <svg width="360" height="60" viewBox="0 0 360 60">
-            <rect x="0" y="20" width="360" height="32" rx="0" fill="white" stroke="#e2e8f0" strokeWidth="1" />
-            <text x="16" y="40" fill="#94a3b8" fontSize="14" fontWeight="600">내 자산</text>
-            <text x="344" y="40" textAnchor="end" fill="#2563eb" fontSize="12" fontWeight="500">전체보기</text>
-            <line x1="80" y1="0" x2="80" y2="20" stroke="#374151" strokeWidth="1.5" />
-            <circle cx="80" cy="0" r="10" fill="#374151" />
-            <text x="80" y="4" textAnchor="middle" fill="white" fontSize="10" fontWeight="600">1</text>
-            <line x1="310" y1="52" x2="310" y2="60" stroke="#374151" strokeWidth="1.5" />
-            <circle cx="310" cy="60" r="10" fill="#374151" />
-            <text x="310" y="64" textAnchor="middle" fill="white" fontSize="10" fontWeight="600">2</text>
+            <rect x="0" y="20" width="360" height="32" rx="0" fill="var(--surface-base-default)" stroke="var(--divider)" strokeWidth="1" />
+            <text x="16" y="40" fill="var(--content-base-neutral)" fontSize="14" fontWeight="600">내 자산</text>
+            <text x="344" y="40" textAnchor="end" fill="var(--content-brand-default)" fontSize="12" fontWeight="500">전체보기</text>
+            <line x1="80" y1="0" x2="80" y2="20" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <circle cx="80" cy="0" r="10" fill="var(--content-base-default)" />
+            <text x="80" y="4" textAnchor="middle" fill="var(--content-base-onColor)" fontSize="10" fontWeight="600">1</text>
+            <line x1="310" y1="52" x2="310" y2="60" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <circle cx="310" cy="60" r="10" fill="var(--content-base-default)" />
+            <text x="310" y="64" textAnchor="middle" fill="var(--content-base-onColor)" fontSize="10" fontWeight="600">2</text>
           </svg>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 20, fontSize: 14, fontWeight: 500, color: "var(--text-primary)" }}>
@@ -170,7 +170,7 @@ function DesignContent() {
           >
             <div style={{ width: "100%", maxWidth: 280 }}>
               <SectionHeaderDemo title="내 자산" />
-              <div style={{ borderTop: "1px solid #f1f5f9", padding: "8px 16px", fontSize: 13, color: "#94a3b8" }}>List items...</div>
+              <div style={{ borderTop: "1px solid var(--border-solid-alternative)", padding: "8px 16px", fontSize: 13, color: "var(--content-base-neutral)" }}>List items...</div>
             </div>
           </VariantCard>
           <VariantCard
@@ -179,7 +179,7 @@ function DesignContent() {
           >
             <div style={{ width: "100%", maxWidth: 280 }}>
               <SectionHeaderDemo title="최근 거래" action={<ActionButton>전체보기</ActionButton>} />
-              <div style={{ borderTop: "1px solid #f1f5f9", padding: "8px 16px", fontSize: 13, color: "#94a3b8" }}>List items...</div>
+              <div style={{ borderTop: "1px solid var(--border-solid-alternative)", padding: "8px 16px", fontSize: 13, color: "var(--content-base-neutral)" }}>List items...</div>
             </div>
           </VariantCard>
           <VariantCard
@@ -188,10 +188,10 @@ function DesignContent() {
           >
             <div style={{ width: "100%", maxWidth: 280 }}>
               <div style={{ paddingLeft: 16, paddingRight: 16, paddingTop: 16, paddingBottom: 8 }}>
-                <div style={{ fontSize: 14, fontWeight: 600, color: "#94a3b8", textTransform: "uppercase" as const, letterSpacing: "0.02em" }}>내 자산</div>
-                <div style={{ fontSize: 12, color: "#cbd5e1", marginTop: 2 }}>총 3개 자산 보유 중</div>
+                <div style={{ fontSize: 14, fontWeight: 600, color: "var(--content-base-neutral)", textTransform: "uppercase" as const, letterSpacing: "0.02em" }}>내 자산</div>
+                <div style={{ fontSize: 12, color: "var(--content-base-assistive)", marginTop: 2 }}>총 3개 자산 보유 중</div>
               </div>
-              <div style={{ borderTop: "1px solid #f1f5f9", padding: "8px 16px", fontSize: 13, color: "#94a3b8" }}>List items...</div>
+              <div style={{ borderTop: "1px solid var(--border-solid-alternative)", padding: "8px 16px", fontSize: 13, color: "var(--content-base-neutral)" }}>List items...</div>
             </div>
           </VariantCard>
           <VariantCard
@@ -201,12 +201,12 @@ function DesignContent() {
             <div style={{ width: "100%", maxWidth: 280 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", paddingLeft: 16, paddingRight: 16, paddingTop: 16, paddingBottom: 8 }}>
                 <div>
-                  <div style={{ fontSize: 14, fontWeight: 600, color: "#94a3b8", textTransform: "uppercase" as const, letterSpacing: "0.02em" }}>거래소 연동</div>
-                  <div style={{ fontSize: 12, color: "#cbd5e1", marginTop: 2 }}>2개 연결됨</div>
+                  <div style={{ fontSize: 14, fontWeight: 600, color: "var(--content-base-neutral)", textTransform: "uppercase" as const, letterSpacing: "0.02em" }}>거래소 연동</div>
+                  <div style={{ fontSize: 12, color: "var(--content-base-assistive)", marginTop: 2 }}>2개 연결됨</div>
                 </div>
                 <ActionButton>+ 추가</ActionButton>
               </div>
-              <div style={{ borderTop: "1px solid #f1f5f9", padding: "8px 16px", fontSize: 13, color: "#94a3b8" }}>List items...</div>
+              <div style={{ borderTop: "1px solid var(--border-solid-alternative)", padding: "8px 16px", fontSize: 13, color: "var(--content-base-neutral)" }}>List items...</div>
             </div>
           </VariantCard>
         </div>
@@ -216,24 +216,24 @@ function DesignContent() {
       <Section title="ZKAP Examples">
         <PreviewBox>
           <div style={{ padding: 24, width: "100%", display: "flex", flexDirection: "column", gap: 20 }}>
-            <div style={{ backgroundColor: "white", borderRadius: 16, overflow: "hidden", maxWidth: 360, boxShadow: "0 1px 3px rgba(0,0,0,0.1)" }}>
+            <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: 16, overflow: "hidden", maxWidth: 360, boxShadow: "0 1px 3px var(--shadow-primitive-xs)" }}>
               <SectionHeaderDemo title="내 자산" action={<ActionButton>전체보기</ActionButton>} />
               <ListCellSimple title="Ethereum" value="₩3,245,000" />
               <ListCellSimple title="Bitcoin" value="₩2,890,000" />
               <ListCellSimple title="Solana" value="₩1,560,000" />
             </div>
 
-            <div style={{ backgroundColor: "white", borderRadius: 16, overflow: "hidden", maxWidth: 360, boxShadow: "0 1px 3px rgba(0,0,0,0.1)" }}>
+            <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: 16, overflow: "hidden", maxWidth: 360, boxShadow: "0 1px 3px var(--shadow-primitive-xs)" }}>
               <SectionHeaderDemo title="설정" />
               <ListCellSimple title="알림 설정" icon="›" />
               <ListCellSimple title="보안" icon="›" />
               <ListCellSimple title="계정 정보" icon="›" />
             </div>
 
-            <div style={{ backgroundColor: "white", borderRadius: 16, overflow: "hidden", maxWidth: 360, boxShadow: "0 1px 3px rgba(0,0,0,0.1)" }}>
+            <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: 16, overflow: "hidden", maxWidth: 360, boxShadow: "0 1px 3px var(--shadow-primitive-xs)" }}>
               <SectionHeaderDemo title="거래소 연동" action={<ActionButton>+ 추가</ActionButton>} />
-              <ListCellSimple title="업비트" value="연결됨" valueColor="#22c55e" />
-              <ListCellSimple title="빗썸" value="연결하기" valueColor="#2563eb" />
+              <ListCellSimple title="업비트" value="연결됨" valueColor="var(--content-success-default)" />
+              <ListCellSimple title="빗썸" value="연결하기" valueColor="var(--content-brand-default)" />
             </div>
           </div>
         </PreviewBox>
@@ -243,11 +243,11 @@ function DesignContent() {
       <Section title="Sizes">
         <PreviewBox>
           <div style={{ padding: 24, width: "100%" }}>
-            <div style={{ backgroundColor: "white", borderRadius: 12, border: "1px solid #e2e8f0", overflow: "hidden", maxWidth: 360 }}>
+            <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: 12, border: "1px solid var(--divider)", overflow: "hidden", maxWidth: 360 }}>
               <SectionHeaderDemo size="small" title="Small (13px)" />
-              <div style={{ height: 1, backgroundColor: "#e2e8f0" }} />
+              <div style={{ height: 1, backgroundColor: "var(--divider)" }} />
               <SectionHeaderDemo size="medium" title="Medium (14px)" />
-              <div style={{ height: 1, backgroundColor: "#e2e8f0" }} />
+              <div style={{ height: 1, backgroundColor: "var(--divider)" }} />
               <SectionHeaderDemo size="large" title="Large (15px)" />
             </div>
           </div>
@@ -273,41 +273,41 @@ function DesignContent() {
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>Title</td>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "#94a3b8" }} />
-                    <code style={{ fontSize: 12 }}>#94a3b8</code>
+                    <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "var(--content-base-neutral)" }} />
+                    <code style={{ fontSize: 12 }}>var(--content-base-neutral)</code>
                   </div>
                 </td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "#6366f1" }}>content.base.tertiary</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "var(--content-brand-default)" }}>content.base.neutral</td>
               </tr>
               <tr>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>Subtitle</td>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "#cbd5e1" }} />
-                    <code style={{ fontSize: 12 }}>#cbd5e1</code>
+                    <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "var(--content-base-assistive)" }} />
+                    <code style={{ fontSize: 12 }}>var(--content-base-assistive)</code>
                   </div>
                 </td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "#6366f1" }}>content.base.quaternary</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "var(--content-brand-default)" }}>content.base.assistive</td>
               </tr>
               <tr>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>Action (Brand)</td>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "#2563eb" }} />
-                    <code style={{ fontSize: 12 }}>#2563eb</code>
+                    <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "var(--content-brand-default)" }} />
+                    <code style={{ fontSize: 12 }}>var(--content-brand-default)</code>
                   </div>
                 </td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "#6366f1" }}>content.brand.default</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "var(--content-brand-default)" }}>content.brand.default</td>
               </tr>
               <tr>
                 <td style={{ padding: "12px 16px" }}>Action (Base)</td>
                 <td style={{ padding: "12px 16px" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "#64748b" }} />
-                    <code style={{ fontSize: 12 }}>#64748b</code>
+                    <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "var(--content-base-secondary)" }} />
+                    <code style={{ fontSize: 12 }}>var(--content-base-secondary)</code>
                   </div>
                 </td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 12, color: "#6366f1" }}>content.base.secondary</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 12, color: "var(--content-brand-default)" }}>content.base.secondary</td>
               </tr>
             </tbody>
           </table>
@@ -323,7 +323,7 @@ function DesignContent() {
         <Subsection title="Default">
           <PreviewBox>
             <div style={{ padding: 24, width: "100%" }}>
-              <div style={{ backgroundColor: "white", borderRadius: 12, overflow: "hidden", maxWidth: 360, border: "1px solid #e2e8f0" }}>
+              <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: 12, overflow: "hidden", maxWidth: 360, border: "1px solid var(--divider)" }}>
                 <SectionHeaderDemo title="내 자산" action={<ActionButton>전체보기</ActionButton>} />
                 <ListCellSimple title="Ethereum" value="₩3,245,000" />
                 <ListCellSimple title="Bitcoin" value="₩2,890,000" />
@@ -338,7 +338,7 @@ function DesignContent() {
         <Subsection title="With Collapsible">
           <PreviewBox>
             <div style={{ padding: 24, width: "100%" }}>
-              <div style={{ backgroundColor: "white", borderRadius: 12, overflow: "hidden", maxWidth: 360, border: "1px solid #e2e8f0" }}>
+              <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: 12, overflow: "hidden", maxWidth: 360, border: "1px solid var(--divider)" }}>
                 <div style={{
                   display: "flex",
                   alignItems: "center",
@@ -346,8 +346,8 @@ function DesignContent() {
                   padding: "16px 16px 8px 16px",
                   cursor: "pointer",
                 }}>
-                  <div style={{ fontSize: 14, fontWeight: 600, color: "#94a3b8", textTransform: "uppercase" as const, letterSpacing: "0.02em" }}>내 자산</div>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <div style={{ fontSize: 14, fontWeight: 600, color: "var(--content-base-neutral)", textTransform: "uppercase" as const, letterSpacing: "0.02em" }}>내 자산</div>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--content-base-neutral)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <polyline points="6 9 12 15 18 9" />
                   </svg>
                 </div>
@@ -376,28 +376,28 @@ function DesignContent() {
             <tbody>
               <tr>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>Padding X</td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", color: "#6366f1", fontSize: 12 }}>spacing.primitive.4</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", color: "var(--content-brand-default)", fontSize: 12 }}>spacing.primitive.4</td>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>16px</td>
               </tr>
               <tr>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>Padding Top</td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", color: "#6366f1", fontSize: 12 }}>spacing.primitive.4</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", color: "var(--content-brand-default)", fontSize: 12 }}>spacing.primitive.4</td>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>16px</td>
               </tr>
               <tr>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>Padding Bottom</td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", color: "#6366f1", fontSize: 12 }}>spacing.primitive.2</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", color: "var(--content-brand-default)", fontSize: 12 }}>spacing.primitive.2</td>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>8px</td>
               </tr>
               <tr>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>Font Weight</td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", color: "#6366f1", fontSize: 12 }}>-</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", color: "var(--content-brand-default)", fontSize: 12 }}>-</td>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>600</td>
               </tr>
               <tr>
                 <td style={{ padding: "12px 16px" }}>Text Color</td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1", fontSize: 12 }}>content.base.tertiary</td>
-                <td style={{ padding: "12px 16px" }}>#94a3b8</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)", fontSize: 12 }}>content.base.neutral</td>
+                <td style={{ padding: "12px 16px" }}>var(--content-base-neutral)</td>
               </tr>
             </tbody>
           </table>
@@ -478,12 +478,12 @@ function DesignContent() {
           <DoCard>
             <div style={{ width: "100%", maxWidth: 220 }}>
               <SectionHeaderDemo title="내 자산" />
-              <div style={{ borderTop: "1px solid #f1f5f9", padding: "8px 16px", fontSize: 12, color: "#94a3b8" }}>List items</div>
+              <div style={{ borderTop: "1px solid var(--border-solid-alternative)", padding: "8px 16px", fontSize: 12, color: "var(--content-base-neutral)" }}>List items</div>
             </div>
           </DoCard>
           <DontCard>
             <div style={{ width: "100%", maxWidth: 220, padding: "12px 16px" }}>
-              <div style={{ fontSize: 16, fontWeight: 700, color: "#334155" }}>내 자산 현황 목록입니다</div>
+              <div style={{ fontSize: 16, fontWeight: 700, color: "var(--content-base-default)" }}>내 자산 현황 목록입니다</div>
             </div>
           </DontCard>
         </div>
@@ -496,14 +496,14 @@ function DesignContent() {
           <DoCard>
             <div style={{ width: "100%", maxWidth: 220 }}>
               <SectionHeaderDemo title="최근 거래" action={<ActionButton>전체보기</ActionButton>} />
-              <div style={{ borderTop: "1px solid #f1f5f9", padding: "8px 16px", fontSize: 12, color: "#94a3b8" }}>List items</div>
+              <div style={{ borderTop: "1px solid var(--border-solid-alternative)", padding: "8px 16px", fontSize: 12, color: "var(--content-base-neutral)" }}>List items</div>
             </div>
           </DoCard>
           <DontCard>
             <div style={{ width: "100%", maxWidth: 220 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 16px" }}>
-                <div style={{ fontSize: 14, fontWeight: 600, color: "#94a3b8", textTransform: "uppercase" as const }}>최근 거래</div>
-                <button style={{ padding: "8px 16px", backgroundColor: "#2563eb", color: "white", border: "none", borderRadius: 8, fontSize: 13, fontWeight: 600 }}>전체보기</button>
+                <div style={{ fontSize: 14, fontWeight: 600, color: "var(--content-base-neutral)", textTransform: "uppercase" as const }}>최근 거래</div>
+                <button style={{ padding: "8px 16px", backgroundColor: "var(--content-brand-default)", color: "var(--content-base-onColor)", border: "none", borderRadius: 8, fontSize: 13, fontWeight: 600 }}>전체보기</button>
               </div>
             </div>
           </DontCard>
@@ -521,12 +521,12 @@ function WebContent() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
       <Section title="Source Code">
-        <div style={{ padding: 16, backgroundColor: "#f8fafc", borderRadius: 12, border: "1px solid #e2e8f0" }}>
+        <div style={{ padding: 16, backgroundColor: "var(--surface-base-alternative)", borderRadius: 12, border: "1px solid var(--divider)" }}>
           <a
-            href="https://github.com/your-org/design-system/tree/main/packages/design-system/src/components/SectionHeader"
+            href="https://github.com/baerae-zkap/design-foundation/tree/main/packages/design-system/src/components/SectionHeader"
             target="_blank"
             rel="noopener noreferrer"
-            style={{ color: "#2563eb", textDecoration: "none", fontSize: 14, fontWeight: 500 }}
+            style={{ color: "var(--content-brand-default)", textDecoration: "none", fontSize: 14, fontWeight: 500 }}
           >
             View on GitHub →
           </a>
@@ -540,7 +540,7 @@ function WebContent() {
       <Section title="Basic Usage">
         <PreviewBox>
           <div style={{ padding: 24 }}>
-            <div style={{ backgroundColor: "white", borderRadius: 16, overflow: "hidden", maxWidth: 360, boxShadow: "0 1px 3px rgba(0,0,0,0.1)" }}>
+            <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: 16, overflow: "hidden", maxWidth: 360, boxShadow: "0 1px 3px var(--shadow-primitive-xs)" }}>
               <SectionHeaderDemo title="내 자산" />
               <ListCellSimple title="Ethereum" value="₩3,245,000" />
               <ListCellSimple title="Bitcoin" value="₩2,890,000" />
@@ -553,10 +553,10 @@ function WebContent() {
       <Section title="With Action Button">
         <PreviewBox>
           <div style={{ padding: 24 }}>
-            <div style={{ backgroundColor: "white", borderRadius: 16, overflow: "hidden", maxWidth: 360, boxShadow: "0 1px 3px rgba(0,0,0,0.1)" }}>
+            <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: 16, overflow: "hidden", maxWidth: 360, boxShadow: "0 1px 3px var(--shadow-primitive-xs)" }}>
               <SectionHeaderDemo title="최근 거래" action={<ActionButton>전체보기</ActionButton>} />
-              <ListCellSimple title="Ethereum" value="+0.5 ETH" valueColor="#22c55e" />
-              <ListCellSimple title="Bitcoin" value="-0.02 BTC" valueColor="#ef4444" />
+              <ListCellSimple title="Ethereum" value="+0.5 ETH" valueColor="var(--content-success-default)" />
+              <ListCellSimple title="Bitcoin" value="-0.02 BTC" valueColor="var(--content-error-default)" />
             </div>
           </div>
         </PreviewBox>
@@ -575,15 +575,15 @@ function WebContent() {
       <Section title="Sizes">
         <PreviewBox>
           <div style={{ padding: 24, display: "flex", flexDirection: "column", gap: 16 }}>
-            <div style={{ backgroundColor: "white", borderRadius: 12, overflow: "hidden", maxWidth: 360, border: "1px solid #e2e8f0" }}>
+            <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: 12, overflow: "hidden", maxWidth: 360, border: "1px solid var(--divider)" }}>
               <SectionHeaderDemo size="small" title="Small (13px)" />
               <ListCellSimple title="Item 1" />
             </div>
-            <div style={{ backgroundColor: "white", borderRadius: 12, overflow: "hidden", maxWidth: 360, border: "1px solid #e2e8f0" }}>
+            <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: 12, overflow: "hidden", maxWidth: 360, border: "1px solid var(--divider)" }}>
               <SectionHeaderDemo size="medium" title="Medium (14px)" />
               <ListCellSimple title="Item 1" />
             </div>
-            <div style={{ backgroundColor: "white", borderRadius: 12, overflow: "hidden", maxWidth: 360, border: "1px solid #e2e8f0" }}>
+            <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: 12, overflow: "hidden", maxWidth: 360, border: "1px solid var(--divider)" }}>
               <SectionHeaderDemo size="large" title="Large (15px)" />
               <ListCellSimple title="Item 1" />
             </div>
@@ -622,12 +622,12 @@ function RNContent() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
       <Section title="Source Code">
-        <div style={{ padding: 16, backgroundColor: "#f8fafc", borderRadius: 12, border: "1px solid #e2e8f0" }}>
+        <div style={{ padding: 16, backgroundColor: "var(--surface-base-alternative)", borderRadius: 12, border: "1px solid var(--divider)" }}>
           <a
-            href="https://github.com/your-org/design-system/tree/main/packages/design-system/src/native/SectionHeader.tsx"
+            href="https://github.com/baerae-zkap/design-foundation/tree/main/packages/design-system/src/native/SectionHeader"
             target="_blank"
             rel="noopener noreferrer"
-            style={{ color: "#2563eb", textDecoration: "none", fontSize: 14, fontWeight: 500 }}
+            style={{ color: "var(--content-brand-default)", textDecoration: "none", fontSize: 14, fontWeight: 500 }}
           >
             View on GitHub →
           </a>
@@ -642,7 +642,7 @@ import { View, Text } from 'react-native';`} />
       <Section title="Basic Usage">
         <PreviewBox>
           <div style={{ padding: 24 }}>
-            <div style={{ backgroundColor: "white", borderRadius: 16, overflow: "hidden", maxWidth: 360, boxShadow: "0 1px 3px rgba(0,0,0,0.1)" }}>
+            <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: 16, overflow: "hidden", maxWidth: 360, boxShadow: "0 1px 3px var(--shadow-primitive-xs)" }}>
               <SectionHeaderDemo title="내 자산" />
               <ListCellSimple title="Ethereum" value="₩3,245,000" />
               <ListCellSimple title="Bitcoin" value="₩2,890,000" />
@@ -655,10 +655,10 @@ import { View, Text } from 'react-native';`} />
       <Section title="With Action Button">
         <PreviewBox>
           <div style={{ padding: 24 }}>
-            <div style={{ backgroundColor: "white", borderRadius: 16, overflow: "hidden", maxWidth: 360, boxShadow: "0 1px 3px rgba(0,0,0,0.1)" }}>
+            <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: 16, overflow: "hidden", maxWidth: 360, boxShadow: "0 1px 3px var(--shadow-primitive-xs)" }}>
               <SectionHeaderDemo title="최근 거래" action={<ActionButton>전체보기</ActionButton>} />
-              <ListCellSimple title="Ethereum" value="+0.5 ETH" valueColor="#22c55e" />
-              <ListCellSimple title="Bitcoin" value="-0.02 BTC" valueColor="#ef4444" />
+              <ListCellSimple title="Ethereum" value="+0.5 ETH" valueColor="var(--content-success-default)" />
+              <ListCellSimple title="Bitcoin" value="-0.02 BTC" valueColor="var(--content-error-default)" />
             </div>
           </div>
         </PreviewBox>
@@ -677,15 +677,15 @@ import { View, Text } from 'react-native';`} />
       <Section title="Sizes">
         <PreviewBox>
           <div style={{ padding: 24, display: "flex", flexDirection: "column", gap: 16 }}>
-            <div style={{ backgroundColor: "white", borderRadius: 12, overflow: "hidden", maxWidth: 360, border: "1px solid #e2e8f0" }}>
+            <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: 12, overflow: "hidden", maxWidth: 360, border: "1px solid var(--divider)" }}>
               <SectionHeaderDemo size="small" title="Small (13px)" />
               <ListCellSimple title="Item 1" />
             </div>
-            <div style={{ backgroundColor: "white", borderRadius: 12, overflow: "hidden", maxWidth: 360, border: "1px solid #e2e8f0" }}>
+            <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: 12, overflow: "hidden", maxWidth: 360, border: "1px solid var(--divider)" }}>
               <SectionHeaderDemo size="medium" title="Medium (14px)" />
               <ListCellSimple title="Item 1" />
             </div>
-            <div style={{ backgroundColor: "white", borderRadius: 12, overflow: "hidden", maxWidth: 360, border: "1px solid #e2e8f0" }}>
+            <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: 12, overflow: "hidden", maxWidth: 360, border: "1px solid var(--divider)" }}>
               <SectionHeaderDemo size="large" title="Large (15px)" />
               <ListCellSimple title="Item 1" />
             </div>
@@ -731,7 +731,7 @@ function ActionButton({ children }: { children: React.ReactNode }) {
     <button style={{
       fontSize: 12,
       fontWeight: 500,
-      color: "#2563eb",
+      color: "var(--content-brand-default)",
       background: "none",
       border: "none",
       cursor: "pointer",
@@ -749,11 +749,11 @@ function ListCellSimple({ title, value, icon, valueColor }: { title: string; val
       alignItems: "center",
       justifyContent: "space-between",
       padding: "12px 16px",
-      borderBottom: "1px solid #f1f5f9",
+      borderBottom: "1px solid var(--border-solid-alternative)",
     }}>
-      <span style={{ fontSize: 14, color: "#334155" }}>{title}</span>
-      {value && <span style={{ fontSize: 13, color: valueColor || "#64748b", fontWeight: 500 }}>{value}</span>}
-      {icon && <span style={{ fontSize: 18, color: "#94a3b8" }}>{icon}</span>}
+      <span style={{ fontSize: 14, color: "var(--content-base-default)" }}>{title}</span>
+      {value && <span style={{ fontSize: 13, color: valueColor || "var(--content-base-secondary)", fontWeight: 500 }}>{value}</span>}
+      {icon && <span style={{ fontSize: 18, color: "var(--content-base-neutral)" }}>{icon}</span>}
     </div>
   );
 }

@@ -9,9 +9,10 @@ import { PropsTable } from "@/components/docs/PropsTable";
 import { PrincipleCard, DoCard, DontCard } from "@/components/docs/Cards";
 import { RadioGroup } from "@/components/docs/Playground";
 import { DoLabel, DontLabel } from "@/components/docs/Labels";
+import { BRAND_EXTERNAL_COLORS } from "@/tokens/brandExternal";
 
 // GitHub source URLs
-const GITHUB_BASE = "https://github.com/baerae-zkap/design-foundation/blob/main/src/source/components/ListCard";
+const GITHUB_BASE = "https://github.com/baerae-zkap/design-foundation/tree/main/packages/design-system/src/components/ListCard";
 const LISTCARD_SOURCE = `${GITHUB_BASE}/ListCard.tsx`;
 
 // Types
@@ -64,7 +65,7 @@ function ListCardPlayground() {
 
   return (
     <div style={{ marginBottom: 32 }}>
-      <div style={{ borderRadius: 20, overflow: "hidden", backgroundColor: "#fafbfc" }}>
+      <div style={{ borderRadius: 20, overflow: "hidden", backgroundColor: "var(--surface-base-alternative)" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
           <div style={{ padding: 60, display: "flex", alignItems: "center", justifyContent: "center" }}>
             <ListCardDemo
@@ -80,7 +81,7 @@ function ListCardPlayground() {
           </div>
 
           <div style={{
-            backgroundColor: "#fafbfc",
+            backgroundColor: "var(--surface-base-alternative)",
             display: "flex",
             flexDirection: "column",
             padding: 16,
@@ -96,7 +97,7 @@ function ListCardPlayground() {
               display: "flex",
               flexDirection: "column",
               gap: 28,
-              backgroundColor: "white",
+              backgroundColor: "var(--surface-base-default)",
               borderRadius: 16,
             }}>
               <RadioGroup
@@ -177,31 +178,31 @@ function DesignContent() {
     <>
       {/* Anatomy */}
       <Section title="Anatomy">
-        <div style={{ backgroundColor: "#f5f5f7", borderRadius: 16, padding: "48px 40px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div style={{ backgroundColor: "var(--surface-base-container)", borderRadius: 16, padding: "48px 40px", display: "flex", alignItems: "center", justifyContent: "center" }}>
           <svg width="400" height="120" viewBox="0 0 400 120">
-            <rect x="20" y="10" width="360" height="100" rx="12" fill="white" stroke="#e2e8f0" strokeWidth="1" filter="url(#shadow)" />
+            <rect x="20" y="10" width="360" height="100" rx="12" fill="var(--surface-base-default)" stroke="var(--border-solid-alternative)" strokeWidth="1" filter="url(#shadow)" />
             <defs>
               <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
                 <feDropShadow dx="0" dy="1" stdDeviation="2" floodOpacity="0.1"/>
               </filter>
             </defs>
-            <rect x="36" y="26" width="68" height="68" rx="8" fill="#e2e8f0" />
-            <rect x="120" y="30" width="40" height="14" rx="4" fill="#2563eb" />
-            <rect x="120" y="50" width="160" height="12" rx="4" fill="#334155" />
-            <rect x="120" y="68" width="120" height="10" rx="4" fill="#94a3b8" />
-            <rect x="120" y="86" width="60" height="12" rx="4" fill="#334155" />
+            <rect x="36" y="26" width="68" height="68" rx="8" fill="var(--surface-base-container)" />
+            <rect x="120" y="30" width="40" height="14" rx="4" fill="var(--surface-brand-default)" />
+            <rect x="120" y="50" width="160" height="12" rx="4" fill="var(--content-base-default)" />
+            <rect x="120" y="68" width="120" height="10" rx="4" fill="var(--content-base-alternative)" />
+            <rect x="120" y="86" width="60" height="12" rx="4" fill="var(--content-base-default)" />
 
-            <line x1="70" y1="0" x2="70" y2="10" stroke="#374151" strokeWidth="1.5" />
-            <circle cx="70" cy="0" r="10" fill="#374151" />
-            <text x="70" y="4" textAnchor="middle" fill="white" fontSize="10" fontWeight="600">1</text>
+            <line x1="70" y1="0" x2="70" y2="10" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <circle cx="70" cy="0" r="10" fill="var(--content-base-default)" />
+            <text x="70" y="4" textAnchor="middle" fill="var(--content-base-onColor)" fontSize="10" fontWeight="600">1</text>
 
-            <line x1="200" y1="110" x2="200" y2="125" stroke="#374151" strokeWidth="1.5" />
-            <circle cx="200" cy="125" r="10" fill="#374151" />
-            <text x="200" y="129" textAnchor="middle" fill="white" fontSize="10" fontWeight="600">2</text>
+            <line x1="200" y1="110" x2="200" y2="125" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <circle cx="200" cy="125" r="10" fill="var(--content-base-default)" />
+            <text x="200" y="129" textAnchor="middle" fill="var(--content-base-onColor)" fontSize="10" fontWeight="600">2</text>
 
-            <line x1="140" y1="30" x2="140" y2="10" stroke="#374151" strokeWidth="1.5" />
-            <circle cx="140" cy="0" r="10" fill="#374151" />
-            <text x="140" y="4" textAnchor="middle" fill="white" fontSize="10" fontWeight="600">3</text>
+            <line x1="140" y1="30" x2="140" y2="10" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <circle cx="140" cy="0" r="10" fill="var(--content-base-default)" />
+            <text x="140" y="4" textAnchor="middle" fill="var(--content-base-onColor)" fontSize="10" fontWeight="600">3</text>
           </svg>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16, marginTop: 20, fontSize: 14, fontWeight: 500, color: "var(--text-primary)" }}>
@@ -220,15 +221,15 @@ function DesignContent() {
         <PreviewBox>
           <div style={{ padding: 24, display: "flex", flexDirection: "column", gap: 12 }}>
             <div>
-              <p style={{ fontSize: 11, color: "#64748b", marginBottom: 8 }}>Elevated - 그림자로 떠있는 느낌</p>
+              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginBottom: 8 }}>Elevated - 그림자로 떠있는 느낌</p>
               <ListCardDemo variant="elevated" size="small" thumbnail={<EthereumIcon size={40} />} title="Ethereum" subtitle="0.7812 ETH" meta="₩3,245,000" />
             </div>
             <div>
-              <p style={{ fontSize: 11, color: "#64748b", marginBottom: 8 }}>Outlined - 테두리로 영역 구분</p>
+              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginBottom: 8 }}>Outlined - 테두리로 영역 구분</p>
               <ListCardDemo variant="outlined" size="small" thumbnail={<BitcoinIcon size={40} />} title="Bitcoin" subtitle="0.0234 BTC" meta="₩2,890,000" />
             </div>
             <div>
-              <p style={{ fontSize: 11, color: "#64748b", marginBottom: 8 }}>Filled - 배경색으로 영역 표시</p>
+              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginBottom: 8 }}>Filled - 배경색으로 영역 표시</p>
               <ListCardDemo variant="filled" size="small" thumbnail={<EthereumIcon size={40} />} title="Ethereum" subtitle="0.5000 ETH" meta="₩2,100,000" />
             </div>
           </div>
@@ -254,19 +255,19 @@ function DesignContent() {
             <tbody>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                 <td style={{ padding: "12px 16px" }}><InlineCode>elevated</InlineCode></td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>white</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>surface.base.default</td>
                 <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>none</td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>0 1px 3px rgba(0,0,0,0.1)</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>0 1px 3px var(--shadow-primitive-xs)</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                 <td style={{ padding: "12px 16px" }}><InlineCode>outlined</InlineCode></td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>white</td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>1px solid #e2e8f0</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>surface.base.default</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>border.solid.alternative</td>
                 <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>none</td>
               </tr>
               <tr>
                 <td style={{ padding: "12px 16px" }}><InlineCode>filled</InlineCode></td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>#f8fafc</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>surface.base.alternative</td>
                 <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>none</td>
                 <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>none</td>
               </tr>
@@ -280,8 +281,8 @@ function DesignContent() {
           </p>
           <PreviewBox>
             <div style={{ padding: 24, display: "flex", flexDirection: "column", gap: 12 }}>
-              <div style={{ border: "2px solid #8b5cf6", borderRadius: 12 }}>
-                <ListCardDemo variant="outlined" size="small" thumbnail={<EthereumIcon size={40} />} badges={<span style={{ display: "inline-flex", padding: "2px 8px", fontSize: 11, fontWeight: 600, color: "#8b5cf6", backgroundColor: "#f5f3ff", borderRadius: 4 }}>Best</span>} title="ZKAP 최적구매" subtitle="0.7812 ETH" meta="₩3,245,000" onClick={() => {}} />
+              <div style={{ border: "2px solid var(--border-brand-default)", borderRadius: 12 }}>
+                <ListCardDemo variant="outlined" size="small" thumbnail={<EthereumIcon size={40} />} badges={<span style={{ display: "inline-flex", padding: "2px 8px", fontSize: 11, fontWeight: 600, color: "var(--content-brand-default)", backgroundColor: "var(--surface-brand-secondary)", borderRadius: 4 }}>Best</span>} title="ZKAP 최적구매" subtitle="0.7812 ETH" meta="₩3,245,000" onClick={() => {}} />
               </div>
               <ListCardDemo variant="outlined" size="small" thumbnail={<BitcoinIcon size={40} />} title="빗썸" subtitle="0.7788 ETH" meta="- 1,600원" onClick={() => {}} />
             </div>
@@ -298,17 +299,17 @@ function DesignContent() {
         <PreviewBox>
           <div style={{ padding: 24, display: "flex", flexDirection: "column", gap: 16 }}>
             <div>
-              <p style={{ fontSize: 11, color: "#64748b", marginBottom: 8 }}>Default</p>
+              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginBottom: 8 }}>Default</p>
               <ListCardDemo variant="elevated" size="small" thumbnail={<EthereumIcon size={40} />} title="Ethereum" subtitle="0.7812 ETH" meta="₩3,245,000" onClick={() => {}} />
             </div>
             <div>
-              <p style={{ fontSize: 11, color: "#64748b", marginBottom: 8 }}>Pressed / Hover</p>
-              <div style={{ backgroundColor: "rgba(0,0,0,0.04)", borderRadius: 12 }}>
+              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginBottom: 8 }}>Pressed / Hover</p>
+              <div style={{ backgroundColor: "var(--surface-base-containerPressed)", borderRadius: 12 }}>
                 <ListCardDemo variant="elevated" size="small" thumbnail={<EthereumIcon size={40} />} title="Ethereum" subtitle="0.7812 ETH" meta="₩3,245,000" />
               </div>
             </div>
             <div>
-              <p style={{ fontSize: 11, color: "#64748b", marginBottom: 8 }}>Disabled</p>
+              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginBottom: 8 }}>Disabled</p>
               <div style={{ opacity: 0.4, pointerEvents: "none" as const }}>
                 <ListCardDemo variant="elevated" size="small" thumbnail={<EthereumIcon size={40} />} title="Ethereum" subtitle="0.7812 ETH" meta="₩3,245,000" />
               </div>
@@ -319,7 +320,7 @@ function DesignContent() {
         <div style={{ marginTop: 16, padding: 16, backgroundColor: "var(--bg-secondary)", borderRadius: 12, fontSize: 13 }}>
           <p style={{ margin: 0, color: "var(--text-secondary)", lineHeight: 1.8 }}>
             <strong style={{ color: "var(--text-primary)" }}>Default:</strong> 기본 스타일 (variant별 배경/테두리/그림자)<br />
-            <strong style={{ color: "var(--text-primary)" }}>Pressed/Hover:</strong> 배경색에 rgba(0,0,0,0.04) 오버레이<br />
+            <strong style={{ color: "var(--text-primary)" }}>Pressed/Hover:</strong> 배경색에 <InlineCode>surface.base.containerPressed</InlineCode> 적용<br />
             <strong style={{ color: "var(--text-primary)" }}>Disabled:</strong> 전체 opacity 감소, 상호작용 불가
           </p>
         </div>
@@ -368,7 +369,7 @@ function DesignContent() {
           <div style={{ padding: 24, display: "flex", flexDirection: "column", gap: 16 }}>
             {(["small", "medium", "large"] as ListCardSize[]).map((s) => (
               <div key={s}>
-                <p style={{ fontSize: 11, color: "#64748b", marginBottom: 8 }}>{s} (thumbnail: {sizeConfig[s].thumbnailSize}px)</p>
+                <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginBottom: 8 }}>{s} (thumbnail: {sizeConfig[s].thumbnailSize}px)</p>
                 <ListCardDemo variant="elevated" size={s} thumbnail={<EthereumIcon size={sizeConfig[s].thumbnailSize} />} badges={<TrendBadge trend="up" value="+5.2%" />} title="Ethereum" subtitle="0.7812 ETH" meta="₩3,245,000" onClick={() => {}} />
               </div>
             ))}
@@ -494,7 +495,7 @@ function DesignContent() {
                 <tr key={i} style={{ borderBottom: "1px solid var(--divider)" }}>
                   <td style={{ padding: "12px 16px" }}>{prop}</td>
                   <td style={{ padding: "12px 16px" }}>{token !== "-" ? <code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>{token}</code> : "-"}</td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>{value}</td>
+                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>{value}</td>
                 </tr>
               ))}
             </tbody>
@@ -568,8 +569,8 @@ function WebContent() {
               padding: "8px 16px",
               fontSize: 13,
               fontWeight: 500,
-              color: "white",
-              backgroundColor: "#24292f",
+              color: "var(--content-base-onColor)",
+              backgroundColor: "var(--docs-code-surface)",
               borderRadius: 12,
               textDecoration: "none",
             }}
@@ -619,8 +620,8 @@ function WebContent() {
         <Subsection title="Highlighted Card">
           <PreviewBox>
             <div style={{ padding: 24, display: "flex", flexDirection: "column", gap: 12 }}>
-              <div style={{ border: "2px solid #8b5cf6", borderRadius: 12 }}>
-                <ListCardDemo variant="outlined" size="small" thumbnail={<EthereumIcon size={40} />} badges={<span style={{ display: "inline-flex", padding: "2px 8px", fontSize: 11, fontWeight: 600, color: "#8b5cf6", backgroundColor: "#f5f3ff", borderRadius: 4 }}>Best</span>} title="ZKAP 최적구매" subtitle="0.7812 ETH" meta="₩3,245,000" onClick={() => {}} />
+              <div style={{ border: "2px solid var(--border-brand-default)", borderRadius: 12 }}>
+                <ListCardDemo variant="outlined" size="small" thumbnail={<EthereumIcon size={40} />} badges={<span style={{ display: "inline-flex", padding: "2px 8px", fontSize: 11, fontWeight: 600, color: "var(--content-brand-default)", backgroundColor: "var(--surface-brand-secondary)", borderRadius: 4 }}>Best</span>} title="ZKAP 최적구매" subtitle="0.7812 ETH" meta="₩3,245,000" onClick={() => {}} />
               </div>
               <ListCardDemo variant="outlined" size="small" thumbnail={<BitcoinIcon size={40} />} title="빗썸" subtitle="0.7788 ETH" meta="- 1,600원" onClick={() => {}} />
             </div>
@@ -628,7 +629,7 @@ function WebContent() {
           <CodeBlock code={`{/* Highlighted - Best 옵션 */}
 <ListCard
   variant="outlined"
-  style={{ borderColor: '#8b5cf6', borderWidth: 2 }}
+  style={{ borderColor: 'var(--content-brand-default)', borderWidth: 2 }}
   thumbnail={<ZkapLogo />}
   badges={<Badge color="purple">Best</Badge>}
   title="ZKAP 최적구매"
@@ -740,8 +741,8 @@ function RNContent() {
               padding: "8px 16px",
               fontSize: 13,
               fontWeight: 500,
-              color: "white",
-              backgroundColor: "#24292f",
+              color: "var(--content-base-onColor)",
+              backgroundColor: "var(--docs-code-surface)",
               borderRadius: 12,
               textDecoration: "none",
             }}
@@ -807,10 +808,10 @@ function RNContent() {
   {/* ZKAP 최적구매 - Best 옵션 (highlighted) */}
   <ListCard
     variant="outlined"
-    style={{ borderColor: '#8b5cf6', borderWidth: 2 }}
+    style={{ borderColor: 'var(--content-brand-default)', borderWidth: 2 }}
     thumbnail={<ZkapLogo />}
     title="ZKAP 최적구매"
-    subtitle={<Text style={{ color: '#3b82f6', fontSize: 24, fontWeight: '700' }}>0.7812 ETH</Text>}
+    subtitle={<Text style={{ color: 'var(--content-brand-default)', fontSize: 24, fontWeight: '700' }}>0.7812 ETH</Text>}
     badges={<Badge color="purple">Best</Badge>}
     onPress={() => selectExchange('zkap')}
   />
@@ -821,7 +822,7 @@ function RNContent() {
     thumbnail={<BithumbLogo />}
     title="빗썸"
     subtitle={<Text style={{ fontSize: 24, fontWeight: '700' }}>0.7788 ETH</Text>}
-    meta={<Text style={{ color: '#64748b' }}>- 1,600원</Text>}
+    meta={<Text style={{ color: 'var(--content-base-secondary)' }}>- 1,600원</Text>}
     onPress={() => selectExchange('bithumb')}
   />
 </View>`} />
@@ -900,7 +901,7 @@ function UsageCard({ situation, description, config, examples }: {
   return (
     <div style={{
       padding: 16,
-      backgroundColor: "white",
+      backgroundColor: "var(--surface-base-default)",
       borderRadius: 12,
       border: "1px solid var(--divider)",
     }}>
@@ -909,8 +910,8 @@ function UsageCard({ situation, description, config, examples }: {
         <span style={{
           fontSize: 11,
           padding: "2px 6px",
-          backgroundColor: "#f1f5f9",
-          color: "#475569",
+          backgroundColor: "var(--surface-base-alternative)",
+          color: "var(--content-base-secondary)",
           borderRadius: 4,
           fontWeight: 500,
         }}>
@@ -931,8 +932,8 @@ function UsageCard({ situation, description, config, examples }: {
 // ============================================
 function EthereumIcon({ size = 48 }: { size?: number }) {
   return (
-    <div style={{ width: size, height: size, borderRadius: size / 2, backgroundColor: "#f1f5f9", display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <svg width={size * 0.55} height={size * 0.55} viewBox="0 0 24 24" fill="#627eea">
+    <div style={{ width: size, height: size, borderRadius: size / 2, backgroundColor: "var(--surface-base-alternative)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <svg width={size * 0.55} height={size * 0.55} viewBox="0 0 24 24" fill={BRAND_EXTERNAL_COLORS.crypto.ethereum}>
         <path d="M12 1.5l-7 10.5 7 4 7-4-7-10.5z" opacity="0.6" />
         <path d="M12 22.5l-7-10 7 4 7-4-7 10z" />
       </svg>
@@ -942,8 +943,8 @@ function EthereumIcon({ size = 48 }: { size?: number }) {
 
 function BitcoinIcon({ size = 48 }: { size?: number }) {
   return (
-    <div style={{ width: size, height: size, borderRadius: size / 2, backgroundColor: "#fff7ed", display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <svg width={size * 0.55} height={size * 0.55} viewBox="0 0 24 24" fill="#f7931a">
+    <div style={{ width: size, height: size, borderRadius: size / 2, backgroundColor: "var(--surface-warning-default)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <svg width={size * 0.55} height={size * 0.55} viewBox="0 0 24 24" fill={BRAND_EXTERNAL_COLORS.crypto.bitcoin}>
         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.5 15h-1v1.5h-1V17h-1v1.5h-1V17H8v-1h1v-8H8V7h1.5V5.5h1V7h1V5.5h1V7c1.38 0 2.5 1.12 2.5 2.5 0 .82-.4 1.54-1 2 .83.46 1.5 1.37 1.5 2.5 0 1.38-1.12 2.5-2.5 2.5h-.5v1h-1v-1zm-.5-7c.55 0 1-.45 1-1s-.45-1-1-1h-2v2h2zm.5 5c.55 0 1-.45 1-1s-.45-1-1-1h-2.5v2H13z" />
       </svg>
     </div>
@@ -952,8 +953,8 @@ function BitcoinIcon({ size = 48 }: { size?: number }) {
 
 function ThumbnailDemo({ size = 80 }: { size?: number }) {
   return (
-    <div style={{ width: size, height: size, backgroundColor: "#e2e8f0", borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <svg width={size * 0.4} height={size * 0.4} viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2">
+    <div style={{ width: size, height: size, backgroundColor: "var(--surface-base-container)", borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <svg width={size * 0.4} height={size * 0.4} viewBox="0 0 24 24" fill="none" stroke="var(--icon-secondary)" strokeWidth="2">
         <rect x="3" y="3" width="18" height="18" rx="2" />
         <circle cx="8.5" cy="8.5" r="1.5" />
         <path d="M21 15l-5-5L5 21" />
@@ -979,8 +980,8 @@ function TrendBadge({ trend, value }: { trend: "up" | "down"; value: string }) {
       padding: "0 8px",
       fontSize: 11,
       fontWeight: 600,
-      color: isUp ? "#16a34a" : "#dc2626",
-      backgroundColor: isUp ? "#f0fdf4" : "#fef2f2",
+      color: isUp ? "var(--content-success-default)" : "var(--content-error-default)",
+      backgroundColor: isUp ? "var(--surface-success-default)" : "var(--surface-error-default)",
       borderRadius: 4
     }}>
       {isUp ? "▲" : "▼"} {value}

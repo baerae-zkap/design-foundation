@@ -10,9 +10,9 @@ const foundations = [
     href: "/colors/palette",
     icon: (
       <div style={{ display: "flex", gap: 4 }}>
-        <div style={{ width: 16, height: 16, borderRadius: 4, backgroundColor: "#2563eb" }} />
-        <div style={{ width: 16, height: 16, borderRadius: 4, backgroundColor: "#22c55e" }} />
-        <div style={{ width: 16, height: 16, borderRadius: 4, backgroundColor: "#f59e0b" }} />
+        <div style={{ width: 16, height: 16, borderRadius: 4, backgroundColor: "var(--content-brand-default)" }} />
+        <div style={{ width: 16, height: 16, borderRadius: 4, backgroundColor: "var(--status-positive-content)" }} />
+        <div style={{ width: 16, height: 16, borderRadius: 4, backgroundColor: "var(--status-cautionary-content)" }} />
       </div>
     ),
   },

@@ -80,7 +80,7 @@ function AccordionPlayground() {
         style={{
           borderRadius: 20,
           overflow: "hidden",
-          backgroundColor: "#fafbfc",
+          backgroundColor: "var(--surface-base-alternative)",
         }}
       >
         <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
@@ -91,7 +91,7 @@ function AccordionPlayground() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              backgroundColor: "#fafbfc",
+              backgroundColor: "var(--surface-base-alternative)",
             }}
           >
             <div style={{ width: "100%", maxWidth: 400 }}>
@@ -102,7 +102,7 @@ function AccordionPlayground() {
                 disabled={disabled}
                 defaultExpanded={defaultExpanded}
               >
-                <p style={{ margin: 0, fontSize: 14, color: "#64748b", lineHeight: 1.6 }}>
+                <p style={{ margin: 0, fontSize: 14, color: "var(--content-base-secondary)", lineHeight: 1.6 }}>
                   This is the accordion content. It can contain any content including text, images, or other components.
                 </p>
               </AccordionDemo>
@@ -112,7 +112,7 @@ function AccordionPlayground() {
           {/* Control Panel */}
           <div
             style={{
-              backgroundColor: "#fafbfc",
+              backgroundColor: "var(--surface-base-alternative)",
               display: "flex",
               flexDirection: "column",
               padding: 16,
@@ -176,7 +176,7 @@ function AccordionPlayground() {
         <div
           style={{
             padding: "10px 16px",
-            backgroundColor: "#18181b",
+            backgroundColor: "var(--inverse-surface-default)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
@@ -194,8 +194,8 @@ function AccordionPlayground() {
             padding: 16,
             fontSize: 13,
             lineHeight: 1.6,
-            color: "#e4e4e7",
-            backgroundColor: "#18181b",
+            color: "var(--border-secondary-default)",
+            backgroundColor: "var(--inverse-surface-default)",
             fontFamily: "'SF Mono', 'Fira Code', monospace",
             overflow: "auto",
           }}
@@ -224,7 +224,7 @@ function DesignContent() {
       {/* Anatomy */}
       <Section title="Anatomy">
         <div style={{
-          backgroundColor: "#f5f5f7",
+          backgroundColor: "var(--surface-base-alternative)",
           borderRadius: 16,
           padding: "48px 40px",
           display: "flex",
@@ -233,40 +233,40 @@ function DesignContent() {
         }}>
           <svg width="420" height="140" viewBox="0 0 420 140">
             {/* Container outline */}
-            <rect x="60" y="20" width="300" height="100" rx="12" fill="white" stroke="#e2e8f0" strokeWidth="1.5" />
+            <rect x="60" y="20" width="300" height="100" rx="12" fill="white" stroke="var(--border-base-default)" strokeWidth="1.5" />
 
             {/* Header area */}
-            <rect x="60" y="20" width="300" height="48" rx="12" fill="#fafbfc" />
+            <rect x="60" y="20" width="300" height="48" rx="12" fill="var(--surface-base-alternative)" />
             <rect x="60" y="56" width="300" height="12" fill="white" />
 
             {/* Title text */}
-            <text x="80" y="50" fill="#334155" fontSize="14" fontWeight="600">Accordion Title</text>
+            <text x="80" y="50" fill="var(--content-base-strong)" fontSize="14" fontWeight="600">Accordion Title</text>
 
             {/* Chevron icon */}
-            <path d="M335 40 L340 46 L345 40" fill="none" stroke="#64748b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M335 40 L340 46 L345 40" fill="none" stroke="var(--content-base-secondary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
 
             {/* Content area */}
-            <rect x="76" y="76" width="268" height="8" rx="4" fill="#e2e8f0" />
-            <rect x="76" y="92" width="200" height="8" rx="4" fill="#e2e8f0" />
+            <rect x="76" y="76" width="268" height="8" rx="4" fill="var(--border-base-default)" />
+            <rect x="76" y="92" width="200" height="8" rx="4" fill="var(--border-base-default)" />
 
             {/* Lines to labels */}
-            <line x1="30" y1="44" x2="60" y2="44" stroke="#374151" strokeWidth="1.5" />
-            <circle cx="60" cy="44" r="3" fill="#374151" />
+            <line x1="30" y1="44" x2="60" y2="44" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <circle cx="60" cy="44" r="3" fill="var(--content-base-default)" />
 
-            <line x1="340" y1="44" x2="390" y2="44" stroke="#374151" strokeWidth="1.5" />
-            <circle cx="340" cy="44" r="3" fill="#374151" />
+            <line x1="340" y1="44" x2="390" y2="44" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <circle cx="340" cy="44" r="3" fill="var(--content-base-default)" />
 
-            <line x1="210" y1="88" x2="210" y2="130" stroke="#374151" strokeWidth="1.5" />
-            <circle cx="210" cy="88" r="3" fill="#374151" />
+            <line x1="210" y1="88" x2="210" y2="130" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <circle cx="210" cy="88" r="3" fill="var(--content-base-default)" />
 
             {/* Numbered circles */}
-            <circle cx="15" cy="44" r="14" fill="#374151" />
+            <circle cx="15" cy="44" r="14" fill="var(--content-base-default)" />
             <text x="15" y="49" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">1</text>
 
-            <circle cx="405" cy="44" r="14" fill="#374151" />
+            <circle cx="405" cy="44" r="14" fill="var(--content-base-default)" />
             <text x="405" y="49" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">2</text>
 
-            <circle cx="210" cy="130" r="14" fill="#374151" />
+            <circle cx="210" cy="130" r="14" fill="var(--content-base-default)" />
             <text x="210" y="135" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">3</text>
           </svg>
         </div>
@@ -293,16 +293,16 @@ function DesignContent() {
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
           <VariantCard name="Single Expand" description="하나의 항목만 펼칠 수 있습니다. 다른 항목을 열면 이전 항목이 자동으로 닫힙니다.">
             <div style={{ display: "flex", flexDirection: "column", gap: 2, width: "100%" }}>
-              <div style={{ height: 14, backgroundColor: "#2563eb", borderRadius: 3, opacity: 0.8 }} />
-              <div style={{ height: 14, backgroundColor: "#e2e8f0", borderRadius: 3 }} />
-              <div style={{ height: 14, backgroundColor: "#e2e8f0", borderRadius: 3 }} />
+              <div style={{ height: 14, backgroundColor: "var(--content-brand-default)", borderRadius: 3, opacity: 0.8 }} />
+              <div style={{ height: 14, backgroundColor: "var(--border-base-default)", borderRadius: 3 }} />
+              <div style={{ height: 14, backgroundColor: "var(--border-base-default)", borderRadius: 3 }} />
             </div>
           </VariantCard>
           <VariantCard name="Multi Expand" description="여러 항목을 동시에 펼칠 수 있습니다. 각 항목이 독립적으로 열리고 닫힙니다.">
             <div style={{ display: "flex", flexDirection: "column", gap: 2, width: "100%" }}>
-              <div style={{ height: 14, backgroundColor: "#2563eb", borderRadius: 3, opacity: 0.8 }} />
-              <div style={{ height: 14, backgroundColor: "#2563eb", borderRadius: 3, opacity: 0.6 }} />
-              <div style={{ height: 14, backgroundColor: "#e2e8f0", borderRadius: 3 }} />
+              <div style={{ height: 14, backgroundColor: "var(--content-brand-default)", borderRadius: 3, opacity: 0.8 }} />
+              <div style={{ height: 14, backgroundColor: "var(--content-brand-default)", borderRadius: 3, opacity: 0.6 }} />
+              <div style={{ height: 14, backgroundColor: "var(--border-base-default)", borderRadius: 3 }} />
             </div>
           </VariantCard>
         </div>
@@ -334,12 +334,12 @@ function DesignContent() {
           <div style={{ display: "flex", flexDirection: "column", gap: 16, width: "100%", maxWidth: 400 }}>
             <div style={{ textAlign: "center" }}>
               <AccordionDemo title="Medium (48px)" size="medium" defaultExpanded={false}>
-                <p style={{ margin: 0, fontSize: 14, color: "#64748b" }}>Content</p>
+                <p style={{ margin: 0, fontSize: 14, color: "var(--content-base-secondary)" }}>Content</p>
               </AccordionDemo>
             </div>
             <div style={{ textAlign: "center" }}>
               <AccordionDemo title="Large (56px)" size="large" defaultExpanded={false}>
-                <p style={{ margin: 0, fontSize: 14, color: "#64748b" }}>Content</p>
+                <p style={{ margin: 0, fontSize: 14, color: "var(--content-base-secondary)" }}>Content</p>
               </AccordionDemo>
             </div>
           </div>
@@ -354,15 +354,15 @@ function DesignContent() {
         <PreviewBox>
           <div style={{ display: "flex", flexDirection: "column", gap: 16, width: "100%", maxWidth: 400, padding: 24 }}>
             <div>
-              <p style={{ fontSize: 11, color: "#64748b", marginBottom: 8 }}>Default Border (#e2e8f0)</p>
+              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginBottom: 8 }}>Default Border (var(--border-base-default))</p>
               <AccordionDemo title="Default border color" defaultExpanded={false}>
-                <p style={{ margin: 0, fontSize: 14, color: "#64748b" }}>Content area</p>
+                <p style={{ margin: 0, fontSize: 14, color: "var(--content-base-secondary)" }}>Content area</p>
               </AccordionDemo>
             </div>
             <div>
-              <p style={{ fontSize: 11, color: "#64748b", marginBottom: 8 }}>Expanded Header Background (#fafbfc)</p>
+              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginBottom: 8 }}>Expanded Header Background (var(--surface-base-alternative))</p>
               <AccordionDemo title="Expanded header color" defaultExpanded={true}>
-                <p style={{ margin: 0, fontSize: 14, color: "#64748b" }}>Header turns to #fafbfc when expanded</p>
+                <p style={{ margin: 0, fontSize: 14, color: "var(--content-base-secondary)" }}>Header turns to var(--surface-base-alternative) when expanded</p>
               </AccordionDemo>
             </div>
           </div>
@@ -374,21 +374,21 @@ function DesignContent() {
         <PreviewBox>
           <div style={{ display: "flex", flexDirection: "column", gap: 16, width: "100%", maxWidth: 400 }}>
             <div>
-              <p style={{ fontSize: 11, color: "#64748b", marginBottom: 8 }}>Collapsed</p>
+              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginBottom: 8 }}>Collapsed</p>
               <AccordionDemo title="Click to expand" defaultExpanded={false}>
-                <p style={{ margin: 0, fontSize: 14, color: "#64748b" }}>Hidden content</p>
+                <p style={{ margin: 0, fontSize: 14, color: "var(--content-base-secondary)" }}>Hidden content</p>
               </AccordionDemo>
             </div>
             <div>
-              <p style={{ fontSize: 11, color: "#64748b", marginBottom: 8 }}>Expanded</p>
+              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginBottom: 8 }}>Expanded</p>
               <AccordionDemo title="Click to collapse" defaultExpanded={true}>
-                <p style={{ margin: 0, fontSize: 14, color: "#64748b" }}>Visible content</p>
+                <p style={{ margin: 0, fontSize: 14, color: "var(--content-base-secondary)" }}>Visible content</p>
               </AccordionDemo>
             </div>
             <div>
-              <p style={{ fontSize: 11, color: "#64748b", marginBottom: 8 }}>Disabled</p>
+              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginBottom: 8 }}>Disabled</p>
               <AccordionDemo title="Cannot interact" disabled defaultExpanded={false}>
-                <p style={{ margin: 0, fontSize: 14, color: "#64748b" }}>Content</p>
+                <p style={{ margin: 0, fontSize: 14, color: "var(--content-base-secondary)" }}>Content</p>
               </AccordionDemo>
             </div>
           </div>
@@ -469,37 +469,37 @@ function DesignContent() {
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                 <td style={{ padding: "12px 16px" }}>Border Radius</td>
                 <td style={{ padding: "12px 16px" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>radius.semantic.card.sm</code></td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>12px</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>12px</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                 <td style={{ padding: "12px 16px" }}>Padding (내부)</td>
                 <td style={{ padding: "12px 16px" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>spacing.primitive.4</code></td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>16px</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>16px</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                 <td style={{ padding: "12px 16px" }}>Header Height (medium)</td>
                 <td style={{ padding: "12px 16px" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>spacing.primitive.12</code></td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>48px</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>48px</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                 <td style={{ padding: "12px 16px" }}>Header Height (large)</td>
                 <td style={{ padding: "12px 16px" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>spacing.primitive.14</code></td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>56px</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>56px</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                 <td style={{ padding: "12px 16px" }}>Border Color</td>
                 <td style={{ padding: "12px 16px" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>border.base.default</code></td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>#e2e8f0 (palette.grey.95)</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>var(--border-base-default) (palette.grey.95)</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                 <td style={{ padding: "12px 16px" }}>Background (header expanded)</td>
                 <td style={{ padding: "12px 16px" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>surface.elevated.alternative</code></td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>#fafbfc (palette.grey.99)</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>var(--surface-base-alternative) (palette.grey.99)</td>
               </tr>
               <tr>
                 <td style={{ padding: "12px 16px" }}>Text Color</td>
                 <td style={{ padding: "12px 16px" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>content.base.default</code></td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>#334155 (palette.grey.30)</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>var(--content-base-default) (palette.grey.30)</td>
               </tr>
             </tbody>
           </table>
@@ -579,14 +579,14 @@ function DesignContent() {
           <DoCard>
             <div style={{ width: "100%", maxWidth: 200 }}>
               <AccordionDemo title="배송 안내" size="medium" defaultExpanded={false}>
-                <p style={{ margin: 0, fontSize: 13, color: "#64748b" }}>2-3일 이내 배송</p>
+                <p style={{ margin: 0, fontSize: 13, color: "var(--content-base-secondary)" }}>2-3일 이내 배송</p>
               </AccordionDemo>
             </div>
           </DoCard>
           <DontCard>
             <div style={{ width: "100%", maxWidth: 200 }}>
-              <div style={{ border: "1px solid #e2e8f0", borderRadius: 12, overflow: "hidden" }}>
-                <div style={{ height: 48, padding: "0 16px", display: "flex", alignItems: "center", fontSize: 14, fontWeight: 500, color: "#334155" }}>
+              <div style={{ border: "1px solid var(--border-base-default)", borderRadius: 12, overflow: "hidden" }}>
+                <div style={{ height: 48, padding: "0 16px", display: "flex", alignItems: "center", fontSize: 14, fontWeight: 500, color: "var(--content-base-strong)" }}>
                   A
                 </div>
               </div>
@@ -594,11 +594,11 @@ function DesignContent() {
           </DontCard>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 8 }}>
-          <p style={{ fontSize: 13, color: "#22c55e", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
+          <p style={{ fontSize: 13, color: "var(--status-positive-content)", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
             <span style={{ fontWeight: 700, flexShrink: 0 }}>Do</span>
             <span style={{ color: "var(--text-secondary)" }}>헤더 텍스트로 내용을 명확히 설명합니다.</span>
           </p>
-          <p style={{ fontSize: 13, color: "#ef4444", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
+          <p style={{ fontSize: 13, color: "var(--status-negative-content)", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
             <span style={{ fontWeight: 700, flexShrink: 0 }}>Don&apos;t</span>
             <span style={{ color: "var(--text-secondary)" }}>헤더에 의미 없는 짧은 텍스트를 사용하지 마세요.</span>
           </p>
@@ -608,27 +608,27 @@ function DesignContent() {
           <DoCard>
             <div style={{ width: "100%", maxWidth: 200, display: "flex", flexDirection: "column", gap: 4 }}>
               <AccordionDemo title="자주 묻는 질문" size="medium" defaultExpanded={true}>
-                <p style={{ margin: 0, fontSize: 13, color: "#64748b" }}>관련 콘텐츠</p>
+                <p style={{ margin: 0, fontSize: 13, color: "var(--content-base-secondary)" }}>관련 콘텐츠</p>
               </AccordionDemo>
               <AccordionDemo title="이용 약관" size="medium" defaultExpanded={false}>
-                <p style={{ margin: 0, fontSize: 13, color: "#64748b" }}>관련 콘텐츠</p>
+                <p style={{ margin: 0, fontSize: 13, color: "var(--content-base-secondary)" }}>관련 콘텐츠</p>
               </AccordionDemo>
             </div>
           </DoCard>
           <DontCard>
             <div style={{ width: "100%", maxWidth: 200 }}>
               <AccordionDemo title="항목 1개만 있는 아코디언" size="medium" defaultExpanded={false}>
-                <p style={{ margin: 0, fontSize: 13, color: "#64748b" }}>콘텐츠가 하나뿐이면 Accordion을 사용하지 마세요.</p>
+                <p style={{ margin: 0, fontSize: 13, color: "var(--content-base-secondary)" }}>콘텐츠가 하나뿐이면 Accordion을 사용하지 마세요.</p>
               </AccordionDemo>
             </div>
           </DontCard>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 8 }}>
-          <p style={{ fontSize: 13, color: "#22c55e", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
+          <p style={{ fontSize: 13, color: "var(--status-positive-content)", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
             <span style={{ fontWeight: 700, flexShrink: 0 }}>Do</span>
             <span style={{ color: "var(--text-secondary)" }}>관련 콘텐츠를 그룹화하여 여러 항목을 제공합니다.</span>
           </p>
-          <p style={{ fontSize: 13, color: "#ef4444", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
+          <p style={{ fontSize: 13, color: "var(--status-negative-content)", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
             <span style={{ fontWeight: 700, flexShrink: 0 }}>Don&apos;t</span>
             <span style={{ color: "var(--text-secondary)" }}>항목이 1개뿐이면 Accordion 대신 직접 표시하세요.</span>
           </p>
@@ -664,7 +664,7 @@ function WebContent() {
               fontSize: 13,
               fontWeight: 500,
               color: "white",
-              backgroundColor: "#24292f",
+              backgroundColor: "var(--inverse-surface-default)",
               borderRadius: 12,
               textDecoration: "none",
             }}
@@ -687,7 +687,7 @@ function WebContent() {
         <PreviewBox>
           <div style={{ width: "100%", maxWidth: 400, padding: 24 }}>
             <AccordionDemo title="Click to expand">
-              <p style={{ margin: 0, fontSize: 14, color: "#64748b", lineHeight: 1.6 }}>
+              <p style={{ margin: 0, fontSize: 14, color: "var(--content-base-secondary)", lineHeight: 1.6 }}>
                 This content is revealed when expanded.
               </p>
             </AccordionDemo>
@@ -751,7 +751,7 @@ function RNContent() {
               fontSize: 13,
               fontWeight: 500,
               color: "white",
-              backgroundColor: "#24292f",
+              backgroundColor: "var(--inverse-surface-default)",
               borderRadius: 12,
               textDecoration: "none",
             }}
@@ -774,7 +774,7 @@ function RNContent() {
         <PreviewBox>
           <div style={{ width: "100%", maxWidth: 400, padding: 24 }}>
             <AccordionDemo title="Click to expand">
-              <p style={{ margin: 0, fontSize: 14, color: "#64748b", lineHeight: 1.6 }}>
+              <p style={{ margin: 0, fontSize: 14, color: "var(--content-base-secondary)", lineHeight: 1.6 }}>
                 This content is revealed when expanded.
               </p>
             </AccordionDemo>
@@ -830,8 +830,8 @@ function UsageCard({ situation, description, recommendation, examples }: {
           <span style={{
             fontSize: 11,
             padding: "2px 6px",
-            backgroundColor: "#dbeafe",
-            color: "#1d4ed8",
+            backgroundColor: "var(--surface-brand-secondary)",
+            color: "var(--surface-brand-defaultPressed)",
             borderRadius: 4,
             fontWeight: 500,
           }}>
@@ -869,7 +869,7 @@ function AccordionGroupDemo({ mode }: { mode: "single" | "multi" }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
       {items.map((item, index) => (
-        <div key={index} style={{ border: "1px solid #e2e8f0", borderRadius: 12, overflow: "hidden" }}>
+        <div key={index} style={{ border: "1px solid var(--border-base-default)", borderRadius: 12, overflow: "hidden" }}>
           <button
             onClick={() => toggleItem(index)}
             style={{
@@ -879,20 +879,20 @@ function AccordionGroupDemo({ mode }: { mode: "single" | "multi" }) {
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              backgroundColor: expandedItems.includes(index) ? "#fafbfc" : "white",
+              backgroundColor: expandedItems.includes(index) ? "var(--surface-base-alternative)" : "white",
               border: "none",
               cursor: "pointer",
               transition: "background-color 0.15s ease",
             }}
           >
-            <span style={{ fontSize: 14, fontWeight: 500, color: "#334155" }}>{item.title}</span>
-            <svg width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="#64748b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transform: expandedItems.includes(index) ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.2s ease" }}>
+            <span style={{ fontSize: 14, fontWeight: 500, color: "var(--content-base-strong)" }}>{item.title}</span>
+            <svg width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="var(--content-base-secondary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transform: expandedItems.includes(index) ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.2s ease" }}>
               <polyline points="6 9 12 15 18 9" />
             </svg>
           </button>
           <div style={{ maxHeight: expandedItems.includes(index) ? 100 : 0, overflow: "hidden", transition: "max-height 0.2s ease" }}>
-            <div style={{ padding: 16, borderTop: "1px solid #e2e8f0" }}>
-              <p style={{ margin: 0, fontSize: 14, color: "#64748b" }}>{item.content}</p>
+            <div style={{ padding: 16, borderTop: "1px solid var(--border-base-default)" }}>
+              <p style={{ margin: 0, fontSize: 14, color: "var(--content-base-secondary)" }}>{item.content}</p>
             </div>
           </div>
         </div>

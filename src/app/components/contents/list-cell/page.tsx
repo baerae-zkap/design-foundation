@@ -10,9 +10,10 @@ import { PropsTable } from "@/components/docs/PropsTable";
 import { PrincipleCard, VariantCard, DoCard, DontCard } from "@/components/docs/Cards";
 import { RadioGroup } from "@/components/docs/Playground";
 import { DoLabel, DontLabel } from "@/components/docs/Labels";
+import { BRAND_EXTERNAL_COLORS } from "@/tokens/brandExternal";
 
 // GitHub source URLs
-const GITHUB_BASE = "https://github.com/baerae-zkap/design-foundation/blob/main/src/source/components/ListCell";
+const GITHUB_BASE = "https://github.com/baerae-zkap/design-foundation/tree/main/packages/design-system/src/components/ListCell";
 const LISTCELL_SOURCE = `${GITHUB_BASE}/ListCell.tsx`;
 
 // Size display info (for documentation labels only)
@@ -59,35 +60,35 @@ function ListCellPlayground() {
 
   return (
     <div style={{ marginBottom: 32 }}>
-      <div style={{ borderRadius: 20, overflow: "hidden", backgroundColor: "#fafbfc" }}>
+      <div style={{ borderRadius: 20, overflow: "hidden", backgroundColor: "var(--surface-base-alternative)" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
           <div style={{ padding: 60, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <div style={{ width: 320, backgroundColor: "white", borderRadius: 16, overflow: "hidden", boxShadow: "0 1px 3px rgba(0,0,0,0.1)" }}>
+            <div style={{ width: 320, backgroundColor: "var(--surface-base-default)", borderRadius: 16, overflow: "hidden", boxShadow: "var(--shadow-sm)" }}>
               {hasSectionHeader && <SectionHeader title="내 자산" />}
               <ListCellDemo
                 size={size}
-                leading={hasLeading ? <CryptoIcon symbol="ETH" color="#627eea" /> : undefined}
+                leading={hasLeading ? <CryptoIcon symbol="ETH" color={BRAND_EXTERNAL_COLORS.crypto.ethereum} /> : undefined}
                 title="Ethereum"
                 subtitle={hasSubtitle ? "0.7812 ETH" : undefined}
-                trailing={hasTrailing ? <span style={{ fontSize: 14, fontWeight: 600, color: "#334155" }}>₩3,245,000</span> : undefined}
+                trailing={hasTrailing ? <span style={{ fontSize: 14, fontWeight: 600, color: "var(--content-base-default)" }}>₩3,245,000</span> : undefined}
                 divider={hasDivider}
                 onClick={() => {}}
               />
               <ListCellDemo
                 size={size}
-                leading={hasLeading ? <CryptoIcon symbol="BTC" color="#f7931a" /> : undefined}
+                leading={hasLeading ? <CryptoIcon symbol="BTC" color={BRAND_EXTERNAL_COLORS.crypto.bitcoin} /> : undefined}
                 title="Bitcoin"
                 subtitle={hasSubtitle ? "0.0234 BTC" : undefined}
-                trailing={hasTrailing ? <span style={{ fontSize: 14, fontWeight: 600, color: "#334155" }}>₩2,890,000</span> : undefined}
+                trailing={hasTrailing ? <span style={{ fontSize: 14, fontWeight: 600, color: "var(--content-base-default)" }}>₩2,890,000</span> : undefined}
                 divider={hasDivider}
                 onClick={() => {}}
               />
               <ListCellDemo
                 size={size}
-                leading={hasLeading ? <CryptoIcon symbol="SOL" color="#00d18c" /> : undefined}
+                leading={hasLeading ? <CryptoIcon symbol="SOL" color={BRAND_EXTERNAL_COLORS.crypto.solana} /> : undefined}
                 title="Solana"
                 subtitle={hasSubtitle ? "12.5 SOL" : undefined}
-                trailing={hasTrailing ? <span style={{ fontSize: 14, fontWeight: 600, color: "#334155" }}>₩1,560,000</span> : undefined}
+                trailing={hasTrailing ? <span style={{ fontSize: 14, fontWeight: 600, color: "var(--content-base-default)" }}>₩1,560,000</span> : undefined}
                 onClick={() => {}}
               />
             </div>
@@ -95,7 +96,7 @@ function ListCellPlayground() {
 
           <div
             style={{
-              backgroundColor: "#fafbfc",
+              backgroundColor: "var(--surface-base-alternative)",
               display: "flex",
               flexDirection: "column",
               padding: 16,
@@ -113,7 +114,7 @@ function ListCellPlayground() {
                 display: "flex",
                 flexDirection: "column",
                 gap: 28,
-                backgroundColor: "white",
+                backgroundColor: "var(--surface-base-default)",
                 borderRadius: 16,
               }}
             >
@@ -194,36 +195,36 @@ function DesignContent() {
     <>
       {/* Anatomy */}
       <Section title="Anatomy">
-        <div style={{ backgroundColor: "#f5f5f7", borderRadius: 16, padding: "48px 40px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div style={{ backgroundColor: "var(--surface-base-container)", borderRadius: 16, padding: "48px 40px", display: "flex", alignItems: "center", justifyContent: "center" }}>
           <svg width="440" height="100" viewBox="0 0 440 100">
             {/* Cell background */}
-            <rect x="20" y="15" width="400" height="60" rx="0" fill="white" stroke="#e2e8f0" strokeWidth="1" />
+            <rect x="20" y="15" width="400" height="60" rx="0" fill="var(--surface-base-default)" stroke="var(--border-solid-alternative)" strokeWidth="1" />
 
             {/* Leading area - circle icon */}
-            <circle cx="58" cy="45" r="18" fill="#e2e8f0" />
+            <circle cx="58" cy="45" r="18" fill="var(--surface-base-container)" />
 
             {/* Content area - title + subtitle */}
-            <rect x="90" y="32" width="120" height="10" rx="4" fill="#334155" />
-            <rect x="90" y="48" width="80" height="8" rx="4" fill="#94a3b8" />
+            <rect x="90" y="32" width="120" height="10" rx="4" fill="var(--content-base-default)" />
+            <rect x="90" y="48" width="80" height="8" rx="4" fill="var(--content-base-alternative)" />
 
             {/* Trailing area - chevron */}
-            <rect x="340" y="35" width="60" height="10" rx="4" fill="#334155" />
-            <text x="410" y="48" textAnchor="middle" fill="#94a3b8" fontSize="18">&#x203A;</text>
+            <rect x="340" y="35" width="60" height="10" rx="4" fill="var(--content-base-default)" />
+            <text x="410" y="48" textAnchor="middle" fill="var(--content-base-alternative)" fontSize="18">&#x203A;</text>
 
             {/* Numbered indicator 1 - Leading */}
-            <line x1="58" y1="15" x2="58" y2="2" stroke="#374151" strokeWidth="1.5" />
-            <circle cx="58" cy="0" r="11" fill="#374151" />
-            <text x="58" y="4" textAnchor="middle" fill="white" fontSize="11" fontWeight="600">1</text>
+            <line x1="58" y1="15" x2="58" y2="2" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <circle cx="58" cy="0" r="11" fill="var(--content-base-default)" />
+            <text x="58" y="4" textAnchor="middle" fill="var(--content-base-onColor)" fontSize="11" fontWeight="600">1</text>
 
             {/* Numbered indicator 2 - Content */}
-            <line x1="130" y1="75" x2="130" y2="88" stroke="#374151" strokeWidth="1.5" />
-            <circle cx="130" cy="98" r="11" fill="#374151" />
-            <text x="130" y="102" textAnchor="middle" fill="white" fontSize="11" fontWeight="600">2</text>
+            <line x1="130" y1="75" x2="130" y2="88" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <circle cx="130" cy="98" r="11" fill="var(--content-base-default)" />
+            <text x="130" y="102" textAnchor="middle" fill="var(--content-base-onColor)" fontSize="11" fontWeight="600">2</text>
 
             {/* Numbered indicator 3 - Trailing */}
-            <line x1="370" y1="15" x2="370" y2="2" stroke="#374151" strokeWidth="1.5" />
-            <circle cx="370" cy="0" r="11" fill="#374151" />
-            <text x="370" y="4" textAnchor="middle" fill="white" fontSize="11" fontWeight="600">3</text>
+            <line x1="370" y1="15" x2="370" y2="2" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <circle cx="370" cy="0" r="11" fill="var(--content-base-default)" />
+            <text x="370" y="4" textAnchor="middle" fill="var(--content-base-onColor)" fontSize="11" fontWeight="600">3</text>
           </svg>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16, marginTop: 20, fontSize: 14, fontWeight: 500, color: "var(--text-primary)" }}>
@@ -247,7 +248,7 @@ function DesignContent() {
             <ListCellDemo title="홍길동" subtitle="hong@example.com" />
           </VariantCard>
           <VariantCard name="Full (Icon + Content + Value)" description="모든 영역이 채워진 정보 표시형">
-            <ListCellDemo leading={<CryptoIcon symbol="ETH" color="#627eea" />} title="Ethereum" subtitle="0.7812 ETH" trailing={<span style={{ fontSize: 13, fontWeight: 600, color: "#334155" }}>₩3.2M</span>} />
+            <ListCellDemo leading={<CryptoIcon symbol="ETH" color={BRAND_EXTERNAL_COLORS.crypto.ethereum} />} title="Ethereum" subtitle="0.7812 ETH" trailing={<span style={{ fontSize: 13, fontWeight: 600, color: "var(--content-base-default)" }}>₩3.2M</span>} />
           </VariantCard>
           <VariantCard name="Title Only + Chevron" description="단순 네비게이션 용도">
             <ListCellDemo title="도움말" trailing={<ChevronIcon />} onClick={() => {}} />
@@ -273,27 +274,27 @@ function DesignContent() {
             <tbody>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                 <td style={{ padding: "12px 16px" }}>Title</td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>#334155</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>var(--content-base-default)</td>
                 <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>기본 타이틀 텍스트</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                 <td style={{ padding: "12px 16px" }}>Subtitle</td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>#64748b</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>var(--content-base-secondary)</td>
                 <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>보조 텍스트, 설명</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                 <td style={{ padding: "12px 16px" }}>Success Trailing</td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>#22c55e</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>var(--content-success-default)</td>
                 <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>연결됨, 성공 상태</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                 <td style={{ padding: "12px 16px" }}>Brand Trailing</td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>#3b82f6</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>var(--content-brand-default)</td>
                 <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>연결하기, 액션 유도</td>
               </tr>
               <tr>
                 <td style={{ padding: "12px 16px" }}>Error Trailing</td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>#ef4444</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>var(--content-error-default)</td>
                 <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>에러, 경고 상태</td>
               </tr>
             </tbody>
@@ -302,10 +303,10 @@ function DesignContent() {
 
         <PreviewBox>
           <div style={{ padding: 24, width: "100%" }}>
-            <div style={{ backgroundColor: "white", borderRadius: 12, border: "1px solid #e2e8f0", overflow: "hidden", maxWidth: 360 }}>
-              <ListCellDemo leading={<StatusDot color="#22c55e" />} title="업비트" subtitle="연동됨" trailing={<span style={{ fontSize: 13, fontWeight: 600, color: "#22c55e" }}>연결됨</span>} divider onClick={() => {}} />
-              <ListCellDemo leading={<StatusDot color="#3b82f6" />} title="빗썸" subtitle="미연동" trailing={<span style={{ fontSize: 13, fontWeight: 600, color: "#3b82f6" }}>연결하기</span>} divider onClick={() => {}} />
-              <ListCellDemo leading={<StatusDot color="#ef4444" />} title="코인원" subtitle="연동 오류" trailing={<span style={{ fontSize: 13, fontWeight: 600, color: "#ef4444" }}>재연결</span>} onClick={() => {}} />
+            <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: 12, border: "1px solid var(--border-solid-alternative)", overflow: "hidden", maxWidth: 360 }}>
+              <ListCellDemo leading={<StatusDot color="var(--content-success-default)" />} title="업비트" subtitle="연동됨" trailing={<span style={{ fontSize: 13, fontWeight: 600, color: "var(--content-success-default)" }}>연결됨</span>} divider onClick={() => {}} />
+              <ListCellDemo leading={<StatusDot color="var(--content-brand-default)" />} title="빗썸" subtitle="미연동" trailing={<span style={{ fontSize: 13, fontWeight: 600, color: "var(--content-brand-default)" }}>연결하기</span>} divider onClick={() => {}} />
+              <ListCellDemo leading={<StatusDot color="var(--content-error-default)" />} title="코인원" subtitle="연동 오류" trailing={<span style={{ fontSize: 13, fontWeight: 600, color: "var(--content-error-default)" }}>재연결</span>} onClick={() => {}} />
             </div>
           </div>
         </PreviewBox>
@@ -319,15 +320,15 @@ function DesignContent() {
 
         <PreviewBox>
           <div style={{ padding: 24, width: "100%" }}>
-            <div style={{ backgroundColor: "white", borderRadius: 12, border: "1px solid #e2e8f0", overflow: "hidden", maxWidth: 400 }}>
+            <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: 12, border: "1px solid var(--border-solid-alternative)", overflow: "hidden", maxWidth: 400 }}>
               <ListCellDemo leading={<AvatarDemo />} title="Default" subtitle="기본 상태" trailing={<ChevronIcon />} divider onClick={() => {}} />
-              <div style={{ backgroundColor: "rgba(0,0,0,0.02)" }}>
+              <div style={{ backgroundColor: "var(--surface-base-containerPressed)" }}>
                 <ListCellDemo leading={<AvatarDemo />} title="Pressed / Hover" subtitle="마우스 오버 또는 터치 시" trailing={<ChevronIcon />} divider />
               </div>
               <div style={{ opacity: 0.4, pointerEvents: "none" as const }}>
                 <ListCellDemo leading={<AvatarDemo />} title="Disabled" subtitle="비활성화 상태" trailing={<ChevronIcon />} divider />
               </div>
-              <div style={{ backgroundColor: "#f0f7ff" }}>
+              <div style={{ backgroundColor: "var(--surface-brand-secondary)" }}>
                 <ListCellDemo leading={<AvatarDemo />} title="Selected" subtitle="선택된 상태" trailing={<CheckIcon />} />
               </div>
             </div>
@@ -337,7 +338,7 @@ function DesignContent() {
         <div style={{ marginTop: 16, padding: 16, backgroundColor: "var(--bg-secondary)", borderRadius: 12, fontSize: 13 }}>
           <p style={{ margin: 0, color: "var(--text-secondary)", lineHeight: 1.8 }}>
             <strong style={{ color: "var(--text-primary)" }}>Default:</strong> 기본 배경 (투명)<br />
-            <strong style={{ color: "var(--text-primary)" }}>Pressed/Hover:</strong> 배경색이 rgba(0,0,0,0.02)로 변경<br />
+            <strong style={{ color: "var(--text-primary)" }}>Pressed/Hover:</strong> 배경색이 <InlineCode>surface.base.containerPressed</InlineCode>로 변경<br />
             <strong style={{ color: "var(--text-primary)" }}>Disabled:</strong> 전체 opacity 감소, 상호작용 불가<br />
             <strong style={{ color: "var(--text-primary)" }}>Selected:</strong> 배경색 변경 + 체크 아이콘 표시
           </p>
@@ -348,10 +349,10 @@ function DesignContent() {
       <Section title="With Section Headers">
         <PreviewBox>
           <div style={{ padding: 24, width: "100%" }}>
-            <div style={{ backgroundColor: "white", borderRadius: 16, overflow: "hidden", maxWidth: 360, boxShadow: "0 1px 3px rgba(0,0,0,0.1)" }}>
+            <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: 16, overflow: "hidden", maxWidth: 360, boxShadow: "var(--shadow-sm)" }}>
               <SectionHeader title="내 자산" />
-              <ListCellDemo leading={<CryptoIcon symbol="ETH" color="#627eea" />} title="Ethereum" subtitle="0.7812 ETH" trailing={<span style={{ fontSize: 14, fontWeight: 600, color: "#334155" }}>₩3,245,000</span>} divider onClick={() => {}} />
-              <ListCellDemo leading={<CryptoIcon symbol="BTC" color="#f7931a" />} title="Bitcoin" subtitle="0.0234 BTC" trailing={<span style={{ fontSize: 14, fontWeight: 600, color: "#334155" }}>₩2,890,000</span>} onClick={() => {}} />
+              <ListCellDemo leading={<CryptoIcon symbol="ETH" color={BRAND_EXTERNAL_COLORS.crypto.ethereum} />} title="Ethereum" subtitle="0.7812 ETH" trailing={<span style={{ fontSize: 14, fontWeight: 600, color: "var(--content-base-default)" }}>₩3,245,000</span>} divider onClick={() => {}} />
+              <ListCellDemo leading={<CryptoIcon symbol="BTC" color={BRAND_EXTERNAL_COLORS.crypto.bitcoin} />} title="Bitcoin" subtitle="0.0234 BTC" trailing={<span style={{ fontSize: 14, fontWeight: 600, color: "var(--content-base-default)" }}>₩2,890,000</span>} onClick={() => {}} />
               <SectionHeader title="설정" />
               <ListCellDemo leading={<SettingsIconDemo />} title="알림 설정" trailing={<ChevronIcon />} divider onClick={() => {}} />
               <ListCellDemo leading={<SettingsIconDemo />} title="보안" trailing={<ChevronIcon />} onClick={() => {}} />
@@ -401,7 +402,7 @@ function DesignContent() {
 
         <PreviewBox>
           <div style={{ padding: 24, width: "100%" }}>
-            <div style={{ backgroundColor: "white", borderRadius: 12, border: "1px solid #e2e8f0", overflow: "hidden" }}>
+            <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: 12, border: "1px solid var(--border-solid-alternative)", overflow: "hidden" }}>
               {(["small", "medium", "large"] as ListCellSize[]).map((s, i, arr) => (
                 <ListCellDemo
                   key={s}
@@ -487,7 +488,7 @@ function DesignContent() {
           <DontCard>
             <div style={{ width: "100%", maxWidth: 280 }}>
               <ListCellDemo leading={<SettingsIconDemo />} title="알림 설정" trailing={<ChevronIcon />} divider onClick={() => {}} />
-              <ListCellDemo title="보안" trailing={<span style={{ fontSize: 12, color: "#3b82f6" }}>변경</span>} onClick={() => {}} />
+              <ListCellDemo title="보안" trailing={<span style={{ fontSize: 12, color: "var(--content-brand-default)" }}>변경</span>} onClick={() => {}} />
             </div>
           </DontCard>
         </div>
@@ -499,12 +500,12 @@ function DesignContent() {
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 24 }}>
           <DoCard>
             <div style={{ width: "100%", maxWidth: 280 }}>
-              <ListCellDemo title="Ethereum" subtitle="0.7812 ETH" trailing={<span style={{ fontSize: 13, fontWeight: 600, color: "#334155" }}>₩3.2M</span>} />
+              <ListCellDemo title="Ethereum" subtitle="0.7812 ETH" trailing={<span style={{ fontSize: 13, fontWeight: 600, color: "var(--content-base-default)" }}>₩3.2M</span>} />
             </div>
           </DoCard>
           <DontCard>
             <div style={{ width: "100%", maxWidth: 280 }}>
-              <ListCellDemo title="Ethereum 이더리움 코인 가상화폐 블록체인" subtitle="0.7812 ETH" trailing={<span style={{ fontSize: 13, fontWeight: 600, color: "#334155" }}>₩3,245,000원</span>} />
+              <ListCellDemo title="Ethereum 이더리움 코인 가상화폐 블록체인" subtitle="0.7812 ETH" trailing={<span style={{ fontSize: 13, fontWeight: 600, color: "var(--content-base-default)" }}>₩3,245,000원</span>} />
             </div>
           </DontCard>
         </div>
@@ -538,12 +539,12 @@ function DesignContent() {
                 ["Padding Y (large)", "spacing.primitive.4", "16px"],
                 ["Padding X", "spacing.primitive.4", "16px"],
                 ["Gap", "spacing.primitive.3", "12px"],
-                ["Divider Color", "border.base.default", "#e2e8f0"],
+                ["Divider Color", "border.base.default", "var(--border-base-default)"],
               ].map(([prop, token, value], i) => (
                 <tr key={i} style={{ borderBottom: "1px solid var(--divider)" }}>
                   <td style={{ padding: "12px 16px" }}>{prop}</td>
                   <td style={{ padding: "12px 16px" }}>{token !== "-" ? <code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>{token}</code> : "-"}</td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>{value}</td>
+                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>{value}</td>
                 </tr>
               ))}
             </tbody>
@@ -617,8 +618,8 @@ function WebContent() {
               padding: "8px 16px",
               fontSize: 13,
               fontWeight: 500,
-              color: "white",
-              backgroundColor: "#24292f",
+              color: "var(--content-base-onColor)",
+              backgroundColor: "var(--docs-code-surface)",
               borderRadius: 12,
               textDecoration: "none",
             }}
@@ -638,7 +639,7 @@ function WebContent() {
       <Section title="Basic Usage">
         <PreviewBox>
           <div style={{ padding: 24, width: "100%" }}>
-            <div style={{ backgroundColor: "white", borderRadius: 12, border: "1px solid #e2e8f0", overflow: "hidden", maxWidth: 360 }}>
+            <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: 12, border: "1px solid var(--border-solid-alternative)", overflow: "hidden", maxWidth: 360 }}>
               <ListCellDemo leading={<AvatarDemo />} title="홍길동" subtitle="hong@example.com" trailing={<ChevronIcon />} divider onClick={() => {}} />
               <ListCellDemo leading={<AvatarDemo />} title="김철수" subtitle="kim@example.com" trailing={<ChevronIcon />} onClick={() => {}} />
             </div>
@@ -657,7 +658,7 @@ function WebContent() {
         <Subsection title="With Leading Icon">
           <PreviewBox>
             <div style={{ padding: 24, width: "100%" }}>
-              <div style={{ backgroundColor: "white", borderRadius: 12, border: "1px solid #e2e8f0", overflow: "hidden", maxWidth: 360 }}>
+              <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: 12, border: "1px solid var(--border-solid-alternative)", overflow: "hidden", maxWidth: 360 }}>
                 <ListCellDemo leading={<SettingsIconDemo />} title="알림 설정" trailing={<ChevronIcon />} divider onClick={() => {}} />
                 <ListCellDemo leading={<SettingsIconDemo />} title="보안 설정" trailing={<ChevronIcon />} onClick={() => {}} />
               </div>
@@ -674,7 +675,7 @@ function WebContent() {
         <Subsection title="Without Leading (Title Only)">
           <PreviewBox>
             <div style={{ padding: 24, width: "100%" }}>
-              <div style={{ backgroundColor: "white", borderRadius: 12, border: "1px solid #e2e8f0", overflow: "hidden", maxWidth: 360 }}>
+              <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: 12, border: "1px solid var(--border-solid-alternative)", overflow: "hidden", maxWidth: 360 }}>
                 <ListCellDemo title="이용약관" trailing={<ChevronIcon />} divider onClick={() => {}} />
                 <ListCellDemo title="개인정보 처리방침" trailing={<ChevronIcon />} onClick={() => {}} />
               </div>
@@ -690,9 +691,9 @@ function WebContent() {
         <Subsection title="With Value Trailing">
           <PreviewBox>
             <div style={{ padding: 24, width: "100%" }}>
-              <div style={{ backgroundColor: "white", borderRadius: 12, border: "1px solid #e2e8f0", overflow: "hidden", maxWidth: 360 }}>
-                <ListCellDemo leading={<CryptoIcon symbol="ETH" color="#627eea" />} title="Ethereum" subtitle="0.7812 ETH" trailing={<span style={{ fontSize: 14, fontWeight: 600, color: "#334155" }}>₩3,245,000</span>} divider onClick={() => {}} />
-                <ListCellDemo leading={<CryptoIcon symbol="BTC" color="#f7931a" />} title="Bitcoin" subtitle="0.0234 BTC" trailing={<span style={{ fontSize: 14, fontWeight: 600, color: "#334155" }}>₩2,890,000</span>} onClick={() => {}} />
+              <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: 12, border: "1px solid var(--border-solid-alternative)", overflow: "hidden", maxWidth: 360 }}>
+                <ListCellDemo leading={<CryptoIcon symbol="ETH" color={BRAND_EXTERNAL_COLORS.crypto.ethereum} />} title="Ethereum" subtitle="0.7812 ETH" trailing={<span style={{ fontSize: 14, fontWeight: 600, color: "var(--content-base-default)" }}>₩3,245,000</span>} divider onClick={() => {}} />
+                <ListCellDemo leading={<CryptoIcon symbol="BTC" color={BRAND_EXTERNAL_COLORS.crypto.bitcoin} />} title="Bitcoin" subtitle="0.0234 BTC" trailing={<span style={{ fontSize: 14, fontWeight: 600, color: "var(--content-base-default)" }}>₩2,890,000</span>} onClick={() => {}} />
               </div>
             </div>
           </PreviewBox>
@@ -709,10 +710,10 @@ function WebContent() {
       <Section title="Colors">
         <PreviewBox>
           <div style={{ padding: 24, width: "100%" }}>
-            <div style={{ backgroundColor: "white", borderRadius: 12, border: "1px solid #e2e8f0", overflow: "hidden", maxWidth: 360 }}>
-              <ListCellDemo leading={<StatusDot color="#22c55e" />} title="업비트" subtitle="연동됨" trailing={<span style={{ fontSize: 13, fontWeight: 600, color: "#22c55e" }}>연결됨</span>} divider onClick={() => {}} />
-              <ListCellDemo leading={<StatusDot color="#3b82f6" />} title="빗썸" subtitle="미연동" trailing={<span style={{ fontSize: 13, fontWeight: 600, color: "#3b82f6" }}>연결하기</span>} divider onClick={() => {}} />
-              <ListCellDemo leading={<StatusDot color="#ef4444" />} title="코인원" subtitle="연동 오류" trailing={<span style={{ fontSize: 13, fontWeight: 600, color: "#ef4444" }}>재연결</span>} onClick={() => {}} />
+            <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: 12, border: "1px solid var(--border-solid-alternative)", overflow: "hidden", maxWidth: 360 }}>
+              <ListCellDemo leading={<StatusDot color="var(--content-success-default)" />} title="업비트" subtitle="연동됨" trailing={<span style={{ fontSize: 13, fontWeight: 600, color: "var(--content-success-default)" }}>연결됨</span>} divider onClick={() => {}} />
+              <ListCellDemo leading={<StatusDot color="var(--content-brand-default)" />} title="빗썸" subtitle="미연동" trailing={<span style={{ fontSize: 13, fontWeight: 600, color: "var(--content-brand-default)" }}>연결하기</span>} divider onClick={() => {}} />
+              <ListCellDemo leading={<StatusDot color="var(--content-error-default)" />} title="코인원" subtitle="연동 오류" trailing={<span style={{ fontSize: 13, fontWeight: 600, color: "var(--content-error-default)" }}>재연결</span>} onClick={() => {}} />
             </div>
           </div>
         </PreviewBox>
@@ -744,7 +745,7 @@ function WebContent() {
       <Section title="Sizes">
         <PreviewBox>
           <div style={{ padding: 24, width: "100%" }}>
-            <div style={{ backgroundColor: "white", borderRadius: 12, border: "1px solid #e2e8f0", overflow: "hidden" }}>
+            <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: 12, border: "1px solid var(--border-solid-alternative)", overflow: "hidden" }}>
               {(["small", "medium", "large"] as ListCellSize[]).map((s, i, arr) => (
                 <ListCellDemo
                   key={s}
@@ -768,7 +769,7 @@ function WebContent() {
       <Section title="States">
         <PreviewBox>
           <div style={{ padding: 24, width: "100%" }}>
-            <div style={{ backgroundColor: "white", borderRadius: 12, border: "1px solid #e2e8f0", overflow: "hidden", maxWidth: 360 }}>
+            <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: 12, border: "1px solid var(--border-solid-alternative)", overflow: "hidden", maxWidth: 360 }}>
               <ListCellDemo leading={<AvatarDemo />} title="Default" subtitle="클릭 가능" trailing={<ChevronIcon />} divider onClick={() => {}} />
               <div style={{ opacity: 0.4, pointerEvents: "none" as const }}>
                 <ListCellDemo leading={<AvatarDemo />} title="Disabled" subtitle="비활성화" trailing={<ChevronIcon />} />
@@ -841,8 +842,8 @@ function RNContent() {
               padding: "8px 16px",
               fontSize: 13,
               fontWeight: 500,
-              color: "white",
-              backgroundColor: "#24292f",
+              color: "var(--content-base-onColor)",
+              backgroundColor: "var(--docs-code-surface)",
               borderRadius: 12,
               textDecoration: "none",
             }}
@@ -917,7 +918,7 @@ function RNContent() {
     leading={<ExchangeIcon name="upbit" />}
     title="업비트"
     subtitle="연동됨"
-    trailing={<Text style={{ color: '#22c55e', fontWeight: '600' }}>연결됨</Text>}
+    trailing={<Text style={{ color: 'var(--status-positive-content)', fontWeight: '600' }}>연결됨</Text>}
     onPress={() => navigate('upbit-detail')}
     divider
   />
@@ -925,7 +926,7 @@ function RNContent() {
     leading={<ExchangeIcon name="bithumb" />}
     title="빗썸"
     subtitle="미연동"
-    trailing={<Text style={{ color: '#3b82f6', fontWeight: '600' }}>연결하기</Text>}
+    trailing={<Text style={{ color: 'var(--content-brand-default)', fontWeight: '600' }}>연결하기</Text>}
     onPress={() => connectExchange('bithumb')}
     divider
   />
@@ -933,7 +934,7 @@ function RNContent() {
     leading={<ExchangeIcon name="coinone" />}
     title="코인원"
     subtitle="연동 오류"
-    trailing={<Text style={{ color: '#ef4444', fontWeight: '600' }}>재연결</Text>}
+    trailing={<Text style={{ color: 'var(--status-negative-content)', fontWeight: '600' }}>재연결</Text>}
     onPress={() => reconnect('coinone')}
   />
 </View>`} />
@@ -1010,7 +1011,7 @@ function UsageCard({ situation, description, config, examples }: {
   return (
     <div style={{
       padding: 16,
-      backgroundColor: "white",
+      backgroundColor: "var(--surface-base-default)",
       borderRadius: 12,
       border: "1px solid var(--divider)",
     }}>
@@ -1019,8 +1020,8 @@ function UsageCard({ situation, description, config, examples }: {
         <span style={{
           fontSize: 11,
           padding: "2px 6px",
-          backgroundColor: "#f1f5f9",
-          color: "#475569",
+          backgroundColor: "var(--surface-base-alternative)",
+          color: "var(--content-base-secondary)",
           borderRadius: 4,
           fontWeight: 500,
         }}>
@@ -1060,8 +1061,8 @@ function CryptoIcon({ symbol, color }: { symbol: string; color: string }) {
 
 function AvatarDemo() {
   return (
-    <div style={{ width: 36, height: 36, borderRadius: "50%", backgroundColor: "#e2e8f0", display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2">
+    <div style={{ width: 36, height: 36, borderRadius: "50%", backgroundColor: "var(--surface-base-container)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--icon-secondary)" strokeWidth="2">
         <circle cx="12" cy="8" r="4" />
         <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
       </svg>
@@ -1071,7 +1072,7 @@ function AvatarDemo() {
 
 function ChevronIcon() {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--icon-secondary)" strokeWidth="2">
       <path d="M9 18l6-6-6-6" />
     </svg>
   );
@@ -1079,7 +1080,7 @@ function ChevronIcon() {
 
 function CheckIcon() {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="2.5">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--icon-brand)" strokeWidth="2.5">
       <path d="M5 13l4 4L19 7" />
     </svg>
   );
@@ -1095,8 +1096,8 @@ function StatusDot({ color }: { color: string }) {
 
 function SettingsIconDemo() {
   return (
-    <div style={{ width: 40, height: 40, borderRadius: 12, backgroundColor: "#f1f5f9", display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#64748b" strokeWidth="2">
+    <div style={{ width: 40, height: 40, borderRadius: 12, backgroundColor: "var(--surface-base-alternative)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--icon-default)" strokeWidth="2">
         <circle cx="12" cy="12" r="3" />
         <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" />
       </svg>

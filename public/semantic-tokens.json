@@ -253,6 +253,112 @@
       "dim_comment": "기본 딤 배경 (grey.15 + 40% alpha)",
       "heavy": "{palette.alphaComposite.overlayLightHeavy}",
       "heavy_comment": "강한 딤 배경 (grey.15 + 85% alpha)"
+    },
+
+    "inverse": {
+      "_description": "반전 컨텍스트(다크 배경 카드/배너) 전용 토큰",
+      "surface": {
+        "default": "{palette.grey.15}",
+        "default_comment": "라이트 테마에서 반전 배경 기본",
+        "alternative": "{palette.grey.20}",
+        "alternative_comment": "라이트 테마 반전 배경 보조"
+      },
+      "content": {
+        "default": "{palette.grey.99}",
+        "default_comment": "반전 배경 위 기본 텍스트",
+        "secondary": "{palette.grey.95}",
+        "secondary_comment": "반전 배경 위 보조 텍스트"
+      },
+      "border": {
+        "default": "{palette.grey.40}",
+        "default_comment": "반전 배경 기본 경계선",
+        "secondary": "{palette.grey.50}",
+        "secondary_comment": "반전 배경 강한 경계선"
+      },
+      "icon": {
+        "default": "{palette.grey.95}",
+        "default_comment": "반전 배경 기본 아이콘"
+      }
+    },
+
+    "status": {
+      "_description": "Wanted 스타일 positive/cautionary/negative 상태 alias",
+      "positive": {
+        "surface": "{palette.green.95}",
+        "surface_comment": "성공 배경 alias",
+        "content": "{palette.green.50}",
+        "content_comment": "성공 텍스트 alias",
+        "border": "{palette.green.50}",
+        "border_comment": "성공 경계선 alias"
+      },
+      "cautionary": {
+        "surface": "{palette.orange.95}",
+        "surface_comment": "주의/경고 배경 alias",
+        "content": "{palette.orange.50}",
+        "content_comment": "주의/경고 텍스트 alias",
+        "border": "{palette.orange.50}",
+        "border_comment": "주의/경고 경계선 alias"
+      },
+      "negative": {
+        "surface": "{palette.red.95}",
+        "surface_comment": "에러/부정 배경 alias",
+        "content": "{palette.red.50}",
+        "content_comment": "에러/부정 텍스트 alias",
+        "border": "{palette.red.50}",
+        "border_comment": "에러/부정 경계선 alias"
+      }
+    },
+
+    "component": {
+      "_description": "Toss 방식 컴포넌트 목적별 semantic alias",
+      "button": {
+        "primarySurface": "{palette.blue.50}",
+        "primarySurface_comment": "Primary 버튼 배경",
+        "primarySurfacePressed": "{palette.blue.45}",
+        "primarySurfacePressed_comment": "Primary 버튼 pressed",
+        "primaryContent": "{palette.static.white}",
+        "primaryContent_comment": "Primary 버튼 텍스트",
+        "secondarySurface": "{palette.blue.95}",
+        "secondarySurface_comment": "Secondary 버튼 배경",
+        "secondarySurfacePressed": "{palette.blue.90}",
+        "secondarySurfacePressed_comment": "Secondary 버튼 pressed",
+        "secondaryContent": "{palette.blue.50}",
+        "secondaryContent_comment": "Secondary 버튼 텍스트",
+        "secondaryBorder": "{palette.blue.50}",
+        "secondaryBorder_comment": "Secondary 버튼 경계선",
+        "destructiveSurface": "{palette.red.50}",
+        "destructiveSurface_comment": "Destructive 버튼 배경",
+        "destructiveSurfacePressed": "{palette.red.40}",
+        "destructiveSurfacePressed_comment": "Destructive 버튼 pressed",
+        "destructiveContent": "{palette.static.white}",
+        "destructiveContent_comment": "Destructive 버튼 텍스트"
+      },
+      "input": {
+        "surface": "{palette.static.white}",
+        "surface_comment": "입력 필드 배경",
+        "border": "{palette.grey.95}",
+        "border_comment": "입력 필드 기본 경계선",
+        "focusBorder": "{palette.blue.50}",
+        "focusBorder_comment": "입력 필드 포커스 경계선",
+        "content": "{palette.grey.30}",
+        "content_comment": "입력 필드 텍스트",
+        "placeholder": "{palette.grey.70}",
+        "placeholder_comment": "입력 필드 플레이스홀더",
+        "focusRing": "{palette.alphaComposite.brandSelectionLight}",
+        "focusRing_comment": "입력 필드 포커스 링"
+      },
+      "chip": {
+        "neutralSurface": "{palette.alphaComposite.fillLightNormal}",
+        "neutralSurface_comment": "기본 칩 배경",
+        "neutralContent": "{palette.grey.30}",
+        "neutralContent_comment": "기본 칩 텍스트",
+        "neutralBorder": "{palette.grey.95}",
+        "neutralBorder_comment": "기본 칩 경계선",
+        "selectedSurface": "{palette.blue.95}",
+        "selectedSurface_comment": "선택 칩 배경",
+        "selectedContent": "{palette.blue.50}",
+        "selectedContent_comment": "선택 칩 텍스트"
+      }
     }
   },
 
@@ -500,6 +606,112 @@
       "dim_comment": "기본 딤 배경 (grey.15 + 72% alpha)",
       "heavy": "{palette.alphaComposite.overlayDarkHeavy}",
       "heavy_comment": "강한 딤 배경 (grey.15 + 93% alpha)"
+    },
+
+    "inverse": {
+      "_description": "반전 컨텍스트(라이트 배경 카드/배너) 전용 토큰",
+      "surface": {
+        "default": "{palette.grey.99}",
+        "default_comment": "다크 테마에서 반전 배경 기본",
+        "alternative": "{palette.grey.95}",
+        "alternative_comment": "다크 테마 반전 배경 보조"
+      },
+      "content": {
+        "default": "{palette.grey.15}",
+        "default_comment": "반전 배경 위 기본 텍스트",
+        "secondary": "{palette.grey.30}",
+        "secondary_comment": "반전 배경 위 보조 텍스트"
+      },
+      "border": {
+        "default": "{palette.grey.80}",
+        "default_comment": "반전 배경 기본 경계선",
+        "secondary": "{palette.grey.70}",
+        "secondary_comment": "반전 배경 강한 경계선"
+      },
+      "icon": {
+        "default": "{palette.grey.30}",
+        "default_comment": "반전 배경 기본 아이콘"
+      }
+    },
+
+    "status": {
+      "_description": "Wanted 스타일 positive/cautionary/negative 상태 alias",
+      "positive": {
+        "surface": "{palette.green.20}",
+        "surface_comment": "성공 배경 alias",
+        "content": "{palette.green.60}",
+        "content_comment": "성공 텍스트 alias",
+        "border": "{palette.green.60}",
+        "border_comment": "성공 경계선 alias"
+      },
+      "cautionary": {
+        "surface": "{palette.orange.20}",
+        "surface_comment": "주의/경고 배경 alias",
+        "content": "{palette.orange.60}",
+        "content_comment": "주의/경고 텍스트 alias",
+        "border": "{palette.orange.60}",
+        "border_comment": "주의/경고 경계선 alias"
+      },
+      "negative": {
+        "surface": "{palette.red.20}",
+        "surface_comment": "에러/부정 배경 alias",
+        "content": "{palette.red.60}",
+        "content_comment": "에러/부정 텍스트 alias",
+        "border": "{palette.red.60}",
+        "border_comment": "에러/부정 경계선 alias"
+      }
+    },
+
+    "component": {
+      "_description": "Toss 방식 컴포넌트 목적별 semantic alias",
+      "button": {
+        "primarySurface": "{palette.blue.55}",
+        "primarySurface_comment": "Primary 버튼 배경",
+        "primarySurfacePressed": "{palette.blue.60}",
+        "primarySurfacePressed_comment": "Primary 버튼 pressed",
+        "primaryContent": "{palette.static.white}",
+        "primaryContent_comment": "Primary 버튼 텍스트",
+        "secondarySurface": "{palette.blue.20}",
+        "secondarySurface_comment": "Secondary 버튼 배경",
+        "secondarySurfacePressed": "{palette.blue.30}",
+        "secondarySurfacePressed_comment": "Secondary 버튼 pressed",
+        "secondaryContent": "{palette.blue.60}",
+        "secondaryContent_comment": "Secondary 버튼 텍스트",
+        "secondaryBorder": "{palette.blue.55}",
+        "secondaryBorder_comment": "Secondary 버튼 경계선",
+        "destructiveSurface": "{palette.red.60}",
+        "destructiveSurface_comment": "Destructive 버튼 배경",
+        "destructiveSurfacePressed": "{palette.red.70}",
+        "destructiveSurfacePressed_comment": "Destructive 버튼 pressed",
+        "destructiveContent": "{palette.static.white}",
+        "destructiveContent_comment": "Destructive 버튼 텍스트"
+      },
+      "input": {
+        "surface": "{palette.grey.20}",
+        "surface_comment": "입력 필드 배경",
+        "border": "{palette.grey.25}",
+        "border_comment": "입력 필드 기본 경계선",
+        "focusBorder": "{palette.blue.55}",
+        "focusBorder_comment": "입력 필드 포커스 경계선",
+        "content": "{palette.grey.95}",
+        "content_comment": "입력 필드 텍스트",
+        "placeholder": "{palette.grey.50}",
+        "placeholder_comment": "입력 필드 플레이스홀더",
+        "focusRing": "{palette.alphaComposite.brandSelectionDark}",
+        "focusRing_comment": "입력 필드 포커스 링"
+      },
+      "chip": {
+        "neutralSurface": "{palette.alphaComposite.fillDarkNormal}",
+        "neutralSurface_comment": "기본 칩 배경",
+        "neutralContent": "{palette.grey.95}",
+        "neutralContent_comment": "기본 칩 텍스트",
+        "neutralBorder": "{palette.grey.25}",
+        "neutralBorder_comment": "기본 칩 경계선",
+        "selectedSurface": "{palette.blue.20}",
+        "selectedSurface_comment": "선택 칩 배경",
+        "selectedContent": "{palette.blue.60}",
+        "selectedContent_comment": "선택 칩 텍스트"
+      }
     }
   }
 }

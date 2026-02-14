@@ -84,7 +84,7 @@ export default function RadiusPage() {
           padding: key === 'lg' ? '10px 20px' : '8px 16px',
           fontSize: key === 'lg' ? 14 : 13,
           fontWeight: 500,
-          backgroundColor: '#2563eb',
+          backgroundColor: 'var(--content-brand-default)',
           color: 'white',
           border: 'none',
           borderRadius: value === 9999 ? 9999 : value,
@@ -94,18 +94,18 @@ export default function RadiusPage() {
 
       {/* Chip */}
       <SemanticSection id="chip" title="Chip" description="칩/태그 컴포넌트용 라운딩입니다." data={semantic.chip} renderPreview={(value) => (
-        <span style={{ display: 'inline-block', padding: '4px 12px', fontSize: 13, backgroundColor: '#dbeafe', color: '#2563eb', borderRadius: value === 9999 ? 9999 : value }}>Tag</span>
+        <span style={{ display: 'inline-block', padding: '4px 12px', fontSize: 13, backgroundColor: 'var(--surface-brand-secondary)', color: 'var(--content-brand-default)', borderRadius: value === 9999 ? 9999 : value }}>Tag</span>
       )} />
 
       {/* Badge */}
       <SemanticSection id="badge" title="Badge" description="뱃지 컴포넌트용 라운딩입니다." data={semantic.badge} renderPreview={(value) => (
-        <span style={{ display: 'inline-block', padding: '2px 8px', fontSize: 12, fontWeight: 500, backgroundColor: '#ef4444', color: 'white', borderRadius: value === 9999 ? 9999 : value }}>NEW</span>
+        <span style={{ display: 'inline-block', padding: '2px 8px', fontSize: 12, fontWeight: 500, backgroundColor: 'var(--status-negative-content)', color: 'white', borderRadius: value === 9999 ? 9999 : value }}>NEW</span>
       )} />
 
       {/* Avatar */}
       <SemanticSection id="avatar" title="Avatar" description="아바타 컴포넌트용 라운딩입니다." data={semantic.avatar} renderPreview={(value) => (
-        <div style={{ width: 40, height: 40, background: '#e2e8f0', borderRadius: value === 9999 ? '50%' : value, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="#94a3b8">
+        <div style={{ width: 40, height: 40, background: 'var(--border-base-default)', borderRadius: value === 9999 ? '50%' : value, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--content-base-placeholder)">
             <circle cx="12" cy="8" r="4" />
             <path d="M12 14c-4 0-8 2-8 4v2h16v-2c0-2-4-4-8-4z" />
           </svg>
@@ -114,11 +114,11 @@ export default function RadiusPage() {
 
       {/* Image */}
       <SemanticSection id="image" title="Image" description="이미지/썸네일 컴포넌트용 라운딩입니다." data={semantic.image} renderPreview={(value) => (
-        <div style={{ width: 56, height: 40, background: '#e2e8f0', borderRadius: value, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="#94a3b8">
-            <rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="#94a3b8" strokeWidth="2"/>
+        <div style={{ width: 56, height: 40, background: 'var(--border-base-default)', borderRadius: value, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--content-base-placeholder)">
+            <rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="var(--content-base-placeholder)" strokeWidth="2"/>
             <circle cx="8.5" cy="8.5" r="1.5" />
-            <path d="M21 15l-5-5-4 4-3-3-6 6" stroke="#94a3b8" strokeWidth="2" fill="none"/>
+            <path d="M21 15l-5-5-4 4-3-3-6 6" stroke="var(--content-base-placeholder)" strokeWidth="2" fill="none"/>
           </svg>
         </div>
       )} />
@@ -139,32 +139,32 @@ export default function RadiusPage() {
               <div key={key} style={{ display: 'flex', alignItems: 'center', gap: 24, padding: '20px 16px', borderBottom: i < arr.length - 1 ? '1px solid var(--divider)' : 'none' }}>
                 <div style={{ width: 140, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                   {key === 'modal' && (
-                    <div style={{ width: 120, height: 80, backgroundColor: '#fff', border: '1px solid #cbd5e1', borderRadius: value, boxShadow: '0 8px 24px rgba(0,0,0,0.15)', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
-                      <div style={{ padding: '8px 10px', borderBottom: '1px solid #e2e8f0' }}>
-                        <div style={{ width: 40, height: 6, backgroundColor: '#cbd5e1', borderRadius: 2 }} />
+                    <div style={{ width: 120, height: 80, backgroundColor: 'var(--static-white)', border: '1px solid var(--border-base-default)', borderRadius: value, boxShadow: '0 8px 24px var(--shadow-primitive-sm)', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+                      <div style={{ padding: '8px 10px', borderBottom: '1px solid var(--border-base-default)' }}>
+                        <div style={{ width: 40, height: 6, backgroundColor: 'var(--border-base-default)', borderRadius: 2 }} />
                       </div>
                       <div style={{ flex: 1, padding: 10, display: 'flex', flexDirection: 'column', gap: 4 }}>
-                        <div style={{ width: '100%', height: 4, backgroundColor: '#f1f5f9', borderRadius: 2 }} />
-                        <div style={{ width: '70%', height: 4, backgroundColor: '#f1f5f9', borderRadius: 2 }} />
+                        <div style={{ width: '100%', height: 4, backgroundColor: 'var(--surface-base-alternative)', borderRadius: 2 }} />
+                        <div style={{ width: '70%', height: 4, backgroundColor: 'var(--surface-base-alternative)', borderRadius: 2 }} />
                       </div>
                     </div>
                   )}
                   {key === 'bottomSheet' && (
-                    <div style={{ width: 120, height: 70, backgroundColor: '#fff', border: '1px solid #cbd5e1', borderTopLeftRadius: value, borderTopRightRadius: value, borderBottomLeftRadius: 0, borderBottomRightRadius: 0, boxShadow: '0 -4px 16px rgba(0,0,0,0.1)', display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: 8 }}>
-                      <div style={{ width: 32, height: 4, backgroundColor: '#cbd5e1', borderRadius: 2, marginBottom: 12 }} />
-                      <div style={{ width: '80%', height: 4, backgroundColor: '#f1f5f9', borderRadius: 2, marginBottom: 6 }} />
-                      <div style={{ width: '60%', height: 4, backgroundColor: '#f1f5f9', borderRadius: 2 }} />
+                    <div style={{ width: 120, height: 70, backgroundColor: 'var(--static-white)', border: '1px solid var(--border-base-default)', borderTopLeftRadius: value, borderTopRightRadius: value, borderBottomLeftRadius: 0, borderBottomRightRadius: 0, boxShadow: '0 -4px 16px var(--shadow-primitive-xs)', display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: 8 }}>
+                      <div style={{ width: 32, height: 4, backgroundColor: 'var(--border-base-default)', borderRadius: 2, marginBottom: 12 }} />
+                      <div style={{ width: '80%', height: 4, backgroundColor: 'var(--surface-base-alternative)', borderRadius: 2, marginBottom: 6 }} />
+                      <div style={{ width: '60%', height: 4, backgroundColor: 'var(--surface-base-alternative)', borderRadius: 2 }} />
                     </div>
                   )}
                   {key === 'toast' && (
-                    <div style={{ width: 120, height: 36, backgroundColor: '#1e293b', borderRadius: value, display: 'flex', alignItems: 'center', padding: '0 12px', gap: 8, boxShadow: '0 4px 12px rgba(0,0,0,0.15)' }}>
-                      <div style={{ width: 14, height: 14, backgroundColor: '#22c55e', borderRadius: '50%' }} />
-                      <span style={{ fontSize: 11, color: '#fff' }}>완료!</span>
+                    <div style={{ width: 120, height: 36, backgroundColor: 'var(--inverse-surface-default)', borderRadius: value, display: 'flex', alignItems: 'center', padding: '0 12px', gap: 8, boxShadow: '0 4px 12px var(--shadow-primitive-sm)' }}>
+                      <div style={{ width: 14, height: 14, backgroundColor: 'var(--status-positive-content)', borderRadius: '50%' }} />
+                      <span style={{ fontSize: 11, color: 'var(--static-white)' }}>완료!</span>
                     </div>
                   )}
                   {key === 'tooltip' && (
-                    <div style={{ width: 80, height: 28, backgroundColor: '#1e293b', borderRadius: value, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
-                      <span style={{ fontSize: 11, color: '#fff' }}>도움말</span>
+                    <div style={{ width: 80, height: 28, backgroundColor: 'var(--inverse-surface-default)', borderRadius: value, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 8px var(--shadow-primitive-sm)' }}>
+                      <span style={{ fontSize: 11, color: 'var(--static-white)' }}>도움말</span>
                     </div>
                   )}
                 </div>
@@ -181,7 +181,7 @@ export default function RadiusPage() {
 
       {/* Skeleton */}
       <SemanticSection id="skeleton" title="Skeleton" description="스켈레톤 로딩 컴포넌트용 라운딩입니다." data={semantic.skeleton} renderPreview={(value, key) => (
-        <div style={{ width: key === 'text' ? 64 : 40, height: key === 'text' ? 14 : 40, background: 'linear-gradient(90deg, #e2e8f0, #f1f5f9, #e2e8f0)', borderRadius: value }} />
+        <div style={{ width: key === 'text' ? 64 : 40, height: key === 'text' ? 14 : 40, background: 'linear-gradient(90deg, var(--border-base-default), var(--surface-base-alternative), var(--border-base-default))', borderRadius: value }} />
       )} />
     </div>
   );

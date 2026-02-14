@@ -238,7 +238,7 @@ function ComponentCard({
           borderRadius: 20,
           overflow: "hidden",
           marginBottom: 14,
-          backgroundColor: "#f5f5f7",
+          backgroundColor: "var(--surface-base-alternative)",
         }}
       >
         <img

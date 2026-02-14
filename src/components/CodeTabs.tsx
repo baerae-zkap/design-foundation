@@ -25,7 +25,7 @@ export function CodeTabs({ webCode, rnCode }: CodeTabsProps) {
         borderRadius: 12,
         border: "1px solid var(--divider)",
         overflow: "hidden",
-        backgroundColor: "#1e293b",
+        backgroundColor: "var(--docs-code-surface)",
       }}
     >
       {/* Tab Header */}
@@ -35,8 +35,8 @@ export function CodeTabs({ webCode, rnCode }: CodeTabsProps) {
           alignItems: "center",
           justifyContent: "space-between",
           padding: "8px 12px",
-          borderBottom: "1px solid rgba(255,255,255,0.1)",
-          backgroundColor: "#0f172a",
+          borderBottom: "1px solid var(--docs-code-border)",
+          backgroundColor: "var(--docs-code-surface-elevated)",
         }}
       >
         <div style={{ display: "flex", gap: 4 }}>
@@ -61,7 +61,7 @@ export function CodeTabs({ webCode, rnCode }: CodeTabsProps) {
             gap: 6,
             padding: "6px 10px",
             fontSize: 12,
-            color: copied ? "#22c55e" : "#94a3b8",
+            color: copied ? "var(--docs-code-success)" : "var(--docs-code-muted)",
             backgroundColor: "transparent",
             border: "none",
             borderRadius: 6,
@@ -91,7 +91,7 @@ export function CodeTabs({ webCode, rnCode }: CodeTabsProps) {
           overflow: "auto",
           fontSize: 13,
           lineHeight: 1.6,
-          color: "#e2e8f0",
+          color: "var(--docs-code-text)",
           fontFamily: "'SF Mono', 'Fira Code', Consolas, monospace",
         }}
       >
@@ -119,8 +119,8 @@ function TabButton({ active, onClick, children }: TabButtonProps) {
         padding: "6px 12px",
         fontSize: 13,
         fontWeight: active ? 600 : 400,
-        color: active ? "#fff" : isHovered ? "#cbd5e1" : "#94a3b8",
-        backgroundColor: active ? "#334155" : "transparent",
+        color: active ? "var(--docs-code-active-text)" : isHovered ? "var(--docs-code-muted-strong)" : "var(--docs-code-muted)",
+        backgroundColor: active ? "var(--docs-code-active-bg)" : "transparent",
         border: "none",
         borderRadius: 6,
         cursor: "pointer",

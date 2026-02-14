@@ -38,7 +38,7 @@ function ColorBar({ name, value, fullName }: { name: string; value: string; full
           style={{
             fontSize: '14px',
             fontWeight: 500,
-            color: isLight ? 'var(--grey-15)' : '#FFFFFF',
+            color: isLight ? 'var(--grey-15)' : 'var(--static-white)',
             whiteSpace: 'nowrap',
             overflow: 'hidden',
             textOverflow: 'ellipsis',
@@ -51,7 +51,7 @@ function ColorBar({ name, value, fullName }: { name: string; value: string; full
           style={{
             fontSize: '12px',
             fontFamily: 'var(--font-mono)',
-            color: isLight ? 'var(--grey-40)' : 'rgba(255,255,255,0.7)'
+            color: isLight ? 'var(--grey-40)' : 'var(--inverse-content-secondary)'
           }}
         >
           {value}
@@ -62,7 +62,7 @@ function ColorBar({ name, value, fullName }: { name: string; value: string; full
           style={{
             fontSize: '12px',
             fontWeight: 500,
-            color: isLight ? 'var(--grey-40)' : 'rgba(255,255,255,0.7)',
+            color: isLight ? 'var(--grey-40)' : 'var(--inverse-content-secondary)',
             flexShrink: 0,
             marginLeft: '8px',
           }}
@@ -149,8 +149,8 @@ export default function PalettePage() {
       <div style={{ marginBottom: 'var(--space-8)' }}>
         <h3 className="text-sm font-semibold mb-3" style={{ color: 'var(--content-base-strong)' }}>Static</h3>
         <div className="space-y-2">
-          <ColorBar name="white" value={paletteJson.static?.white ?? '#ffffff'} fullName="static.white" />
-          <ColorBar name="black" value={paletteJson.static?.black ?? '#000000'} fullName="static.black" />
+          <ColorBar name="white" value={paletteJson.static?.white ?? 'var(--static-white)'} fullName="static.white" />
+          <ColorBar name="black" value={paletteJson.static?.black ?? 'var(--static-black)'} fullName="static.black" />
         </div>
       </div>
     </div>

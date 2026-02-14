@@ -13,7 +13,7 @@ type SemanticItem = {
   description: string;
 };
 
-// Palette 참조 해석: "{palette.blue.500}" → "hsla(...)"
+// Palette 참조 해석: "{palette.blue.500}" → 실제 컬러값
 function resolveRef(ref: string): string {
   if (!ref.startsWith("{palette.")) return ref;
   const path = ref.slice(9, -1).split(".");
@@ -347,59 +347,35 @@ export default function SemanticPage() {
         { name: 'semantic-tokens.json', path: '/semantic-tokens.json' },
       ]} />
 
-      {/* Surface */}
-      <SemanticSection
-        title="Surface"
-        description="배경색/서피스 - 화면, 컨테이너, 컴포넌트 배경"
-        lightItems={processSemanticCategory(lightData.surface)}
-        darkItems={processSemanticCategory(darkData.surface)}
-        prefix="surface"
-      />
+      {[
+        { key: "surface", title: "Surface", description: "배경색/서피스 - 화면, 컨테이너, 컴포넌트 배경" },
+        { key: "content", title: "Content", description: "콘텐츠 컬러 - 텍스트, 아이콘 등" },
+        { key: "border", title: "Border", description: "테두리/구분선 컬러" },
+        { key: "fill", title: "Fill", description: "컴포넌트 채움 계열" },
+        { key: "interaction", title: "Interaction", description: "인터랙션 상태 컬러" },
+        { key: "visualization", title: "Visualization", description: "차트/그래프용 컬러" },
+        { key: "icon", title: "Icon", description: "아이콘 전용 컬러" },
+        { key: "overlay", title: "Overlay", description: "오버레이/딤 배경" },
+        { key: "inverse", title: "Inverse", description: "반전 컨텍스트(테마 반전 UI)용 토큰" },
+        { key: "status", title: "Status", description: "positive/cautionary/negative 상태 alias" },
+        { key: "component", title: "Component Alias", description: "버튼/입력/칩 전용 시멘틱 alias" },
+      ].map((section) => {
+        const lightCategory = (lightData as Record<string, unknown>)[section.key] as Record<string, unknown> | undefined;
+        const darkCategory = (darkData as Record<string, unknown>)[section.key] as Record<string, unknown> | undefined;
 
-      {/* Content */}
-      <SemanticSection
-        title="Content"
-        description="콘텐츠 컬러 - 텍스트, 아이콘 등"
-        lightItems={processSemanticCategory(lightData.content)}
-        darkItems={processSemanticCategory(darkData.content)}
-        prefix="content"
-      />
+        if (!lightCategory || !darkCategory) return null;
 
-      {/* Border */}
-      <SemanticSection
-        title="Border"
-        description="테두리/구분선 컬러"
-        lightItems={processSemanticCategory(lightData.border)}
-        darkItems={processSemanticCategory(darkData.border)}
-        prefix="border"
-      />
-
-      {/* Visualization */}
-      <SemanticSection
-        title="Visualization"
-        description="차트/그래프용 컬러"
-        lightItems={processSemanticCategory(lightData.visualization)}
-        darkItems={processSemanticCategory(darkData.visualization)}
-        prefix="visualization"
-      />
-
-      {/* Icon */}
-      <SemanticSection
-        title="Icon"
-        description="아이콘 전용 컬러"
-        lightItems={processSemanticCategory(lightData.icon)}
-        darkItems={processSemanticCategory(darkData.icon)}
-        prefix="icon"
-      />
-
-      {/* Overlay */}
-      <SemanticSection
-        title="Overlay"
-        description="오버레이/딤 배경"
-        lightItems={processSemanticCategory(lightData.overlay)}
-        darkItems={processSemanticCategory(darkData.overlay)}
-        prefix="overlay"
-      />
+        return (
+          <SemanticSection
+            key={section.key}
+            title={section.title}
+            description={section.description}
+            lightItems={processSemanticCategory(lightCategory)}
+            darkItems={processSemanticCategory(darkCategory)}
+            prefix={section.key}
+          />
+        );
+      })}
     </div>
   );
 }

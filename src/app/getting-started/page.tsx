@@ -145,7 +145,7 @@ function App() {
                 width: 40,
                 height: 40,
                 borderRadius: 10,
-                backgroundColor: "#f0f9ff",
+                backgroundColor: "var(--surface-brand-secondary)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -198,12 +198,12 @@ node_modules/@zkap/design-system/docs/components/ActionArea.md`}
             <tbody>
               <tr>
                 <td style={{ padding: "8px 12px", fontSize: 14, color: "var(--text-primary)" }}>react</td>
-                <td style={{ padding: "8px 12px", fontSize: 13, fontFamily: "monospace", color: "#6366f1" }}>&gt;= 18.0.0</td>
+                <td style={{ padding: "8px 12px", fontSize: 13, fontFamily: "monospace", color: "var(--content-brand-default)" }}>&gt;= 18.0.0</td>
                 <td style={{ padding: "8px 12px", fontSize: 14, color: "var(--text-primary)" }}>Yes</td>
               </tr>
               <tr>
                 <td style={{ padding: "8px 12px", fontSize: 14, color: "var(--text-primary)" }}>react-native</td>
-                <td style={{ padding: "8px 12px", fontSize: 13, fontFamily: "monospace", color: "#6366f1" }}>&gt;= 0.70.0</td>
+                <td style={{ padding: "8px 12px", fontSize: 13, fontFamily: "monospace", color: "var(--content-brand-default)" }}>&gt;= 0.70.0</td>
                 <td style={{ padding: "8px 12px", fontSize: 14, color: "var(--text-secondary)" }}>Optional (for native)</td>
               </tr>
             </tbody>
@@ -247,8 +247,8 @@ function ComponentCard({ name, description, href }: { name: string; description:
         transition: "all 150ms ease",
       }}
       onMouseOver={(e) => {
-        e.currentTarget.style.borderColor = "#2563eb";
-        e.currentTarget.style.boxShadow = "0 4px 12px rgba(37, 99, 235, 0.1)";
+        e.currentTarget.style.borderColor = "var(--content-brand-default)";
+        e.currentTarget.style.boxShadow = "var(--shadow-sm)";
       }}
       onMouseOut={(e) => {
         e.currentTarget.style.borderColor = "var(--divider)";

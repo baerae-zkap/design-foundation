@@ -11,15 +11,17 @@ export function RadioGroup({ label, options, value, onChange, disabled }: {
 }) {
   return (
     <div>
-      <div style={{ fontSize: 14, fontWeight: 500, color: "#c4c4c4", marginBottom: 14 }}>
+      <div style={{ fontSize: 14, fontWeight: 500, color: "var(--content-base-assistive)", marginBottom: 14 }}>
         {label}
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
         {options.map(opt => {
           const isSelected = value === opt.value;
+          const inputId = `${label.replace(/\s+/g, "-").toLowerCase()}-${opt.value}`;
           return (
             <label
-              key={opt.value}
+              key={inputId}
+              htmlFor={inputId}
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -27,23 +29,42 @@ export function RadioGroup({ label, options, value, onChange, disabled }: {
                 cursor: disabled ? "not-allowed" : "pointer",
                 fontSize: 15,
                 fontWeight: 500,
-                color: disabled ? "#555" : isSelected ? "var(--text-primary)" : "#9ca3af",
+                color: disabled
+                  ? "var(--content-disabled-default)"
+                  : isSelected
+                    ? "var(--content-base-strong)"
+                    : "var(--content-base-alternative)",
                 opacity: disabled ? 0.5 : 1,
                 transition: "color 0.15s ease",
               }}
-              onClick={() => !disabled && onChange(opt.value)}
             >
+              <input
+                id={inputId}
+                type="radio"
+                name={label}
+                value={opt.value}
+                checked={isSelected}
+                disabled={disabled}
+                onChange={() => onChange(opt.value)}
+                style={{
+                  position: "absolute",
+                  opacity: 0,
+                  pointerEvents: "none",
+                }}
+              />
               <div
                 style={{
                   width: 22,
                   height: 22,
                   borderRadius: "50%",
-                  border: isSelected ? "2px solid #3b82f6" : "2px solid #e5e5e5",
+                  border: isSelected
+                    ? "2px solid var(--content-brand-default)"
+                    : "2px solid var(--border-base-default)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   transition: "all 0.15s ease",
-                  backgroundColor: "white",
+                  backgroundColor: "var(--surface-base-default)",
                 }}
               >
                 {isSelected && (
@@ -52,7 +73,7 @@ export function RadioGroup({ label, options, value, onChange, disabled }: {
                       width: 12,
                       height: 12,
                       borderRadius: "50%",
-                      backgroundColor: "#3b82f6",
+                      backgroundColor: "var(--content-brand-default)",
                     }}
                   />
                 )}
@@ -74,8 +95,8 @@ export function CodeTypeTab({ active, onClick, children }: { active: boolean; on
         padding: "4px 12px",
         fontSize: 12,
         fontWeight: 500,
-        color: active ? "#e4e4e7" : "#71717a",
-        backgroundColor: active ? "#27272a" : "transparent",
+        color: active ? "var(--docs-code-active-text)" : "var(--docs-code-muted)",
+        backgroundColor: active ? "var(--docs-code-active-bg)" : "transparent",
         border: "none",
         borderRadius: 4,
         cursor: "pointer",
@@ -103,9 +124,9 @@ export function CopyButton({ text }: { text: string }) {
         padding: "4px 10px",
         fontSize: 11,
         fontWeight: 500,
-        color: copied ? "#22c55e" : "#71717a",
+        color: copied ? "var(--docs-code-success)" : "var(--docs-code-muted)",
         backgroundColor: "transparent",
-        border: "1px solid #3f3f46",
+        border: "1px solid var(--docs-code-border)",
         borderRadius: 4,
         cursor: "pointer",
         display: "flex",

@@ -29,87 +29,87 @@ const colorConfig: Record<ChipColor, {
 }> = {
   brandDefault: {
     filled: {
-      bg: '#dbeafe',
-      bgPressed: '#bfdbfe',
-      bgSelected: '#2563eb',
-      text: '#1e40af',
-      textSelected: '#ffffff',
+      bg: 'var(--surface-brand-secondary)',
+      bgPressed: 'var(--surface-brand-secondaryPressed)',
+      bgSelected: 'var(--content-brand-default)',
+      text: 'var(--content-brand-default)',
+      textSelected: 'var(--static-white)',
     },
     outlined: {
       bg: 'transparent',
-      bgPressed: 'rgba(37, 99, 235, 0.08)',
-      bgSelected: '#2563eb',
-      border: '#2563eb',
-      text: '#2563eb',
-      textSelected: '#ffffff',
+      bgPressed: 'var(--effect-alpha-brand-selection)',
+      bgSelected: 'var(--content-brand-default)',
+      border: 'var(--content-brand-default)',
+      text: 'var(--content-brand-default)',
+      textSelected: 'var(--static-white)',
     },
   },
   baseDefault: {
     filled: {
-      bg: '#f1f5f9',
-      bgPressed: '#e2e8f0',
-      bgSelected: '#334155',
-      text: '#334155',
-      textSelected: '#ffffff',
+      bg: 'var(--surface-base-alternative)',
+      bgPressed: 'var(--border-base-default)',
+      bgSelected: 'var(--content-base-strong)',
+      text: 'var(--content-base-strong)',
+      textSelected: 'var(--static-white)',
     },
     outlined: {
       bg: 'transparent',
-      bgPressed: 'rgba(0, 0, 0, 0.04)',
-      bgSelected: '#334155',
-      border: '#cbd5e1',
-      text: '#334155',
-      textSelected: '#ffffff',
+      bgPressed: 'var(--effect-alpha-fill-alternative)',
+      bgSelected: 'var(--content-base-strong)',
+      border: 'var(--border-base-default)',
+      text: 'var(--content-base-strong)',
+      textSelected: 'var(--static-white)',
     },
   },
   successDefault: {
     filled: {
-      bg: '#dcfce7',
-      bgPressed: '#bbf7d0',
-      bgSelected: '#16a34a',
-      text: '#166534',
-      textSelected: '#ffffff',
+      bg: 'var(--status-positive-surface)',
+      bgPressed: 'var(--surface-success-defaultPressed)',
+      bgSelected: 'var(--status-positive-content)',
+      text: 'var(--content-success-strong)',
+      textSelected: 'var(--static-white)',
     },
     outlined: {
       bg: 'transparent',
-      bgPressed: 'rgba(34, 197, 94, 0.08)',
-      bgSelected: '#16a34a',
-      border: '#22c55e',
-      text: '#166534',
-      textSelected: '#ffffff',
+      bgPressed: 'var(--status-positive-surface)',
+      bgSelected: 'var(--status-positive-content)',
+      border: 'var(--status-positive-content)',
+      text: 'var(--content-success-strong)',
+      textSelected: 'var(--static-white)',
     },
   },
   errorDefault: {
     filled: {
-      bg: '#fee2e2',
-      bgPressed: '#fecaca',
-      bgSelected: '#dc2626',
-      text: '#991b1b',
-      textSelected: '#ffffff',
+      bg: 'var(--status-negative-surface)',
+      bgPressed: 'var(--surface-error-defaultPressed)',
+      bgSelected: 'var(--status-negative-content)',
+      text: 'var(--content-error-default)',
+      textSelected: 'var(--static-white)',
     },
     outlined: {
       bg: 'transparent',
-      bgPressed: 'rgba(239, 68, 68, 0.08)',
-      bgSelected: '#dc2626',
-      border: '#ef4444',
-      text: '#991b1b',
-      textSelected: '#ffffff',
+      bgPressed: 'var(--status-negative-surface)',
+      bgSelected: 'var(--status-negative-content)',
+      border: 'var(--status-negative-content)',
+      text: 'var(--content-error-default)',
+      textSelected: 'var(--static-white)',
     },
   },
   warningDefault: {
     filled: {
-      bg: '#fef9c3',
-      bgPressed: '#fef08a',
-      bgSelected: '#ca8a04',
-      text: '#854d0e',
-      textSelected: '#ffffff',
+      bg: 'var(--status-cautionary-surface)',
+      bgPressed: 'var(--status-cautionary-surface)',
+      bgSelected: 'var(--status-cautionary-content)',
+      text: 'var(--content-warning-strong)',
+      textSelected: 'var(--static-white)',
     },
     outlined: {
       bg: 'transparent',
-      bgPressed: 'rgba(234, 179, 8, 0.08)',
-      bgSelected: '#ca8a04',
-      border: '#eab308',
-      text: '#854d0e',
-      textSelected: '#ffffff',
+      bgPressed: 'var(--status-cautionary-surface)',
+      bgSelected: 'var(--status-cautionary-content)',
+      border: 'var(--status-cautionary-border)',
+      text: 'var(--content-warning-strong)',
+      textSelected: 'var(--static-white)',
     },
   },
 };
@@ -187,7 +187,7 @@ function ChipPlayground() {
         style={{
           borderRadius: 20,
           overflow: "hidden",
-          backgroundColor: "#fafbfc",
+          backgroundColor: "var(--surface-base-alternative)",
         }}
       >
         <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
@@ -198,7 +198,7 @@ function ChipPlayground() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              backgroundColor: "#fafbfc",
+              backgroundColor: "var(--surface-base-alternative)",
             }}
           >
             <ChipDemo
@@ -215,7 +215,7 @@ function ChipPlayground() {
           {/* Control Panel */}
           <div
             style={{
-              backgroundColor: "#fafbfc",
+              backgroundColor: "var(--surface-base-alternative)",
               display: "flex",
               flexDirection: "column",
               padding: 16,
@@ -306,7 +306,7 @@ function ChipPlayground() {
         <div
           style={{
             padding: "10px 16px",
-            backgroundColor: "#18181b",
+            backgroundColor: "var(--inverse-surface-default)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
@@ -324,8 +324,8 @@ function ChipPlayground() {
             padding: 16,
             fontSize: 13,
             lineHeight: 1.6,
-            color: "#e4e4e7",
-            backgroundColor: "#18181b",
+            color: "var(--border-secondary-default)",
+            backgroundColor: "var(--inverse-surface-default)",
             fontFamily: "'SF Mono', 'Fira Code', monospace",
             overflow: "auto",
           }}
@@ -353,7 +353,7 @@ function DesignContent() {
       {/* Anatomy */}
       <Section title="Anatomy">
         <div style={{
-          backgroundColor: "#f5f5f7",
+          backgroundColor: "var(--surface-base-alternative)",
           borderRadius: 16,
           padding: "48px 40px",
           display: "flex",
@@ -362,7 +362,7 @@ function DesignContent() {
         }}>
           <svg width="420" height="120" viewBox="0 0 420 120">
             {/* Chip Container */}
-            <rect x="120" y="40" width="180" height="40" rx="20" fill="#2563eb" />
+            <rect x="120" y="40" width="180" height="40" rx="20" fill="var(--content-brand-default)" />
 
             {/* Check icon circle */}
             <circle cx="148" cy="60" r="10" fill="white" fillOpacity="0.2" />
@@ -376,29 +376,29 @@ function DesignContent() {
             <path d="M268 56 L276 64 M276 56 L268 64" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
 
             {/* Lines to labels */}
-            <line x1="70" y1="60" x2="120" y2="60" stroke="#374151" strokeWidth="1.5" />
-            <circle cx="120" cy="60" r="3" fill="#374151" />
+            <line x1="70" y1="60" x2="120" y2="60" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <circle cx="120" cy="60" r="3" fill="var(--content-base-default)" />
 
-            <line x1="148" y1="40" x2="148" y2="15" stroke="#374151" strokeWidth="1.5" />
-            <circle cx="148" cy="40" r="3" fill="#374151" />
+            <line x1="148" y1="40" x2="148" y2="15" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <circle cx="148" cy="40" r="3" fill="var(--content-base-default)" />
 
-            <line x1="200" y1="80" x2="200" y2="105" stroke="#374151" strokeWidth="1.5" />
-            <circle cx="200" cy="80" r="3" fill="#374151" />
+            <line x1="200" y1="80" x2="200" y2="105" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <circle cx="200" cy="80" r="3" fill="var(--content-base-default)" />
 
-            <line x1="272" y1="40" x2="272" y2="15" stroke="#374151" strokeWidth="1.5" />
-            <circle cx="272" cy="40" r="3" fill="#374151" />
+            <line x1="272" y1="40" x2="272" y2="15" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <circle cx="272" cy="40" r="3" fill="var(--content-base-default)" />
 
             {/* Numbered circles */}
-            <circle cx="55" cy="60" r="14" fill="#374151" />
+            <circle cx="55" cy="60" r="14" fill="var(--content-base-default)" />
             <text x="55" y="65" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">1</text>
 
-            <circle cx="148" cy="15" r="14" fill="#374151" />
+            <circle cx="148" cy="15" r="14" fill="var(--content-base-default)" />
             <text x="148" y="20" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">2</text>
 
-            <circle cx="200" cy="105" r="14" fill="#374151" />
+            <circle cx="200" cy="105" r="14" fill="var(--content-base-default)" />
             <text x="200" y="110" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">3</text>
 
-            <circle cx="272" cy="15" r="14" fill="#374151" />
+            <circle cx="272" cy="15" r="14" fill="var(--content-base-default)" />
             <text x="272" y="20" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">4</text>
           </svg>
         </div>
@@ -460,15 +460,15 @@ function DesignContent() {
           <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
             <div style={{ textAlign: "center" }}>
               <ChipDemo size="small">Small</ChipDemo>
-              <p style={{ fontSize: 11, color: "#64748b", marginTop: 8 }}>24px</p>
+              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginTop: 8 }}>24px</p>
             </div>
             <div style={{ textAlign: "center" }}>
               <ChipDemo size="medium">Medium</ChipDemo>
-              <p style={{ fontSize: 11, color: "#64748b", marginTop: 8 }}>32px</p>
+              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginTop: 8 }}>32px</p>
             </div>
             <div style={{ textAlign: "center" }}>
               <ChipDemo size="large">Large</ChipDemo>
-              <p style={{ fontSize: 11, color: "#64748b", marginTop: 8 }}>40px</p>
+              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginTop: 8 }}>40px</p>
             </div>
           </div>
         </PreviewBox>
@@ -509,15 +509,15 @@ function DesignContent() {
           <div style={{ display: "flex", gap: 16, flexWrap: "wrap", alignItems: "center" }}>
             <div style={{ textAlign: "center" }}>
               <ChipDemo color="brandDefault">Default</ChipDemo>
-              <p style={{ fontSize: 11, color: "#64748b", marginTop: 8 }}>기본</p>
+              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginTop: 8 }}>기본</p>
             </div>
             <div style={{ textAlign: "center" }}>
               <ChipDemo color="brandDefault" selected>Selected</ChipDemo>
-              <p style={{ fontSize: 11, color: "#64748b", marginTop: 8 }}>선택됨</p>
+              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginTop: 8 }}>선택됨</p>
             </div>
             <div style={{ textAlign: "center" }}>
               <ChipDemo color="brandDefault" disabled>Disabled</ChipDemo>
-              <p style={{ fontSize: 11, color: "#64748b", marginTop: 8 }}>비활성화</p>
+              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginTop: 8 }}>비활성화</p>
             </div>
           </div>
         </PreviewBox>
@@ -543,33 +543,33 @@ function DesignContent() {
               <tbody>
                 <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                   <td style={{ padding: "12px 16px" }}>Height</td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>24px</td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>32px</td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>40px</td>
+                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>24px</td>
+                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>32px</td>
+                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>40px</td>
                 </tr>
                 <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                   <td style={{ padding: "12px 16px" }}>Padding X</td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>8px (primitive.2)</td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>12px (primitive.3)</td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>16px (primitive.4)</td>
+                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>8px (primitive.2)</td>
+                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>12px (primitive.3)</td>
+                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>16px (primitive.4)</td>
                 </tr>
                 <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                   <td style={{ padding: "12px 16px" }}>Font Size</td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>12px (xs)</td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>14px (sm)</td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>16px (base)</td>
+                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>12px (xs)</td>
+                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>14px (sm)</td>
+                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>16px (base)</td>
                 </tr>
                 <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                   <td style={{ padding: "12px 16px" }}>Icon Size</td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>14px</td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>18px</td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>22px</td>
+                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>14px</td>
+                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>18px</td>
+                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>22px</td>
                 </tr>
                 <tr>
                   <td style={{ padding: "12px 16px" }}>Border Radius</td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>12px (height/2)</td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>16px (height/2)</td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>20px (height/2)</td>
+                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>12px (height/2)</td>
+                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>16px (height/2)</td>
+                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>20px (height/2)</td>
                 </tr>
               </tbody>
             </table>
@@ -590,27 +590,27 @@ function DesignContent() {
                 <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                   <td style={{ padding: "12px 16px" }}>Background (filled)</td>
                   <td style={{ padding: "12px 16px" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>surface.brand.secondary</code></td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>#dbeafe (palette.blue.95)</td>
+                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>var(--surface-brand-secondary) (palette.blue.95)</td>
                 </tr>
                 <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                   <td style={{ padding: "12px 16px" }}>Background (selected)</td>
                   <td style={{ padding: "12px 16px" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>surface.brand.default</code></td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>#2563eb (palette.blue.50)</td>
+                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>var(--content-brand-default) (palette.blue.50)</td>
                 </tr>
                 <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                   <td style={{ padding: "12px 16px" }}>Border (outlined)</td>
                   <td style={{ padding: "12px 16px" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>border.brand.default</code></td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>#2563eb (palette.blue.50)</td>
+                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>var(--content-brand-default) (palette.blue.50)</td>
                 </tr>
                 <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                   <td style={{ padding: "12px 16px" }}>Text (filled)</td>
                   <td style={{ padding: "12px 16px" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>content.brand.strong</code></td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>#1e40af (palette.blue.40)</td>
+                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>var(--content-brand-default) (palette.blue.50)</td>
                 </tr>
                 <tr>
                   <td style={{ padding: "12px 16px" }}>Text (selected)</td>
                   <td style={{ padding: "12px 16px" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>content.base.onColor</code></td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>#ffffff (palette.static.white)</td>
+                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>var(--static-white) (palette.static.white)</td>
                 </tr>
               </tbody>
             </table>
@@ -664,8 +664,8 @@ function DesignContent() {
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
               <thead>
                 <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)", color: "#16a34a" }}>Do</th>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)", color: "#dc2626" }}>Don&apos;t</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)", color: "var(--status-positive-content)" }}>Do</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)", color: "var(--status-negative-content)" }}>Don&apos;t</th>
                 </tr>
               </thead>
               <tbody>
@@ -866,7 +866,7 @@ function WebContent() {
               fontSize: 13,
               fontWeight: 500,
               color: "white",
-              backgroundColor: "#24292f",
+              backgroundColor: "var(--inverse-surface-default)",
               borderRadius: 12,
               textDecoration: "none",
             }}
@@ -985,7 +985,7 @@ function RNContent() {
               fontSize: 13,
               fontWeight: 500,
               color: "white",
-              backgroundColor: "#24292f",
+              backgroundColor: "var(--inverse-surface-default)",
               borderRadius: 12,
               textDecoration: "none",
             }}
@@ -1193,8 +1193,8 @@ function UsageCard({ situation, desc, variant = "filled", color, chipLabel, sele
           <span style={{
             fontSize: 11,
             padding: "2px 6px",
-            backgroundColor: variant === "filled" ? "#dbeafe" : "#f1f5f9",
-            color: variant === "filled" ? "#1d4ed8" : "#475569",
+            backgroundColor: variant === "filled" ? "var(--surface-brand-secondary)" : "var(--surface-base-alternative)",
+            color: variant === "filled" ? "var(--surface-brand-defaultPressed)" : "var(--content-base-secondary)",
             borderRadius: 4,
             fontWeight: 500,
           }}>

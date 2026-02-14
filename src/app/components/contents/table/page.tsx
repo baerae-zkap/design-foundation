@@ -22,7 +22,7 @@ function UsageCard({ situation, description, example }: {
       gridTemplateColumns: "1fr",
       gap: 4,
       padding: 16,
-      backgroundColor: "white",
+      backgroundColor: "var(--surface-base-default)",
       borderRadius: 12,
       border: "1px solid var(--divider)",
     }}>
@@ -45,7 +45,7 @@ function DesignContent() {
       {/* Anatomy - SVG Diagram */}
       <Section title="Anatomy">
         <div style={{
-          backgroundColor: "#f5f5f7",
+          backgroundColor: "var(--surface-base-container)",
           borderRadius: 16,
           padding: "48px 40px",
           display: "flex",
@@ -54,63 +54,63 @@ function DesignContent() {
         }}>
           <svg width="480" height="180" viewBox="0 0 480 180">
             {/* Table container outline */}
-            <rect x="40" y="20" width="400" height="140" rx="12" fill="white" stroke="#e2e8f0" strokeWidth="1.5" />
+            <rect x="40" y="20" width="400" height="140" rx="12" fill="var(--surface-base-default)" stroke="var(--border-solid-alternative)" strokeWidth="1.5" />
 
             {/* Header row */}
-            <rect x="40" y="20" width="400" height="36" rx="12" fill="#f8fafc" stroke="#e2e8f0" strokeWidth="1" />
-            <rect x="40" y="44" width="400" height="12" fill="#f8fafc" />
-            <text x="80" y="43" fill="#64748b" fontSize="12" fontWeight="600">Column A</text>
-            <text x="200" y="43" fill="#64748b" fontSize="12" fontWeight="600">Column B</text>
-            <text x="340" y="43" fill="#64748b" fontSize="12" fontWeight="600">Column C</text>
+            <rect x="40" y="20" width="400" height="36" rx="12" fill="var(--surface-base-alternative)" stroke="var(--border-solid-alternative)" strokeWidth="1" />
+            <rect x="40" y="44" width="400" height="12" fill="var(--surface-base-alternative)" />
+            <text x="80" y="43" fill="var(--content-base-secondary)" fontSize="12" fontWeight="600">Column A</text>
+            <text x="200" y="43" fill="var(--content-base-secondary)" fontSize="12" fontWeight="600">Column B</text>
+            <text x="340" y="43" fill="var(--content-base-secondary)" fontSize="12" fontWeight="600">Column C</text>
 
             {/* Header / body divider */}
-            <line x1="40" y1="56" x2="440" y2="56" stroke="#e2e8f0" strokeWidth="1" />
+            <line x1="40" y1="56" x2="440" y2="56" stroke="var(--border-solid-alternative)" strokeWidth="1" />
 
             {/* Data row 1 */}
-            <text x="80" y="80" fill="#334155" fontSize="12">Data 1</text>
-            <text x="200" y="80" fill="#334155" fontSize="12">Data 2</text>
-            <text x="340" y="80" fill="#334155" fontSize="12">Data 3</text>
+            <text x="80" y="80" fill="var(--content-base-default)" fontSize="12">Data 1</text>
+            <text x="200" y="80" fill="var(--content-base-default)" fontSize="12">Data 2</text>
+            <text x="340" y="80" fill="var(--content-base-default)" fontSize="12">Data 3</text>
 
             {/* Row divider */}
-            <line x1="40" y1="96" x2="440" y2="96" stroke="#f1f5f9" strokeWidth="1" />
+            <line x1="40" y1="96" x2="440" y2="96" stroke="var(--border-solid-alternative)" strokeWidth="1" />
 
             {/* Data row 2 */}
-            <text x="80" y="118" fill="#334155" fontSize="12">Data 4</text>
-            <text x="200" y="118" fill="#334155" fontSize="12">Data 5</text>
-            <text x="340" y="118" fill="#334155" fontSize="12">Data 6</text>
+            <text x="80" y="118" fill="var(--content-base-default)" fontSize="12">Data 4</text>
+            <text x="200" y="118" fill="var(--content-base-default)" fontSize="12">Data 5</text>
+            <text x="340" y="118" fill="var(--content-base-default)" fontSize="12">Data 6</text>
 
             {/* Row divider */}
-            <line x1="40" y1="134" x2="440" y2="134" stroke="#f1f5f9" strokeWidth="1" />
+            <line x1="40" y1="134" x2="440" y2="134" stroke="var(--border-solid-alternative)" strokeWidth="1" />
 
             {/* Data row 3 */}
-            <text x="80" y="152" fill="#334155" fontSize="12">Data 7</text>
-            <text x="200" y="152" fill="#334155" fontSize="12">Data 8</text>
-            <text x="340" y="152" fill="#334155" fontSize="12">Data 9</text>
+            <text x="80" y="152" fill="var(--content-base-default)" fontSize="12">Data 7</text>
+            <text x="200" y="152" fill="var(--content-base-default)" fontSize="12">Data 8</text>
+            <text x="340" y="152" fill="var(--content-base-default)" fontSize="12">Data 9</text>
 
             {/* Column dividers */}
-            <line x1="175" y1="20" x2="175" y2="160" stroke="#f1f5f9" strokeWidth="1" strokeDasharray="4 3" />
-            <line x1="310" y1="20" x2="310" y2="160" stroke="#f1f5f9" strokeWidth="1" strokeDasharray="4 3" />
+            <line x1="175" y1="20" x2="175" y2="160" stroke="var(--border-solid-alternative)" strokeWidth="1" strokeDasharray="4 3" />
+            <line x1="310" y1="20" x2="310" y2="160" stroke="var(--border-solid-alternative)" strokeWidth="1" strokeDasharray="4 3" />
 
             {/* Numbered annotations */}
             {/* 1 - Header Row */}
-            <line x1="460" y1="38" x2="445" y2="38" stroke="#374151" strokeWidth="1.5" />
-            <circle cx="468" cy="38" r="12" fill="#374151" />
-            <text x="468" y="42" textAnchor="middle" fill="white" fontSize="11" fontWeight="600">1</text>
+            <line x1="460" y1="38" x2="445" y2="38" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <circle cx="468" cy="38" r="12" fill="var(--content-base-default)" />
+            <text x="468" y="42" textAnchor="middle" fill="var(--surface-base-default)" fontSize="11" fontWeight="600">1</text>
 
             {/* 2 - Data Row */}
-            <line x1="460" y1="76" x2="445" y2="76" stroke="#374151" strokeWidth="1.5" />
-            <circle cx="468" cy="76" r="12" fill="#374151" />
-            <text x="468" y="80" textAnchor="middle" fill="white" fontSize="11" fontWeight="600">2</text>
+            <line x1="460" y1="76" x2="445" y2="76" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <circle cx="468" cy="76" r="12" fill="var(--content-base-default)" />
+            <text x="468" y="80" textAnchor="middle" fill="var(--surface-base-default)" fontSize="11" fontWeight="600">2</text>
 
             {/* 3 - Cell */}
-            <line x1="130" y1="170" x2="130" y2="162" stroke="#374151" strokeWidth="1.5" />
-            <circle cx="130" cy="176" r="12" fill="#374151" />
-            <text x="130" y="180" textAnchor="middle" fill="white" fontSize="11" fontWeight="600">3</text>
+            <line x1="130" y1="170" x2="130" y2="162" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <circle cx="130" cy="176" r="12" fill="var(--content-base-default)" />
+            <text x="130" y="180" textAnchor="middle" fill="var(--surface-base-default)" fontSize="11" fontWeight="600">3</text>
 
             {/* 4 - Border */}
-            <line x1="16" y1="90" x2="38" y2="90" stroke="#374151" strokeWidth="1.5" />
-            <circle cx="12" cy="90" r="12" fill="#374151" />
-            <text x="12" y="94" textAnchor="middle" fill="white" fontSize="11" fontWeight="600">4</text>
+            <line x1="16" y1="90" x2="38" y2="90" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <circle cx="12" cy="90" r="12" fill="var(--content-base-default)" />
+            <text x="12" y="94" textAnchor="middle" fill="var(--surface-base-default)" fontSize="11" fontWeight="600">4</text>
           </svg>
         </div>
         <div style={{
@@ -193,71 +193,71 @@ function DesignContent() {
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>헤더 배경</td>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "#f8fafc", border: "1px solid #e2e8f0" }} />
-                    <code style={{ fontSize: 12 }}>#f8fafc</code>
+                    <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", border: "1px solid var(--border-base-default)" }} />
+                    <code style={{ fontSize: 12 }}>var(--surface-base-alternative)</code>
                   </div>
                 </td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "#6366f1" }}>surface.base.alternative</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "var(--content-brand-default)" }}>surface.base.alternative</td>
               </tr>
               <tr>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>데이터 행 배경</td>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "#ffffff", border: "1px solid #e2e8f0" }} />
-                    <code style={{ fontSize: 12 }}>#ffffff</code>
+                    <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "var(--surface-base-default)", border: "1px solid var(--border-base-default)" }} />
+                    <code style={{ fontSize: 12 }}>var(--static-white)</code>
                   </div>
                 </td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "#6366f1" }}>surface.base.default</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "var(--content-brand-default)" }}>surface.base.default</td>
               </tr>
               <tr>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>Striped 행 배경</td>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "#f8fafc", border: "1px solid #e2e8f0" }} />
-                    <code style={{ fontSize: 12 }}>#f8fafc</code>
+                    <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", border: "1px solid var(--border-base-default)" }} />
+                    <code style={{ fontSize: 12 }}>var(--surface-base-alternative)</code>
                   </div>
                 </td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "#6366f1" }}>surface.base.alternative</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "var(--content-brand-default)" }}>surface.base.alternative</td>
               </tr>
               <tr>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>Hover 행 배경</td>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "#f1f5f9" }} />
-                    <code style={{ fontSize: 12 }}>#f1f5f9</code>
+                    <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "var(--surface-base-containerPressed)" }} />
+                    <code style={{ fontSize: 12 }}>var(--border-base-default)</code>
                   </div>
                 </td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "#6366f1" }}>surface.base.hover</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "var(--content-brand-default)" }}>surface.base.containerPressed</td>
               </tr>
               <tr>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>테두리</td>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "#e2e8f0" }} />
-                    <code style={{ fontSize: 12 }}>#e2e8f0</code>
+                    <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "var(--border-base-default)" }} />
+                    <code style={{ fontSize: 12 }}>var(--border-base-default)</code>
                   </div>
                 </td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "#6366f1" }}>border.base.default</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "var(--content-brand-default)" }}>border.base.default</td>
               </tr>
               <tr>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>헤더 텍스트</td>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "#64748b" }} />
-                    <code style={{ fontSize: 12 }}>#64748b</code>
+                    <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "var(--content-base-secondary)" }} />
+                    <code style={{ fontSize: 12 }}>var(--content-base-secondary)</code>
                   </div>
                 </td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "#6366f1" }}>content.base.tertiary</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "var(--content-brand-default)" }}>content.base.secondary</td>
               </tr>
               <tr>
                 <td style={{ padding: "12px 16px" }}>셀 텍스트</td>
                 <td style={{ padding: "12px 16px" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "#334155" }} />
-                    <code style={{ fontSize: 12 }}>#334155</code>
+                    <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "var(--content-base-default)" }} />
+                    <code style={{ fontSize: 12 }}>var(--content-base-default)</code>
                   </div>
                 </td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 12, color: "#6366f1" }}>content.base.default</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 12, color: "var(--content-brand-default)" }}>content.base.default</td>
               </tr>
             </tbody>
           </table>
@@ -287,24 +287,24 @@ function DesignContent() {
               <div style={{
                 borderRadius: 12,
                 overflow: "hidden",
-                border: "1px solid #e2e8f0",
+                border: "1px solid var(--border-solid-alternative)",
                 maxWidth: 600,
               }}>
-                <table style={{ width: "100%", borderCollapse: "collapse", backgroundColor: "white" }}>
+                <table style={{ width: "100%", borderCollapse: "collapse", backgroundColor: "var(--surface-base-default)" }}>
                   <thead>
-                    <tr style={{ backgroundColor: "#f8fafc", borderBottom: "1px solid #e2e8f0" }}>
-                      <th style={{ padding: "8px 20px", textAlign: "left", fontSize: 14, fontWeight: 600, color: "#64748b" }}>Name</th>
-                      <th style={{ padding: "8px 20px", textAlign: "left", fontSize: 14, fontWeight: 600, color: "#64748b" }}>Value</th>
+                    <tr style={{ backgroundColor: "var(--surface-base-alternative)", borderBottom: "1px solid var(--border-solid-alternative)" }}>
+                      <th style={{ padding: "8px 20px", textAlign: "left", fontSize: 14, fontWeight: 600, color: "var(--content-base-secondary)" }}>Name</th>
+                      <th style={{ padding: "8px 20px", textAlign: "left", fontSize: 14, fontWeight: 600, color: "var(--content-base-secondary)" }}>Value</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr style={{ backgroundColor: "#f1f5f9", borderBottom: "1px solid #e2e8f0" }}>
-                      <td style={{ padding: "16px 20px", fontSize: 14, color: "#334155" }}>ETH</td>
-                      <td style={{ padding: "16px 20px", fontSize: 14, color: "#334155" }}>₩3,245,000</td>
+                    <tr style={{ backgroundColor: "var(--surface-base-container)", borderBottom: "1px solid var(--border-solid-alternative)" }}>
+                      <td style={{ padding: "16px 20px", fontSize: 14, color: "var(--content-base-default)" }}>ETH</td>
+                      <td style={{ padding: "16px 20px", fontSize: 14, color: "var(--content-base-default)" }}>₩3,245,000</td>
                     </tr>
                     <tr>
-                      <td style={{ padding: "16px 20px", fontSize: 14, color: "#334155" }}>BTC</td>
-                      <td style={{ padding: "16px 20px", fontSize: 14, color: "#334155" }}>₩1,850,000</td>
+                      <td style={{ padding: "16px 20px", fontSize: 14, color: "var(--content-base-default)" }}>BTC</td>
+                      <td style={{ padding: "16px 20px", fontSize: 14, color: "var(--content-base-default)" }}>₩1,850,000</td>
                     </tr>
                   </tbody>
                 </table>
@@ -312,7 +312,7 @@ function DesignContent() {
             </div>
           </PreviewBox>
           <div style={{ marginTop: 12, padding: 12, backgroundColor: "var(--bg-secondary)", borderRadius: 8, fontSize: 13, color: "var(--text-secondary)" }}>
-            마우스 오버 시 행 배경이 <code style={{ fontSize: 12 }}>#f1f5f9</code>로 변경됩니다.
+            마우스 오버 시 행 배경이 <code style={{ fontSize: 12 }}>surface.base.container</code>로 변경됩니다.
           </div>
         </Subsection>
 
@@ -322,24 +322,24 @@ function DesignContent() {
               <div style={{
                 borderRadius: 12,
                 overflow: "hidden",
-                border: "1px solid #e2e8f0",
+                border: "1px solid var(--border-solid-alternative)",
                 maxWidth: 600,
               }}>
-                <table style={{ width: "100%", borderCollapse: "collapse", backgroundColor: "white" }}>
+                <table style={{ width: "100%", borderCollapse: "collapse", backgroundColor: "var(--surface-base-default)" }}>
                   <thead>
-                    <tr style={{ backgroundColor: "#f8fafc", borderBottom: "1px solid #e2e8f0" }}>
-                      <th style={{ padding: "8px 20px", textAlign: "left", fontSize: 14, fontWeight: 600, color: "#64748b" }}>Name</th>
-                      <th style={{ padding: "8px 20px", textAlign: "left", fontSize: 14, fontWeight: 600, color: "#64748b" }}>Value</th>
+                    <tr style={{ backgroundColor: "var(--surface-base-alternative)", borderBottom: "1px solid var(--border-solid-alternative)" }}>
+                      <th style={{ padding: "8px 20px", textAlign: "left", fontSize: 14, fontWeight: 600, color: "var(--content-base-secondary)" }}>Name</th>
+                      <th style={{ padding: "8px 20px", textAlign: "left", fontSize: 14, fontWeight: 600, color: "var(--content-base-secondary)" }}>Value</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr style={{ backgroundColor: "#eff6ff", borderBottom: "1px solid #e2e8f0" }}>
-                      <td style={{ padding: "16px 20px", fontSize: 14, color: "#1d4ed8", fontWeight: 500 }}>ETH</td>
-                      <td style={{ padding: "16px 20px", fontSize: 14, color: "#1d4ed8", fontWeight: 500 }}>₩3,245,000</td>
+                    <tr style={{ backgroundColor: "var(--surface-brand-secondary)", borderBottom: "1px solid var(--border-solid-alternative)" }}>
+                      <td style={{ padding: "16px 20px", fontSize: 14, color: "var(--content-brand-default)", fontWeight: 500 }}>ETH</td>
+                      <td style={{ padding: "16px 20px", fontSize: 14, color: "var(--content-brand-default)", fontWeight: 500 }}>₩3,245,000</td>
                     </tr>
                     <tr>
-                      <td style={{ padding: "16px 20px", fontSize: 14, color: "#334155" }}>BTC</td>
-                      <td style={{ padding: "16px 20px", fontSize: 14, color: "#334155" }}>₩1,850,000</td>
+                      <td style={{ padding: "16px 20px", fontSize: 14, color: "var(--content-base-default)" }}>BTC</td>
+                      <td style={{ padding: "16px 20px", fontSize: 14, color: "var(--content-base-default)" }}>₩1,850,000</td>
                     </tr>
                   </tbody>
                 </table>
@@ -347,7 +347,7 @@ function DesignContent() {
             </div>
           </PreviewBox>
           <div style={{ marginTop: 12, padding: 12, backgroundColor: "var(--bg-secondary)", borderRadius: 8, fontSize: 13, color: "var(--text-secondary)" }}>
-            선택된 행은 브랜드 컬러 배경(<code style={{ fontSize: 12 }}>#eff6ff</code>)과 강조 텍스트로 표시됩니다.
+            선택된 행은 브랜드 컬러 배경(<code style={{ fontSize: 12 }}>surface.brand.secondary</code>)과 강조 텍스트로 표시됩니다.
           </div>
         </Subsection>
 
@@ -357,28 +357,28 @@ function DesignContent() {
               <div style={{
                 borderRadius: 12,
                 overflow: "hidden",
-                border: "1px solid #e2e8f0",
+                border: "1px solid var(--border-solid-alternative)",
                 maxWidth: 600,
               }}>
-                <table style={{ width: "100%", borderCollapse: "collapse", backgroundColor: "white" }}>
+                <table style={{ width: "100%", borderCollapse: "collapse", backgroundColor: "var(--surface-base-default)" }}>
                   <thead>
-                    <tr style={{ backgroundColor: "#f8fafc", borderBottom: "1px solid #e2e8f0" }}>
-                      <th style={{ padding: "8px 20px", textAlign: "left", fontSize: 14, fontWeight: 600, color: "#64748b" }}>Name</th>
-                      <th style={{ padding: "8px 20px", textAlign: "left", fontSize: 14, fontWeight: 600, color: "#64748b" }}>Value</th>
-                      <th style={{ padding: "8px 20px", textAlign: "left", fontSize: 14, fontWeight: 600, color: "#64748b" }}>Change</th>
+                    <tr style={{ backgroundColor: "var(--surface-base-alternative)", borderBottom: "1px solid var(--border-solid-alternative)" }}>
+                      <th style={{ padding: "8px 20px", textAlign: "left", fontSize: 14, fontWeight: 600, color: "var(--content-base-secondary)" }}>Name</th>
+                      <th style={{ padding: "8px 20px", textAlign: "left", fontSize: 14, fontWeight: 600, color: "var(--content-base-secondary)" }}>Value</th>
+                      <th style={{ padding: "8px 20px", textAlign: "left", fontSize: 14, fontWeight: 600, color: "var(--content-base-secondary)" }}>Change</th>
                     </tr>
                   </thead>
                   <tbody>
                     {[0, 1, 2].map((i) => (
-                      <tr key={i} style={{ borderBottom: i < 2 ? "1px solid #e2e8f0" : "none" }}>
+                      <tr key={i} style={{ borderBottom: i < 2 ? "1px solid var(--border-solid-alternative)" : "none" }}>
                         <td style={{ padding: "16px 20px" }}>
-                          <div style={{ width: 60, height: 14, borderRadius: 4, backgroundColor: "#e2e8f0", animation: "pulse 1.5s ease-in-out infinite" }} />
+                          <div style={{ width: 60, height: 14, borderRadius: 4, backgroundColor: "var(--border-solid-alternative)", animation: "pulse 1.5s ease-in-out infinite" }} />
                         </td>
                         <td style={{ padding: "16px 20px" }}>
-                          <div style={{ width: 80, height: 14, borderRadius: 4, backgroundColor: "#e2e8f0", animation: "pulse 1.5s ease-in-out infinite", animationDelay: "0.2s" }} />
+                          <div style={{ width: 80, height: 14, borderRadius: 4, backgroundColor: "var(--border-solid-alternative)", animation: "pulse 1.5s ease-in-out infinite", animationDelay: "0.2s" }} />
                         </td>
                         <td style={{ padding: "16px 20px" }}>
-                          <div style={{ width: 40, height: 14, borderRadius: 4, backgroundColor: "#e2e8f0", animation: "pulse 1.5s ease-in-out infinite", animationDelay: "0.4s" }} />
+                          <div style={{ width: 40, height: 14, borderRadius: 4, backgroundColor: "var(--border-solid-alternative)", animation: "pulse 1.5s ease-in-out infinite", animationDelay: "0.4s" }} />
                         </td>
                       </tr>
                     ))}
@@ -408,7 +408,7 @@ function DesignContent() {
               </thead>
               <tbody>
                 <tr>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 13, color: "#6366f1" }}>card.sm</td>
+                  <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 13, color: "var(--content-brand-default)" }}>card.sm</td>
                   <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>12px</td>
                   <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>테이블 외곽 모서리</td>
                 </tr>
@@ -630,12 +630,12 @@ function WebContent() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
       <Section title="Source Code">
-        <div style={{ padding: 16, backgroundColor: "#f8fafc", borderRadius: 8, border: "1px solid var(--divider)" }}>
+        <div style={{ padding: 16, backgroundColor: "var(--surface-base-alternative)", borderRadius: 8, border: "1px solid var(--divider)" }}>
           <a
-            href="https://github.com/your-org/design-foundation/tree/main/packages/design-system/src/components/Table"
+            href="https://github.com/baerae-zkap/design-foundation/tree/main/packages/design-system/src/components/Table"
             target="_blank"
             rel="noopener noreferrer"
-            style={{ color: "var(--primary)", textDecoration: "none", fontSize: 14 }}
+            style={{ color: "var(--brand-primary)", textDecoration: "none", fontSize: 14 }}
           >
             View on GitHub →
           </a>
@@ -673,13 +673,13 @@ function WebContent() {
       <TableCell>ETH</TableCell>
       <TableCell>0.7812</TableCell>
       <TableCell>₩3,245,000</TableCell>
-      <TableCell style={{ color: '#22c55e' }}>+5.2%</TableCell>
+      <TableCell style={{ color: 'var(--status-positive-content)' }}>+5.2%</TableCell>
     </TableRow>
     <TableRow>
       <TableCell>BTC</TableCell>
       <TableCell>0.0234</TableCell>
       <TableCell>₩1,850,000</TableCell>
-      <TableCell style={{ color: '#ef4444' }}>-2.1%</TableCell>
+      <TableCell style={{ color: 'var(--status-negative-content)' }}>-2.1%</TableCell>
     </TableRow>
   </TableBody>
 </Table>`} />
@@ -768,12 +768,12 @@ function RNContent() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
       <Section title="Source Code">
-        <div style={{ padding: 16, backgroundColor: "#f8fafc", borderRadius: 8, border: "1px solid var(--divider)" }}>
+        <div style={{ padding: 16, backgroundColor: "var(--surface-base-alternative)", borderRadius: 8, border: "1px solid var(--divider)" }}>
           <a
-            href="https://github.com/your-org/design-foundation/tree/main/packages/design-system/src/native/Table.tsx"
+            href="https://github.com/baerae-zkap/design-foundation/tree/main/packages/design-system/src/native/Table"
             target="_blank"
             rel="noopener noreferrer"
-            style={{ color: "var(--primary)", textDecoration: "none", fontSize: 14 }}
+            style={{ color: "var(--brand-primary)", textDecoration: "none", fontSize: 14 }}
           >
             View on GitHub →
           </a>
@@ -813,7 +813,7 @@ import { Text } from 'react-native';`} />
       <TableCell>0.7812</TableCell>
       <TableCell>₩3,245,000</TableCell>
       <TableCell>
-        <Text style={{ color: '#22c55e' }}>+5.2%</Text>
+        <Text style={{ color: 'var(--status-positive-content)' }}>+5.2%</Text>
       </TableCell>
     </TableRow>
     <TableRow>
@@ -821,7 +821,7 @@ import { Text } from 'react-native';`} />
       <TableCell>0.0234</TableCell>
       <TableCell>₩1,850,000</TableCell>
       <TableCell>
-        <Text style={{ color: '#ef4444' }}>-2.1%</Text>
+        <Text style={{ color: 'var(--status-negative-content)' }}>-2.1%</Text>
       </TableCell>
     </TableRow>
   </TableBody>
@@ -902,9 +902,9 @@ import { Text } from 'react-native';`} />
         </Subsection>
 
         <Subsection title="Platform Differences">
-          <div style={{ padding: 16, backgroundColor: "#fef3c7", borderRadius: 8, border: "1px solid #fcd34d" }}>
-            <div style={{ fontSize: 14, fontWeight: 600, color: "#92400e", marginBottom: 8 }}>⚠️ React Native Notes</div>
-            <ul style={{ margin: 0, paddingLeft: 20, color: "#78350f", fontSize: 14 }}>
+          <div style={{ padding: 16, backgroundColor: "var(--surface-warning-default)", borderRadius: 8, border: "1px solid var(--border-base-default)" }}>
+            <div style={{ fontSize: 14, fontWeight: 600, color: "var(--content-warning-strong)", marginBottom: 8 }}>⚠️ React Native Notes</div>
+            <ul style={{ margin: 0, paddingLeft: 20, color: "var(--content-warning-default)", fontSize: 14 }}>
               <li>실제 HTML table 태그 대신 View 기반 레이아웃 사용</li>
               <li>Context API로 variant와 size 정보 전달</li>
               <li>문자열 children은 자동으로 Text 컴포넌트로 래핑됨</li>
@@ -951,14 +951,14 @@ function TablePlayground() {
 
   return (
     <div style={{ marginBottom: 32 }}>
-      <div style={{ borderRadius: 20, overflow: "hidden", backgroundColor: "#fafbfc" }}>
+      <div style={{ borderRadius: 20, overflow: "hidden", backgroundColor: "var(--surface-base-alternative)" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
           <div style={{ padding: 60, display: "flex", alignItems: "center", justifyContent: "center" }}>
             <TableDemo variant={variant} size={size} />
           </div>
 
           <div style={{
-            backgroundColor: "#fafbfc",
+            backgroundColor: "var(--surface-base-alternative)",
             display: "flex",
             flexDirection: "column",
             padding: 16,
@@ -974,7 +974,7 @@ function TablePlayground() {
               display: "flex",
               flexDirection: "column",
               gap: 28,
-              backgroundColor: "white",
+              backgroundColor: "var(--surface-base-default)",
               borderRadius: 16,
             }}>
               <RadioGroup
@@ -1021,11 +1021,11 @@ function TableDemo({
   compact?: boolean;
 }) {
   const data = compact ? [
-    { asset: "ETH", amount: "0.7812", value: "₩3,245,000", change: "+5.2%", changeColor: "#22c55e" },
+    { asset: "ETH", amount: "0.7812", value: "₩3,245,000", change: "+5.2%", changeColor: "var(--content-success-default)" },
   ] : [
-    { asset: "ETH", amount: "0.7812", value: "₩3,245,000", change: "+5.2%", changeColor: "#22c55e" },
-    { asset: "BTC", amount: "0.0234", value: "₩1,850,000", change: "-2.1%", changeColor: "#ef4444" },
-    { asset: "USDT", amount: "1,250.00", value: "₩1,250,000", change: "0.0%", changeColor: "#64748b" },
+    { asset: "ETH", amount: "0.7812", value: "₩3,245,000", change: "+5.2%", changeColor: "var(--content-success-default)" },
+    { asset: "BTC", amount: "0.0234", value: "₩1,850,000", change: "-2.1%", changeColor: "var(--content-error-default)" },
+    { asset: "USDT", amount: "1,250.00", value: "₩1,250,000", change: "0.0%", changeColor: "var(--content-base-secondary)" },
   ];
 
   return (
@@ -1048,7 +1048,7 @@ function TableDemo({
             <TableRow
               key={idx}
               style={{
-                backgroundColor: variant === "striped" && idx % 2 === 1 ? "#f8fafc" : "white",
+                backgroundColor: variant === "striped" && idx % 2 === 1 ? "var(--surface-base-alternative)" : "var(--surface-base-default)",
               }}
             >
               <TableCell>{row.asset}</TableCell>

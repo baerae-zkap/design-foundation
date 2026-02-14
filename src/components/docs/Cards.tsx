@@ -10,7 +10,7 @@ export function PrincipleCard({ number, title, desc }: {
   return (
     <div style={{
       padding: 20,
-      backgroundColor: "white",
+      backgroundColor: "var(--surface-base-default)",
       borderRadius: 12,
       border: "1px solid var(--divider)",
     }}>
@@ -19,8 +19,8 @@ export function PrincipleCard({ number, title, desc }: {
           width: 22,
           height: 22,
           borderRadius: "50%",
-          backgroundColor: "#e5e7eb",
-          color: "#6b7280",
+          backgroundColor: "var(--surface-base-container)",
+          color: "var(--content-base-neutral)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -44,7 +44,7 @@ export function VariantCard({ name, description, children }: {
   return (
     <div style={{
       padding: 20,
-      backgroundColor: "white",
+      backgroundColor: "var(--surface-base-default)",
       borderRadius: 12,
       border: "1px solid var(--divider)",
     }}>
@@ -53,7 +53,7 @@ export function VariantCard({ name, description, children }: {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#fafbfc",
+        backgroundColor: "var(--surface-base-alternative)",
         borderRadius: 12,
         marginBottom: 16,
       }}>
@@ -70,7 +70,7 @@ export function DoCard({ children }: { children: React.ReactNode }) {
     <div style={{ borderRadius: 12, overflow: "hidden", border: "1px solid var(--divider)" }}>
       <div style={{
         padding: 24,
-        backgroundColor: "#f8f9fa",
+        backgroundColor: "var(--surface-base-alternative)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -80,17 +80,17 @@ export function DoCard({ children }: { children: React.ReactNode }) {
       </div>
       <div style={{
         padding: "12px 16px",
-        backgroundColor: "white",
+        backgroundColor: "var(--surface-base-default)",
         borderTop: "1px solid var(--divider)",
         display: "flex",
         alignItems: "center",
         gap: 6,
       }}>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-          <circle cx="12" cy="12" r="10" fill="#22c55e"/>
-          <path d="M8 12l3 3 5-5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <circle cx="12" cy="12" r="10" fill="var(--content-success-default)"/>
+          <path d="M8 12l3 3 5-5" stroke="var(--content-base-onColor)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
-        <span style={{ fontSize: 14, fontWeight: 600, color: "#16a34a" }}>Do</span>
+        <span style={{ fontSize: 14, fontWeight: 600, color: "var(--content-success-default)" }}>Do</span>
       </div>
     </div>
   );
@@ -101,7 +101,7 @@ export function DontCard({ children }: { children: React.ReactNode }) {
     <div style={{ borderRadius: 12, overflow: "hidden", border: "1px solid var(--divider)" }}>
       <div style={{
         padding: 24,
-        backgroundColor: "#f8f9fa",
+        backgroundColor: "var(--surface-base-alternative)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -111,17 +111,17 @@ export function DontCard({ children }: { children: React.ReactNode }) {
       </div>
       <div style={{
         padding: "12px 16px",
-        backgroundColor: "white",
+        backgroundColor: "var(--surface-base-default)",
         borderTop: "1px solid var(--divider)",
         display: "flex",
         alignItems: "center",
         gap: 6,
       }}>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-          <circle cx="12" cy="12" r="10" fill="#ef4444"/>
-          <path d="M15 9l-6 6M9 9l6 6" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+          <circle cx="12" cy="12" r="10" fill="var(--content-error-default)"/>
+          <path d="M15 9l-6 6M9 9l6 6" stroke="var(--content-base-onColor)" strokeWidth="2" strokeLinecap="round"/>
         </svg>
-        <span style={{ fontSize: 14, fontWeight: 600, color: "#dc2626" }}>Don&apos;t</span>
+        <span style={{ fontSize: 14, fontWeight: 600, color: "var(--content-error-default)" }}>Don&apos;t</span>
       </div>
     </div>
   );

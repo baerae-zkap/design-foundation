@@ -267,7 +267,7 @@ export default function ShadowPage() {
               <span className="font-medium" style={{ color: 'var(--text-primary)' }}>iOS</span>
             </div>
             <pre className="code-block text-xs">
-              <code style={{ color: 'var(--text-secondary)' }}>{`shadowColor: "#101726"
+              <code style={{ color: 'var(--text-secondary)' }}>{`shadowColor: "var(--grey-5)"
 shadowOffset: { width: 0, height: 4 }
 shadowOpacity: 0.10
 shadowRadius: 4`}</code>

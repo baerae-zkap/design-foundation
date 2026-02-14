@@ -68,7 +68,7 @@ function ContentBadgePlayground() {
         style={{
           borderRadius: 20,
           overflow: "hidden",
-          backgroundColor: "#fafbfc",
+          backgroundColor: "var(--surface-base-alternative)",
         }}
       >
         <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
@@ -79,7 +79,7 @@ function ContentBadgePlayground() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              backgroundColor: "#fafbfc",
+              backgroundColor: "var(--surface-base-alternative)",
             }}
           >
             <ContentBadgeDemo variant={variant} color={color} size={size} dot={dot}>
@@ -90,7 +90,7 @@ function ContentBadgePlayground() {
           {/* Control Panel */}
           <div
             style={{
-              backgroundColor: "#fafbfc",
+              backgroundColor: "var(--surface-base-alternative)",
               display: "flex",
               flexDirection: "column",
               padding: 16,
@@ -171,7 +171,7 @@ function ContentBadgePlayground() {
         <div
           style={{
             padding: "10px 16px",
-            backgroundColor: "#18181b",
+            backgroundColor: "var(--inverse-surface-default)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
@@ -189,8 +189,8 @@ function ContentBadgePlayground() {
             padding: 16,
             fontSize: 13,
             lineHeight: 1.6,
-            color: "#e4e4e7",
-            backgroundColor: "#18181b",
+            color: "var(--border-secondary-default)",
+            backgroundColor: "var(--inverse-surface-default)",
             fontFamily: "'SF Mono', 'Fira Code', monospace",
             overflow: "auto",
           }}
@@ -219,7 +219,7 @@ function DesignContent() {
       {/* Anatomy */}
       <Section title="Anatomy">
         <div style={{
-          backgroundColor: "#f5f5f7",
+          backgroundColor: "var(--surface-base-alternative)",
           borderRadius: 16,
           padding: "48px 40px",
           display: "flex",
@@ -228,7 +228,7 @@ function DesignContent() {
         }}>
           <svg width="360" height="120" viewBox="0 0 360 120">
             {/* Badge Container */}
-            <rect x="120" y="40" width="120" height="40" rx="4" fill="#2563eb" />
+            <rect x="120" y="40" width="120" height="40" rx="4" fill="var(--content-brand-default)" />
 
             {/* Dot */}
             <circle cx="140" cy="60" r="4" fill="white" />
@@ -237,29 +237,29 @@ function DesignContent() {
             <text x="180" y="65" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">진행중</text>
 
             {/* Lines to labels */}
-            <line x1="70" y1="60" x2="120" y2="60" stroke="#374151" strokeWidth="1.5" />
-            <circle cx="120" cy="60" r="3" fill="#374151" />
+            <line x1="70" y1="60" x2="120" y2="60" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <circle cx="120" cy="60" r="3" fill="var(--content-base-default)" />
 
-            <line x1="140" y1="40" x2="140" y2="15" stroke="#374151" strokeWidth="1.5" />
-            <circle cx="140" cy="40" r="3" fill="#374151" />
+            <line x1="140" y1="40" x2="140" y2="15" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <circle cx="140" cy="40" r="3" fill="var(--content-base-default)" />
 
-            <line x1="180" y1="80" x2="180" y2="105" stroke="#374151" strokeWidth="1.5" />
-            <circle cx="180" cy="80" r="3" fill="#374151" />
+            <line x1="180" y1="80" x2="180" y2="105" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <circle cx="180" cy="80" r="3" fill="var(--content-base-default)" />
 
             {/* Numbered circles */}
-            <circle cx="55" cy="60" r="14" fill="#374151" />
+            <circle cx="55" cy="60" r="14" fill="var(--content-base-default)" />
             <text x="55" y="65" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">1</text>
 
-            <circle cx="140" cy="15" r="14" fill="#374151" />
+            <circle cx="140" cy="15" r="14" fill="var(--content-base-default)" />
             <text x="140" y="20" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">2</text>
 
-            <circle cx="180" cy="105" r="14" fill="#374151" />
+            <circle cx="180" cy="105" r="14" fill="var(--content-base-default)" />
             <text x="180" y="110" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">3</text>
 
             {/* Padding indicator */}
-            <line x1="122" y1="42" x2="122" y2="52" stroke="#94a3b8" strokeWidth="1" strokeDasharray="2 2" />
-            <line x1="132" y1="42" x2="132" y2="52" stroke="#94a3b8" strokeWidth="1" strokeDasharray="2 2" />
-            <text x="127" y="36" textAnchor="middle" fill="#94a3b8" fontSize="8">px</text>
+            <line x1="122" y1="42" x2="122" y2="52" stroke="var(--content-base-placeholder)" strokeWidth="1" strokeDasharray="2 2" />
+            <line x1="132" y1="42" x2="132" y2="52" stroke="var(--content-base-placeholder)" strokeWidth="1" strokeDasharray="2 2" />
+            <text x="127" y="36" textAnchor="middle" fill="var(--content-base-placeholder)" fontSize="8">px</text>
           </svg>
         </div>
         <div style={{
@@ -298,15 +298,15 @@ function DesignContent() {
           <div style={{ display: "flex", gap: 16, alignItems: "center", padding: 24 }}>
             <div style={{ textAlign: "center" }}>
               <ContentBadgeDemo variant="filled" color="brandDefault" size="small">Small</ContentBadgeDemo>
-              <p style={{ fontSize: 11, color: "#64748b", marginTop: 8 }}>18px</p>
+              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginTop: 8 }}>18px</p>
             </div>
             <div style={{ textAlign: "center" }}>
               <ContentBadgeDemo variant="filled" color="brandDefault" size="medium">Medium</ContentBadgeDemo>
-              <p style={{ fontSize: 11, color: "#64748b", marginTop: 8 }}>22px</p>
+              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginTop: 8 }}>22px</p>
             </div>
             <div style={{ textAlign: "center" }}>
               <ContentBadgeDemo variant="filled" color="brandDefault" size="large">Large</ContentBadgeDemo>
-              <p style={{ fontSize: 11, color: "#64748b", marginTop: 8 }}>26px</p>
+              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginTop: 8 }}>26px</p>
             </div>
           </div>
         </PreviewBox>
@@ -318,27 +318,27 @@ function DesignContent() {
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", padding: 24 }}>
             <div style={{ textAlign: "center" }}>
               <ContentBadgeDemo variant="filled" color="brandDefault" size="medium">Brand</ContentBadgeDemo>
-              <p style={{ fontSize: 10, color: "#64748b", marginTop: 6 }}>프로모션</p>
+              <p style={{ fontSize: 10, color: "var(--content-base-secondary)", marginTop: 6 }}>프로모션</p>
             </div>
             <div style={{ textAlign: "center" }}>
               <ContentBadgeDemo variant="filled" color="baseDefault" size="medium">Base</ContentBadgeDemo>
-              <p style={{ fontSize: 10, color: "#64748b", marginTop: 6 }}>일반</p>
+              <p style={{ fontSize: 10, color: "var(--content-base-secondary)", marginTop: 6 }}>일반</p>
             </div>
             <div style={{ textAlign: "center" }}>
               <ContentBadgeDemo variant="filled" color="successDefault" size="medium">Success</ContentBadgeDemo>
-              <p style={{ fontSize: 10, color: "#64748b", marginTop: 6 }}>완료</p>
+              <p style={{ fontSize: 10, color: "var(--content-base-secondary)", marginTop: 6 }}>완료</p>
             </div>
             <div style={{ textAlign: "center" }}>
               <ContentBadgeDemo variant="filled" color="errorDefault" size="medium">Error</ContentBadgeDemo>
-              <p style={{ fontSize: 10, color: "#64748b", marginTop: 6 }}>품절</p>
+              <p style={{ fontSize: 10, color: "var(--content-base-secondary)", marginTop: 6 }}>품절</p>
             </div>
             <div style={{ textAlign: "center" }}>
               <ContentBadgeDemo variant="filled" color="warningDefault" size="medium">Warning</ContentBadgeDemo>
-              <p style={{ fontSize: 10, color: "#64748b", marginTop: 6 }}>주의</p>
+              <p style={{ fontSize: 10, color: "var(--content-base-secondary)", marginTop: 6 }}>주의</p>
             </div>
             <div style={{ textAlign: "center" }}>
               <ContentBadgeDemo variant="filled" color="infoDefault" size="medium">Info</ContentBadgeDemo>
-              <p style={{ fontSize: 10, color: "#64748b", marginTop: 6 }}>안내</p>
+              <p style={{ fontSize: 10, color: "var(--content-base-secondary)", marginTop: 6 }}>안내</p>
             </div>
           </div>
         </PreviewBox>
@@ -364,11 +364,11 @@ function DesignContent() {
           <div style={{ display: "flex", gap: 24, alignItems: "center", padding: 24 }}>
             <div style={{ textAlign: "center" }}>
               <ContentBadgeDemo variant="filled" color="brandDefault" size="medium">Default</ContentBadgeDemo>
-              <p style={{ fontSize: 11, color: "#64748b", marginTop: 8 }}>Default</p>
+              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginTop: 8 }}>Default</p>
             </div>
             <div style={{ textAlign: "center" }}>
               <ContentBadgeDemo variant="filled" color="brandDefault" size="medium" dot>With Dot</ContentBadgeDemo>
-              <p style={{ fontSize: 11, color: "#64748b", marginTop: 8 }}>Dot Status</p>
+              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginTop: 8 }}>Dot Status</p>
             </div>
             <div style={{ textAlign: "center" }}>
               <span style={{
@@ -381,13 +381,13 @@ function DesignContent() {
                 fontSize: 12,
                 fontWeight: 600,
                 lineHeight: 1,
-                color: "#94a3b8",
-                backgroundColor: "#f1f5f9",
+                color: "var(--content-base-placeholder)",
+                backgroundColor: "var(--surface-base-alternative)",
                 border: "none",
                 borderRadius: 4,
                 whiteSpace: "nowrap" as const,
               }}>Disabled context</span>
-              <p style={{ fontSize: 11, color: "#64748b", marginTop: 8 }}>Muted (context)</p>
+              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginTop: 8 }}>Muted (context)</p>
             </div>
           </div>
         </PreviewBox>
@@ -418,42 +418,42 @@ function DesignContent() {
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                 <td style={{ padding: "12px 16px" }}>Border Radius</td>
                 <td style={{ padding: "12px 16px" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>radius.primitive.xs</code></td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>4px</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>4px</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                 <td style={{ padding: "12px 16px" }}>Gap (dot/icon-text)</td>
                 <td style={{ padding: "12px 16px" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>spacing.primitive.1</code></td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>4px</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>4px</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                 <td style={{ padding: "12px 16px" }}>Padding X (small)</td>
                 <td style={{ padding: "12px 16px" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>spacing.primitive.1.5</code></td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>6px</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>6px</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                 <td style={{ padding: "12px 16px" }}>Padding X (medium)</td>
                 <td style={{ padding: "12px 16px" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>spacing.primitive.2</code></td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>8px</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>8px</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                 <td style={{ padding: "12px 16px" }}>Padding X (large)</td>
                 <td style={{ padding: "12px 16px" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>spacing.primitive.2.5</code></td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>10px</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>10px</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                 <td style={{ padding: "12px 16px" }}>Height (small)</td>
                 <td style={{ padding: "12px 16px" }}>-</td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>18px</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>18px</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                 <td style={{ padding: "12px 16px" }}>Height (medium)</td>
                 <td style={{ padding: "12px 16px" }}>-</td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>22px</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>22px</td>
               </tr>
               <tr>
                 <td style={{ padding: "12px 16px" }}>Height (large)</td>
                 <td style={{ padding: "12px 16px" }}>-</td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>26px</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>26px</td>
               </tr>
             </tbody>
           </table>
@@ -635,11 +635,11 @@ function DesignContent() {
           </DontCard>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 8 }}>
-          <p style={{ fontSize: 13, color: "#22c55e", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
+          <p style={{ fontSize: 13, color: "var(--status-positive-content)", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
             <span style={{ fontWeight: 700, flexShrink: 0 }}>Do</span>
             <span style={{ color: "var(--text-secondary)" }}>1-2 단어의 짧고 명확한 라벨을 사용합니다.</span>
           </p>
-          <p style={{ fontSize: 13, color: "#ef4444", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
+          <p style={{ fontSize: 13, color: "var(--status-negative-content)", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
             <span style={{ fontWeight: 700, flexShrink: 0 }}>Don&apos;t</span>
             <span style={{ color: "var(--text-secondary)" }}>문장이나 긴 텍스트를 Badge에 넣지 마세요.</span>
           </p>
@@ -662,11 +662,11 @@ function DesignContent() {
           </DontCard>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 8 }}>
-          <p style={{ fontSize: 13, color: "#22c55e", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
+          <p style={{ fontSize: 13, color: "var(--status-positive-content)", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
             <span style={{ fontWeight: 700, flexShrink: 0 }}>Do</span>
             <span style={{ color: "var(--text-secondary)" }}>같은 영역에서 동일한 variant와 size를 유지합니다.</span>
           </p>
-          <p style={{ fontSize: 13, color: "#ef4444", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
+          <p style={{ fontSize: 13, color: "var(--status-negative-content)", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
             <span style={{ fontWeight: 700, flexShrink: 0 }}>Don&apos;t</span>
             <span style={{ color: "var(--text-secondary)" }}>같은 영역에서 variant와 size를 혼용하지 마세요.</span>
           </p>
@@ -702,7 +702,7 @@ function WebContent() {
               fontSize: 13,
               fontWeight: 500,
               color: "white",
-              backgroundColor: "#24292f",
+              backgroundColor: "var(--inverse-surface-default)",
               borderRadius: 12,
               textDecoration: "none",
             }}
@@ -799,7 +799,7 @@ function RNContent() {
               fontSize: 13,
               fontWeight: 500,
               color: "white",
-              backgroundColor: "#24292f",
+              backgroundColor: "var(--inverse-surface-default)",
               borderRadius: 12,
               textDecoration: "none",
             }}
@@ -884,8 +884,8 @@ function UsageCard({ situation, description, recommendation, examples }: {
           <span style={{
             fontSize: 11,
             padding: "2px 6px",
-            backgroundColor: "#dbeafe",
-            color: "#1d4ed8",
+            backgroundColor: "var(--surface-brand-secondary)",
+            color: "var(--surface-brand-defaultPressed)",
             borderRadius: 4,
             fontWeight: 500,
           }}>

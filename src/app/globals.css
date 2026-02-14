@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./generated-color-tokens.css";
+@import "./generated-foundation-tokens.css";
 
 :root {
   /* Docs UI - Code/Playground */
@@ -36,31 +37,31 @@
   --brand-primary: var(--content-brand-default);
   --brand-hover: var(--blue-45);
 
-  /* Spacing (4px grid) */
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-5: 20px;
-  --space-6: 24px;
-  --space-8: 32px;
-  --space-10: 40px;
-  --space-12: 48px;
+  /* Spacing aliases */
+  --space-1: var(--spacing-primitive-1);
+  --space-2: var(--spacing-primitive-2);
+  --space-3: var(--spacing-primitive-3);
+  --space-4: var(--spacing-primitive-4);
+  --space-5: var(--spacing-primitive-5);
+  --space-6: var(--spacing-primitive-6);
+  --space-8: var(--spacing-primitive-8);
+  --space-10: var(--spacing-primitive-10);
+  --space-12: var(--spacing-primitive-12);
 
-  /* Radius */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 16px;
+  /* Radius aliases */
+  --radius-sm: var(--radius-primitive-xs);
+  --radius-md: var(--radius-primitive-sm);
+  --radius-lg: var(--radius-primitive-md);
+  --radius-xl: var(--radius-primitive-lg);
 
-  /* Shadow */
-  --shadow-xs: 0px 1px 2px rgba(16, 23, 38, 0.06);
-  --shadow-sm: 0px 2px 4px rgba(16, 23, 38, 0.08);
-  --shadow-md: 0px 4px 8px rgba(16, 23, 38, 0.10);
+  /* Shadow aliases */
+  --shadow-xs: var(--shadow-primitive-xs);
+  --shadow-sm: var(--shadow-primitive-sm);
+  --shadow-md: var(--shadow-primitive-md);
 
-  /* Typography */
-  --font-base: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  --font-mono: "SF Mono", SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+  /* Typography aliases */
+  --font-base: var(--typography-primitive-font-family-base), var(--typography-primitive-font-family-fallback);
+  --font-mono: var(--typography-semantic-code-md-font-family);
 }
 
 

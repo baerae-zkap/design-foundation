@@ -29,19 +29,19 @@ const colorConfig: Record<IconButtonColor, {
   outlined: { bg: string; bgPressed: string; color: string; border: string };
 }> = {
   brandDefault: {
-    filled: { bg: '#2563eb', bgPressed: '#1d4ed8', color: 'white' },
-    ghost: { bg: 'transparent', bgHover: 'rgba(37, 99, 235, 0.08)', bgPressed: 'rgba(37, 99, 235, 0.12)', color: '#2563eb', colorPressed: '#1d4ed8' },
-    outlined: { bg: 'white', bgPressed: '#eff6ff', color: '#2563eb', border: '#2563eb' },
+    filled: { bg: 'var(--content-brand-default)', bgPressed: 'var(--surface-brand-defaultPressed)', color: 'white' },
+    ghost: { bg: 'transparent', bgHover: 'var(--effect-alpha-brand-selection)', bgPressed: 'var(--effect-alpha-brand-selection)', color: 'var(--content-brand-default)', colorPressed: 'var(--surface-brand-defaultPressed)' },
+    outlined: { bg: 'var(--surface-base-default)', bgPressed: 'var(--surface-brand-secondary)', color: 'var(--content-brand-default)', border: 'var(--content-brand-default)' },
   },
   baseDefault: {
-    filled: { bg: '#334155', bgPressed: '#1e293b', color: 'white' },
-    ghost: { bg: 'transparent', bgHover: 'rgba(0, 0, 0, 0.04)', bgPressed: 'rgba(0, 0, 0, 0.08)', color: '#334155', colorPressed: '#1e293b' },
-    outlined: { bg: 'white', bgPressed: '#f8fafc', color: '#334155', border: '#cbd5e1' },
+    filled: { bg: 'var(--content-base-strong)', bgPressed: 'var(--inverse-surface-default)', color: 'white' },
+    ghost: { bg: 'transparent', bgHover: 'var(--effect-alpha-fill-alternative)', bgPressed: 'var(--effect-alpha-fill-normal)', color: 'var(--content-base-strong)', colorPressed: 'var(--inverse-surface-default)' },
+    outlined: { bg: 'var(--surface-base-default)', bgPressed: 'var(--surface-base-alternative)', color: 'var(--content-base-strong)', border: 'var(--border-base-default)' },
   },
   errorDefault: {
-    filled: { bg: '#ef4444', bgPressed: '#dc2626', color: 'white' },
-    ghost: { bg: 'transparent', bgHover: 'rgba(239, 68, 68, 0.08)', bgPressed: 'rgba(239, 68, 68, 0.12)', color: '#ef4444', colorPressed: '#dc2626' },
-    outlined: { bg: 'white', bgPressed: '#fef2f2', color: '#dc2626', border: '#ef4444' },
+    filled: { bg: 'var(--status-negative-content)', bgPressed: 'var(--status-negative-content)', color: 'white' },
+    ghost: { bg: 'transparent', bgHover: 'var(--status-negative-surface)', bgPressed: 'var(--status-negative-surface)', color: 'var(--status-negative-content)', colorPressed: 'var(--status-negative-content)' },
+    outlined: { bg: 'var(--surface-base-default)', bgPressed: 'var(--status-negative-surface)', color: 'var(--status-negative-content)', border: 'var(--status-negative-content)' },
   },
 };
 
@@ -114,7 +114,7 @@ function IconButtonPlayground() {
         style={{
           borderRadius: 20,
           overflow: "hidden",
-          backgroundColor: "#fafbfc",
+          backgroundColor: "var(--surface-base-alternative)",
         }}
       >
         <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
@@ -125,7 +125,7 @@ function IconButtonPlayground() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              backgroundColor: "#fafbfc",
+              backgroundColor: "var(--surface-base-alternative)",
             }}
           >
             <IconButtonDemo
@@ -139,7 +139,7 @@ function IconButtonPlayground() {
           {/* Control Panel */}
           <div
             style={{
-              backgroundColor: "#fafbfc",
+              backgroundColor: "var(--surface-base-alternative)",
               display: "flex",
               flexDirection: "column",
               padding: 16,
@@ -187,9 +187,9 @@ function IconButtonPlayground() {
                         padding: "6px 10px",
                         fontSize: 12,
                         borderRadius: 6,
-                        border: color === c ? "2px solid #2563eb" : "1px solid #e2e8f0",
-                        backgroundColor: color === c ? "#eff6ff" : "white",
-                        color: color === c ? "#2563eb" : "#64748b",
+                        border: color === c ? "2px solid var(--content-brand-default)" : "1px solid var(--border-base-default)",
+                        backgroundColor: color === c ? "var(--surface-brand-secondary)" : "var(--surface-base-default)",
+                        color: color === c ? "var(--content-brand-default)" : "var(--content-base-secondary)",
                         cursor: "pointer",
                       }}
                     >
@@ -231,7 +231,7 @@ function IconButtonPlayground() {
         <div
           style={{
             padding: "10px 16px",
-            backgroundColor: "#18181b",
+            backgroundColor: "var(--inverse-surface-default)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
@@ -249,8 +249,8 @@ function IconButtonPlayground() {
             padding: 16,
             fontSize: 13,
             lineHeight: 1.6,
-            color: "#e4e4e7",
-            backgroundColor: "#18181b",
+            color: "var(--border-secondary-default)",
+            backgroundColor: "var(--inverse-surface-default)",
             fontFamily: "'SF Mono', 'Fira Code', monospace",
             overflow: "auto",
           }}
@@ -278,7 +278,7 @@ function DesignContent() {
       {/* Anatomy */}
       <Section title="Anatomy">
         <div style={{
-          backgroundColor: "#f5f5f7",
+          backgroundColor: "var(--surface-base-alternative)",
           borderRadius: 16,
           padding: "48px 40px",
           display: "flex",
@@ -287,25 +287,25 @@ function DesignContent() {
         }}>
           <svg width="280" height="120" viewBox="0 0 280 120">
             {/* Container circle */}
-            <circle cx="140" cy="60" r="28" fill="none" stroke="#2563eb" strokeWidth="2" strokeDasharray="4 3" />
+            <circle cx="140" cy="60" r="28" fill="none" stroke="var(--content-brand-default)" strokeWidth="2" strokeDasharray="4 3" />
 
             {/* Icon inside */}
-            <line x1="140" y1="48" x2="140" y2="72" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" />
-            <line x1="128" y1="60" x2="152" y2="60" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" />
+            <line x1="140" y1="48" x2="140" y2="72" stroke="var(--content-brand-default)" strokeWidth="2.5" strokeLinecap="round" />
+            <line x1="128" y1="60" x2="152" y2="60" stroke="var(--content-brand-default)" strokeWidth="2.5" strokeLinecap="round" />
 
             {/* Line from circle 1 to container */}
-            <line x1="50" y1="60" x2="112" y2="60" stroke="#374151" strokeWidth="1.5" />
-            <circle cx="112" cy="60" r="3" fill="#374151" />
+            <line x1="50" y1="60" x2="112" y2="60" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <circle cx="112" cy="60" r="3" fill="var(--content-base-default)" />
 
             {/* Line from circle 2 to icon */}
-            <line x1="140" y1="32" x2="140" y2="10" stroke="#374151" strokeWidth="1.5" />
-            <circle cx="140" cy="32" r="3" fill="#374151" />
+            <line x1="140" y1="32" x2="140" y2="10" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <circle cx="140" cy="32" r="3" fill="var(--content-base-default)" />
 
             {/* Numbered circles */}
-            <circle cx="35" cy="60" r="14" fill="#374151" />
+            <circle cx="35" cy="60" r="14" fill="var(--content-base-default)" />
             <text x="35" y="65" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">1</text>
 
-            <circle cx="140" cy="10" r="14" fill="#374151" />
+            <circle cx="140" cy="10" r="14" fill="var(--content-base-default)" />
             <text x="140" y="15" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">2</text>
           </svg>
         </div>
@@ -411,15 +411,15 @@ function DesignContent() {
           <div style={{ display: "flex", gap: 24, alignItems: "center" }}>
             <div style={{ textAlign: "center" }}>
               <IconButtonDemo size="small" />
-              <p style={{ fontSize: 11, color: "#64748b", marginTop: 8 }}>32px</p>
+              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginTop: 8 }}>32px</p>
             </div>
             <div style={{ textAlign: "center" }}>
               <IconButtonDemo size="medium" />
-              <p style={{ fontSize: 11, color: "#64748b", marginTop: 8 }}>40px</p>
+              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginTop: 8 }}>40px</p>
             </div>
             <div style={{ textAlign: "center" }}>
               <IconButtonDemo size="large" />
-              <p style={{ fontSize: 11, color: "#64748b", marginTop: 8 }}>48px</p>
+              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginTop: 8 }}>48px</p>
             </div>
           </div>
         </PreviewBox>
@@ -462,11 +462,11 @@ function DesignContent() {
           <div style={{ display: "flex", gap: 24, alignItems: "center" }}>
             <div style={{ textAlign: "center" }}>
               <IconButtonDemo variant="ghost" color="baseDefault" />
-              <p style={{ fontSize: 11, color: "#64748b", marginTop: 8 }}>Default</p>
+              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginTop: 8 }}>Default</p>
             </div>
             <div style={{ textAlign: "center" }}>
               <IconButtonDemo variant="ghost" color="baseDefault" disabled />
-              <p style={{ fontSize: 11, color: "#64748b", marginTop: 8 }}>Disabled</p>
+              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginTop: 8 }}>Disabled</p>
             </div>
           </div>
         </PreviewBox>
@@ -526,19 +526,19 @@ function DesignContent() {
             <tbody>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                 <td style={{ padding: "12px 16px" }}>Button Size</td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>32px (primitive.8)</td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>40px (primitive.10)</td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>48px (primitive.12)</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>32px (primitive.8)</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>40px (primitive.10)</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>48px (primitive.12)</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                 <td style={{ padding: "12px 16px" }}>Icon Size</td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>18px</td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>22px</td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>26px</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>18px</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>22px</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>26px</td>
               </tr>
               <tr>
                 <td style={{ padding: "12px 16px" }}>Border Radius</td>
-                <td colSpan={3} style={{ padding: "12px 16px", fontFamily: "monospace", color: "#6366f1" }}>9999px (primitive.full)</td>
+                <td colSpan={3} style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>9999px (primitive.full)</td>
               </tr>
             </tbody>
           </table>
@@ -662,7 +662,7 @@ function WebContent() {
               fontSize: 13,
               fontWeight: 500,
               color: "white",
-              backgroundColor: "#24292f",
+              backgroundColor: "var(--inverse-surface-default)",
               borderRadius: 12,
               textDecoration: "none",
             }}
@@ -753,7 +753,7 @@ function RNContent() {
               fontSize: 13,
               fontWeight: 500,
               color: "white",
-              backgroundColor: "#24292f",
+              backgroundColor: "var(--inverse-surface-default)",
               borderRadius: 12,
               textDecoration: "none",
             }}
@@ -853,8 +853,8 @@ function UsageCard({ situation, desc, variant, color, iconType }: {
           <span style={{
             fontSize: 11,
             padding: "2px 6px",
-            backgroundColor: variant === "filled" ? "#dbeafe" : "#f1f5f9",
-            color: variant === "filled" ? "#1d4ed8" : "#475569",
+            backgroundColor: variant === "filled" ? "var(--surface-brand-secondary)" : "var(--surface-base-alternative)",
+            color: variant === "filled" ? "var(--surface-brand-defaultPressed)" : "var(--content-base-secondary)",
             borderRadius: 4,
             fontWeight: 500,
           }}>

@@ -177,7 +177,7 @@ export function Sidebar() {
                   padding: '24px 24px 8px',
                   fontSize: '13px',
                   fontWeight: 400,
-                  color: '#94a3b8',
+                  color: 'var(--content-base-placeholder)',
                 }}
               >
                 {item.title}

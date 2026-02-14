@@ -51,7 +51,7 @@ function ThumbnailPlayground() {
 
   return (
     <div style={{ marginBottom: 32 }}>
-      <div style={{ borderRadius: 20, overflow: "hidden", backgroundColor: "#fafbfc" }}>
+      <div style={{ borderRadius: 20, overflow: "hidden", backgroundColor: "var(--surface-base-alternative)" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
           <div style={{ padding: 60, display: "flex", alignItems: "center", justifyContent: "center" }}>
             <ThumbnailDemo
@@ -65,7 +65,7 @@ function ThumbnailPlayground() {
           </div>
 
           <div style={{
-            backgroundColor: "#fafbfc",
+            backgroundColor: "var(--surface-base-alternative)",
             display: "flex",
             flexDirection: "column",
             padding: 16,
@@ -177,7 +177,7 @@ function DesignContent() {
       {/* Anatomy - SVG Diagram */}
       <Section title="Anatomy">
         <div style={{
-          backgroundColor: "#f5f5f7",
+          backgroundColor: "var(--surface-base-alternative)",
           borderRadius: 16,
           padding: "48px 40px",
           display: "flex",
@@ -187,41 +187,41 @@ function DesignContent() {
         }}>
           <svg width="360" height="240" viewBox="0 0 360 240">
             {/* Container outline */}
-            <rect x="60" y="20" width="240" height="160" rx="12" fill="#e2e8f0" stroke="#cbd5e1" strokeWidth="1.5" strokeDasharray="6 3" />
+            <rect x="60" y="20" width="240" height="160" rx="12" fill="var(--border-base-default)" stroke="var(--border-base-default)" strokeWidth="1.5" strokeDasharray="6 3" />
 
             {/* Image area */}
-            <rect x="64" y="24" width="232" height="152" rx="10" fill="#94a3b8" />
+            <rect x="64" y="24" width="232" height="152" rx="10" fill="var(--content-base-placeholder)" />
             <text x="180" y="100" textAnchor="middle" fill="white" fontSize="14" fontWeight="500" opacity="0.8">Image Area</text>
 
             {/* Play icon overlay */}
-            <circle cx="180" cy="100" r="24" fill="rgba(0,0,0,0.5)" />
+            <circle cx="180" cy="100" r="24" fill="var(--effect-alpha-overlay-dim)" />
             <polygon points="174,88 174,112 194,100" fill="white" />
 
             {/* Overlay bar at bottom */}
-            <rect x="64" y="144" width="232" height="32" rx="0" fill="rgba(0,0,0,0.5)" />
+            <rect x="64" y="144" width="232" height="32" rx="0" fill="var(--effect-alpha-overlay-dim)" />
             <text x="180" y="164" textAnchor="middle" fill="white" fontSize="11" fontWeight="500">Overlay</text>
 
             {/* Numbered annotations */}
             {/* 1 - Container */}
-            <line x1="40" y1="40" x2="58" y2="40" stroke="#374151" strokeWidth="1.5" />
-            <circle cx="30" cy="40" r="12" fill="#374151" />
+            <line x1="40" y1="40" x2="58" y2="40" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <circle cx="30" cy="40" r="12" fill="var(--content-base-default)" />
             <text x="30" y="44" textAnchor="middle" fill="white" fontSize="11" fontWeight="600">1</text>
 
             {/* 2 - Image */}
-            <line x1="310" y1="60" x2="298" y2="60" stroke="#374151" strokeWidth="1.5" />
-            <circle cx="320" cy="60" r="12" fill="#374151" />
+            <line x1="310" y1="60" x2="298" y2="60" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <circle cx="320" cy="60" r="12" fill="var(--content-base-default)" />
             <text x="320" y="64" textAnchor="middle" fill="white" fontSize="11" fontWeight="600">2</text>
 
             {/* 3 - Play Icon */}
-            <line x1="210" y1="100" x2="230" y2="100" stroke="#374151" strokeWidth="1.5" />
-            <line x1="230" y1="100" x2="230" y2="210" stroke="#374151" strokeWidth="1.5" />
-            <circle cx="230" cy="220" r="12" fill="#374151" />
+            <line x1="210" y1="100" x2="230" y2="100" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <line x1="230" y1="100" x2="230" y2="210" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <circle cx="230" cy="220" r="12" fill="var(--content-base-default)" />
             <text x="230" y="224" textAnchor="middle" fill="white" fontSize="11" fontWeight="600">3</text>
 
             {/* 4 - Overlay */}
-            <line x1="310" y1="160" x2="330" y2="160" stroke="#374151" strokeWidth="1.5" />
-            <line x1="330" y1="160" x2="330" y2="210" stroke="#374151" strokeWidth="1.5" />
-            <circle cx="330" cy="220" r="12" fill="#374151" />
+            <line x1="310" y1="160" x2="330" y2="160" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <line x1="330" y1="160" x2="330" y2="210" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <circle cx="330" cy="220" r="12" fill="var(--content-base-default)" />
             <text x="330" y="224" textAnchor="middle" fill="white" fontSize="11" fontWeight="600">4</text>
           </svg>
         </div>
@@ -260,23 +260,23 @@ function DesignContent() {
 
       {/* Sizes */}
       <Section title="Sizes">
-        <div style={{ backgroundColor: "#fafbfc", borderRadius: 12, padding: 32 }}>
+        <div style={{ backgroundColor: "var(--surface-base-alternative)", borderRadius: 12, padding: 32 }}>
           <div style={{ display: "flex", gap: 24, alignItems: "flex-end", justifyContent: "center" }}>
             <div style={{ textAlign: "center" }}>
               <ThumbnailDemo src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400" aspectRatio="1:1" size={64} />
-              <div style={{ marginTop: 12, fontSize: 13, color: "#6b7280" }}>64px</div>
+              <div style={{ marginTop: 12, fontSize: 13, color: "var(--content-base-secondary)" }}>64px</div>
             </div>
             <div style={{ textAlign: "center" }}>
               <ThumbnailDemo src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400" aspectRatio="1:1" size={80} />
-              <div style={{ marginTop: 12, fontSize: 13, color: "#6b7280" }}>80px</div>
+              <div style={{ marginTop: 12, fontSize: 13, color: "var(--content-base-secondary)" }}>80px</div>
             </div>
             <div style={{ textAlign: "center" }}>
               <ThumbnailDemo src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400" aspectRatio="1:1" size={120} />
-              <div style={{ marginTop: 12, fontSize: 13, color: "#6b7280" }}>120px</div>
+              <div style={{ marginTop: 12, fontSize: 13, color: "var(--content-base-secondary)" }}>120px</div>
             </div>
             <div style={{ textAlign: "center" }}>
               <ThumbnailDemo src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400" aspectRatio="1:1" size={160} />
-              <div style={{ marginTop: 12, fontSize: 13, color: "#6b7280" }}>160px</div>
+              <div style={{ marginTop: 12, fontSize: 13, color: "var(--content-base-secondary)" }}>160px</div>
             </div>
           </div>
         </div>
@@ -317,7 +317,7 @@ function DesignContent() {
                 <div style={{
                   width: "100%",
                   paddingBottom: "56.25%",
-                  backgroundColor: "#e2e8f0",
+                  backgroundColor: "var(--border-base-default)",
                   position: "relative",
                 }}>
                   <div style={{
@@ -326,7 +326,7 @@ function DesignContent() {
                     left: 0,
                     width: "100%",
                     height: "100%",
-                    background: "linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%)",
+                    background: "linear-gradient(90deg, var(--border-base-default) 25%, var(--surface-base-alternative) 50%, var(--border-base-default) 75%)",
                     backgroundSize: "200% 100%",
                     animation: "shimmer 1.5s ease-in-out infinite",
                   }} />
@@ -340,7 +340,7 @@ function DesignContent() {
                 <div style={{
                   width: "100%",
                   paddingBottom: "100%",
-                  backgroundColor: "#e2e8f0",
+                  backgroundColor: "var(--border-base-default)",
                   position: "relative",
                 }}>
                   <div style={{
@@ -349,7 +349,7 @@ function DesignContent() {
                     left: 0,
                     width: "100%",
                     height: "100%",
-                    background: "linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%)",
+                    background: "linear-gradient(90deg, var(--border-base-default) 25%, var(--surface-base-alternative) 50%, var(--border-base-default) 75%)",
                     backgroundSize: "200% 100%",
                     animation: "shimmer 1.5s ease-in-out infinite",
                   }} />
@@ -374,7 +374,7 @@ function DesignContent() {
                 <div style={{
                   width: "100%",
                   paddingBottom: "56.25%",
-                  backgroundColor: "#f1f5f9",
+                  backgroundColor: "var(--surface-base-alternative)",
                   position: "relative",
                 }}>
                   <div style={{
@@ -387,19 +387,19 @@ function DesignContent() {
                     alignItems: "center",
                     gap: 8,
                   }}>
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--content-base-placeholder)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
                       <circle cx="8.5" cy="8.5" r="1.5" />
                       <polyline points="21 15 16 10 5 21" />
                     </svg>
-                    <span style={{ fontSize: 11, color: "#94a3b8" }}>Unavailable</span>
+                    <span style={{ fontSize: 11, color: "var(--content-base-placeholder)" }}>Unavailable</span>
                   </div>
                 </div>
               </div>
             </div>
           </PreviewBox>
           <div style={{ marginTop: 12, padding: 12, backgroundColor: "var(--bg-secondary)", borderRadius: 8, fontSize: 13, color: "var(--text-secondary)" }}>
-            이미지 로드 실패 시 fallback UI를 표시합니다. 배경색은 <code style={{ fontSize: 12 }}>#f1f5f9</code>입니다.
+            이미지 로드 실패 시 fallback UI를 표시합니다. 배경색은 <code style={{ fontSize: 12 }}>var(--surface-base-alternative)</code>입니다.
           </div>
         </Subsection>
 
@@ -419,7 +419,7 @@ function DesignContent() {
                       left: 0,
                       right: 0,
                       bottom: 0,
-                      backgroundColor: "rgba(0,0,0,0.3)",
+                      backgroundColor: "var(--effect-alpha-overlay-dim)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -442,10 +442,10 @@ function DesignContent() {
         <DesignTokensTable
           tokens={[
             { name: "Border Radius", value: "12px", usage: "radius=true일 때" },
-            { name: "Border Color", value: "rgba(0,0,0,0.08)", usage: "border=true일 때" },
+            { name: "Border Color", value: "var(--border-base-default)", usage: "border=true일 때" },
             { name: "Play Icon Size", value: "48px", usage: "playIcon 크기" },
-            { name: "Play Icon Background", value: "rgba(0,0,0,0.6)", usage: "반투명 배경" },
-            { name: "Fallback Background", value: "#f1f5f9", usage: "에러 시 배경색" },
+            { name: "Play Icon Background", value: "var(--effect-alpha-overlay-dim)", usage: "반투명 배경" },
+            { name: "Fallback Background", value: "var(--surface-base-alternative)", usage: "에러 시 배경색" },
           ]}
         />
       </Section>
@@ -566,12 +566,12 @@ function WebContent() {
       <Section title="Source Code">
         <div style={{
           padding: 16,
-          backgroundColor: "#f8fafc",
+          backgroundColor: "var(--surface-base-alternative)",
           borderRadius: 8,
           border: "1px solid var(--divider)",
           fontSize: 14,
         }}>
-          <a href={WEB_SOURCE} target="_blank" rel="noopener noreferrer" style={{ color: "#2563eb", textDecoration: "none" }}>
+          <a href={WEB_SOURCE} target="_blank" rel="noopener noreferrer" style={{ color: "var(--content-brand-default)", textDecoration: "none" }}>
             View on GitHub →
           </a>
         </div>
@@ -693,12 +693,12 @@ function RNContent() {
       <Section title="Source Code">
         <div style={{
           padding: 16,
-          backgroundColor: "#f8fafc",
+          backgroundColor: "var(--surface-base-alternative)",
           borderRadius: 8,
           border: "1px solid var(--divider)",
           fontSize: 14,
         }}>
-          <a href={NATIVE_SOURCE} target="_blank" rel="noopener noreferrer" style={{ color: "#2563eb", textDecoration: "none" }}>
+          <a href={NATIVE_SOURCE} target="_blank" rel="noopener noreferrer" style={{ color: "var(--content-brand-default)", textDecoration: "none" }}>
             View on GitHub →
           </a>
         </div>
@@ -777,7 +777,7 @@ import { View, Text } from 'react-native';`} />
                   left: 8,
                   right: 8,
                   padding: 8,
-                  backgroundColor: "rgba(0,0,0,0.7)",
+                  backgroundColor: "var(--effect-alpha-overlay-heavy)",
                   borderRadius: 4,
                   color: "white",
                   fontSize: 12,
@@ -800,7 +800,7 @@ import { View, Text } from 'react-native';`} />
       left: 8,
       right: 8,
       padding: 8,
-      backgroundColor: 'rgba(0,0,0,0.7)',
+      backgroundColor: 'var(--effect-alpha-overlay-heavy)',
       borderRadius: 4,
     }}>
       <Text style={{ color: 'white', fontSize: 12, textAlign: 'center' }}>
@@ -874,7 +874,7 @@ function StyleCard({ name, description, children }: { name: string; description:
     }}>
       <div style={{
         marginBottom: 16,
-        backgroundColor: "#fafbfc",
+        backgroundColor: "var(--surface-base-alternative)",
         borderRadius: 8,
         padding: 16,
         display: "flex",
@@ -904,7 +904,7 @@ function DesignTokensTable({ tokens }: { tokens: { name: string; value: string; 
           {tokens.map((token, i) => (
             <tr key={i} style={{ borderBottom: "1px solid var(--divider)" }}>
               <td style={{ padding: "12px 16px", color: "var(--text-primary)", fontWeight: 500 }}>{token.name}</td>
-              <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 12, color: "#6366f1" }}>{token.value}</td>
+              <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 12, color: "var(--content-brand-default)" }}>{token.value}</td>
               <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>{token.usage}</td>
             </tr>
           ))}

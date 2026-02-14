@@ -85,7 +85,7 @@ function TextButtonPlayground() {
         style={{
           borderRadius: 20,
           overflow: "hidden",
-          backgroundColor: "#fafbfc",
+          backgroundColor: "var(--surface-base-alternative)",
         }}
       >
         <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
@@ -96,7 +96,7 @@ function TextButtonPlayground() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              backgroundColor: "#fafbfc",
+              backgroundColor: "var(--surface-base-alternative)",
             }}
           >
             <TextButtonDemo
@@ -112,7 +112,7 @@ function TextButtonPlayground() {
           {/* Control Panel */}
           <div
             style={{
-              backgroundColor: "#fafbfc",
+              backgroundColor: "var(--surface-base-alternative)",
               display: "flex",
               flexDirection: "column",
               padding: 16,
@@ -193,7 +193,7 @@ function TextButtonPlayground() {
         <div
           style={{
             padding: "10px 16px",
-            backgroundColor: "#18181b",
+            backgroundColor: "var(--inverse-surface-default)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
@@ -211,8 +211,8 @@ function TextButtonPlayground() {
             padding: 16,
             fontSize: 13,
             lineHeight: 1.6,
-            color: "#e4e4e7",
-            backgroundColor: "#18181b",
+            color: "var(--border-secondary-default)",
+            backgroundColor: "var(--inverse-surface-default)",
             fontFamily: "'SF Mono', 'Fira Code', monospace",
             overflow: "auto",
           }}
@@ -615,7 +615,7 @@ function DesignContent() {
                 <button style={{
                   width: "100%",
                   height: 48,
-                  backgroundColor: "#2563eb",
+                  backgroundColor: "var(--content-brand-default)",
                   color: "white",
                   border: "none",
                   borderRadius: 12,
@@ -648,7 +648,7 @@ function DesignContent() {
             <PreviewBox>
               <div style={{ padding: "16px 20px" }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                  <span style={{ fontSize: 16, fontWeight: 700, color: "#18181b" }}>추천 상품</span>
+                  <span style={{ fontSize: 16, fontWeight: 700, color: "var(--inverse-surface-default)" }}>추천 상품</span>
                   <TextButtonDemo variant="arrow" color="baseDefault" size="small">
                     전체보기
                   </TextButtonDemo>
@@ -659,7 +659,7 @@ function DesignContent() {
           </div>
           <div>
             <PreviewBox>
-              <div style={{ padding: 20, backgroundColor: "#2563eb", borderRadius: 12, margin: 12, textAlign: "center" }}>
+              <div style={{ padding: 20, backgroundColor: "var(--content-brand-default)", borderRadius: 12, margin: 12, textAlign: "center" }}>
                 <TextButtonDemo variant="clear" color="brandDefault" size="medium">
                   가독성 낮음
                 </TextButtonDemo>
@@ -766,12 +766,12 @@ function DesignContent() {
               <tbody>
                 <tr>
                   <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-primary)" }}>Hover Background</td>
-                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>rgba(color, 0.06)</td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>var(--effect-alpha-fill-alternative)</td>
                   <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>호버 시 연한 배경 오버레이</td>
                 </tr>
                 <tr>
                   <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-primary)" }}>Pressed Background</td>
-                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>rgba(color, 0.12)</td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>var(--effect-alpha-fill-normal)</td>
                   <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>누름 시 더 진한 배경 오버레이</td>
                 </tr>
                 <tr>
@@ -818,8 +818,8 @@ function UsageRecommendationCard({ situation, desc, variant, color, examples }: 
           <span style={{
             fontSize: 11,
             padding: "2px 6px",
-            backgroundColor: "#f1f5f9",
-            color: "#475569",
+            backgroundColor: "var(--surface-base-alternative)",
+            color: "var(--content-base-secondary)",
             borderRadius: 4,
             fontWeight: 500,
           }}>
@@ -862,7 +862,7 @@ function WebContent() {
               fontSize: 13,
               fontWeight: 500,
               color: "white",
-              backgroundColor: "#24292f",
+              backgroundColor: "var(--inverse-surface-default)",
               borderRadius: 12,
               textDecoration: "none",
             }}
@@ -1046,7 +1046,7 @@ function RNContent() {
               fontSize: 13,
               fontWeight: 500,
               color: "white",
-              backgroundColor: "#24292f",
+              backgroundColor: "var(--inverse-surface-default)",
               borderRadius: 12,
               textDecoration: "none",
             }}
@@ -1215,37 +1215,37 @@ function AnatomyDiagram() {
     <PreviewBox>
       <svg width="400" height="100" viewBox="0 0 400 100">
         {/* Background */}
-        <rect x="120" y="30" width="160" height="40" fill="transparent" stroke="#e5e7eb" strokeWidth="1" strokeDasharray="4" rx="6" />
+        <rect x="120" y="30" width="160" height="40" fill="transparent" stroke="var(--border-base-default)" strokeWidth="1" strokeDasharray="4" rx="6" />
 
         {/* Text Label */}
-        <text x="200" y="55" textAnchor="middle" fontSize="16" fontWeight="500" fill="#2563eb">Text Button</text>
+        <text x="200" y="55" textAnchor="middle" fontSize="16" fontWeight="500" fill="var(--content-brand-default)">Text Button</text>
 
         {/* Arrow Icon (for arrow variant) */}
-        <path d="M275 50 L285 50 M280 45 L285 50 L280 55" stroke="#2563eb" strokeWidth="2" fill="none" />
+        <path d="M275 50 L285 50 M280 45 L285 50 L280 55" stroke="var(--content-brand-default)" strokeWidth="2" fill="none" />
 
         {/* Underline (for underline variant) */}
-        <line x1="150" y1="62" x2="250" y2="62" stroke="#2563eb" strokeWidth="1" strokeDasharray="4" opacity="0.5" />
+        <line x1="150" y1="62" x2="250" y2="62" stroke="var(--content-brand-default)" strokeWidth="1" strokeDasharray="4" opacity="0.5" />
 
         {/* Annotations */}
         {/* 1. Label */}
-        <circle cx="200" cy="12" r="10" fill="#3b82f6" />
+        <circle cx="200" cy="12" r="10" fill="var(--content-brand-default)" />
         <text x="200" y="16" textAnchor="middle" fontSize="11" fill="white" fontWeight="600">1</text>
-        <line x1="200" y1="22" x2="200" y2="35" stroke="#3b82f6" strokeWidth="1" strokeDasharray="2" />
+        <line x1="200" y1="22" x2="200" y2="35" stroke="var(--content-brand-default)" strokeWidth="1" strokeDasharray="2" />
 
         {/* 2. Trailing Icon */}
-        <circle cx="320" cy="50" r="10" fill="#3b82f6" />
+        <circle cx="320" cy="50" r="10" fill="var(--content-brand-default)" />
         <text x="320" y="54" textAnchor="middle" fontSize="11" fill="white" fontWeight="600">2</text>
-        <line x1="310" y1="50" x2="290" y2="50" stroke="#3b82f6" strokeWidth="1" strokeDasharray="2" />
+        <line x1="310" y1="50" x2="290" y2="50" stroke="var(--content-brand-default)" strokeWidth="1" strokeDasharray="2" />
 
         {/* 3. Underline */}
-        <circle cx="200" cy="88" r="10" fill="#3b82f6" />
+        <circle cx="200" cy="88" r="10" fill="var(--content-brand-default)" />
         <text x="200" y="92" textAnchor="middle" fontSize="11" fill="white" fontWeight="600">3</text>
-        <line x1="200" y1="78" x2="200" y2="66" stroke="#3b82f6" strokeWidth="1" strokeDasharray="2" />
+        <line x1="200" y1="78" x2="200" y2="66" stroke="var(--content-brand-default)" strokeWidth="1" strokeDasharray="2" />
 
         {/* 4. Touch area */}
-        <circle cx="80" cy="50" r="10" fill="#3b82f6" />
+        <circle cx="80" cy="50" r="10" fill="var(--content-brand-default)" />
         <text x="80" y="54" textAnchor="middle" fontSize="11" fill="white" fontWeight="600">4</text>
-        <line x1="90" y1="50" x2="118" y2="50" stroke="#3b82f6" strokeWidth="1" strokeDasharray="2" />
+        <line x1="90" y1="50" x2="118" y2="50" stroke="var(--content-brand-default)" strokeWidth="1" strokeDasharray="2" />
       </svg>
     </PreviewBox>
   );
@@ -1260,7 +1260,7 @@ function GuidelineItem({ type, title, description }: { type: "do" | "dont"; titl
           width: 24,
           height: 24,
           borderRadius: "50%",
-          backgroundColor: type === "do" ? "#22c55e" : "#ef4444",
+          backgroundColor: type === "do" ? "var(--status-positive-content)" : "var(--status-negative-content)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -1293,7 +1293,7 @@ function PhoneFrame({ children }: { children: React.ReactNode }) {
     <div
       style={{
         borderRadius: 24,
-        border: "2px solid #d1d5db",
+        border: "2px solid var(--border-base-default)",
         overflow: "hidden",
         backgroundColor: "white",
       }}
@@ -1306,7 +1306,7 @@ function PhoneFrame({ children }: { children: React.ReactNode }) {
         alignItems: "center",
         fontSize: 12,
         fontWeight: 500,
-        color: "#18181b",
+        color: "var(--inverse-surface-default)",
       }}>
         <span>9:41</span>
         <div style={{ display: "flex", gap: 4, alignItems: "center" }}>
@@ -1326,7 +1326,7 @@ function PhoneFrame({ children }: { children: React.ReactNode }) {
 
       {/* Home Indicator */}
       <div style={{ padding: "8px 0 12px", display: "flex", justifyContent: "center" }}>
-        <div style={{ width: 60, height: 4, backgroundColor: "#d1d5db", borderRadius: 2 }} />
+        <div style={{ width: 60, height: 4, backgroundColor: "var(--border-base-default)", borderRadius: 2 }} />
       </div>
     </div>
   );
@@ -1347,7 +1347,7 @@ function UsageCard({ type, title, description, position = "top", children }: {
       {/* Card with gray background and partial phone frame */}
       <div
         style={{
-          backgroundColor: "#f5f5f7",
+          backgroundColor: "var(--surface-base-alternative)",
           borderRadius: 16,
           padding: isBottom ? "0 24px 24px" : "24px 24px 0",
           overflow: "hidden",
@@ -1358,10 +1358,10 @@ function UsageCard({ type, title, description, position = "top", children }: {
           style={{
             backgroundColor: "white",
             borderRadius: isBottom ? "0 0 20px 20px" : "20px 20px 0 0",
-            borderLeft: "2px solid #e5e7eb",
-            borderRight: "2px solid #e5e7eb",
-            borderTop: isBottom ? "none" : "2px solid #e5e7eb",
-            borderBottom: isBottom ? "2px solid #e5e7eb" : "none",
+            borderLeft: "2px solid var(--border-base-default)",
+            borderRight: "2px solid var(--border-base-default)",
+            borderTop: isBottom ? "none" : "2px solid var(--border-base-default)",
+            borderBottom: isBottom ? "2px solid var(--border-base-default)" : "none",
             overflow: "hidden",
             marginTop: isBottom ? 0 : 20,
             marginBottom: isBottom ? 20 : 0,
@@ -1371,7 +1371,7 @@ function UsageCard({ type, title, description, position = "top", children }: {
           {/* Home indicator for bottom position */}
           {isBottom && (
             <div style={{ padding: "8px 0 12px", backgroundColor: "white", display: "flex", justifyContent: "center" }}>
-              <div style={{ width: 60, height: 4, backgroundColor: "#d1d5db", borderRadius: 2 }} />
+              <div style={{ width: 60, height: 4, backgroundColor: "var(--border-base-default)", borderRadius: 2 }} />
             </div>
           )}
         </div>
@@ -1384,7 +1384,7 @@ function UsageCard({ type, title, description, position = "top", children }: {
             width: 22,
             height: 22,
             borderRadius: "50%",
-            backgroundColor: type === "do" ? "#22c55e" : "#ef4444",
+            backgroundColor: type === "do" ? "var(--status-positive-content)" : "var(--status-negative-content)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -1417,9 +1417,9 @@ function ActionAreaWithTextButton() {
   return (
     <div
       style={{
-        borderLeft: "2px solid #d1d5db",
-        borderRight: "2px solid #d1d5db",
-        borderBottom: "2px solid #d1d5db",
+        borderLeft: "2px solid var(--border-base-default)",
+        borderRight: "2px solid var(--border-base-default)",
+        borderBottom: "2px solid var(--border-base-default)",
         borderRadius: "0 0 20px 20px",
         overflow: "hidden",
         backgroundColor: "white",
@@ -1432,7 +1432,7 @@ function ActionAreaWithTextButton() {
             style={{
               width: "100%",
               height: 48,
-              backgroundColor: "#2563eb",
+              backgroundColor: "var(--content-brand-default)",
               color: "white",
               border: "none",
               borderRadius: 12,
@@ -1451,7 +1451,7 @@ function ActionAreaWithTextButton() {
       </div>
       {/* Home indicator */}
       <div style={{ padding: "8px 0 12px", backgroundColor: "white", display: "flex", justifyContent: "center" }}>
-        <div style={{ width: 60, height: 4, backgroundColor: "#d1d5db", borderRadius: 2 }} />
+        <div style={{ width: 60, height: 4, backgroundColor: "var(--border-base-default)", borderRadius: 2 }} />
       </div>
     </div>
   );
@@ -1475,16 +1475,16 @@ function TextButtonDemo({ variant, color, size, disabled, isHovered, isPressed, 
   const forcedStyle: React.CSSProperties = {};
   if (isPressed) {
     const pressedBgMap: Record<TextButtonColor, string> = {
-      brandDefault: "rgba(37, 99, 235, 0.12)",
-      baseDefault: "rgba(55, 65, 81, 0.12)",
-      errorDefault: "rgba(220, 38, 38, 0.12)",
+      brandDefault: "var(--effect-alpha-brand-selection)",
+      baseDefault: "var(--effect-alpha-fill-normal)",
+      errorDefault: "var(--status-negative-surface)",
     };
     forcedStyle.backgroundColor = pressedBgMap[color];
   } else if (isHovered) {
     const hoverBgMap: Record<TextButtonColor, string> = {
-      brandDefault: "rgba(37, 99, 235, 0.06)",
-      baseDefault: "rgba(55, 65, 81, 0.06)",
-      errorDefault: "rgba(220, 38, 38, 0.06)",
+      brandDefault: "var(--effect-alpha-brand-selection)",
+      baseDefault: "var(--effect-alpha-fill-alternative)",
+      errorDefault: "var(--status-negative-surface)",
     };
     forcedStyle.backgroundColor = hoverBgMap[color];
   }

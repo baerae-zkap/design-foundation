@@ -156,7 +156,7 @@ ${buttons}
         style={{
           borderRadius: 20,
           overflow: "hidden",
-          backgroundColor: "#fafbfc",
+          backgroundColor: "var(--surface-base-alternative)",
         }}
       >
         <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
@@ -167,7 +167,7 @@ ${buttons}
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              backgroundColor: "#fafbfc",
+              backgroundColor: "var(--surface-base-alternative)",
             }}
           >
             <div style={{ width: "100%", maxWidth: 340 }}>
@@ -224,7 +224,7 @@ ${buttons}
           {/* Control Panel */}
           <div
             style={{
-              backgroundColor: "#fafbfc",
+              backgroundColor: "var(--surface-base-alternative)",
               display: "flex",
               flexDirection: "column",
               padding: 16,
@@ -294,7 +294,7 @@ ${buttons}
         <div
           style={{
             padding: "10px 16px",
-            backgroundColor: "#18181b",
+            backgroundColor: "var(--inverse-surface-default)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
@@ -312,8 +312,8 @@ ${buttons}
             padding: 16,
             fontSize: 13,
             lineHeight: 1.6,
-            color: "#e4e4e7",
-            backgroundColor: "#18181b",
+            color: "var(--border-secondary-default)",
+            backgroundColor: "var(--inverse-surface-default)",
             fontFamily: "'SF Mono', 'Fira Code', monospace",
             overflow: "auto",
           }}
@@ -363,7 +363,7 @@ function DesignContent() {
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>
                   <InlineCode>주요 (Main)</InlineCode>
                 </td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "#6366f1" }}>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "var(--content-brand-default)" }}>
                   buttonType=&quot;filled&quot; color=&quot;brandDefault&quot;
                 </td>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>
@@ -374,7 +374,7 @@ function DesignContent() {
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>
                   <InlineCode>대안 (Alternative)</InlineCode>
                 </td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "#6366f1" }}>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "var(--content-brand-default)" }}>
                   buttonType=&quot;filled&quot; color=&quot;baseContainer&quot;
                 </td>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>
@@ -385,7 +385,7 @@ function DesignContent() {
                 <td style={{ padding: "12px 16px" }}>
                   <InlineCode>보조 (Sub)</InlineCode>
                 </td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 12, color: "#6366f1" }}>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 12, color: "var(--content-brand-default)" }}>
                   TextButton color=&quot;baseDefault&quot;
                 </td>
                 <td style={{ padding: "12px 16px" }}>
@@ -553,19 +553,19 @@ import { ActionArea, Button, TextButton } from '@baerae-zkap/design-system/nativ
               <tbody>
                 <tr>
                   <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", fontWeight: 500 }}>중요한 결정</td>
-                  <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)" }}><code style={{ backgroundColor: "#dbeafe", padding: "2px 6px", borderRadius: 4, fontSize: 12, color: "#1d4ed8" }}>strong</code></td>
+                  <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)" }}><code style={{ backgroundColor: "var(--surface-brand-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12, color: "var(--surface-brand-defaultPressed)" }}>strong</code></td>
                   <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>Main + Alternative</td>
                   <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", color: "var(--text-tertiary)", fontSize: 13 }}>결제, 저장</td>
                 </tr>
                 <tr>
                   <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", fontWeight: 500 }}>균등한 선택</td>
-                  <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)" }}><code style={{ backgroundColor: "#dbeafe", padding: "2px 6px", borderRadius: 4, fontSize: 12, color: "#1d4ed8" }}>neutral</code></td>
+                  <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)" }}><code style={{ backgroundColor: "var(--surface-brand-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12, color: "var(--surface-brand-defaultPressed)" }}>neutral</code></td>
                   <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>Main + Alternative</td>
                   <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", color: "var(--text-tertiary)", fontSize: 13 }}>확인/취소</td>
                 </tr>
                 <tr>
                   <td style={{ padding: "10px 14px", fontWeight: 500 }}>인라인 액션</td>
-                  <td style={{ padding: "10px 14px" }}><code style={{ backgroundColor: "#dbeafe", padding: "2px 6px", borderRadius: 4, fontSize: 12, color: "#1d4ed8" }}>compact</code></td>
+                  <td style={{ padding: "10px 14px" }}><code style={{ backgroundColor: "var(--surface-brand-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12, color: "var(--surface-brand-defaultPressed)" }}>compact</code></td>
                   <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>Main + Alternative</td>
                   <td style={{ padding: "10px 14px", color: "var(--text-tertiary)", fontSize: 13 }}>수정/삭제</td>
                 </tr>
@@ -889,7 +889,7 @@ function WebContent() {
               fontSize: 13,
               fontWeight: 500,
               color: "white",
-              backgroundColor: "#24292f",
+              backgroundColor: "var(--inverse-surface-default)",
               borderRadius: 12,
               textDecoration: "none",
             }}
@@ -1017,7 +1017,7 @@ function WebContent() {
           </div>
         </PreviewBox>
         <CodeBlock code={`<View style={{ flexDirection: 'column', gap: 12, padding: 20 }}>
-  <Text style={{ fontSize: 14, color: '#6b7280', textAlign: 'center', marginBottom: 6 }}>
+  <Text style={{ fontSize: 14, color: 'var(--content-base-secondary)', textAlign: 'center', marginBottom: 6 }}>
     변경 사항을 저장하시겠습니까?
   </Text>
   <Button
@@ -1088,19 +1088,19 @@ function WebContent() {
             <tbody>
               <tr>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontWeight: 500 }}>Main (주요 액션)</td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "#6366f1" }}>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "var(--content-brand-default)" }}>
                   buttonType=&quot;filled&quot; color=&quot;brandDefault&quot; size=&quot;xLarge&quot; layout=&quot;fillWidth&quot;
                 </td>
               </tr>
               <tr>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontWeight: 500 }}>Alternative (대체 액션)</td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "#6366f1" }}>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "var(--content-brand-default)" }}>
                   buttonType=&quot;outlined&quot; color=&quot;baseContainer&quot; size=&quot;xLarge&quot; layout=&quot;fillWidth&quot;
                 </td>
               </tr>
               <tr>
                 <td style={{ padding: "12px 16px", fontWeight: 500 }}>Sub (보조 링크)</td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 12, color: "#6366f1" }}>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 12, color: "var(--content-brand-default)" }}>
                   buttonType=&quot;plain&quot; color=&quot;brandDefault&quot;
                 </td>
               </tr>
@@ -1156,17 +1156,17 @@ function WebContent() {
                 <tr>
                   <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontWeight: 500 }}>Enabled</td>
                   <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>기본 상태</td>
-                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "#6366f1" }}>default</td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "var(--content-brand-default)" }}>default</td>
                 </tr>
                 <tr>
                   <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontWeight: 500 }}>Disabled</td>
                   <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>비활성화</td>
-                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "#6366f1" }}>disabled=true</td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "var(--content-brand-default)" }}>disabled=true</td>
                 </tr>
                 <tr>
                   <td style={{ padding: "12px 16px", fontWeight: 500 }}>Loading</td>
                   <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>로딩 중</td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 12, color: "#6366f1" }}>isLoading=true</td>
+                  <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 12, color: "var(--content-brand-default)" }}>isLoading=true</td>
                 </tr>
               </tbody>
             </table>
@@ -1203,7 +1203,7 @@ function RNContent() {
               fontSize: 13,
               fontWeight: 500,
               color: "white",
-              backgroundColor: "#24292f",
+              backgroundColor: "var(--inverse-surface-default)",
               borderRadius: 12,
               textDecoration: "none",
             }}
@@ -1332,7 +1332,7 @@ import { View, Text } from 'react-native';`} />
           </div>
         </PreviewBox>
         <CodeBlock code={`<View style={{ flexDirection: 'column', gap: 12, padding: 20 }}>
-  <Text style={{ fontSize: 14, color: '#6b7280', textAlign: 'center', marginBottom: 6 }}>
+  <Text style={{ fontSize: 14, color: 'var(--content-base-secondary)', textAlign: 'center', marginBottom: 6 }}>
     변경 사항을 저장하시겠습니까?
   </Text>
   <Button
@@ -1403,19 +1403,19 @@ import { View, Text } from 'react-native';`} />
             <tbody>
               <tr>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontWeight: 500 }}>Main (주요 액션)</td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "#6366f1" }}>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "var(--content-brand-default)" }}>
                   buttonType=&quot;filled&quot; color=&quot;brandDefault&quot; size=&quot;xLarge&quot; layout=&quot;fillWidth&quot;
                 </td>
               </tr>
               <tr>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontWeight: 500 }}>Alternative (대체 액션)</td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "#6366f1" }}>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "var(--content-brand-default)" }}>
                   buttonType=&quot;outlined&quot; color=&quot;baseContainer&quot; size=&quot;xLarge&quot; layout=&quot;fillWidth&quot;
                 </td>
               </tr>
               <tr>
                 <td style={{ padding: "12px 16px", fontWeight: 500 }}>Sub (보조 링크)</td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 12, color: "#6366f1" }}>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 12, color: "var(--content-brand-default)" }}>
                   buttonType=&quot;plain&quot; color=&quot;brandDefault&quot;
                 </td>
               </tr>
@@ -1500,8 +1500,8 @@ function UsageCard({ situation, desc, variant, buttons, examples }: {
           <span style={{
             fontSize: 11,
             padding: "2px 6px",
-            backgroundColor: "#dbeafe",
-            color: "#1d4ed8",
+            backgroundColor: "var(--surface-brand-secondary)",
+            color: "var(--surface-brand-defaultPressed)",
             borderRadius: 4,
             fontWeight: 500,
           }}>
@@ -1523,7 +1523,7 @@ function UsageCard({ situation, desc, variant, buttons, examples }: {
 function AnatomyDiagram() {
   return (
     <div style={{
-      backgroundColor: "#f5f5f7",
+      backgroundColor: "var(--surface-base-alternative)",
       borderRadius: 16,
       padding: "32px 40px",
       display: "flex",
@@ -1532,49 +1532,49 @@ function AnatomyDiagram() {
     }}>
       <svg width="320" height="160" viewBox="0 0 320 160">
         {/* Screen side borders (open top) */}
-        <line x1="60" y1="0" x2="60" y2="140" stroke="#d1d5db" strokeWidth="2" />
-        <line x1="260" y1="0" x2="260" y2="140" stroke="#d1d5db" strokeWidth="2" />
+        <line x1="60" y1="0" x2="60" y2="140" stroke="var(--border-base-default)" strokeWidth="2" />
+        <line x1="260" y1="0" x2="260" y2="140" stroke="var(--border-base-default)" strokeWidth="2" />
 
         {/* Screen bottom with rounded corners */}
-        <path d="M60 140 L60 150 Q60 160 70 160 L250 160 Q260 160 260 150 L260 140" fill="none" stroke="#d1d5db" strokeWidth="2" />
+        <path d="M60 140 L60 150 Q60 160 70 160 L250 160 Q260 160 260 150 L260 140" fill="none" stroke="var(--border-base-default)" strokeWidth="2" />
 
         {/* Action Area background */}
         <rect x="61" y="0" width="198" height="140" fill="white" />
 
         {/* Caption */}
-        <text x="160" y="28" textAnchor="middle" fill="#6b7280" fontSize="11">변경 사항을 저장하시겠습니까?</text>
+        <text x="160" y="28" textAnchor="middle" fill="var(--content-base-secondary)" fontSize="11">변경 사항을 저장하시겠습니까?</text>
 
         {/* Main button */}
-        <rect x="76" y="42" width="168" height="36" rx="8" fill="#2563eb" />
+        <rect x="76" y="42" width="168" height="36" rx="8" fill="var(--content-brand-default)" />
         <text x="160" y="65" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">Main</text>
 
         {/* Alternative button */}
-        <rect x="76" y="86" width="168" height="36" rx="8" fill="#f3f4f6" />
-        <text x="160" y="109" textAnchor="middle" fill="#374151" fontSize="12" fontWeight="600">Alternative</text>
+        <rect x="76" y="86" width="168" height="36" rx="8" fill="var(--surface-base-alternative)" />
+        <text x="160" y="109" textAnchor="middle" fill="var(--content-base-default)" fontSize="12" fontWeight="600">Alternative</text>
 
         {/* Home indicator */}
-        <rect x="130" y="135" width="60" height="4" rx="2" fill="#d1d5db" />
+        <rect x="130" y="135" width="60" height="4" rx="2" fill="var(--border-base-default)" />
 
         {/* Number indicators */}
         {/* 1. Caption */}
-        <circle cx="30" cy="28" r="12" fill="#374151" />
+        <circle cx="30" cy="28" r="12" fill="var(--content-base-default)" />
         <text x="30" y="32" textAnchor="middle" fill="white" fontSize="11" fontWeight="600">1</text>
-        <line x1="42" y1="28" x2="72" y2="28" stroke="#374151" strokeWidth="1" strokeDasharray="2,2" />
+        <line x1="42" y1="28" x2="72" y2="28" stroke="var(--content-base-default)" strokeWidth="1" strokeDasharray="2,2" />
 
         {/* 2. Main Button */}
-        <circle cx="290" cy="60" r="12" fill="#374151" />
+        <circle cx="290" cy="60" r="12" fill="var(--content-base-default)" />
         <text x="290" y="64" textAnchor="middle" fill="white" fontSize="11" fontWeight="600">2</text>
-        <line x1="245" y1="60" x2="278" y2="60" stroke="#374151" strokeWidth="1" strokeDasharray="2,2" />
+        <line x1="245" y1="60" x2="278" y2="60" stroke="var(--content-base-default)" strokeWidth="1" strokeDasharray="2,2" />
 
         {/* 3. Alternative Button */}
-        <circle cx="290" cy="104" r="12" fill="#374151" />
+        <circle cx="290" cy="104" r="12" fill="var(--content-base-default)" />
         <text x="290" y="108" textAnchor="middle" fill="white" fontSize="11" fontWeight="600">3</text>
-        <line x1="245" y1="104" x2="278" y2="104" stroke="#374151" strokeWidth="1" strokeDasharray="2,2" />
+        <line x1="245" y1="104" x2="278" y2="104" stroke="var(--content-base-default)" strokeWidth="1" strokeDasharray="2,2" />
 
         {/* 4. Container */}
-        <circle cx="30" cy="90" r="12" fill="#374151" />
+        <circle cx="30" cy="90" r="12" fill="var(--content-base-default)" />
         <text x="30" y="94" textAnchor="middle" fill="white" fontSize="11" fontWeight="600">4</text>
-        <line x1="42" y1="90" x2="60" y2="90" stroke="#374151" strokeWidth="1" strokeDasharray="2,2" />
+        <line x1="42" y1="90" x2="60" y2="90" stroke="var(--content-base-default)" strokeWidth="1" strokeDasharray="2,2" />
       </svg>
     </div>
   );
@@ -1602,9 +1602,9 @@ function ActionAreaDemo({ variant, children, caption }: ActionAreaDemoProps) {
   return (
     <div
       style={{
-        borderLeft: "2px solid #d1d5db",
-        borderRight: "2px solid #d1d5db",
-        borderBottom: "2px solid #d1d5db",
+        borderLeft: "2px solid var(--border-base-default)",
+        borderRight: "2px solid var(--border-base-default)",
+        borderBottom: "2px solid var(--border-base-default)",
         borderRadius: "0 0 20px 20px",
         overflow: "hidden",
         backgroundColor: "white",
@@ -1623,7 +1623,7 @@ function ActionAreaDemo({ variant, children, caption }: ActionAreaDemoProps) {
 
       {/* Home indicator */}
       <div style={{ padding: "8px 0 12px", backgroundColor: "white", display: "flex", justifyContent: "center" }}>
-        <div style={{ width: 60, height: 4, backgroundColor: "#d1d5db", borderRadius: 2 }} />
+        <div style={{ width: 60, height: 4, backgroundColor: "var(--border-base-default)", borderRadius: 2 }} />
       </div>
     </div>
   );
