@@ -16,7 +16,7 @@
  */
 
 import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
-import { colors, palette } from '../../tokens/colors';
+import { colors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
@@ -49,18 +49,18 @@ const sizeStyles: Record<TextButtonSize, number> = {
 const colorStyles: Record<TextButtonColor, { default: string; pressed: string; pressedBg: string }> = {
   brandDefault: {
     default: colors.content.brand.default,
-    pressed: palette.blue[30],
-    pressedBg: 'rgba(0, 0, 0, 0.06)'
+    pressed: colors.surface.brand.defaultPressed,
+    pressedBg: colors.fill.alternative
   },
   baseDefault: {
     default: colors.content.base.default,
-    pressed: palette.grey[15],
-    pressedBg: 'rgba(0, 0, 0, 0.06)'
+    pressed: colors.content.base.strong,
+    pressedBg: colors.fill.alternative
   },
   errorDefault: {
     default: colors.content.error.default,
-    pressed: palette.red[30],
-    pressedBg: 'rgba(0, 0, 0, 0.06)'
+    pressed: colors.surface.error.solidPressed,
+    pressedBg: colors.fill.alternative
   },
 };
 

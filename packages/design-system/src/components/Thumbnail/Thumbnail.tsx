@@ -15,7 +15,7 @@
  */
 
 import { forwardRef, useState, type HTMLAttributes, type ReactNode } from 'react';
-import { colors, palette } from '../../tokens/colors';
+import { colors } from '../../tokens/colors';
 import { radius } from '../../tokens/radius';
 
 export type ThumbnailAspectRatio = '1:1' | '16:9' | '4:3' | '3:2' | '2:1' | '9:16' | '3:4';
@@ -117,18 +117,18 @@ export const Thumbnail = forwardRef<HTMLDivElement, ThumbnailProps>(
       width: 48,
       height: 48,
       borderRadius: '50%',
-      backgroundColor: 'rgba(0, 0, 0, 0.6)',
+      backgroundColor: colors.overlay.dim,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      color: 'white',
+      color: colors.content.base.onColor,
       pointerEvents: 'none',
     };
 
     const triangleStyle: React.CSSProperties = {
       width: 0,
       height: 0,
-      borderLeft: '12px solid white',
+      borderLeft: `12px solid ${colors.content.base.onColor}`,
       borderTop: '8px solid transparent',
       borderBottom: '8px solid transparent',
       marginLeft: 3,
@@ -144,7 +144,7 @@ export const Thumbnail = forwardRef<HTMLDivElement, ThumbnailProps>(
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: colors.surface.base.container,
-      color: palette.grey[60],
+      color: colors.content.base.neutral,
       fontSize: 14,
     };
 

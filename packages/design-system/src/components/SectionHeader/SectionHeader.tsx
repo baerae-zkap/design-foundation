@@ -14,7 +14,7 @@
  */
 
 import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
-import { colors, palette } from '../../tokens/colors';
+import { colors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { typography } from '../../tokens/typography';
 
@@ -83,7 +83,7 @@ export const SectionHeader = forwardRef<HTMLDivElement, SectionHeaderProps>(
     const titleStyle: React.CSSProperties = {
       fontSize: sizeStyle.fontSize,
       fontWeight: typography.fontWeight.semibold,
-      color: palette.grey[60],
+      color: colors.content.base.neutral,
       lineHeight: 1.4,
       textTransform: 'uppercase',
       letterSpacing: '0.02em',

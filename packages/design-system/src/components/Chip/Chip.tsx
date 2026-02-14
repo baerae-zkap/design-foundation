@@ -15,7 +15,7 @@
  */
 
 import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
-import { colors, palette } from '../../tokens/colors';
+import { colors } from '../../tokens/colors';
 import { typography } from '../../tokens/typography';
 import { usePressable } from '../../utils/usePressable';
 import { transitions } from '../../utils/styles';
@@ -62,12 +62,12 @@ const colorConfig: Record<ChipColor, {
       bg: colors.surface.brand.secondary,
       bgPressed: colors.surface.brand.secondaryPressed,
       bgSelected: colors.surface.brand.default,
-      text: palette.blue[30],
+      text: colors.content.brand.default,
       textSelected: colors.content.base.onColor,
     },
     outlined: {
       bg: 'transparent',
-      bgPressed: 'rgba(37, 99, 235, 0.08)',
+      bgPressed: colors.surface.brand.secondary,
       bgSelected: colors.surface.brand.default,
       border: colors.border.brand.default,
       text: colors.content.brand.default,
@@ -84,7 +84,7 @@ const colorConfig: Record<ChipColor, {
     },
     outlined: {
       bg: 'transparent',
-      bgPressed: 'rgba(0, 0, 0, 0.04)',
+      bgPressed: colors.fill.alternative,
       bgSelected: colors.content.base.default,
       border: colors.border.secondary.default,
       text: colors.content.base.default,
@@ -93,52 +93,52 @@ const colorConfig: Record<ChipColor, {
   },
   successDefault: {
     filled: {
-      bg: palette.green[95],
-      bgPressed: palette.green[90],
-      bgSelected: palette.green[40],
-      text: palette.green[30],
+      bg: colors.surface.success.default,
+      bgPressed: colors.surface.success.defaultPressed,
+      bgSelected: colors.surface.success.solid,
+      text: colors.content.success.strong,
       textSelected: colors.content.base.onColor,
     },
     outlined: {
       bg: 'transparent',
-      bgPressed: 'rgba(34, 197, 94, 0.08)',
-      bgSelected: palette.green[40],
+      bgPressed: colors.surface.success.default,
+      bgSelected: colors.surface.success.solid,
       border: colors.border.success.default,
-      text: palette.green[30],
+      text: colors.content.success.strong,
       textSelected: colors.content.base.onColor,
     },
   },
   errorDefault: {
     filled: {
-      bg: palette.red[95],
-      bgPressed: palette.red[90],
+      bg: colors.surface.error.default,
+      bgPressed: colors.surface.error.defaultPressed,
       bgSelected: colors.surface.error.solid,
-      text: palette.red[30],
+      text: colors.content.error.default,
       textSelected: colors.content.base.onColor,
     },
     outlined: {
       bg: 'transparent',
-      bgPressed: 'rgba(239, 68, 68, 0.08)',
+      bgPressed: colors.surface.error.default,
       bgSelected: colors.surface.error.solid,
       border: colors.border.error.default,
-      text: palette.red[30],
+      text: colors.content.error.default,
       textSelected: colors.content.base.onColor,
     },
   },
   warningDefault: {
     filled: {
-      bg: palette.yellow[95],
-      bgPressed: palette.yellow[90],
-      bgSelected: palette.yellow[40],
-      text: palette.yellow[30],
+      bg: colors.surface.warning.default,
+      bgPressed: colors.surface.warning.default,
+      bgSelected: colors.content.warning.default,
+      text: colors.content.warning.strong,
       textSelected: colors.content.base.onColor,
     },
     outlined: {
       bg: 'transparent',
-      bgPressed: 'rgba(234, 179, 8, 0.08)',
-      bgSelected: palette.yellow[40],
-      border: palette.yellow[50],
-      text: palette.yellow[30],
+      bgPressed: colors.surface.warning.default,
+      bgSelected: colors.content.warning.default,
+      border: colors.status.cautionary.border,
+      text: colors.content.warning.strong,
       textSelected: colors.content.base.onColor,
     },
   },

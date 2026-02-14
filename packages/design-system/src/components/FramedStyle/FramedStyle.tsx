@@ -94,7 +94,7 @@ export const FramedStyle = forwardRef<HTMLDivElement, FramedStyleProps>(
       cursor: isInteractive ? 'pointer' : 'default',
       transition: transitions.all,
       ...(selected && {
-        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)',
+        boxShadow: `0 2px 8px ${colors.fill.normal}`,
       }),
       ...style,
     };

@@ -19,7 +19,7 @@
  */
 
 import React, { forwardRef, type HTMLAttributes, type ReactNode, Children, isValidElement, cloneElement } from 'react';
-import { colors, palette } from '../../tokens/colors';
+import { colors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { typography } from '../../tokens/typography';
 
@@ -47,50 +47,6 @@ export interface ActionAreaProps extends Omit<HTMLAttributes<HTMLDivElement>, 'c
   backgroundColor?: string;
   /** 버튼 요소들 (Button, TextButton 컴포넌트) */
   children: ReactNode;
-}
-
-// ============================================
-// Color Utilities
-// ============================================
-
-/**
- * Convert a color to its transparent version (alpha = 0)
- * This prevents the "transparent black" issue in gradients
- * where 'transparent' is interpreted as rgba(0,0,0,0)
- */
-function toTransparent(color: string): string {
-  // Handle common color names
-  if (color === 'white' || color === '#fff' || color === '#ffffff') {
-    return 'rgba(255,255,255,0)';
-  }
-  if (color === 'black' || color === '#000' || color === '#000000') {
-    return 'rgba(0,0,0,0)';
-  }
-  // Handle hex colors
-  if (color.startsWith('#')) {
-    const hex = color.slice(1);
-    let r, g, b;
-    if (hex.length === 3) {
-      r = parseInt(hex[0] + hex[0], 16);
-      g = parseInt(hex[1] + hex[1], 16);
-      b = parseInt(hex[2] + hex[2], 16);
-    } else {
-      r = parseInt(hex.slice(0, 2), 16);
-      g = parseInt(hex.slice(2, 4), 16);
-      b = parseInt(hex.slice(4, 6), 16);
-    }
-    return `rgba(${r},${g},${b},0)`;
-  }
-  // Handle rgb/rgba
-  if (color.startsWith('rgb')) {
-    const match = color.match(/\d+/g);
-    if (match) {
-      const [r, g, b] = match;
-      return `rgba(${r},${g},${b},0)`;
-    }
-  }
-  // Fallback to transparent white
-  return 'rgba(255,255,255,0)';
 }
 
 // ============================================
@@ -206,7 +162,7 @@ export const ActionArea = forwardRef<HTMLDivElement, ActionAreaProps>(
               left: 0,
               right: 0,
               height: gradientHeight,
-              background: `linear-gradient(to bottom, ${toTransparent(backgroundColor)} 0%, ${backgroundColor} 100%)`,
+              background: `linear-gradient(to bottom, color-mix(in srgb, ${backgroundColor} 0%, transparent) 0%, ${backgroundColor} 100%)`,
               pointerEvents: 'none',
             }}
           />
@@ -219,7 +175,7 @@ export const ActionArea = forwardRef<HTMLDivElement, ActionAreaProps>(
             <p
               style={{
                 fontSize: typography.fontSize.sm,
-                color: palette.grey[60],
+                color: colors.content.base.neutral,
                 textAlign: 'center',
                 lineHeight: 1.5,
                 margin: 0,

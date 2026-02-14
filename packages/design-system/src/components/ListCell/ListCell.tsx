@@ -15,7 +15,7 @@
  */
 
 import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
-import { colors, palette } from '../../tokens/colors';
+import { colors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { typography } from '../../tokens/typography';
 import { usePressable } from '../../utils/usePressable';
@@ -112,7 +112,11 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
       gap: sizeStyle.gap,
       minHeight: sizeStyle.minHeight,
       padding: `${sizeStyle.paddingY}px ${sizeStyle.paddingX}px`,
-      backgroundColor: isHovered && isInteractive ? 'rgba(0,0,0,0.02)' : 'transparent',
+      backgroundColor: isPressed && isInteractive
+        ? colors.fill.normal
+        : isHovered && isInteractive
+          ? colors.fill.alternative
+          : 'transparent',
       cursor: isInteractive ? 'pointer' : 'default',
       opacity: disabled ? 0.5 : 1,
       borderBottom: divider ? `1px solid ${colors.border.base.default}` : 'none',

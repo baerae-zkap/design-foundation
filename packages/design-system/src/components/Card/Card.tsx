@@ -16,7 +16,7 @@
  */
 
 import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
-import { colors, palette } from '../../tokens/colors';
+import { colors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { usePressable } from '../../utils/usePressable';
@@ -54,7 +54,7 @@ const variantStyles: Record<CardVariant, {
   elevated: {
     bg: colors.surface.base.default,
     bgPressed: colors.surface.base.alternative,
-    shadow: '0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06)',
+    shadow: `0 1px 3px ${colors.fill.normal}, 0 1px 2px ${colors.fill.alternative}`,
   },
   outlined: {
     bg: colors.surface.base.default,

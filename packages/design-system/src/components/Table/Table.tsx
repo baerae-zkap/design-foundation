@@ -22,7 +22,7 @@
  */
 
 import { forwardRef, createContext, useContext, type ReactNode, type HTMLAttributes, type TdHTMLAttributes, type ThHTMLAttributes } from 'react';
-import { colors, palette } from '../../tokens/colors';
+import { colors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
@@ -193,7 +193,7 @@ export const TableHeadCell = forwardRef<HTMLTableCellElement, TableHeadCellProps
       textAlign: 'left',
       fontSize: sizeStyle.fontSize,
       fontWeight: typography.fontWeight.semibold,
-      color: palette.grey[60],
+      color: colors.content.base.neutral,
       backgroundColor: colors.surface.base.alternative,
       borderBottom: `1px solid ${colors.border.base.default}`,
       minHeight: sizeStyle.minHeight,

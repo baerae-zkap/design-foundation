@@ -11,7 +11,7 @@
  */
 
 import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
-import { colors, palette } from '../../tokens/colors';
+import { colors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
@@ -60,12 +60,12 @@ const colorConfig: Record<ContentBadgeColor, {
     },
     subtle: {
       bg: colors.surface.brand.secondary,
-      text: palette.blue[40],
+      text: colors.content.brand.default,
     },
   },
   baseDefault: {
     filled: {
-      bg: palette.grey[50],
+      bg: colors.content.base.secondary,
       text: colors.content.base.onColor,
     },
     outlined: {
@@ -90,7 +90,7 @@ const colorConfig: Record<ContentBadgeColor, {
     },
     subtle: {
       bg: colors.surface.success.default,
-      text: palette.green[30],
+      text: colors.content.success.strong,
     },
   },
   errorDefault: {
@@ -105,37 +105,37 @@ const colorConfig: Record<ContentBadgeColor, {
     },
     subtle: {
       bg: colors.surface.error.default,
-      text: palette.red[30],
+      text: colors.content.error.default,
     },
   },
   warningDefault: {
     filled: {
-      bg: palette.orange[40],
+      bg: colors.content.warning.default,
       text: colors.content.base.onColor,
     },
     outlined: {
       bg: 'transparent',
-      border: palette.orange[50],
-      text: palette.orange[40],
+      border: colors.status.cautionary.border,
+      text: colors.content.warning.default,
     },
     subtle: {
-      bg: palette.orange[95],
-      text: palette.orange[30],
+      bg: colors.status.cautionary.surface,
+      text: colors.content.warning.strong,
     },
   },
   infoDefault: {
     filled: {
-      bg: palette.cyan[40],
+      bg: colors.content.info.default,
       text: colors.content.base.onColor,
     },
     outlined: {
       bg: 'transparent',
-      border: palette.cyan[50],
-      text: palette.cyan[40],
+      border: colors.content.info.default,
+      text: colors.content.info.default,
     },
     subtle: {
-      bg: palette.cyan[95],
-      text: palette.cyan[30],
+      bg: colors.surface.info.default,
+      text: colors.content.info.strong,
     },
   },
 };

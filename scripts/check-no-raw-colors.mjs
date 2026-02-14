@@ -5,6 +5,7 @@ const repoRoot = path.resolve(process.cwd());
 const targets = [
   path.join(repoRoot, "src", "app"),
   path.join(repoRoot, "src", "components"),
+  path.join(repoRoot, "packages", "design-system", "src", "components"),
 ];
 
 const allowedFileNames = new Set([
@@ -27,6 +28,7 @@ function walk(dir) {
       continue;
     }
     if (!fileExtensions.has(path.extname(entry.name))) continue;
+    if (entry.name.endsWith(".native.tsx")) continue;
     if (allowedFileNames.has(entry.name)) continue;
 
     const content = fs.readFileSync(fullPath, "utf8");
@@ -56,4 +58,6 @@ if (findings.length > 0) {
   process.exit(1);
 }
 
-console.log("No raw color literals found in src/app and src/components.");
+console.log(
+  "No raw color literals found in src/app, src/components, and packages/design-system/src/components (excluding *.native.tsx)."
+);

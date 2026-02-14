@@ -285,7 +285,7 @@ export const SegmentedControl = forwardRef<HTMLDivElement, SegmentedControlProps
         transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1)',
         ...(variant === 'solid'
           ? {
-              boxShadow: '0 1px 3px rgba(0, 0, 0, 0.12)',
+              boxShadow: `0 1px 3px ${colors.fill.normal}`,
             }
           : {
               border: `1px solid ${colors.border.brand.default}`,

@@ -15,7 +15,7 @@
  */
 
 import { forwardRef, useState, useRef, useEffect, type HTMLAttributes } from 'react';
-import { colors, palette } from '../../tokens/colors';
+import { colors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
@@ -194,7 +194,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
       height: config.thumbSize,
       borderRadius: radius.primitive.full,
       backgroundColor: colors.surface.base.default,
-      boxShadow: '0 2px 6px rgba(0, 0, 0, 0.2)',
+      boxShadow: `0 2px 6px ${colors.fill.strong}`,
     };
 
     const tooltipStyle: React.CSSProperties = {
@@ -202,7 +202,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
       top: -(config.thumbSize + spacing.primitive[3] + 8),
       left: '50%',
       transform: 'translateX(-50%)',
-      backgroundColor: palette.grey[15] || '#1a1a1a',
+      backgroundColor: colors.inverse.surface.default,
       paddingLeft: spacing.primitive[2],
       paddingRight: spacing.primitive[2],
       paddingTop: spacing.primitive[1],
@@ -232,7 +232,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
       height: 0,
       borderLeft: '4px solid transparent',
       borderRight: '4px solid transparent',
-      borderTop: `4px solid ${palette.grey[15] || '#1a1a1a'}`,
+      borderTop: `4px solid ${colors.inverse.surface.default}`,
     };
 
     const trackLabelStyle: React.CSSProperties = {

@@ -143,7 +143,7 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(
       height: config.thumbSize,
       borderRadius: radius.primitive.full,
       backgroundColor: colors.surface.base.default,
-      boxShadow: '0 1px 3px rgba(0, 0, 0, 0.15)',
+      boxShadow: `0 1px 3px ${colors.fill.normal}`,
       transition: 'transform 200ms cubic-bezier(0.4, 0, 0.2, 1)',
       transform: `translateX(${thumbTranslateX}px)`,
       display: 'flex',

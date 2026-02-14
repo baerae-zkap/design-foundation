@@ -18,7 +18,7 @@
  */
 
 import { forwardRef, useState, useEffect, useRef, type ReactNode } from 'react';
-import { colors, palette } from '../../tokens/colors';
+import { colors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
@@ -474,7 +474,7 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
                         }}
                       >
                         {isSelected && (
-                          <svg width={10} height={10} viewBox="0 0 24 24" fill="none" stroke={palette.static.white} strokeWidth={2.5}>
+                          <svg width={10} height={10} viewBox="0 0 24 24" fill="none" stroke={colors.content.base.onColor} strokeWidth={2.5}>
                             <path d="M20 6L9 17l-5-5" />
                           </svg>
                         )}
@@ -507,7 +507,7 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
                           justifyContent: 'center',
                         }}
                       >
-                        <svg width={12} height={12} viewBox="0 0 24 24" fill="none" stroke={palette.static.white} strokeWidth={3}>
+                        <svg width={12} height={12} viewBox="0 0 24 24" fill="none" stroke={colors.content.base.onColor} strokeWidth={3}>
                           <path d="M20 6L9 17l-5-5" />
                         </svg>
                       </div>

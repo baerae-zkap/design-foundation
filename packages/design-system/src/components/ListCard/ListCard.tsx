@@ -15,7 +15,7 @@
  */
 
 import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
-import { colors, palette } from '../../tokens/colors';
+import { colors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
@@ -87,7 +87,7 @@ const sizeConfig: Record<ListCardSize, {
 const variantStyles: Record<ListCardVariant, React.CSSProperties> = {
   elevated: {
     backgroundColor: colors.surface.base.default,
-    boxShadow: '0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06)',
+    boxShadow: `0 1px 3px ${colors.fill.normal}, 0 1px 2px ${colors.fill.alternative}`,
     border: 'none',
   },
   outlined: {
@@ -135,7 +135,7 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
       if (variant === 'filled') {
         return colors.surface.base.container;
       } else {
-        return palette.grey[99];
+        return colors.surface.base.alternative;
       }
     };
 
