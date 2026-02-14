@@ -16,6 +16,57 @@ Design Foundation은 baerae-zkap 서비스에서 사용할 통합 디자인 시�
 
 ---
 
+## 최근 2일 작업 요약 (2026-02-13 ~ 2026-02-14)
+
+아래 내용은 최근 2일 동안 `main` 브랜치에 반영된 핵심 개선입니다.
+
+### 1) Color/Foundation 토큰 생성 자동화
+- **무엇을 개선했는가**
+  - `public/*.json` 기반으로 토큰 결과물을 생성하도록 스크립트 추가:
+    - `scripts/generate-colors-ts.mjs`
+    - `scripts/generate-foundation-css.mjs`
+  - `package.json`에 `tokens:colors`, `tokens:foundation`, `tokens` 파이프라인 구성.
+- **왜 했는가**
+  - 수동 관리 시 `palette/semantic/json`과 실제 사용 코드가 쉽게 드리프트(불일치)되는 문제를 제거하기 위해.
+
+### 2) Semantic 토큰 체계 확장 (Toss/Wanted 참조)
+- **무엇을 개선했는가**
+  - `public/semantic-tokens.json`에 `inverse`, `status`, `component` 계층 보강.
+  - 색상 효과 레이어(`alpha/effects`)를 문서와 사용 코드에 연결.
+- **왜 했는가**
+  - 팔레트 직접 사용을 줄이고, 목적 기반(의미 기반) 토큰으로 라이트/다크를 안정적으로 운용하기 위해.
+
+### 3) 문서 사이트의 색상 사용 방식 통일
+- **무엇을 개선했는가**
+  - Semantic/Effects 페이지를 토큰 중심 표 구조로 정리.
+  - swatch/라벨/복사 피드백 UI 정렬 문제 및 가독성 문제 수정.
+  - 토큰 카드에 팔레트 참조 정보가 명확히 드러나도록 개선.
+- **왜 했는가**
+  - “어떤 시멘틱이 어떤 팔레트를 참조하는지”를 검증 가능한 형태로 보여주기 위해.
+
+### 4) 하드코딩 컬러 제거 + 예외 정책 수립
+- **무엇을 개선했는가**
+  - `src/app`, `src/components` 내 직접 색상값(hex/rgba/hsla) 제거.
+  - 모든 실제 UI 색을 semantic/effect CSS 변수로 치환.
+  - 외부 브랜드 색(코인/구글 아이콘)은 `src/tokens/brandExternal.ts`로 분리(명시적 예외).
+- **왜 했는가**
+  - 테마 일관성, 유지보수성, 토큰 기반 개발 원칙을 강제하기 위해.
+
+### 5) 회귀 방지 검증 추가
+- **무엇을 개선했는가**
+  - `scripts/check-no-raw-colors.mjs` 추가.
+  - `prebuild`에 raw color 검사 연결(`npm run check:raw-colors`).
+- **왜 했는가**
+  - 이후 변경에서 하드코딩 색상이 다시 유입되는 문제를 CI/빌드 단계에서 조기에 차단하기 위해.
+
+### 6) 교차 검증
+- **무엇을 했는가**
+  - Claude Opus 4.6로 분류 기준(치환 대상 vs 예외 대상) 교차 검증 후 반영.
+- **왜 했는가**
+  - 예외(브랜드 고정색)와 토큰화 대상(실제 UI 색)의 경계를 명확히 하기 위해.
+
+---
+
 ## 폴더 구조
 
 ```
