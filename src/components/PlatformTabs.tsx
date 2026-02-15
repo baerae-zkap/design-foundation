@@ -59,7 +59,67 @@ export function PlatformTabs({ children, defaultPlatform = "design" }: PlatformT
       </div>
 
       {/* Tab Content */}
-      {children(activePlatform)}
+      {activePlatform === "rn" ? (
+        <RNPlaceholder />
+      ) : (
+        children(activePlatform)
+      )}
+    </div>
+  );
+}
+
+function RNPlaceholder() {
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "80px 40px",
+        textAlign: "center",
+      }}
+    >
+      <div
+        style={{
+          width: 48,
+          height: 48,
+          borderRadius: 12,
+          backgroundColor: "var(--surface-base-container)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          marginBottom: 16,
+          fontSize: 24,
+        }}
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 6v6l4 2" />
+        </svg>
+      </div>
+      <p
+        style={{
+          fontSize: 16,
+          fontWeight: 600,
+          color: "var(--text-primary)",
+          margin: "0 0 8px 0",
+        }}
+      >
+        React Native 문서 준비중
+      </p>
+      <p
+        style={{
+          fontSize: 14,
+          color: "var(--text-tertiary)",
+          margin: 0,
+          maxWidth: 320,
+          lineHeight: 1.5,
+        }}
+      >
+        React Native 컴포넌트 가이드를 준비하고 있습니다.
+        Web 탭에서 컴포넌트 사용법을 먼저 확인해주세요.
+      </p>
     </div>
   );
 }

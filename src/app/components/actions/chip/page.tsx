@@ -7,7 +7,7 @@ import { Chip } from '@baerae-zkap/design-system';
 import { Section, Subsection } from "@/components/docs/Section";
 import { PropsTable } from "@/components/docs/PropsTable";
 import { PrincipleCard, VariantCard, DoCard, DontCard } from "@/components/docs/Cards";
-import { RadioGroup, CodeTypeTab, CopyButton } from "@/components/docs/Playground";
+import { RadioGroup, CopyButton } from "@/components/docs/Playground";
 import { DoLabel, DontLabel } from "@/components/docs/Labels";
 
 // Types
@@ -130,7 +130,8 @@ export default function ChipPage() {
         Chip
       </h1>
       <p style={{ fontSize: 15, color: "var(--text-secondary)", marginBottom: 32, lineHeight: 1.6 }}>
-        입력, 속성, 액션을 나타내는 컴팩트한 인터랙티브 요소입니다. 필터 선택, 태그 입력, 보조 액션 등에 사용됩니다.
+        사용자의 선택, 필터링, 입력값을 시각적으로 나타내는 컴팩트한 인터랙티브 요소입니다.
+        짧은 텍스트로 상태를 표현하며, 선택/해제 토글이나 태그 제거 등의 인터랙션을 제공합니다.
       </p>
 
       {/* Interactive Playground */}
@@ -150,8 +151,6 @@ function ChipPlayground() {
   const [size, setSize] = useState<ChipSize>("medium");
   const [selected, setSelected] = useState(false);
   const [showClose, setShowClose] = useState(false);
-  const [codeType, setCodeType] = useState<"rn" | "web">("rn");
-
   const generateCode = () => {
     const props = [];
     if (variant !== "filled") props.push(`variant="${variant}"`);
@@ -162,23 +161,9 @@ function ChipPlayground() {
 
     const propsStr = props.length > 0 ? `\n  ${props.join("\n  ")}\n` : " ";
 
-    if (codeType === "rn") {
-      return `<Chip${propsStr.length > 1 ? propsStr : " "}onPress={() => {}}>
+    return `<Chip${propsStr.length > 1 ? propsStr : " "}onClick={() => {}}>
   태그
 </Chip>`;
-    } else {
-      return `<Chip${propsStr.length > 1 ? propsStr : " "}onClick={() => {}}>
-  태그
-</Chip>`;
-    }
-  };
-
-  const colorLabels: Record<ChipColor, string> = {
-    brandDefault: "Brand",
-    baseDefault: "Base",
-    successDefault: "Success",
-    errorDefault: "Error",
-    warningDefault: "Warning",
   };
 
   return (
@@ -233,7 +218,7 @@ function ChipPlayground() {
                 display: "flex",
                 flexDirection: "column",
                 gap: 28,
-                backgroundColor: "white",
+                backgroundColor: "var(--surface-base-default)",
                 borderRadius: 16,
               }}
             >
@@ -306,16 +291,13 @@ function ChipPlayground() {
         <div
           style={{
             padding: "10px 16px",
-            backgroundColor: "var(--inverse-surface-default)",
+            backgroundColor: "var(--docs-code-surface)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
           }}
         >
-          <div style={{ display: "flex", gap: 8 }}>
-            <CodeTypeTab active={codeType === "rn"} onClick={() => setCodeType("rn")}>React Native</CodeTypeTab>
-            <CodeTypeTab active={codeType === "web"} onClick={() => setCodeType("web")}>Web</CodeTypeTab>
-          </div>
+          <span style={{ fontSize: 13, fontWeight: 500, color: "var(--docs-code-active-text)" }}>Web</span>
           <CopyButton text={generateCode()} />
         </div>
         <pre
@@ -324,8 +306,8 @@ function ChipPlayground() {
             padding: 16,
             fontSize: 13,
             lineHeight: 1.6,
-            color: "var(--border-secondary-default)",
-            backgroundColor: "var(--inverse-surface-default)",
+            color: "var(--docs-code-text)",
+            backgroundColor: "var(--docs-code-surface)",
             fontFamily: "'SF Mono', 'Fira Code', monospace",
             overflow: "auto",
           }}
@@ -341,15 +323,39 @@ function PlatformContent({ platform }: { platform: Platform }) {
   if (platform === "design") {
     return <DesignContent />;
   }
-  if (platform === "web") {
-    return <WebContent />;
-  }
-  return <RNContent />;
+  return <WebContent />;
 }
 
 function DesignContent() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
+      {/* Overview */}
+      <Section title="Overview">
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 24, lineHeight: 1.7 }}>
+          Chip은 <strong style={{ color: "var(--text-primary)" }}>짧은 텍스트로 선택 상태, 카테고리, 속성을 나타내는 인터랙티브 요소</strong>입니다.
+          Button보다 작고 가벼우며, Badge와 달리 사용자가 직접 조작할 수 있습니다.
+          필터 선택/해제, 태그 입력/삭제 등 <strong style={{ color: "var(--text-primary)" }}>반복적이고 가역적인 선택 인터랙션</strong>에 적합합니다.
+        </p>
+
+        <Subsection title="When to use">
+          <ul style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.8, paddingLeft: 20, margin: 0 }}>
+            <li>카테고리 필터를 선택/해제할 때 (예: 상품 목록 필터링)</li>
+            <li>여러 옵션 중 하나 또는 다수를 선택할 때 (예: 관심 분야 선택)</li>
+            <li>사용자가 입력한 태그를 표시하고 삭제할 수 있을 때 (예: 검색 태그, 수신자)</li>
+            <li>상태를 간결하게 표시하면서 인터랙션이 필요할 때 (예: 거래 상태 필터)</li>
+          </ul>
+        </Subsection>
+
+        <Subsection title="When NOT to use">
+          <ul style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.8, paddingLeft: 20, margin: 0 }}>
+            <li><strong style={{ color: "var(--text-primary)" }}>주요 CTA 액션</strong>이 필요하면 → <code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>Button</code> 사용</li>
+            <li><strong style={{ color: "var(--text-primary)" }}>읽기 전용 상태 표시</strong>만 필요하면 → <code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>ContentBadge</code> 사용</li>
+            <li><strong style={{ color: "var(--text-primary)" }}>텍스트 링크 스타일</strong>의 보조 액션이면 → <code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>TextButton</code> 사용</li>
+            <li><strong style={{ color: "var(--text-primary)" }}>긴 텍스트</strong>가 들어가야 하면 → Chip 대신 다른 컴포넌트 고려</li>
+          </ul>
+        </Subsection>
+      </Section>
+
       {/* Anatomy */}
       <Section title="Anatomy">
         <div style={{
@@ -840,6 +846,43 @@ function DesignContent() {
           </div>
         </Subsection>
       </Section>
+
+      {/* Related Components */}
+      <Section title="Related Components">
+        <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+            <thead>
+              <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>컴포넌트</th>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>용도</th>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>차이점</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                <td style={{ padding: "12px 16px", fontWeight: 500 }}>Button</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>주요/보조 액션 트리거</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>Chip은 선택/필터용, Button은 액션 실행용</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                <td style={{ padding: "12px 16px", fontWeight: 500 }}>ContentBadge</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>읽기 전용 상태/라벨 표시</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>Chip은 인터랙티브, Badge는 비인터랙티브</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                <td style={{ padding: "12px 16px", fontWeight: 500 }}>TextButton</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>텍스트 링크 스타일 보조 액션</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>Chip은 선택 상태 표현, TextButton은 네비게이션/액션</td>
+              </tr>
+              <tr>
+                <td style={{ padding: "12px 16px", fontWeight: 500 }}>IconButton</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>아이콘만으로 액션 표현</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>Chip은 텍스트 기반, IconButton은 아이콘 전용</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </Section>
     </div>
   );
 }
@@ -963,125 +1006,6 @@ const remove = (tag: string) => {
   );
 }
 
-function RNContent() {
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
-      {/* Source Code */}
-      <Section title="Source Code">
-        <div style={{ padding: 16, backgroundColor: "var(--bg-secondary)", borderRadius: 12, marginBottom: 24, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <div>
-            <p style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", margin: 0 }}>Chip Component</p>
-            <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: "4px 0 0 0" }}>실제 컴포넌트 소스 코드를 GitHub에서 확인하세요.</p>
-          </div>
-          <a
-            href="https://github.com/baerae-zkap/design-foundation/blob/main/packages/design-system/src/native/Chip.tsx"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 6,
-              padding: "8px 16px",
-              fontSize: 13,
-              fontWeight: 500,
-              color: "white",
-              backgroundColor: "var(--inverse-surface-default)",
-              borderRadius: 12,
-              textDecoration: "none",
-            }}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-            </svg>
-            View on GitHub
-          </a>
-        </div>
-      </Section>
-
-      {/* Import */}
-      <Section title="Import">
-        <CodeBlock code={`import { Chip } from '@baerae-zkap/design-system/native';`} />
-      </Section>
-
-      {/* Basic Usage */}
-      <Section title="Basic Usage">
-        <PreviewBox>
-          <ChipDemo>기본 칩</ChipDemo>
-        </PreviewBox>
-        <CodeBlock code={`<Chip onPress={() => {}}>기본 칩</Chip>`} />
-      </Section>
-
-      {/* Filter Example */}
-      <Section title="Filter Example">
-        <PreviewBox>
-          <FilterChipDemo />
-        </PreviewBox>
-        <CodeBlock code={`const [selected, setSelected] = useState(['전자제품']);
-
-const toggle = (filter: string) => {
-  setSelected(prev =>
-    prev.includes(filter)
-      ? prev.filter(f => f !== filter)
-      : [...prev, filter]
-  );
-};
-
-<View style={{ flexDirection: 'row', gap: 8 }}>
-  {['전자제품', '의류', '식품'].map(filter => (
-    <Chip
-      key={filter}
-      color="brandDefault"
-      selected={selected.includes(filter)}
-      onPress={() => toggle(filter)}
-    >
-      {filter}
-    </Chip>
-  ))}
-</View>`} />
-      </Section>
-
-      {/* Input Example */}
-      <Section title="Input Example">
-        <PreviewBox>
-          <InputChipDemo />
-        </PreviewBox>
-        <CodeBlock code={`const [tags, setTags] = useState(['React', 'TypeScript']);
-
-const remove = (tag: string) => {
-  setTags(prev => prev.filter(t => t !== tag));
-};
-
-<View style={{ flexDirection: 'row', gap: 8, flexWrap: 'wrap' }}>
-  {tags.map(tag => (
-    <Chip
-      key={tag}
-      onClose={() => remove(tag)}
-    >
-      {tag}
-    </Chip>
-  ))}
-</View>`} />
-      </Section>
-
-      {/* API Reference */}
-      <Section title="API Reference">
-        <PropsTable
-          props={[
-            { name: "variant", type: '"filled" | "outlined"', required: false, defaultVal: '"filled"', description: "스타일 변형" },
-            { name: "color", type: '"brandDefault" | "baseDefault" | "successDefault" | "errorDefault" | "warningDefault"', required: false, defaultVal: '"baseDefault"', description: "색상 테마" },
-            { name: "size", type: '"small" | "medium" | "large"', required: false, defaultVal: '"medium"', description: "크기" },
-            { name: "selected", type: "boolean", required: false, defaultVal: "false", description: "선택 상태" },
-            { name: "disabled", type: "boolean", required: false, defaultVal: "false", description: "비활성화 상태" },
-            { name: "leftIcon", type: "ReactNode", required: false, description: "좌측 아이콘" },
-            { name: "onClose", type: "() => void", required: false, description: "닫기 버튼 핸들러" },
-            { name: "onPress", type: "(event) => void", required: false, description: "탭 핸들러" },
-          ]}
-        />
-      </Section>
-    </div>
-  );
-}
-
 // ==================== Demo Components ====================
 
 interface ChipDemoProps {
@@ -1134,7 +1058,7 @@ function FilterChipDemo() {
       {filters.map(filter => (
         <ChipDemo
           key={filter}
-              color="brandDefault"
+          color="brandDefault"
           selected={selected.includes(filter)}
         >
           {filter}
@@ -1156,7 +1080,7 @@ function InputChipDemo() {
       {tags.map(tag => (
         <ChipDemo
           key={tag}
-              onClose={() => remove(tag)}
+          onClose={() => remove(tag)}
         >
           {tag}
         </ChipDemo>
@@ -1182,7 +1106,7 @@ function UsageCard({ situation, desc, variant = "filled", color, chipLabel, sele
       gridTemplateColumns: "1fr auto",
       gap: 16,
       padding: 16,
-      backgroundColor: "white",
+      backgroundColor: "var(--surface-base-default)",
       borderRadius: 12,
       border: "1px solid var(--divider)",
       alignItems: "center",
