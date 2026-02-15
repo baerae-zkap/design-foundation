@@ -15,9 +15,10 @@
  */
 
 import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
-import { colors } from '../../tokens/colors';
+import { cssVarColors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { typography } from '../../tokens/typography';
+import { opacity } from '../../tokens/general';
 import { usePressable } from '../../utils/usePressable';
 import { transitions } from '../../utils/styles';
 
@@ -52,7 +53,7 @@ const sizeConfig: Record<ListCellSize, {
   gap: number;
 }> = {
   small: {
-    minHeight: 44,
+    minHeight: spacing.component.listCell.minHeight.sm,
     paddingY: spacing.primitive[2],
     paddingX: spacing.primitive[4],
     titleSize: typography.fontSize.sm,
@@ -60,7 +61,7 @@ const sizeConfig: Record<ListCellSize, {
     gap: spacing.primitive[3],
   },
   medium: {
-    minHeight: 56,
+    minHeight: spacing.component.listCell.minHeight.md,
     paddingY: spacing.primitive[3],
     paddingX: spacing.primitive[4],
     titleSize: typography.fontSize.md,
@@ -68,7 +69,7 @@ const sizeConfig: Record<ListCellSize, {
     gap: spacing.primitive[3],
   },
   large: {
-    minHeight: 72,
+    minHeight: spacing.component.listCell.minHeight.lg,
     paddingY: spacing.primitive[4],
     paddingX: spacing.primitive[4],
     titleSize: typography.fontSize.md,
@@ -113,13 +114,13 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
       minHeight: sizeStyle.minHeight,
       padding: `${sizeStyle.paddingY}px ${sizeStyle.paddingX}px`,
       backgroundColor: isPressed && isInteractive
-        ? colors.fill.normal
+        ? cssVarColors.fill.normal
         : isHovered && isInteractive
-          ? colors.fill.alternative
+          ? cssVarColors.fill.alternative
           : 'transparent',
       cursor: isInteractive ? 'pointer' : 'default',
-      opacity: disabled ? 0.5 : 1,
-      borderBottom: divider ? `1px solid ${colors.border.base.default}` : 'none',
+      opacity: disabled ? opacity.disabled : 1,
+      borderBottom: divider ? `1px solid ${cssVarColors.border.base.default}` : 'none',
       transition: transitions.background,
       ...style,
     };
@@ -135,7 +136,7 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
     const titleStyle: React.CSSProperties = {
       fontSize: sizeStyle.titleSize,
       fontWeight: typography.fontWeight.medium,
-      color: colors.content.base.default,
+      color: cssVarColors.content.base.default,
       lineHeight: 1.4,
       overflow: 'hidden',
       textOverflow: 'ellipsis',
@@ -145,7 +146,7 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
     const subtitleStyle: React.CSSProperties = {
       fontSize: sizeStyle.subtitleSize,
       fontWeight: typography.fontWeight.regular,
-      color: colors.content.base.secondary,
+      color: cssVarColors.content.base.secondary,
       lineHeight: 1.4,
       overflow: 'hidden',
       textOverflow: 'ellipsis',
@@ -189,7 +190,7 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
 
         {/* Trailing */}
         {trailing && (
-          <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center', color: colors.content.disabled.default }}>
+          <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center', color: cssVarColors.content.base.neutral }}>
             {trailing}
           </div>
         )}

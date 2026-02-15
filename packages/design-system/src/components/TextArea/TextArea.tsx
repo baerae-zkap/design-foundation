@@ -16,11 +16,12 @@
  */
 
 import { forwardRef, useState, type TextareaHTMLAttributes, type ReactNode, type ChangeEvent } from 'react';
-import { colors } from '../../tokens/colors';
+import { cssVarColors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
 import { transitions } from '../../utils/styles';
+import { opacity } from '../../tokens/general';
 
 export type TextAreaResize = 'normal' | 'limited' | 'fixed';
 
@@ -110,15 +111,15 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     };
 
     const getBorderColor = () => {
-      if (disabled) return colors.border.disabled.default;
-      if (error) return colors.border.error.default;
-      if (isFocused) return colors.border.brand.default;
-      return colors.border.base.default;
+      if (disabled) return cssVarColors.border.disabled.default;
+      if (error) return cssVarColors.border.error.default;
+      if (isFocused) return cssVarColors.border.brand.default;
+      return cssVarColors.border.base.default;
     };
 
     const getBackgroundColor = () => {
-      if (disabled || readOnly) return colors.surface.base.alternative;
-      return colors.surface.base.default;
+      if (disabled || readOnly) return cssVarColors.surface.base.alternative;
+      return cssVarColors.surface.base.default;
     };
 
     // Calculate heights based on resize mode
@@ -161,12 +162,12 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       fontSize: typography.fontSize.sm,
       fontWeight: typography.fontWeight.medium,
       fontFamily: typography.fontFamily.base,
-      color: colors.content.base.default,
+      color: cssVarColors.content.base.default,
       marginBottom: spacing.component.input.labelGap,
     };
 
     const requiredStyle: React.CSSProperties = {
-      color: colors.content.error.default,
+      color: cssVarColors.content.error.default,
       marginLeft: spacing.primitive[1],
     };
 
@@ -184,7 +185,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     const textAreaStyle: React.CSSProperties = {
       fontSize: typography.fontSize.sm,
       fontFamily: typography.fontFamily.base,
-      color: disabled ? colors.content.disabled.default : colors.content.base.default,
+      color: disabled ? cssVarColors.content.disabled.default : cssVarColors.content.base.default,
       border: 'none',
       outline: 'none',
       background: 'transparent',
@@ -192,13 +193,13 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       width: '100%',
       minHeight: '100%',
       resize: cssResize,
-      opacity: disabled ? 0.38 : 1,
+      opacity: disabled ? opacity.disabled : 1,
     };
 
     const descriptionStyle: React.CSSProperties = {
       fontSize: typography.fontSize.xs,
       fontFamily: typography.fontFamily.base,
-      color: error ? colors.content.error.default : colors.content.base.secondary,
+      color: error ? cssVarColors.content.error.default : cssVarColors.content.base.secondary,
       marginTop: spacing.component.input.helperGap,
     };
 
@@ -213,7 +214,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     const countStyle: React.CSSProperties = {
       fontSize: typography.fontSize.xs,
       fontFamily: typography.fontFamily.base,
-      color: colors.content.base.secondary,
+      color: cssVarColors.content.base.secondary,
     };
 
     const displayDescription = error ? errorMessage : effectiveDescription;

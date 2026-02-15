@@ -15,8 +15,10 @@
  */
 
 import { forwardRef, useState, type HTMLAttributes, type ReactNode } from 'react';
-import { colors } from '../../tokens/colors';
-import { radius } from '../../tokens/radius';
+import { cssVarColors } from '../../tokens/colors';
+import { radius as radiusTokens } from '../../tokens/radius';
+import { spacing } from '../../tokens/spacing';
+import { typography } from '../../tokens/typography';
 
 export type ThumbnailAspectRatio = '1:1' | '16:9' | '4:3' | '3:2' | '2:1' | '9:16' | '3:4';
 
@@ -77,8 +79,8 @@ export const Thumbnail = forwardRef<HTMLDivElement, ThumbnailProps>(
       position: 'relative',
       width: typeof size === 'number' ? `${size}px` : size || '100%',
       overflow: 'hidden',
-      borderRadius: radius ? 12 : 0,
-      border: border ? `1px solid ${colors.border.base.default}` : 'none',
+      borderRadius: radius ? radiusTokens.primitive.md : 0,
+      border: border ? `1px solid ${cssVarColors.border.base.default}` : 'none',
       cursor: onClick ? 'pointer' : 'default',
       ...style,
     };
@@ -114,21 +116,21 @@ export const Thumbnail = forwardRef<HTMLDivElement, ThumbnailProps>(
       top: '50%',
       left: '50%',
       transform: 'translate(-50%, -50%)',
-      width: 48,
-      height: 48,
+      width: spacing.component.thumbnail.playIconSize,
+      height: spacing.component.thumbnail.playIconSize,
       borderRadius: '50%',
-      backgroundColor: colors.overlay.dim,
+      backgroundColor: cssVarColors.overlay.dim,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      color: colors.content.base.onColor,
+      color: cssVarColors.content.base.onColor,
       pointerEvents: 'none',
     };
 
     const triangleStyle: React.CSSProperties = {
       width: 0,
       height: 0,
-      borderLeft: `12px solid ${colors.content.base.onColor}`,
+      borderLeft: `12px solid ${cssVarColors.content.base.onColor}`,
       borderTop: '8px solid transparent',
       borderBottom: '8px solid transparent',
       marginLeft: 3,
@@ -143,9 +145,9 @@ export const Thumbnail = forwardRef<HTMLDivElement, ThumbnailProps>(
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: colors.surface.base.container,
-      color: colors.content.base.neutral,
-      fontSize: 14,
+      backgroundColor: cssVarColors.surface.base.container,
+      color: cssVarColors.content.base.neutral,
+      fontSize: typography.fontSize.sm,
     };
 
     return (

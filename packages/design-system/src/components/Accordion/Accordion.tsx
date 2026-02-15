@@ -11,11 +11,12 @@
  */
 
 import { forwardRef, useState, useEffect, useRef, type HTMLAttributes, type ReactNode } from 'react';
-import { colors, palette } from '../../tokens/colors';
+import { cssVarColors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
 import { transitions } from '../../utils/styles';
+import { opacity } from '../../tokens/general';
 
 export type AccordionSize = 'medium' | 'large';
 
@@ -37,8 +38,8 @@ export interface AccordionProps extends Omit<HTMLAttributes<HTMLDivElement>, 'ti
 }
 
 const sizeStyles: Record<AccordionSize, { height: number; iconSize: number }> = {
-  medium: { height: 48, iconSize: 16 },
-  large: { height: 56, iconSize: 16 },
+  medium: { height: spacing.component.accordion.height.md, iconSize: spacing.component.accordion.iconSize },
+  large: { height: spacing.component.accordion.height.lg, iconSize: spacing.component.accordion.iconSize },
 };
 
 export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
@@ -83,8 +84,8 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
 
     const containerStyle: React.CSSProperties = {
       borderRadius: radius.component.card.sm,
-      border: `1px solid ${colors.border.base.default}`,
-      backgroundColor: colors.surface.base.default,
+      border: `1px solid ${cssVarColors.border.base.default}`,
+      backgroundColor: cssVarColors.surface.base.default,
       overflow: 'hidden',
       ...style,
     };
@@ -97,15 +98,15 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
       alignItems: 'center',
       justifyContent: 'space-between',
       cursor: disabled ? 'not-allowed' : 'pointer',
-      backgroundColor: expanded ? colors.surface.elevated.alternative : colors.surface.base.default,
+      backgroundColor: expanded ? cssVarColors.surface.elevated.alternative : cssVarColors.surface.base.default,
       transition: transitions.background,
-      opacity: disabled ? 0.5 : 1,
+      opacity: disabled ? opacity.disabled : 1,
     };
 
     const titleStyle: React.CSSProperties = {
       fontSize: typography.fontSize.md,
       fontWeight: typography.fontWeight.semibold,
-      color: colors.content.base.default,
+      color: cssVarColors.content.base.default,
       margin: 0,
       flex: 1,
     };
@@ -115,7 +116,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
       height: sizeStyle.iconSize,
       transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)',
       transition: transitions.all,
-      color: colors.content.base.secondary,
+      color: cssVarColors.content.base.secondary,
     };
 
     const contentWrapperStyle: React.CSSProperties = {

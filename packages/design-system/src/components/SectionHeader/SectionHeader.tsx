@@ -14,7 +14,7 @@
  */
 
 import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
-import { colors } from '../../tokens/colors';
+import { cssVarColors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { typography } from '../../tokens/typography';
 
@@ -37,7 +37,7 @@ const sizeConfig: Record<SectionHeaderSize, {
   paddingBottom: number;
 }> = {
   small: {
-    fontSize: 13,
+    fontSize: typography.fontSize.compact,
     paddingX: spacing.primitive[4],
     paddingTop: spacing.primitive[4],
     paddingBottom: spacing.primitive[2],
@@ -83,7 +83,7 @@ export const SectionHeader = forwardRef<HTMLDivElement, SectionHeaderProps>(
     const titleStyle: React.CSSProperties = {
       fontSize: sizeStyle.fontSize,
       fontWeight: typography.fontWeight.semibold,
-      color: colors.content.base.neutral,
+      color: cssVarColors.content.base.neutral,
       lineHeight: 1.4,
       textTransform: 'uppercase',
       letterSpacing: '0.02em',

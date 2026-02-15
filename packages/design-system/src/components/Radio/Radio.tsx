@@ -13,10 +13,11 @@
  */
 
 import React, { forwardRef, type InputHTMLAttributes, type ChangeEvent } from 'react';
-import { colors } from '../../tokens/colors';
+import { cssVarColors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
+import { opacity } from '../../tokens/general';
 import { transitions } from '../../utils/styles';
 
 export type RadioSize = 'small' | 'medium';
@@ -85,7 +86,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
       alignItems: 'center',
       gap: tight ? sizeStyle.tightGap : sizeStyle.gap,
       minHeight: 44, // Minimum touch target
-      opacity: disabled ? 0.4 : 1,
+      opacity: disabled ? opacity.disabled : 1,
       cursor: disabled ? 'not-allowed' : 'pointer',
       ...style,
     };
@@ -113,11 +114,11 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
       border: `2px solid ${
         disabled
           ? selected
-            ? colors.content.disabled.default
-            : colors.border.disabled.default
+            ? cssVarColors.content.disabled.default
+            : cssVarColors.border.disabled.default
           : selected
-          ? colors.content.brand.default
-          : colors.border.solid.alternative
+          ? cssVarColors.content.brand.default
+          : cssVarColors.border.solid.alternative
       }`,
       backgroundColor: 'transparent',
       display: 'flex',
@@ -131,7 +132,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
       width: sizeStyle.inner,
       height: sizeStyle.inner,
       borderRadius: radius.primitive.full, // 9999
-      backgroundColor: disabled ? colors.content.disabled.default : colors.content.brand.default,
+      backgroundColor: disabled ? cssVarColors.content.disabled.default : cssVarColors.content.brand.default,
       transform: selected ? 'scale(1)' : 'scale(0)',
       transition: 'transform 150ms ease',
     };
@@ -140,7 +141,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
       fontSize: sizeStyle.fontSize,
       fontWeight: typography.fontWeight.regular,
       fontFamily: typography.fontFamily.base,
-      color: disabled ? colors.content.disabled.default : colors.content.base.default,
+      color: disabled ? cssVarColors.content.disabled.default : cssVarColors.content.base.default,
       lineHeight: sizeStyle.fontSize * 1.5,
       userSelect: 'none',
     };

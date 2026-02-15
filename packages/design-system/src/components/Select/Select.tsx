@@ -18,8 +18,8 @@
  */
 
 import { forwardRef, useState, useEffect, useRef, type ReactNode } from 'react';
-import { colors } from '../../tokens/colors';
-import { shadow } from '../../tokens/shadow';
+import { cssVarColors } from '../../tokens/colors';
+import { cssVarShadow } from '../../tokens/shadow';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
@@ -114,7 +114,7 @@ const Chip: React.FC<{
         paddingLeft: chipPaddingX,
         paddingRight: chipPaddingX,
         borderRadius: radius.component.chip.default,
-        backgroundColor: colors.surface.base.alternative,
+        backgroundColor: cssVarColors.surface.base.alternative,
         gap: spacing.primitive[1],
       }}
     >
@@ -122,7 +122,7 @@ const Chip: React.FC<{
         style={{
           fontSize: chipFontSize,
           fontFamily: typography.fontFamily.base,
-          color: colors.content.base.default,
+          color: cssVarColors.content.base.default,
           whiteSpace: 'nowrap',
         }}
       >
@@ -142,7 +142,7 @@ const Chip: React.FC<{
             border: 'none',
             background: 'none',
             cursor: 'pointer',
-            color: colors.content.base.secondary,
+            color: cssVarColors.content.base.secondary,
           }}
           aria-label={`Remove ${label}`}
         >
@@ -209,15 +209,15 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
     }, [isOpen]);
 
     const getBorderColor = () => {
-      if (disabled) return colors.border.disabled.default;
-      if (error) return colors.border.error.default;
-      if (isOpen) return colors.border.brand.default;
-      return colors.border.solid.alternative;
+      if (disabled) return cssVarColors.border.disabled.default;
+      if (error) return cssVarColors.border.error.default;
+      if (isOpen) return cssVarColors.border.brand.default;
+      return cssVarColors.border.solid.alternative;
     };
 
     const getBackgroundColor = () => {
-      if (disabled) return colors.surface.base.alternative;
-      return colors.surface.base.default;
+      if (disabled) return cssVarColors.surface.base.alternative;
+      return cssVarColors.surface.base.default;
     };
 
     const handleOpen = () => {
@@ -260,8 +260,8 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
               fontSize: sizeStyle.fontSize,
               fontFamily: typography.fontFamily.base,
               color: hasSelection
-                ? colors.content.base.default
-                : colors.content.base.placeholder,
+                ? cssVarColors.content.base.default
+                : cssVarColors.content.base.placeholder,
               flex: 1,
               whiteSpace: 'nowrap',
               overflow: 'hidden',
@@ -304,7 +304,7 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
           style={{
             fontSize: sizeStyle.fontSize,
             fontFamily: typography.fontFamily.base,
-            color: colors.content.base.placeholder,
+            color: cssVarColors.content.base.placeholder,
             flex: 1,
           }}
         >
@@ -339,7 +339,7 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
                 fontSize: typography.fontSize.sm,
                 fontWeight: typography.fontWeight.medium,
                 fontFamily: typography.fontFamily.base,
-                color: colors.content.base.default,
+                color: cssVarColors.content.base.default,
               }}
             >
               {label}
@@ -350,7 +350,7 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
                   fontSize: typography.fontSize.sm,
                   fontWeight: typography.fontWeight.medium,
                   fontFamily: typography.fontFamily.base,
-                  color: colors.content.error.default,
+                  color: cssVarColors.content.error.default,
                   marginLeft: 2,
                 }}
               >
@@ -378,7 +378,7 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
             height={sizeStyle.iconSize}
             viewBox="0 0 24 24"
             fill="none"
-            stroke={disabled ? colors.content.disabled.default : colors.content.base.secondary}
+            stroke={disabled ? cssVarColors.content.disabled.default : cssVarColors.content.base.secondary}
             strokeWidth={2}
           >
             <path d="m6 9 6 6 6-6" />
@@ -391,7 +391,7 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
             style={{
               fontSize: typography.fontSize.xs,
               fontFamily: typography.fontFamily.base,
-              color: colors.content.base.secondary,
+              color: cssVarColors.content.base.secondary,
               marginTop: spacing.component.input.helperGap,
             }}
           >
@@ -405,7 +405,7 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
             style={{
               fontSize: typography.fontSize.xs,
               fontFamily: typography.fontFamily.base,
-              color: colors.content.error.default,
+              color: cssVarColors.content.error.default,
               marginTop: spacing.component.input.helperGap,
             }}
           >
@@ -422,9 +422,9 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
               left: 0,
               right: 0,
               marginTop: spacing.primitive[1],
-              backgroundColor: colors.surface.base.default,
+              backgroundColor: cssVarColors.surface.base.default,
               borderRadius: radius.component.card.sm,
-              boxShadow: shadow.semantic.dropdown.default,
+              boxShadow: cssVarShadow.semantic.dropdown.default,
               maxHeight: 400,
               overflowY: 'auto',
               zIndex: 1000,
@@ -446,12 +446,12 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
                       paddingRight: spacing.semantic.inset.sm,
                       paddingTop: spacing.semantic.inset.sm,
                       paddingBottom: spacing.semantic.inset.sm,
-                      backgroundColor: isSelected ? colors.surface.brand.secondary : 'transparent',
+                      backgroundColor: isSelected ? cssVarColors.surface.brand.secondary : 'transparent',
                       cursor: isDisabled ? 'not-allowed' : 'pointer',
                     }}
                     onMouseEnter={(e) => {
                       if (!isDisabled && !isSelected) {
-                        e.currentTarget.style.backgroundColor = colors.surface.base.alternative;
+                        e.currentTarget.style.backgroundColor = cssVarColors.surface.base.alternative;
                       }
                     }}
                     onMouseLeave={(e) => {
@@ -466,8 +466,8 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
                           width: 18,
                           height: 18,
                           borderRadius: radius.primitive.xs,
-                          border: isSelected ? 'none' : `1.5px solid ${colors.border.solid.alternative}`,
-                          backgroundColor: isSelected ? colors.surface.brand.default : 'transparent',
+                          border: isSelected ? 'none' : `1.5px solid ${cssVarColors.border.solid.alternative}`,
+                          backgroundColor: isSelected ? cssVarColors.surface.brand.default : 'transparent',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
@@ -475,7 +475,7 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
                         }}
                       >
                         {isSelected && (
-                          <svg width={10} height={10} viewBox="0 0 24 24" fill="none" stroke={colors.content.base.onColor} strokeWidth={2.5}>
+                          <svg width={10} height={10} viewBox="0 0 24 24" fill="none" stroke={cssVarColors.content.base.onColor} strokeWidth={2.5}>
                             <path d="M20 6L9 17l-5-5" />
                           </svg>
                         )}
@@ -487,10 +487,10 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
                         fontSize: typography.fontSize.sm,
                         fontFamily: typography.fontFamily.base,
                         color: isDisabled
-                          ? colors.content.disabled.default
+                          ? cssVarColors.content.disabled.default
                           : isSelected
-                          ? colors.content.brand.default
-                          : colors.content.base.default,
+                          ? cssVarColors.content.brand.default
+                          : cssVarColors.content.base.default,
                         fontWeight: isSelected ? typography.fontWeight.semibold : typography.fontWeight.regular,
                       }}
                     >
@@ -502,13 +502,13 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
                           width: 16,
                           height: 16,
                           borderRadius: radius.primitive.full,
-                          backgroundColor: colors.surface.brand.default,
+                          backgroundColor: cssVarColors.surface.brand.default,
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
                         }}
                       >
-                        <svg width={12} height={12} viewBox="0 0 24 24" fill="none" stroke={colors.content.base.onColor} strokeWidth={3}>
+                        <svg width={12} height={12} viewBox="0 0 24 24" fill="none" stroke={cssVarColors.content.base.onColor} strokeWidth={3}>
                           <path d="M20 6L9 17l-5-5" />
                         </svg>
                       </div>
@@ -518,7 +518,7 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
                     <div
                       style={{
                         height: 1,
-                        backgroundColor: colors.border.solid.alternative,
+                        backgroundColor: cssVarColors.border.solid.alternative,
                       }}
                     />
                   )}

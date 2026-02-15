@@ -11,7 +11,7 @@
  */
 
 import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
-import { colors } from '../../tokens/colors';
+import { cssVarColors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
@@ -37,9 +37,9 @@ export interface ContentBadgeProps extends HTMLAttributes<HTMLSpanElement> {
 
 // Size configurations
 const sizeConfig: Record<ContentBadgeSize, { height: number; fontSize: number; paddingX: number; dotSize: number; iconSize: number }> = {
-  small: { height: 18, fontSize: typography.fontSize.xs, paddingX: 6, dotSize: 4, iconSize: 10 },
-  medium: { height: 22, fontSize: typography.fontSize.xs, paddingX: spacing.primitive[2], dotSize: 6, iconSize: 12 },
-  large: { height: 26, fontSize: typography.fontSize.sm, paddingX: 10, dotSize: 6, iconSize: 14 },
+  small: { height: spacing.component.badge.height.sm, fontSize: typography.fontSize.xs, paddingX: spacing.component.badge.paddingX.sm, dotSize: spacing.component.badge.dotSize.sm, iconSize: spacing.component.badge.iconSize.sm },
+  medium: { height: spacing.component.badge.height.md, fontSize: typography.fontSize.xs, paddingX: spacing.component.badge.paddingX.md, dotSize: spacing.component.badge.dotSize.md, iconSize: spacing.component.badge.iconSize.md },
+  large: { height: spacing.component.badge.height.lg, fontSize: typography.fontSize.sm, paddingX: spacing.component.badge.paddingX.lg, dotSize: spacing.component.badge.dotSize.lg, iconSize: spacing.component.badge.iconSize.lg },
 };
 
 // Color configurations
@@ -50,92 +50,92 @@ const colorConfig: Record<ContentBadgeColor, {
 }> = {
   brandDefault: {
     filled: {
-      bg: colors.surface.brand.default,
-      text: colors.content.base.onColor,
+      bg: cssVarColors.surface.brand.default,
+      text: cssVarColors.content.base.onColor,
     },
     outlined: {
       bg: 'transparent',
-      border: colors.border.brand.default,
-      text: colors.content.brand.default,
+      border: cssVarColors.border.brand.default,
+      text: cssVarColors.content.brand.default,
     },
     subtle: {
-      bg: colors.surface.brand.secondary,
-      text: colors.content.brand.default,
+      bg: cssVarColors.surface.brand.secondary,
+      text: cssVarColors.content.brand.default,
     },
   },
   baseDefault: {
     filled: {
-      bg: colors.content.base.secondary,
-      text: colors.content.base.onColor,
+      bg: cssVarColors.content.base.secondary,
+      text: cssVarColors.content.base.onColor,
     },
     outlined: {
       bg: 'transparent',
-      border: colors.border.secondary.default,
-      text: colors.content.base.secondary,
+      border: cssVarColors.border.secondary.default,
+      text: cssVarColors.content.base.secondary,
     },
     subtle: {
-      bg: colors.surface.base.container,
-      text: colors.content.base.default,
+      bg: cssVarColors.surface.base.container,
+      text: cssVarColors.content.base.default,
     },
   },
   successDefault: {
     filled: {
-      bg: colors.surface.success.solid,
-      text: colors.content.base.onColor,
+      bg: cssVarColors.surface.success.solid,
+      text: cssVarColors.content.base.onColor,
     },
     outlined: {
       bg: 'transparent',
-      border: colors.border.success.default,
-      text: colors.content.success.default,
+      border: cssVarColors.border.success.default,
+      text: cssVarColors.content.success.default,
     },
     subtle: {
-      bg: colors.surface.success.default,
-      text: colors.content.success.strong,
+      bg: cssVarColors.surface.success.default,
+      text: cssVarColors.content.success.strong,
     },
   },
   errorDefault: {
     filled: {
-      bg: colors.surface.error.solid,
-      text: colors.content.base.onColor,
+      bg: cssVarColors.surface.error.solid,
+      text: cssVarColors.content.base.onColor,
     },
     outlined: {
       bg: 'transparent',
-      border: colors.border.error.default,
-      text: colors.content.error.default,
+      border: cssVarColors.border.error.default,
+      text: cssVarColors.content.error.default,
     },
     subtle: {
-      bg: colors.surface.error.default,
-      text: colors.content.error.default,
+      bg: cssVarColors.surface.error.default,
+      text: cssVarColors.content.error.default,
     },
   },
   warningDefault: {
     filled: {
-      bg: colors.content.warning.default,
-      text: colors.content.base.onColor,
+      bg: cssVarColors.content.warning.default,
+      text: cssVarColors.content.base.onColor,
     },
     outlined: {
       bg: 'transparent',
-      border: colors.status.cautionary.border,
-      text: colors.content.warning.default,
+      border: cssVarColors.status.cautionary.border,
+      text: cssVarColors.content.warning.default,
     },
     subtle: {
-      bg: colors.status.cautionary.surface,
-      text: colors.content.warning.strong,
+      bg: cssVarColors.status.cautionary.surface,
+      text: cssVarColors.content.warning.strong,
     },
   },
   infoDefault: {
     filled: {
-      bg: colors.content.info.default,
-      text: colors.content.base.onColor,
+      bg: cssVarColors.content.info.default,
+      text: cssVarColors.content.base.onColor,
     },
     outlined: {
       bg: 'transparent',
-      border: colors.content.info.default,
-      text: colors.content.info.default,
+      border: cssVarColors.border.info.default,
+      text: cssVarColors.content.info.default,
     },
     subtle: {
-      bg: colors.surface.info.default,
-      text: colors.content.info.strong,
+      bg: cssVarColors.surface.info.default,
+      text: cssVarColors.content.info.strong,
     },
   },
 };

@@ -13,10 +13,11 @@
  */
 
 import React, { forwardRef, type InputHTMLAttributes, type ChangeEvent } from 'react';
-import { colors } from '../../tokens/colors';
+import { cssVarColors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
+import { opacity } from '../../tokens/general';
 import { transitions } from '../../utils/styles';
 
 export type CheckboxSize = 'small' | 'medium';
@@ -91,7 +92,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       alignItems: 'center',
       gap: tight ? sizeStyle.tightGap : sizeStyle.gap,
       minHeight: 44, // Minimum touch target
-      opacity: disabled ? 0.4 : 1,
+      opacity: disabled ? opacity.disabled : 1,
       cursor: disabled ? 'not-allowed' : 'pointer',
       ...style,
     };
@@ -119,8 +120,8 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      border: checked || indeterminate ? 'none' : `1.5px solid ${colors.border.solid.alternative}`,
-      backgroundColor: checked || indeterminate ? colors.surface.brand.default : 'transparent',
+      border: checked || indeterminate ? 'none' : `1.5px solid ${cssVarColors.border.solid.alternative}`,
+      backgroundColor: checked || indeterminate ? cssVarColors.surface.brand.default : 'transparent',
       transition: transitions.all,
       pointerEvents: 'none',
     };
@@ -129,13 +130,13 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       fontSize: sizeStyle.fontSize,
       fontWeight: bold ? typography.fontWeight.semibold : typography.fontWeight.regular,
       fontFamily: typography.fontFamily.base,
-      color: colors.content.base.default,
+      color: cssVarColors.content.base.default,
       lineHeight: sizeStyle.fontSize * 1.5,
       userSelect: 'none',
     };
 
     const renderIcon = () => {
-      const iconColor = colors.content.base.onColor; // white
+      const iconColor = cssVarColors.content.base.onColor; // white
       const strokeWidth = 2.5;
 
       if (indeterminate) {

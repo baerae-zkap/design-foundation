@@ -15,7 +15,7 @@
  */
 
 import { forwardRef, useState, type InputHTMLAttributes, type ChangeEvent, type KeyboardEvent } from 'react';
-import { colors } from '../../tokens/colors';
+import { cssVarColors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
@@ -118,14 +118,14 @@ export const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
     };
 
     const getBorderColor = () => {
-      if (disabled) return colors.border.disabled.default;
-      if (isFocused) return colors.border.brand.default;
+      if (disabled) return cssVarColors.border.disabled.default;
+      if (isFocused) return cssVarColors.border.brand.default;
       return 'transparent';
     };
 
     const getBackgroundColor = () => {
-      if (disabled) return colors.surface.disabled.default;
-      return colors.surface.base.alternative;
+      if (disabled) return cssVarColors.surface.disabled.default;
+      return cssVarColors.surface.base.alternative;
     };
 
     const containerStyle: React.CSSProperties = {
@@ -157,7 +157,7 @@ export const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       fontSize: sizeStyle.fontSize,
       lineHeight: `${sizeStyle.lineHeight}px`,
       fontFamily: typography.fontFamily.base,
-      color: disabled ? colors.content.disabled.default : colors.content.base.default,
+      color: disabled ? cssVarColors.content.disabled.default : cssVarColors.content.base.default,
       padding: 0,
     };
 
@@ -169,7 +169,7 @@ export const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       border: 'none',
       background: 'none',
       cursor: disabled ? 'not-allowed' : 'pointer',
-      color: colors.content.base.secondary,
+      color: cssVarColors.content.base.secondary,
     };
 
     return (
@@ -181,7 +181,7 @@ export const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
             height={sizeStyle.iconSize}
             viewBox="0 0 24 24"
             fill="none"
-            stroke={disabled ? colors.content.disabled.default : colors.content.base.secondary}
+            stroke={disabled ? cssVarColors.content.disabled.default : cssVarColors.content.base.secondary}
             strokeWidth={2}
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -244,7 +244,7 @@ export const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
               cursor: 'pointer',
               fontSize: typography.fontSize.md,
               fontFamily: typography.fontFamily.base,
-              color: colors.content.brand.default,
+              color: cssVarColors.content.brand.default,
               whiteSpace: 'nowrap',
             }}
             aria-label="취소"

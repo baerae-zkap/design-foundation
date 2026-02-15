@@ -15,8 +15,10 @@
  */
 
 import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
-import { colors } from '../../tokens/colors';
+import { cssVarColors } from '../../tokens/colors';
+import { spacing } from '../../tokens/spacing';
 import { typography } from '../../tokens/typography';
+import { opacity } from '../../tokens/general';
 import { usePressable } from '../../utils/usePressable';
 import { transitions } from '../../utils/styles';
 
@@ -47,9 +49,9 @@ export interface ChipProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>,
 
 // Size configurations
 const sizeConfig: Record<ChipSize, { height: number; fontSize: number; paddingX: number; iconSize: number }> = {
-  small: { height: 24, fontSize: 12, paddingX: 8, iconSize: 14 },
-  medium: { height: 32, fontSize: typography.fontSize.sm, paddingX: 12, iconSize: 18 },
-  large: { height: 40, fontSize: typography.fontSize.md, paddingX: 16, iconSize: 22 },
+  small: { height: spacing.component.chip.height.sm, fontSize: typography.fontSize.xs, paddingX: spacing.component.chip.paddingX.sm, iconSize: spacing.component.chip.iconSize.sm },
+  medium: { height: spacing.component.chip.height.md, fontSize: typography.fontSize.sm, paddingX: spacing.component.chip.paddingX.md, iconSize: spacing.component.chip.iconSize.md },
+  large: { height: spacing.component.chip.height.lg, fontSize: typography.fontSize.md, paddingX: spacing.component.chip.paddingX.lg, iconSize: spacing.component.chip.iconSize.lg },
 };
 
 // Color configurations
@@ -59,87 +61,87 @@ const colorConfig: Record<ChipColor, {
 }> = {
   brandDefault: {
     filled: {
-      bg: colors.surface.brand.secondary,
-      bgPressed: colors.surface.brand.secondaryPressed,
-      bgSelected: colors.surface.brand.default,
-      text: colors.content.brand.default,
-      textSelected: colors.content.base.onColor,
+      bg: cssVarColors.surface.brand.secondary,
+      bgPressed: cssVarColors.surface.brand.secondaryPressed,
+      bgSelected: cssVarColors.surface.brand.default,
+      text: cssVarColors.content.brand.default,
+      textSelected: cssVarColors.content.base.onColor,
     },
     outlined: {
       bg: 'transparent',
-      bgPressed: colors.surface.brand.secondary,
-      bgSelected: colors.surface.brand.default,
-      border: colors.border.brand.default,
-      text: colors.content.brand.default,
-      textSelected: colors.content.base.onColor,
+      bgPressed: cssVarColors.surface.brand.secondary,
+      bgSelected: cssVarColors.surface.brand.default,
+      border: cssVarColors.border.brand.default,
+      text: cssVarColors.content.brand.default,
+      textSelected: cssVarColors.content.base.onColor,
     },
   },
   baseDefault: {
     filled: {
-      bg: colors.surface.base.container,
-      bgPressed: colors.surface.base.containerPressed,
-      bgSelected: colors.content.base.default,
-      text: colors.content.base.default,
-      textSelected: colors.content.base.onColor,
+      bg: cssVarColors.surface.base.container,
+      bgPressed: cssVarColors.surface.base.containerPressed,
+      bgSelected: cssVarColors.content.base.default,
+      text: cssVarColors.content.base.default,
+      textSelected: cssVarColors.content.base.onColor,
     },
     outlined: {
       bg: 'transparent',
-      bgPressed: colors.fill.alternative,
-      bgSelected: colors.content.base.default,
-      border: colors.border.secondary.default,
-      text: colors.content.base.default,
-      textSelected: colors.content.base.onColor,
+      bgPressed: cssVarColors.fill.alternative,
+      bgSelected: cssVarColors.content.base.default,
+      border: cssVarColors.border.secondary.default,
+      text: cssVarColors.content.base.default,
+      textSelected: cssVarColors.content.base.onColor,
     },
   },
   successDefault: {
     filled: {
-      bg: colors.surface.success.default,
-      bgPressed: colors.surface.success.defaultPressed,
-      bgSelected: colors.surface.success.solid,
-      text: colors.content.success.strong,
-      textSelected: colors.content.base.onColor,
+      bg: cssVarColors.surface.success.default,
+      bgPressed: cssVarColors.surface.success.defaultPressed,
+      bgSelected: cssVarColors.surface.success.solid,
+      text: cssVarColors.content.success.strong,
+      textSelected: cssVarColors.content.base.onColor,
     },
     outlined: {
       bg: 'transparent',
-      bgPressed: colors.surface.success.default,
-      bgSelected: colors.surface.success.solid,
-      border: colors.border.success.default,
-      text: colors.content.success.strong,
-      textSelected: colors.content.base.onColor,
+      bgPressed: cssVarColors.surface.success.default,
+      bgSelected: cssVarColors.surface.success.solid,
+      border: cssVarColors.border.success.default,
+      text: cssVarColors.content.success.strong,
+      textSelected: cssVarColors.content.base.onColor,
     },
   },
   errorDefault: {
     filled: {
-      bg: colors.surface.error.default,
-      bgPressed: colors.surface.error.defaultPressed,
-      bgSelected: colors.surface.error.solid,
-      text: colors.content.error.default,
-      textSelected: colors.content.base.onColor,
+      bg: cssVarColors.surface.error.default,
+      bgPressed: cssVarColors.surface.error.defaultPressed,
+      bgSelected: cssVarColors.surface.error.solid,
+      text: cssVarColors.content.error.default,
+      textSelected: cssVarColors.content.base.onColor,
     },
     outlined: {
       bg: 'transparent',
-      bgPressed: colors.surface.error.default,
-      bgSelected: colors.surface.error.solid,
-      border: colors.border.error.default,
-      text: colors.content.error.default,
-      textSelected: colors.content.base.onColor,
+      bgPressed: cssVarColors.surface.error.default,
+      bgSelected: cssVarColors.surface.error.solid,
+      border: cssVarColors.border.error.default,
+      text: cssVarColors.content.error.default,
+      textSelected: cssVarColors.content.base.onColor,
     },
   },
   warningDefault: {
     filled: {
-      bg: colors.surface.warning.default,
-      bgPressed: colors.surface.warning.default,
-      bgSelected: colors.content.warning.default,
-      text: colors.content.warning.strong,
-      textSelected: colors.content.base.onColor,
+      bg: cssVarColors.surface.warning.default,
+      bgPressed: cssVarColors.surface.warning.defaultPressed,
+      bgSelected: cssVarColors.content.warning.default,
+      text: cssVarColors.content.warning.strong,
+      textSelected: cssVarColors.content.base.onColor,
     },
     outlined: {
       bg: 'transparent',
-      bgPressed: colors.surface.warning.default,
-      bgSelected: colors.content.warning.default,
-      border: colors.status.cautionary.border,
-      text: colors.content.warning.strong,
-      textSelected: colors.content.base.onColor,
+      bgPressed: cssVarColors.surface.warning.defaultPressed,
+      bgSelected: cssVarColors.content.warning.default,
+      border: cssVarColors.status.cautionary.border,
+      text: cssVarColors.content.warning.strong,
+      textSelected: cssVarColors.content.base.onColor,
     },
   },
 };
@@ -182,7 +184,7 @@ export const Chip = forwardRef<HTMLButtonElement, ChipProps>(
     };
 
     const getTextColor = (): string => {
-      if (disabled) return colors.content.disabled.default;
+      if (disabled) return cssVarColors.content.disabled.default;
       return selected ? colorStyle.textSelected : colorStyle.text;
     };
 
@@ -190,7 +192,7 @@ export const Chip = forwardRef<HTMLButtonElement, ChipProps>(
       display: 'inline-flex',
       alignItems: 'center',
       justifyContent: 'center',
-      gap: 4,
+      gap: spacing.component.chip.gap,
       height: sizeStyle.height,
       padding: `0 ${sizeStyle.paddingX}px`,
       fontSize: sizeStyle.fontSize,
@@ -198,11 +200,11 @@ export const Chip = forwardRef<HTMLButtonElement, ChipProps>(
       color: getTextColor(),
       backgroundColor: getBackgroundColor(),
       border: variant === 'outlined' && !selected
-        ? `1px solid ${disabled ? colors.border.disabled.default : (colorStyle as { border: string }).border}`
+        ? `1px solid ${disabled ? cssVarColors.border.disabled.default : (colorStyle as { border: string }).border}`
         : 'none',
       borderRadius: sizeStyle.height / 2,
       cursor: disabled ? 'not-allowed' : 'pointer',
-      opacity: disabled ? 0.5 : 1,
+      opacity: disabled ? opacity.disabled : 1,
       transition: transitions.all,
       ...style,
     };
@@ -219,7 +221,7 @@ export const Chip = forwardRef<HTMLButtonElement, ChipProps>(
       >
         {/* Avatar or Left Icon */}
         {avatar && (
-          <span style={{ marginLeft: -4, display: 'flex', alignItems: 'center' }}>
+          <span style={{ marginLeft: -spacing.component.chip.gap, display: 'flex', alignItems: 'center' }}>
             {avatar}
           </span>
         )}
@@ -278,7 +280,7 @@ export const Chip = forwardRef<HTMLButtonElement, ChipProps>(
               }
             }}
             style={{
-              marginRight: -4,
+              marginRight: -spacing.component.chip.gap,
               padding: 2,
               display: 'flex',
               alignItems: 'center',

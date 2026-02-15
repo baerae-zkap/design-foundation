@@ -16,12 +16,13 @@
  */
 
 import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
-import { colors } from '../../tokens/colors';
-import { shadow } from '../../tokens/shadow';
+import { cssVarColors } from '../../tokens/colors';
+import { cssVarShadow } from '../../tokens/shadow';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { usePressable } from '../../utils/usePressable';
 import { transitions } from '../../utils/styles';
+import { opacity } from '../../tokens/general';
 
 export type CardVariant = 'elevated' | 'outlined' | 'filled';
 export type CardPadding = 'none' | 'small' | 'medium' | 'large';
@@ -53,18 +54,18 @@ const variantStyles: Record<CardVariant, {
   shadow?: string;
 }> = {
   elevated: {
-    bg: colors.surface.base.default,
-    bgPressed: colors.surface.base.alternative,
-    shadow: shadow.semantic.card.elevated,
+    bg: cssVarColors.surface.base.default,
+    bgPressed: cssVarColors.surface.base.alternative,
+    shadow: cssVarShadow.semantic.card.elevated,
   },
   outlined: {
-    bg: colors.surface.base.default,
-    bgPressed: colors.surface.base.alternative,
-    border: colors.border.base.default,
+    bg: cssVarColors.surface.base.default,
+    bgPressed: cssVarColors.surface.base.alternative,
+    border: cssVarColors.border.base.default,
   },
   filled: {
-    bg: colors.surface.base.alternative,
-    bgPressed: colors.surface.base.containerPressed,
+    bg: cssVarColors.surface.base.alternative,
+    bgPressed: cssVarColors.surface.base.containerPressed,
   },
 };
 
@@ -104,7 +105,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
       border: variant === 'outlined' ? `1px solid ${variantStyle.border}` : 'none',
       boxShadow: variant === 'elevated' ? variantStyle.shadow : 'none',
       cursor: isClickable ? 'pointer' : 'default',
-      opacity: disabled ? 0.5 : 1,
+      opacity: disabled ? opacity.disabled : 1,
       transition: transitions.all,
       ...style,
     };

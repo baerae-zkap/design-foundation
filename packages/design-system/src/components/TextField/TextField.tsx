@@ -16,7 +16,7 @@
  */
 
 import { forwardRef, useState, type InputHTMLAttributes, type ReactNode, type ChangeEvent } from 'react';
-import { colors } from '../../tokens/colors';
+import { cssVarColors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
@@ -139,16 +139,16 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     };
 
     const getBorderColor = () => {
-      if (disabled || readOnly) return colors.border.disabled.default;
-      if (error) return colors.border.error.default;
-      if (isFocused) return colors.border.brand.default;
-      return colors.border.solid.alternative;
+      if (disabled || readOnly) return cssVarColors.border.disabled.default;
+      if (error) return cssVarColors.border.error.default;
+      if (isFocused) return cssVarColors.border.brand.default;
+      return cssVarColors.border.solid.alternative;
     };
 
     const getBackgroundColor = () => {
-      if (disabled) return colors.surface.base.alternative;
-      if (readOnly) return colors.surface.base.alternative;
-      return colors.surface.base.default;
+      if (disabled) return cssVarColors.surface.base.alternative;
+      if (readOnly) return cssVarColors.surface.base.alternative;
+      return cssVarColors.surface.base.default;
     };
 
     const containerStyle: React.CSSProperties = {
@@ -162,7 +162,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       fontSize: typography.fontSize.sm,
       fontWeight: typography.fontWeight.medium,
       fontFamily: typography.fontFamily.base,
-      color: colors.content.base.default,
+      color: cssVarColors.content.base.default,
       display: 'flex',
       alignItems: 'center',
       gap: spacing.primitive[1],
@@ -172,7 +172,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       fontSize: typography.fontSize.sm,
       fontWeight: typography.fontWeight.medium,
       fontFamily: typography.fontFamily.base,
-      color: colors.content.error.default,
+      color: cssVarColors.content.error.default,
     };
 
     const inputContainerStyle: React.CSSProperties = {
@@ -202,7 +202,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       flex: 1,
       fontSize: sizeStyle.fontSize,
       fontFamily: typography.fontFamily.base,
-      color: disabled ? colors.content.disabled.default : colors.content.base.default,
+      color: disabled ? cssVarColors.content.disabled.default : cssVarColors.content.base.default,
       border: 'none',
       outline: 'none',
       background: 'transparent',
@@ -213,7 +213,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     const affixStyle: React.CSSProperties = {
       fontSize: sizeStyle.fontSize,
       fontFamily: typography.fontFamily.base,
-      color: colors.content.base.secondary,
+      color: cssVarColors.content.base.secondary,
       flexShrink: 0,
     };
 
@@ -232,7 +232,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       justifyContent: 'center',
       paddingLeft: spacing.primitive[3],
       paddingRight: spacing.primitive[3],
-      borderLeft: `1px solid ${colors.border.solid.alternative}`,
+      borderLeft: `1px solid ${cssVarColors.border.solid.alternative}`,
       cursor: 'pointer',
       transition: transitions.background,
     };
@@ -240,14 +240,14 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     const descriptionStyle: React.CSSProperties = {
       fontSize: typography.fontSize.xs,
       fontFamily: typography.fontFamily.base,
-      color: error ? colors.content.error.default : colors.content.base.secondary,
+      color: error ? cssVarColors.content.error.default : cssVarColors.content.base.secondary,
       marginTop: spacing.component.input.helperGap,
     };
 
     const countStyle: React.CSSProperties = {
       fontSize: typography.fontSize.xs,
       fontFamily: typography.fontFamily.base,
-      color: colors.content.base.secondary,
+      color: cssVarColors.content.base.secondary,
       marginTop: spacing.component.input.helperGap,
       textAlign: 'right',
     };
@@ -317,7 +317,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
               type="button"
               style={trailingButtonStyle}
               onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.backgroundColor = colors.surface.base.alternative;
+                (e.currentTarget as HTMLElement).style.backgroundColor = cssVarColors.surface.base.alternative;
               }}
               onMouseLeave={(e) => {
                 (e.currentTarget as HTMLElement).style.backgroundColor = 'transparent';

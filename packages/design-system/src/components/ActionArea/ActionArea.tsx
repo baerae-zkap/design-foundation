@@ -19,7 +19,7 @@
  */
 
 import React, { forwardRef, type HTMLAttributes, type ReactNode, Children, isValidElement, cloneElement } from 'react';
-import { colors } from '../../tokens/colors';
+import { cssVarColors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { typography } from '../../tokens/typography';
 
@@ -82,7 +82,7 @@ export const ActionArea = forwardRef<HTMLDivElement, ActionAreaProps>(
       gradientHeight = 48,
       caption,
       useSafeArea = true,
-      backgroundColor = colors.surface.base.default,
+      backgroundColor = cssVarColors.surface.base.default,
       children,
       style,
       ...props
@@ -175,7 +175,7 @@ export const ActionArea = forwardRef<HTMLDivElement, ActionAreaProps>(
             <p
               style={{
                 fontSize: typography.fontSize.sm,
-                color: colors.content.base.neutral,
+                color: cssVarColors.content.base.neutral,
                 textAlign: 'center',
                 lineHeight: 1.5,
                 margin: 0,

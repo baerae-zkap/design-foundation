@@ -14,7 +14,7 @@
  */
 
 import { forwardRef, type HTMLAttributes } from 'react';
-import { colors } from '../../tokens/colors';
+import { cssVarColors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { typography } from '../../tokens/typography';
 import { usePressable } from '../../utils/usePressable';
@@ -80,23 +80,24 @@ export const CheckMark = forwardRef<HTMLDivElement, CheckMarkProps>(
     // Color logic based on state
     const getIconColor = () => {
       if (disabled) {
-        return colors.content.disabled.default;
+        return cssVarColors.content.disabled.default;
       }
       if (checked) {
-        return colors.content.brand.default;
+        return cssVarColors.content.brand.default;
       }
-      return isPressed ? colors.content.base.secondary : colors.content.base.alternative;
+      return isPressed ? cssVarColors.content.base.secondary : cssVarColors.content.base.alternative;
     };
 
     const getTextColor = () => {
       if (disabled) {
-        return colors.content.disabled.default;
+        return cssVarColors.content.disabled.default;
       }
-      return colors.content.base.default;
+      return cssVarColors.content.base.default;
     };
 
     const getOpacity = () => {
       if (disabled) return 1;
+      // TODO: Replace with opacity.pressed token when available
       return isPressed ? 0.8 : 1;
     };
 

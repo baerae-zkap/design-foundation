@@ -19,10 +19,11 @@
 import { forwardRef, useState, useRef, useEffect, useCallback, type HTMLAttributes, type ReactNode } from 'react';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
-import { colors } from '../../tokens/colors';
-import { shadow } from '../../tokens/shadow';
+import { cssVarColors } from '../../tokens/colors';
+import { cssVarShadow } from '../../tokens/shadow';
 import { typography } from '../../tokens/typography';
 import { transitions } from '../../utils/styles';
+import { opacity } from '../../tokens/general';
 
 // ─── Types ───────────────────────────────────────────────────────────
 
@@ -180,15 +181,15 @@ export const SegmentedControl = forwardRef<HTMLDivElement, SegmentedControlProps
     const containerStyle: React.CSSProperties = {
       backgroundColor:
         variant === 'solid'
-          ? colors.surface.base.alternative
-          : colors.surface.base.default,
+          ? cssVarColors.surface.base.alternative
+          : cssVarColors.surface.base.default,
       borderRadius: rcTokens.container,
       padding: variant === 'solid' ? scTokens.containerPadding : 0,
       overflow: variant === 'solid' ? 'hidden' : 'visible',
       ...(variant === 'outlined' && {
-        border: `1px solid ${colors.border.base.default}`,
+        border: `1px solid ${cssVarColors.border.base.default}`,
       }),
-      opacity: disabled ? 0.4 : 1,
+      opacity: disabled ? opacity.disabled : 1,
       ...(fullWidth && { width: '100%' }),
       display: isFluid ? 'inline-flex' : 'flex',
       ...style,
@@ -241,10 +242,10 @@ export const SegmentedControl = forwardRef<HTMLDivElement, SegmentedControlProps
         fontWeight: isSelected ? typography.fontWeight.semibold : typography.fontWeight.medium,
         fontFamily: typography.fontFamily.base,
         color: isDisabled
-          ? colors.content.base.disabled
+          ? cssVarColors.content.disabled.default
           : isSelected
-            ? colors.content.brand.default
-            : colors.content.base.secondary,
+            ? cssVarColors.content.brand.default
+            : cssVarColors.content.base.secondary,
         whiteSpace: 'nowrap',
       };
     };
@@ -260,8 +261,8 @@ export const SegmentedControl = forwardRef<HTMLDivElement, SegmentedControlProps
           height: sizeStyle.height,
           backgroundColor:
             variant === 'solid'
-              ? colors.surface.base.default
-              : colors.surface.brand.secondary,
+              ? cssVarColors.surface.base.default
+              : cssVarColors.surface.brand.secondary,
           borderRadius: isOutlined ? rcTokens.container : rcTokens.segment,
           zIndex: 1,
           opacity: 0,
@@ -279,17 +280,17 @@ export const SegmentedControl = forwardRef<HTMLDivElement, SegmentedControlProps
         height: sizeStyle.height + borderOverlap * 2,
         backgroundColor:
           variant === 'solid'
-            ? colors.surface.base.default
-            : colors.surface.brand.secondary,
+            ? cssVarColors.surface.base.default
+            : cssVarColors.surface.brand.secondary,
         borderRadius: isOutlined ? rcTokens.container : rcTokens.segment,
         zIndex: 1,
         transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1)',
         ...(variant === 'solid'
           ? {
-              boxShadow: shadow.semantic.button.pressed,
+              boxShadow: cssVarShadow.semantic.button.pressed,
             }
           : {
-              border: `1px solid ${colors.border.brand.default}`,
+              border: `1px solid ${cssVarColors.border.brand.default}`,
             }),
       };
     };

@@ -16,7 +16,7 @@
  */
 
 import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
-import { colors } from '../../tokens/colors';
+import { cssVarColors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
@@ -39,28 +39,28 @@ export interface TextButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonEle
 }
 
 const sizeStyles: Record<TextButtonSize, number> = {
-  xSmall: 12,
-  small: typography.fontSize.sm,
-  medium: typography.fontSize.md,
-  large: 18,
-  xLarge: 20,
+  xSmall: spacing.component.textButton.fontSize.xs,
+  small: spacing.component.textButton.fontSize.sm,
+  medium: spacing.component.textButton.fontSize.md,
+  large: spacing.component.textButton.fontSize.lg,
+  xLarge: spacing.component.textButton.fontSize.xl,
 };
 
 const colorStyles: Record<TextButtonColor, { default: string; pressed: string; pressedBg: string }> = {
   brandDefault: {
-    default: colors.content.brand.default,
-    pressed: colors.surface.brand.defaultPressed,
-    pressedBg: colors.fill.alternative
+    default: cssVarColors.content.brand.default,
+    pressed: cssVarColors.surface.brand.defaultPressed,
+    pressedBg: cssVarColors.fill.alternative
   },
   baseDefault: {
-    default: colors.content.base.default,
-    pressed: colors.content.base.strong,
-    pressedBg: colors.fill.alternative
+    default: cssVarColors.content.base.default,
+    pressed: cssVarColors.content.base.strong,
+    pressedBg: cssVarColors.fill.alternative
   },
   errorDefault: {
-    default: colors.content.error.default,
-    pressed: colors.surface.error.solidPressed,
-    pressedBg: colors.fill.alternative
+    default: cssVarColors.content.error.default,
+    pressed: cssVarColors.surface.error.solidPressed,
+    pressedBg: cssVarColors.fill.alternative
   },
 };
 
@@ -97,7 +97,7 @@ export const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(
       padding: `${spacing.primitive[1]}px ${spacing.primitive[2]}px`,
       fontSize,
       fontWeight: typography.fontWeight.medium,
-      color: disabled ? colors.content.disabled.default : (isPressed ? colorStyle.pressed : colorStyle.default),
+      color: disabled ? cssVarColors.content.disabled.default : (isPressed ? colorStyle.pressed : colorStyle.default),
       background: isPressed && !disabled ? colorStyle.pressedBg : 'transparent',
       border: 'none',
       borderRadius: radius.primitive.sm,

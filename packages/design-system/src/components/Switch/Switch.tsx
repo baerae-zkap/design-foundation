@@ -13,11 +13,12 @@
  */
 
 import { forwardRef, useState, type ButtonHTMLAttributes, type ReactNode } from 'react';
-import { colors } from '../../tokens/colors';
-import { shadow } from '../../tokens/shadow';
+import { cssVarColors } from '../../tokens/colors';
+import { cssVarShadow } from '../../tokens/shadow';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
+import { opacity } from '../../tokens/general';
 import { usePressable } from '../../utils/usePressable';
 import { transitions } from '../../utils/styles';
 
@@ -105,10 +106,10 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(
     });
 
     const trackBackgroundColor = isDisabled
-      ? colors.surface.disabled.default
+      ? cssVarColors.surface.disabled.default
       : value
-      ? (onColor || colors.surface.brand.default)
-      : (offColor || colors.border.base.default);
+      ? (onColor || cssVarColors.surface.brand.default)
+      : (offColor || cssVarColors.border.base.default);
 
     const thumbTranslateX = value
       ? config.trackWidth - config.thumbSize - config.thumbOffset
@@ -130,7 +131,7 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(
       backgroundColor: trackBackgroundColor,
       border: 'none',
       cursor: isDisabled ? 'not-allowed' : 'pointer',
-      opacity: isDisabled ? 0.38 : 1,
+      opacity: isDisabled ? opacity.disabled : 1,
       transition: transitions.background,
       display: 'flex',
       alignItems: 'center',
@@ -143,8 +144,8 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(
       width: config.thumbSize,
       height: config.thumbSize,
       borderRadius: radius.primitive.full,
-      backgroundColor: colors.surface.base.default,
-      boxShadow: shadow.semantic.button.pressed,
+      backgroundColor: cssVarColors.surface.base.default,
+      boxShadow: cssVarShadow.semantic.button.pressed,
       transition: 'transform 200ms cubic-bezier(0.4, 0, 0.2, 1)',
       transform: `translateX(${thumbTranslateX}px)`,
       display: 'flex',
@@ -155,7 +156,7 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(
     const labelStyle: React.CSSProperties = {
       fontSize: size === 'large' ? typography.fontSize.md : typography.fontSize.sm,
       fontWeight: typography.fontWeight.medium,
-      color: isDisabled ? colors.content.disabled.default : colors.content.base.default,
+      color: isDisabled ? cssVarColors.content.disabled.default : cssVarColors.content.base.default,
     };
 
     return (
@@ -191,7 +192,7 @@ function LoadingSpinner({ size }: { size: number }) {
         width: size,
         height: size,
         borderRadius: radius.primitive.full,
-        border: `2px solid ${colors.border.base.default}`,
+        border: `2px solid ${cssVarColors.border.base.default}`,
         borderTopColor: 'transparent',
         animation: 'spin 1s linear infinite',
       }}

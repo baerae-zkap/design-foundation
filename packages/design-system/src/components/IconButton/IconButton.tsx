@@ -16,8 +16,10 @@
  */
 
 import { forwardRef, useState, type ButtonHTMLAttributes, type ReactNode } from 'react';
-import { colors } from '../../tokens/colors';
+import { cssVarColors } from '../../tokens/colors';
 import { radius } from '../../tokens/radius';
+import { spacing } from '../../tokens/spacing';
+import { opacity } from '../../tokens/general';
 import { transitions } from '../../utils/styles';
 
 export type IconButtonVariant = 'filled' | 'ghost' | 'outlined';
@@ -37,9 +39,9 @@ export interface IconButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonEle
 
 // Size: button size, icon size
 const sizeStyles: Record<IconButtonSize, { size: number; iconSize: number }> = {
-  small: { size: 32, iconSize: 18 },
-  medium: { size: 40, iconSize: 22 },
-  large: { size: 48, iconSize: 26 },
+  small: { size: spacing.component.iconButton.size.sm, iconSize: spacing.component.iconButton.iconSize.sm },
+  medium: { size: spacing.component.iconButton.size.md, iconSize: spacing.component.iconButton.iconSize.md },
+  large: { size: spacing.component.iconButton.size.lg, iconSize: spacing.component.iconButton.iconSize.lg },
 };
 
 const colorStyles: Record<IconButtonColor, {
@@ -49,62 +51,62 @@ const colorStyles: Record<IconButtonColor, {
 }> = {
   brandDefault: {
     filled: {
-      bg: colors.surface.brand.default,
-      bgPressed: colors.surface.brand.defaultPressed,
-      color: colors.content.base.onColor
+      bg: cssVarColors.surface.brand.default,
+      bgPressed: cssVarColors.surface.brand.defaultPressed,
+      color: cssVarColors.content.base.onColor
     },
     ghost: {
       bg: 'transparent',
-      bgHover: colors.fill.alternative,
-      bgPressed: colors.fill.normal,
-      color: colors.content.brand.default,
-      colorPressed: colors.surface.brand.defaultPressed
+      bgHover: cssVarColors.fill.alternative,
+      bgPressed: cssVarColors.fill.normal,
+      color: cssVarColors.content.brand.default,
+      colorPressed: cssVarColors.surface.brand.defaultPressed
     },
     outlined: {
-      bg: colors.surface.base.default,
-      bgPressed: colors.surface.brand.secondary,
-      color: colors.content.brand.default,
-      border: colors.border.brand.default
+      bg: cssVarColors.surface.base.default,
+      bgPressed: cssVarColors.surface.brand.secondary,
+      color: cssVarColors.content.brand.default,
+      border: cssVarColors.border.brand.default
     },
   },
   baseDefault: {
     filled: {
-      bg: colors.content.base.default,
-      bgPressed: colors.inverse.surface.default,
-      color: colors.content.base.onColor
+      bg: cssVarColors.content.base.default,
+      bgPressed: cssVarColors.inverse.surface.default,
+      color: cssVarColors.content.base.onColor
     },
     ghost: {
       bg: 'transparent',
-      bgHover: colors.fill.alternative,
-      bgPressed: colors.fill.normal,
-      color: colors.content.base.default,
-      colorPressed: colors.inverse.surface.default
+      bgHover: cssVarColors.fill.alternative,
+      bgPressed: cssVarColors.fill.normal,
+      color: cssVarColors.content.base.default,
+      colorPressed: cssVarColors.inverse.surface.default
     },
     outlined: {
-      bg: colors.surface.base.default,
-      bgPressed: colors.surface.base.alternative,
-      color: colors.content.base.default,
-      border: colors.border.secondary.default
+      bg: cssVarColors.surface.base.default,
+      bgPressed: cssVarColors.surface.base.alternative,
+      color: cssVarColors.content.base.default,
+      border: cssVarColors.border.secondary.default
     },
   },
   errorDefault: {
     filled: {
-      bg: colors.surface.error.solid,
-      bgPressed: colors.surface.error.solidPressed,
-      color: colors.content.base.onColor
+      bg: cssVarColors.surface.error.solid,
+      bgPressed: cssVarColors.surface.error.solidPressed,
+      color: cssVarColors.content.base.onColor
     },
     ghost: {
       bg: 'transparent',
-      bgHover: colors.status.negative.surface,
-      bgPressed: colors.status.negative.surface,
-      color: colors.content.error.default,
-      colorPressed: colors.surface.error.solidPressed
+      bgHover: cssVarColors.status.negative.surface,
+      bgPressed: cssVarColors.status.negative.surface,
+      color: cssVarColors.content.error.default,
+      colorPressed: cssVarColors.surface.error.solidPressed
     },
     outlined: {
-      bg: colors.surface.base.default,
-      bgPressed: colors.surface.error.default,
-      color: colors.content.error.default,
-      border: colors.border.error.default
+      bg: cssVarColors.surface.base.default,
+      bgPressed: cssVarColors.surface.error.default,
+      color: cssVarColors.content.error.default,
+      border: cssVarColors.border.error.default
     },
   },
 };
@@ -186,7 +188,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
       backgroundColor,
       color: iconColor,
       cursor: disabled ? 'not-allowed' : 'pointer',
-      opacity: disabled ? 0.5 : 1,
+      opacity: disabled ? opacity.disabled : 1,
       transition: transitions.all,
       padding: 0,
       outline: 'none',
