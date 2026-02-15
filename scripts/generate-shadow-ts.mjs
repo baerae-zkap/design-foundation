@@ -86,6 +86,49 @@ const darkBorderRoot = isObject(darkRoot.border) ? darkRoot.border : {};
 const darkSemanticRoot = isObject(darkRoot.semantic) ? darkRoot.semantic : semanticRoot;
 const mergedDarkPrimitiveRoot = { ...primitiveRoot, ...darkPrimitiveRoot };
 
+function toKebab(value) {
+  return value
+    .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
+    .replace(/\s+/g, '-')
+    .toLowerCase();
+}
+
+function buildCssVarLines(node, prefix, indent = 0) {
+  const pad = ' '.repeat(indent);
+  const lines = ['{'];
+
+  for (const [key, value] of Object.entries(node)) {
+    if (isSkippableKey(key)) continue;
+
+    const renderedKey = formatKey(key);
+    const kebabKey = toKebab(key);
+    const entryPad = ' '.repeat(indent + 2);
+
+    if (isObject(value)) {
+      if ('value' in value && (typeof value.value === 'string' || typeof value.value === 'number')) {
+        const varName = `var(--shadow-${prefix}-${kebabKey})`;
+        lines.push(`${entryPad}${renderedKey}: ${JSON.stringify(varName)} as const,`);
+        continue;
+      }
+
+      const nestedPrefix = prefix ? `${prefix}-${kebabKey}` : kebabKey;
+      const nestedLines = buildCssVarLines(value, nestedPrefix, indent + 2);
+      lines.push(`${entryPad}${renderedKey}: ${nestedLines[0]}`);
+      lines.push(...nestedLines.slice(1).map((line) => `${entryPad}${line}`));
+      lines[lines.length - 1] += ',';
+      continue;
+    }
+
+    if (typeof value === 'string' || typeof value === 'number') {
+      const varName = `var(--shadow-${prefix}-${kebabKey})`;
+      lines.push(`${entryPad}${renderedKey}: ${JSON.stringify(varName)} as const,`);
+    }
+  }
+
+  lines.push(`${pad}}`);
+  return lines;
+}
+
 const primitiveKeys = new Set(
   Object.keys(primitiveRoot).filter((key) => !isSkippableKey(key)),
 );
@@ -102,6 +145,8 @@ const semanticLines = buildTokenLines(semanticRoot, {
     return toLiteralExpression(value);
   },
 });
+const cssVarPrimitiveLines = buildCssVarLines(primitiveRoot, 'primitive');
+const cssVarSemanticLines = buildCssVarLines(semanticRoot, 'semantic');
 const darkPrimitiveKeys = new Set(
   Object.keys(mergedDarkPrimitiveRoot).filter((key) => !isSkippableKey(key)),
 );
@@ -145,6 +190,17 @@ const content = [
   '',
   'export type ShadowToken = typeof shadow;',
   'export type DarkShadowToken = typeof darkShadow;',
+  '',
+  '/** CSS variable references for web components (mirrors shadow structure) */',
+  `const cssVarPrimitive = ${cssVarPrimitiveLines.join('\n')} as const;`,
+  `const cssVarSemantic = ${cssVarSemanticLines.join('\n')} as const;`,
+  '',
+  'export const cssVarShadow = {',
+  '  primitive: cssVarPrimitive,',
+  '  semantic: cssVarSemantic,',
+  '} as const;',
+  '',
+  'export type CssVarShadowToken = typeof cssVarShadow;',
   '',
 ].join('\n');
 

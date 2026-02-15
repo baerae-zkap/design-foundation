@@ -44,6 +44,7 @@
         "3xs": 10,
         "2xs": 11,
         "xs": 12,
+        "compact": 13,
         "sm": 14,
         "md": 16,
         "lg": 18,
@@ -54,13 +55,14 @@
         "5xl": 36,
         "6xl": 40,
         "7xl": 48,
-        "_comment": "md(16)가 기본 본문 크기. 접근성 기준 최소 본문 크기는 14px"
+        "_comment": "md(16)가 기본 본문 크기. compact(13)는 테이블/리스트 밀집 UI용. 접근성 기준 최소 본문 크기는 14px"
       },
 
       "lineHeight": {
         "3xs": 14,
         "2xs": 16,
         "xs": 18,
+        "compact": 19,
         "sm": 20,
         "md": 24,
         "lg": 26,
@@ -268,6 +270,26 @@
           "lineHeight": "{primitive.lineHeight.2xs}",
           "letterSpacing": "{primitive.letterSpacing.normal}",
           "_comment": "11px. 법적 고지, 매우 작은 메타 정보"
+        }
+      },
+
+      "compact": {
+        "_comment": "밀집 UI용 (테이블, 리스트카드, 섹션헤더 등). 13px 고정",
+        "md": {
+          "fontFamily": "{primitive.fontFamily.weights.regular}",
+          "fontWeight": "{primitive.fontWeight.regular}",
+          "fontSize": "{primitive.fontSize.compact}",
+          "lineHeight": "{primitive.lineHeight.compact}",
+          "letterSpacing": "{primitive.letterSpacing.normal}",
+          "_comment": "13px. 테이블 셀, 리스트카드 본문"
+        },
+        "sm": {
+          "fontFamily": "{primitive.fontFamily.weights.medium}",
+          "fontWeight": "{primitive.fontWeight.medium}",
+          "fontSize": "{primitive.fontSize.compact}",
+          "lineHeight": "{primitive.lineHeight.compact}",
+          "letterSpacing": "{primitive.letterSpacing.normal}",
+          "_comment": "13px. 섹션헤더, 테이블 헤더"
         }
       },
 

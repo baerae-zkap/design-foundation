@@ -323,6 +323,134 @@
             "value": "{primitive.4}",
             "_comment": "16px. 구분선 상하 여백"
           }
+        },
+
+        "segmentedControl": {
+          "containerPadding": {
+            "value": 3,
+            "_comment": "3px. container 내부 패딩 (segment와 container 사이 gap)"
+          },
+          "height": {
+            "sm": { "value": "{primitive.8}", "_comment": "32px. 소형" },
+            "md": { "value": 36, "_comment": "36px. 기본" },
+            "lg": { "value": 42, "_comment": "42px. 대형" }
+          },
+          "paddingX": {
+            "sm": { "value": "{primitive.3}", "_comment": "12px. 소형 (inset.xs)" },
+            "md": { "value": "{primitive.4}", "_comment": "16px. 기본 (inset.sm)" },
+            "lg": { "value": "{primitive.5}", "_comment": "20px. 대형 (inset.md)" }
+          },
+          "iconGap": {
+            "value": "{primitive.2}",
+            "_comment": "8px. 아이콘-텍스트 gap"
+          }
+        },
+
+        "chip": {
+          "height": {
+            "sm": { "value": "{primitive.6}", "_comment": "24px. 소형 칩" },
+            "md": { "value": "{primitive.8}", "_comment": "32px. 기본 칩" },
+            "lg": { "value": "{primitive.10}", "_comment": "40px. 대형 칩" }
+          },
+          "paddingX": {
+            "sm": { "value": "{primitive.2}", "_comment": "8px. 소형 칩 좌우" },
+            "md": { "value": "{primitive.3}", "_comment": "12px. 기본 칩 좌우" },
+            "lg": { "value": "{primitive.4}", "_comment": "16px. 대형 칩 좌우" }
+          },
+          "gap": {
+            "value": "{primitive.1}",
+            "_comment": "4px. 칩 내 아이콘-텍스트 간격"
+          },
+          "iconSize": {
+            "sm": { "value": 14, "_comment": "14px. 소형 칩 아이콘" },
+            "md": { "value": 18, "_comment": "18px. 기본 칩 아이콘" },
+            "lg": { "value": 22, "_comment": "22px. 대형 칩 아이콘" }
+          }
+        },
+
+        "badge": {
+          "height": {
+            "sm": { "value": 18, "_comment": "18px. 소형 뱃지" },
+            "md": { "value": 22, "_comment": "22px. 기본 뱃지" },
+            "lg": { "value": 26, "_comment": "26px. 대형 뱃지" }
+          },
+          "paddingX": {
+            "sm": { "value": 6, "_comment": "6px. 소형 뱃지 좌우" },
+            "md": { "value": "{primitive.2}", "_comment": "8px. 기본 뱃지 좌우" },
+            "lg": { "value": 10, "_comment": "10px. 대형 뱃지 좌우" }
+          },
+          "dotSize": {
+            "sm": { "value": "{primitive.1}", "_comment": "4px. 소형 뱃지 닷" },
+            "md": { "value": 6, "_comment": "6px. 기본 뱃지 닷" },
+            "lg": { "value": 6, "_comment": "6px. 대형 뱃지 닷" }
+          },
+          "iconSize": {
+            "sm": { "value": 10, "_comment": "10px. 소형 뱃지 아이콘" },
+            "md": { "value": "{primitive.3}", "_comment": "12px. 기본 뱃지 아이콘" },
+            "lg": { "value": 14, "_comment": "14px. 대형 뱃지 아이콘" }
+          }
+        },
+
+        "accordion": {
+          "height": {
+            "md": { "value": "{primitive.12}", "_comment": "48px. 기본 아코디언 헤더" },
+            "lg": { "value": "{primitive.14}", "_comment": "56px. 대형 아코디언 헤더" }
+          },
+          "iconSize": {
+            "value": "{primitive.4}",
+            "_comment": "16px. 아코디언 화살표 아이콘"
+          }
+        },
+
+        "table": {
+          "minHeight": {
+            "sm": { "value": "{primitive.10}", "_comment": "40px. 소형 테이블 행" },
+            "md": { "value": 44, "_comment": "44px. 기본 테이블 행" },
+            "lg": { "value": "{primitive.12}", "_comment": "48px. 대형 테이블 행" }
+          },
+          "headCellPaddingY": {
+            "sm": { "value": 6, "_comment": "6px. 소형 테이블 헤더 상하" },
+            "md": { "value": "{primitive.2}", "_comment": "8px. 기본 테이블 헤더 상하" },
+            "lg": { "value": 10, "_comment": "10px. 대형 테이블 헤더 상하" }
+          }
+        },
+
+        "iconButton": {
+          "size": {
+            "sm": { "value": "{primitive.8}", "_comment": "32px. 소형 아이콘 버튼" },
+            "md": { "value": "{primitive.10}", "_comment": "40px. 기본 아이콘 버튼" },
+            "lg": { "value": "{primitive.12}", "_comment": "48px. 대형 아이콘 버튼" }
+          },
+          "iconSize": {
+            "sm": { "value": 18, "_comment": "18px. 소형 버튼 아이콘" },
+            "md": { "value": 22, "_comment": "22px. 기본 버튼 아이콘" },
+            "lg": { "value": 26, "_comment": "26px. 대형 버튼 아이콘" }
+          }
+        },
+
+        "thumbnail": {
+          "playIconSize": {
+            "value": "{primitive.12}",
+            "_comment": "48px. 썸네일 재생 아이콘"
+          }
+        },
+
+        "listCell": {
+          "minHeight": {
+            "sm": { "value": 44, "_comment": "44px. 소형 리스트 셀" },
+            "md": { "value": "{primitive.14}", "_comment": "56px. 기본 리스트 셀" },
+            "lg": { "value": 72, "_comment": "72px. 대형 리스트 셀" }
+          }
+        },
+
+        "textButton": {
+          "fontSize": {
+            "xs": { "value": 12, "_comment": "12px. 초소형 텍스트 버튼" },
+            "sm": { "value": 14, "_comment": "14px. 소형 텍스트 버튼" },
+            "md": { "value": "{primitive.4}", "_comment": "16px. 기본 텍스트 버튼" },
+            "lg": { "value": 18, "_comment": "18px. 대형 텍스트 버튼" },
+            "xl": { "value": "{primitive.5}", "_comment": "20px. 특대 텍스트 버튼" }
+          }
         }
       }
     },

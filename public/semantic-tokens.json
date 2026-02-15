@@ -126,25 +126,33 @@
       },
       "error": {
         "default": "{palette.red.50}",
-        "default_comment": "에러 텍스트"
+        "default_comment": "에러 텍스트",
+        "onSolid": "{palette.static.white}",
+        "onSolid_comment": "에러 solid 배경 위 텍스트. white on red.50 WCAG AA 통과"
       },
       "warning": {
         "default": "{palette.orange.50}",
         "default_comment": "경고 텍스트",
         "strong": "{palette.orange.30}",
-        "strong_comment": "강한 경고 텍스트. 라이트 배경 본문 가독성 확보"
+        "strong_comment": "강한 경고 텍스트. 라이트 배경 본문 가독성 확보",
+        "onSolid": "{palette.grey.15}",
+        "onSolid_comment": "경고 solid 배경 위 텍스트. white on orange.50 WCAG 실패로 grey.15 사용"
       },
       "success": {
         "default": "{palette.green.50}",
         "default_comment": "성공 텍스트",
         "strong": "{palette.green.30}",
-        "strong_comment": "강한 성공 텍스트. 라이트 배경 본문 가독성 확보"
+        "strong_comment": "강한 성공 텍스트. 라이트 배경 본문 가독성 확보",
+        "onSolid": "{palette.static.white}",
+        "onSolid_comment": "성공 solid 배경 위 텍스트. white on green.50 WCAG AA 통과"
       },
       "info": {
         "default": "{palette.teal.50}",
         "default_comment": "정보 텍스트",
         "strong": "{palette.teal.30}",
-        "strong_comment": "강한 정보 텍스트. 라이트 배경 본문 가독성 확보"
+        "strong_comment": "강한 정보 텍스트. 라이트 배경 본문 가독성 확보",
+        "onSolid": "{palette.static.white}",
+        "onSolid_comment": "정보 solid 배경 위 텍스트. white on teal.50 WCAG AA 통과"
       },
       "profit": {
         "default": "{palette.red.50}",
@@ -269,6 +277,10 @@
       "disabled_comment": "비활성 아이콘",
       "brand": "{palette.blue.50}",
       "brand_comment": "브랜드 아이콘",
+      "error": "{palette.red.50}",
+      "error_comment": "에러 아이콘",
+      "success": "{palette.green.50}",
+      "success_comment": "성공 아이콘",
       "warning": "{palette.orange.50}",
       "warning_comment": "경고 아이콘",
       "info": "{palette.teal.50}",
@@ -515,25 +527,33 @@
       },
       "error": {
         "default": "{palette.red.60}",
-        "default_comment": "에러 텍스트"
+        "default_comment": "에러 텍스트",
+        "onSolid": "{palette.static.white}",
+        "onSolid_comment": "에러 solid 배경 위 텍스트. white on red.60 WCAG AA 통과"
       },
       "warning": {
         "default": "{palette.orange.60}",
         "default_comment": "경고 텍스트",
         "strong": "{palette.orange.80}",
-        "strong_comment": "강한 경고 텍스트. 다크 배경 본문 가독성 확보"
+        "strong_comment": "강한 경고 텍스트. 다크 배경 본문 가독성 확보",
+        "onSolid": "{palette.static.white}",
+        "onSolid_comment": "경고 solid 배경 위 텍스트. white on orange.60 WCAG AA 통과"
       },
       "success": {
         "default": "{palette.green.60}",
         "default_comment": "성공 텍스트",
         "strong": "{palette.green.80}",
-        "strong_comment": "강한 성공 텍스트. 다크 배경 본문 가독성 확보"
+        "strong_comment": "강한 성공 텍스트. 다크 배경 본문 가독성 확보",
+        "onSolid": "{palette.static.white}",
+        "onSolid_comment": "성공 solid 배경 위 텍스트. white on green.60 WCAG AA 통과"
       },
       "info": {
         "default": "{palette.teal.60}",
         "default_comment": "정보 텍스트",
         "strong": "{palette.teal.80}",
-        "strong_comment": "강한 정보 텍스트. 다크 배경 본문 가독성 확보"
+        "strong_comment": "강한 정보 텍스트. 다크 배경 본문 가독성 확보",
+        "onSolid": "{palette.static.white}",
+        "onSolid_comment": "정보 solid 배경 위 텍스트. white on teal.60 WCAG AA 통과"
       },
       "profit": {
         "default": "{palette.red.60}",
@@ -658,6 +678,10 @@
       "disabled_comment": "비활성 아이콘",
       "brand": "{palette.blue.60}",
       "brand_comment": "브랜드 아이콘",
+      "error": "{palette.red.60}",
+      "error_comment": "에러 아이콘",
+      "success": "{palette.green.60}",
+      "success_comment": "성공 아이콘",
       "warning": "{palette.orange.60}",
       "warning_comment": "경고 아이콘",
       "info": "{palette.teal.60}",

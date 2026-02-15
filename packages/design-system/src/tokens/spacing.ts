@@ -135,6 +135,103 @@ export const spacing = {
       },
       iconGap: 8,             // 아이콘-텍스트 gap (primitive.2)
     },
+    chip: {
+      height: {
+        sm: 24,
+        md: 32,
+        lg: 40,
+      },
+      paddingX: {
+        sm: 8,
+        md: 12,
+        lg: 16,
+      },
+      gap: 4,
+      iconSize: {
+        sm: 14,
+        md: 18,
+        lg: 22,
+      },
+    },
+    badge: {
+      height: {
+        sm: 18,
+        md: 22,
+        lg: 26,
+      },
+      paddingX: {
+        sm: 6,
+        md: 8,
+        lg: 10,
+      },
+      dotSize: {
+        sm: 4,
+        md: 6,
+        lg: 6,
+      },
+      iconSize: {
+        sm: 10,
+        md: 12,
+        lg: 14,
+      },
+    },
+    accordion: {
+      height: {
+        md: 48,
+        lg: 56,
+      },
+      iconSize: 16,
+    },
+    table: {
+      minHeight: {
+        sm: 40,
+        md: 44,
+        lg: 48,
+      },
+      headCellPaddingY: {
+        sm: 6,
+        md: 8,
+        lg: 10,
+      },
+    },
+    iconButton: {
+      size: {
+        sm: 32,
+        md: 40,
+        lg: 48,
+      },
+      iconSize: {
+        sm: 18,
+        md: 22,
+        lg: 26,
+      },
+    },
+    thumbnail: {
+      playIconSize: 48,
+    },
+    listCell: {
+      minHeight: {
+        sm: 44,
+        md: 56,
+        lg: 72,
+      },
+    },
+    listCard: {
+      thumbnailSize: {
+        sm: 56,
+        md: 80,
+        lg: 100,
+      },
+    },
+    textButton: {
+      fontSize: {
+        xs: 12,
+        sm: 14,
+        md: 16,
+        lg: 18,
+        xl: 20,
+      },
+    },
   },
 } as const;
 

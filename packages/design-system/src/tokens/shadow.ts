@@ -124,3 +124,63 @@ export const darkShadow = {
 
 export type ShadowToken = typeof shadow;
 export type DarkShadowToken = typeof darkShadow;
+
+/** CSS variable references for web components (mirrors shadow structure) */
+const cssVarPrimitive = {
+  none: "var(--shadow-primitive-none)" as const,
+  xs: "var(--shadow-primitive-xs)" as const,
+  sm: "var(--shadow-primitive-sm)" as const,
+  md: "var(--shadow-primitive-md)" as const,
+  lg: "var(--shadow-primitive-lg)" as const,
+  xl: "var(--shadow-primitive-xl)" as const,
+  "2xl": "var(--shadow-primitive-2xl)" as const,
+} as const;
+const cssVarSemantic = {
+  card: {
+      default: "var(--shadow-semantic-card-default)" as const,
+      elevated: "var(--shadow-semantic-card-elevated)" as const,
+      floating: "var(--shadow-semantic-card-floating)" as const,
+    },
+  button: {
+      default: "var(--shadow-semantic-button-default)" as const,
+      elevated: "var(--shadow-semantic-button-elevated)" as const,
+      pressed: "var(--shadow-semantic-button-pressed)" as const,
+    },
+  dropdown: {
+      default: "var(--shadow-semantic-dropdown-default)" as const,
+    },
+  popover: {
+      default: "var(--shadow-semantic-popover-default)" as const,
+    },
+  modal: {
+      default: "var(--shadow-semantic-modal-default)" as const,
+    },
+  bottomSheet: {
+      default: "var(--shadow-semantic-bottom-sheet-default)" as const,
+    },
+  drawer: {
+      default: "var(--shadow-semantic-drawer-default)" as const,
+    },
+  toast: {
+      default: "var(--shadow-semantic-toast-default)" as const,
+    },
+  header: {
+      default: "var(--shadow-semantic-header-default)" as const,
+      scrolled: "var(--shadow-semantic-header-scrolled)" as const,
+    },
+  tabBar: {
+      default: "var(--shadow-semantic-tab-bar-default)" as const,
+      elevated: "var(--shadow-semantic-tab-bar-elevated)" as const,
+    },
+  input: {
+      focus: "var(--shadow-semantic-input-focus)" as const,
+      error: "var(--shadow-semantic-input-error)" as const,
+    },
+} as const;
+
+export const cssVarShadow = {
+  primitive: cssVarPrimitive,
+  semantic: cssVarSemantic,
+} as const;
+
+export type CssVarShadowToken = typeof cssVarShadow;

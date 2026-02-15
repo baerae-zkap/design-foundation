@@ -327,18 +327,22 @@ export const colors = {
     },
     error: {
       default: palette.red["50"],
+      onSolid: palette.static.white,
     },
     warning: {
       default: palette.orange["50"],
       strong: palette.orange["30"],
+      onSolid: palette.grey["15"],
     },
     success: {
       default: palette.green["50"],
       strong: palette.green["30"],
+      onSolid: palette.static.white,
     },
     info: {
       default: palette.teal["50"],
       strong: palette.teal["30"],
+      onSolid: palette.static.white,
     },
     profit: {
       default: palette.red["50"],
@@ -414,6 +418,8 @@ export const colors = {
     secondary: palette.grey["60"],
     disabled: palette.grey["80"],
     brand: palette.blue["50"],
+    error: palette.red["50"],
+    success: palette.green["50"],
     warning: palette.orange["50"],
     info: palette.teal["50"],
   },
@@ -563,18 +569,22 @@ export const darkColors = {
     },
     error: {
       default: palette.red["60"],
+      onSolid: palette.static.white,
     },
     warning: {
       default: palette.orange["60"],
       strong: palette.orange["80"],
+      onSolid: palette.static.white,
     },
     success: {
       default: palette.green["60"],
       strong: palette.green["80"],
+      onSolid: palette.static.white,
     },
     info: {
       default: palette.teal["60"],
       strong: palette.teal["80"],
+      onSolid: palette.static.white,
     },
     profit: {
       default: palette.red["60"],
@@ -650,6 +660,8 @@ export const darkColors = {
     secondary: palette.grey["60"],
     disabled: palette.grey["40"],
     brand: palette.blue["60"],
+    error: palette.red["60"],
+    success: palette.green["60"],
     warning: palette.orange["60"],
     info: palette.teal["60"],
   },
@@ -803,18 +815,22 @@ export const cssVarColors = {
     },
     error: {
       default: 'var(--content-error-default)' as const,
+      onSolid: 'var(--content-error-onSolid)' as const,
     },
     warning: {
       default: 'var(--content-warning-default)' as const,
       strong: 'var(--content-warning-strong)' as const,
+      onSolid: 'var(--content-warning-onSolid)' as const,
     },
     success: {
       default: 'var(--content-success-default)' as const,
       strong: 'var(--content-success-strong)' as const,
+      onSolid: 'var(--content-success-onSolid)' as const,
     },
     info: {
       default: 'var(--content-info-default)' as const,
       strong: 'var(--content-info-strong)' as const,
+      onSolid: 'var(--content-info-onSolid)' as const,
     },
     profit: {
       default: 'var(--content-profit-default)' as const,
@@ -890,6 +906,8 @@ export const cssVarColors = {
     secondary: 'var(--icon-secondary)' as const,
     disabled: 'var(--icon-disabled)' as const,
     brand: 'var(--icon-brand)' as const,
+    error: 'var(--icon-error)' as const,
+    success: 'var(--icon-success)' as const,
     warning: 'var(--icon-warning)' as const,
     info: 'var(--icon-info)' as const,
   },

@@ -239,9 +239,23 @@ function buildDarkShadowOverrideLines() {
     }
   }
 
-  const darkNodes = collectValueNodes(dark).filter(({ path }) => path[0] !== 'primitive');
-  for (const { path, value } of darkNodes) {
-    const variable = `--shadow-dark-${path.map(toKebab).join('-')}`;
+  const darkSemantic = isObject(dark.semantic) ? dark.semantic : {};
+  const darkSemanticNodes = collectValueNodes(darkSemantic);
+  for (const { path, value } of darkSemanticNodes) {
+    const variable = `--shadow-semantic-${path.map(toKebab).join('-')}`;
+    const refPath = parseRef(value);
+    if (refPath && refPath[0] === 'primitive') {
+      lines.push(`  ${variable}: var(--shadow-primitive-${toKebab(refPath[1] ?? '')});`);
+      continue;
+    }
+    const resolved = resolveRefValue(value, dark);
+    lines.push(`  ${variable}: ${String(resolved)};`);
+  }
+
+  const darkBorder = isObject(dark.border) ? dark.border : {};
+  const darkBorderNodes = collectValueNodes(darkBorder);
+  for (const { path, value } of darkBorderNodes) {
+    const variable = `--shadow-dark-border-${path.map(toKebab).join('-')}`;
     const resolved = resolveRefValue(value, dark);
     lines.push(`  ${variable}: ${String(resolved)};`);
   }
@@ -264,7 +278,20 @@ const rootLines = [
 
 const darkShadowLines = buildDarkShadowOverrideLines();
 if (darkShadowLines.length > 0) {
-  rootLines.push('[data-theme="dark"] {', ...darkShadowLines, '}', '');
+  rootLines.push(
+    '/* Shadow dark overrides (system preference fallback) */',
+    '@media (prefers-color-scheme: dark) {',
+    '  :root:not([data-theme="light"]) {',
+    ...darkShadowLines.map(line => '  ' + line),
+    '  }',
+    '}',
+    '',
+    '/* Shadow dark overrides (explicit user choice) */',
+    ':root[data-theme="dark"] {',
+    ...darkShadowLines,
+    '}',
+    '',
+  );
 }
 
 mkdirSync(dirname(outputPath), { recursive: true });

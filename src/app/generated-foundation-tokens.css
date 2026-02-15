@@ -79,6 +79,60 @@
   --spacing-semantic-component-tab-bar-height: 48px;
   --spacing-semantic-component-tab-bar-item-gap: 8px;
   --spacing-semantic-component-divider-margin-y: 16px;
+  --spacing-semantic-component-segmented-control-container-padding: 3px;
+  --spacing-semantic-component-segmented-control-height-sm: 32px;
+  --spacing-semantic-component-segmented-control-height-md: 36px;
+  --spacing-semantic-component-segmented-control-height-lg: 42px;
+  --spacing-semantic-component-segmented-control-padding-x-sm: 12px;
+  --spacing-semantic-component-segmented-control-padding-x-md: 16px;
+  --spacing-semantic-component-segmented-control-padding-x-lg: 20px;
+  --spacing-semantic-component-segmented-control-icon-gap: 8px;
+  --spacing-semantic-component-chip-height-sm: 24px;
+  --spacing-semantic-component-chip-height-md: 32px;
+  --spacing-semantic-component-chip-height-lg: 40px;
+  --spacing-semantic-component-chip-padding-x-sm: 8px;
+  --spacing-semantic-component-chip-padding-x-md: 12px;
+  --spacing-semantic-component-chip-padding-x-lg: 16px;
+  --spacing-semantic-component-chip-gap: 4px;
+  --spacing-semantic-component-chip-icon-size-sm: 14px;
+  --spacing-semantic-component-chip-icon-size-md: 18px;
+  --spacing-semantic-component-chip-icon-size-lg: 22px;
+  --spacing-semantic-component-badge-height-sm: 18px;
+  --spacing-semantic-component-badge-height-md: 22px;
+  --spacing-semantic-component-badge-height-lg: 26px;
+  --spacing-semantic-component-badge-padding-x-sm: 6px;
+  --spacing-semantic-component-badge-padding-x-md: 8px;
+  --spacing-semantic-component-badge-padding-x-lg: 10px;
+  --spacing-semantic-component-badge-dot-size-sm: 4px;
+  --spacing-semantic-component-badge-dot-size-md: 6px;
+  --spacing-semantic-component-badge-dot-size-lg: 6px;
+  --spacing-semantic-component-badge-icon-size-sm: 10px;
+  --spacing-semantic-component-badge-icon-size-md: 12px;
+  --spacing-semantic-component-badge-icon-size-lg: 14px;
+  --spacing-semantic-component-accordion-height-md: 48px;
+  --spacing-semantic-component-accordion-height-lg: 56px;
+  --spacing-semantic-component-accordion-icon-size: 16px;
+  --spacing-semantic-component-table-min-height-sm: 40px;
+  --spacing-semantic-component-table-min-height-md: 44px;
+  --spacing-semantic-component-table-min-height-lg: 48px;
+  --spacing-semantic-component-table-head-cell-padding-y-sm: 6px;
+  --spacing-semantic-component-table-head-cell-padding-y-md: 8px;
+  --spacing-semantic-component-table-head-cell-padding-y-lg: 10px;
+  --spacing-semantic-component-icon-button-size-sm: 32px;
+  --spacing-semantic-component-icon-button-size-md: 40px;
+  --spacing-semantic-component-icon-button-size-lg: 48px;
+  --spacing-semantic-component-icon-button-icon-size-sm: 18px;
+  --spacing-semantic-component-icon-button-icon-size-md: 22px;
+  --spacing-semantic-component-icon-button-icon-size-lg: 26px;
+  --spacing-semantic-component-thumbnail-play-icon-size: 48px;
+  --spacing-semantic-component-list-cell-min-height-sm: 44px;
+  --spacing-semantic-component-list-cell-min-height-md: 56px;
+  --spacing-semantic-component-list-cell-min-height-lg: 72px;
+  --spacing-semantic-component-text-button-font-size-xs: 12px;
+  --spacing-semantic-component-text-button-font-size-sm: 14px;
+  --spacing-semantic-component-text-button-font-size-md: 16px;
+  --spacing-semantic-component-text-button-font-size-lg: 18px;
+  --spacing-semantic-component-text-button-font-size-xl: 20px;
 
   /* Radius tokens */
   --radius-primitive-none: 0px;
@@ -136,6 +190,7 @@
   --typography-primitive-font-size-3xs: 10px;
   --typography-primitive-font-size-2xs: 11px;
   --typography-primitive-font-size-xs: 12px;
+  --typography-primitive-font-size-compact: 13px;
   --typography-primitive-font-size-sm: 14px;
   --typography-primitive-font-size-md: 16px;
   --typography-primitive-font-size-lg: 18px;
@@ -149,6 +204,7 @@
   --typography-primitive-line-height-3xs: 14px;
   --typography-primitive-line-height-2xs: 16px;
   --typography-primitive-line-height-xs: 18px;
+  --typography-primitive-line-height-compact: 19px;
   --typography-primitive-line-height-sm: 20px;
   --typography-primitive-line-height-md: 24px;
   --typography-primitive-line-height-lg: 26px;
@@ -259,6 +315,16 @@
   --typography-semantic-caption-sm-font-size: 11px;
   --typography-semantic-caption-sm-line-height: 16px;
   --typography-semantic-caption-sm-letter-spacing: 0px;
+  --typography-semantic-compact-md-font-family: Pretendard-Regular;
+  --typography-semantic-compact-md-font-weight: 400;
+  --typography-semantic-compact-md-font-size: 13px;
+  --typography-semantic-compact-md-line-height: 19px;
+  --typography-semantic-compact-md-letter-spacing: 0px;
+  --typography-semantic-compact-sm-font-family: Pretendard-Medium;
+  --typography-semantic-compact-sm-font-weight: 500;
+  --typography-semantic-compact-sm-font-size: 13px;
+  --typography-semantic-compact-sm-line-height: 19px;
+  --typography-semantic-compact-sm-letter-spacing: 0px;
   --typography-semantic-numeric-xl-font-family: SpoqaHanSansNeo-Bold;
   --typography-semantic-numeric-xl-font-weight: 700;
   --typography-semantic-numeric-xl-font-size: 36px;
@@ -369,7 +435,22 @@
 
 }
 
-[data-theme="dark"] {
+/* Shadow dark overrides (system preference fallback) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --shadow-primitive-xs: 0px 1px 2px rgba(0, 0, 0, 0.20);
+    --shadow-primitive-sm: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    --shadow-primitive-md: 0px 4px 8px rgba(0, 0, 0, 0.30);
+    --shadow-primitive-lg: 0px 8px 16px rgba(0, 0, 0, 0.35);
+    --shadow-primitive-xl: 0px 12px 24px rgba(0, 0, 0, 0.40);
+    --shadow-primitive-2xl: 0px 16px 32px rgba(0, 0, 0, 0.45);
+    --shadow-dark-border-subtle: 0px 0px 0px 1px rgba(255, 255, 255, 0.06);
+    --shadow-dark-border-default: 0px 0px 0px 1px rgba(255, 255, 255, 0.10);
+  }
+}
+
+/* Shadow dark overrides (explicit user choice) */
+:root[data-theme="dark"] {
   --shadow-primitive-xs: 0px 1px 2px rgba(0, 0, 0, 0.20);
   --shadow-primitive-sm: 0px 2px 4px rgba(0, 0, 0, 0.25);
   --shadow-primitive-md: 0px 4px 8px rgba(0, 0, 0, 0.30);
