@@ -7,7 +7,7 @@ import { TextButton } from '@baerae-zkap/design-system';
 import { Section, Subsection, InlineCode } from "@/components/docs/Section";
 import { PropsTable } from "@/components/docs/PropsTable";
 import { PrincipleCard, VariantCard } from "@/components/docs/Cards";
-import { RadioGroup, CodeTypeTab, CopyButton } from "@/components/docs/Playground";
+import { RadioGroup, CopyButton } from "@/components/docs/Playground";
 import { DoLabel, DontLabel } from "@/components/docs/Labels";
 
 // Types
@@ -31,7 +31,7 @@ export default function TextButtonPage() {
         Text Button
       </h1>
       <p style={{ fontSize: 15, color: "var(--text-secondary)", marginBottom: 32, lineHeight: 1.6 }}>
-        배경 없이 텍스트만으로 구성된 버튼입니다. 시각적 노이즈를 줄이면서 보조 액션이나 낮은 우선순위의 동작을 유도할 때 사용합니다.
+        배경 없이 텍스트만으로 액션을 표현하는 최소한의 버튼입니다. 회원가입, 건너뛰기, 더보기 등 보조 액션이나 네비게이션 링크에 사용하며, Filled Button과 함께 자연스러운 시각적 계층을 형성합니다.
       </p>
 
       {/* Interactive Playground */}
@@ -50,7 +50,6 @@ function TextButtonPlayground() {
   const [color, setColor] = useState<TextButtonColor>("brandDefault");
   const [size, setSize] = useState<TextButtonSize>("medium");
   const [disabled, setDisabled] = useState(false);
-  const [codeType, setCodeType] = useState<"rn" | "web">("rn");
 
   const generateCode = () => {
     const props = [];
@@ -61,15 +60,9 @@ function TextButtonPlayground() {
 
     const propsStr = `\n  ${props.join("\n  ")}\n`;
 
-    if (codeType === "rn") {
-      return `<TextButton${propsStr}onPress={() => {}}>
+    return `<TextButton${propsStr}onClick={() => {}}>
   Text Button
 </TextButton>`;
-    } else {
-      return `<TextButton${propsStr}onClick={() => {}}>
-  Text Button
-</TextButton>`;
-    }
   };
 
   const colorLabels: Record<TextButtonColor, string> = {
@@ -131,7 +124,7 @@ function TextButtonPlayground() {
                 display: "flex",
                 flexDirection: "column",
                 gap: 28,
-                backgroundColor: "white",
+                backgroundColor: "var(--surface-base-default)",
                 borderRadius: 16,
               }}
             >
@@ -193,16 +186,13 @@ function TextButtonPlayground() {
         <div
           style={{
             padding: "10px 16px",
-            backgroundColor: "var(--inverse-surface-default)",
+            backgroundColor: "var(--docs-code-surface)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
           }}
         >
-          <div style={{ display: "flex", gap: 8 }}>
-            <CodeTypeTab active={codeType === "rn"} onClick={() => setCodeType("rn")}>React Native</CodeTypeTab>
-            <CodeTypeTab active={codeType === "web"} onClick={() => setCodeType("web")}>Web</CodeTypeTab>
-          </div>
+          <span style={{ fontSize: 13, fontWeight: 500, color: "var(--docs-code-active-text)" }}>Web</span>
           <CopyButton text={generateCode()} />
         </div>
         <pre
@@ -211,8 +201,8 @@ function TextButtonPlayground() {
             padding: 16,
             fontSize: 13,
             lineHeight: 1.6,
-            color: "var(--border-secondary-default)",
-            backgroundColor: "var(--inverse-surface-default)",
+            color: "var(--docs-code-text)",
+            backgroundColor: "var(--docs-code-surface)",
             fontFamily: "'SF Mono', 'Fira Code', monospace",
             overflow: "auto",
           }}
@@ -228,15 +218,44 @@ function PlatformContent({ platform }: { platform: Platform }) {
   if (platform === "design") {
     return <DesignContent />;
   }
-  if (platform === "web") {
-    return <WebContent />;
-  }
-  return <RNContent />;
+  return <WebContent />;
 }
 
 function DesignContent() {
   return (
-    <>
+    <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
+      {/* Overview */}
+      <Section title="Overview">
+        <div style={{ display: "grid", gap: 24 }}>
+          <div>
+            <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6, margin: 0 }}>
+              TextButton은 <strong style={{ color: "var(--text-primary)" }}>배경 없이 텍스트만으로 액션을 표현</strong>하는 최소한의 버튼입니다.
+              시각적 노이즈를 줄이면서 보조 액션이나 네비게이션 링크를 제공할 때 사용합니다.
+            </p>
+          </div>
+
+          <div>
+            <h4 style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", marginBottom: 12 }}>When to use</h4>
+            <ul style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.8, margin: 0, paddingLeft: 20 }}>
+              <li>Filled Button의 <strong style={{ color: "var(--text-primary)" }}>보조 액션</strong>으로 시각적 계층을 형성할 때 (회원가입, 건너뛰기)</li>
+              <li>섹션 헤더 옆 <strong style={{ color: "var(--text-primary)" }}>네비게이션 링크</strong>로 사용할 때 (더보기, 전체보기)</li>
+              <li>문장 내 <strong style={{ color: "var(--text-primary)" }}>인라인 액션</strong>이 필요할 때 (이용약관, 개인정보처리방침)</li>
+              <li>시각적 노이즈를 최소화하면서 <strong style={{ color: "var(--text-primary)" }}>반복적인 액션</strong>을 제공할 때</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", marginBottom: 12 }}>When NOT to use</h4>
+            <ul style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.8, margin: 0, paddingLeft: 20 }}>
+              <li><strong style={{ color: "var(--text-primary)" }}>주요 CTA 액션이라면</strong> → Button filled variant 사용 (시각적 강조 필요)</li>
+              <li><strong style={{ color: "var(--text-primary)" }}>아이콘만으로 충분한 액션이라면</strong> → IconButton 사용</li>
+              <li><strong style={{ color: "var(--text-primary)" }}>선택/필터 인터랙션이라면</strong> → Chip 사용</li>
+              <li><strong style={{ color: "var(--text-primary)" }}>실제 페이지 이동 링크라면</strong> → HTML <code>&lt;a&gt;</code> 태그를 사용하세요 (SEO, 접근성)</li>
+            </ul>
+          </div>
+        </div>
+      </Section>
+
       {/* Anatomy */}
       <Section title="Anatomy">
         <AnatomyDiagram />
@@ -616,7 +635,7 @@ function DesignContent() {
                   width: "100%",
                   height: 48,
                   backgroundColor: "var(--content-brand-default)",
-                  color: "white",
+                  color: "var(--content-base-onColor)",
                   border: "none",
                   borderRadius: 12,
                   fontSize: 16,
@@ -648,7 +667,7 @@ function DesignContent() {
             <PreviewBox>
               <div style={{ padding: "16px 20px" }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                  <span style={{ fontSize: 16, fontWeight: 700, color: "var(--inverse-surface-default)" }}>추천 상품</span>
+                  <span style={{ fontSize: 16, fontWeight: 700, color: "var(--text-primary)" }}>추천 상품</span>
                   <TextButtonDemo variant="arrow" color="baseDefault" size="small">
                     전체보기
                   </TextButtonDemo>
@@ -673,7 +692,7 @@ function DesignContent() {
       {/* Design Tokens */}
       <Section title="Design Tokens">
         <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
-          TextButton 컴포넌트에 적용된 Foundation 기반 디자인 토큰입니다. <a href="/spacing" style={{ color: "var(--brand-primary)" }}>Spacing 토큰 전체 보기 →</a>
+          TextButton 컴포넌트에 적용된 Foundation 기반 디자인 토큰입니다. <a href="/spacing" style={{ color: "var(--content-brand-default)" }}>Spacing 토큰 전체 보기 →</a>
         </p>
 
         <Subsection title="Spacing & Layout">
@@ -789,7 +808,44 @@ function DesignContent() {
           </div>
         </Subsection>
       </Section>
-    </>
+
+      {/* Related Components */}
+      <Section title="Related Components">
+        <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+            <thead>
+              <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>컴포넌트</th>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>용도</th>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>차이점</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                <td style={{ padding: "12px 16px", fontWeight: 500 }}>Button</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>주요/보조 액션 트리거</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>Button은 배경(filled/outlined)이 있어 시각적 무게감이 큼. TextButton은 텍스트만으로 최소한의 존재감</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                <td style={{ padding: "12px 16px", fontWeight: 500 }}>IconButton</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>아이콘 전용 원형 버튼</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>IconButton은 아이콘만, TextButton은 텍스트 중심. 공간이 극히 제한된 경우 IconButton 사용</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                <td style={{ padding: "12px 16px", fontWeight: 500 }}>Chip</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>필터링/선택 인터랙션</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>Chip은 선택 상태 토글용, TextButton은 단일 액션 실행/네비게이션용</td>
+              </tr>
+              <tr>
+                <td style={{ padding: "12px 16px", fontWeight: 500 }}>ActionArea</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>하단 액션 영역 컨테이너</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>ActionArea 내에서 Button과 함께 TextButton을 보조 액션으로 배치하는 패턴이 일반적</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </Section>
+    </div>
   );
 }
 
@@ -807,7 +863,7 @@ function UsageRecommendationCard({ situation, desc, variant, color, examples }: 
       gridTemplateColumns: "1fr auto",
       gap: 16,
       padding: 16,
-      backgroundColor: "white",
+      backgroundColor: "var(--surface-base-default)",
       borderRadius: 12,
       border: "1px solid var(--divider)",
       alignItems: "center",
@@ -861,8 +917,8 @@ function WebContent() {
               padding: "8px 16px",
               fontSize: 13,
               fontWeight: 500,
-              color: "white",
-              backgroundColor: "var(--inverse-surface-default)",
+              color: "var(--content-base-onColor)",
+              backgroundColor: "var(--docs-code-surface)",
               borderRadius: 12,
               textDecoration: "none",
             }}
@@ -961,7 +1017,7 @@ function WebContent() {
             <ActionAreaWithTextButton />
           </div>
         </PreviewBox>
-        <CodeBlock code={`<View style={{ flexDirection: 'column', gap: 12, padding: 20, alignItems: 'center' }}>
+        <CodeBlock code={`<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 20, alignItems: 'center' }}>
   <Button
     buttonType="filled"
     color="brandDefault"
@@ -977,7 +1033,7 @@ function WebContent() {
   >
     회원가입
   </TextButton>
-</View>`} />
+</div>`} />
       </Section>
 
       <Section title="States">
@@ -1015,192 +1071,6 @@ function WebContent() {
               { name: "type", type: '"button" | "submit" | "reset"', required: false, defaultVal: '"button"', description: "HTML button type" },
               { name: "aria-label", type: "string", required: false, description: "스크린 리더용 레이블" },
               { name: "aria-disabled", type: "boolean", required: false, description: "비활성화 상태 접근성 전달" },
-            ]}
-          />
-        </Subsection>
-      </Section>
-    </div>
-  );
-}
-
-const TEXTBUTTON_NATIVE_SOURCE = `${GITHUB_BASE}/native/TextButton.tsx`;
-
-function RNContent() {
-  return (
-    <div>
-      <Section title="Source Code">
-        <div style={{ padding: 16, backgroundColor: "var(--bg-secondary)", borderRadius: 12, marginBottom: 24, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <div>
-            <p style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", margin: 0 }}>TextButton Component</p>
-            <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: "4px 0 0 0" }}>실제 컴포넌트 소스 코드를 GitHub에서 확인하세요.</p>
-          </div>
-          <a
-            href={TEXTBUTTON_NATIVE_SOURCE}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 6,
-              padding: "8px 16px",
-              fontSize: 13,
-              fontWeight: 500,
-              color: "white",
-              backgroundColor: "var(--inverse-surface-default)",
-              borderRadius: 12,
-              textDecoration: "none",
-            }}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-            </svg>
-            View on GitHub
-          </a>
-        </div>
-      </Section>
-
-      <Section title="Import">
-        <CodeBlock code={`import { TextButton } from '@zkap/design-system';`} />
-      </Section>
-
-      <Section title="Basic Usage">
-        <PreviewBox>
-          <div style={{ display: "flex", gap: 16, alignItems: "center", padding: 24 }}>
-            <TextButtonDemo variant="clear" color="brandDefault" size="medium">Text Button</TextButtonDemo>
-          </div>
-        </PreviewBox>
-        <CodeBlock code={`<TextButton
-  variant="clear"
-  color="brandDefault"
-  size="medium"
-  onPress={() => {}}
->
-  Text Button
-</TextButton>`} />
-      </Section>
-
-      <Section title="Variants">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
-          세 가지 variant를 제공합니다: clear(기본), underline, arrow
-        </p>
-        <PreviewBox>
-          <div style={{ display: "flex", gap: 24, alignItems: "center", padding: 24 }}>
-            <TextButtonDemo variant="clear" color="brandDefault" size="medium">Clear</TextButtonDemo>
-            <TextButtonDemo variant="underline" color="brandDefault" size="medium">Underline</TextButtonDemo>
-            <TextButtonDemo variant="arrow" color="brandDefault" size="medium">Arrow</TextButtonDemo>
-          </div>
-        </PreviewBox>
-        <CodeBlock code={`{/* Clear (default) */}
-<TextButton variant="clear" onPress={() => {}}>
-  Clear
-</TextButton>
-
-{/* Underline */}
-<TextButton variant="underline" onPress={() => {}}>
-  Underline
-</TextButton>
-
-{/* Arrow - for navigation */}
-<TextButton variant="arrow" onPress={() => {}}>
-  Arrow
-</TextButton>`} />
-      </Section>
-
-      <Section title="Colors">
-        <PreviewBox>
-          <div style={{ display: "flex", gap: 24, alignItems: "center", padding: 24 }}>
-            <TextButtonDemo variant="clear" color="brandDefault" size="medium">Brand</TextButtonDemo>
-            <TextButtonDemo variant="clear" color="baseDefault" size="medium">Base</TextButtonDemo>
-            <TextButtonDemo variant="clear" color="errorDefault" size="medium">Error</TextButtonDemo>
-          </div>
-        </PreviewBox>
-        <CodeBlock code={`<TextButton color="brandDefault" onPress={() => {}}>Brand</TextButton>
-<TextButton color="baseDefault" onPress={() => {}}>Base</TextButton>
-<TextButton color="errorDefault" onPress={() => {}}>Error</TextButton>`} />
-      </Section>
-
-      <Section title="Sizes">
-        <PreviewBox>
-          <div style={{ display: "flex", gap: 24, alignItems: "center", padding: 24 }}>
-            <TextButtonDemo variant="clear" color="brandDefault" size="xSmall">XSmall</TextButtonDemo>
-            <TextButtonDemo variant="clear" color="brandDefault" size="small">Small</TextButtonDemo>
-            <TextButtonDemo variant="clear" color="brandDefault" size="medium">Medium</TextButtonDemo>
-            <TextButtonDemo variant="clear" color="brandDefault" size="large">Large</TextButtonDemo>
-            <TextButtonDemo variant="clear" color="brandDefault" size="xLarge">XLarge</TextButtonDemo>
-          </div>
-        </PreviewBox>
-        <CodeBlock code={`<TextButton size="xSmall" onPress={() => {}}>XSmall</TextButton>
-<TextButton size="small" onPress={() => {}}>Small</TextButton>
-<TextButton size="medium" onPress={() => {}}>Medium</TextButton>
-<TextButton size="large" onPress={() => {}}>Large</TextButton>
-<TextButton size="xLarge" onPress={() => {}}>XLarge</TextButton>`} />
-      </Section>
-
-      <Section title="With Action Area">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
-          Action Area에서 보조 액션으로 사용됩니다. 주요 버튼과 함께 시각적 계층을 형성합니다.
-        </p>
-        <PreviewBox>
-          <div style={{ width: "100%", maxWidth: 320 }}>
-            <ActionAreaWithTextButton />
-          </div>
-        </PreviewBox>
-        <CodeBlock code={`<View style={{ flexDirection: 'column', gap: 12, padding: 20, alignItems: 'center' }}>
-  <Button
-    buttonType="filled"
-    color="brandDefault"
-    size="xLarge"
-    layout="fillWidth"
-    onPress={() => {}}
-  >
-    로그인
-  </Button>
-  <TextButton
-    color="brandDefault"
-    onPress={() => {}}
-  >
-    회원가입
-  </TextButton>
-</View>`} />
-      </Section>
-
-      <Section title="States">
-        <PreviewBox>
-          <div style={{ display: "flex", gap: 24, alignItems: "center", padding: 24 }}>
-            <TextButtonDemo variant="clear" color="brandDefault" size="medium">Default</TextButtonDemo>
-            <TextButtonDemo variant="clear" color="brandDefault" size="medium" disabled>Disabled</TextButtonDemo>
-          </div>
-        </PreviewBox>
-        <CodeBlock code={`<TextButton color="brandDefault" onPress={() => {}}>
-  Default
-</TextButton>
-
-<TextButton color="brandDefault" disabled onPress={() => {}}>
-  Disabled
-</TextButton>`} />
-      </Section>
-
-      <Section title="API Reference">
-        <Subsection title="Common Props">
-          <PropsTable
-            props={[
-              { name: "children", type: "ReactNode", required: true, description: "버튼 텍스트" },
-              { name: "variant", type: '"clear" | "underline" | "arrow"', required: false, defaultVal: '"clear"', description: "버튼 스타일 변형" },
-              { name: "color", type: '"brandDefault" | "baseDefault" | "errorDefault"', required: false, defaultVal: '"brandDefault"', description: "텍스트 색상" },
-              { name: "size", type: '"xSmall" | "small" | "medium" | "large" | "xLarge"', required: false, defaultVal: '"medium"', description: "텍스트 크기" },
-              { name: "disabled", type: "boolean", required: false, defaultVal: "false", description: "비활성화 상태" },
-            ]}
-          />
-        </Subsection>
-        <Subsection title="React Native-specific Props">
-          <PropsTable
-            props={[
-              { name: "onPress", type: "(event: GestureResponderEvent) => void", required: false, description: "탭 핸들러" },
-              { name: "onPressIn", type: "(event: GestureResponderEvent) => void", required: false, description: "터치 시작 핸들러" },
-              { name: "onPressOut", type: "(event: GestureResponderEvent) => void", required: false, description: "터치 종료 핸들러" },
-              { name: "accessibilityLabel", type: "string", required: false, description: "스크린 리더용 레이블" },
-              { name: "accessibilityHint", type: "string", required: false, description: "동작 힌트 설명" },
-              { name: "hitSlop", type: "Insets", required: false, description: "터치 영역 확장" },
             ]}
           />
         </Subsection>
@@ -1251,167 +1121,6 @@ function AnatomyDiagram() {
   );
 }
 
-// Guideline Item
-function GuidelineItem({ type, title, description }: { type: "do" | "dont"; title: string; description: string }) {
-  return (
-    <div style={{ display: "flex", gap: 16 }}>
-      <div
-        style={{
-          width: 24,
-          height: 24,
-          borderRadius: "50%",
-          backgroundColor: type === "do" ? "var(--status-positive-content)" : "var(--status-negative-content)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flexShrink: 0,
-        }}
-      >
-        {type === "do" ? (
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
-            <polyline points="20 6 9 17 4 12" />
-          </svg>
-        ) : (
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
-            <line x1="18" y1="6" x2="6" y2="18" />
-            <line x1="6" y1="6" x2="18" y2="18" />
-          </svg>
-        )}
-      </div>
-      <div>
-        <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 4, color: "var(--text-primary)" }}>{title}</div>
-        <div style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.6 }}>{description}</div>
-      </div>
-    </div>
-  );
-}
-
-// Variant Card for 2x2 grid layout
-// Phone Frame Component for Usage Guidelines
-function PhoneFrame({ children }: { children: React.ReactNode }) {
-  return (
-    <div
-      style={{
-        borderRadius: 24,
-        border: "2px solid var(--border-base-default)",
-        overflow: "hidden",
-        backgroundColor: "white",
-      }}
-    >
-      {/* Status Bar */}
-      <div style={{
-        padding: "8px 16px",
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        fontSize: 12,
-        fontWeight: 500,
-        color: "var(--inverse-surface-default)",
-      }}>
-        <span>9:41</span>
-        <div style={{ display: "flex", gap: 4, alignItems: "center" }}>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 3C7.46 3 3.34 4.78.29 7.67c-.18.18-.29.43-.29.71 0 .28.11.53.29.71l2.48 2.48c.18.18.43.29.71.29.27 0 .52-.11.7-.28.79-.74 1.69-1.36 2.66-1.85.33-.16.56-.5.56-.9v-3.1c1.45-.48 3-.73 4.6-.73s3.15.25 4.6.73v3.1c0 .4.23.74.56.9.98.49 1.87 1.12 2.67 1.85.18.18.43.28.7.28.28 0 .53-.11.71-.29l2.48-2.48c.18-.18.29-.43.29-.71 0-.28-.11-.53-.29-.71C20.66 4.78 16.54 3 12 3z"/>
-          </svg>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/>
-          </svg>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div style={{ minHeight: 160 }}>
-        {children}
-      </div>
-
-      {/* Home Indicator */}
-      <div style={{ padding: "8px 0 12px", display: "flex", justifyContent: "center" }}>
-        <div style={{ width: 60, height: 4, backgroundColor: "var(--border-base-default)", borderRadius: 2 }} />
-      </div>
-    </div>
-  );
-}
-
-// Usage Card Component with partial phone frame
-function UsageCard({ type, title, description, position = "top", children }: {
-  type: "do" | "dont";
-  title: string;
-  description: string;
-  position?: "top" | "bottom";
-  children: React.ReactNode;
-}) {
-  const isBottom = position === "bottom";
-
-  return (
-    <div>
-      {/* Card with gray background and partial phone frame */}
-      <div
-        style={{
-          backgroundColor: "var(--surface-base-alternative)",
-          borderRadius: 16,
-          padding: isBottom ? "0 24px 24px" : "24px 24px 0",
-          overflow: "hidden",
-        }}
-      >
-        {/* Partial Phone Frame */}
-        <div
-          style={{
-            backgroundColor: "white",
-            borderRadius: isBottom ? "0 0 20px 20px" : "20px 20px 0 0",
-            borderLeft: "2px solid var(--border-base-default)",
-            borderRight: "2px solid var(--border-base-default)",
-            borderTop: isBottom ? "none" : "2px solid var(--border-base-default)",
-            borderBottom: isBottom ? "2px solid var(--border-base-default)" : "none",
-            overflow: "hidden",
-            marginTop: isBottom ? 0 : 20,
-            marginBottom: isBottom ? 20 : 0,
-          }}
-        >
-          {children}
-          {/* Home indicator for bottom position */}
-          {isBottom && (
-            <div style={{ padding: "8px 0 12px", backgroundColor: "white", display: "flex", justifyContent: "center" }}>
-              <div style={{ width: 60, height: 4, backgroundColor: "var(--border-base-default)", borderRadius: 2 }} />
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* Do/Don't indicator with description */}
-      <div style={{ display: "flex", gap: 12, marginTop: 16, alignItems: "flex-start" }}>
-        <div
-          style={{
-            width: 22,
-            height: 22,
-            borderRadius: "50%",
-            backgroundColor: type === "do" ? "var(--status-positive-content)" : "var(--status-negative-content)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexShrink: 0,
-            marginTop: 1,
-          }}
-        >
-          {type === "do" ? (
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
-              <polyline points="20 6 9 17 4 12" />
-            </svg>
-          ) : (
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
-              <line x1="18" y1="6" x2="6" y2="18" />
-              <line x1="6" y1="6" x2="18" y2="18" />
-            </svg>
-          )}
-        </div>
-        <div>
-          <div style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", marginBottom: 4 }}>{title}</div>
-          <div style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.6 }}>{description}</div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 // Action Area with Text Button Demo
 function ActionAreaWithTextButton() {
   return (
@@ -1422,10 +1131,10 @@ function ActionAreaWithTextButton() {
         borderBottom: "2px solid var(--border-base-default)",
         borderRadius: "0 0 20px 20px",
         overflow: "hidden",
-        backgroundColor: "white",
+        backgroundColor: "var(--surface-base-default)",
       }}
     >
-      <div style={{ padding: 20, backgroundColor: "white" }}>
+      <div style={{ padding: 20, backgroundColor: "var(--surface-base-default)" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: 12, alignItems: "center" }}>
           {/* Main Button */}
           <button
@@ -1433,7 +1142,7 @@ function ActionAreaWithTextButton() {
               width: "100%",
               height: 48,
               backgroundColor: "var(--content-brand-default)",
-              color: "white",
+              color: "var(--content-base-onColor)",
               border: "none",
               borderRadius: 12,
               fontSize: 16,
@@ -1450,7 +1159,7 @@ function ActionAreaWithTextButton() {
         </div>
       </div>
       {/* Home indicator */}
-      <div style={{ padding: "8px 0 12px", backgroundColor: "white", display: "flex", justifyContent: "center" }}>
+      <div style={{ padding: "8px 0 12px", backgroundColor: "var(--surface-base-default)", display: "flex", justifyContent: "center" }}>
         <div style={{ width: 60, height: 4, backgroundColor: "var(--border-base-default)", borderRadius: 2 }} />
       </div>
     </div>
