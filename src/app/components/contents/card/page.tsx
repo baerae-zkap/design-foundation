@@ -7,7 +7,7 @@ import { Card } from '@baerae-zkap/design-system';
 import { Section, Subsection } from "@/components/docs/Section";
 import { PropsTable } from "@/components/docs/PropsTable";
 import { PrincipleCard, VariantCard, DoCard, DontCard } from "@/components/docs/Cards";
-import { RadioGroup, CodeTypeTab, CopyButton } from "@/components/docs/Playground";
+import { RadioGroup, CopyButton } from "@/components/docs/Playground";
 
 // Types
 type CardVariant = "elevated" | "outlined" | "filled";
@@ -29,7 +29,7 @@ export default function CardPage() {
         Card
       </h1>
       <p style={{ fontSize: 15, color: "var(--text-secondary)", marginBottom: 32, lineHeight: 1.6 }}>
-        콘텐츠를 그룹화하여 표시하는 컨테이너입니다. 프로필, 상품, 설정 항목 등을 담을 때 사용됩니다.
+        관련 정보를 하나의 시각적 단위로 그룹화하는 컨테이너입니다. 콘텐츠 간 시각적 계층과 구조를 만듭니다.
       </p>
 
       {/* Interactive Playground */}
@@ -47,19 +47,18 @@ function CardPlayground() {
   const [variant, setVariant] = useState<CardVariant>("elevated");
   const [padding, setPadding] = useState<CardPadding>("medium");
   const [clickable, setClickable] = useState(false);
-  const [codeType, setCodeType] = useState<"rn" | "web">("rn");
 
   const generateCode = () => {
     const props = [];
     if (variant !== "elevated") props.push(`variant="${variant}"`);
     if (padding !== "medium") props.push(`padding="${padding}"`);
-    if (clickable) props.push(codeType === "rn" ? "onPress={() => {}}" : "onClick={() => {}}");
+    if (clickable) props.push("onClick={() => {}}");
 
     const propsStr = props.length > 0 ? `\n  ${props.join("\n  ")}\n` : "";
 
     return `<Card${propsStr}>
-  <Text style={{ fontWeight: '600' }}>Card Title</Text>
-  <Text>Card content goes here</Text>
+  <h3>Card Title</h3>
+  <p>Card content goes here</p>
 </Card>`;
   };
 
@@ -80,7 +79,7 @@ function CardPlayground() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              backgroundColor: variant === "filled" ? "white" : "var(--surface-base-alternative)",
+              backgroundColor: variant === "filled" ? "var(--surface-base-default)" : "var(--surface-base-alternative)",
             }}
           >
             <CardDemo
@@ -118,7 +117,7 @@ function CardPlayground() {
                 display: "flex",
                 flexDirection: "column",
                 gap: 28,
-                backgroundColor: "white",
+                backgroundColor: "var(--surface-base-default)",
                 borderRadius: 16,
               }}
             >
@@ -167,15 +166,21 @@ function CardPlayground() {
         <div
           style={{
             padding: "10px 16px",
-            backgroundColor: "var(--inverse-surface-default)",
+            backgroundColor: "var(--docs-code-surface)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
           }}
         >
           <div style={{ display: "flex", gap: 8 }}>
-            <CodeTypeTab active={codeType === "rn"} onClick={() => setCodeType("rn")}>React Native</CodeTypeTab>
-            <CodeTypeTab active={codeType === "web"} onClick={() => setCodeType("web")}>Web</CodeTypeTab>
+            <span style={{
+              fontSize: 13,
+              fontWeight: 600,
+              padding: "4px 12px",
+              borderRadius: 6,
+              color: "var(--content-base-onColor)",
+              backgroundColor: "var(--docs-code-active-bg)",
+            }}>Web</span>
           </div>
           <CopyButton text={generateCode()} />
         </div>
@@ -185,8 +190,8 @@ function CardPlayground() {
             padding: 16,
             fontSize: 13,
             lineHeight: 1.6,
-            color: "var(--border-secondary-default)",
-            backgroundColor: "var(--inverse-surface-default)",
+            color: "var(--docs-code-text)",
+            backgroundColor: "var(--docs-code-surface)",
             fontFamily: "'SF Mono', 'Fira Code', monospace",
             overflow: "auto",
           }}
@@ -203,15 +208,107 @@ function PlatformContent({ platform }: { platform: Platform }) {
   if (platform === "design") {
     return <DesignContent />;
   }
-  if (platform === "web") {
-    return <WebContent />;
-  }
-  return <RNContent />;
+  return <WebContent />;
 }
 
 function DesignContent() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
+      {/* Overview */}
+      <div>
+        <h2
+          style={{
+            fontSize: 24,
+            fontWeight: 700,
+            color: "var(--text-primary)",
+            marginBottom: 8,
+          }}
+        >
+          개요
+        </h2>
+        <p
+          style={{
+            fontSize: 16,
+            lineHeight: 1.6,
+            color: "var(--text-secondary)",
+            marginBottom: 24,
+          }}
+        >
+          Card는 관련 정보를 하나의 시각적 단위로 그룹화하는 컨테이너 컴포넌트입니다. 콘텐츠를 구조화하고 시각적 계층을 만들어 사용자가 정보를 쉽게 탐색할 수 있게 합니다.
+        </p>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: 24,
+          }}
+        >
+          <div
+            style={{
+              padding: 24,
+              borderRadius: 12,
+              backgroundColor: "var(--surface-success-default)",
+              border: "1px solid var(--border-success-default)",
+            }}
+          >
+            <h3
+              style={{
+                fontSize: 16,
+                fontWeight: 600,
+                color: "var(--content-success-default)",
+                marginBottom: 12,
+              }}
+            >
+              이런 경우 사용하세요
+            </h3>
+            <ul
+              style={{
+                fontSize: 14,
+                lineHeight: 1.8,
+                color: "var(--text-secondary)",
+                paddingLeft: 20,
+                margin: 0,
+              }}
+            >
+              <li>관련 콘텐츠를 하나의 단위로 묶어 표시할 때</li>
+              <li>그리드 레이아웃에서 반복 가능한 콘텐츠 단위가 필요할 때</li>
+              <li>콘텐츠 간 시각적 구분이 필요할 때</li>
+            </ul>
+          </div>
+          <div
+            style={{
+              padding: 24,
+              borderRadius: 12,
+              backgroundColor: "var(--surface-error-default)",
+              border: "1px solid var(--border-error-default)",
+            }}
+          >
+            <h3
+              style={{
+                fontSize: 16,
+                fontWeight: 600,
+                color: "var(--content-error-default)",
+                marginBottom: 12,
+              }}
+            >
+              이런 경우 사용하지 마세요
+            </h3>
+            <ul
+              style={{
+                fontSize: 14,
+                lineHeight: 1.8,
+                color: "var(--text-secondary)",
+                paddingLeft: 20,
+                margin: 0,
+              }}
+            >
+              <li>단순 텍스트 나열에는 사용하지 마세요 — 불필요한 시각적 무게를 더합니다</li>
+              <li>페이지 전체 레이아웃 컨테이너로 사용하지 마세요</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
       {/* Anatomy */}
       <Section title="Anatomy">
         <div style={{
@@ -584,7 +681,7 @@ function DesignContent() {
               <CardDemo variant="elevated" padding="small">
                 <p style={{ margin: 0, fontSize: 11, color: "var(--content-base-secondary)" }}>Elevated</p>
               </CardDemo>
-              <div style={{ padding: 12, backgroundColor: "white", borderRadius: 12, boxShadow: "0 1px 3px var(--shadow-primitive-xs)", border: "1px solid var(--border-base-default)" }}>
+              <div style={{ padding: 12, backgroundColor: "var(--surface-base-default)", borderRadius: 12, boxShadow: "0 1px 3px var(--shadow-primitive-xs)", border: "1px solid var(--border-base-default)" }}>
                 <p style={{ margin: 0, fontSize: 11, color: "var(--content-base-secondary)" }}>Mixed</p>
               </div>
             </div>
@@ -601,13 +698,62 @@ function DesignContent() {
           </p>
         </div>
       </Section>
+
+      {/* Related Components */}
+      <div>
+        <h2
+          style={{
+            fontSize: 24,
+            fontWeight: 700,
+            color: "var(--text-primary)",
+            marginBottom: 16,
+          }}
+        >
+          관련 컴포넌트
+        </h2>
+        <table
+          style={{
+            width: "100%",
+            borderCollapse: "collapse",
+            fontSize: 14,
+          }}
+        >
+          <thead>
+            <tr
+              style={{
+                borderBottom: "2px solid var(--border-default)",
+              }}
+            >
+              <th style={{ textAlign: "left", padding: "12px 16px", color: "var(--text-primary)" }}>컴포넌트</th>
+              <th style={{ textAlign: "left", padding: "12px 16px", color: "var(--text-primary)" }}>용도</th>
+              <th style={{ textAlign: "left", padding: "12px 16px", color: "var(--text-primary)" }}>차이점</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+              <td style={{ padding: "12px 16px", fontWeight: 600, color: "var(--text-primary)" }}>ListCell</td>
+              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>콘텐츠 표시</td>
+              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>ListCell은 단일 행, Card는 자유 레이아웃 컨테이너</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+              <td style={{ padding: "12px 16px", fontWeight: 600, color: "var(--text-primary)" }}>ActionArea</td>
+              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>터치 가능한 영역</td>
+              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>ActionArea는 Card 내부에서 인터랙션 영역 지정</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+              <td style={{ padding: "12px 16px", fontWeight: 600, color: "var(--text-primary)" }}>ContentBadge</td>
+              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>정보 라벨</td>
+              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>ContentBadge는 Card 내부 상태 표시에 사용</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
 
 const GITHUB_BASE = "https://github.com/baerae-zkap/design-foundation/blob/main/packages/design-system/src";
 const CARD_SOURCE = `${GITHUB_BASE}/components/Card/Card.tsx`;
-const CARD_NATIVE_SOURCE = `${GITHUB_BASE}/native/Card.tsx`;
 
 function WebContent() {
   return (
@@ -630,8 +776,8 @@ function WebContent() {
               padding: "8px 16px",
               fontSize: 13,
               fontWeight: 500,
-              color: "white",
-              backgroundColor: "var(--inverse-surface-default)",
+              color: "var(--content-base-onColor)",
+              backgroundColor: "var(--docs-code-surface)",
               borderRadius: 12,
               textDecoration: "none",
             }}
@@ -725,90 +871,6 @@ function WebContent() {
   );
 }
 
-function RNContent() {
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
-      {/* Source Code */}
-      <Section title="Source Code">
-        <div style={{ padding: 16, backgroundColor: "var(--bg-secondary)", borderRadius: 12, marginBottom: 24, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <div>
-            <p style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", margin: 0 }}>Card Component</p>
-            <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: "4px 0 0 0" }}>실제 컴포넌트 소스 코드를 GitHub에서 확인하세요.</p>
-          </div>
-          <a
-            href={CARD_NATIVE_SOURCE}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 6,
-              padding: "8px 16px",
-              fontSize: 13,
-              fontWeight: 500,
-              color: "white",
-              backgroundColor: "var(--inverse-surface-default)",
-              borderRadius: 12,
-              textDecoration: "none",
-            }}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-            </svg>
-            View on GitHub
-          </a>
-        </div>
-      </Section>
-
-      {/* Import */}
-      <Section title="Import">
-        <CodeBlock code={`import { Card } from '@baerae-zkap/design-system/native';`} />
-      </Section>
-
-      {/* Basic Usage */}
-      <Section title="Basic Usage">
-        <PreviewBox>
-          <div style={{ padding: 24 }}>
-            <CardDemo variant="elevated" padding="medium">
-              <p style={{ margin: 0, fontWeight: 600, fontSize: 16, color: "var(--content-base-strong)", marginBottom: 8 }}>
-                Card Title
-              </p>
-              <p style={{ margin: 0, fontSize: 14, color: "var(--content-base-secondary)" }}>
-                Card content goes here.
-              </p>
-            </CardDemo>
-          </div>
-        </PreviewBox>
-        <CodeBlock code={`<Card>
-  <Text style={{ fontWeight: '600' }}>Card Title</Text>
-  <Text>Card content goes here.</Text>
-</Card>`} />
-      </Section>
-
-      {/* Clickable */}
-      <Section title="Clickable Card">
-        <CodeBlock code={`<Card onPress={() => console.log('pressed')}>
-  <Text style={{ fontWeight: '600' }}>Tap me</Text>
-  <Text>This card is interactive</Text>
-</Card>`} />
-      </Section>
-
-      {/* API Reference */}
-      <Section title="API Reference">
-        <PropsTable
-          props={[
-            { name: "variant", type: '"elevated" | "outlined" | "filled"', required: false, defaultVal: '"elevated"', description: "카드 스타일" },
-            { name: "padding", type: '"none" | "small" | "medium" | "large"', required: false, defaultVal: '"medium"', description: "내부 여백" },
-            { name: "children", type: "ReactNode", required: true, description: "카드 콘텐츠" },
-            { name: "onPress", type: "(event) => void", required: false, description: "탭 핸들러 (터치 가능한 카드)" },
-            { name: "disabled", type: "boolean", required: false, defaultVal: "false", description: "비활성화 상태" },
-          ]}
-        />
-      </Section>
-    </div>
-  );
-}
-
 // ============================================
 // Shared Components
 // ============================================
@@ -825,7 +887,7 @@ function UsageCard({ situation, description, recommendation, examples }: {
       gridTemplateColumns: "1fr auto",
       gap: 16,
       padding: 16,
-      backgroundColor: "white",
+      backgroundColor: "var(--surface-base-default)",
       borderRadius: 12,
       border: "1px solid var(--divider)",
       alignItems: "center",

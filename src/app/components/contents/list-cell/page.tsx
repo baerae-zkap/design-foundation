@@ -38,7 +38,7 @@ export default function ListCellPage() {
         List Cell
       </h1>
       <p style={{ fontSize: 15, color: "var(--text-secondary)", marginBottom: 32, lineHeight: 1.6 }}>
-        리스트 아이템을 표시하는 수평 레이아웃 컴포넌트입니다. 설정, 네비게이션, 데이터 목록 등 다양한 리스트 UI에 사용됩니다.
+        리스트의 각 행을 구성하는 기본 단위입니다. 레이블, 설명, 액세서리를 일관된 레이아웃으로 제공합니다.
       </p>
 
       <ListCellPlayground />
@@ -183,8 +183,7 @@ function ListCellPlayground() {
 
 function PlatformContent({ platform }: { platform: Platform }) {
   if (platform === "design") return <DesignContent />;
-  if (platform === "web") return <WebContent />;
-  return <RNContent />;
+  return <WebContent />;
 }
 
 // ============================================
@@ -192,7 +191,32 @@ function PlatformContent({ platform }: { platform: Platform }) {
 // ============================================
 function DesignContent() {
   return (
-    <>
+    <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
+      {/* Overview */}
+      <div>
+        <h2 style={{ fontSize: 24, fontWeight: 700, color: "var(--text-primary)", marginBottom: 8 }}>개요</h2>
+        <p style={{ fontSize: 16, lineHeight: 1.6, color: "var(--text-secondary)", marginBottom: 24 }}>
+          ListCell은 리스트의 각 행을 구성하는 기본 단위 컴포넌트입니다. 레이블, 설명, 액세서리 등을 일관된 레이아웃으로 표시합니다.
+        </p>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
+          <div style={{ padding: 24, borderRadius: 12, backgroundColor: "var(--surface-success-default)", border: "1px solid var(--border-success-default)" }}>
+            <h3 style={{ fontSize: 16, fontWeight: 600, color: "var(--content-success-default)", marginBottom: 12 }}>이런 경우 사용하세요</h3>
+            <ul style={{ fontSize: 14, lineHeight: 1.8, color: "var(--text-secondary)", paddingLeft: 20, margin: 0 }}>
+              <li>설정 화면의 옵션 항목을 나열할 때</li>
+              <li>메뉴나 네비게이션 목록을 구성할 때</li>
+              <li>단순한 텍스트 기반 리스트가 필요할 때</li>
+            </ul>
+          </div>
+          <div style={{ padding: 24, borderRadius: 12, backgroundColor: "var(--surface-error-default)", border: "1px solid var(--border-error-default)" }}>
+            <h3 style={{ fontSize: 16, fontWeight: 600, color: "var(--content-error-default)", marginBottom: 12 }}>이런 경우 사용하지 마세요</h3>
+            <ul style={{ fontSize: 14, lineHeight: 1.8, color: "var(--text-secondary)", paddingLeft: 20, margin: 0 }}>
+              <li>썸네일이 포함된 미디어 리스트에는 ListCard를 사용하세요</li>
+              <li>복잡한 레이아웃이 필요하면 Card를 사용하세요</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
       {/* Anatomy */}
       <Section title="Anatomy">
         <div style={{ backgroundColor: "var(--surface-base-container)", borderRadius: 16, padding: "48px 40px", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -591,7 +615,38 @@ function DesignContent() {
           </div>
         </Subsection>
       </Section>
-    </>
+
+      {/* Related Components */}
+      <div>
+        <h2 style={{ fontSize: 24, fontWeight: 700, color: "var(--text-primary)", marginBottom: 16 }}>관련 컴포넌트</h2>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+          <thead>
+            <tr style={{ borderBottom: "2px solid var(--border-default)" }}>
+              <th style={{ textAlign: "left", padding: "12px 16px", color: "var(--text-primary)" }}>컴포넌트</th>
+              <th style={{ textAlign: "left", padding: "12px 16px", color: "var(--text-primary)" }}>용도</th>
+              <th style={{ textAlign: "left", padding: "12px 16px", color: "var(--text-primary)" }}>차이점</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+              <td style={{ padding: "12px 16px", fontWeight: 600, color: "var(--text-primary)" }}>ListCard</td>
+              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>리스트 항목</td>
+              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>ListCard는 썸네일 포함, ListCell은 텍스트 중심</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+              <td style={{ padding: "12px 16px", fontWeight: 600, color: "var(--text-primary)" }}>Table</td>
+              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>데이터 나열</td>
+              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>Table은 열 기반 구조화, ListCell은 단일 행</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+              <td style={{ padding: "12px 16px", fontWeight: 600, color: "var(--text-primary)" }}>Accordion</td>
+              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>목록 표시</td>
+              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>Accordion은 펼침 콘텐츠 포함, ListCell은 단일 행</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 }
 
@@ -811,185 +866,6 @@ function WebContent() {
             props={[
               { name: "onClick", type: "() => void", required: false, description: "클릭 핸들러" },
               { name: "aria-label", type: "string", required: false, description: "스크린 리더용 레이블" },
-            ]}
-          />
-        </Subsection>
-      </Section>
-    </>
-  );
-}
-
-// ============================================
-// React Native Tab Content
-// ============================================
-function RNContent() {
-  return (
-    <>
-      <Section title="Source Code">
-        <div style={{ padding: 16, backgroundColor: "var(--bg-secondary)", borderRadius: 12, marginBottom: 24, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <div>
-            <p style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", margin: 0 }}>ListCell Component</p>
-            <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: "4px 0 0 0" }}>실제 컴포넌트 소스 코드를 GitHub에서 확인하세요.</p>
-          </div>
-          <a
-            href={LISTCELL_SOURCE}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 6,
-              padding: "8px 16px",
-              fontSize: 13,
-              fontWeight: 500,
-              color: "var(--content-base-onColor)",
-              backgroundColor: "var(--docs-code-surface)",
-              borderRadius: 12,
-              textDecoration: "none",
-            }}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-            </svg>
-            View on GitHub
-          </a>
-        </div>
-      </Section>
-
-      <Section title="Import">
-        <CodeBlock code={`import { ListCell } from '@baerae-zkap/design-system/native';`} />
-      </Section>
-
-      <Section title="Basic Usage">
-        <CodeBlock code={`<ListCell
-  leading={<Avatar src="user.jpg" />}
-  title="홍길동"
-  subtitle="hong@example.com"
-  trailing={<ChevronRight />}
-  onPress={() => navigate('user-detail')}
-/>`} />
-      </Section>
-
-      <Section title="Variants">
-        <Subsection title="Settings List">
-          <CodeBlock code={`<View style={{ backgroundColor: 'white', borderRadius: 16 }}>
-  <ListCell
-    leading={<SettingsIcon />}
-    title="알림 설정"
-    trailing={<ChevronRight />}
-    onPress={() => navigate('notifications')}
-    divider
-  />
-  <ListCell
-    leading={<SecurityIcon />}
-    title="보안"
-    trailing={<ChevronRight />}
-    onPress={() => navigate('security')}
-  />
-</View>`} />
-        </Subsection>
-
-        <Subsection title="Asset List with Values">
-          <CodeBlock code={`<View style={{ backgroundColor: 'white', borderRadius: 16 }}>
-  <SectionHeader title="내 자산" />
-  <ListCell
-    leading={<CryptoIcon symbol="ETH" />}
-    title="Ethereum"
-    subtitle="0.7812 ETH"
-    trailing={<Text style={{ fontWeight: '600' }}>₩3,245,000</Text>}
-    onPress={() => navigate('eth-detail')}
-    divider
-  />
-  <ListCell
-    leading={<CryptoIcon symbol="BTC" />}
-    title="Bitcoin"
-    subtitle="0.0234 BTC"
-    trailing={<Text style={{ fontWeight: '600' }}>₩2,890,000</Text>}
-    onPress={() => navigate('btc-detail')}
-  />
-</View>`} />
-        </Subsection>
-      </Section>
-
-      <Section title="Colors">
-        <CodeBlock code={`{/* 상태 표시가 있는 리스트 */}
-<View style={{ backgroundColor: 'white', borderRadius: 16 }}>
-  <ListCell
-    leading={<ExchangeIcon name="upbit" />}
-    title="업비트"
-    subtitle="연동됨"
-    trailing={<Text style={{ color: 'var(--status-positive-content)', fontWeight: '600' }}>연결됨</Text>}
-    onPress={() => navigate('upbit-detail')}
-    divider
-  />
-  <ListCell
-    leading={<ExchangeIcon name="bithumb" />}
-    title="빗썸"
-    subtitle="미연동"
-    trailing={<Text style={{ color: 'var(--content-brand-default)', fontWeight: '600' }}>연결하기</Text>}
-    onPress={() => connectExchange('bithumb')}
-    divider
-  />
-  <ListCell
-    leading={<ExchangeIcon name="coinone" />}
-    title="코인원"
-    subtitle="연동 오류"
-    trailing={<Text style={{ color: 'var(--status-negative-content)', fontWeight: '600' }}>재연결</Text>}
-    onPress={() => reconnect('coinone')}
-  />
-</View>`} />
-      </Section>
-
-      <Section title="Sizes">
-        <CodeBlock code={`{/* Small - 밀도 높은 리스트 */}
-<ListCell size="small" title="Small (44px)" onPress={() => {}} />
-
-{/* Medium - 기본 (default) */}
-<ListCell size="medium" title="Medium (56px)" onPress={() => {}} />
-
-{/* Large - 강조 리스트 */}
-<ListCell size="large" title="Large (72px)" onPress={() => {}} />`} />
-      </Section>
-
-      <Section title="States">
-        <CodeBlock code={`{/* Default - 터치 가능 */}
-<ListCell
-  title="Default"
-  subtitle="터치 가능"
-  trailing={<ChevronRight />}
-  onPress={() => {}}
-/>
-
-{/* Disabled - 비활성화 */}
-<ListCell
-  title="Disabled"
-  subtitle="비활성화"
-  trailing={<ChevronRight />}
-  disabled
-/>`} />
-      </Section>
-
-      <Section title="API Reference">
-        <Subsection title="Common Props">
-          <PropsTable
-            props={[
-              { name: "leading", type: "ReactNode", required: false, description: "좌측 영역 (아이콘, 아바타)" },
-              { name: "title", type: "ReactNode", required: true, description: "메인 타이틀" },
-              { name: "subtitle", type: "ReactNode", required: false, description: "서브타이틀" },
-              { name: "trailing", type: "ReactNode", required: false, description: "우측 영역" },
-              { name: "size", type: '"small" | "medium" | "large"', required: false, defaultVal: '"medium"', description: "크기" },
-              { name: "divider", type: "boolean", required: false, defaultVal: "false", description: "하단 구분선" },
-              { name: "disabled", type: "boolean", required: false, defaultVal: "false", description: "비활성화" },
-            ]}
-          />
-        </Subsection>
-        <Subsection title="React Native-specific Props">
-          <PropsTable
-            props={[
-              { name: "onPress", type: "() => void", required: false, description: "탭 핸들러" },
-              { name: "onLongPress", type: "() => void", required: false, description: "길게 누르기 핸들러" },
-              { name: "accessibilityLabel", type: "string", required: false, description: "스크린 리더용 레이블" },
-              { name: "accessibilityHint", type: "string", required: false, description: "동작 힌트 설명" },
             ]}
           />
         </Subsection>

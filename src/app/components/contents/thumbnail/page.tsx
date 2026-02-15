@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Breadcrumb } from "@/components/Breadcrumb";
-import { PlatformTabs, CodeBlock, PreviewBox, Platform, highlightCode } from "@/components/PlatformTabs";
+import { PlatformTabs, CodeBlock, PreviewBox, Platform } from "@/components/PlatformTabs";
 import { Thumbnail } from '@baerae-zkap/design-system';
 import type { ThumbnailAspectRatio } from '@baerae-zkap/design-system';
 import { Section, Subsection } from "@/components/docs/Section";
@@ -13,7 +13,6 @@ import { RadioGroup } from "@/components/docs/Playground";
 // GitHub source URLs
 const GITHUB_BASE = "https://github.com/baerae-zkap/design-foundation/blob/main/packages/design-system";
 const WEB_SOURCE = `${GITHUB_BASE}/src/components/Thumbnail/Thumbnail.tsx`;
-const NATIVE_SOURCE = `${GITHUB_BASE}/src/native/Thumbnail.tsx`;
 
 export default function ThumbnailPage() {
   return (
@@ -30,7 +29,7 @@ export default function ThumbnailPage() {
         Thumbnail
       </h1>
       <p style={{ fontSize: 15, color: "var(--text-secondary)", marginBottom: 32, lineHeight: 1.6 }}>
-        이미지/비디오 콘텐츠를 표시하는 컴포넌트입니다. 다양한 종횡비와 스타일 옵션을 지원합니다.
+        이미지, 비디오 등 미디어 콘텐츠의 미리보기를 다양한 크기와 형태로 일관되게 표현하는 컴포넌트입니다.
       </p>
 
       <ThumbnailPlayground />
@@ -81,7 +80,7 @@ function ThumbnailPlayground() {
               display: "flex",
               flexDirection: "column",
               gap: 28,
-              backgroundColor: "white",
+              backgroundColor: "var(--surface-base-default)",
               borderRadius: 16,
             }}>
               <RadioGroup
@@ -143,8 +142,7 @@ function ThumbnailPlayground() {
 
 function PlatformContent({ platform }: { platform: Platform }) {
   if (platform === "design") return <DesignContent />;
-  if (platform === "web") return <WebContent />;
-  return <RNContent />;
+  return <WebContent />;
 }
 
 // Helper: UsageCard
@@ -159,7 +157,7 @@ function UsageCard({ situation, description, example }: {
       gridTemplateColumns: "1fr",
       gap: 4,
       padding: 16,
-      backgroundColor: "white",
+      backgroundColor: "var(--surface-base-default)",
       borderRadius: 12,
       border: "1px solid var(--divider)",
     }}>
@@ -173,7 +171,32 @@ function UsageCard({ situation, description, example }: {
 
 function DesignContent() {
   return (
-    <div>
+    <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
+      {/* Overview */}
+      <div>
+        <h2 style={{ fontSize: 24, fontWeight: 700, color: "var(--text-primary)", marginBottom: 8 }}>개요</h2>
+        <p style={{ fontSize: 16, lineHeight: 1.6, color: "var(--text-secondary)", marginBottom: 24 }}>
+          Thumbnail은 이미지, 비디오 등 미디어 콘텐츠의 미리보기를 표시하는 컴포넌트입니다. 다양한 크기와 형태의 미디어 프리뷰를 일관되게 표현합니다.
+        </p>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
+          <div style={{ padding: 24, borderRadius: 12, backgroundColor: "var(--surface-success-default)", border: "1px solid var(--border-success-default)" }}>
+            <h3 style={{ fontSize: 16, fontWeight: 600, color: "var(--content-success-default)", marginBottom: 12 }}>이런 경우 사용하세요</h3>
+            <ul style={{ fontSize: 14, lineHeight: 1.8, color: "var(--text-secondary)", paddingLeft: 20, margin: 0 }}>
+              <li>미디어 콘텐츠의 미리보기를 표시할 때</li>
+              <li>리스트나 그리드에서 이미지 프리뷰가 필요할 때</li>
+              <li>비디오 콘텐츠에 재생 아이콘 오버레이가 필요할 때</li>
+            </ul>
+          </div>
+          <div style={{ padding: 24, borderRadius: 12, backgroundColor: "var(--surface-error-default)", border: "1px solid var(--border-error-default)" }}>
+            <h3 style={{ fontSize: 16, fontWeight: 600, color: "var(--content-error-default)", marginBottom: 12 }}>이런 경우 사용하지 마세요</h3>
+            <ul style={{ fontSize: 14, lineHeight: 1.8, color: "var(--text-secondary)", paddingLeft: 20, margin: 0 }}>
+              <li>아이콘이나 로고 표시에는 사용하지 마세요</li>
+              <li>전체 크기 이미지 뷰어가 필요하면 별도 갤러리 컴포넌트를 사용하세요</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
       {/* Anatomy - SVG Diagram */}
       <Section title="Anatomy">
         <div style={{
@@ -424,7 +447,7 @@ function DesignContent() {
                       alignItems: "center",
                       justifyContent: "center",
                     }}>
-                      <span style={{ color: "white", fontSize: 13, fontWeight: 600 }}>View Detail</span>
+                      <span style={{ color: "var(--content-base-onColor)", fontSize: 13, fontWeight: 600 }}>View Detail</span>
                     </div>
                   }
                 />
@@ -556,13 +579,45 @@ function DesignContent() {
           <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0, paddingLeft: 4 }}>비디오인지 구분할 수 없는 썸네일</p>
         </div>
       </Section>
+
+      {/* Related Components */}
+      <Section title="Related Components">
+        <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+            <thead>
+              <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>컴포넌트</th>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>용도</th>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>차이점</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                <td style={{ padding: "12px 16px", fontWeight: 500 }}>ListCard</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>미디어 리스트</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>ListCard는 Thumbnail을 포함하는 리스트 항목</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                <td style={{ padding: "12px 16px", fontWeight: 500 }}>Card</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>콘텐츠 컨테이너</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>Card 내부에서 Thumbnail을 미디어 프리뷰로 사용</td>
+              </tr>
+              <tr>
+                <td style={{ padding: "12px 16px", fontWeight: 500 }}>ContentBadge</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>정보 라벨</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>Thumbnail 위에 ContentBadge로 상태 오버레이 가능</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </Section>
     </div>
   );
 }
 
 function WebContent() {
   return (
-    <div>
+    <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
       <Section title="Source Code">
         <div style={{
           padding: 16,
@@ -687,171 +742,13 @@ function WebContent() {
   );
 }
 
-function RNContent() {
-  return (
-    <div>
-      <Section title="Source Code">
-        <div style={{
-          padding: 16,
-          backgroundColor: "var(--surface-base-alternative)",
-          borderRadius: 8,
-          border: "1px solid var(--divider)",
-          fontSize: 14,
-        }}>
-          <a href={NATIVE_SOURCE} target="_blank" rel="noopener noreferrer" style={{ color: "var(--content-brand-default)", textDecoration: "none" }}>
-            View on GitHub →
-          </a>
-        </div>
-      </Section>
-
-      <Section title="Import">
-        <CodeBlock code={`import { Thumbnail } from '@baerae-zkap/design-system/native';
-import { View, Text } from 'react-native';`} />
-      </Section>
-
-      <Section title="Basic Usage">
-        <PreviewBox>
-          <div style={{ display: "flex", justifyContent: "center", padding: 24 }}>
-            <ThumbnailDemo
-              src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400"
-              aspectRatio="16:9"
-              size={240}
-              radius
-            />
-          </div>
-        </PreviewBox>
-        <CodeBlock code={`<Thumbnail
-  src={{ uri: "https://example.com/image.jpg" }}
-  alt="Image description"
-  aspectRatio="16:9"
-  size={240}
-  radius
-  onPress={() => console.log('Pressed')}
-/>`} />
-      </Section>
-
-      <Section title="Aspect Ratios">
-        <PreviewBox>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, padding: 24 }}>
-            <ThumbnailDemo src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400" aspectRatio="1:1" />
-            <ThumbnailDemo src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400" aspectRatio="16:9" />
-            <ThumbnailDemo src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400" aspectRatio="4:3" />
-          </div>
-        </PreviewBox>
-        <CodeBlock code={`<Thumbnail src={{ uri: "..." }} aspectRatio="1:1" />
-<Thumbnail src={{ uri: "..." }} aspectRatio="16:9" />
-<Thumbnail src={{ uri: "..." }} aspectRatio="4:3" />`} />
-      </Section>
-
-      <Section title="With Play Icon">
-        <PreviewBox>
-          <div style={{ display: "flex", justifyContent: "center", padding: 24 }}>
-            <ThumbnailDemo
-              src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400"
-              aspectRatio="16:9"
-              size={240}
-              playIcon
-            />
-          </div>
-        </PreviewBox>
-        <CodeBlock code={`<Thumbnail
-  src={{ uri: "https://example.com/video-poster.jpg" }}
-  alt="Video thumbnail"
-  aspectRatio="16:9"
-  playIcon
-  onPress={() => playVideo()}
-/>`} />
-      </Section>
-
-      <Section title="With Overlay">
-        <PreviewBox>
-          <div style={{ display: "flex", justifyContent: "center", padding: 24 }}>
-            <ThumbnailDemo
-              src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400"
-              aspectRatio="1:1"
-              size={120}
-              overlay={
-                <div style={{
-                  position: "absolute",
-                  bottom: 8,
-                  left: 8,
-                  right: 8,
-                  padding: 8,
-                  backgroundColor: "var(--effect-alpha-overlay-heavy)",
-                  borderRadius: 4,
-                  color: "white",
-                  fontSize: 12,
-                  textAlign: "center",
-                }}>
-                  Live
-                </div>
-              }
-            />
-          </div>
-        </PreviewBox>
-        <CodeBlock code={`<Thumbnail
-  src={{ uri: "..." }}
-  aspectRatio="1:1"
-  size={120}
-  overlay={
-    <View style={{
-      position: 'absolute',
-      bottom: 8,
-      left: 8,
-      right: 8,
-      padding: 8,
-      backgroundColor: 'var(--effect-alpha-overlay-heavy)',
-      borderRadius: 4,
-    }}>
-      <Text style={{ color: 'white', fontSize: 12, textAlign: 'center' }}>
-        Live
-      </Text>
-    </View>
-  }
-/>`} />
-      </Section>
-
-      <Section title="API Reference">
-        <Subsection title="Common Props">
-          <PropsTable
-            props={[
-              { name: "src", type: "ImageSourcePropType", required: true, description: "이미지 소스" },
-              { name: "alt", type: "string", required: false, defaultVal: "''", description: "대체 텍스트" },
-              { name: "aspectRatio", type: "ThumbnailAspectRatio", required: false, defaultVal: "'1:1'", description: "종횡비" },
-              { name: "size", type: "number", required: false, description: "너비 크기" },
-              { name: "radius", type: "boolean", required: false, defaultVal: "true", description: "라운드 모서리 (12px)" },
-              { name: "border", type: "boolean", required: false, defaultVal: "false", description: "테두리 표시" },
-              { name: "playIcon", type: "boolean", required: false, defaultVal: "false", description: "재생 아이콘 표시" },
-              { name: "fallback", type: "string | ReactNode", required: false, description: "실패 시 대체 콘텐츠" },
-              { name: "overlay", type: "ReactNode", required: false, description: "오버레이 콘텐츠" },
-            ]}
-          />
-        </Subsection>
-
-        <Subsection title="React Native-specific Props">
-          <PropsTable
-            props={[
-              { name: "onPress", type: "() => void", required: false, description: "터치 핸들러" },
-              { name: "style", type: "ViewStyle", required: false, description: "커스텀 스타일" },
-            ]}
-          />
-        </Subsection>
-
-        <Subsection title="Types">
-          <CodeBlock code={`type ThumbnailAspectRatio = '1:1' | '16:9' | '4:3' | '3:2' | '2:1' | '9:16' | '3:4';`} />
-        </Subsection>
-      </Section>
-    </div>
-  );
-}
-
 // Helper Components
 
 function AspectRatioCard({ name, description, children }: { name: string; description: string; children: React.ReactNode }) {
   return (
     <div style={{
       padding: 20,
-      backgroundColor: "white",
+      backgroundColor: "var(--surface-base-default)",
       borderRadius: 12,
       border: "1px solid var(--divider)",
     }}>
@@ -868,7 +765,7 @@ function StyleCard({ name, description, children }: { name: string; description:
   return (
     <div style={{
       padding: 20,
-      backgroundColor: "white",
+      backgroundColor: "var(--surface-base-default)",
       borderRadius: 12,
       border: "1px solid var(--divider)",
     }}>
@@ -906,33 +803,6 @@ function DesignTokensTable({ tokens }: { tokens: { name: string; value: string; 
               <td style={{ padding: "12px 16px", color: "var(--text-primary)", fontWeight: 500 }}>{token.name}</td>
               <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 12, color: "var(--content-brand-default)" }}>{token.value}</td>
               <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>{token.usage}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-}
-
-function GuidelinesTable({ guidelines }: { guidelines: { do: string; dont: string }[] }) {
-  return (
-    <div style={{ marginBottom: 32 }}>
-      <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
-        <thead>
-          <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
-            <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, color: "var(--text-primary)", width: "50%" }}>
-              ✓ Do
-            </th>
-            <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, color: "var(--text-primary)", width: "50%" }}>
-              ✗ Don't
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {guidelines.map((item, i) => (
-            <tr key={i} style={{ borderBottom: "1px solid var(--divider)" }}>
-              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>{item.do}</td>
-              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>{item.dont}</td>
             </tr>
           ))}
         </tbody>

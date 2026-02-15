@@ -42,6 +42,31 @@ function UsageCard({ situation, description, example }: {
 function DesignContent() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
+      {/* Overview */}
+      <div>
+        <h2 style={{ fontSize: 24, fontWeight: 700, color: "var(--text-primary)", marginBottom: 8 }}>개요</h2>
+        <p style={{ fontSize: 16, lineHeight: 1.6, color: "var(--text-secondary)", marginBottom: 24 }}>
+          Table은 구조화된 데이터를 행과 열로 정리하여 표시하는 컴포넌트입니다. 비교 가능한 데이터를 일관된 형식으로 보여줄 때 사용합니다.
+        </p>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
+          <div style={{ padding: 24, borderRadius: 12, backgroundColor: "var(--surface-success-default)", border: "1px solid var(--border-success-default)" }}>
+            <h3 style={{ fontSize: 16, fontWeight: 600, color: "var(--content-success-default)", marginBottom: 12 }}>이런 경우 사용하세요</h3>
+            <ul style={{ fontSize: 14, lineHeight: 1.8, color: "var(--text-secondary)", paddingLeft: 20, margin: 0 }}>
+              <li>비교 가능한 데이터를 열 기반으로 정렬해야 할 때</li>
+              <li>정렬, 필터링이 필요한 데이터 목록을 표시할 때</li>
+              <li>숫자, 상태 등 구조화된 정보를 표현할 때</li>
+            </ul>
+          </div>
+          <div style={{ padding: 24, borderRadius: 12, backgroundColor: "var(--surface-error-default)", border: "1px solid var(--border-error-default)" }}>
+            <h3 style={{ fontSize: 16, fontWeight: 600, color: "var(--content-error-default)", marginBottom: 12 }}>이런 경우 사용하지 마세요</h3>
+            <ul style={{ fontSize: 14, lineHeight: 1.8, color: "var(--text-secondary)", paddingLeft: 20, margin: 0 }}>
+              <li>단순한 리스트에는 ListCell을 사용하세요</li>
+              <li>2열 이하의 간단한 정보에는 Card나 ListCard가 적합합니다</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
       {/* Anatomy - SVG Diagram */}
       <Section title="Anatomy">
         <div style={{
@@ -621,6 +646,38 @@ function DesignContent() {
           </DontCard>
         </div>
       </Section>
+
+      {/* Related Components */}
+      <Section title="Related Components">
+        <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+            <thead>
+              <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>컴포넌트</th>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>용도</th>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>차이점</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                <td style={{ padding: "12px 16px", fontWeight: 500 }}>ListCell</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>데이터 나열</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>ListCell은 단일 행, Table은 열 기반 구조화</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                <td style={{ padding: "12px 16px", fontWeight: 500 }}>Card</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>정보 표시</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>Card는 자유 레이아웃, Table은 정렬된 행/열</td>
+              </tr>
+              <tr>
+                <td style={{ padding: "12px 16px", fontWeight: 500 }}>ContentBadge</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>상태 표시</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>ContentBadge는 Table 셀 내 상태 라벨에 사용</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </Section>
     </div>
   );
 }
@@ -635,7 +692,7 @@ function WebContent() {
             href="https://github.com/baerae-zkap/design-foundation/tree/main/packages/design-system/src/components/Table"
             target="_blank"
             rel="noopener noreferrer"
-            style={{ color: "var(--brand-primary)", textDecoration: "none", fontSize: 14 }}
+            style={{ color: "var(--content-brand-default)", textDecoration: "none", fontSize: 14 }}
           >
             View on GitHub →
           </a>
@@ -763,160 +820,6 @@ function WebContent() {
   );
 }
 
-// React Native Tab Content
-function RNContent() {
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
-      <Section title="Source Code">
-        <div style={{ padding: 16, backgroundColor: "var(--surface-base-alternative)", borderRadius: 8, border: "1px solid var(--divider)" }}>
-          <a
-            href="https://github.com/baerae-zkap/design-foundation/tree/main/packages/design-system/src/native/Table"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: "var(--brand-primary)", textDecoration: "none", fontSize: 14 }}
-          >
-            View on GitHub →
-          </a>
-        </div>
-      </Section>
-
-      <Section title="Import">
-        <CodeBlock code={`import {
-  Table,
-  TableHead,
-  TableBody,
-  TableRow,
-  TableHeadCell,
-  TableCell
-} from '@baerae-zkap/design-system/native';
-import { Text } from 'react-native';`} />
-      </Section>
-
-      <Section title="Basic Usage">
-        <PreviewBox>
-          <div style={{ padding: 24 }}>
-            <TableDemo variant="default" size="medium" />
-          </div>
-        </PreviewBox>
-        <CodeBlock code={`<Table variant="default" size="medium">
-  <TableHead>
-    <TableRow>
-      <TableHeadCell>자산명</TableHeadCell>
-      <TableHeadCell>보유량</TableHeadCell>
-      <TableHeadCell>평가금액</TableHeadCell>
-      <TableHeadCell>등락률</TableHeadCell>
-    </TableRow>
-  </TableHead>
-  <TableBody>
-    <TableRow>
-      <TableCell>ETH</TableCell>
-      <TableCell>0.7812</TableCell>
-      <TableCell>₩3,245,000</TableCell>
-      <TableCell>
-        <Text style={{ color: 'var(--status-positive-content)' }}>+5.2%</Text>
-      </TableCell>
-    </TableRow>
-    <TableRow>
-      <TableCell>BTC</TableCell>
-      <TableCell>0.0234</TableCell>
-      <TableCell>₩1,850,000</TableCell>
-      <TableCell>
-        <Text style={{ color: 'var(--status-negative-content)' }}>-2.1%</Text>
-      </TableCell>
-    </TableRow>
-  </TableBody>
-</Table>`} />
-      </Section>
-
-      <Section title="Variants">
-        <Subsection title="Default">
-          <PreviewBox>
-            <div style={{ padding: 24 }}>
-              <TableDemo variant="default" size="medium" />
-            </div>
-          </PreviewBox>
-          <CodeBlock code={`<Table variant="default" size="medium">
-  {/* ... */}
-</Table>`} />
-
-        </Subsection>
-
-        <Subsection title="Striped">
-          <PreviewBox>
-            <div style={{ padding: 24 }}>
-              <TableDemo variant="striped" size="medium" />
-            </div>
-          </PreviewBox>
-          <CodeBlock code={`<Table variant="striped" size="medium">
-  {/* ... */}
-</Table>`} />
-
-        </Subsection>
-      </Section>
-
-      <Section title="Sizes">
-        <Subsection title="Small">
-          <PreviewBox>
-            <div style={{ padding: 24 }}>
-              <TableDemo variant="default" size="small" />
-            </div>
-          </PreviewBox>
-        </Subsection>
-
-        <Subsection title="Medium">
-          <PreviewBox>
-            <div style={{ padding: 24 }}>
-              <TableDemo variant="default" size="medium" />
-            </div>
-          </PreviewBox>
-        </Subsection>
-
-        <Subsection title="Large">
-          <PreviewBox>
-            <div style={{ padding: 24 }}>
-              <TableDemo variant="default" size="large" />
-            </div>
-          </PreviewBox>
-        </Subsection>
-      </Section>
-
-      <Section title="API Reference">
-        <Subsection title="Table Props">
-          <PropsTable
-            props={[
-              { name: "variant", type: "'default' | 'striped'", required: false, defaultVal: "'default'", description: "테이블 스타일" },
-              { name: "size", type: "'small' | 'medium' | 'large'", required: false, defaultVal: "'medium'", description: "테이블 크기" },
-              { name: "children", type: "ReactNode", required: true, description: "TableHead, TableBody 등" },
-              { name: "style", type: "ViewStyle", required: false, description: "커스텀 스타일" },
-            ]}
-          />
-        </Subsection>
-
-        <Subsection title="Sub-component Props">
-          <PropsTable
-            props={[
-              { name: "children", type: "ReactNode", required: true, description: "자식 요소" },
-              { name: "style", type: "ViewStyle", required: false, description: "커스텀 스타일" },
-            ]}
-          />
-        </Subsection>
-
-        <Subsection title="Platform Differences">
-          <div style={{ padding: 16, backgroundColor: "var(--surface-warning-default)", borderRadius: 8, border: "1px solid var(--border-base-default)" }}>
-            <div style={{ fontSize: 14, fontWeight: 600, color: "var(--content-warning-strong)", marginBottom: 8 }}>⚠️ React Native Notes</div>
-            <ul style={{ margin: 0, paddingLeft: 20, color: "var(--content-warning-default)", fontSize: 14 }}>
-              <li>실제 HTML table 태그 대신 View 기반 레이아웃 사용</li>
-              <li>Context API로 variant와 size 정보 전달</li>
-              <li>문자열 children은 자동으로 Text 컴포넌트로 래핑됨</li>
-              <li>스타일 커스터마이징 시 ViewStyle과 TextStyle 분리 필요</li>
-            </ul>
-          </div>
-        </Subsection>
-      </Section>
-    </div>
-  );
-}
-
 // Main Page Component
 export default function TablePage() {
   return (
@@ -933,7 +836,7 @@ export default function TablePage() {
         Table
       </h1>
       <p style={{ fontSize: 15, color: "var(--text-secondary)", marginBottom: 32, lineHeight: 1.6 }}>
-        데이터를 행과 열의 그리드 형식으로 표시하는 테이블 컴포넌트입니다. Desktop 전용 컴포넌트로 설계되었습니다.
+        구조화된 데이터를 행과 열로 정리하여 비교, 정렬, 필터링이 가능한 형식으로 표시하는 컴포넌트입니다.
       </p>
 
       <TablePlayground />
@@ -1006,8 +909,7 @@ function TablePlayground() {
 
 function PlatformContent({ platform }: { platform: Platform }) {
   if (platform === "design") return <DesignContent />;
-  if (platform === "web") return <WebContent />;
-  return <RNContent />;
+  return <WebContent />;
 }
 
 // Table Demo Component

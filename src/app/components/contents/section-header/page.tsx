@@ -25,7 +25,7 @@ export default function SectionHeaderPage() {
         Section Header
       </h1>
       <p style={{ fontSize: 15, color: "var(--text-secondary)", marginBottom: 32, lineHeight: 1.6 }}>
-        리스트 섹션 상단에 사용되는 간단한 타이틀 컴포넌트입니다.
+        콘텐츠 영역의 제목과 부가 액션을 표시하여 섹션을 구분하는 컴포넌트입니다.
       </p>
 
       <SectionHeaderPlayground />
@@ -107,8 +107,7 @@ function SectionHeaderPlayground() {
 
 function PlatformContent({ platform }: { platform: Platform }) {
   if (platform === "design") return <DesignContent />;
-  if (platform === "web") return <WebContent />;
-  return <RNContent />;
+  return <WebContent />;
 }
 
 // Helper: UsageCard
@@ -137,6 +136,31 @@ function UsageCard({ situation, description, example }: {
 function DesignContent() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
+      {/* Overview */}
+      <div>
+        <h2 style={{ fontSize: 24, fontWeight: 700, color: "var(--text-primary)", marginBottom: 8 }}>개요</h2>
+        <p style={{ fontSize: 16, lineHeight: 1.6, color: "var(--text-secondary)", marginBottom: 24 }}>
+          SectionHeader는 콘텐츠 영역의 제목과 부가 액션을 표시하는 컴포넌트입니다. 섹션을 시각적으로 구분하고 컨텍스트를 제공합니다.
+        </p>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
+          <div style={{ padding: 24, borderRadius: 12, backgroundColor: "var(--surface-success-default)", border: "1px solid var(--border-success-default)" }}>
+            <h3 style={{ fontSize: 16, fontWeight: 600, color: "var(--content-success-default)", marginBottom: 12 }}>이런 경우 사용하세요</h3>
+            <ul style={{ fontSize: 14, lineHeight: 1.8, color: "var(--text-secondary)", paddingLeft: 20, margin: 0 }}>
+              <li>콘텐츠 섹션의 시작 부분에 제목을 표시할 때</li>
+              <li>섹션 제목과 함께 &apos;더보기&apos; 등의 액션이 필요할 때</li>
+              <li>화면 내 여러 섹션을 구분할 때</li>
+            </ul>
+          </div>
+          <div style={{ padding: 24, borderRadius: 12, backgroundColor: "var(--surface-error-default)", border: "1px solid var(--border-error-default)" }}>
+            <h3 style={{ fontSize: 16, fontWeight: 600, color: "var(--content-error-default)", marginBottom: 12 }}>이런 경우 사용하지 마세요</h3>
+            <ul style={{ fontSize: 14, lineHeight: 1.8, color: "var(--text-secondary)", paddingLeft: 20, margin: 0 }}>
+              <li>페이지 최상위 제목에는 사용하지 마세요 — 페이지 헤더를 사용하세요</li>
+              <li>Accordion처럼 접을 수 있는 기능이 필요하면 Accordion을 사용하세요</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
       {/* Anatomy */}
       <Section title="Anatomy">
         <div style={{ backgroundColor: "var(--surface-base-container)", borderRadius: 16, padding: "48px 40px", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -513,6 +537,37 @@ function DesignContent() {
           <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0, paddingLeft: 4 }}>큰 Button을 action으로 사용하지 않기</p>
         </div>
       </Section>
+
+      {/* Related Components */}
+      <div>
+        <h2 style={{ fontSize: 24, fontWeight: 700, color: "var(--text-primary)", marginBottom: 16 }}>관련 컴포넌트</h2>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+          <thead>
+            <tr style={{ borderBottom: "2px solid var(--border-default)" }}>
+              <th style={{ textAlign: "left", padding: "12px 16px", color: "var(--text-primary)" }}>컴포넌트</th>
+              <th style={{ textAlign: "left", padding: "12px 16px", color: "var(--text-primary)" }}>용도</th>
+              <th style={{ textAlign: "left", padding: "12px 16px", color: "var(--text-primary)" }}>차이점</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+              <td style={{ padding: "12px 16px", fontWeight: 600, color: "var(--text-primary)" }}>Accordion</td>
+              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>섹션 구분</td>
+              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>Accordion은 접고 펼침 가능, SectionHeader는 고정 제목</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+              <td style={{ padding: "12px 16px", fontWeight: 600, color: "var(--text-primary)" }}>Card</td>
+              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>영역 구분</td>
+              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>Card는 콘텐츠 컨테이너, SectionHeader는 제목만 표시</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+              <td style={{ padding: "12px 16px", fontWeight: 600, color: "var(--text-primary)" }}>ListCell</td>
+              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>항목 표시</td>
+              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>ListCell은 리스트 행, SectionHeader는 섹션 시작점</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
@@ -610,107 +665,6 @@ function WebContent() {
             props={[
               { name: "style", type: "React.CSSProperties", required: false, description: "커스텀 스타일" },
               { name: "className", type: "string", required: false, description: "CSS 클래스명" },
-            ]}
-          />
-        </Subsection>
-      </Section>
-    </div>
-  );
-}
-
-function RNContent() {
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
-      <Section title="Source Code">
-        <div style={{ padding: 16, backgroundColor: "var(--surface-base-alternative)", borderRadius: 12, border: "1px solid var(--divider)" }}>
-          <a
-            href="https://github.com/baerae-zkap/design-foundation/tree/main/packages/design-system/src/native/SectionHeader"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: "var(--content-brand-default)", textDecoration: "none", fontSize: 14, fontWeight: 500 }}
-          >
-            View on GitHub →
-          </a>
-        </div>
-      </Section>
-
-      <Section title="Import">
-        <CodeBlock code={`import { SectionHeader } from '@baerae-zkap/design-system/native';
-import { View, Text } from 'react-native';`} />
-      </Section>
-
-      <Section title="Basic Usage">
-        <PreviewBox>
-          <div style={{ padding: 24 }}>
-            <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: 16, overflow: "hidden", maxWidth: 360, boxShadow: "0 1px 3px var(--shadow-primitive-xs)" }}>
-              <SectionHeaderDemo title="내 자산" />
-              <ListCellSimple title="Ethereum" value="₩3,245,000" />
-              <ListCellSimple title="Bitcoin" value="₩2,890,000" />
-            </div>
-          </div>
-        </PreviewBox>
-        <CodeBlock code={`<SectionHeader title="내 자산" />`} />
-      </Section>
-
-      <Section title="With Action Button">
-        <PreviewBox>
-          <div style={{ padding: 24 }}>
-            <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: 16, overflow: "hidden", maxWidth: 360, boxShadow: "0 1px 3px var(--shadow-primitive-xs)" }}>
-              <SectionHeaderDemo title="최근 거래" action={<ActionButton>전체보기</ActionButton>} />
-              <ListCellSimple title="Ethereum" value="+0.5 ETH" valueColor="var(--content-success-default)" />
-              <ListCellSimple title="Bitcoin" value="-0.02 BTC" valueColor="var(--content-error-default)" />
-            </div>
-          </div>
-        </PreviewBox>
-        <CodeBlock code={`import { SectionHeader, TextButton } from '@baerae-zkap/design-system/native';
-
-<SectionHeader
-  title="최근 거래"
-  action={
-    <TextButton size="small" color="brandDefault" onPress={() => navigate('/transactions')}>
-      전체보기
-    </TextButton>
-  }
-/>`} />
-      </Section>
-
-      <Section title="Sizes">
-        <PreviewBox>
-          <div style={{ padding: 24, display: "flex", flexDirection: "column", gap: 16 }}>
-            <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: 12, overflow: "hidden", maxWidth: 360, border: "1px solid var(--divider)" }}>
-              <SectionHeaderDemo size="small" title="Small (13px)" />
-              <ListCellSimple title="Item 1" />
-            </div>
-            <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: 12, overflow: "hidden", maxWidth: 360, border: "1px solid var(--divider)" }}>
-              <SectionHeaderDemo size="medium" title="Medium (14px)" />
-              <ListCellSimple title="Item 1" />
-            </div>
-            <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: 12, overflow: "hidden", maxWidth: 360, border: "1px solid var(--divider)" }}>
-              <SectionHeaderDemo size="large" title="Large (15px)" />
-              <ListCellSimple title="Item 1" />
-            </div>
-          </div>
-        </PreviewBox>
-        <CodeBlock code={`<SectionHeader size="small" title="Small" />
-<SectionHeader size="medium" title="Medium" />
-<SectionHeader size="large" title="Large" />`} />
-      </Section>
-
-      <Section title="API Reference">
-        <Subsection title="Common Props">
-          <PropsTable
-            props={[
-              { name: "title", type: "string", required: true, description: "섹션 타이틀" },
-              { name: "action", type: "ReactNode", required: false, description: "우측 액션 영역 (버튼, 링크 등)" },
-              { name: "size", type: '"small" | "medium" | "large"', required: false, defaultVal: '"medium"', description: "타이틀 크기" },
-            ]}
-          />
-        </Subsection>
-
-        <Subsection title="React Native-specific Props">
-          <PropsTable
-            props={[
-              { name: "style", type: "ViewStyle", required: false, description: "커스텀 스타일" },
             ]}
           />
         </Subsection>

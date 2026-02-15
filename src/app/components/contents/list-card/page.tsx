@@ -41,7 +41,7 @@ export default function ListCardPage() {
         List Card
       </h1>
       <p style={{ fontSize: 15, color: "var(--text-secondary)", marginBottom: 32, lineHeight: 1.6 }}>
-        리스트 형태의 카드 컴포넌트입니다. 썸네일, 콘텐츠, 액션 영역으로 구성되며 상품 목록, 가격 비교, 포트폴리오 등에 사용됩니다.
+        썸네일과 텍스트 정보를 수평으로 배치하여 리스트 형태로 표시하는 컴포넌트입니다.
       </p>
 
       <ListCardPlayground />
@@ -166,8 +166,7 @@ function ListCardPlayground() {
 
 function PlatformContent({ platform }: { platform: Platform }) {
   if (platform === "design") return <DesignContent />;
-  if (platform === "web") return <WebContent />;
-  return <RNContent />;
+  return <WebContent />;
 }
 
 // ============================================
@@ -175,7 +174,32 @@ function PlatformContent({ platform }: { platform: Platform }) {
 // ============================================
 function DesignContent() {
   return (
-    <>
+    <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
+      {/* Overview */}
+      <div>
+        <h2 style={{ fontSize: 24, fontWeight: 700, color: "var(--text-primary)", marginBottom: 8 }}>개요</h2>
+        <p style={{ fontSize: 16, lineHeight: 1.6, color: "var(--text-secondary)", marginBottom: 24 }}>
+          ListCard는 썸네일, 제목, 설명 등의 정보를 수평으로 배치하여 리스트 형태로 표시하는 컴포넌트입니다. 미디어 콘텐츠와 텍스트 정보를 함께 보여줄 때 적합합니다.
+        </p>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
+          <div style={{ padding: 24, borderRadius: 12, backgroundColor: "var(--surface-success-default)", border: "1px solid var(--border-success-default)" }}>
+            <h3 style={{ fontSize: 16, fontWeight: 600, color: "var(--content-success-default)", marginBottom: 12 }}>이런 경우 사용하세요</h3>
+            <ul style={{ fontSize: 14, lineHeight: 1.8, color: "var(--text-secondary)", paddingLeft: 20, margin: 0 }}>
+              <li>음악, 영상, 상품 등 미디어와 텍스트를 함께 표시할 때</li>
+              <li>검색 결과를 썸네일과 함께 나열할 때</li>
+              <li>히스토리나 최근 항목 목록을 보여줄 때</li>
+            </ul>
+          </div>
+          <div style={{ padding: 24, borderRadius: 12, backgroundColor: "var(--surface-error-default)", border: "1px solid var(--border-error-default)" }}>
+            <h3 style={{ fontSize: 16, fontWeight: 600, color: "var(--content-error-default)", marginBottom: 12 }}>이런 경우 사용하지 마세요</h3>
+            <ul style={{ fontSize: 14, lineHeight: 1.8, color: "var(--text-secondary)", paddingLeft: 20, margin: 0 }}>
+              <li>썸네일 없이 텍스트만 나열할 때는 ListCell을 사용하세요</li>
+              <li>카드 형태의 자유 레이아웃이 필요하면 Card를 사용하세요</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
       {/* Anatomy */}
       <Section title="Anatomy">
         <div style={{ backgroundColor: "var(--surface-base-container)", borderRadius: 16, padding: "48px 40px", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -542,7 +566,38 @@ function DesignContent() {
           </div>
         </Subsection>
       </Section>
-    </>
+
+      {/* Related Components */}
+      <div>
+        <h2 style={{ fontSize: 24, fontWeight: 700, color: "var(--text-primary)", marginBottom: 16 }}>관련 컴포넌트</h2>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+          <thead>
+            <tr style={{ borderBottom: "2px solid var(--border-default)" }}>
+              <th style={{ textAlign: "left", padding: "12px 16px", color: "var(--text-primary)" }}>컴포넌트</th>
+              <th style={{ textAlign: "left", padding: "12px 16px", color: "var(--text-primary)" }}>용도</th>
+              <th style={{ textAlign: "left", padding: "12px 16px", color: "var(--text-primary)" }}>차이점</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+              <td style={{ padding: "12px 16px", fontWeight: 600, color: "var(--text-primary)" }}>ListCell</td>
+              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>리스트 항목</td>
+              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>ListCell은 텍스트 위주, ListCard는 썸네일 포함</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+              <td style={{ padding: "12px 16px", fontWeight: 600, color: "var(--text-primary)" }}>Card</td>
+              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>콘텐츠 그룹화</td>
+              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>Card는 자유 레이아웃, ListCard는 수평 정렬 고정</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+              <td style={{ padding: "12px 16px", fontWeight: 600, color: "var(--text-primary)" }}>Thumbnail</td>
+              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>이미지 표시</td>
+              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>Thumbnail은 ListCard 내부 썸네일 영역에 사용</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 }
 
@@ -710,176 +765,6 @@ function WebContent() {
             props={[
               { name: "onClick", type: "() => void", required: false, description: "클릭 핸들러" },
               { name: "aria-label", type: "string", required: false, description: "스크린 리더용 레이블" },
-            ]}
-          />
-        </Subsection>
-      </Section>
-    </>
-  );
-}
-
-// ============================================
-// React Native Tab Content
-// ============================================
-function RNContent() {
-  return (
-    <>
-      <Section title="Source Code">
-        <div style={{ padding: 16, backgroundColor: "var(--bg-secondary)", borderRadius: 12, marginBottom: 24, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <div>
-            <p style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", margin: 0 }}>ListCard Component</p>
-            <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: "4px 0 0 0" }}>실제 컴포넌트 소스 코드를 GitHub에서 확인하세요.</p>
-          </div>
-          <a
-            href={LISTCARD_SOURCE}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 6,
-              padding: "8px 16px",
-              fontSize: 13,
-              fontWeight: 500,
-              color: "var(--content-base-onColor)",
-              backgroundColor: "var(--docs-code-surface)",
-              borderRadius: 12,
-              textDecoration: "none",
-            }}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-            </svg>
-            View on GitHub
-          </a>
-        </div>
-      </Section>
-
-      <Section title="Import">
-        <CodeBlock code={`import { ListCard } from '@baerae-zkap/design-system/native';`} />
-      </Section>
-
-      <Section title="Basic Usage">
-        <CodeBlock code={`<ListCard
-  thumbnail={<Image source={{ uri: 'product.jpg' }} style={{ width: '100%', height: '100%' }} />}
-  badges={<ContentBadge color="brandDefault">NEW</ContentBadge>}
-  title="프리미엄 무선 이어폰"
-  subtitle="고음질 블루투스 5.3 지원"
-  meta="₩89,000"
-  onPress={() => navigate('product-detail')}
-/>`} />
-      </Section>
-
-      <Section title="Variants">
-        <CodeBlock code={`{/* Elevated - 그림자 스타일 (기본) */}
-<ListCard
-  variant="elevated"
-  thumbnail={<CryptoIcon symbol="ETH" />}
-  title="Ethereum"
-  subtitle="0.7812 ETH"
-  meta="₩3,245,000"
-  onPress={() => {}}
-/>
-
-{/* Outlined - 테두리 스타일 */}
-<ListCard
-  variant="outlined"
-  thumbnail={<CryptoIcon symbol="BTC" />}
-  title="Bitcoin"
-  subtitle="0.0234 BTC"
-  meta="₩2,890,000"
-  onPress={() => {}}
-/>
-
-{/* Filled - 배경 스타일 */}
-<ListCard
-  variant="filled"
-  thumbnail={<CryptoIcon symbol="SOL" />}
-  title="Solana"
-  subtitle="12.5 SOL"
-  meta="₩1,560,000"
-  onPress={() => {}}
-/>`} />
-      </Section>
-
-      <Section title="Colors">
-        <CodeBlock code={`{/* 거래소별 가격 비교 카드 */}
-<View style={{ gap: 12 }}>
-  {/* ZKAP 최적구매 - Best 옵션 (highlighted) */}
-  <ListCard
-    variant="outlined"
-    style={{ borderColor: 'var(--content-brand-default)', borderWidth: 2 }}
-    thumbnail={<ZkapLogo />}
-    title="ZKAP 최적구매"
-    subtitle={<Text style={{ color: 'var(--content-brand-default)', fontSize: 24, fontWeight: '700' }}>0.7812 ETH</Text>}
-    badges={<Badge color="purple">Best</Badge>}
-    onPress={() => selectExchange('zkap')}
-  />
-
-  {/* 빗썸 - 일반 옵션 */}
-  <ListCard
-    variant="outlined"
-    thumbnail={<BithumbLogo />}
-    title="빗썸"
-    subtitle={<Text style={{ fontSize: 24, fontWeight: '700' }}>0.7788 ETH</Text>}
-    meta={<Text style={{ color: 'var(--content-base-secondary)' }}>- 1,600원</Text>}
-    onPress={() => selectExchange('bithumb')}
-  />
-</View>`} />
-      </Section>
-
-      <Section title="Sizes">
-        <CodeBlock code={`{/* Small - 밀도 높은 리스트 */}
-<ListCard size="small" title="Small (padding: 12px)" onPress={() => {}} />
-
-{/* Medium - 기본 (default) */}
-<ListCard size="medium" title="Medium (padding: 16px)" onPress={() => {}} />
-
-{/* Large - 강조 카드 */}
-<ListCard size="large" title="Large (padding: 20px)" onPress={() => {}} />`} />
-      </Section>
-
-      <Section title="States">
-        <CodeBlock code={`{/* Default - 터치 가능 */}
-<ListCard
-  title="Default"
-  subtitle="터치 가능"
-  meta="₩3,245,000"
-  onPress={() => {}}
-/>
-
-{/* Disabled - 비활성화 */}
-<ListCard
-  title="Disabled"
-  subtitle="비활성화"
-  meta="₩3,245,000"
-  disabled
-/>`} />
-      </Section>
-
-      <Section title="API Reference">
-        <Subsection title="Common Props">
-          <PropsTable
-            props={[
-              { name: "variant", type: '"elevated" | "outlined" | "filled"', required: false, defaultVal: '"elevated"', description: "카드 스타일" },
-              { name: "size", type: '"small" | "medium" | "large"', required: false, defaultVal: '"medium"', description: "크기" },
-              { name: "thumbnail", type: "ReactNode", required: false, description: "좌측 썸네일" },
-              { name: "title", type: "ReactNode", required: true, description: "메인 타이틀" },
-              { name: "subtitle", type: "ReactNode", required: false, description: "서브타이틀" },
-              { name: "meta", type: "ReactNode", required: false, description: "메타 정보 (가격)" },
-              { name: "badges", type: "ReactNode", required: false, description: "상단 뱃지 영역" },
-              { name: "action", type: "ReactNode", required: false, description: "우측 액션 영역" },
-              { name: "disabled", type: "boolean", required: false, defaultVal: "false", description: "비활성화" },
-            ]}
-          />
-        </Subsection>
-        <Subsection title="React Native-specific Props">
-          <PropsTable
-            props={[
-              { name: "onPress", type: "() => void", required: false, description: "탭 핸들러" },
-              { name: "onLongPress", type: "() => void", required: false, description: "길게 누르기 핸들러" },
-              { name: "accessibilityLabel", type: "string", required: false, description: "스크린 리더용 레이블" },
-              { name: "accessibilityHint", type: "string", required: false, description: "동작 힌트 설명" },
             ]}
           />
         </Subsection>

@@ -7,7 +7,7 @@ import { ContentBadge } from '@baerae-zkap/design-system';
 import { Section, Subsection } from "@/components/docs/Section";
 import { PropsTable } from "@/components/docs/PropsTable";
 import { PrincipleCard, VariantCard, DoCard, DontCard } from "@/components/docs/Cards";
-import { RadioGroup, CodeTypeTab, CopyButton } from "@/components/docs/Playground";
+import { RadioGroup, CopyButton } from "@/components/docs/Playground";
 
 // Types
 type ContentBadgeVariant = "filled" | "outlined" | "subtle";
@@ -30,7 +30,7 @@ export default function ContentBadgePage() {
         Content Badge
       </h1>
       <p style={{ fontSize: 15, color: "var(--text-secondary)", marginBottom: 32, lineHeight: 1.6 }}>
-        콘텐츠의 상태, 카테고리, 라벨을 표시하는 비인터랙티브 요소입니다.
+        상태, 카테고리, 수량 등 간결한 정보를 라벨 형태로 강조하여 표시하는 컴포넌트입니다.
       </p>
 
       {/* Interactive Playground */}
@@ -49,7 +49,6 @@ function ContentBadgePlayground() {
   const [color, setColor] = useState<ContentBadgeColor>("brandDefault");
   const [size, setSize] = useState<ContentBadgeSize>("medium");
   const [dot, setDot] = useState(false);
-  const [codeType, setCodeType] = useState<"rn" | "web">("rn");
 
   const generateCode = () => {
     const props = [];
@@ -108,7 +107,7 @@ function ContentBadgePlayground() {
                 display: "flex",
                 flexDirection: "column",
                 gap: 28,
-                backgroundColor: "white",
+                backgroundColor: "var(--surface-base-default)",
                 borderRadius: 16,
               }}
             >
@@ -171,15 +170,21 @@ function ContentBadgePlayground() {
         <div
           style={{
             padding: "10px 16px",
-            backgroundColor: "var(--inverse-surface-default)",
+            backgroundColor: "var(--docs-code-surface)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
           }}
         >
           <div style={{ display: "flex", gap: 8 }}>
-            <CodeTypeTab active={codeType === "rn"} onClick={() => setCodeType("rn")}>React Native</CodeTypeTab>
-            <CodeTypeTab active={codeType === "web"} onClick={() => setCodeType("web")}>Web</CodeTypeTab>
+            <span style={{
+              fontSize: 13,
+              fontWeight: 600,
+              padding: "4px 12px",
+              borderRadius: 6,
+              color: "var(--content-base-onColor)",
+              backgroundColor: "var(--docs-code-active-bg)",
+            }}>Web</span>
           </div>
           <CopyButton text={generateCode()} />
         </div>
@@ -189,8 +194,8 @@ function ContentBadgePlayground() {
             padding: 16,
             fontSize: 13,
             lineHeight: 1.6,
-            color: "var(--border-secondary-default)",
-            backgroundColor: "var(--inverse-surface-default)",
+            color: "var(--docs-code-text)",
+            backgroundColor: "var(--docs-code-surface)",
             fontFamily: "'SF Mono', 'Fira Code', monospace",
             overflow: "auto",
           }}
@@ -207,15 +212,107 @@ function PlatformContent({ platform }: { platform: Platform }) {
   if (platform === "design") {
     return <DesignContent />;
   }
-  if (platform === "web") {
-    return <WebContent />;
-  }
-  return <RNContent />;
+  return <WebContent />;
 }
 
 function DesignContent() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
+      {/* Overview */}
+      <div>
+        <h2
+          style={{
+            fontSize: 24,
+            fontWeight: 700,
+            color: "var(--text-primary)",
+            marginBottom: 8,
+          }}
+        >
+          개요
+        </h2>
+        <p
+          style={{
+            fontSize: 16,
+            lineHeight: 1.6,
+            color: "var(--text-secondary)",
+            marginBottom: 24,
+          }}
+        >
+          ContentBadge는 상태, 카테고리, 수량 등의 간결한 정보를 라벨 형태로 표시하는 컴포넌트입니다. 텍스트 옆에 부가 정보를 시각적으로 강조할 때 사용합니다.
+        </p>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: 24,
+          }}
+        >
+          <div
+            style={{
+              padding: 24,
+              borderRadius: 12,
+              backgroundColor: "var(--surface-success-default)",
+              border: "1px solid var(--border-success-default)",
+            }}
+          >
+            <h3
+              style={{
+                fontSize: 16,
+                fontWeight: 600,
+                color: "var(--content-success-default)",
+                marginBottom: 12,
+              }}
+            >
+              이런 경우 사용하세요
+            </h3>
+            <ul
+              style={{
+                fontSize: 14,
+                lineHeight: 1.8,
+                color: "var(--text-secondary)",
+                paddingLeft: 20,
+                margin: 0,
+              }}
+            >
+              <li>상태 표시가 필요할 때 (예: &apos;신규&apos;, &apos;완료&apos;, &apos;진행중&apos;)</li>
+              <li>카테고리나 태그를 표시할 때</li>
+              <li>알림 수량이나 카운트를 표시할 때</li>
+            </ul>
+          </div>
+          <div
+            style={{
+              padding: 24,
+              borderRadius: 12,
+              backgroundColor: "var(--surface-error-default)",
+              border: "1px solid var(--border-error-default)",
+            }}
+          >
+            <h3
+              style={{
+                fontSize: 16,
+                fontWeight: 600,
+                color: "var(--content-error-default)",
+                marginBottom: 12,
+              }}
+            >
+              이런 경우 사용하지 마세요
+            </h3>
+            <ul
+              style={{
+                fontSize: 14,
+                lineHeight: 1.8,
+                color: "var(--text-secondary)",
+                paddingLeft: 20,
+                margin: 0,
+              }}
+            >
+              <li>긴 텍스트에는 사용하지 마세요 — 3단어 이내로 유지하세요</li>
+              <li>인터랙티브한 요소가 필요하면 Chip을 사용하세요</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
       {/* Anatomy */}
       <Section title="Anatomy">
         <div style={{
@@ -672,13 +769,62 @@ function DesignContent() {
           </p>
         </div>
       </Section>
+
+      {/* Related Components */}
+      <div>
+        <h2
+          style={{
+            fontSize: 24,
+            fontWeight: 700,
+            color: "var(--text-primary)",
+            marginBottom: 16,
+          }}
+        >
+          관련 컴포넌트
+        </h2>
+        <table
+          style={{
+            width: "100%",
+            borderCollapse: "collapse",
+            fontSize: 14,
+          }}
+        >
+          <thead>
+            <tr
+              style={{
+                borderBottom: "2px solid var(--border-default)",
+              }}
+            >
+              <th style={{ textAlign: "left", padding: "12px 16px", color: "var(--text-primary)" }}>컴포넌트</th>
+              <th style={{ textAlign: "left", padding: "12px 16px", color: "var(--text-primary)" }}>용도</th>
+              <th style={{ textAlign: "left", padding: "12px 16px", color: "var(--text-primary)" }}>차이점</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+              <td style={{ padding: "12px 16px", fontWeight: 600, color: "var(--text-primary)" }}>Chip</td>
+              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>라벨 표시</td>
+              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>Chip은 인터랙티브(선택/삭제), ContentBadge는 정보 표시만</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+              <td style={{ padding: "12px 16px", fontWeight: 600, color: "var(--text-primary)" }}>Button</td>
+              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>액션 실행</td>
+              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>Button은 동작 트리거, ContentBadge는 상태 표시</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+              <td style={{ padding: "12px 16px", fontWeight: 600, color: "var(--text-primary)" }}>IconButton</td>
+              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>아이콘 액션</td>
+              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>IconButton은 동작, ContentBadge는 정보</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
 
 const GITHUB_BASE = "https://github.com/baerae-zkap/design-foundation/blob/main/packages/design-system/src";
 const CONTENT_BADGE_SOURCE = `${GITHUB_BASE}/components/ContentBadge/ContentBadge.tsx`;
-const CONTENT_BADGE_NATIVE_SOURCE = `${GITHUB_BASE}/native/ContentBadge.tsx`;
 
 function WebContent() {
   return (
@@ -701,8 +847,8 @@ function WebContent() {
               padding: "8px 16px",
               fontSize: 13,
               fontWeight: 500,
-              color: "white",
-              backgroundColor: "var(--inverse-surface-default)",
+              color: "var(--content-base-onColor)",
+              backgroundColor: "var(--docs-code-surface)",
               borderRadius: 12,
               textDecoration: "none",
             }}
@@ -777,86 +923,6 @@ function WebContent() {
   );
 }
 
-function RNContent() {
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
-      {/* Source Code */}
-      <Section title="Source Code">
-        <div style={{ padding: 16, backgroundColor: "var(--bg-secondary)", borderRadius: 12, marginBottom: 24, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <div>
-            <p style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", margin: 0 }}>ContentBadge Component</p>
-            <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: "4px 0 0 0" }}>실제 컴포넌트 소스 코드를 GitHub에서 확인하세요.</p>
-          </div>
-          <a
-            href={CONTENT_BADGE_NATIVE_SOURCE}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 6,
-              padding: "8px 16px",
-              fontSize: 13,
-              fontWeight: 500,
-              color: "white",
-              backgroundColor: "var(--inverse-surface-default)",
-              borderRadius: 12,
-              textDecoration: "none",
-            }}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-            </svg>
-            View on GitHub
-          </a>
-        </div>
-      </Section>
-
-      {/* Import */}
-      <Section title="Import">
-        <CodeBlock code={`import { ContentBadge } from '@baerae-zkap/design-system/native';`} />
-      </Section>
-
-      {/* Basic Usage */}
-      <Section title="Basic Usage">
-        <PreviewBox>
-          <div style={{ display: "flex", gap: 12, padding: 24 }}>
-            <ContentBadgeDemo variant="filled" color="brandDefault" size="medium">NEW</ContentBadgeDemo>
-            <ContentBadgeDemo variant="filled" color="successDefault" size="medium">판매중</ContentBadgeDemo>
-            <ContentBadgeDemo variant="filled" color="errorDefault" size="medium">품절</ContentBadgeDemo>
-          </div>
-        </PreviewBox>
-        <CodeBlock code={`<ContentBadge color="brandDefault">NEW</ContentBadge>
-<ContentBadge color="successDefault">판매중</ContentBadge>
-<ContentBadge color="errorDefault">품절</ContentBadge>`} />
-      </Section>
-
-      {/* Status with Dot */}
-      <Section title="Status with Dot">
-        <CodeBlock code={`<View style={{ flexDirection: 'row', gap: 8 }}>
-  <ContentBadge color="successDefault" dot>온라인</ContentBadge>
-  <ContentBadge color="errorDefault" dot>오프라인</ContentBadge>
-  <ContentBadge color="brandDefault" dot>진행중</ContentBadge>
-</View>`} />
-      </Section>
-
-      {/* API Reference */}
-      <Section title="API Reference">
-        <PropsTable
-          props={[
-            { name: "variant", type: '"filled" | "outlined" | "subtle"', required: false, defaultVal: '"filled"', description: "스타일 변형" },
-            { name: "color", type: '"brandDefault" | "baseDefault" | "successDefault" | "errorDefault" | "warningDefault" | "infoDefault"', required: false, defaultVal: '"baseDefault"', description: "색상 테마" },
-            { name: "size", type: '"small" | "medium" | "large"', required: false, defaultVal: '"medium"', description: "크기" },
-            { name: "dot", type: "boolean", required: false, defaultVal: "false", description: "상태 점 표시" },
-            { name: "leftIcon", type: "ReactNode", required: false, description: "좌측 아이콘 (dot과 배타적)" },
-            { name: "children", type: "ReactNode", required: false, description: "Badge 텍스트" },
-          ]}
-        />
-      </Section>
-    </div>
-  );
-}
-
 // ============================================
 // Shared Components
 // ============================================
@@ -873,7 +939,7 @@ function UsageCard({ situation, description, recommendation, examples }: {
       gridTemplateColumns: "1fr auto",
       gap: 16,
       padding: 16,
-      backgroundColor: "white",
+      backgroundColor: "var(--surface-base-default)",
       borderRadius: 12,
       border: "1px solid var(--divider)",
       alignItems: "center",

@@ -7,7 +7,7 @@ import { Accordion } from '@baerae-zkap/design-system';
 import { Section, Subsection } from "@/components/docs/Section";
 import { PropsTable } from "@/components/docs/PropsTable";
 import { PrincipleCard, VariantCard, DoCard, DontCard } from "@/components/docs/Cards";
-import { RadioGroup, CodeTypeTab, CopyButton } from "@/components/docs/Playground";
+import { RadioGroup, CopyButton } from "@/components/docs/Playground";
 
 // Types
 type AccordionSize = "medium" | "large";
@@ -28,7 +28,7 @@ export default function AccordionPage() {
         Accordion
       </h1>
       <p style={{ fontSize: 15, color: "var(--text-secondary)", marginBottom: 32, lineHeight: 1.6 }}>
-        접을 수 있는 콘텐츠 영역입니다. FAQ, 설정 메뉴 등에서 정보를 계층적으로 표시할 때 사용됩니다.
+        제목을 탭하여 콘텐츠를 접거나 펼칠 수 있는 컴포넌트입니다. 제한된 공간에서 많은 정보를 효과적으로 구성합니다.
       </p>
 
       {/* Interactive Playground */}
@@ -46,7 +46,6 @@ function AccordionPlayground() {
   const [size, setSize] = useState<AccordionSize>("medium");
   const [disabled, setDisabled] = useState(false);
   const [defaultExpanded, setDefaultExpanded] = useState(false);
-  const [codeType, setCodeType] = useState<"rn" | "web">("rn");
 
   const generateCode = () => {
     const props = [];
@@ -57,21 +56,12 @@ function AccordionPlayground() {
 
     const propsStr = props.join("\n  ");
 
-    if (codeType === "rn") {
-      return `<Accordion
-  ${propsStr}
-  onChange={(expanded) => console.log(expanded)}
->
-  <Text>Accordion content goes here</Text>
-</Accordion>`;
-    } else {
-      return `<Accordion
+    return `<Accordion
   ${propsStr}
   onChange={(expanded) => console.log(expanded)}
 >
   <p>Accordion content goes here</p>
 </Accordion>`;
-    }
   };
 
   return (
@@ -130,7 +120,7 @@ function AccordionPlayground() {
                 display: "flex",
                 flexDirection: "column",
                 gap: 28,
-                backgroundColor: "white",
+                backgroundColor: "var(--surface-base-default)",
                 borderRadius: 16,
               }}
             >
@@ -176,15 +166,21 @@ function AccordionPlayground() {
         <div
           style={{
             padding: "10px 16px",
-            backgroundColor: "var(--inverse-surface-default)",
+            backgroundColor: "var(--docs-code-surface)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
           }}
         >
           <div style={{ display: "flex", gap: 8 }}>
-            <CodeTypeTab active={codeType === "rn"} onClick={() => setCodeType("rn")}>React Native</CodeTypeTab>
-            <CodeTypeTab active={codeType === "web"} onClick={() => setCodeType("web")}>Web</CodeTypeTab>
+            <span style={{
+              fontSize: 13,
+              fontWeight: 600,
+              padding: "4px 12px",
+              borderRadius: 6,
+              color: "var(--content-base-onColor)",
+              backgroundColor: "var(--docs-code-active-bg)",
+            }}>Web</span>
           </div>
           <CopyButton text={generateCode()} />
         </div>
@@ -194,8 +190,8 @@ function AccordionPlayground() {
             padding: 16,
             fontSize: 13,
             lineHeight: 1.6,
-            color: "var(--border-secondary-default)",
-            backgroundColor: "var(--inverse-surface-default)",
+            color: "var(--docs-code-text)",
+            backgroundColor: "var(--docs-code-surface)",
             fontFamily: "'SF Mono', 'Fira Code', monospace",
             overflow: "auto",
           }}
@@ -212,15 +208,107 @@ function PlatformContent({ platform }: { platform: Platform }) {
   if (platform === "design") {
     return <DesignContent />;
   }
-  if (platform === "web") {
-    return <WebContent />;
-  }
-  return <RNContent />;
+  return <WebContent />;
 }
 
 function DesignContent() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
+      {/* Overview */}
+      <div>
+        <h2
+          style={{
+            fontSize: 24,
+            fontWeight: 700,
+            color: "var(--text-primary)",
+            marginBottom: 8,
+          }}
+        >
+          개요
+        </h2>
+        <p
+          style={{
+            fontSize: 16,
+            lineHeight: 1.6,
+            color: "var(--text-secondary)",
+            marginBottom: 24,
+          }}
+        >
+          Accordion은 제목과 접을 수 있는 콘텐츠 영역으로 구성된 컴포넌트입니다. 많은 양의 정보를 제한된 공간에 효과적으로 표시할 때 사용합니다.
+        </p>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: 24,
+          }}
+        >
+          <div
+            style={{
+              padding: 24,
+              borderRadius: 12,
+              backgroundColor: "var(--surface-success-default)",
+              border: "1px solid var(--border-success-default)",
+            }}
+          >
+            <h3
+              style={{
+                fontSize: 16,
+                fontWeight: 600,
+                color: "var(--content-success-default)",
+                marginBottom: 12,
+              }}
+            >
+              이런 경우 사용하세요
+            </h3>
+            <ul
+              style={{
+                fontSize: 14,
+                lineHeight: 1.8,
+                color: "var(--text-secondary)",
+                paddingLeft: 20,
+                margin: 0,
+              }}
+            >
+              <li>FAQ, 도움말 등 질문과 답변 형태의 콘텐츠를 구성할 때</li>
+              <li>설정 화면에서 카테고리별 옵션을 그룹화할 때</li>
+              <li>긴 콘텐츠를 단계별로 펼쳐볼 수 있게 할 때</li>
+            </ul>
+          </div>
+          <div
+            style={{
+              padding: 24,
+              borderRadius: 12,
+              backgroundColor: "var(--surface-error-default)",
+              border: "1px solid var(--border-error-default)",
+            }}
+          >
+            <h3
+              style={{
+                fontSize: 16,
+                fontWeight: 600,
+                color: "var(--content-error-default)",
+                marginBottom: 12,
+              }}
+            >
+              이런 경우 사용하지 마세요
+            </h3>
+            <ul
+              style={{
+                fontSize: 14,
+                lineHeight: 1.8,
+                color: "var(--text-secondary)",
+                paddingLeft: 20,
+                margin: 0,
+              }}
+            >
+              <li>항상 표시되어야 하는 중요 정보에는 사용하지 마세요</li>
+              <li>2개 이하의 짧은 항목에는 불필요합니다</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
       {/* Anatomy */}
       <Section title="Anatomy">
         <div style={{
@@ -634,13 +722,62 @@ function DesignContent() {
           </p>
         </div>
       </Section>
+
+      {/* Related Components */}
+      <div>
+        <h2
+          style={{
+            fontSize: 24,
+            fontWeight: 700,
+            color: "var(--text-primary)",
+            marginBottom: 16,
+          }}
+        >
+          관련 컴포넌트
+        </h2>
+        <table
+          style={{
+            width: "100%",
+            borderCollapse: "collapse",
+            fontSize: 14,
+          }}
+        >
+          <thead>
+            <tr
+              style={{
+                borderBottom: "2px solid var(--border-default)",
+              }}
+            >
+              <th style={{ textAlign: "left", padding: "12px 16px", color: "var(--text-primary)" }}>컴포넌트</th>
+              <th style={{ textAlign: "left", padding: "12px 16px", color: "var(--text-primary)" }}>용도</th>
+              <th style={{ textAlign: "left", padding: "12px 16px", color: "var(--text-primary)" }}>차이점</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+              <td style={{ padding: "12px 16px", fontWeight: 600, color: "var(--text-primary)" }}>Card</td>
+              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>콘텐츠 그룹화</td>
+              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>Card는 항상 표시, Accordion은 접고 펼침</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+              <td style={{ padding: "12px 16px", fontWeight: 600, color: "var(--text-primary)" }}>SectionHeader</td>
+              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>섹션 구분</td>
+              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>SectionHeader는 고정 제목, Accordion은 토글 가능</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+              <td style={{ padding: "12px 16px", fontWeight: 600, color: "var(--text-primary)" }}>ListCell</td>
+              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>항목 나열</td>
+              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>ListCell은 단일 행, Accordion은 펼쳐지는 콘텐츠 영역 포함</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
 
 const GITHUB_BASE = "https://github.com/baerae-zkap/design-foundation/blob/main/packages/design-system/src";
 const ACCORDION_SOURCE = `${GITHUB_BASE}/components/Accordion/Accordion.tsx`;
-const ACCORDION_NATIVE_SOURCE = `${GITHUB_BASE}/native/Accordion.tsx`;
 
 function WebContent() {
   return (
@@ -663,8 +800,8 @@ function WebContent() {
               padding: "8px 16px",
               fontSize: 13,
               fontWeight: 500,
-              color: "white",
-              backgroundColor: "var(--inverse-surface-default)",
+              color: "var(--content-base-onColor)",
+              backgroundColor: "var(--docs-code-surface)",
               borderRadius: 12,
               textDecoration: "none",
             }}
@@ -729,80 +866,6 @@ function WebContent() {
   );
 }
 
-function RNContent() {
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
-      {/* Source Code */}
-      <Section title="Source Code">
-        <div style={{ padding: 16, backgroundColor: "var(--bg-secondary)", borderRadius: 12, marginBottom: 24, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <div>
-            <p style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", margin: 0 }}>Accordion Component</p>
-            <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: "4px 0 0 0" }}>실제 컴포넌트 소스 코드를 GitHub에서 확인하세요.</p>
-          </div>
-          <a
-            href={ACCORDION_NATIVE_SOURCE}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 6,
-              padding: "8px 16px",
-              fontSize: 13,
-              fontWeight: 500,
-              color: "white",
-              backgroundColor: "var(--inverse-surface-default)",
-              borderRadius: 12,
-              textDecoration: "none",
-            }}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-            </svg>
-            View on GitHub
-          </a>
-        </div>
-      </Section>
-
-      {/* Import */}
-      <Section title="Import">
-        <CodeBlock code={`import { Accordion } from '@baerae-zkap/design-system/native';`} />
-      </Section>
-
-      {/* Basic Usage */}
-      <Section title="Basic Usage">
-        <PreviewBox>
-          <div style={{ width: "100%", maxWidth: 400, padding: 24 }}>
-            <AccordionDemo title="Click to expand">
-              <p style={{ margin: 0, fontSize: 14, color: "var(--content-base-secondary)", lineHeight: 1.6 }}>
-                This content is revealed when expanded.
-              </p>
-            </AccordionDemo>
-          </div>
-        </PreviewBox>
-        <CodeBlock code={`<Accordion title="Click to expand">
-  <Text>This content is revealed when expanded.</Text>
-</Accordion>`} />
-      </Section>
-
-      {/* API Reference */}
-      <Section title="API Reference">
-        <PropsTable
-          props={[
-            { name: "title", type: "string", required: true, description: "헤더에 표시되는 제목" },
-            { name: "children", type: "ReactNode", required: true, description: "펼쳐지는 콘텐츠" },
-            { name: "size", type: '"medium" | "large"', required: false, defaultVal: '"medium"', description: "아코디언 크기" },
-            { name: "defaultExpanded", type: "boolean", required: false, defaultVal: "false", description: "초기 펼침 상태 (비제어)" },
-            { name: "expanded", type: "boolean", required: false, description: "펼침 상태 (제어)" },
-            { name: "onChange", type: "(expanded: boolean) => void", required: false, description: "상태 변경 콜백" },
-            { name: "disabled", type: "boolean", required: false, defaultVal: "false", description: "비활성화 상태" },
-          ]}
-        />
-      </Section>
-    </div>
-  );
-}
-
 // ============================================
 // Shared Components
 // ============================================
@@ -819,7 +882,7 @@ function UsageCard({ situation, description, recommendation, examples }: {
       gridTemplateColumns: "1fr auto",
       gap: 16,
       padding: 16,
-      backgroundColor: "white",
+      backgroundColor: "var(--surface-base-default)",
       borderRadius: 12,
       border: "1px solid var(--divider)",
       alignItems: "center",
@@ -879,7 +942,7 @@ function AccordionGroupDemo({ mode }: { mode: "single" | "multi" }) {
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              backgroundColor: expandedItems.includes(index) ? "var(--surface-base-alternative)" : "white",
+              backgroundColor: expandedItems.includes(index) ? "var(--surface-base-alternative)" : "var(--surface-base-default)",
               border: "none",
               cursor: "pointer",
               transition: "background-color 0.15s ease",
