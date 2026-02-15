@@ -7,7 +7,7 @@ import { IconButton } from '@baerae-zkap/design-system';
 import { Section, Subsection } from "@/components/docs/Section";
 import { PropsTable } from "@/components/docs/PropsTable";
 import { PrincipleCard, VariantCard, DoCard, DontCard } from "@/components/docs/Cards";
-import { RadioGroup, CodeTypeTab, CopyButton } from "@/components/docs/Playground";
+import { RadioGroup, CopyButton } from "@/components/docs/Playground";
 import { DoLabel, DontLabel } from "@/components/docs/Labels";
 
 // Types
@@ -16,33 +16,10 @@ type IconButtonColor = "brandDefault" | "baseDefault" | "errorDefault";
 type IconButtonSize = "small" | "medium" | "large";
 
 // Size configurations
-const sizeConfig: Record<IconButtonSize, { size: number; iconSize: number }> = {
-  small: { size: 32, iconSize: 18 },
-  medium: { size: 40, iconSize: 22 },
-  large: { size: 48, iconSize: 26 },
-};
-
-// Color configurations
-const colorConfig: Record<IconButtonColor, {
-  filled: { bg: string; bgPressed: string; color: string };
-  ghost: { bg: string; bgHover: string; bgPressed: string; color: string; colorPressed: string };
-  outlined: { bg: string; bgPressed: string; color: string; border: string };
-}> = {
-  brandDefault: {
-    filled: { bg: 'var(--content-brand-default)', bgPressed: 'var(--surface-brand-defaultPressed)', color: 'white' },
-    ghost: { bg: 'transparent', bgHover: 'var(--effect-alpha-brand-selection)', bgPressed: 'var(--effect-alpha-brand-selection)', color: 'var(--content-brand-default)', colorPressed: 'var(--surface-brand-defaultPressed)' },
-    outlined: { bg: 'var(--surface-base-default)', bgPressed: 'var(--surface-brand-secondary)', color: 'var(--content-brand-default)', border: 'var(--content-brand-default)' },
-  },
-  baseDefault: {
-    filled: { bg: 'var(--content-base-strong)', bgPressed: 'var(--inverse-surface-default)', color: 'white' },
-    ghost: { bg: 'transparent', bgHover: 'var(--effect-alpha-fill-alternative)', bgPressed: 'var(--effect-alpha-fill-normal)', color: 'var(--content-base-strong)', colorPressed: 'var(--inverse-surface-default)' },
-    outlined: { bg: 'var(--surface-base-default)', bgPressed: 'var(--surface-base-alternative)', color: 'var(--content-base-strong)', border: 'var(--border-base-default)' },
-  },
-  errorDefault: {
-    filled: { bg: 'var(--status-negative-content)', bgPressed: 'var(--status-negative-content)', color: 'white' },
-    ghost: { bg: 'transparent', bgHover: 'var(--status-negative-surface)', bgPressed: 'var(--status-negative-surface)', color: 'var(--status-negative-content)', colorPressed: 'var(--status-negative-content)' },
-    outlined: { bg: 'var(--surface-base-default)', bgPressed: 'var(--status-negative-surface)', color: 'var(--status-negative-content)', border: 'var(--status-negative-content)' },
-  },
+const sizeConfig: Record<IconButtonSize, { iconSize: number }> = {
+  small: { iconSize: 18 },
+  medium: { iconSize: 22 },
+  large: { iconSize: 26 },
 };
 
 export default function IconButtonPage() {
@@ -61,7 +38,7 @@ export default function IconButtonPage() {
         Icon Button
       </h1>
       <p style={{ fontSize: 15, color: "var(--text-secondary)", marginBottom: 32, lineHeight: 1.6 }}>
-        아이콘만으로 구성된 원형 버튼입니다. 공간이 제한된 영역이나 반복적인 액션에 사용됩니다.
+        아이콘만으로 의미를 전달하는 원형 버튼입니다. 닫기, 메뉴, 검색 등 보편적으로 인식되는 아이콘 액션에 사용하며, 공간이 제한된 툴바나 네비게이션 영역에 최적화되어 있습니다.
       </p>
 
       {/* Interactive Playground */}
@@ -80,7 +57,6 @@ function IconButtonPlayground() {
   const [color, setColor] = useState<IconButtonColor>("baseDefault");
   const [size, setSize] = useState<IconButtonSize>("medium");
   const [disabled, setDisabled] = useState(false);
-  const [codeType, setCodeType] = useState<"rn" | "web">("rn");
 
   const generateCode = () => {
     const props = [];
@@ -91,15 +67,9 @@ function IconButtonPlayground() {
 
     const propsStr = props.length > 0 ? `\n  ${props.join("\n  ")}\n` : " ";
 
-    if (codeType === "rn") {
-      return `<IconButton${propsStr.length > 1 ? propsStr : " "}onPress={() => {}}>
+    return `<IconButton${propsStr.length > 1 ? propsStr : " "}onClick={() => {}}>
   <PlusIcon />
 </IconButton>`;
-    } else {
-      return `<IconButton${propsStr.length > 1 ? propsStr : " "}onClick={() => {}}>
-  <PlusIcon />
-</IconButton>`;
-    }
   };
 
   const colorLabels: Record<IconButtonColor, string> = {
@@ -157,7 +127,7 @@ function IconButtonPlayground() {
                 display: "flex",
                 flexDirection: "column",
                 gap: 28,
-                backgroundColor: "white",
+                backgroundColor: "var(--surface-base-default)",
                 borderRadius: 16,
               }}
             >
@@ -231,16 +201,13 @@ function IconButtonPlayground() {
         <div
           style={{
             padding: "10px 16px",
-            backgroundColor: "var(--inverse-surface-default)",
+            backgroundColor: "var(--docs-code-surface)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
           }}
         >
-          <div style={{ display: "flex", gap: 8 }}>
-            <CodeTypeTab active={codeType === "rn"} onClick={() => setCodeType("rn")}>React Native</CodeTypeTab>
-            <CodeTypeTab active={codeType === "web"} onClick={() => setCodeType("web")}>Web</CodeTypeTab>
-          </div>
+          <span style={{ fontSize: 13, fontWeight: 500, color: "var(--docs-code-active-text)" }}>Web</span>
           <CopyButton text={generateCode()} />
         </div>
         <pre
@@ -249,8 +216,8 @@ function IconButtonPlayground() {
             padding: 16,
             fontSize: 13,
             lineHeight: 1.6,
-            color: "var(--border-secondary-default)",
-            backgroundColor: "var(--inverse-surface-default)",
+            color: "var(--docs-code-text)",
+            backgroundColor: "var(--docs-code-surface)",
             fontFamily: "'SF Mono', 'Fira Code', monospace",
             overflow: "auto",
           }}
@@ -266,15 +233,44 @@ function PlatformContent({ platform }: { platform: Platform }) {
   if (platform === "design") {
     return <DesignContent />;
   }
-  if (platform === "web") {
-    return <WebContent />;
-  }
-  return <RNContent />;
+  return <WebContent />;
 }
 
 function DesignContent() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
+      {/* Overview */}
+      <Section title="Overview">
+        <div style={{ display: "grid", gap: 24 }}>
+          <div>
+            <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6, margin: 0 }}>
+              IconButton은 <strong style={{ color: "var(--text-primary)" }}>아이콘만으로 의미가 명확히 전달되는 단일 액션</strong>을 위한 원형 버튼입니다.
+              텍스트 없이 아이콘으로만 기능을 표현하므로 공간 효율이 높고, 툴바나 네비게이션 등 반복적으로 나타나는 UI 패턴에 적합합니다.
+            </p>
+          </div>
+
+          <div>
+            <h4 style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", marginBottom: 12 }}>When to use</h4>
+            <ul style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.8, margin: 0, paddingLeft: 20 }}>
+              <li>아이콘의 의미가 <strong style={{ color: "var(--text-primary)" }}>보편적으로 인식</strong>되는 액션 (닫기, 메뉴, 검색, 추가 등)</li>
+              <li><strong style={{ color: "var(--text-primary)" }}>공간이 제한된</strong> 툴바, 헤더, 카드 액션 영역</li>
+              <li>테이블 행별 편집/삭제 등 <strong style={{ color: "var(--text-primary)" }}>반복되는 액션 패턴</strong></li>
+              <li>원형 버튼의 시각적 일관성이 필요할 때 (FAB, 모달 닫기 등)</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", marginBottom: 12 }}>When NOT to use</h4>
+            <ul style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.8, margin: 0, paddingLeft: 20 }}>
+              <li><strong style={{ color: "var(--text-primary)" }}>아이콘만으로 의미 전달이 어렵다면</strong> → Button에 텍스트 + 아이콘 조합 사용</li>
+              <li><strong style={{ color: "var(--text-primary)" }}>주요 CTA 액션이라면</strong> → Button filled variant 사용 (텍스트로 명확성 확보)</li>
+              <li><strong style={{ color: "var(--text-primary)" }}>텍스트 링크 스타일이 필요하면</strong> → TextButton 사용</li>
+              <li><strong style={{ color: "var(--text-primary)" }}>Button의 icon-only 모드와 비교:</strong> Button은 직사각형 기반 icon-only 지원, IconButton은 원형 전용 설계로 툴바/네비게이션 패턴에 최적화</li>
+            </ul>
+          </div>
+        </div>
+      </Section>
+
       {/* Anatomy */}
       <Section title="Anatomy">
         <div style={{
@@ -326,7 +322,7 @@ function DesignContent() {
       {/* Usage Guidelines */}
       <Section title="Usage Guidelines">
         <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 24, lineHeight: 1.6 }}>
-          일관된 UX를 위해 아래 권고 조합을 따르세요. Icon Button은 <strong style={{ color: "var(--text-primary)" }}>텍스트 없이 아이콘만으로 의미가 전달</strong>되어야 하는 상황에서 사용합니다.
+          일관된 UX를 위해 아래 권고 조합을 따르세요. Icon Button은 <strong style={{ color: "var(--text-primary)" }}>원형 버튼이 필요하고 아이콘만으로 의미가 전달</strong>되어야 하는 상황에서 사용합니다. Button 컴포넌트도 icon-only 모드를 제공하나 직사각형 기반이며, IconButton은 원형 전용으로 시각적 일관성이 중요한 패턴에 적합합니다.
         </p>
 
         <Subsection title="Recommended Combinations">
@@ -373,18 +369,13 @@ function DesignContent() {
           <div style={{ display: "grid", gap: 16 }}>
             <PrincipleCard
               number={1}
-              title="아이콘만으로 의미 전달이 충분할 때 사용"
-              desc="아이콘의 의미가 명확하지 않다면 텍스트 Button을 사용하세요. Icon Button은 보편적으로 인식되는 아이콘(닫기, 메뉴, 추가 등)에 적합합니다."
+              title="반드시 접근성 레이블 제공"
+              desc="아이콘만 있으므로 aria-label을 필수로 제공해야 합니다. 스크린 리더 사용자가 버튼의 목적을 알 수 있어야 합니다."
             />
             <PrincipleCard
               number={2}
               title="variant로 계층 구조 표현"
               desc="filled는 가장 강조된 액션, ghost는 보조 액션, outlined는 중간 강조에 사용합니다. 화면당 filled Icon Button은 1-2개로 제한하세요."
-            />
-            <PrincipleCard
-              number={3}
-              title="반드시 접근성 레이블 제공"
-              desc="아이콘만 있으므로 aria-label (Web) 또는 accessibilityLabel (RN)을 필수로 제공해야 합니다. 스크린 리더 사용자가 버튼의 목적을 알 수 있어야 합니다."
             />
           </div>
         </Subsection>
@@ -572,10 +563,6 @@ function DesignContent() {
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>aria-disabled</code></td>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>비활성화 상태를 보조 기술에 전달</td>
               </tr>
-              <tr>
-                <td style={{ padding: "12px 16px" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>accessibilityLabel</code> (RN)</td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>React Native에서의 접근성 레이블</td>
-              </tr>
             </tbody>
           </table>
         </div>
@@ -612,7 +599,7 @@ function DesignContent() {
             <PrincipleCard
               number={1}
               title="Accessibility Label 필수"
-              desc="텍스트 레이블이 없으므로 aria-label (Web) 또는 accessibilityLabel (RN)을 반드시 제공해야 합니다. 예: aria-label='메뉴 열기', aria-label='닫기'"
+              desc="텍스트 레이블이 없으므로 aria-label을 반드시 제공해야 합니다. 예: aria-label='메뉴 열기', aria-label='닫기'"
             />
             <PrincipleCard
               number={2}
@@ -632,13 +619,49 @@ function DesignContent() {
           </div>
         </Subsection>
       </Section>
+
+      {/* Related Components */}
+      <Section title="Related Components">
+        <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+            <thead>
+              <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>컴포넌트</th>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>용도</th>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>차이점</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                <td style={{ padding: "12px 16px", fontWeight: 500 }}>Button</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>텍스트 레이블이 있는 주요/보조 액션</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>Button도 icon-only 지원하나 직사각형 기반. IconButton은 원형 전용으로 툴바/네비게이션에 최적화</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                <td style={{ padding: "12px 16px", fontWeight: 500 }}>TextButton</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>텍스트 링크 스타일의 가벼운 액션</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>IconButton은 아이콘 전용, TextButton은 텍스트 중심의 최소한 버튼</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                <td style={{ padding: "12px 16px", fontWeight: 500 }}>Chip</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>필터링/선택 인터랙션</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>Chip은 선택 상태 토글용, IconButton은 단일 액션 실행용</td>
+              </tr>
+              <tr>
+                <td style={{ padding: "12px 16px", fontWeight: 500 }}>ContentBadge</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>읽기 전용 상태/라벨 표시</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>ContentBadge는 인터랙션 없음, IconButton은 클릭 가능한 액션 버튼</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </Section>
     </div>
   );
 }
 
 const GITHUB_BASE = "https://github.com/baerae-zkap/design-foundation/blob/main/packages/design-system/src";
 const ICONBUTTON_SOURCE = `${GITHUB_BASE}/components/IconButton/IconButton.tsx`;
-const ICONBUTTON_NATIVE_SOURCE = `${GITHUB_BASE}/native/IconButton.tsx`;
 
 function WebContent() {
   return (
@@ -661,8 +684,8 @@ function WebContent() {
               padding: "8px 16px",
               fontSize: 13,
               fontWeight: 500,
-              color: "white",
-              backgroundColor: "var(--inverse-surface-default)",
+              color: "var(--content-base-onColor)",
+              backgroundColor: "var(--docs-code-surface)",
               borderRadius: 12,
               textDecoration: "none",
             }}
@@ -731,75 +754,6 @@ function WebContent() {
   );
 }
 
-function RNContent() {
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
-      {/* Source Code */}
-      <Section title="Source Code">
-        <div style={{ padding: 16, backgroundColor: "var(--bg-secondary)", borderRadius: 12, marginBottom: 24, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <div>
-            <p style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", margin: 0 }}>IconButton Component</p>
-            <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: "4px 0 0 0" }}>실제 컴포넌트 소스 코드를 GitHub에서 확인하세요.</p>
-          </div>
-          <a
-            href={ICONBUTTON_NATIVE_SOURCE}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 6,
-              padding: "8px 16px",
-              fontSize: 13,
-              fontWeight: 500,
-              color: "white",
-              backgroundColor: "var(--inverse-surface-default)",
-              borderRadius: 12,
-              textDecoration: "none",
-            }}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-            </svg>
-            View on GitHub
-          </a>
-        </div>
-      </Section>
-
-      {/* Import */}
-      <Section title="Import">
-        <CodeBlock code={`import { IconButton } from '@baerae-zkap/design-system/native';`} />
-      </Section>
-
-      {/* Basic Usage */}
-      <Section title="Basic Usage">
-        <PreviewBox>
-          <div style={{ display: "flex", gap: 16, alignItems: "center", padding: 24 }}>
-            <IconButtonDemo variant="ghost" color="baseDefault" />
-          </div>
-        </PreviewBox>
-        <CodeBlock code={`<IconButton onPress={() => {}}>
-  <PlusIcon />
-</IconButton>`} />
-      </Section>
-
-      {/* API Reference */}
-      <Section title="API Reference">
-        <PropsTable
-          props={[
-            { name: "variant", type: '"filled" | "ghost" | "outlined"', required: false, defaultVal: '"ghost"', description: "버튼 스타일" },
-            { name: "color", type: '"brandDefault" | "baseDefault" | "errorDefault"', required: false, defaultVal: '"baseDefault"', description: "색상 테마" },
-            { name: "size", type: '"small" | "medium" | "large"', required: false, defaultVal: '"medium"', description: "버튼 크기" },
-            { name: "disabled", type: "boolean", required: false, defaultVal: "false", description: "비활성화 상태" },
-            { name: "children", type: "ReactNode", required: true, description: "아이콘 콘텐츠" },
-            { name: "onPress", type: "(event) => void", required: false, description: "탭 핸들러" },
-          ]}
-        />
-      </Section>
-    </div>
-  );
-}
-
 // ============================================
 // Shared Components
 // ============================================
@@ -842,7 +796,7 @@ function UsageCard({ situation, desc, variant, color, iconType }: {
       gridTemplateColumns: "1fr auto",
       gap: 16,
       padding: 16,
-      backgroundColor: "white",
+      backgroundColor: "var(--surface-base-default)",
       borderRadius: 12,
       border: "1px solid var(--divider)",
       alignItems: "center",
