@@ -1,13 +1,13 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { PlatformTabs, CodeBlock, PreviewBox, Platform, highlightCode } from "@/components/PlatformTabs";
 import { Button } from '@baerae-zkap/design-system';
 import { Section, Subsection, InlineCode } from "@/components/docs/Section";
 import { PropsTable, ColorTableRow } from "@/components/docs/PropsTable";
 import { PrincipleCard, DoCard, DontCard } from "@/components/docs/Cards";
-import { RadioGroup, CodeTypeTab, CopyButton } from "@/components/docs/Playground";
+import { RadioGroup, CopyButton } from "@/components/docs/Playground";
 import { NumberBadge, DoLabel, DontLabel } from "@/components/docs/Labels";
 import { BRAND_EXTERNAL_COLORS } from "@/tokens/brandExternal";
 
@@ -32,7 +32,7 @@ export default function ButtonPage() {
         Button
       </h1>
       <p style={{ fontSize: 15, color: "var(--text-secondary)", marginBottom: 32, lineHeight: 1.6 }}>
-        작업을 수행하는데 사용되는 클릭 가능한 요소입니다. 폼 제출, 다이얼로그 상호작용, 작업 취소 및 삭제 등의 액션을 트리거합니다.
+        폼 제출, 다이얼로그 확인/취소, CTA 등 주요 사용자 액션을 실행하는 핵심 버튼 컴포넌트입니다. Filled, Outlined, Ghost 스타일과 7가지 색상 조합으로 시각적 위계를 표현합니다.
       </p>
 
       {/* Interactive Playground */}
@@ -54,8 +54,6 @@ function ButtonPlayground() {
   const [trailingIcon, setTrailingIcon] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [disabled, setDisabled] = useState(false);
-  const [codeType, setCodeType] = useState<"rn" | "web">("rn");
-
   const generateCode = () => {
     const props = [];
     if (buttonType !== "filled") props.push(`buttonType="${buttonType}"`);
@@ -68,15 +66,9 @@ function ButtonPlayground() {
 
     const propsStr = props.length > 0 ? `\n  ${props.join("\n  ")}\n` : " ";
 
-    if (codeType === "rn") {
-      return `<Button${propsStr.length > 1 ? propsStr : " "}onPress={() => {}}>
+    return `<Button${propsStr.length > 1 ? propsStr : " "}onClick={() => {}}>
   Button
 </Button>`;
-    } else {
-      return `<Button${propsStr.length > 1 ? propsStr : " "}onClick={() => {}}>
-  Button
-</Button>`;
-    }
   };
 
   const colorLabels: Record<ButtonColor, string> = {
@@ -239,10 +231,7 @@ function ButtonPlayground() {
             justifyContent: "space-between",
           }}
         >
-          <div style={{ display: "flex", gap: 8 }}>
-            <CodeTypeTab active={codeType === "rn"} onClick={() => setCodeType("rn")}>React Native</CodeTypeTab>
-            <CodeTypeTab active={codeType === "web"} onClick={() => setCodeType("web")}>Web</CodeTypeTab>
-          </div>
+          <span style={{ fontSize: 13, fontWeight: 600, color: "var(--docs-code-active-text)" }}>Web</span>
           <CopyButton text={generateCode()} />
         </div>
         <pre
@@ -270,8 +259,6 @@ function PlatformContent({ platform }: { platform: Platform }) {
       return <DesignContent />;
     case "web":
       return <WebContent />;
-    case "rn":
-      return <RNContent />;
   }
 }
 
@@ -280,7 +267,36 @@ function PlatformContent({ platform }: { platform: Platform }) {
 // ============================================
 function DesignContent() {
   return (
-    <>
+    <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
+      {/* Overview */}
+      <Section title="Overview">
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.8, marginBottom: 20 }}>
+          Button은 사용자의 액션을 트리거하는 가장 핵심적인 인터랙티브 요소입니다.
+          Filled, Outlined, Ghost 등 다양한 스타일과 Brand, Base, Success, Error 등의 색상을 조합하여
+          시각적 위계를 표현합니다.
+        </p>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+          <div style={{ padding: 20, borderRadius: 12, backgroundColor: "var(--surface-base-alternative)" }}>
+            <h4 style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", marginBottom: 12 }}>When to use</h4>
+            <ul style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.8, margin: 0, paddingLeft: 20 }}>
+              <li>폼 제출, 저장, 삭제 등 명확한 액션이 필요할 때</li>
+              <li>CTA(Call to Action)로 사용자의 주의를 끌어야 할 때</li>
+              <li>다이얼로그의 확인/취소 액션을 제공할 때</li>
+              <li>네비게이션이 아닌 기능적 동작을 실행할 때</li>
+            </ul>
+          </div>
+          <div style={{ padding: 20, borderRadius: 12, backgroundColor: "var(--surface-base-alternative)" }}>
+            <h4 style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", marginBottom: 12 }}>When NOT to use</h4>
+            <ul style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.8, margin: 0, paddingLeft: 20 }}>
+              <li>페이지 간 이동 → <InlineCode>TextButton</InlineCode> (arrow variant) 사용</li>
+              <li>텍스트 내 링크 → HTML <InlineCode>&lt;a&gt;</InlineCode> 태그 사용</li>
+              <li>아이콘만 있는 버튼 → <InlineCode>IconButton</InlineCode> 사용</li>
+              <li>필터/선택 토글 → <InlineCode>Chip</InlineCode> 사용</li>
+            </ul>
+          </div>
+        </div>
+      </Section>
+
       {/* Anatomy */}
       <Section title="Anatomy">
         <AnatomyDiagram />
@@ -824,7 +840,7 @@ function DesignContent() {
       {/* Design Tokens */}
       <Section title="Design Tokens">
         <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
-          Button 컴포넌트에 적용된 Foundation 기반 디자인 토큰입니다. <a href="/spacing" style={{ color: "var(--brand-primary)" }}>Spacing 토큰 전체 보기 →</a>
+          Button 컴포넌트에 적용된 Foundation 기반 디자인 토큰입니다. <a href="/spacing" style={{ color: "var(--content-brand-default)" }}>Spacing 토큰 전체 보기 →</a>
         </p>
 
         <Subsection title="Spacing & Layout">
@@ -951,7 +967,44 @@ function DesignContent() {
           </div>
         </Subsection>
       </Section>
-    </>
+
+      {/* Related Components */}
+      <Section title="Related Components">
+        <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+            <thead>
+              <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>컴포넌트</th>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>용도</th>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>차이점</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                <td style={{ padding: "12px 16px", fontWeight: 500 }}>TextButton</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>보조 액션, 네비게이션</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>배경 없이 텍스트만으로 최소한의 시각적 존재감. Button과 함께 보조 액션으로 배치</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                <td style={{ padding: "12px 16px", fontWeight: 500 }}>IconButton</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>아이콘 전용 원형 버튼</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>아이콘만 표시하는 원형 버튼. 공간이 제한적이고 의미가 명확한 아이콘이 있을 때 사용</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                <td style={{ padding: "12px 16px", fontWeight: 500 }}>Chip</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>필터링, 선택 토글</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>선택 상태를 토글하는 용도. Button은 단발성 액션, Chip은 상태 전환</td>
+              </tr>
+              <tr>
+                <td style={{ padding: "12px 16px", fontWeight: 500 }}>ActionArea</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>하단 액션 영역 컨테이너</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>Button을 포함하는 고정 하단 영역. 주요 CTA Button + 보조 TextButton 조합이 일반적</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </Section>
+    </div>
   );
 }
 
@@ -1158,245 +1211,6 @@ function WebContent() {
   );
 }
 
-// ============================================
-// React Native Tab Content
-// ============================================
-function RNContent() {
-  return (
-    <>
-      <Section title="Source Code">
-        <div style={{ padding: 16, backgroundColor: "var(--bg-secondary)", borderRadius: 12, marginBottom: 24, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <div>
-            <p style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", margin: 0 }}>Button Component</p>
-            <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: "4px 0 0 0" }}>실제 컴포넌트 소스 코드를 GitHub에서 확인하세요.</p>
-          </div>
-          <a
-            href={BUTTON_SOURCE}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 6,
-              padding: "8px 16px",
-              fontSize: 13,
-              fontWeight: 500,
-              color: "var(--content-base-onColor)",
-              backgroundColor: "var(--docs-code-surface)",
-              borderRadius: 12,
-              textDecoration: "none",
-            }}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-            </svg>
-            View on GitHub
-          </a>
-        </div>
-      </Section>
-
-      <Section title="Import">
-        <CodeBlock
-          code={`import { Button } from '@zkap/design-system';`}
-          sourceUrl={BUTTON_SOURCE}
-        />
-      </Section>
-
-      <Section title="Basic Usage">
-        <PreviewBox>
-          <div style={{ display: "flex", gap: 16 }}>
-            <ButtonDemo buttonType="filled" color="brandDefault">Filled</ButtonDemo>
-            <ButtonDemo buttonType="outlined" color="brandDefault">Outlined</ButtonDemo>
-          </div>
-        </PreviewBox>
-        <CodeBlock
-          code={`<Button
-  buttonType="filled"
-  color="brandDefault"
-  onPress={() => {}}
->
-  Filled
-</Button>
-
-<Button
-  buttonType="outlined"
-  color="brandDefault"
-  onPress={() => {}}
->
-  Outlined
-</Button>`}
-          sourceUrl={BUTTON_SOURCE}
-        />
-      </Section>
-
-      <Section title="Colors">
-        <PreviewBox>
-          <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-            <ButtonDemo buttonType="filled" color="brandDefault">Brand</ButtonDemo>
-            <ButtonDemo buttonType="filled" color="brandSecondary">Secondary</ButtonDemo>
-            <ButtonDemo buttonType="filled" color="baseContainer">Base</ButtonDemo>
-            <ButtonDemo buttonType="filled" color="successDefault">Success</ButtonDemo>
-            <ButtonDemo buttonType="filled" color="errorDefault">Error</ButtonDemo>
-          </div>
-        </PreviewBox>
-        <CodeBlock
-          code={`<Button buttonType="filled" color="brandDefault" onPress={() => {}}>
-  Brand
-</Button>
-
-<Button buttonType="filled" color="successDefault" onPress={() => {}}>
-  Success
-</Button>
-
-<Button buttonType="filled" color="errorDefault" onPress={() => {}}>
-  Error
-</Button>`}
-          sourceUrl={BUTTON_STYLES}
-          title="Colors"
-        />
-      </Section>
-
-      <Section title="Sizes">
-        <PreviewBox>
-          <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-            <ButtonDemo buttonType="filled" color="brandDefault" size="small">Small</ButtonDemo>
-            <ButtonDemo buttonType="filled" color="brandDefault" size="medium">Medium</ButtonDemo>
-            <ButtonDemo buttonType="filled" color="brandDefault" size="large">Large</ButtonDemo>
-            <ButtonDemo buttonType="filled" color="brandDefault" size="xLarge">X-Large</ButtonDemo>
-          </div>
-        </PreviewBox>
-        <CodeBlock
-          code={`<Button buttonType="filled" color="brandDefault" size="small" onPress={() => {}}>
-  Small
-</Button>
-
-<Button buttonType="filled" color="brandDefault" size="xLarge" onPress={() => {}}>
-  X-Large
-</Button>`}
-          sourceUrl={BUTTON_STYLES}
-          title="Sizes"
-        />
-      </Section>
-
-      <Section title="With Grid Content">
-        <PreviewBox>
-          <div style={{ display: "flex", gap: 16 }}>
-            <ButtonDemo buttonType="filled" color="brandDefault" leadingIcon>Leading</ButtonDemo>
-            <ButtonDemo buttonType="filled" color="brandDefault" trailingIcon>Trailing</ButtonDemo>
-            <ButtonDemo buttonType="filled" color="brandDefault" iconOnly="plus" />
-          </div>
-        </PreviewBox>
-        <CodeBlock
-          code={`// Leading icon
-<Button
-  buttonType="filled"
-  color="brandDefault"
-  leftContent={<Icon name="plus" size={16} color="onColor" />}
-  centerContent="Leading"
-  onPress={() => {}}
-/>
-
-// Trailing icon
-<Button
-  buttonType="filled"
-  color="brandDefault"
-  centerContent="Trailing"
-  rightContent={<Icon name="chevron-right" size={16} color="onColor" />}
-  onPress={() => {}}
-/>
-
-// Icon only - accessibilityLabel 필수!
-<Button
-  buttonType="filled"
-  color="brandDefault"
-  centerContent={<Icon name="plus" size={20} color="onColor" />}
-  accessibilityLabel="추가하기"
-  onPress={() => {}}
-/>`}
-          sourceUrl={BUTTON_SOURCE}
-          title="Grid Content"
-        />
-      </Section>
-
-      <Section title="Layout">
-        <PreviewBox>
-          <div style={{ width: "100%", maxWidth: 280, display: "flex", flexDirection: "column", gap: 12 }}>
-            <ButtonDemo buttonType="filled" color="brandDefault" layout="fillWidth">Fill Width</ButtonDemo>
-            <ButtonDemo buttonType="filled" color="brandDefault">Hug (default)</ButtonDemo>
-          </div>
-        </PreviewBox>
-        <CodeBlock code={`<Button
-  buttonType="filled"
-  color="brandDefault"
-  layout="fillWidth"
-  onPress={() => {}}
->
-  Fill Width
-</Button>`} />
-      </Section>
-
-      <Section title="States">
-        <PreviewBox>
-          <div style={{ display: "flex", gap: 16 }}>
-            <ButtonDemo buttonType="filled" color="brandDefault">Default</ButtonDemo>
-            <ButtonDemo buttonType="filled" color="brandDefault" disabled>Disabled</ButtonDemo>
-            <ButtonDemo buttonType="filled" color="brandDefault" isLoading>Loading</ButtonDemo>
-          </div>
-        </PreviewBox>
-        <CodeBlock code={`<Button
-  buttonType="filled"
-  color="brandDefault"
-  disabled
-  onPress={() => {}}
->
-  Disabled
-</Button>
-
-<Button
-  buttonType="filled"
-  color="brandDefault"
-  isLoading
-  onPress={() => {}}
->
-  Loading
-</Button>`} />
-      </Section>
-
-      <Section title="API Reference">
-        <Subsection title="Common Props">
-          <PropsTable
-            props={[
-              { name: "children", type: "ReactNode", required: false, description: "버튼 텍스트" },
-              { name: "buttonType", type: '"filled" | "outlined"', required: false, defaultVal: '"filled"', description: "버튼 스타일" },
-              { name: "color", type: '"brandDefault" | "brandSecondary" | "baseContainer" | "successDefault" | "errorDefault" | "kakaoDefault" | "googleDefault"', required: false, defaultVal: '"brandDefault"', description: "색상 테마" },
-              { name: "size", type: '"small" | "medium" | "large" | "xLarge"', required: false, defaultVal: '"medium"', description: "버튼 크기" },
-              { name: "layout", type: '"hug" | "fillWidth" | "fill"', required: false, defaultVal: '"hug"', description: "레이아웃 모드" },
-              { name: "disabled", type: "boolean", required: false, defaultVal: "false", description: "비활성화 상태" },
-              { name: "isLoading", type: "boolean", required: false, defaultVal: "false", description: "로딩 상태" },
-              { name: "leftContent", type: "ReactNode", required: false, description: "좌측 콘텐츠 (Grid 모드)" },
-              { name: "centerContent", type: "ReactNode", required: false, description: "중앙 콘텐츠 (Grid 모드)" },
-              { name: "rightContent", type: "ReactNode", required: false, description: "우측 콘텐츠 (Grid 모드)" },
-            ]}
-          />
-        </Subsection>
-        <Subsection title="React Native-specific Props">
-          <PropsTable
-            props={[
-              { name: "onPress", type: "(event: GestureResponderEvent) => void", required: false, description: "탭 핸들러" },
-              { name: "onPressIn", type: "(event: GestureResponderEvent) => void", required: false, description: "터치 시작 핸들러" },
-              { name: "onPressOut", type: "(event: GestureResponderEvent) => void", required: false, description: "터치 종료 핸들러" },
-              { name: "onLongPress", type: "(event: GestureResponderEvent) => void", required: false, description: "길게 누르기 핸들러" },
-              { name: "accessibilityLabel", type: "string", required: false, description: "스크린 리더용 레이블 (icon-only 필수)" },
-              { name: "accessibilityHint", type: "string", required: false, description: "동작 힌트 설명" },
-              { name: "accessibilityState", type: "AccessibilityState", required: false, description: "접근성 상태 (disabled, busy 등)" },
-              { name: "hitSlop", type: "Insets", required: false, description: "터치 영역 확장" },
-            ]}
-          />
-        </Subsection>
-      </Section>
-    </>
-  );
-}
 
 // ============================================
 // Usage Guidelines Components
