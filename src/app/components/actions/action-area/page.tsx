@@ -7,7 +7,7 @@ import { ActionArea, Button, TextButton, IconButton } from '@baerae-zkap/design-
 import { Section, Subsection, InlineCode } from "@/components/docs/Section";
 import { PropsTable } from "@/components/docs/PropsTable";
 import { PrincipleCard } from "@/components/docs/Cards";
-import { RadioGroup, CodeTypeTab, CopyButton } from "@/components/docs/Playground";
+import { RadioGroup, CopyButton } from "@/components/docs/Playground";
 import { NumberBadge, DoLabel, DontLabel } from "@/components/docs/Labels";
 
 export default function ActionAreaPage() {
@@ -26,8 +26,8 @@ export default function ActionAreaPage() {
         Action Area
       </h1>
       <p style={{ fontSize: 15, color: "var(--text-secondary)", marginBottom: 32, lineHeight: 1.6 }}>
-        모달 혹은 화면 하단 영역에서 메인, 대체, 보조 행동을 할 수 있는 다양한 레벨의 버튼 묶음을 제공합니다.
-        내부적으로 Button 컴포넌트를 사용하여 일관된 스타일을 유지합니다.
+        화면 하단 또는 모달·바텀시트 하단에 고정되는 액션 버튼 컨테이너입니다.
+        Button과 TextButton을 조합하여 주요(Main)·대안(Alternative)·보조(Sub) 액션의 시각적 위계를 자동으로 관리합니다.
       </p>
 
       {/* Interactive Playground */}
@@ -48,17 +48,15 @@ function ActionAreaPlayground() {
   const [variant, setVariant] = useState<ActionAreaVariant>("neutral");
   const [combination, setCombination] = useState<"alternative" | "sub" | "main">("alternative");
   const [subButtonOption, setSubButtonOption] = useState<"label" | "icon">("icon");
-  const [codeType, setCodeType] = useState<"rn" | "web">("rn");
-
   const generateCode = () => {
-    const eventHandler = codeType === "rn" ? "onPress={() => {}}" : "onClick={() => {}}";
+    const eventHandler = "onClick={() => {}}";
     const size = variant === "compact" ? "medium" : "xLarge";
     const isCompact = variant === "compact";
 
     // Cancel variant: single outlined cancel button
     if (variant === "cancel") {
       return `{/* Cancel variant: single dismiss button */}
-<View style={{ flexDirection: 'column', gap: 12, padding: 20 }}>
+<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 20 }}>
   <Button
     buttonType="outlined"
     color="baseContainer"
@@ -68,7 +66,7 @@ function ActionAreaPlayground() {
   >
     Cancel
   </Button>
-</View>`;
+</div>`;
     }
 
     // Determine flex direction based on variant
@@ -136,12 +134,12 @@ function ActionAreaPlayground() {
     }
 
     // Wrapper style - padding: Modal(24px) or BottomSheet(20px), gap: modal.buttonGap(12px)
-    const wrapperStyle = `flexDirection: '${flexDirection}', gap: 12, padding: 20${justifyContent}${alignItems}`;
+    const wrapperStyle = `display: 'flex', flexDirection: '${flexDirection}', gap: 12, padding: 20${justifyContent}${alignItems}`;
 
     return `{/* gap: modal.buttonGap(12), padding: bottomSheet.padding(20) or modal.padding(24) */}
-<View style={{ ${wrapperStyle} }}>
+<div style={{ ${wrapperStyle} }}>
 ${buttons}
-</View>`;
+</div>`;
   };
 
   const isVertical = variant === "strong";
@@ -243,7 +241,7 @@ ${buttons}
                 display: "flex",
                 flexDirection: "column",
                 gap: 28,
-                backgroundColor: "white",
+                backgroundColor: "var(--surface-base-default)",
                 borderRadius: 16,
               }}
             >
@@ -294,16 +292,13 @@ ${buttons}
         <div
           style={{
             padding: "10px 16px",
-            backgroundColor: "var(--inverse-surface-default)",
+            backgroundColor: "var(--docs-code-surface)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
           }}
         >
-          <div style={{ display: "flex", gap: 8 }}>
-            <CodeTypeTab active={codeType === "rn"} onClick={() => setCodeType("rn")}>React Native</CodeTypeTab>
-            <CodeTypeTab active={codeType === "web"} onClick={() => setCodeType("web")}>Web</CodeTypeTab>
-          </div>
+          <span style={{ fontSize: 13, fontWeight: 600, color: "var(--docs-code-active-text)" }}>Web</span>
           <CopyButton text={generateCode()} />
         </div>
         <pre
@@ -312,8 +307,8 @@ ${buttons}
             padding: 16,
             fontSize: 13,
             lineHeight: 1.6,
-            color: "var(--border-secondary-default)",
-            backgroundColor: "var(--inverse-surface-default)",
+            color: "var(--docs-code-text)",
+            backgroundColor: "var(--docs-code-surface)",
             fontFamily: "'SF Mono', 'Fira Code', monospace",
             overflow: "auto",
           }}
@@ -331,8 +326,6 @@ function PlatformContent({ platform }: { platform: Platform }) {
       return <DesignContent />;
     case "web":
       return <WebContent />;
-    case "rn":
-      return <RNContent />;
   }
 }
 
@@ -341,7 +334,7 @@ function PlatformContent({ platform }: { platform: Platform }) {
 // ============================================
 function DesignContent() {
   return (
-    <>
+    <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
       {/* Button Mapping */}
       <Section title="Button Component Mapping">
         <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
@@ -414,6 +407,34 @@ import { ActionArea, Button, TextButton } from '@baerae-zkap/design-system/nativ
   <Button buttonType="filled" color="baseContainer" onPress={() => {}}>취소</Button>
   <Button buttonType="filled" color="brandDefault" onPress={() => {}}>확인</Button>
 </ActionArea>`} />
+      </Section>
+
+      {/* Overview */}
+      <Section title="Overview">
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.8, marginBottom: 20 }}>
+          Action Area는 화면 하단 또는 모달 하단에 배치되는 액션 버튼 컨테이너입니다.
+          내부적으로 Button과 TextButton을 조합하여 주요/보조/대체 액션의 시각적 위계를 자동으로 관리합니다.
+        </p>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+          <div style={{ padding: 20, borderRadius: 12, backgroundColor: "var(--surface-base-alternative)" }}>
+            <h4 style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", marginBottom: 12 }}>When to use</h4>
+            <ul style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.8, margin: 0, paddingLeft: 20 }}>
+              <li>화면 하단에 고정되는 CTA 영역이 필요할 때</li>
+              <li>모달/바텀시트의 확인·취소 버튼 영역</li>
+              <li>주요 + 보조 버튼 조합이 필요할 때</li>
+              <li>스크롤 위 고정 액션 바가 필요할 때</li>
+            </ul>
+          </div>
+          <div style={{ padding: 20, borderRadius: 12, backgroundColor: "var(--surface-base-alternative)" }}>
+            <h4 style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", marginBottom: 12 }}>When NOT to use</h4>
+            <ul style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.8, margin: 0, paddingLeft: 20 }}>
+              <li>인라인 버튼 배치 → <InlineCode>Button</InlineCode> 직접 사용</li>
+              <li>단일 텍스트 링크 → <InlineCode>TextButton</InlineCode> 사용</li>
+              <li>카드 내부 액션 → 카드 자체에 Button 배치</li>
+              <li>네비게이션 바 → 별도 NavBar 컴포넌트 사용</li>
+            </ul>
+          </div>
+        </div>
       </Section>
 
       {/* Anatomy */}
@@ -662,7 +683,7 @@ import { ActionArea, Button, TextButton } from '@baerae-zkap/design-system/nativ
       {/* Design Tokens */}
       <Section title="Design Tokens">
         <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
-          ActionArea는 사용되는 컨텍스트에 따라 다른 토큰을 적용합니다. <a href="/spacing" style={{ color: "var(--brand-primary)" }}>Spacing 토큰 전체 보기 →</a>
+          ActionArea는 사용되는 컨텍스트에 따라 다른 토큰을 적용합니다. <a href="/spacing" style={{ color: "var(--content-brand-default)" }}>Spacing 토큰 전체 보기 →</a>
         </p>
 
         <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)" }}>
@@ -858,7 +879,44 @@ import { ActionArea, Button, TextButton } from '@baerae-zkap/design-system/nativ
           </div>
         </div>
       </Section>
-    </>
+
+      {/* Related Components */}
+      <Section title="Related Components">
+        <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+            <thead>
+              <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>컴포넌트</th>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>용도</th>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>차이점</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                <td style={{ padding: "12px 16px", fontWeight: 500 }}>Button</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>개별 액션 버튼</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>ActionArea는 Button을 내부적으로 사용하며, 여러 버튼의 레이아웃과 위계를 자동 관리</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                <td style={{ padding: "12px 16px", fontWeight: 500 }}>TextButton</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>텍스트 전용 보조 액션</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>ActionArea 내에서 보조(sub) 버튼으로 자동 배치됨</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                <td style={{ padding: "12px 16px", fontWeight: 500 }}>IconButton</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>아이콘 전용 보조 버튼</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>ActionArea의 sub 위치에 아이콘 버튼을 배치할 수 있음</td>
+              </tr>
+              <tr>
+                <td style={{ padding: "12px 16px", fontWeight: 500 }}>Chip</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>필터/선택 토글</td>
+                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>Chip은 상태 토글용으로 ActionArea의 액션 버튼과는 역할이 다름</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </Section>
+    </div>
   );
 }
 
@@ -888,8 +946,8 @@ function WebContent() {
               padding: "8px 16px",
               fontSize: 13,
               fontWeight: 500,
-              color: "white",
-              backgroundColor: "var(--inverse-surface-default)",
+              color: "var(--content-base-onColor)",
+              backgroundColor: "var(--docs-code-surface)",
               borderRadius: 12,
               textDecoration: "none",
             }}
@@ -918,7 +976,7 @@ function WebContent() {
             </ActionAreaDemo>
           </div>
         </PreviewBox>
-        <CodeBlock code={`<View style={{ flexDirection: 'column', gap: 12, padding: 20 }}>
+        <CodeBlock code={`<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 20 }}>
   <Button
     buttonType="filled"
     color="brandDefault"
@@ -937,7 +995,7 @@ function WebContent() {
   >
     Alternative
   </Button>
-</View>`} />
+</div>`} />
       </Section>
 
       <Section title="Neutral Variant">
@@ -952,7 +1010,7 @@ function WebContent() {
             </ActionAreaDemo>
           </div>
         </PreviewBox>
-        <CodeBlock code={`<View style={{ flexDirection: 'row', gap: 12, padding: 20 }}>
+        <CodeBlock code={`<div style={{ display: 'flex', flexDirection: 'row', gap: 12, padding: 20 }}>
   <Button
     buttonType="outlined"
     color="baseContainer"
@@ -971,7 +1029,7 @@ function WebContent() {
   >
     Main
   </Button>
-</View>`} />
+</div>`} />
       </Section>
 
       <Section title="Compact Variant">
@@ -986,7 +1044,7 @@ function WebContent() {
             </ActionAreaDemo>
           </div>
         </PreviewBox>
-        <CodeBlock code={`<View style={{ flexDirection: 'row', gap: 12, justifyContent: 'flex-end', padding: 20 }}>
+        <CodeBlock code={`<div style={{ display: 'flex', flexDirection: 'row', gap: 12, justifyContent: 'flex-end', padding: 20 }}>
   <TextButton
     color="brandDefault"
     onClick={() => {}}
@@ -1001,7 +1059,7 @@ function WebContent() {
   >
     Main
   </Button>
-</View>`} />
+</div>`} />
       </Section>
 
       <Section title="With Caption">
@@ -1016,7 +1074,7 @@ function WebContent() {
             </ActionAreaDemo>
           </div>
         </PreviewBox>
-        <CodeBlock code={`<View style={{ flexDirection: 'column', gap: 12, padding: 20 }}>
+        <CodeBlock code={`<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 20 }}>
   <Text style={{ fontSize: 14, color: 'var(--content-base-secondary)', textAlign: 'center', marginBottom: 6 }}>
     변경 사항을 저장하시겠습니까?
   </Text>
@@ -1038,7 +1096,7 @@ function WebContent() {
   >
     취소
   </Button>
-</View>`} />
+</div>`} />
       </Section>
 
       <Section title="Main + Sub Combination">
@@ -1053,7 +1111,7 @@ function WebContent() {
             </ActionAreaDemo>
           </div>
         </PreviewBox>
-        <CodeBlock code={`<View style={{ flexDirection: 'column', gap: 12, padding: 20, alignItems: 'center' }}>
+        <CodeBlock code={`<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 20, alignItems: 'center' }}>
   <Button
     buttonType="filled"
     color="brandDefault"
@@ -1069,7 +1127,7 @@ function WebContent() {
   >
     회원가입
   </TextButton>
-</View>`} />
+</div>`} />
       </Section>
 
       <Section title="Button Props Reference">
@@ -1177,345 +1235,6 @@ function WebContent() {
   );
 }
 
-const ACTIONAREA_NATIVE_SOURCE = `${GITHUB_BASE}/native/ActionArea.tsx`;
-
-// ============================================
-// React Native Tab Content
-// ============================================
-function RNContent() {
-  return (
-    <>
-      <Section title="Source Code">
-        <div style={{ padding: 16, backgroundColor: "var(--bg-secondary)", borderRadius: 12, marginBottom: 24, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <div>
-            <p style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", margin: 0 }}>ActionArea Component</p>
-            <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: "4px 0 0 0" }}>실제 컴포넌트 소스 코드를 GitHub에서 확인하세요.</p>
-          </div>
-          <a
-            href={ACTIONAREA_NATIVE_SOURCE}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 6,
-              padding: "8px 16px",
-              fontSize: 13,
-              fontWeight: 500,
-              color: "white",
-              backgroundColor: "var(--inverse-surface-default)",
-              borderRadius: 12,
-              textDecoration: "none",
-            }}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-            </svg>
-            View on GitHub
-          </a>
-        </div>
-      </Section>
-
-      <Section title="Import">
-        <CodeBlock code={`import { Button } from '@zkap/design-system';
-import { View, Text } from 'react-native';`} />
-      </Section>
-
-      <Section title="Strong Variant">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
-          세로 배치, Main 버튼이 위에 위치합니다.
-        </p>
-        <PreviewBox>
-          <div style={{ width: "100%", maxWidth: 320, display: "flex", flexDirection: "column", gap: 16 }}>
-            <ActionAreaDemo variant="strong">
-              <ActionAreaButtonDemo variant="main" size="xLarge">Main</ActionAreaButtonDemo>
-              <ActionAreaButtonDemo variant="alternative" size="xLarge">Alternative</ActionAreaButtonDemo>
-            </ActionAreaDemo>
-          </div>
-        </PreviewBox>
-        <CodeBlock code={`<View style={{ flexDirection: 'column', gap: 12, padding: 20 }}>
-  <Button
-    buttonType="filled"
-    color="brandDefault"
-    size="xLarge"
-    layout="fillWidth"
-    onPress={() => {}}
-  >
-    Main
-  </Button>
-  <Button
-    buttonType="outlined"
-    color="baseContainer"
-    size="xLarge"
-    layout="fillWidth"
-    onPress={() => {}}
-  >
-    Alternative
-  </Button>
-</View>`} />
-      </Section>
-
-      <Section title="Neutral Variant">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
-          가로 배치, 동일 너비로 Main 버튼이 오른쪽에 위치합니다.
-        </p>
-        <PreviewBox>
-          <div style={{ width: "100%", maxWidth: 320 }}>
-            <ActionAreaDemo variant="neutral">
-              <ActionAreaButtonDemo variant="alternative" size="xLarge">Alternative</ActionAreaButtonDemo>
-              <ActionAreaButtonDemo variant="main" size="xLarge">Main</ActionAreaButtonDemo>
-            </ActionAreaDemo>
-          </div>
-        </PreviewBox>
-        <CodeBlock code={`<View style={{ flexDirection: 'row', gap: 12, padding: 20 }}>
-  <Button
-    buttonType="outlined"
-    color="baseContainer"
-    size="xLarge"
-    layout="fillWidth"
-    onPress={() => {}}
-  >
-    Alternative
-  </Button>
-  <Button
-    buttonType="filled"
-    color="brandDefault"
-    size="xLarge"
-    layout="fillWidth"
-    onPress={() => {}}
-  >
-    Main
-  </Button>
-</View>`} />
-      </Section>
-
-      <Section title="Compact Variant">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
-          가로 배치, 우측 정렬, 작은 버튼 사이즈입니다.
-        </p>
-        <PreviewBox>
-          <div style={{ width: "100%", maxWidth: 320 }}>
-            <ActionAreaDemo variant="compact">
-              <ActionAreaButtonDemo variant="sub" size="small">Sub</ActionAreaButtonDemo>
-              <ActionAreaButtonDemo variant="main" size="small">Main</ActionAreaButtonDemo>
-            </ActionAreaDemo>
-          </div>
-        </PreviewBox>
-        <CodeBlock code={`<View style={{ flexDirection: 'row', gap: 12, justifyContent: 'flex-end', padding: 20 }}>
-  <TextButton
-    color="brandDefault"
-    onPress={() => {}}
-  >
-    Sub
-  </TextButton>
-  <Button
-    buttonType="filled"
-    color="brandDefault"
-    size="medium"
-    onPress={() => {}}
-  >
-    Main
-  </Button>
-</View>`} />
-      </Section>
-
-      <Section title="With Caption">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
-          버튼 상단에 안내 텍스트를 추가합니다.
-        </p>
-        <PreviewBox>
-          <div style={{ width: "100%", maxWidth: 320 }}>
-            <ActionAreaDemo variant="strong" caption="변경 사항을 저장하시겠습니까?">
-              <ActionAreaButtonDemo variant="main" size="xLarge">저장</ActionAreaButtonDemo>
-              <ActionAreaButtonDemo variant="alternative" size="xLarge">취소</ActionAreaButtonDemo>
-            </ActionAreaDemo>
-          </div>
-        </PreviewBox>
-        <CodeBlock code={`<View style={{ flexDirection: 'column', gap: 12, padding: 20 }}>
-  <Text style={{ fontSize: 14, color: 'var(--content-base-secondary)', textAlign: 'center', marginBottom: 6 }}>
-    변경 사항을 저장하시겠습니까?
-  </Text>
-  <Button
-    buttonType="filled"
-    color="brandDefault"
-    size="xLarge"
-    layout="fillWidth"
-    onPress={() => {}}
-  >
-    저장
-  </Button>
-  <Button
-    buttonType="outlined"
-    color="baseContainer"
-    size="xLarge"
-    layout="fillWidth"
-    onPress={() => {}}
-  >
-    취소
-  </Button>
-</View>`} />
-      </Section>
-
-      <Section title="Main + Sub Combination">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
-          주요 액션과 보조 링크를 함께 제공합니다.
-        </p>
-        <PreviewBox>
-          <div style={{ width: "100%", maxWidth: 320 }}>
-            <ActionAreaDemo variant="strong">
-              <ActionAreaButtonDemo variant="main" size="xLarge">로그인</ActionAreaButtonDemo>
-              <ActionAreaButtonDemo variant="sub" size="xLarge">회원가입</ActionAreaButtonDemo>
-            </ActionAreaDemo>
-          </div>
-        </PreviewBox>
-        <CodeBlock code={`<View style={{ flexDirection: 'column', gap: 12, padding: 20, alignItems: 'center' }}>
-  <Button
-    buttonType="filled"
-    color="brandDefault"
-    size="xLarge"
-    layout="fillWidth"
-    onPress={() => {}}
-  >
-    로그인
-  </Button>
-  <TextButton
-    color="brandDefault"
-    onPress={() => {}}
-  >
-    회원가입
-  </TextButton>
-</View>`} />
-      </Section>
-
-      <Section title="Button Props Reference">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
-          Action Area 패턴에서 사용되는 Button props 매핑입니다.
-        </p>
-
-        <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)", marginBottom: 24 }}>
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
-            <thead>
-              <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)", color: "var(--text-primary)" }}>버튼 역할</th>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)", color: "var(--text-primary)" }}>Button Props</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontWeight: 500 }}>Main (주요 액션)</td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "var(--content-brand-default)" }}>
-                  buttonType=&quot;filled&quot; color=&quot;brandDefault&quot; size=&quot;xLarge&quot; layout=&quot;fillWidth&quot;
-                </td>
-              </tr>
-              <tr>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontWeight: 500 }}>Alternative (대체 액션)</td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: 12, color: "var(--content-brand-default)" }}>
-                  buttonType=&quot;outlined&quot; color=&quot;baseContainer&quot; size=&quot;xLarge&quot; layout=&quot;fillWidth&quot;
-                </td>
-              </tr>
-              <tr>
-                <td style={{ padding: "12px 16px", fontWeight: 500 }}>Sub (보조 링크)</td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 12, color: "var(--content-brand-default)" }}>
-                  buttonType=&quot;plain&quot; color=&quot;brandDefault&quot;
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </Section>
-
-      <Section title="API Reference">
-        <Subsection title="Button">
-          <PropsTable
-            props={[
-              { name: "children", type: "ReactNode", required: true, description: "버튼 텍스트 또는 콘텐츠" },
-              { name: "buttonType", type: '"filled" | "outlined" | "plain"', required: false, defaultVal: '"filled"', description: "버튼 스타일 타입" },
-              { name: "color", type: '"brandDefault" | "baseContainer" | ...' , required: false, defaultVal: '"brandDefault"', description: "버튼 색상" },
-              { name: "size", type: '"small" | "medium" | "large" | "xLarge"', required: false, defaultVal: '"medium"', description: "버튼 크기" },
-              { name: "layout", type: '"hug" | "fillWidth" | "fill"', required: false, defaultVal: '"hug"', description: "버튼 레이아웃" },
-              { name: "disabled", type: "boolean", required: false, defaultVal: "false", description: "비활성화 상태" },
-              { name: "isLoading", type: "boolean", required: false, defaultVal: "false", description: "로딩 상태" },
-              { name: "onPress", type: "(event: GestureResponderEvent) => void", required: false, description: "탭 핸들러" },
-            ]}
-          />
-        </Subsection>
-
-        <Subsection title="React Native 전용 Props">
-          <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
-            React Native 환경에서 접근성과 테스트를 위해 사용할 수 있는 추가 props입니다.
-          </p>
-          <PropsTable
-            props={[
-              { name: "accessibilityLabel", type: "string", required: false, description: "스크린 리더가 읽을 버튼 설명 텍스트" },
-              { name: "accessibilityHint", type: "string", required: false, description: "버튼 동작에 대한 추가 힌트" },
-              { name: "accessibilityState", type: "AccessibilityState", required: false, description: "{ disabled, busy } 등 접근성 상태" },
-              { name: "testID", type: "string", required: false, description: "E2E 테스트용 식별자" },
-              { name: "hapticFeedback", type: '"light" | "medium" | "heavy"', required: false, description: "탭 시 햅틱 피드백 강도" },
-            ]}
-          />
-          <CodeBlock code={`// 접근성을 고려한 사용 예시
-<Button
-  buttonType="filled"
-  color="brandDefault"
-  size="xLarge"
-  layout="fillWidth"
-  accessibilityLabel="결제하기"
-  accessibilityHint="터치하면 결제가 진행됩니다"
-  testID="checkout-button"
-  hapticFeedback="medium"
-  onPress={handleCheckout}
->
-  결제하기
-</Button>`} />
-        </Subsection>
-      </Section>
-    </>
-  );
-}
-
-// ============================================
-// Usage Guidelines Components
-// ============================================
-function UsageCard({ situation, desc, variant, buttons, examples }: {
-  situation: string;
-  desc: string;
-  variant: string;
-  buttons: string;
-  examples: string[];
-}) {
-  return (
-    <div style={{
-      display: "grid",
-      gridTemplateColumns: "1fr auto",
-      gap: 16,
-      padding: 16,
-      backgroundColor: "white",
-      borderRadius: 12,
-      border: "1px solid var(--divider)",
-      alignItems: "center",
-    }}>
-      <div>
-        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
-          <span style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)" }}>{situation}</span>
-          <span style={{
-            fontSize: 11,
-            padding: "2px 6px",
-            backgroundColor: "var(--surface-brand-secondary)",
-            color: "var(--surface-brand-defaultPressed)",
-            borderRadius: 4,
-            fontWeight: 500,
-          }}>
-            {variant}
-          </span>
-        </div>
-        <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0, marginBottom: 6 }}>{desc}</p>
-        <p style={{ fontSize: 12, color: "var(--text-tertiary)", margin: 0 }}>
-          {buttons} | 예시: {examples.join(", ")}
-        </p>
-      </div>
-    </div>
-  );
-}
 
 // ============================================
 // Anatomy Diagram
@@ -1607,7 +1326,7 @@ function ActionAreaDemo({ variant, children, caption }: ActionAreaDemoProps) {
         borderBottom: "2px solid var(--border-base-default)",
         borderRadius: "0 0 20px 20px",
         overflow: "hidden",
-        backgroundColor: "white",
+        backgroundColor: "var(--surface-base-default)",
       }}
     >
       {/* Action Area using real component */}
@@ -1622,7 +1341,7 @@ function ActionAreaDemo({ variant, children, caption }: ActionAreaDemoProps) {
       </ActionArea>
 
       {/* Home indicator */}
-      <div style={{ padding: "8px 0 12px", backgroundColor: "white", display: "flex", justifyContent: "center" }}>
+      <div style={{ padding: "8px 0 12px", backgroundColor: "var(--surface-base-default)", display: "flex", justifyContent: "center" }}>
         <div style={{ width: 60, height: 4, backgroundColor: "var(--border-base-default)", borderRadius: 2 }} />
       </div>
     </div>
@@ -1779,33 +1498,5 @@ function StateButtonDemo({ state, variant, children }: {
     >
       {children}
     </Button>
-  );
-}
-
-// Accessibility card component
-function AccessibilityCard({ icon, title, items }: {
-  icon: string;
-  title: string;
-  items: string[];
-}) {
-  return (
-    <div style={{
-      padding: 20,
-      backgroundColor: "white",
-      borderRadius: 12,
-      border: "1px solid var(--divider)",
-    }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
-        <span style={{ fontSize: 20 }}>{icon}</span>
-        <span style={{ fontSize: 15, fontWeight: 600, color: "var(--text-primary)" }}>{title}</span>
-      </div>
-      <ul style={{ margin: 0, padding: 0, paddingLeft: 20, listStyle: "disc" }}>
-        {items.map((item, i) => (
-          <li key={i} style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.8 }}>
-            {item}
-          </li>
-        ))}
-      </ul>
-    </div>
   );
 }
