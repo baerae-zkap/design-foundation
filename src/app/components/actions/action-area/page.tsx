@@ -161,14 +161,14 @@ ${buttons}
           {/* Preview Area */}
           <div
             style={{
-              padding: 60,
+              padding: 40,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               backgroundColor: "var(--surface-base-alternative)",
             }}
           >
-            <div style={{ width: "100%", maxWidth: 340 }}>
+            <div style={{ width: "100%", maxWidth: 380 }}>
               <ActionAreaDemo variant={variant}>
                 {/* Cancel variant: single cancel button only */}
                 {variant === "cancel" ? (
@@ -379,7 +379,7 @@ function DesignContent() {
                   <InlineCode>보조 (Sub)</InlineCode>
                 </td>
                 <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 12, color: "var(--content-brand-default)" }}>
-                  TextButton color=&quot;baseDefault&quot;
+                  TextButton color=&quot;brandDefault&quot;
                 </td>
                 <td style={{ padding: "12px 16px" }}>
                   <TextButtonDemo size="small">Sub</TextButtonDemo>
@@ -488,61 +488,6 @@ import { ActionArea, Button, TextButton } from '@baerae-zkap/design-system/nativ
           <InteractionStateCard label="Hover" sublabel="마우스 오버" color="var(--content-base-onColor)" bgColor="var(--surface-brand-defaultPressed)" />
           <InteractionStateCard label="Pressed" sublabel="누름" color="var(--content-base-onColor)" bgColor="var(--surface-brand-defaultPressed)" />
           <InteractionStateCard label="Disabled" sublabel="비활성화" color="var(--content-disabled-default)" bgColor="var(--surface-disabled-default)" opacity={0.4} />
-        </div>
-      </Section>
-
-      {/* Design Tokens (New) */}
-      <Section title="Design Tokens">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 16 }}>
-          컴포넌트에 적용된 디자인 토큰입니다. 커스터마이징 시 아래 토큰을 참조하세요.
-        </p>
-        <div style={{ overflowX: "auto" }}>
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
-            <thead>
-              <tr style={{ borderBottom: "2px solid var(--border-default)" }}>
-                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: 600 }}>속성</th>
-                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: 600 }}>토큰</th>
-                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: 600 }}>값 (Light)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>오버레이 그라디언트</td>
-                <td style={{ padding: "10px 12px" }}>
-                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>gradient.fadeTop</code>
-                </td>
-                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>투명 → 배경색 그라디언트</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>컨테이너 패딩 (Modal)</td>
-                <td style={{ padding: "10px 12px" }}>
-                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>modal.padding</code>
-                </td>
-                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>24px</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>컨테이너 패딩 (BottomSheet)</td>
-                <td style={{ padding: "10px 12px" }}>
-                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>bottomSheet.padding</code>
-                </td>
-                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>20px</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>버튼 간격</td>
-                <td style={{ padding: "10px 12px" }}>
-                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>modal.buttonGap</code>
-                </td>
-                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>12px</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>모서리 반경</td>
-                <td style={{ padding: "10px 12px" }}>
-                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>radius.lg</code>
-                </td>
-                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>20px (바텀시트)</td>
-              </tr>
-            </tbody>
-          </table>
         </div>
       </Section>
 
@@ -1036,7 +981,7 @@ function WebContent() {
       </Section>
 
       <Section title="Import">
-        <CodeBlock code={`import { Button } from '@zkap/design-system';`} />
+        <CodeBlock code={`import { ActionArea, Button, TextButton } from '@baerae-zkap/design-system';`} />
       </Section>
 
       <Section title="Strong Variant">
@@ -1062,7 +1007,7 @@ function WebContent() {
     Main
   </Button>
   <Button
-    buttonType="outlined"
+    buttonType="filled"
     color="baseContainer"
     size="xLarge"
     layout="fillWidth"
@@ -1234,7 +1179,7 @@ function WebContent() {
               <tr>
                 <td style={{ padding: "12px 16px", fontWeight: 500 }}>Sub (보조 링크)</td>
                 <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 12, color: "var(--content-brand-default)" }}>
-                  buttonType=&quot;plain&quot; color=&quot;brandDefault&quot;
+                  TextButton color=&quot;brandDefault&quot;
                 </td>
               </tr>
             </tbody>
@@ -1333,7 +1278,7 @@ function AnatomyDiagram() {
         <path d="M60 140 L60 150 Q60 160 70 160 L250 160 Q260 160 260 150 L260 140" fill="none" stroke="var(--border-base-default)" strokeWidth="2" />
 
         {/* Action Area background */}
-        <rect x="61" y="0" width="198" height="140" fill="white" />
+        <rect x="61" y="0" width="198" height="140" fill="var(--surface-base-default)" />
 
         {/* Caption */}
         <text x="160" y="28" textAnchor="middle" fill="var(--content-base-secondary)" fontSize="11">변경 사항을 저장하시겠습니까?</text>
@@ -1465,7 +1410,7 @@ function ActionAreaButtonDemo({ variant, size, children, compact = false }: Acti
 // IconButton Demo for sub action with icon
 function IconButtonDemo({ size }: { size: ButtonSize }) {
   const iconButtonSize = size === "xLarge" ? "large" as const : "small" as const;
-  const iconSize = size === "xLarge" ? 20 : 16;
+  const iconSize = size === "xLarge" ? 24 : 18;
 
   return (
     <IconButton
