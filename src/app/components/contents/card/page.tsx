@@ -748,11 +748,11 @@ function DesignContent() {
           </DontCard>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 8 }}>
-          <p style={{ fontSize: 13, color: "var(--status-positive-content)", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
+          <p style={{ fontSize: 13, color: "var(--content-success-default)", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
             <span style={{ fontWeight: 700, flexShrink: 0 }}>Do</span>
             <span style={{ color: "var(--text-secondary)" }}>일관된 padding 값을 사용합니다.</span>
           </p>
-          <p style={{ fontSize: 13, color: "var(--status-negative-content)", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
+          <p style={{ fontSize: 13, color: "var(--content-error-default)", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
             <span style={{ fontWeight: 700, flexShrink: 0 }}>Don&apos;t</span>
             <span style={{ color: "var(--text-secondary)" }}>padding을 none으로 두고 내부에서 임의로 조절하지 마세요.</span>
           </p>
@@ -781,11 +781,11 @@ function DesignContent() {
           </DontCard>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 8 }}>
-          <p style={{ fontSize: 13, color: "var(--status-positive-content)", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
+          <p style={{ fontSize: 13, color: "var(--content-success-default)", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
             <span style={{ fontWeight: 700, flexShrink: 0 }}>Do</span>
             <span style={{ color: "var(--text-secondary)" }}>같은 맥락에서 variant를 통일합니다.</span>
           </p>
-          <p style={{ fontSize: 13, color: "var(--status-negative-content)", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
+          <p style={{ fontSize: 13, color: "var(--content-error-default)", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
             <span style={{ fontWeight: 700, flexShrink: 0 }}>Don&apos;t</span>
             <span style={{ color: "var(--text-secondary)" }}>같은 영역에서 elevated와 outlined을 혼용하지 마세요.</span>
           </p>

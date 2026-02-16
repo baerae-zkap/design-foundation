@@ -139,7 +139,7 @@ const colorConfig: Record<ChipColor, {
       bg: 'transparent',
       bgPressed: cssVarColors.surface.warning.defaultPressed,
       bgSelected: cssVarColors.content.warning.default,
-      border: cssVarColors.status.cautionary.border,
+      border: cssVarColors.border.warning.default,
       text: cssVarColors.content.warning.strong,
       textSelected: cssVarColors.content.base.onColor,
     },

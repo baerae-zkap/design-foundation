@@ -97,8 +97,8 @@ const colorStyles: Record<IconButtonColor, {
     },
     ghost: {
       bg: 'transparent',
-      bgHover: cssVarColors.status.negative.surface,
-      bgPressed: cssVarColors.status.negative.surface,
+      bgHover: cssVarColors.surface.error.default,
+      bgPressed: cssVarColors.surface.error.default,
       color: cssVarColors.content.error.default,
       colorPressed: cssVarColors.surface.error.solidPressed
     },

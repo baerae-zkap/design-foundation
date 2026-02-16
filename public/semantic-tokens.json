@@ -321,91 +321,71 @@
       }
     },
 
-    "status": {
-      "_description": "Wanted 스타일 positive/cautionary/negative 상태 alias",
-      "positive": {
-        "surface": "{palette.green.95}",
-        "surface_comment": "성공 배경 alias",
-        "content": "{palette.green.50}",
-        "content_comment": "성공 텍스트 alias",
-        "border": "{palette.green.50}",
-        "border_comment": "성공 경계선 alias"
-      },
-      "cautionary": {
-        "surface": "{palette.orange.95}",
-        "surface_comment": "주의/경고 배경 alias",
-        "content": "{palette.orange.50}",
-        "content_comment": "주의/경고 텍스트 alias",
-        "border": "{palette.orange.50}",
-        "border_comment": "주의/경고 경계선 alias"
-      },
-      "negative": {
-        "surface": "{palette.red.95}",
-        "surface_comment": "에러/부정 배경 alias",
-        "content": "{palette.red.50}",
-        "content_comment": "에러/부정 텍스트 alias",
-        "border": "{palette.red.50}",
-        "border_comment": "에러/부정 경계선 alias"
-      },
-      "informational": {
-        "surface": "{palette.teal.95}",
-        "surface_comment": "정보 배경 alias",
-        "content": "{palette.teal.50}",
-        "content_comment": "정보 텍스트 alias",
-        "border": "{palette.teal.50}",
-        "border_comment": "정보 경계선 alias"
-      }
-    },
-
     "component": {
       "_description": "Toss 방식 컴포넌트 목적별 semantic alias",
       "button": {
-        "primarySurface": "{palette.blue.50}",
-        "primarySurface_comment": "Primary 버튼 배경",
-        "primarySurfacePressed": "{palette.blue.45}",
-        "primarySurfacePressed_comment": "Primary 버튼 pressed",
-        "primaryContent": "{palette.static.white}",
-        "primaryContent_comment": "Primary 버튼 텍스트",
-        "secondarySurface": "{palette.blue.95}",
-        "secondarySurface_comment": "Secondary 버튼 배경",
-        "secondarySurfacePressed": "{palette.blue.90}",
-        "secondarySurfacePressed_comment": "Secondary 버튼 pressed",
-        "secondaryContent": "{palette.blue.50}",
-        "secondaryContent_comment": "Secondary 버튼 텍스트",
-        "secondaryBorder": "{palette.blue.50}",
-        "secondaryBorder_comment": "Secondary 버튼 경계선",
-        "destructiveSurface": "{palette.red.50}",
-        "destructiveSurface_comment": "Destructive 버튼 배경",
-        "destructiveSurfacePressed": "{palette.red.40}",
-        "destructiveSurfacePressed_comment": "Destructive 버튼 pressed",
-        "destructiveContent": "{palette.static.white}",
-        "destructiveContent_comment": "Destructive 버튼 텍스트"
+        "surface": {
+          "primary": "{palette.blue.50}",
+          "primary_comment": "Primary 버튼 배경",
+          "primaryPressed": "{palette.blue.45}",
+          "primaryPressed_comment": "Primary 버튼 pressed",
+          "secondary": "{palette.blue.95}",
+          "secondary_comment": "Secondary 버튼 배경",
+          "secondaryPressed": "{palette.blue.90}",
+          "secondaryPressed_comment": "Secondary 버튼 pressed",
+          "destructive": "{palette.red.50}",
+          "destructive_comment": "Destructive 버튼 배경",
+          "destructivePressed": "{palette.red.40}",
+          "destructivePressed_comment": "Destructive 버튼 pressed"
+        },
+        "content": {
+          "primary": "{palette.static.white}",
+          "primary_comment": "Primary 버튼 텍스트",
+          "secondary": "{palette.blue.50}",
+          "secondary_comment": "Secondary 버튼 텍스트",
+          "destructive": "{palette.static.white}",
+          "destructive_comment": "Destructive 버튼 텍스트"
+        },
+        "border": {
+          "secondary": "{palette.blue.50}",
+          "secondary_comment": "Secondary 버튼 경계선"
+        }
       },
       "input": {
         "surface": "{palette.static.white}",
         "surface_comment": "입력 필드 배경",
-        "border": "{palette.grey.95}",
-        "border_comment": "입력 필드 기본 경계선",
-        "focusBorder": "{palette.blue.50}",
-        "focusBorder_comment": "입력 필드 포커스 경계선",
+        "border": {
+          "default": "{palette.grey.95}",
+          "default_comment": "입력 필드 기본 경계선",
+          "focus": "{palette.blue.50}",
+          "focus_comment": "입력 필드 포커스 경계선"
+        },
         "content": "{palette.grey.30}",
         "content_comment": "입력 필드 텍스트",
         "placeholder": "{palette.grey.70}",
         "placeholder_comment": "입력 필드 플레이스홀더",
-        "focusRing": "{palette.alphaComposite.brandSelectionLight}",
-        "focusRing_comment": "입력 필드 포커스 링"
+        "ring": {
+          "focus": "{palette.alphaComposite.brandSelectionLight}",
+          "focus_comment": "입력 필드 포커스 링"
+        }
       },
       "chip": {
-        "neutralSurface": "{palette.alphaComposite.fillLightNormal}",
-        "neutralSurface_comment": "기본 칩 배경",
-        "neutralContent": "{palette.grey.30}",
-        "neutralContent_comment": "기본 칩 텍스트",
-        "neutralBorder": "{palette.grey.95}",
-        "neutralBorder_comment": "기본 칩 경계선",
-        "selectedSurface": "{palette.blue.95}",
-        "selectedSurface_comment": "선택 칩 배경",
-        "selectedContent": "{palette.blue.50}",
-        "selectedContent_comment": "선택 칩 텍스트"
+        "surface": {
+          "neutral": "{palette.alphaComposite.fillLightNormal}",
+          "neutral_comment": "기본 칩 배경",
+          "selected": "{palette.blue.95}",
+          "selected_comment": "선택 칩 배경"
+        },
+        "content": {
+          "neutral": "{palette.grey.30}",
+          "neutral_comment": "기본 칩 텍스트",
+          "selected": "{palette.blue.50}",
+          "selected_comment": "선택 칩 텍스트"
+        },
+        "border": {
+          "neutral": "{palette.grey.95}",
+          "neutral_comment": "기본 칩 경계선"
+        }
       }
     }
   },
@@ -722,91 +702,71 @@
       }
     },
 
-    "status": {
-      "_description": "Wanted 스타일 positive/cautionary/negative 상태 alias",
-      "positive": {
-        "surface": "{palette.green.20}",
-        "surface_comment": "성공 배경 alias",
-        "content": "{palette.green.60}",
-        "content_comment": "성공 텍스트 alias",
-        "border": "{palette.green.60}",
-        "border_comment": "성공 경계선 alias"
-      },
-      "cautionary": {
-        "surface": "{palette.orange.20}",
-        "surface_comment": "주의/경고 배경 alias",
-        "content": "{palette.orange.60}",
-        "content_comment": "주의/경고 텍스트 alias",
-        "border": "{palette.orange.60}",
-        "border_comment": "주의/경고 경계선 alias"
-      },
-      "negative": {
-        "surface": "{palette.red.20}",
-        "surface_comment": "에러/부정 배경 alias",
-        "content": "{palette.red.60}",
-        "content_comment": "에러/부정 텍스트 alias",
-        "border": "{palette.red.60}",
-        "border_comment": "에러/부정 경계선 alias"
-      },
-      "informational": {
-        "surface": "{palette.teal.20}",
-        "surface_comment": "정보 배경 alias",
-        "content": "{palette.teal.60}",
-        "content_comment": "정보 텍스트 alias",
-        "border": "{palette.teal.60}",
-        "border_comment": "정보 경계선 alias"
-      }
-    },
-
     "component": {
       "_description": "Toss 방식 컴포넌트 목적별 semantic alias",
       "button": {
-        "primarySurface": "{palette.blue.55}",
-        "primarySurface_comment": "Primary 버튼 배경",
-        "primarySurfacePressed": "{palette.blue.60}",
-        "primarySurfacePressed_comment": "Primary 버튼 pressed",
-        "primaryContent": "{palette.static.white}",
-        "primaryContent_comment": "Primary 버튼 텍스트",
-        "secondarySurface": "{palette.blue.20}",
-        "secondarySurface_comment": "Secondary 버튼 배경",
-        "secondarySurfacePressed": "{palette.blue.30}",
-        "secondarySurfacePressed_comment": "Secondary 버튼 pressed",
-        "secondaryContent": "{palette.blue.60}",
-        "secondaryContent_comment": "Secondary 버튼 텍스트",
-        "secondaryBorder": "{palette.blue.55}",
-        "secondaryBorder_comment": "Secondary 버튼 경계선",
-        "destructiveSurface": "{palette.red.60}",
-        "destructiveSurface_comment": "Destructive 버튼 배경",
-        "destructiveSurfacePressed": "{palette.red.70}",
-        "destructiveSurfacePressed_comment": "Destructive 버튼 pressed",
-        "destructiveContent": "{palette.static.white}",
-        "destructiveContent_comment": "Destructive 버튼 텍스트"
+        "surface": {
+          "primary": "{palette.blue.55}",
+          "primary_comment": "Primary 버튼 배경",
+          "primaryPressed": "{palette.blue.60}",
+          "primaryPressed_comment": "Primary 버튼 pressed",
+          "secondary": "{palette.blue.20}",
+          "secondary_comment": "Secondary 버튼 배경",
+          "secondaryPressed": "{palette.blue.30}",
+          "secondaryPressed_comment": "Secondary 버튼 pressed",
+          "destructive": "{palette.red.60}",
+          "destructive_comment": "Destructive 버튼 배경",
+          "destructivePressed": "{palette.red.70}",
+          "destructivePressed_comment": "Destructive 버튼 pressed"
+        },
+        "content": {
+          "primary": "{palette.static.white}",
+          "primary_comment": "Primary 버튼 텍스트",
+          "secondary": "{palette.blue.60}",
+          "secondary_comment": "Secondary 버튼 텍스트",
+          "destructive": "{palette.static.white}",
+          "destructive_comment": "Destructive 버튼 텍스트"
+        },
+        "border": {
+          "secondary": "{palette.blue.55}",
+          "secondary_comment": "Secondary 버튼 경계선"
+        }
       },
       "input": {
         "surface": "{palette.grey.20}",
         "surface_comment": "입력 필드 배경",
-        "border": "{palette.grey.25}",
-        "border_comment": "입력 필드 기본 경계선",
-        "focusBorder": "{palette.blue.55}",
-        "focusBorder_comment": "입력 필드 포커스 경계선",
+        "border": {
+          "default": "{palette.grey.25}",
+          "default_comment": "입력 필드 기본 경계선",
+          "focus": "{palette.blue.55}",
+          "focus_comment": "입력 필드 포커스 경계선"
+        },
         "content": "{palette.grey.95}",
         "content_comment": "입력 필드 텍스트",
         "placeholder": "{palette.grey.50}",
         "placeholder_comment": "입력 필드 플레이스홀더",
-        "focusRing": "{palette.alphaComposite.brandSelectionDark}",
-        "focusRing_comment": "입력 필드 포커스 링"
+        "ring": {
+          "focus": "{palette.alphaComposite.brandSelectionDark}",
+          "focus_comment": "입력 필드 포커스 링"
+        }
       },
       "chip": {
-        "neutralSurface": "{palette.alphaComposite.fillDarkNormal}",
-        "neutralSurface_comment": "기본 칩 배경",
-        "neutralContent": "{palette.grey.95}",
-        "neutralContent_comment": "기본 칩 텍스트",
-        "neutralBorder": "{palette.grey.25}",
-        "neutralBorder_comment": "기본 칩 경계선",
-        "selectedSurface": "{palette.blue.20}",
-        "selectedSurface_comment": "선택 칩 배경",
-        "selectedContent": "{palette.blue.60}",
-        "selectedContent_comment": "선택 칩 텍스트"
+        "surface": {
+          "neutral": "{palette.alphaComposite.fillDarkNormal}",
+          "neutral_comment": "기본 칩 배경",
+          "selected": "{palette.blue.20}",
+          "selected_comment": "선택 칩 배경"
+        },
+        "content": {
+          "neutral": "{palette.grey.95}",
+          "neutral_comment": "기본 칩 텍스트",
+          "selected": "{palette.blue.60}",
+          "selected_comment": "선택 칩 텍스트"
+        },
+        "border": {
+          "neutral": "{palette.grey.25}",
+          "neutral_comment": "기본 칩 경계선"
+        }
       }
     }
   }

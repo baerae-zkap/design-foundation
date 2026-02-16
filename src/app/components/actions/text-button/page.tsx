@@ -1323,14 +1323,14 @@ function TextButtonDemo({ variant, color, size, disabled, isHovered, isPressed, 
     const pressedBgMap: Record<TextButtonColor, string> = {
       brandDefault: "var(--effect-alpha-brand-selection)",
       baseDefault: "var(--effect-alpha-fill-normal)",
-      errorDefault: "var(--status-negative-surface)",
+      errorDefault: "var(--surface-error-default)",
     };
     forcedStyle.backgroundColor = pressedBgMap[color];
   } else if (isHovered) {
     const hoverBgMap: Record<TextButtonColor, string> = {
       brandDefault: "var(--effect-alpha-brand-selection)",
       baseDefault: "var(--effect-alpha-fill-alternative)",
-      errorDefault: "var(--status-negative-surface)",
+      errorDefault: "var(--surface-error-default)",
     };
     forcedStyle.backgroundColor = hoverBgMap[color];
   }

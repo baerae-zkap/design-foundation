@@ -115,11 +115,11 @@ const colorConfig: Record<ContentBadgeColor, {
     },
     outlined: {
       bg: 'transparent',
-      border: cssVarColors.status.cautionary.border,
+      border: cssVarColors.border.warning.default,
       text: cssVarColors.content.warning.default,
     },
     subtle: {
-      bg: cssVarColors.status.cautionary.surface,
+      bg: cssVarColors.surface.warning.default,
       text: cssVarColors.content.warning.strong,
     },
   },

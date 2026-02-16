@@ -353,9 +353,9 @@ export default function SpacingPage() {
           title="Button"
           description="버튼 컴포넌트의 내부 패딩과 아이콘-텍스트 간격"
           tokens={[
-            { name: 'paddingX', sizes: semantic.component.button.paddingX, color: 'var(--status-negative-surface)' },
+            { name: 'paddingX', sizes: semantic.component.button.paddingX, color: 'var(--surface-error-default)' },
             { name: 'paddingY', sizes: semantic.component.button.paddingY, color: 'var(--surface-brand-secondary)' },
-            { name: 'gap', value: semantic.component.button.gap, color: 'var(--status-positive-surface)' },
+            { name: 'gap', value: semantic.component.button.gap, color: 'var(--surface-success-default)' },
           ]}
           renderMockup={(values) => {
             const px = values.paddingX || 20;
@@ -373,10 +373,10 @@ export default function SpacingPage() {
                     position: 'relative',
                   }}>
                     {/* PaddingX overlays with dashed borders */}
-                    <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: px, backgroundColor: 'var(--status-negative-surface)', borderRadius: 'var(--radius-md) 0 0 var(--radius-md)', borderRight: '1px dashed var(--status-negative-border)' }}>
+                    <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: px, backgroundColor: 'var(--surface-error-default)', borderRadius: 'var(--radius-md) 0 0 var(--radius-md)', borderRight: '1px dashed var(--border-error-default)' }}>
                       <span style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%) rotate(-90deg)', fontSize: 10, fontWeight: 600, color: 'white' }}>{px}</span>
                     </div>
-                    <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: px, backgroundColor: 'var(--status-negative-surface)', borderRadius: '0 var(--radius-md) var(--radius-md) 0', borderLeft: '1px dashed var(--status-negative-border)' }} />
+                    <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: px, backgroundColor: 'var(--surface-error-default)', borderRadius: '0 var(--radius-md) var(--radius-md) 0', borderLeft: '1px dashed var(--border-error-default)' }} />
                     {/* PaddingY overlays with dashed borders */}
                     <div style={{ position: 'absolute', left: px, right: px, top: 0, height: py, backgroundColor: 'var(--surface-brand-secondary)', borderBottom: '1px dashed var(--content-brand-default)' }}>
                       <span style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', fontSize: 10, fontWeight: 600, color: 'white' }}>{py}</span>
@@ -391,7 +391,7 @@ export default function SpacingPage() {
                     </div>
 
                     {/* Gap indicator overlay */}
-                    <div style={{ position: 'absolute', left: px + 16, top: py, bottom: py, width: gap, backgroundColor: 'var(--status-positive-surface)', border: '1px dashed var(--status-positive-border)', borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <div style={{ position: 'absolute', left: px + 16, top: py, bottom: py, width: gap, backgroundColor: 'var(--surface-success-default)', border: '1px dashed var(--border-success-default)', borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       <span style={{ fontSize: 9, fontWeight: 600, color: 'white', writingMode: 'vertical-rl' }}>{gap}</span>
                     </div>
                   </div>
@@ -399,7 +399,7 @@ export default function SpacingPage() {
                   {/* Legend */}
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 11 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <div style={{ width: 14, height: 14, backgroundColor: 'var(--status-negative-surface)', border: '1px dashed var(--status-negative-border)', borderRadius: 2 }} />
+                      <div style={{ width: 14, height: 14, backgroundColor: 'var(--surface-error-default)', border: '1px dashed var(--border-error-default)', borderRadius: 2 }} />
                       <span style={{ color: 'var(--text-secondary)' }}>paddingX <strong>{px}px</strong></span>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -407,7 +407,7 @@ export default function SpacingPage() {
                       <span style={{ color: 'var(--text-secondary)' }}>paddingY <strong>{py}px</strong></span>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <div style={{ width: 14, height: 14, backgroundColor: 'var(--status-positive-surface)', border: '1px dashed var(--status-positive-border)', borderRadius: 2 }} />
+                      <div style={{ width: 14, height: 14, backgroundColor: 'var(--surface-success-default)', border: '1px dashed var(--border-success-default)', borderRadius: 2 }} />
                       <span style={{ color: 'var(--text-secondary)' }}>gap <strong>{gap}px</strong></span>
                     </div>
                   </div>
@@ -422,10 +422,10 @@ export default function SpacingPage() {
           title="Modal"
           description="모달의 내부 패딩과 영역별 간격"
           tokens={[
-            { name: 'padding', value: semantic.component.modal.padding, color: 'var(--status-negative-surface)' },
-            { name: 'headerGap', value: semantic.component.modal.headerGap, color: 'var(--status-cautionary-surface)' },
+            { name: 'padding', value: semantic.component.modal.padding, color: 'var(--surface-error-default)' },
+            { name: 'headerGap', value: semantic.component.modal.headerGap, color: 'var(--surface-warning-default)' },
             { name: 'footerGap', value: semantic.component.modal.footerGap, color: 'var(--surface-brand-secondary)' },
-            { name: 'buttonGap', value: semantic.component.modal.buttonGap, color: 'var(--status-positive-surface)' },
+            { name: 'buttonGap', value: semantic.component.modal.buttonGap, color: 'var(--surface-success-default)' },
           ]}
           renderMockup={(values) => {
             const padding = values.padding || 24;
@@ -444,22 +444,22 @@ export default function SpacingPage() {
                     position: 'relative',
                   }}>
                     {/* Padding overlays with dashed borders */}
-                    <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: padding, backgroundColor: 'var(--status-negative-surface)', borderRadius: 'var(--radius-xl) var(--radius-xl) 0 0', borderBottom: '1px dashed var(--status-negative-border)' }}>
-                      <span style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', fontSize: 10, fontWeight: 600, color: 'var(--status-negative-content)' }}>{padding}</span>
+                    <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: padding, backgroundColor: 'var(--surface-error-default)', borderRadius: 'var(--radius-xl) var(--radius-xl) 0 0', borderBottom: '1px dashed var(--border-error-default)' }}>
+                      <span style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', fontSize: 10, fontWeight: 600, color: 'var(--content-error-default)' }}>{padding}</span>
                     </div>
-                    <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: padding, backgroundColor: 'var(--status-negative-surface)', borderRadius: '0 0 var(--radius-xl) var(--radius-xl)', borderTop: '1px dashed var(--status-negative-border)' }} />
-                    <div style={{ position: 'absolute', top: padding, bottom: padding, left: 0, width: padding, backgroundColor: 'var(--status-negative-surface)', borderRight: '1px dashed var(--status-negative-border)' }}>
-                      <span style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%) rotate(-90deg)', fontSize: 10, fontWeight: 600, color: 'var(--status-negative-content)' }}>{padding}</span>
+                    <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: padding, backgroundColor: 'var(--surface-error-default)', borderRadius: '0 0 var(--radius-xl) var(--radius-xl)', borderTop: '1px dashed var(--border-error-default)' }} />
+                    <div style={{ position: 'absolute', top: padding, bottom: padding, left: 0, width: padding, backgroundColor: 'var(--surface-error-default)', borderRight: '1px dashed var(--border-error-default)' }}>
+                      <span style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%) rotate(-90deg)', fontSize: 10, fontWeight: 600, color: 'var(--content-error-default)' }}>{padding}</span>
                     </div>
-                    <div style={{ position: 'absolute', top: padding, bottom: padding, right: 0, width: padding, backgroundColor: 'var(--status-negative-surface)', borderLeft: '1px dashed var(--status-negative-border)' }} />
+                    <div style={{ position: 'absolute', top: padding, bottom: padding, right: 0, width: padding, backgroundColor: 'var(--surface-error-default)', borderLeft: '1px dashed var(--border-error-default)' }} />
 
                     <div style={{ padding, position: 'relative', zIndex: 1 }}>
                       {/* Header */}
                       <div style={{ fontSize: 16, fontWeight: 600, color: 'var(--text-primary)' }}>모달 제목</div>
 
                       {/* HeaderGap indicator - inline */}
-                      <div style={{ height: headerGap, backgroundColor: 'var(--status-cautionary-surface)', border: '1px dashed var(--status-cautionary-border)', borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--status-cautionary-content)' }}>{headerGap}</span>
+                      <div style={{ height: headerGap, backgroundColor: 'var(--surface-warning-default)', border: '1px dashed var(--border-warning-default)', borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--content-warning-default)' }}>{headerGap}</span>
                       </div>
 
                       {/* Content */}
@@ -476,8 +476,8 @@ export default function SpacingPage() {
                       <div style={{ display: 'flex', position: 'relative' }}>
                         <button style={{ flex: 1, padding: '10px 14px', backgroundColor: 'var(--grey-95)', border: 'none', borderRadius: 'var(--radius-md)', fontSize: 13, fontWeight: 500, color: 'var(--text-primary)', cursor: 'pointer' }}>취소</button>
                         {/* ButtonGap indicator - inline */}
-                        <div style={{ width: buttonGap, backgroundColor: 'var(--status-positive-surface)', border: '1px dashed var(--status-positive-border)', borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          <span style={{ fontSize: 9, fontWeight: 600, color: 'var(--status-positive-content)', writingMode: 'vertical-rl' }}>{buttonGap}</span>
+                        <div style={{ width: buttonGap, backgroundColor: 'var(--surface-success-default)', border: '1px dashed var(--border-success-default)', borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          <span style={{ fontSize: 9, fontWeight: 600, color: 'var(--content-success-default)', writingMode: 'vertical-rl' }}>{buttonGap}</span>
                         </div>
                         <button style={{ flex: 1, padding: '10px 14px', backgroundColor: 'var(--brand-primary)', border: 'none', borderRadius: 'var(--radius-md)', fontSize: 13, fontWeight: 500, color: 'white', cursor: 'pointer' }}>확인</button>
                       </div>
@@ -487,11 +487,11 @@ export default function SpacingPage() {
                   {/* Legend */}
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 11, paddingTop: 8 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <div style={{ width: 14, height: 14, backgroundColor: 'var(--status-negative-surface)', border: '1px dashed var(--status-negative-border)', borderRadius: 2 }} />
+                      <div style={{ width: 14, height: 14, backgroundColor: 'var(--surface-error-default)', border: '1px dashed var(--border-error-default)', borderRadius: 2 }} />
                       <span style={{ color: 'var(--text-secondary)' }}>padding <strong>{padding}px</strong></span>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <div style={{ width: 14, height: 14, backgroundColor: 'var(--status-cautionary-surface)', border: '1px dashed var(--status-cautionary-border)', borderRadius: 2 }} />
+                      <div style={{ width: 14, height: 14, backgroundColor: 'var(--surface-warning-default)', border: '1px dashed var(--border-warning-default)', borderRadius: 2 }} />
                       <span style={{ color: 'var(--text-secondary)' }}>headerGap <strong>{headerGap}px</strong></span>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -499,7 +499,7 @@ export default function SpacingPage() {
                       <span style={{ color: 'var(--text-secondary)' }}>footerGap <strong>{footerGap}px</strong></span>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <div style={{ width: 14, height: 14, backgroundColor: 'var(--status-positive-surface)', border: '1px dashed var(--status-positive-border)', borderRadius: 2 }} />
+                      <div style={{ width: 14, height: 14, backgroundColor: 'var(--surface-success-default)', border: '1px dashed var(--border-success-default)', borderRadius: 2 }} />
                       <span style={{ color: 'var(--text-secondary)' }}>buttonGap <strong>{buttonGap}px</strong></span>
                     </div>
                   </div>
@@ -514,9 +514,9 @@ export default function SpacingPage() {
           title="Input"
           description="입력 필드의 내부 패딩과 라벨/도움말 간격"
           tokens={[
-            { name: 'paddingX', value: semantic.component.input.paddingX, color: 'var(--status-negative-surface)' },
+            { name: 'paddingX', value: semantic.component.input.paddingX, color: 'var(--surface-error-default)' },
             { name: 'paddingY', value: semantic.component.input.paddingY, color: 'var(--surface-brand-secondary)' },
-            { name: 'labelGap', value: semantic.component.input.labelGap, color: 'var(--status-cautionary-surface)' },
+            { name: 'labelGap', value: semantic.component.input.labelGap, color: 'var(--surface-warning-default)' },
             { name: 'helperGap', value: semantic.component.input.helperGap, color: 'var(--surface-brand-secondary)' },
           ]}
           renderMockup={(values) => {
@@ -533,17 +533,17 @@ export default function SpacingPage() {
                     <label style={{ display: 'block', fontSize: 14, fontWeight: 500, color: 'var(--text-primary)' }}>이메일 주소</label>
 
                     {/* LabelGap indicator - inline */}
-                    <div style={{ height: labelGap, backgroundColor: 'var(--status-cautionary-surface)', border: '1px dashed var(--status-cautionary-border)', borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      {labelGap >= 8 && <span style={{ fontSize: 9, fontWeight: 600, color: 'var(--status-cautionary-content)' }}>{labelGap}</span>}
+                    <div style={{ height: labelGap, backgroundColor: 'var(--surface-warning-default)', border: '1px dashed var(--border-warning-default)', borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      {labelGap >= 8 && <span style={{ fontSize: 9, fontWeight: 600, color: 'var(--content-warning-default)' }}>{labelGap}</span>}
                     </div>
 
                     {/* Input */}
                     <div style={{ position: 'relative', backgroundColor: 'var(--bg-elevated)', border: '1px solid var(--divider)', borderRadius: 'var(--radius-md)' }}>
                       {/* Padding overlays with dashed borders */}
-                      <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: px, backgroundColor: 'var(--status-negative-surface)', borderRadius: 'var(--radius-md) 0 0 var(--radius-md)', borderRight: '1px dashed var(--status-negative-border)' }}>
-                        <span style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%) rotate(-90deg)', fontSize: 10, fontWeight: 600, color: 'var(--status-negative-content)' }}>{px}</span>
+                      <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: px, backgroundColor: 'var(--surface-error-default)', borderRadius: 'var(--radius-md) 0 0 var(--radius-md)', borderRight: '1px dashed var(--border-error-default)' }}>
+                        <span style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%) rotate(-90deg)', fontSize: 10, fontWeight: 600, color: 'var(--content-error-default)' }}>{px}</span>
                       </div>
-                      <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: px, backgroundColor: 'var(--status-negative-surface)', borderRadius: '0 var(--radius-md) var(--radius-md) 0', borderLeft: '1px dashed var(--status-negative-border)' }} />
+                      <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: px, backgroundColor: 'var(--surface-error-default)', borderRadius: '0 var(--radius-md) var(--radius-md) 0', borderLeft: '1px dashed var(--border-error-default)' }} />
                       <div style={{ position: 'absolute', left: px, right: px, top: 0, height: py, backgroundColor: 'var(--surface-brand-secondary)', borderBottom: '1px dashed var(--content-brand-default)' }}>
                         <span style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', fontSize: 10, fontWeight: 600, color: 'var(--content-brand-default)' }}>{py}</span>
                       </div>
@@ -576,7 +576,7 @@ export default function SpacingPage() {
                   {/* Legend */}
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 11, paddingTop: 8 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <div style={{ width: 14, height: 14, backgroundColor: 'var(--status-negative-surface)', border: '1px dashed var(--status-negative-border)', borderRadius: 2 }} />
+                      <div style={{ width: 14, height: 14, backgroundColor: 'var(--surface-error-default)', border: '1px dashed var(--border-error-default)', borderRadius: 2 }} />
                       <span style={{ color: 'var(--text-secondary)' }}>paddingX <strong>{px}px</strong></span>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -584,7 +584,7 @@ export default function SpacingPage() {
                       <span style={{ color: 'var(--text-secondary)' }}>paddingY <strong>{py}px</strong></span>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <div style={{ width: 14, height: 14, backgroundColor: 'var(--status-cautionary-surface)', border: '1px dashed var(--status-cautionary-border)', borderRadius: 2 }} />
+                      <div style={{ width: 14, height: 14, backgroundColor: 'var(--surface-warning-default)', border: '1px dashed var(--border-warning-default)', borderRadius: 2 }} />
                       <span style={{ color: 'var(--text-secondary)' }}>labelGap <strong>{labelGap}px</strong></span>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -603,8 +603,8 @@ export default function SpacingPage() {
           title="Card"
           description="카드 컴포넌트의 내부 패딩과 요소 간격"
           tokens={[
-            { name: 'padding', sizes: semantic.component.card.padding, color: 'var(--status-negative-surface)' },
-            { name: 'gap', value: semantic.component.card.gap, color: 'var(--status-positive-surface)' },
+            { name: 'padding', sizes: semantic.component.card.padding, color: 'var(--surface-error-default)' },
+            { name: 'gap', value: semantic.component.card.gap, color: 'var(--surface-success-default)' },
           ]}
           renderMockup={(values) => {
             const padding = values.padding || 20;
@@ -621,14 +621,14 @@ export default function SpacingPage() {
                     position: 'relative',
                   }}>
                     {/* Padding overlays with dashed borders */}
-                    <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: padding, backgroundColor: 'var(--status-negative-surface)', borderRadius: 'var(--radius-xl) var(--radius-xl) 0 0', borderBottom: '1px dashed var(--status-negative-border)' }}>
-                      <span style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', fontSize: 10, fontWeight: 600, color: 'var(--status-negative-content)' }}>{padding}</span>
+                    <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: padding, backgroundColor: 'var(--surface-error-default)', borderRadius: 'var(--radius-xl) var(--radius-xl) 0 0', borderBottom: '1px dashed var(--border-error-default)' }}>
+                      <span style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', fontSize: 10, fontWeight: 600, color: 'var(--content-error-default)' }}>{padding}</span>
                     </div>
-                    <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: padding, backgroundColor: 'var(--status-negative-surface)', borderRadius: '0 0 var(--radius-xl) var(--radius-xl)', borderTop: '1px dashed var(--status-negative-border)' }} />
-                    <div style={{ position: 'absolute', top: padding, bottom: padding, left: 0, width: padding, backgroundColor: 'var(--status-negative-surface)', borderRight: '1px dashed var(--status-negative-border)' }}>
-                      <span style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%) rotate(-90deg)', fontSize: 10, fontWeight: 600, color: 'var(--status-negative-content)' }}>{padding}</span>
+                    <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: padding, backgroundColor: 'var(--surface-error-default)', borderRadius: '0 0 var(--radius-xl) var(--radius-xl)', borderTop: '1px dashed var(--border-error-default)' }} />
+                    <div style={{ position: 'absolute', top: padding, bottom: padding, left: 0, width: padding, backgroundColor: 'var(--surface-error-default)', borderRight: '1px dashed var(--border-error-default)' }}>
+                      <span style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%) rotate(-90deg)', fontSize: 10, fontWeight: 600, color: 'var(--content-error-default)' }}>{padding}</span>
                     </div>
-                    <div style={{ position: 'absolute', top: padding, bottom: padding, right: 0, width: padding, backgroundColor: 'var(--status-negative-surface)', borderLeft: '1px dashed var(--status-negative-border)' }} />
+                    <div style={{ position: 'absolute', top: padding, bottom: padding, right: 0, width: padding, backgroundColor: 'var(--surface-error-default)', borderLeft: '1px dashed var(--border-error-default)' }} />
 
                     <div style={{ padding, position: 'relative', zIndex: 1 }}>
                       {/* Image placeholder */}
@@ -641,8 +641,8 @@ export default function SpacingPage() {
                       </div>
 
                       {/* Gap indicator - inline */}
-                      <div style={{ height: gap, backgroundColor: 'var(--status-positive-surface)', border: '1px dashed var(--status-positive-border)', borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--status-positive-content)' }}>{gap}</span>
+                      <div style={{ height: gap, backgroundColor: 'var(--surface-success-default)', border: '1px dashed var(--border-success-default)', borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--content-success-default)' }}>{gap}</span>
                       </div>
 
                       {/* Content */}
@@ -654,11 +654,11 @@ export default function SpacingPage() {
                   {/* Legend */}
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 11, paddingTop: 8 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <div style={{ width: 14, height: 14, backgroundColor: 'var(--status-negative-surface)', border: '1px dashed var(--status-negative-border)', borderRadius: 2 }} />
+                      <div style={{ width: 14, height: 14, backgroundColor: 'var(--surface-error-default)', border: '1px dashed var(--border-error-default)', borderRadius: 2 }} />
                       <span style={{ color: 'var(--text-secondary)' }}>padding <strong>{padding}px</strong></span>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <div style={{ width: 14, height: 14, backgroundColor: 'var(--status-positive-surface)', border: '1px dashed var(--status-positive-border)', borderRadius: 2 }} />
+                      <div style={{ width: 14, height: 14, backgroundColor: 'var(--surface-success-default)', border: '1px dashed var(--border-success-default)', borderRadius: 2 }} />
                       <span style={{ color: 'var(--text-secondary)' }}>gap <strong>{gap}px</strong></span>
                     </div>
                   </div>
@@ -673,7 +673,7 @@ export default function SpacingPage() {
           title="List"
           description="리스트 아이템의 내부 패딩"
           tokens={[
-            { name: 'itemPaddingX', value: semantic.component.list.itemPaddingX, color: 'var(--status-negative-surface)' },
+            { name: 'itemPaddingX', value: semantic.component.list.itemPaddingX, color: 'var(--surface-error-default)' },
             { name: 'itemPaddingY', value: semantic.component.list.itemPaddingY, color: 'var(--surface-brand-secondary)' },
           ]}
           renderMockup={(values) => {
@@ -691,12 +691,12 @@ export default function SpacingPage() {
                       {/* Show padding overlay on first item only */}
                       {item.showOverlay && (
                         <>
-                          <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: px, backgroundColor: 'var(--status-negative-surface)', borderRight: '1px dashed var(--status-negative-surface)', zIndex: 2 }} />
-                          <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: px, backgroundColor: 'var(--status-negative-surface)', borderLeft: '1px dashed var(--status-negative-surface)', zIndex: 2 }} />
+                          <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: px, backgroundColor: 'var(--surface-error-default)', borderRight: '1px dashed var(--surface-error-default)', zIndex: 2 }} />
+                          <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: px, backgroundColor: 'var(--surface-error-default)', borderLeft: '1px dashed var(--surface-error-default)', zIndex: 2 }} />
                           <div style={{ position: 'absolute', left: px, right: px, top: 0, height: py, backgroundColor: 'var(--surface-brand-secondary)', borderBottom: '1px dashed var(--surface-brand-secondary)', zIndex: 2 }} />
                           <div style={{ position: 'absolute', left: px, right: px, bottom: 0, height: py, backgroundColor: 'var(--surface-brand-secondary)', borderTop: '1px dashed var(--surface-brand-secondary)', zIndex: 2 }} />
 
-                          <span style={{ position: 'absolute', left: px / 2, top: '50%', transform: 'translateX(-50%) rotate(-90deg)', fontSize: 9, fontWeight: 600, color: 'var(--status-negative-content)', whiteSpace: 'nowrap', zIndex: 3 }}>{px}</span>
+                          <span style={{ position: 'absolute', left: px / 2, top: '50%', transform: 'translateX(-50%) rotate(-90deg)', fontSize: 9, fontWeight: 600, color: 'var(--content-error-default)', whiteSpace: 'nowrap', zIndex: 3 }}>{px}</span>
                           <span style={{ position: 'absolute', left: '50%', top: py / 2, transform: 'translate(-50%, -50%)', fontSize: 9, fontWeight: 600, color: 'var(--content-brand-default)', whiteSpace: 'nowrap', zIndex: 3 }}>{py}</span>
                         </>
                       )}
@@ -760,8 +760,8 @@ export default function SpacingPage() {
                 </p>
 
                 {/* Description-Content gap indicator - inline */}
-                <div style={{ height: 24, backgroundColor: 'var(--status-cautionary-surface)', border: '1px dashed var(--status-cautionary-border)', borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--status-cautionary-content)' }}>24</span>
+                <div style={{ height: 24, backgroundColor: 'var(--surface-warning-default)', border: '1px dashed var(--border-warning-default)', borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--content-warning-default)' }}>24</span>
                 </div>
 
                 {/* Content */}
@@ -779,7 +779,7 @@ export default function SpacingPage() {
                 <div style={{ fontSize: 11, color: 'var(--text-tertiary)', marginLeft: 24 }}>vertical.2xs</div>
 
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 8 }}>
-                  <div style={{ width: 16, height: 16, backgroundColor: 'var(--status-cautionary-surface)', border: '1px dashed var(--status-cautionary-border)', borderRadius: 2 }} />
+                  <div style={{ width: 16, height: 16, backgroundColor: 'var(--surface-warning-default)', border: '1px dashed var(--border-warning-default)', borderRadius: 2 }} />
                   <span style={{ color: 'var(--text-secondary)' }}>설명 → 콘텐츠 <strong>24px</strong></span>
                 </div>
                 <div style={{ fontSize: 11, color: 'var(--text-tertiary)', marginLeft: 24 }}>vertical.lg</div>
@@ -900,7 +900,7 @@ export default function SpacingPage() {
                 <div style={{ fontSize: 18, fontWeight: 600, color: 'var(--text-primary)' }}>섹션 제목</div>
 
                 {/* Title-Description gap indicator - inline (4px, no number) */}
-                <div style={{ height: 4, backgroundColor: 'var(--status-positive-surface)', border: '1px dashed var(--status-positive-border)', borderRadius: 2 }} />
+                <div style={{ height: 4, backgroundColor: 'var(--surface-success-default)', border: '1px dashed var(--border-success-default)', borderRadius: 2 }} />
 
                 {/* Section Description */}
                 <p style={{ fontSize: 13, color: 'var(--text-tertiary)', margin: 0 }}>섹션에 대한 짧은 설명</p>
@@ -914,15 +914,15 @@ export default function SpacingPage() {
                 <div style={{ padding: 12, backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', fontSize: 13, color: 'var(--text-secondary)' }}>리스트 아이템 1</div>
 
                 {/* Item gap indicator - inline */}
-                <div style={{ height: 12, backgroundColor: 'var(--status-cautionary-surface)', border: '1px dashed var(--status-cautionary-border)', borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <span style={{ fontSize: 9, fontWeight: 600, color: 'var(--status-cautionary-content)' }}>12</span>
+                <div style={{ height: 12, backgroundColor: 'var(--surface-warning-default)', border: '1px dashed var(--border-warning-default)', borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <span style={{ fontSize: 9, fontWeight: 600, color: 'var(--content-warning-default)' }}>12</span>
                 </div>
 
                 <div style={{ padding: 12, backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', fontSize: 13, color: 'var(--text-secondary)' }}>리스트 아이템 2</div>
 
                 {/* Item gap indicator - inline */}
-                <div style={{ height: 12, backgroundColor: 'var(--status-cautionary-surface)', border: '1px dashed var(--status-cautionary-border)', borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <span style={{ fontSize: 9, fontWeight: 600, color: 'var(--status-cautionary-content)' }}>12</span>
+                <div style={{ height: 12, backgroundColor: 'var(--surface-warning-default)', border: '1px dashed var(--border-warning-default)', borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <span style={{ fontSize: 9, fontWeight: 600, color: 'var(--content-warning-default)' }}>12</span>
                 </div>
 
                 <div style={{ padding: 12, backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', fontSize: 13, color: 'var(--text-secondary)' }}>리스트 아이템 3</div>
@@ -931,7 +931,7 @@ export default function SpacingPage() {
               {/* Legend */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12, fontSize: 12, minWidth: 180 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <div style={{ width: 16, height: 16, backgroundColor: 'var(--status-positive-surface)', border: '1px dashed var(--status-positive-border)', borderRadius: 2 }} />
+                  <div style={{ width: 16, height: 16, backgroundColor: 'var(--surface-success-default)', border: '1px dashed var(--border-success-default)', borderRadius: 2 }} />
                   <span style={{ color: 'var(--text-secondary)' }}>제목 → 설명 <strong>4px</strong></span>
                 </div>
                 <div style={{ fontSize: 11, color: 'var(--text-tertiary)', marginLeft: 24 }}>vertical.3xs</div>
@@ -943,7 +943,7 @@ export default function SpacingPage() {
                 <div style={{ fontSize: 11, color: 'var(--text-tertiary)', marginLeft: 24 }}>vertical.sm</div>
 
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 8 }}>
-                  <div style={{ width: 16, height: 16, backgroundColor: 'var(--status-cautionary-surface)', border: '1px dashed var(--status-cautionary-border)', borderRadius: 2 }} />
+                  <div style={{ width: 16, height: 16, backgroundColor: 'var(--surface-warning-default)', border: '1px dashed var(--border-warning-default)', borderRadius: 2 }} />
                   <span style={{ color: 'var(--text-secondary)' }}>아이템 간격 <strong>12px</strong></span>
                 </div>
                 <div style={{ fontSize: 11, color: 'var(--text-tertiary)', marginLeft: 24 }}>vertical.xs</div>

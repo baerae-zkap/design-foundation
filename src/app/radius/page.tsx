@@ -99,7 +99,7 @@ export default function RadiusPage() {
 
       {/* Badge */}
       <SemanticSection id="badge" title="Badge" description="뱃지 컴포넌트용 라운딩입니다." data={semantic.badge} renderPreview={(value) => (
-        <span style={{ display: 'inline-block', padding: '2px 8px', fontSize: 12, fontWeight: 500, backgroundColor: 'var(--status-negative-content)', color: 'white', borderRadius: value === 9999 ? 9999 : value }}>NEW</span>
+        <span style={{ display: 'inline-block', padding: '2px 8px', fontSize: 12, fontWeight: 500, backgroundColor: 'var(--content-error-default)', color: 'white', borderRadius: value === 9999 ? 9999 : value }}>NEW</span>
       )} />
 
       {/* Avatar */}
@@ -158,7 +158,7 @@ export default function RadiusPage() {
                   )}
                   {key === 'toast' && (
                     <div style={{ width: 120, height: 36, backgroundColor: 'var(--inverse-surface-default)', borderRadius: value, display: 'flex', alignItems: 'center', padding: '0 12px', gap: 8, boxShadow: '0 4px 12px var(--shadow-primitive-sm)' }}>
-                      <div style={{ width: 14, height: 14, backgroundColor: 'var(--status-positive-content)', borderRadius: '50%' }} />
+                      <div style={{ width: 14, height: 14, backgroundColor: 'var(--content-success-default)', borderRadius: '50%' }} />
                       <span style={{ fontSize: 11, color: 'var(--static-white)' }}>완료!</span>
                     </div>
                   )}

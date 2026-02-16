@@ -825,11 +825,11 @@ function DesignContent() {
           </DontCard>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 8 }}>
-          <p style={{ fontSize: 13, color: "var(--status-positive-content)", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
+          <p style={{ fontSize: 13, color: "var(--content-success-default)", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
             <span style={{ fontWeight: 700, flexShrink: 0 }}>Do</span>
             <span style={{ color: "var(--text-secondary)" }}>1-2 단어의 짧고 명확한 라벨을 사용합니다.</span>
           </p>
-          <p style={{ fontSize: 13, color: "var(--status-negative-content)", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
+          <p style={{ fontSize: 13, color: "var(--content-error-default)", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
             <span style={{ fontWeight: 700, flexShrink: 0 }}>Don&apos;t</span>
             <span style={{ color: "var(--text-secondary)" }}>문장이나 긴 텍스트를 Badge에 넣지 마세요.</span>
           </p>
@@ -852,11 +852,11 @@ function DesignContent() {
           </DontCard>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 8 }}>
-          <p style={{ fontSize: 13, color: "var(--status-positive-content)", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
+          <p style={{ fontSize: 13, color: "var(--content-success-default)", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
             <span style={{ fontWeight: 700, flexShrink: 0 }}>Do</span>
             <span style={{ color: "var(--text-secondary)" }}>같은 영역에서 동일한 variant와 size를 유지합니다.</span>
           </p>
-          <p style={{ fontSize: 13, color: "var(--status-negative-content)", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
+          <p style={{ fontSize: 13, color: "var(--content-error-default)", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
             <span style={{ fontWeight: 700, flexShrink: 0 }}>Don&apos;t</span>
             <span style={{ color: "var(--text-secondary)" }}>같은 영역에서 variant와 size를 혼용하지 마세요.</span>
           </p>

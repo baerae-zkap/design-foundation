@@ -47,7 +47,7 @@ function Button({
       secondary: { backgroundColor: "var(--grey-97)", color: "var(--text-primary)", border: "none" },
       outline: { backgroundColor: "transparent", color: "var(--brand-primary)", border: "1px solid var(--brand-primary)" },
       ghost: { backgroundColor: "transparent", color: "var(--text-secondary)", border: "none" },
-      danger: { backgroundColor: "var(--status-negative-content)", color: "white", border: "none" },
+      danger: { backgroundColor: "var(--content-error-default)", color: "white", border: "none" },
     };
 
     return styles[v];

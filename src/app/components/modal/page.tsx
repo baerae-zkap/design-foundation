@@ -166,7 +166,7 @@ export default function ModalPage() {
                 fontWeight: 500,
                 borderRadius: "var(--radius-md)",
                 border: "none",
-                backgroundColor: "var(--status-negative-content)",
+                backgroundColor: "var(--content-error-default)",
                 color: "white",
                 cursor: "pointer",
               }}

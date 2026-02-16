@@ -946,13 +946,13 @@ function WebContent() {
       <TableCell>ETH</TableCell>
       <TableCell>0.7812</TableCell>
       <TableCell>₩3,245,000</TableCell>
-      <TableCell style={{ color: 'var(--status-positive-content)' }}>+5.2%</TableCell>
+      <TableCell style={{ color: 'var(--content-success-default)' }}>+5.2%</TableCell>
     </TableRow>
     <TableRow>
       <TableCell>BTC</TableCell>
       <TableCell>0.0234</TableCell>
       <TableCell>₩1,850,000</TableCell>
-      <TableCell style={{ color: 'var(--status-negative-content)' }}>-2.1%</TableCell>
+      <TableCell style={{ color: 'var(--content-error-default)' }}>-2.1%</TableCell>
     </TableRow>
   </TableBody>
 </Table>`} />

@@ -880,11 +880,11 @@ function DesignContent() {
           </DontCard>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 8 }}>
-          <p style={{ fontSize: 13, color: "var(--status-positive-content)", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
+          <p style={{ fontSize: 13, color: "var(--content-success-default)", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
             <span style={{ fontWeight: 700, flexShrink: 0 }}>Do</span>
             <span style={{ color: "var(--text-secondary)" }}>헤더 텍스트로 내용을 명확히 설명합니다.</span>
           </p>
-          <p style={{ fontSize: 13, color: "var(--status-negative-content)", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
+          <p style={{ fontSize: 13, color: "var(--content-error-default)", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
             <span style={{ fontWeight: 700, flexShrink: 0 }}>Don&apos;t</span>
             <span style={{ color: "var(--text-secondary)" }}>헤더에 의미 없는 짧은 텍스트를 사용하지 마세요.</span>
           </p>
@@ -910,11 +910,11 @@ function DesignContent() {
           </DontCard>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 8 }}>
-          <p style={{ fontSize: 13, color: "var(--status-positive-content)", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
+          <p style={{ fontSize: 13, color: "var(--content-success-default)", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
             <span style={{ fontWeight: 700, flexShrink: 0 }}>Do</span>
             <span style={{ color: "var(--text-secondary)" }}>관련 콘텐츠를 그룹화하여 여러 항목을 제공합니다.</span>
           </p>
-          <p style={{ fontSize: 13, color: "var(--status-negative-content)", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
+          <p style={{ fontSize: 13, color: "var(--content-error-default)", display: "flex", alignItems: "flex-start", gap: 8, margin: 0 }}>
             <span style={{ fontWeight: 700, flexShrink: 0 }}>Don&apos;t</span>
             <span style={{ color: "var(--text-secondary)" }}>항목이 1개뿐이면 Accordion 대신 직접 표시하세요.</span>
           </p>

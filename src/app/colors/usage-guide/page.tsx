@@ -414,20 +414,22 @@ cssVarColors.content.base.onColor  // white`}
 
         <CodeBlock
           code={`// Button
-cssVarColors.component.button.filled.brand.bg
-cssVarColors.component.button.filled.brand.bgPressed
+cssVarColors.component.button.surface.primary
+cssVarColors.component.button.surface.primaryPressed
+cssVarColors.component.button.content.primary
 
 // Input
-cssVarColors.component.input.default.border
-cssVarColors.component.input.default.borderFocused
+cssVarColors.component.input.border.default
+cssVarColors.component.input.border.focus
+cssVarColors.component.input.ring.focus
 
 // Chip
-cssVarColors.component.chip.filled.default.bg
-cssVarColors.component.chip.filled.default.text
+cssVarColors.component.chip.surface.neutral
+cssVarColors.component.chip.content.neutral
 
-// Status badges
-cssVarColors.status.informational.bg
-cssVarColors.status.informational.text`}
+// Info badge
+cssVarColors.surface.info.default
+cssVarColors.content.info.default`}
           language="tsx"
         />
       </Section>

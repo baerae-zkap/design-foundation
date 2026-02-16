@@ -67,9 +67,9 @@ const colorStyles: Record<ButtonColor, {
 }> = {
   brandDefault: {
     filled: {
-      bg: cssVarColors.component.button.primarySurface,
-      bgPressed: cssVarColors.component.button.primarySurfacePressed,
-      color: cssVarColors.component.button.primaryContent,
+      bg: cssVarColors.component.button.surface.primary,
+      bgPressed: cssVarColors.component.button.surface.primaryPressed,
+      color: cssVarColors.component.button.content.primary,
     },
     outlined: {
       bg: cssVarColors.surface.base.default,
@@ -80,15 +80,15 @@ const colorStyles: Record<ButtonColor, {
   },
   brandSecondary: {
     filled: {
-      bg: cssVarColors.component.button.secondarySurface,
-      bgPressed: cssVarColors.component.button.secondarySurfacePressed,
-      color: cssVarColors.component.button.secondaryContent,
+      bg: cssVarColors.component.button.surface.secondary,
+      bgPressed: cssVarColors.component.button.surface.secondaryPressed,
+      color: cssVarColors.component.button.content.secondary,
     },
     outlined: {
       bg: cssVarColors.surface.base.default,
       bgPressed: cssVarColors.surface.brand.secondary,
       color: cssVarColors.content.brand.default,
-      border: cssVarColors.component.button.secondaryBorder,
+      border: cssVarColors.component.button.border.secondary,
     },
   },
   baseContainer: {
@@ -119,9 +119,9 @@ const colorStyles: Record<ButtonColor, {
   },
   errorDefault: {
     filled: {
-      bg: cssVarColors.component.button.destructiveSurface,
-      bgPressed: cssVarColors.component.button.destructiveSurfacePressed,
-      color: cssVarColors.component.button.destructiveContent,
+      bg: cssVarColors.component.button.surface.destructive,
+      bgPressed: cssVarColors.component.button.surface.destructivePressed,
+      color: cssVarColors.component.button.content.destructive,
     },
     outlined: {
       bg: cssVarColors.surface.base.default,

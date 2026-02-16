@@ -24,30 +24,30 @@ function Toast({ message, type = "info", isVisible, onClose }: ToastProps) {
 
   const typeStyles: Record<ToastType, { bg: string; border: string; icon: React.ReactNode }> = {
     success: {
-      bg: "var(--status-positive-surface)",
-      border: "var(--status-positive-content)",
+      bg: "var(--surface-success-default)",
+      border: "var(--content-success-default)",
       icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--status-positive-content)" strokeWidth="2">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--content-success-default)" strokeWidth="2">
           <path d="M22 11.08V12a10 10 0 11-5.93-9.14" strokeLinecap="round" strokeLinejoin="round" />
           <path d="M22 4L12 14.01l-3-3" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       ),
     },
     error: {
-      bg: "var(--status-negative-surface)",
-      border: "var(--status-negative-content)",
+      bg: "var(--surface-error-default)",
+      border: "var(--content-error-default)",
       icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--status-negative-content)" strokeWidth="2">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--content-error-default)" strokeWidth="2">
           <circle cx="12" cy="12" r="10" />
           <path d="M15 9l-6 6M9 9l6 6" strokeLinecap="round" />
         </svg>
       ),
     },
     warning: {
-      bg: "var(--status-cautionary-surface)",
-      border: "var(--status-cautionary-content)",
+      bg: "var(--surface-warning-default)",
+      border: "var(--content-warning-default)",
       icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--status-cautionary-content)" strokeWidth="2">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--content-warning-default)" strokeWidth="2">
           <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
           <path d="M12 9v4M12 17h.01" strokeLinecap="round" />
         </svg>
@@ -112,9 +112,9 @@ function Button({ variant = "primary", children, onClick }: { variant?: "primary
   const variantStyles: Record<string, React.CSSProperties> = {
     primary: { backgroundColor: "var(--brand-primary)", color: "white" },
     secondary: { backgroundColor: "var(--grey-95)", color: "var(--text-primary)" },
-    success: { backgroundColor: "var(--status-positive-content)", color: "white" },
-    error: { backgroundColor: "var(--status-negative-content)", color: "white" },
-    warning: { backgroundColor: "var(--status-cautionary-content)", color: "white" },
+    success: { backgroundColor: "var(--content-success-default)", color: "white" },
+    error: { backgroundColor: "var(--content-error-default)", color: "white" },
+    warning: { backgroundColor: "var(--content-warning-default)", color: "white" },
   };
 
   return (
@@ -205,30 +205,30 @@ showToast("새로운 알림이 있습니다.", "info");`}</code>
             };
             const typeStyles: Record<ToastType, { bg: string; border: string; icon: React.ReactNode }> = {
               success: {
-                bg: "var(--status-positive-surface)",
-                border: "var(--status-positive-content)",
+                bg: "var(--surface-success-default)",
+                border: "var(--content-success-default)",
                 icon: (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--status-positive-content)" strokeWidth="2">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--content-success-default)" strokeWidth="2">
                     <path d="M22 11.08V12a10 10 0 11-5.93-9.14" strokeLinecap="round" strokeLinejoin="round" />
                     <path d="M22 4L12 14.01l-3-3" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 ),
               },
               error: {
-                bg: "var(--status-negative-surface)",
-                border: "var(--status-negative-content)",
+                bg: "var(--surface-error-default)",
+                border: "var(--content-error-default)",
                 icon: (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--status-negative-content)" strokeWidth="2">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--content-error-default)" strokeWidth="2">
                     <circle cx="12" cy="12" r="10" />
                     <path d="M15 9l-6 6M9 9l6 6" strokeLinecap="round" />
                   </svg>
                 ),
               },
               warning: {
-                bg: "var(--status-cautionary-surface)",
-                border: "var(--status-cautionary-content)",
+                bg: "var(--surface-warning-default)",
+                border: "var(--content-warning-default)",
                 icon: (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--status-cautionary-content)" strokeWidth="2">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--content-warning-default)" strokeWidth="2">
                     <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
                     <path d="M12 9v4M12 17h.01" strokeLinecap="round" />
                   </svg>

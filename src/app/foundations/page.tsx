@@ -11,8 +11,8 @@ const foundations = [
     icon: (
       <div style={{ display: "flex", gap: 4 }}>
         <div style={{ width: 16, height: 16, borderRadius: 4, backgroundColor: "var(--content-brand-default)" }} />
-        <div style={{ width: 16, height: 16, borderRadius: 4, backgroundColor: "var(--status-positive-content)" }} />
-        <div style={{ width: 16, height: 16, borderRadius: 4, backgroundColor: "var(--status-cautionary-content)" }} />
+        <div style={{ width: 16, height: 16, borderRadius: 4, backgroundColor: "var(--content-success-default)" }} />
+        <div style={{ width: 16, height: 16, borderRadius: 4, backgroundColor: "var(--content-warning-default)" }} />
       </div>
     ),
   },

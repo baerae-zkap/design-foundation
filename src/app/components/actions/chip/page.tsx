@@ -63,51 +63,51 @@ const colorConfig: Record<ChipColor, {
   },
   successDefault: {
     filled: {
-      bg: 'var(--status-positive-surface)',
+      bg: 'var(--surface-success-default)',
       bgPressed: 'var(--surface-success-defaultPressed)',
-      bgSelected: 'var(--status-positive-content)',
+      bgSelected: 'var(--content-success-default)',
       text: 'var(--content-success-strong)',
       textSelected: 'var(--static-white)',
     },
     outlined: {
       bg: 'transparent',
-      bgPressed: 'var(--status-positive-surface)',
-      bgSelected: 'var(--status-positive-content)',
-      border: 'var(--status-positive-content)',
+      bgPressed: 'var(--surface-success-default)',
+      bgSelected: 'var(--content-success-default)',
+      border: 'var(--border-success-default)',
       text: 'var(--content-success-strong)',
       textSelected: 'var(--static-white)',
     },
   },
   errorDefault: {
     filled: {
-      bg: 'var(--status-negative-surface)',
+      bg: 'var(--surface-error-default)',
       bgPressed: 'var(--surface-error-defaultPressed)',
-      bgSelected: 'var(--status-negative-content)',
+      bgSelected: 'var(--content-error-default)',
       text: 'var(--content-error-default)',
       textSelected: 'var(--static-white)',
     },
     outlined: {
       bg: 'transparent',
-      bgPressed: 'var(--status-negative-surface)',
-      bgSelected: 'var(--status-negative-content)',
-      border: 'var(--status-negative-content)',
+      bgPressed: 'var(--surface-error-default)',
+      bgSelected: 'var(--content-error-default)',
+      border: 'var(--border-error-default)',
       text: 'var(--content-error-default)',
       textSelected: 'var(--static-white)',
     },
   },
   warningDefault: {
     filled: {
-      bg: 'var(--status-cautionary-surface)',
-      bgPressed: 'var(--status-cautionary-surface)',
-      bgSelected: 'var(--status-cautionary-content)',
+      bg: 'var(--surface-warning-default)',
+      bgPressed: 'var(--surface-warning-default)',
+      bgSelected: 'var(--content-warning-default)',
       text: 'var(--content-warning-strong)',
       textSelected: 'var(--static-white)',
     },
     outlined: {
       bg: 'transparent',
-      bgPressed: 'var(--status-cautionary-surface)',
-      bgSelected: 'var(--status-cautionary-content)',
-      border: 'var(--status-cautionary-border)',
+      bgPressed: 'var(--surface-warning-default)',
+      bgSelected: 'var(--content-warning-default)',
+      border: 'var(--border-warning-default)',
       text: 'var(--content-warning-strong)',
       textSelected: 'var(--static-white)',
     },
@@ -790,8 +790,8 @@ function DesignContent() {
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
               <thead>
                 <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)", color: "var(--status-positive-content)" }}>Do</th>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)", color: "var(--status-negative-content)" }}>Don&apos;t</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)", color: "var(--content-success-default)" }}>Do</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)", color: "var(--content-error-default)" }}>Don&apos;t</th>
                 </tr>
               </thead>
               <tbody>

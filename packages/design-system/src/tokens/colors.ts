@@ -444,55 +444,49 @@ export const colors = {
       default: palette.grey["95"],
     },
   },
-  status: {
-    positive: {
-      surface: palette.green["95"],
-      content: palette.green["50"],
-      border: palette.green["50"],
-    },
-    cautionary: {
-      surface: palette.orange["95"],
-      content: palette.orange["50"],
-      border: palette.orange["50"],
-    },
-    negative: {
-      surface: palette.red["95"],
-      content: palette.red["50"],
-      border: palette.red["50"],
-    },
-    informational: {
-      surface: palette.teal["95"],
-      content: palette.teal["50"],
-      border: palette.teal["50"],
-    },
-  },
   component: {
     button: {
-      primarySurface: palette.blue["50"],
-      primarySurfacePressed: palette.blue["45"],
-      primaryContent: palette.static.white,
-      secondarySurface: palette.blue["95"],
-      secondarySurfacePressed: palette.blue["90"],
-      secondaryContent: palette.blue["50"],
-      secondaryBorder: palette.blue["50"],
-      destructiveSurface: palette.red["50"],
-      destructiveSurfacePressed: palette.red["40"],
-      destructiveContent: palette.static.white,
+      surface: {
+        primary: palette.blue["50"],
+        primaryPressed: palette.blue["45"],
+        secondary: palette.blue["95"],
+        secondaryPressed: palette.blue["90"],
+        destructive: palette.red["50"],
+        destructivePressed: palette.red["40"],
+      },
+      content: {
+        primary: palette.static.white,
+        secondary: palette.blue["50"],
+        destructive: palette.static.white,
+      },
+      border: {
+        secondary: palette.blue["50"],
+      },
     },
     input: {
       surface: palette.static.white,
-      border: palette.grey["95"],
-      focusBorder: palette.blue["50"],
+      border: {
+        default: palette.grey["95"],
+        focus: palette.blue["50"],
+      },
       content: palette.grey["30"],
       placeholder: palette.grey["70"],
-      focusRing: palette.alphaComposite.brandSelectionLight,
+      ring: {
+        focus: palette.alphaComposite.brandSelectionLight,
+      },
     },
     chip: {
-      neutralSurface: palette.alphaComposite.fillLightNormal,
-      neutralContent: palette.grey["30"],
-      neutralBorder: palette.grey["95"],
-      selectedSurface: palette.blue["95"],
-      selectedContent: palette.blue["50"],
+      surface: {
+        neutral: palette.alphaComposite.fillLightNormal,
+        selected: palette.blue["95"],
+      },
+      content: {
+        neutral: palette.grey["30"],
+        selected: palette.blue["50"],
+      },
+      border: {
+        neutral: palette.grey["95"],
+      },
     },
   },
 } as const;
@@ -686,55 +680,49 @@ export const darkColors = {
       default: palette.grey["30"],
     },
   },
-  status: {
-    positive: {
-      surface: palette.green["20"],
-      content: palette.green["60"],
-      border: palette.green["60"],
-    },
-    cautionary: {
-      surface: palette.orange["20"],
-      content: palette.orange["60"],
-      border: palette.orange["60"],
-    },
-    negative: {
-      surface: palette.red["20"],
-      content: palette.red["60"],
-      border: palette.red["60"],
-    },
-    informational: {
-      surface: palette.teal["20"],
-      content: palette.teal["60"],
-      border: palette.teal["60"],
-    },
-  },
   component: {
     button: {
-      primarySurface: palette.blue["55"],
-      primarySurfacePressed: palette.blue["60"],
-      primaryContent: palette.static.white,
-      secondarySurface: palette.blue["20"],
-      secondarySurfacePressed: palette.blue["30"],
-      secondaryContent: palette.blue["60"],
-      secondaryBorder: palette.blue["55"],
-      destructiveSurface: palette.red["60"],
-      destructiveSurfacePressed: palette.red["70"],
-      destructiveContent: palette.static.white,
+      surface: {
+        primary: palette.blue["55"],
+        primaryPressed: palette.blue["60"],
+        secondary: palette.blue["20"],
+        secondaryPressed: palette.blue["30"],
+        destructive: palette.red["60"],
+        destructivePressed: palette.red["70"],
+      },
+      content: {
+        primary: palette.static.white,
+        secondary: palette.blue["60"],
+        destructive: palette.static.white,
+      },
+      border: {
+        secondary: palette.blue["55"],
+      },
     },
     input: {
       surface: palette.grey["20"],
-      border: palette.grey["25"],
-      focusBorder: palette.blue["55"],
+      border: {
+        default: palette.grey["25"],
+        focus: palette.blue["55"],
+      },
       content: palette.grey["95"],
       placeholder: palette.grey["50"],
-      focusRing: palette.alphaComposite.brandSelectionDark,
+      ring: {
+        focus: palette.alphaComposite.brandSelectionDark,
+      },
     },
     chip: {
-      neutralSurface: palette.alphaComposite.fillDarkNormal,
-      neutralContent: palette.grey["95"],
-      neutralBorder: palette.grey["25"],
-      selectedSurface: palette.blue["20"],
-      selectedContent: palette.blue["60"],
+      surface: {
+        neutral: palette.alphaComposite.fillDarkNormal,
+        selected: palette.blue["20"],
+      },
+      content: {
+        neutral: palette.grey["95"],
+        selected: palette.blue["60"],
+      },
+      border: {
+        neutral: palette.grey["25"],
+      },
     },
   },
 } as const;
@@ -932,55 +920,49 @@ export const cssVarColors = {
       default: 'var(--inverse-icon-default)' as const,
     },
   },
-  status: {
-    positive: {
-      surface: 'var(--status-positive-surface)' as const,
-      content: 'var(--status-positive-content)' as const,
-      border: 'var(--status-positive-border)' as const,
-    },
-    cautionary: {
-      surface: 'var(--status-cautionary-surface)' as const,
-      content: 'var(--status-cautionary-content)' as const,
-      border: 'var(--status-cautionary-border)' as const,
-    },
-    negative: {
-      surface: 'var(--status-negative-surface)' as const,
-      content: 'var(--status-negative-content)' as const,
-      border: 'var(--status-negative-border)' as const,
-    },
-    informational: {
-      surface: 'var(--status-informational-surface)' as const,
-      content: 'var(--status-informational-content)' as const,
-      border: 'var(--status-informational-border)' as const,
-    },
-  },
   component: {
     button: {
-      primarySurface: 'var(--component-button-primarySurface)' as const,
-      primarySurfacePressed: 'var(--component-button-primarySurfacePressed)' as const,
-      primaryContent: 'var(--component-button-primaryContent)' as const,
-      secondarySurface: 'var(--component-button-secondarySurface)' as const,
-      secondarySurfacePressed: 'var(--component-button-secondarySurfacePressed)' as const,
-      secondaryContent: 'var(--component-button-secondaryContent)' as const,
-      secondaryBorder: 'var(--component-button-secondaryBorder)' as const,
-      destructiveSurface: 'var(--component-button-destructiveSurface)' as const,
-      destructiveSurfacePressed: 'var(--component-button-destructiveSurfacePressed)' as const,
-      destructiveContent: 'var(--component-button-destructiveContent)' as const,
+      surface: {
+        primary: 'var(--component-button-surface-primary)' as const,
+        primaryPressed: 'var(--component-button-surface-primaryPressed)' as const,
+        secondary: 'var(--component-button-surface-secondary)' as const,
+        secondaryPressed: 'var(--component-button-surface-secondaryPressed)' as const,
+        destructive: 'var(--component-button-surface-destructive)' as const,
+        destructivePressed: 'var(--component-button-surface-destructivePressed)' as const,
+      },
+      content: {
+        primary: 'var(--component-button-content-primary)' as const,
+        secondary: 'var(--component-button-content-secondary)' as const,
+        destructive: 'var(--component-button-content-destructive)' as const,
+      },
+      border: {
+        secondary: 'var(--component-button-border-secondary)' as const,
+      },
     },
     input: {
       surface: 'var(--component-input-surface)' as const,
-      border: 'var(--component-input-border)' as const,
-      focusBorder: 'var(--component-input-focusBorder)' as const,
+      border: {
+        default: 'var(--component-input-border-default)' as const,
+        focus: 'var(--component-input-border-focus)' as const,
+      },
       content: 'var(--component-input-content)' as const,
       placeholder: 'var(--component-input-placeholder)' as const,
-      focusRing: 'var(--component-input-focusRing)' as const,
+      ring: {
+        focus: 'var(--component-input-ring-focus)' as const,
+      },
     },
     chip: {
-      neutralSurface: 'var(--component-chip-neutralSurface)' as const,
-      neutralContent: 'var(--component-chip-neutralContent)' as const,
-      neutralBorder: 'var(--component-chip-neutralBorder)' as const,
-      selectedSurface: 'var(--component-chip-selectedSurface)' as const,
-      selectedContent: 'var(--component-chip-selectedContent)' as const,
+      surface: {
+        neutral: 'var(--component-chip-surface-neutral)' as const,
+        selected: 'var(--component-chip-surface-selected)' as const,
+      },
+      content: {
+        neutral: 'var(--component-chip-content-neutral)' as const,
+        selected: 'var(--component-chip-content-selected)' as const,
+      },
+      border: {
+        neutral: 'var(--component-chip-border-neutral)' as const,
+      },
     },
   },
 } as const;
