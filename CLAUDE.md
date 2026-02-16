@@ -176,9 +176,34 @@ Ultrapilot 4단계 병렬 실행. Codex 코드리뷰 + Architect 검증 완료.
   - Raw color lint: 0 findings
   - Architect + Codex 코드리뷰 검증 완료
 
+### 7) 토큰 아키텍처 정리 — Q1 Status 통합 + Q2 컴포넌트 토큰 네이밍 구조화 (2026-02-16)
+동료 개발자 제안 기반. Ultrapilot 병렬 실행 + Architect 교차검증 + Codex 코드리뷰 완료.
+
+**Q1: Status 토큰 통합 제거**
+- `status` 블록 제거 (positive/negative/cautionary/informational → success/error/warning/info 시멘틱으로 통합)
+- 12개 토큰 × 2 테마 = 24개 제거, 패리티 136/136 → 124/124
+- 4개 컴포넌트 코드 업데이트 (Chip, IconButton, ContentBadge, Button)
+- 14개 문서 페이지 CSS var 참조 업데이트 (63건)
+- lint-tokens.mjs WCAG 쌍 업데이트 (light + dark)
+
+**Q2: 컴포넌트 토큰 네이밍 구조화**
+- Button: flat → nested (`primarySurface` → `surface.primary`)
+- Chip: flat → nested (`neutralSurface` → `surface.neutral`)
+- Input: flat → nested (`focusBorder` → `border.focus`, `focusRing` → `ring.focus`)
+- CSS var: `--component-button-primarySurface` → `--component-button-surface-primary`
+- usage-guide 코드 샘플 업데이트
+
+**반영 파일:** 23개 (semantic-tokens.json, colors.ts, generated-color-tokens.css, 4 컴포넌트, 14 문서 페이지, lint-tokens.mjs, usage-guide)
+
+**검증:**
+  - `npm run build` 성공 (35 pages, 0 errors)
+  - Light/Dark 패리티 124/124 PASS
+  - Architect 교차검증 14/15 PASS (1건 수정 후 PASS)
+  - Codex 코드리뷰 HIGH 1 + MEDIUM 2 수정 완료
+
 ## 현재 상태 요약
 - Palette: 단일(primitive) 뷰로 정리 완료
-- Semantic: Light/Dark 136/136 패리티 완료
+- Semantic: Light/Dark 124/124 패리티 완료 (status 토큰 12개 통합 제거)
 - 테마 런타임: CSS 변수 + bootstrap script + media query fallback 구현 완료
 - cssVarColors + cssVarShadow: 자동생성 파이프라인 완료
 - **24개 전체 웹 컴포넌트: CSS var 마이그레이션 완료** (13 exported + 11 internal)
@@ -244,7 +269,7 @@ scripts/generate-foundation-css.mjs ──→ src/app/generated-foundation-token
 npm run build
 
 # 토큰 품질 게이트만 실행
-npm run check:tokens       # 패리티(blocking) + WCAG 대비(warn-only)
+npm run check:tokens       # 패리티(blocking) + WCAG 대비(warn-only) — 124/124 expected
 npm run check:raw-colors   # hex 리터럴 잔존 검사
 
 # 웹 컴포넌트 hex 잔여 확인
