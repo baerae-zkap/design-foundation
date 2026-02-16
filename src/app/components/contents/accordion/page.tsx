@@ -483,6 +483,204 @@ function DesignContent() {
         </PreviewBox>
       </Section>
 
+      {/* Interaction States */}
+      <Section title="Interaction States">
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 24 }}>
+          Accordion 헤더는 사용자의 상호작용에 따라 시각적 피드백을 제공합니다. 각 상태는 명확히 구분되어 현재 인터랙션을 인지할 수 있게 합니다.
+        </p>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
+          gap: 16,
+          padding: 24,
+          backgroundColor: "var(--surface-base-alternative)",
+          borderRadius: 16,
+        }}>
+          <StateCard label="Collapsed" sublabel="접힌 상태">
+            <div style={{ width: 120, border: "1px solid var(--border-base-default)", borderRadius: 8, overflow: "hidden" }}>
+              <div style={{ height: 36, padding: "0 12px", display: "flex", alignItems: "center", justifyContent: "space-between", backgroundColor: "var(--surface-base-default)" }}>
+                <span style={{ fontSize: 11, fontWeight: 600, color: "var(--content-base-strong)" }}>Title</span>
+                <svg width={12} height={12} viewBox="0 0 24 24" fill="none" stroke="var(--content-base-secondary)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9" /></svg>
+              </div>
+            </div>
+          </StateCard>
+          <StateCard label="Expanded" sublabel="펼친 상태">
+            <div style={{ width: 120, border: "1px solid var(--border-base-default)", borderRadius: 8, overflow: "hidden" }}>
+              <div style={{ height: 36, padding: "0 12px", display: "flex", alignItems: "center", justifyContent: "space-between", backgroundColor: "var(--surface-base-alternative)" }}>
+                <span style={{ fontSize: 11, fontWeight: 600, color: "var(--content-base-strong)" }}>Title</span>
+                <svg width={12} height={12} viewBox="0 0 24 24" fill="none" stroke="var(--content-base-secondary)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ transform: "rotate(180deg)" }}><polyline points="6 9 12 15 18 9" /></svg>
+              </div>
+              <div style={{ padding: 8, borderTop: "1px solid var(--border-base-default)" }}>
+                <div style={{ height: 6, width: "80%", backgroundColor: "var(--border-base-default)", borderRadius: 3 }} />
+                <div style={{ height: 6, width: "60%", backgroundColor: "var(--border-base-default)", borderRadius: 3, marginTop: 4 }} />
+              </div>
+            </div>
+          </StateCard>
+          <StateCard label="Hover" sublabel="마우스 오버">
+            <div style={{ width: 120, border: "1px solid var(--border-base-default)", borderRadius: 8, overflow: "hidden", boxShadow: "0 0 0 2px var(--surface-brand-secondary)" }}>
+              <div style={{ height: 36, padding: "0 12px", display: "flex", alignItems: "center", justifyContent: "space-between", backgroundColor: "var(--surface-base-alternative)" }}>
+                <span style={{ fontSize: 11, fontWeight: 600, color: "var(--content-base-strong)" }}>Title</span>
+                <svg width={12} height={12} viewBox="0 0 24 24" fill="none" stroke="var(--content-base-secondary)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9" /></svg>
+              </div>
+            </div>
+          </StateCard>
+          <StateCard label="Disabled" sublabel="비활성화">
+            <div style={{ width: 120, border: "1px solid var(--border-base-default)", borderRadius: 8, overflow: "hidden", opacity: 0.4 }}>
+              <div style={{ height: 36, padding: "0 12px", display: "flex", alignItems: "center", justifyContent: "space-between", backgroundColor: "var(--surface-base-default)" }}>
+                <span style={{ fontSize: 11, fontWeight: 600, color: "var(--content-base-strong)" }}>Title</span>
+                <svg width={12} height={12} viewBox="0 0 24 24" fill="none" stroke="var(--content-base-secondary)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9" /></svg>
+              </div>
+            </div>
+          </StateCard>
+        </div>
+      </Section>
+
+      {/* Design Tokens (Spec) */}
+      <Section title="Design Tokens">
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 16 }}>
+          컴포넌트에 적용된 디자인 토큰입니다. 커스터마이징 시 아래 토큰을 참조하세요.
+        </p>
+        <div style={{ overflowX: "auto" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
+            <thead>
+              <tr style={{ borderBottom: "2px solid var(--border-default)" }}>
+                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: 600 }}>속성</th>
+                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: 600 }}>토큰</th>
+                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: 600 }}>값</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>배경색</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>--surface-base-default</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+                    <span style={{ width: 12, height: 12, borderRadius: 3, backgroundColor: "var(--surface-base-default)", border: "1px solid var(--border-default)" }} />
+                    White / Dark Grey
+                  </span>
+                </td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>헤더 텍스트</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>--content-base-default</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+                    <span style={{ width: 12, height: 12, borderRadius: 3, backgroundColor: "var(--content-base-default)", border: "1px solid var(--border-default)" }} />
+                    fontSize: 16
+                  </span>
+                </td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>본문 텍스트</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>--text-secondary</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+                    <span style={{ width: 12, height: 12, borderRadius: 3, backgroundColor: "var(--text-secondary)", border: "1px solid var(--border-default)" }} />
+                    fontSize: 14
+                  </span>
+                </td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>구분선</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>--border-default</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+                    <span style={{ width: 12, height: 12, borderRadius: 3, backgroundColor: "var(--border-default)", border: "1px solid var(--border-default)" }} />
+                    1px solid
+                  </span>
+                </td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>아이콘</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>--content-base-neutral</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+                    <span style={{ width: 12, height: 12, borderRadius: 3, backgroundColor: "var(--content-base-neutral)", border: "1px solid var(--border-default)" }} />
+                    Chevron
+                  </span>
+                </td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>최소 높이 (md)</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>spacing.component.accordion.md</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>56px</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>최소 높이 (lg)</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>spacing.component.accordion.lg</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>64px</td>
+              </tr>
+              <tr>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>패딩</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>spacing.primitive.4</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>16px</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </Section>
+
+      {/* UX Writing */}
+      <Section title="UX Writing">
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 24 }}>
+          Accordion 헤더 텍스트는 사용자가 내용을 예측할 수 있도록 명확하고 간결하게 작성합니다.
+        </p>
+        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+            <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-success-default)", border: "1px solid var(--border-success-default)" }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-success-default)", marginBottom: 8 }}>DO</div>
+              <code style={{ fontSize: 14, color: "var(--text-primary)" }}>&quot;결제 수단 관리&quot;</code>
+              <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4, margin: 0 }}>제목은 명사형으로 간결하게</p>
+            </div>
+            <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-error-default)", border: "1px solid var(--border-error-default)" }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-error-default)", marginBottom: 8 }}>DON&apos;T</div>
+              <code style={{ fontSize: 14, color: "var(--text-primary)" }}>&quot;결제 수단 관리하기&quot;</code>
+              <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4, margin: 0 }}>동사형 제목은 피하세요</p>
+            </div>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+            <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-success-default)", border: "1px solid var(--border-success-default)" }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-success-default)", marginBottom: 8 }}>DO</div>
+              <code style={{ fontSize: 14, color: "var(--text-primary)" }}>&quot;자주 묻는 질문&quot;</code>
+              <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4, margin: 0 }}>한글 표현을 우선 사용하세요</p>
+            </div>
+            <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-error-default)", border: "1px solid var(--border-error-default)" }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-error-default)", marginBottom: 8 }}>DON&apos;T</div>
+              <code style={{ fontSize: 14, color: "var(--text-primary)" }}>&quot;FAQ&quot;</code>
+              <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4, margin: 0 }}>약어보다 한글 표현이 직관적입니다</p>
+            </div>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+            <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-success-default)", border: "1px solid var(--border-success-default)" }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-success-default)", marginBottom: 8 }}>DO</div>
+              <code style={{ fontSize: 14, color: "var(--text-primary)" }}>&quot;배송 정보&quot;</code>
+              <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4, margin: 0 }}>헤더는 짧고 핵심적으로</p>
+            </div>
+            <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-error-default)", border: "1px solid var(--border-error-default)" }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-error-default)", marginBottom: 8 }}>DON&apos;T</div>
+              <code style={{ fontSize: 14, color: "var(--text-primary)" }}>&quot;배송 정보를 확인하세요&quot;</code>
+              <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4, margin: 0 }}>문장형 헤더는 불필요하게 깁니다</p>
+            </div>
+          </div>
+        </div>
+      </Section>
+
       {/* Usage Guidelines */}
       <Section title="Usage Guidelines">
         <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 24, lineHeight: 1.6 }}>
@@ -991,5 +1189,19 @@ function AccordionDemo({
     >
       {children}
     </Accordion>
+  );
+}
+
+function StateCard({ label, sublabel, children }: {
+  label: string; sublabel: string; children: React.ReactNode;
+}) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12, padding: 16 }}>
+      {children}
+      <div style={{ textAlign: "center" }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: "var(--text-primary)" }}>{label}</div>
+        <div style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 2 }}>{sublabel}</div>
+      </div>
+    </div>
   );
 }

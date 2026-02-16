@@ -557,6 +557,99 @@ function DesignContent() {
         </div>
       </Section>
 
+      {/* Interaction States */}
+      <Section title="Interaction States">
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 24 }}>
+          ContentBadge는 비인터랙티브 요소로 hover/pressed 상태가 없습니다. 대신 색상 variant를 통해 정보의 의미를 시각적으로 구분합니다.
+        </p>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
+          gap: 16,
+          padding: 24,
+          backgroundColor: "var(--surface-base-alternative)",
+          borderRadius: 16,
+        }}>
+          <StateCard label="Info" sublabel="안내 정보">
+            <span style={{
+              display: "inline-flex", alignItems: "center", justifyContent: "center",
+              height: 22, padding: "0 10px", fontSize: 12, fontWeight: 600, lineHeight: 1,
+              color: "var(--content-info-default)", backgroundColor: "var(--surface-info-default)",
+              borderRadius: 4, whiteSpace: "nowrap" as const,
+            }}>안내</span>
+          </StateCard>
+          <StateCard label="Success" sublabel="성공/완료">
+            <span style={{
+              display: "inline-flex", alignItems: "center", justifyContent: "center",
+              height: 22, padding: "0 10px", fontSize: 12, fontWeight: 600, lineHeight: 1,
+              color: "var(--content-success-default)", backgroundColor: "var(--surface-success-default)",
+              borderRadius: 4, whiteSpace: "nowrap" as const,
+            }}>완료</span>
+          </StateCard>
+          <StateCard label="Warning" sublabel="주의/경고">
+            <span style={{
+              display: "inline-flex", alignItems: "center", justifyContent: "center",
+              height: 22, padding: "0 10px", fontSize: 12, fontWeight: 600, lineHeight: 1,
+              color: "var(--content-warning-default)", backgroundColor: "var(--surface-warning-default)",
+              borderRadius: 4, whiteSpace: "nowrap" as const,
+            }}>주의</span>
+          </StateCard>
+          <StateCard label="Error" sublabel="오류/품절">
+            <span style={{
+              display: "inline-flex", alignItems: "center", justifyContent: "center",
+              height: 22, padding: "0 10px", fontSize: 12, fontWeight: 600, lineHeight: 1,
+              color: "var(--content-error-default)", backgroundColor: "var(--surface-error-default)",
+              borderRadius: 4, whiteSpace: "nowrap" as const,
+            }}>품절</span>
+          </StateCard>
+        </div>
+      </Section>
+
+      {/* UX Writing */}
+      <Section title="UX Writing">
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 24 }}>
+          ContentBadge 라벨은 1-2단어로 짧고 명확하게 작성합니다. 상태를 즉시 인지할 수 있어야 합니다.
+        </p>
+        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+            <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-success-default)", border: "1px solid var(--border-success-default)" }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-success-default)", marginBottom: 8 }}>DO</div>
+              <code style={{ fontSize: 14, color: "var(--text-primary)" }}>&quot;신규&quot;</code>
+              <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4, margin: 0 }}>1-2 단어로 간결하게</p>
+            </div>
+            <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-error-default)", border: "1px solid var(--border-error-default)" }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-error-default)", marginBottom: 8 }}>DON&apos;T</div>
+              <code style={{ fontSize: 14, color: "var(--text-primary)" }}>&quot;새로운 항목입니다&quot;</code>
+              <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4, margin: 0 }}>문장형 라벨은 Badge에 적합하지 않습니다</p>
+            </div>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+            <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-success-default)", border: "1px solid var(--border-success-default)" }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-success-default)", marginBottom: 8 }}>DO</div>
+              <code style={{ fontSize: 14, color: "var(--text-primary)" }}>&quot;진행중&quot;</code>
+              <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4, margin: 0 }}>최대한 짧게 표현하세요</p>
+            </div>
+            <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-error-default)", border: "1px solid var(--border-error-default)" }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-error-default)", marginBottom: 8 }}>DON&apos;T</div>
+              <code style={{ fontSize: 14, color: "var(--text-primary)" }}>&quot;현재 진행 중인 상태&quot;</code>
+              <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4, margin: 0 }}>설명이 길면 Badge 밖에 배치하세요</p>
+            </div>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+            <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-success-default)", border: "1px solid var(--border-success-default)" }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-success-default)", marginBottom: 8 }}>DO</div>
+              <code style={{ fontSize: 14, color: "var(--text-primary)" }}>&quot;완료&quot;</code>
+              <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4, margin: 0 }}>명사형으로 상태를 표현하세요</p>
+            </div>
+            <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-error-default)", border: "1px solid var(--border-error-default)" }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-error-default)", marginBottom: 8 }}>DON&apos;T</div>
+              <code style={{ fontSize: 14, color: "var(--text-primary)" }}>&quot;완료됨&quot;</code>
+              <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4, margin: 0 }}>~됨 보다 명사형이 더 깔끔합니다</p>
+            </div>
+          </div>
+        </div>
+      </Section>
+
       {/* Usage Guidelines */}
       <Section title="Usage Guidelines">
         <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 24, lineHeight: 1.6 }}>
@@ -993,5 +1086,19 @@ function ContentBadgeDemo({
     >
       {children}
     </ContentBadge>
+  );
+}
+
+function StateCard({ label, sublabel, children }: {
+  label: string; sublabel: string; children: React.ReactNode;
+}) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12, padding: 16 }}>
+      {children}
+      <div style={{ textAlign: "center" }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: "var(--text-primary)" }}>{label}</div>
+        <div style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 2 }}>{sublabel}</div>
+      </div>
+    </div>
   );
 }

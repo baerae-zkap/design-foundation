@@ -401,6 +401,187 @@ function DesignContent() {
         </PreviewBox>
       </Section>
 
+      {/* Interaction States */}
+      <Section title="Interaction States">
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 24 }}>
+          ListCard는 클릭 가능한 카드로, 사용자 상호작용에 따라 배경색과 그림자 변화로 피드백을 제공합니다.
+        </p>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
+          gap: 16,
+          padding: 24,
+          backgroundColor: "var(--surface-base-alternative)",
+          borderRadius: 16,
+        }}>
+          <StateCard label="Default" sublabel="기본 상태">
+            <div style={{ width: 130, height: 48, borderRadius: 10, backgroundColor: "var(--surface-base-default)", boxShadow: "var(--shadow-semantic-card-default)", display: "flex", alignItems: "center", padding: "0 10px", gap: 8 }}>
+              <div style={{ width: 28, height: 28, borderRadius: 14, backgroundColor: "var(--surface-base-alternative)", flexShrink: 0 }} />
+              <div style={{ flex: 1 }}>
+                <div style={{ height: 6, width: "70%", backgroundColor: "var(--border-base-default)", borderRadius: 3 }} />
+                <div style={{ height: 5, width: "50%", backgroundColor: "var(--surface-base-alternative)", borderRadius: 3, marginTop: 4 }} />
+              </div>
+            </div>
+          </StateCard>
+          <StateCard label="Hover" sublabel="마우스 오버">
+            <div style={{ width: 130, height: 48, borderRadius: 10, backgroundColor: "var(--surface-base-default)", boxShadow: "var(--shadow-semantic-card-elevated)", display: "flex", alignItems: "center", padding: "0 10px", gap: 8 }}>
+              <div style={{ width: 28, height: 28, borderRadius: 14, backgroundColor: "var(--surface-base-alternative)", flexShrink: 0 }} />
+              <div style={{ flex: 1 }}>
+                <div style={{ height: 6, width: "70%", backgroundColor: "var(--border-base-default)", borderRadius: 3 }} />
+                <div style={{ height: 5, width: "50%", backgroundColor: "var(--surface-base-alternative)", borderRadius: 3, marginTop: 4 }} />
+              </div>
+            </div>
+          </StateCard>
+          <StateCard label="Pressed" sublabel="눌림 상태">
+            <div style={{ width: 130, height: 48, borderRadius: 10, backgroundColor: "var(--surface-base-containerPressed)", boxShadow: "var(--shadow-primitive-xs)", display: "flex", alignItems: "center", padding: "0 10px", gap: 8 }}>
+              <div style={{ width: 28, height: 28, borderRadius: 14, backgroundColor: "var(--surface-base-alternative)", flexShrink: 0 }} />
+              <div style={{ flex: 1 }}>
+                <div style={{ height: 6, width: "70%", backgroundColor: "var(--border-base-default)", borderRadius: 3 }} />
+                <div style={{ height: 5, width: "50%", backgroundColor: "var(--surface-base-alternative)", borderRadius: 3, marginTop: 4 }} />
+              </div>
+            </div>
+          </StateCard>
+          <StateCard label="Focused" sublabel="키보드 포커스">
+            <div style={{ width: 130, height: 48, borderRadius: 10, backgroundColor: "var(--surface-base-default)", boxShadow: "var(--shadow-semantic-card-default)", outline: "2px solid var(--content-brand-default)", outlineOffset: 2, display: "flex", alignItems: "center", padding: "0 10px", gap: 8 }}>
+              <div style={{ width: 28, height: 28, borderRadius: 14, backgroundColor: "var(--surface-base-alternative)", flexShrink: 0 }} />
+              <div style={{ flex: 1 }}>
+                <div style={{ height: 6, width: "70%", backgroundColor: "var(--border-base-default)", borderRadius: 3 }} />
+                <div style={{ height: 5, width: "50%", backgroundColor: "var(--surface-base-alternative)", borderRadius: 3, marginTop: 4 }} />
+              </div>
+            </div>
+          </StateCard>
+        </div>
+      </Section>
+
+      {/* Design Tokens (Spec) */}
+      <Section title="Design Tokens">
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 16 }}>
+          컴포넌트에 적용된 디자인 토큰입니다. 커스터마이징 시 아래 토큰을 참조하세요.
+        </p>
+        <div style={{ overflowX: "auto" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
+            <thead>
+              <tr style={{ borderBottom: "2px solid var(--border-default)" }}>
+                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: 600 }}>속성</th>
+                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: 600 }}>토큰</th>
+                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: 600 }}>값</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>배경색</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>--surface-base-default</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+                    <span style={{ width: 12, height: 12, borderRadius: 3, backgroundColor: "var(--surface-base-default)", border: "1px solid var(--border-default)" }} />
+                    White / Dark Grey
+                  </span>
+                </td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>텍스트</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>--content-base-default</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+                    <span style={{ width: 12, height: 12, borderRadius: 3, backgroundColor: "var(--content-base-default)", border: "1px solid var(--border-default)" }} />
+                    Title
+                  </span>
+                </td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>서브텍스트</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>--text-secondary</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+                    <span style={{ width: 12, height: 12, borderRadius: 3, backgroundColor: "var(--text-secondary)", border: "1px solid var(--border-default)" }} />
+                    Subtitle
+                  </span>
+                </td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>썸네일 크기 (sm)</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>spacing.component.thumbnail.sm</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>56px</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>썸네일 크기 (md)</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>spacing.component.thumbnail.md</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>80px</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>썸네일 크기 (lg)</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>spacing.component.thumbnail.lg</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>100px</td>
+              </tr>
+              <tr>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>border-radius</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>radius.semantic.card.sm</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>12px</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </Section>
+
+      {/* UX Writing */}
+      <Section title="UX Writing">
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 24 }}>
+          ListCard의 타이틀과 서브텍스트는 정보 계층을 명확히 구분하고, 핵심 정보만 간결하게 표시합니다.
+        </p>
+        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+            <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-success-default)", border: "1px solid var(--border-success-default)" }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-success-default)", marginBottom: 8 }}>DO</div>
+              <code style={{ fontSize: 14, color: "var(--text-primary)" }}>&quot;삼성전자 005930&quot;</code>
+              <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4, margin: 0 }}>핵심 식별 정보만 타이틀에 표시</p>
+            </div>
+            <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-error-default)", border: "1px solid var(--border-error-default)" }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-error-default)", marginBottom: 8 }}>DON&apos;T</div>
+              <code style={{ fontSize: 14, color: "var(--text-primary)" }}>&quot;삼성전자 주식회사 (005930)&quot;</code>
+              <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4, margin: 0 }}>불필요한 정보는 서브텍스트로 분리하세요</p>
+            </div>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+            <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-success-default)", border: "1px solid var(--border-success-default)" }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-success-default)", marginBottom: 8 }}>DO</div>
+              <code style={{ fontSize: 14, color: "var(--text-primary)" }}>서브텍스트에 보조 정보</code>
+              <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4, margin: 0 }}>정보 계층을 활용하세요</p>
+            </div>
+            <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-error-default)", border: "1px solid var(--border-error-default)" }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-error-default)", marginBottom: 8 }}>DON&apos;T</div>
+              <code style={{ fontSize: 14, color: "var(--text-primary)" }}>타이틀에 모든 정보 넣기</code>
+              <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4, margin: 0 }}>타이틀이 길어지면 가독성이 떨어집니다</p>
+            </div>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+            <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-success-default)", border: "1px solid var(--border-success-default)" }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-success-default)", marginBottom: 8 }}>DO</div>
+              <code style={{ fontSize: 14, color: "var(--text-primary)" }}>&quot;72,300원&quot;</code>
+              <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4, margin: 0 }}>Meta에는 수치만 표시</p>
+            </div>
+            <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-error-default)", border: "1px solid var(--border-error-default)" }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-error-default)", marginBottom: 8 }}>DON&apos;T</div>
+              <code style={{ fontSize: 14, color: "var(--text-primary)" }}>&quot;현재가: 72,300원&quot;</code>
+              <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4, margin: 0 }}>레이블이 이미 있으면 반복하지 마세요</p>
+            </div>
+          </div>
+        </div>
+      </Section>
+
       {/* Usage Guidelines */}
       <Section title="Usage Guidelines">
         <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 24, lineHeight: 1.6 }}>
@@ -904,5 +1085,19 @@ function ListCardDemo({
       meta={meta}
       onClick={onClick}
     />
+  );
+}
+
+function StateCard({ label, sublabel, children }: {
+  label: string; sublabel: string; children: React.ReactNode;
+}) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12, padding: 16 }}>
+      {children}
+      <div style={{ textAlign: "center" }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: "var(--text-primary)" }}>{label}</div>
+        <div style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 2 }}>{sublabel}</div>
+      </div>
+    </div>
   );
 }

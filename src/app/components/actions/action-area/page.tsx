@@ -471,6 +471,81 @@ import { ActionArea, Button, TextButton } from '@baerae-zkap/design-system/nativ
         </div>
       </Section>
 
+      {/* Interaction States */}
+      <Section title="Interaction States">
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 24 }}>
+          ActionArea는 컨테이너로서 내부 버튼의 상태에 따라 전체 영역의 시각적 피드백이 달라집니다. 각 내부 버튼은 독립적인 인터랙션 상태를 가집니다.
+        </p>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
+          gap: 16,
+          padding: 24,
+          backgroundColor: "var(--surface-base-alternative)",
+          borderRadius: 16,
+        }}>
+          <InteractionStateCard label="Default" sublabel="기본 상태" color="var(--content-base-onColor)" bgColor="var(--surface-brand-default)" />
+          <InteractionStateCard label="Hover" sublabel="마우스 오버" color="var(--content-base-onColor)" bgColor="var(--surface-brand-defaultPressed)" />
+          <InteractionStateCard label="Pressed" sublabel="누름" color="var(--content-base-onColor)" bgColor="var(--surface-brand-defaultPressed)" />
+          <InteractionStateCard label="Disabled" sublabel="비활성화" color="var(--content-disabled-default)" bgColor="var(--surface-disabled-default)" opacity={0.4} />
+        </div>
+      </Section>
+
+      {/* Design Tokens (New) */}
+      <Section title="Design Tokens">
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 16 }}>
+          컴포넌트에 적용된 디자인 토큰입니다. 커스터마이징 시 아래 토큰을 참조하세요.
+        </p>
+        <div style={{ overflowX: "auto" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
+            <thead>
+              <tr style={{ borderBottom: "2px solid var(--border-default)" }}>
+                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: 600 }}>속성</th>
+                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: 600 }}>토큰</th>
+                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: 600 }}>값 (Light)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>오버레이 그라디언트</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>gradient.fadeTop</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>투명 → 배경색 그라디언트</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>컨테이너 패딩 (Modal)</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>modal.padding</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>24px</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>컨테이너 패딩 (BottomSheet)</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>bottomSheet.padding</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>20px</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>버튼 간격</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>modal.buttonGap</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>12px</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>모서리 반경</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>radius.lg</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>20px (바텀시트)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </Section>
+
       {/* Variants */}
       <Section title="Variants">
         <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 24, lineHeight: 1.6 }}>
@@ -1479,6 +1554,29 @@ function TextButtonDemo({
 }
 
 // State demo button for States section
+function InteractionStateCard({ label, sublabel, color, bgColor, opacity, showFocusRing }: {
+  label: string; sublabel: string; color: string; bgColor: string; opacity?: number; showFocusRing?: boolean;
+}) {
+  return (
+    <div style={{
+      display: "flex", flexDirection: "column", alignItems: "center", gap: 12, padding: 16,
+    }}>
+      <div style={{
+        width: "100%", height: 48, borderRadius: 12,
+        backgroundColor: bgColor,
+        display: "flex", alignItems: "center", justifyContent: "center",
+        opacity: opacity ?? 1,
+        outline: showFocusRing ? "2px solid var(--content-brand-default)" : "none",
+        outlineOffset: showFocusRing ? 2 : 0,
+        color: color, fontSize: 13, fontWeight: 500,
+      }}>
+        {label}
+      </div>
+      <span style={{ fontSize: 12, color: "var(--text-tertiary)", textAlign: "center" }}>{sublabel}</span>
+    </div>
+  );
+}
+
 function StateButtonDemo({ state, variant, children }: {
   state: "pressed" | "disabled" | "loading";
   variant: "main" | "alternative";

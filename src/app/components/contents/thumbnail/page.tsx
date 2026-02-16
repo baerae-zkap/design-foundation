@@ -263,6 +263,145 @@ function DesignContent() {
         </div>
       </Section>
 
+      {/* 인터랙션 상태 */}
+      <Section title="인터랙션 상태">
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 24 }}>
+          Thumbnail은 미디어 콘텐츠 상태와 사용자 인터랙션에 따라 다양한 시각적 상태를 가집니다.
+        </p>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
+          gap: 16,
+          padding: 24,
+          backgroundColor: "var(--surface-base-alternative)",
+          borderRadius: 16,
+        }}>
+          <ThumbStateCard label="Default" sublabel="기본 상태">
+            <div style={{ width: 120, height: 68, borderRadius: 8, overflow: "hidden", position: "relative" }}>
+              <div style={{ width: "100%", height: "100%", backgroundColor: "var(--content-base-placeholder)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" opacity={0.6}>
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                  <circle cx="8.5" cy="8.5" r="1.5" />
+                  <polyline points="21 15 16 10 5 21" />
+                </svg>
+              </div>
+            </div>
+          </ThumbStateCard>
+          <ThumbStateCard label="Hover" sublabel="오버레이 표시">
+            <div style={{ width: 120, height: 68, borderRadius: 8, overflow: "hidden", position: "relative" }}>
+              <div style={{ width: "100%", height: "100%", backgroundColor: "var(--content-base-placeholder)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" opacity={0.6}>
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                  <circle cx="8.5" cy="8.5" r="1.5" />
+                  <polyline points="21 15 16 10 5 21" />
+                </svg>
+              </div>
+              <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, backgroundColor: "var(--effect-alpha-overlay-dim)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <span style={{ color: "white", fontSize: 11, fontWeight: 600 }}>View</span>
+              </div>
+            </div>
+          </ThumbStateCard>
+          <ThumbStateCard label="Playing" sublabel="비디오 재생 표시">
+            <div style={{ width: 120, height: 68, borderRadius: 8, overflow: "hidden", position: "relative" }}>
+              <div style={{ width: "100%", height: "100%", backgroundColor: "var(--content-base-placeholder)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <div style={{ width: 32, height: 32, borderRadius: "50%", backgroundColor: "var(--effect-alpha-overlay-dim)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
+                    <polygon points="8,5 20,12 8,19" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </ThumbStateCard>
+          <ThumbStateCard label="Error" sublabel="로드 실패">
+            <div style={{ width: 120, height: 68, borderRadius: 8, overflow: "hidden", position: "relative" }}>
+              <div style={{ width: "100%", height: "100%", backgroundColor: "var(--surface-base-alternative)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 4 }}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--content-base-placeholder)" strokeWidth="1.5">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                  <line x1="9" y1="9" x2="15" y2="15" />
+                  <line x1="15" y1="9" x2="9" y2="15" />
+                </svg>
+                <span style={{ fontSize: 9, color: "var(--content-base-placeholder)" }}>Unavailable</span>
+              </div>
+            </div>
+          </ThumbStateCard>
+        </div>
+      </Section>
+
+      {/* 디자인 토큰 */}
+      <Section title="디자인 토큰">
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 16 }}>
+          컴포넌트에 적용된 디자인 토큰입니다. 커스터마이징 시 아래 토큰을 참조하세요.
+        </p>
+        <div style={{ overflowX: "auto" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
+            <thead>
+              <tr style={{ borderBottom: "2px solid var(--border-default)" }}>
+                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: 600 }}>속성</th>
+                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: 600 }}>토큰</th>
+                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: 600 }}>값</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>배경</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>--surface-base-alternative</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+                    <span style={{ width: 12, height: 12, borderRadius: 3, backgroundColor: "var(--surface-base-alternative)", border: "1px solid var(--border-default)" }} />
+                    Placeholder 배경
+                  </span>
+                </td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>border-radius</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>-</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>12px</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>오버레이</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>--effect-alpha-overlay-dim</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+                    <span style={{ width: 12, height: 12, borderRadius: 3, backgroundColor: "var(--effect-alpha-overlay-dim)", border: "1px solid var(--border-default)" }} />
+                    var(--effect-alpha-overlay-dim)
+                  </span>
+                </td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>재생 아이콘</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>--content-base-onColor</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+                    <span style={{ width: 12, height: 12, borderRadius: 3, backgroundColor: "white", border: "1px solid var(--border-default)" }} />
+                    White
+                  </span>
+                </td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>캡션</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>--text-secondary</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+                    <span style={{ width: 12, height: 12, borderRadius: 3, backgroundColor: "var(--text-secondary)", border: "1px solid var(--border-default)" }} />
+                    fontSize: 12
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </Section>
+
       {/* Aspect Ratios */}
       <Section title="Aspect Ratios">
         <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 20 }}>
@@ -807,6 +946,20 @@ function DesignTokensTable({ tokens }: { tokens: { name: string; value: string; 
           ))}
         </tbody>
       </table>
+    </div>
+  );
+}
+
+function ThumbStateCard({ label, sublabel, children }: {
+  label: string; sublabel: string; children: React.ReactNode;
+}) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12, padding: 16 }}>
+      {children}
+      <div style={{ textAlign: "center" }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: "var(--text-primary)" }}>{label}</div>
+        <div style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 2 }}>{sublabel}</div>
+      </div>
     </div>
   );
 }

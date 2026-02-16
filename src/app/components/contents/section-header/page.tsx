@@ -182,6 +182,197 @@ function DesignContent() {
         </div>
       </Section>
 
+      {/* 인터랙션 상태 */}
+      <Section title="인터랙션 상태">
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 24 }}>
+          SectionHeader는 비인터랙티브 컴포넌트입니다. 대신 구성 요소의 조합에 따라 다양한 시각적 상태를 가집니다.
+        </p>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
+          gap: 16,
+          padding: 24,
+          backgroundColor: "var(--surface-base-alternative)",
+          borderRadius: 16,
+        }}>
+          <SHStateCard label="Title Only" sublabel="기본 타이틀만 표시">
+            <div style={{ width: 140, backgroundColor: "var(--surface-base-default)", borderRadius: 8, border: "1px solid var(--border-default)", overflow: "hidden" }}>
+              <div style={{ padding: "10px 12px 6px 12px" }}>
+                <div style={{ width: 48, height: 7, borderRadius: 3, backgroundColor: "var(--content-base-neutral)" }} />
+              </div>
+              <div style={{ height: 1, backgroundColor: "var(--border-default)" }} />
+              <div style={{ padding: "8px 12px" }}>
+                <div style={{ width: 60, height: 5, borderRadius: 2, backgroundColor: "var(--content-base-alternative)", marginBottom: 4 }} />
+                <div style={{ width: 40, height: 5, borderRadius: 2, backgroundColor: "var(--content-base-alternative)" }} />
+              </div>
+            </div>
+          </SHStateCard>
+          <SHStateCard label="With Action" sublabel="우측 액션 버튼 포함">
+            <div style={{ width: 140, backgroundColor: "var(--surface-base-default)", borderRadius: 8, border: "1px solid var(--border-default)", overflow: "hidden" }}>
+              <div style={{ padding: "10px 12px 6px 12px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <div style={{ width: 48, height: 7, borderRadius: 3, backgroundColor: "var(--content-base-neutral)" }} />
+                <div style={{ width: 32, height: 6, borderRadius: 3, backgroundColor: "var(--content-brand-default)" }} />
+              </div>
+              <div style={{ height: 1, backgroundColor: "var(--border-default)" }} />
+              <div style={{ padding: "8px 12px" }}>
+                <div style={{ width: 60, height: 5, borderRadius: 2, backgroundColor: "var(--content-base-alternative)", marginBottom: 4 }} />
+                <div style={{ width: 40, height: 5, borderRadius: 2, backgroundColor: "var(--content-base-alternative)" }} />
+              </div>
+            </div>
+          </SHStateCard>
+          <SHStateCard label="With Description" sublabel="보조 설명 텍스트 포함">
+            <div style={{ width: 140, backgroundColor: "var(--surface-base-default)", borderRadius: 8, border: "1px solid var(--border-default)", overflow: "hidden" }}>
+              <div style={{ padding: "10px 12px 6px 12px" }}>
+                <div style={{ width: 48, height: 7, borderRadius: 3, backgroundColor: "var(--content-base-neutral)", marginBottom: 4 }} />
+                <div style={{ width: 64, height: 5, borderRadius: 2, backgroundColor: "var(--content-base-assistive)" }} />
+              </div>
+              <div style={{ height: 1, backgroundColor: "var(--border-default)" }} />
+              <div style={{ padding: "8px 12px" }}>
+                <div style={{ width: 60, height: 5, borderRadius: 2, backgroundColor: "var(--content-base-alternative)", marginBottom: 4 }} />
+                <div style={{ width: 40, height: 5, borderRadius: 2, backgroundColor: "var(--content-base-alternative)" }} />
+              </div>
+            </div>
+          </SHStateCard>
+          <SHStateCard label="Full" sublabel="설명 + 액션 모두 포함">
+            <div style={{ width: 140, backgroundColor: "var(--surface-base-default)", borderRadius: 8, border: "1px solid var(--border-default)", overflow: "hidden" }}>
+              <div style={{ padding: "10px 12px 6px 12px", display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+                <div>
+                  <div style={{ width: 48, height: 7, borderRadius: 3, backgroundColor: "var(--content-base-neutral)", marginBottom: 4 }} />
+                  <div style={{ width: 52, height: 5, borderRadius: 2, backgroundColor: "var(--content-base-assistive)" }} />
+                </div>
+                <div style={{ width: 28, height: 6, borderRadius: 3, backgroundColor: "var(--content-brand-default)" }} />
+              </div>
+              <div style={{ height: 1, backgroundColor: "var(--border-default)" }} />
+              <div style={{ padding: "8px 12px" }}>
+                <div style={{ width: 60, height: 5, borderRadius: 2, backgroundColor: "var(--content-base-alternative)", marginBottom: 4 }} />
+                <div style={{ width: 40, height: 5, borderRadius: 2, backgroundColor: "var(--content-base-alternative)" }} />
+              </div>
+            </div>
+          </SHStateCard>
+        </div>
+      </Section>
+
+      {/* 디자인 토큰 */}
+      <Section title="디자인 토큰">
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 16 }}>
+          컴포넌트에 적용된 디자인 토큰입니다. 커스터마이징 시 아래 토큰을 참조하세요.
+        </p>
+        <div style={{ overflowX: "auto" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
+            <thead>
+              <tr style={{ borderBottom: "2px solid var(--border-default)" }}>
+                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: 600 }}>속성</th>
+                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: 600 }}>토큰</th>
+                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: 600 }}>값</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>타이틀</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>--content-base-default</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+                    <span style={{ width: 12, height: 12, borderRadius: 3, backgroundColor: "var(--content-base-default)", border: "1px solid var(--border-default)" }} />
+                    fontSize: 18, fontWeight: 700
+                  </span>
+                </td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>설명 텍스트</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>--text-secondary</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+                    <span style={{ width: 12, height: 12, borderRadius: 3, backgroundColor: "var(--text-secondary)", border: "1px solid var(--border-default)" }} />
+                    fontSize: 14
+                  </span>
+                </td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>액션 버튼</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>--content-brand-default</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+                    <span style={{ width: 12, height: 12, borderRadius: 3, backgroundColor: "var(--content-brand-default)", border: "1px solid var(--border-default)" }} />
+                    Brand color
+                  </span>
+                </td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>하단 구분선</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>--border-default</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+                    <span style={{ width: 12, height: 12, borderRadius: 3, backgroundColor: "var(--border-default)", border: "1px solid var(--border-default)" }} />
+                    1px solid
+                  </span>
+                </td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>패딩</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>spacing.primitive.4</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>16px 0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </Section>
+
+      {/* UX 라이팅 */}
+      <Section title="UX 라이팅">
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 24 }}>
+          SectionHeader의 타이틀은 간결하고 명확해야 합니다. 액션 버튼 텍스트는 짧은 동사형으로 작성합니다.
+        </p>
+
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12 }}>
+          <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-success-default)", border: "1px solid var(--border-success-default)" }}>
+            <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-success-default)", marginBottom: 8 }}>DO</div>
+            <code style={{ fontSize: 14, color: "var(--text-primary)" }}>&quot;인기 종목&quot;</code>
+            <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4, margin: 0 }}>2-3 단어로 섹션을 명확히 표현합니다</p>
+          </div>
+          <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-error-default)", border: "1px solid var(--border-error-default)" }}>
+            <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-error-default)", marginBottom: 8 }}>DON&apos;T</div>
+            <code style={{ fontSize: 14, color: "var(--text-primary)" }}>&quot;인기 있는 종목 모음&quot;</code>
+            <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4, margin: 0 }}>불필요하게 긴 타이틀을 사용하지 않습니다</p>
+          </div>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12 }}>
+          <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-success-default)", border: "1px solid var(--border-success-default)" }}>
+            <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-success-default)", marginBottom: 8 }}>DO</div>
+            <code style={{ fontSize: 14, color: "var(--text-primary)" }}>&quot;더보기&quot;</code>
+            <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4, margin: 0 }}>액션은 간결한 동사형으로 표현합니다</p>
+          </div>
+          <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-error-default)", border: "1px solid var(--border-error-default)" }}>
+            <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-error-default)", marginBottom: 8 }}>DON&apos;T</div>
+            <code style={{ fontSize: 14, color: "var(--text-primary)" }}>&quot;전체 보기로 이동합니다&quot;</code>
+            <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4, margin: 0 }}>설명형 문장을 액션에 사용하지 않습니다</p>
+          </div>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12 }}>
+          <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-success-default)", border: "1px solid var(--border-success-default)" }}>
+            <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-success-default)", marginBottom: 8 }}>DO</div>
+            <code style={{ fontSize: 14, color: "var(--text-primary)" }}>설명은 한 줄로 작성</code>
+            <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4, margin: 0 }}>보조 설명은 간결하게 한 줄로 유지합니다</p>
+          </div>
+          <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-error-default)", border: "1px solid var(--border-error-default)" }}>
+            <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-error-default)", marginBottom: 8 }}>DON&apos;T</div>
+            <code style={{ fontSize: 14, color: "var(--text-primary)" }}>설명에 여러 문장 나열</code>
+            <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4, margin: 0 }}>긴 설명은 섹션 헤더의 간결함을 해칩니다</p>
+          </div>
+        </div>
+      </Section>
+
       {/* Variants */}
       <Section title="Variants">
         <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
@@ -693,6 +884,20 @@ function ActionButton({ children }: { children: React.ReactNode }) {
     }}>
       {children}
     </button>
+  );
+}
+
+function SHStateCard({ label, sublabel, children }: {
+  label: string; sublabel: string; children: React.ReactNode;
+}) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12, padding: 16 }}>
+      {children}
+      <div style={{ textAlign: "center" }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: "var(--text-primary)" }}>{label}</div>
+        <div style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 2 }}>{sublabel}</div>
+      </div>
+    </div>
   );
 }
 

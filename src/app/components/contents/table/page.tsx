@@ -154,6 +154,222 @@ function DesignContent() {
         </div>
       </Section>
 
+      {/* 인터랙션 상태 */}
+      <Section title="인터랙션 상태">
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 24 }}>
+          Table의 행은 사용자 상호작용에 따라 시각적 피드백을 제공합니다. 정렬 가능한 컬럼 헤더는 클릭 시 정렬 상태가 변경됩니다.
+        </p>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
+          gap: 16,
+          padding: 24,
+          backgroundColor: "var(--surface-base-alternative)",
+          borderRadius: 16,
+        }}>
+          <TableStateCard label="Default Row" sublabel="기본 행 상태">
+            <div style={{ width: 140, borderRadius: 6, overflow: "hidden", border: "1px solid var(--border-default)" }}>
+              <div style={{ height: 20, backgroundColor: "var(--surface-base-alternative)", display: "flex", alignItems: "center", padding: "0 8px", gap: 16, borderBottom: "1px solid var(--border-default)" }}>
+                <div style={{ width: 28, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-secondary)" }} />
+                <div style={{ width: 28, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-secondary)" }} />
+              </div>
+              <div style={{ height: 22, backgroundColor: "var(--surface-base-default)", display: "flex", alignItems: "center", padding: "0 8px", gap: 16, borderBottom: "1px solid var(--border-default)" }}>
+                <div style={{ width: 24, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-default)" }} />
+                <div style={{ width: 24, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-default)" }} />
+              </div>
+              <div style={{ height: 22, backgroundColor: "var(--surface-base-default)", display: "flex", alignItems: "center", padding: "0 8px", gap: 16 }}>
+                <div style={{ width: 24, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-default)" }} />
+                <div style={{ width: 24, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-default)" }} />
+              </div>
+            </div>
+          </TableStateCard>
+          <TableStateCard label="Hover Row" sublabel="마우스 오버 행">
+            <div style={{ width: 140, borderRadius: 6, overflow: "hidden", border: "1px solid var(--border-default)" }}>
+              <div style={{ height: 20, backgroundColor: "var(--surface-base-alternative)", display: "flex", alignItems: "center", padding: "0 8px", gap: 16, borderBottom: "1px solid var(--border-default)" }}>
+                <div style={{ width: 28, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-secondary)" }} />
+                <div style={{ width: 28, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-secondary)" }} />
+              </div>
+              <div style={{ height: 22, backgroundColor: "var(--surface-base-containerPressed)", display: "flex", alignItems: "center", padding: "0 8px", gap: 16, borderBottom: "1px solid var(--border-default)" }}>
+                <div style={{ width: 24, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-default)" }} />
+                <div style={{ width: 24, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-default)" }} />
+              </div>
+              <div style={{ height: 22, backgroundColor: "var(--surface-base-default)", display: "flex", alignItems: "center", padding: "0 8px", gap: 16 }}>
+                <div style={{ width: 24, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-default)" }} />
+                <div style={{ width: 24, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-default)" }} />
+              </div>
+            </div>
+          </TableStateCard>
+          <TableStateCard label="Selected Row" sublabel="선택된 행">
+            <div style={{ width: 140, borderRadius: 6, overflow: "hidden", border: "1px solid var(--border-default)" }}>
+              <div style={{ height: 20, backgroundColor: "var(--surface-base-alternative)", display: "flex", alignItems: "center", padding: "0 8px", gap: 16, borderBottom: "1px solid var(--border-default)" }}>
+                <div style={{ width: 28, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-secondary)" }} />
+                <div style={{ width: 28, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-secondary)" }} />
+              </div>
+              <div style={{ height: 22, backgroundColor: "var(--surface-brand-secondary)", display: "flex", alignItems: "center", padding: "0 8px", gap: 16, borderBottom: "1px solid var(--border-default)" }}>
+                <div style={{ width: 24, height: 4, borderRadius: 2, backgroundColor: "var(--content-brand-default)" }} />
+                <div style={{ width: 24, height: 4, borderRadius: 2, backgroundColor: "var(--content-brand-default)" }} />
+              </div>
+              <div style={{ height: 22, backgroundColor: "var(--surface-base-default)", display: "flex", alignItems: "center", padding: "0 8px", gap: 16 }}>
+                <div style={{ width: 24, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-default)" }} />
+                <div style={{ width: 24, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-default)" }} />
+              </div>
+            </div>
+          </TableStateCard>
+          <TableStateCard label="Sorted Column" sublabel="정렬 활성 컬럼">
+            <div style={{ width: 140, borderRadius: 6, overflow: "hidden", border: "1px solid var(--border-default)" }}>
+              <div style={{ height: 20, backgroundColor: "var(--surface-base-alternative)", display: "flex", alignItems: "center", padding: "0 8px", gap: 16, borderBottom: "1px solid var(--border-default)" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 2 }}>
+                  <div style={{ width: 28, height: 4, borderRadius: 2, backgroundColor: "var(--content-brand-default)" }} />
+                  <span style={{ fontSize: 8, color: "var(--content-brand-default)" }}>▼</span>
+                </div>
+                <div style={{ width: 28, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-secondary)" }} />
+              </div>
+              <div style={{ height: 22, backgroundColor: "var(--surface-base-default)", display: "flex", alignItems: "center", padding: "0 8px", gap: 16, borderBottom: "1px solid var(--border-default)" }}>
+                <div style={{ width: 24, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-default)" }} />
+                <div style={{ width: 24, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-default)" }} />
+              </div>
+              <div style={{ height: 22, backgroundColor: "var(--surface-base-default)", display: "flex", alignItems: "center", padding: "0 8px", gap: 16 }}>
+                <div style={{ width: 24, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-default)" }} />
+                <div style={{ width: 24, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-default)" }} />
+              </div>
+            </div>
+          </TableStateCard>
+        </div>
+      </Section>
+
+      {/* 디자인 토큰 */}
+      <Section title="디자인 토큰">
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 16 }}>
+          컴포넌트에 적용된 디자인 토큰입니다. 커스터마이징 시 아래 토큰을 참조하세요.
+        </p>
+        <div style={{ overflowX: "auto" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
+            <thead>
+              <tr style={{ borderBottom: "2px solid var(--border-default)" }}>
+                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: 600 }}>속성</th>
+                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: 600 }}>토큰</th>
+                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: 600 }}>값</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>헤더 배경</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>--surface-base-alternative</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+                    <span style={{ width: 12, height: 12, borderRadius: 3, backgroundColor: "var(--surface-base-alternative)", border: "1px solid var(--border-default)" }} />
+                    Light Grey / Dark Grey
+                  </span>
+                </td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>헤더 텍스트</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>--content-base-default</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+                    <span style={{ width: 12, height: 12, borderRadius: 3, backgroundColor: "var(--content-base-default)", border: "1px solid var(--border-default)" }} />
+                    fontSize: 13, fontWeight: 600
+                  </span>
+                </td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>셀 텍스트</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>--content-base-default</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+                    <span style={{ width: 12, height: 12, borderRadius: 3, backgroundColor: "var(--content-base-default)", border: "1px solid var(--border-default)" }} />
+                    fontSize: 14
+                  </span>
+                </td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>구분선</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>--border-default</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+                    <span style={{ width: 12, height: 12, borderRadius: 3, backgroundColor: "var(--border-default)", border: "1px solid var(--border-default)" }} />
+                    1px solid
+                  </span>
+                </td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>최소 높이</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>-</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>sm: 40px / md: 44px / lg: 48px</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>정렬 아이콘</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>--content-base-neutral</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+                    <span style={{ width: 12, height: 12, borderRadius: 3, backgroundColor: "var(--content-base-neutral)", border: "1px solid var(--border-default)" }} />
+                    Neutral icon
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </Section>
+
+      {/* UX 라이팅 */}
+      <Section title="UX 라이팅">
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 24 }}>
+          Table의 컬럼 헤더와 셀 데이터는 간결하고 일관된 형식으로 작성합니다. 숫자 데이터는 우측 정렬하여 비교가 용이하도록 합니다.
+        </p>
+
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12 }}>
+          <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-success-default)", border: "1px solid var(--border-success-default)" }}>
+            <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-success-default)", marginBottom: 8 }}>DO</div>
+            <code style={{ fontSize: 14, color: "var(--text-primary)" }}>&quot;종목명&quot;</code>
+            <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4, margin: 0 }}>간결한 컬럼 헤더를 사용합니다</p>
+          </div>
+          <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-error-default)", border: "1px solid var(--border-error-default)" }}>
+            <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-error-default)", marginBottom: 8 }}>DON&apos;T</div>
+            <code style={{ fontSize: 14, color: "var(--text-primary)" }}>&quot;종목 이름&quot;</code>
+            <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4, margin: 0 }}>불필요하게 풀어쓰지 않습니다</p>
+          </div>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12 }}>
+          <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-success-default)", border: "1px solid var(--border-success-default)" }}>
+            <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-success-default)", marginBottom: 8 }}>DO</div>
+            <code style={{ fontSize: 14, color: "var(--text-primary)" }}>&quot;현재가&quot;</code>
+            <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4, margin: 0 }}>단위는 값에 포함하고 헤더는 짧게 유지합니다</p>
+          </div>
+          <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-error-default)", border: "1px solid var(--border-error-default)" }}>
+            <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-error-default)", marginBottom: 8 }}>DON&apos;T</div>
+            <code style={{ fontSize: 14, color: "var(--text-primary)" }}>&quot;현재 가격(원)&quot;</code>
+            <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4, margin: 0 }}>헤더에 단위를 포함하지 않습니다</p>
+          </div>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12 }}>
+          <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-success-default)", border: "1px solid var(--border-success-default)" }}>
+            <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-success-default)", marginBottom: 8 }}>DO</div>
+            <code style={{ fontSize: 14, color: "var(--text-primary)" }}>숫자 우측 정렬</code>
+            <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4, margin: 0 }}>숫자 데이터는 우측 정렬하여 비교를 용이하게 합니다</p>
+          </div>
+          <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-error-default)", border: "1px solid var(--border-error-default)" }}>
+            <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-error-default)", marginBottom: 8 }}>DON&apos;T</div>
+            <code style={{ fontSize: 14, color: "var(--text-primary)" }}>숫자 좌측 정렬</code>
+            <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4, margin: 0 }}>좌측 정렬 시 자릿수 비교가 어렵습니다</p>
+          </div>
+        </div>
+      </Section>
+
       {/* Variants */}
       <Section title="Variants">
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
@@ -910,6 +1126,20 @@ function TablePlayground() {
 function PlatformContent({ platform }: { platform: Platform }) {
   if (platform === "design") return <DesignContent />;
   return <WebContent />;
+}
+
+function TableStateCard({ label, sublabel, children }: {
+  label: string; sublabel: string; children: React.ReactNode;
+}) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12, padding: 16 }}>
+      {children}
+      <div style={{ textAlign: "center" }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: "var(--text-primary)" }}>{label}</div>
+        <div style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 2 }}>{sublabel}</div>
+      </div>
+    </div>
+  );
 }
 
 // Table Demo Component

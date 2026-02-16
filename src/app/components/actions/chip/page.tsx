@@ -424,6 +424,126 @@ function DesignContent() {
         </div>
       </Section>
 
+      {/* Interaction States */}
+      <Section title="Interaction States">
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 24 }}>
+          Chip은 선택 상태를 포함하여 다양한 인터랙션 상태를 지원합니다. 선택/해제 토글과 호버, 누름 피드백이 시각적으로 명확히 구분됩니다.
+        </p>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
+          gap: 16,
+          padding: 24,
+          backgroundColor: "var(--surface-base-alternative)",
+          borderRadius: 16,
+        }}>
+          <InteractionStateCard label="Default" sublabel="기본 상태" color="var(--content-brand-default)" bgColor="var(--surface-brand-secondary)" />
+          <InteractionStateCard label="Selected" sublabel="선택됨" color="var(--static-white)" bgColor="var(--content-brand-default)" />
+          <InteractionStateCard label="Hover" sublabel="마우스 오버" color="var(--content-brand-default)" bgColor="var(--surface-brand-secondaryPressed)" />
+          <InteractionStateCard label="Pressed" sublabel="누름" color="var(--content-brand-default)" bgColor="var(--surface-brand-secondaryPressed)" />
+          <InteractionStateCard label="Disabled" sublabel="비활성화" color="var(--content-disabled-default)" bgColor="var(--surface-disabled-default)" opacity={0.4} />
+          <InteractionStateCard label="Focused" sublabel="키보드 포커스" color="var(--content-brand-default)" bgColor="var(--surface-brand-secondary)" showFocusRing />
+        </div>
+      </Section>
+
+      {/* Design Tokens (New) */}
+      <Section title="Design Tokens">
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 16 }}>
+          컴포넌트에 적용된 디자인 토큰입니다. 커스터마이징 시 아래 토큰을 참조하세요.
+        </p>
+        <div style={{ overflowX: "auto" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
+            <thead>
+              <tr style={{ borderBottom: "2px solid var(--border-default)" }}>
+                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: 600 }}>속성</th>
+                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: 600 }}>토큰</th>
+                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: 600 }}>값 (Light)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>배경색 (filled)</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>--surface-brand-secondary</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+                    <span style={{ width: 12, height: 12, borderRadius: 3, backgroundColor: "var(--surface-brand-secondary)" }} />
+                    Brand Light
+                  </span>
+                </td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>텍스트 색상</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>--content-brand-default</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+                    <span style={{ width: 12, height: 12, borderRadius: 3, backgroundColor: "var(--content-brand-default)" }} />
+                    Brand Blue
+                  </span>
+                </td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>높이 (sm / md / lg)</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>chip.height</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>24px / 32px / 40px</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>수평 패딩 (sm / md / lg)</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>primitive.2 / 3 / 4</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>8px / 12px / 16px</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
+                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>모서리 반경</td>
+                <td style={{ padding: "10px 12px" }}>
+                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>height / 2</code>
+                </td>
+                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>12px / 16px / 20px (완전 라운드)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </Section>
+
+      {/* UX Writing */}
+      <Section title="UX Writing">
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 24 }}>
+          사용자에게 명확한 경험을 전달하기 위한 텍스트 작성 가이드입니다.
+        </p>
+        <div style={{ display: "grid", gap: 12 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+            <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-success-default)", border: "1px solid var(--border-success-default)" }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-success-default)", marginBottom: 8 }}>DO</div>
+              <code style={{ fontSize: 14, color: "var(--text-primary)" }}>&quot;최신순&quot;</code>
+              <p style={{ fontSize: 12, color: "var(--text-tertiary)", margin: 0, marginTop: 4 }}>짧고 간결하게 표현합니다</p>
+            </div>
+            <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-error-default)", border: "1px solid var(--border-error-default)" }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-error-default)", marginBottom: 8 }}>DON&apos;T</div>
+              <code style={{ fontSize: 14, color: "var(--text-primary)" }}>&quot;최신순으로 정렬합니다&quot;</code>
+              <p style={{ fontSize: 12, color: "var(--text-tertiary)", margin: 0, marginTop: 4 }}>Chip에는 문장을 넣지 않습니다</p>
+            </div>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+            <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-success-default)", border: "1px solid var(--border-success-default)" }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-success-default)", marginBottom: 8 }}>DO</div>
+              <code style={{ fontSize: 14, color: "var(--text-primary)" }}>&quot;서울&quot;</code>
+              <p style={{ fontSize: 12, color: "var(--text-tertiary)", margin: 0, marginTop: 4 }}>가능한 한 짧게 작성합니다</p>
+            </div>
+            <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-error-default)", border: "1px solid var(--border-error-default)" }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-error-default)", marginBottom: 8 }}>DON&apos;T</div>
+              <code style={{ fontSize: 14, color: "var(--text-primary)" }}>&quot;서울특별시&quot;</code>
+              <p style={{ fontSize: 12, color: "var(--text-tertiary)", margin: 0, marginTop: 4 }}>공식 명칭보다 축약형을 사용합니다</p>
+            </div>
+          </div>
+        </div>
+      </Section>
+
       {/* Behaviors */}
       <Section title="Behaviors">
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
@@ -1090,6 +1210,29 @@ function InputChipDemo() {
 }
 
 // ==================== UI Components ====================
+
+function InteractionStateCard({ label, sublabel, color, bgColor, opacity, showFocusRing }: {
+  label: string; sublabel: string; color: string; bgColor: string; opacity?: number; showFocusRing?: boolean;
+}) {
+  return (
+    <div style={{
+      display: "flex", flexDirection: "column", alignItems: "center", gap: 12, padding: 16,
+    }}>
+      <div style={{
+        width: "100%", height: 48, borderRadius: 12,
+        backgroundColor: bgColor,
+        display: "flex", alignItems: "center", justifyContent: "center",
+        opacity: opacity ?? 1,
+        outline: showFocusRing ? "2px solid var(--content-brand-default)" : "none",
+        outlineOffset: showFocusRing ? 2 : 0,
+        color: color, fontSize: 13, fontWeight: 500,
+      }}>
+        {label}
+      </div>
+      <span style={{ fontSize: 12, color: "var(--text-tertiary)", textAlign: "center" }}>{sublabel}</span>
+    </div>
+  );
+}
 
 function UsageCard({ situation, desc, variant = "filled", color, chipLabel, selected = false, showClose = false }: {
   situation: string;
