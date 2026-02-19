@@ -41,6 +41,8 @@ export interface ListCellProps extends Omit<HTMLAttributes<HTMLDivElement>, 'tit
   onClick?: () => void;
   /** 하단 구분선 표시 */
   divider?: boolean;
+  /** 우측에 화살표(chevron) 아이콘 표시 */
+  withArrow?: boolean;
 }
 
 // Size configurations (from Foundation tokens)
@@ -89,6 +91,7 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
       verticalAlign = 'center',
       onClick,
       divider = false,
+      withArrow = false,
       style,
       onMouseDown,
       onMouseUp,
@@ -129,7 +132,7 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
       cursor: isInteractive ? 'pointer' : 'default',
       outline: isFocusVisible && isInteractive ? `2px solid var(--content-brand-default)` : 'none',
       outlineOffset: 2,
-      borderBottom: divider ? `${borderWidth.default}px solid ${cssVarColors.border.base.default}` : 'none',
+      borderBottom: divider ? `${borderWidth.default}px solid ${cssVarColors.border.solid.alternative}` : 'none',
       transition: transitions.background,
       ...style,
     };
@@ -216,9 +219,14 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
         </div>
 
         {/* Trailing */}
-        {trailing && (
-          <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center', color: cssVarColors.content.base.neutral }}>
+        {(trailing || withArrow) && (
+          <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center', gap: spacing.primitive[1], color: cssVarColors.content.base.neutral }}>
             {trailing}
+            {withArrow && (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            )}
           </div>
         )}
       </div>

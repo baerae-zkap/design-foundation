@@ -4,7 +4,7 @@
 > Import: `import { ListCell } from '@baerae-zkap/design-system'`
 
 ## What It Is
-A single-row horizontal list item for settings, menus, and option lists. Supports leading content (icon/avatar), title + subtitle, and trailing content (value text, switch, badge, chevron).
+A single-row horizontal list item for settings, menus, and option lists. Supports leading content (icon/avatar), title + description, and trailing content (value text, switch, badge, chevron).
 
 ## When to Use
 - Use for settings/preferences lists (Language, Dark Mode, Notifications)
@@ -22,18 +22,19 @@ A single-row horizontal list item for settings, menus, and option lists. Support
 |------|------|---------|-------------|
 | `leading` | `ReactNode` | -- | Left area (icon, avatar, checkbox) |
 | `title` | `ReactNode` | (required) | Main text. Single line, truncated with ellipsis |
-| `subtitle` | `ReactNode` | -- | Secondary text below title. Single line, truncated |
+| `description` | `ReactNode` | -- | Secondary text below title. Single line, truncated |
 | `trailing` | `ReactNode` | -- | Right area (value string, Switch, ContentBadge, chevron icon) |
 | `size` | `"small" \| "medium" \| "large"` | `"medium"` | Row height and font sizes |
+| `verticalAlign` | `"top" \| "center"` | `"center"` | Vertical alignment of all slots |
+| `withArrow` | `boolean` | `false` | Shows built-in right-pointing chevron at the end. For navigation rows. |
 | `onClick` | `() => void` | -- | Click handler. When provided, row becomes interactive |
-| `disabled` | `boolean` | `false` | Grays out row, blocks interaction |
 | `divider` | `boolean` | `false` | Show bottom border separator |
 
 Also accepts all standard `HTMLAttributes<HTMLDivElement>` except `title`.
 
 ## Size Guide
-| Size | Min Height | Title Font | Subtitle Font | Padding Y | Padding X | Gap |
-|------|------------|------------|---------------|-----------|-----------|-----|
+| Size | Min Height | Title Font | Description Font | Padding Y | Padding X | Gap |
+|------|------------|------------|------------------|-----------|-----------|-----|
 | `small` | `spacing.component.listCell.minHeight.sm` | 14px (sm) | 12px (xs) | 8px | 16px | 12px |
 | `medium` | `spacing.component.listCell.minHeight.md` | 16px (md) | 14px (sm) | 12px | 16px | 12px |
 | `large` | `spacing.component.listCell.minHeight.lg` | 16px (md) | 14px (sm) | 16px | 16px | 16px |
@@ -48,29 +49,29 @@ Also accepts all standard `HTMLAttributes<HTMLDivElement>` except `title`.
 <ListCell title="Notifications" trailing={<Switch checked={notifs} onChange={setNotifs} />} />
 ```
 
-### Navigation menu
+### Navigation menu with built-in arrow
 ```tsx
 <ListCell
   leading={<UserIcon />}
   title="Profile"
-  trailing={<ChevronRightIcon />}
+  withArrow
   onClick={() => navigate('/profile')}
   divider
 />
 <ListCell
   leading={<SettingsIcon />}
   title="Settings"
-  trailing={<ChevronRightIcon />}
+  withArrow
   onClick={() => navigate('/settings')}
 />
 ```
 
-### With subtitle
+### With description
 ```tsx
 <ListCell
   leading={<Avatar src={user.avatar} size={40} />}
   title={user.name}
-  subtitle={user.email}
+  description={user.email}
   trailing={<ContentBadge color="primary" size="small">Admin</ContentBadge>}
   onClick={() => selectUser(user.id)}
 />
@@ -82,11 +83,21 @@ Also accepts all standard `HTMLAttributes<HTMLDivElement>` except `title`.
 <ListCell title="Build" trailing="1234" />
 ```
 
+### Top-aligned for multiline content
+```tsx
+<ListCell
+  leading={<AlertIcon />}
+  title="Important Notice"
+  description="This action cannot be undone and will permanently delete your data."
+  verticalAlign="top"
+/>
+```
+
 ## Do / Don't
 
 - DO: Use `divider` between items in a list for visual separation
 - DON'T: Use custom borders -- use the `divider` prop
-- DO: Use trailing content for values, switches, badges, or chevrons
+- DO: Use `withArrow` for navigation rows instead of passing a custom chevron to `trailing`
 - DON'T: Put a full `Button` in the trailing slot -- keep it lightweight
 - DO: Group related ListCells under a `SectionHeader`
 - DON'T: Mix ListCell sizes within the same list section
@@ -99,14 +110,14 @@ Also accepts all standard `HTMLAttributes<HTMLDivElement>` except `title`.
 | Background (pressed) | `cssVarColors.fill.normal` |
 | Title color | `cssVarColors.content.base.default` |
 | Title weight | `typography.fontWeight.medium` |
-| Subtitle color | `cssVarColors.content.base.secondary` |
-| Trailing color | `cssVarColors.content.base.neutral` |
-| Divider border | `borderWidth.default` + `cssVarColors.border.base.default` |
-| Disabled opacity | `opacity.disabled` |
+| Description color | `cssVarColors.content.base.secondary` |
+| Trailing / Arrow color | `cssVarColors.content.base.neutral` |
+| Divider border | `borderWidth.default` + `cssVarColors.border.solid.alternative` |
 | Transition | `transitions.background` |
 
 ## Accessibility
 - When `onClick` is provided: `role="button"`, `tabIndex={0}`, keyboard Enter/Space triggers click
 - When no `onClick`: no interactive role (static display)
-- Title and subtitle truncated with `text-overflow: ellipsis`
+- Title and description truncated with `text-overflow: ellipsis`
 - Interactive ListCell shows hover and pressed visual states
+- `withArrow` chevron is decorative (no aria-label needed)
