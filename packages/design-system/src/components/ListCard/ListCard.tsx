@@ -64,7 +64,7 @@ const variantStyles: Record<ListCardVariant, React.CSSProperties> = {
     border: `${borderWidth.default}px solid ${cssVarColors.border.base.default}`,
   },
   filled: {
-    backgroundColor: cssVarColors.surface.base.default,
+    backgroundColor: 'transparent',
     boxShadow: 'none',
     border: 'none',
   },
