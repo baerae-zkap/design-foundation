@@ -59,10 +59,10 @@ function ListCardPlayground() {
     <div style={{ marginBottom: spacing.primitive[8] }}>
       <div style={{ borderRadius: radius.primitive.xl, overflow: "hidden", backgroundColor: "var(--surface-base-alternative)" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
-          <div style={{ padding: 60, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <div style={{ padding: `${spacing.primitive[8]}px ${spacing.primitive[6]}px`, display: "flex", flexDirection: "column", justifyContent: "center" }}>
             <ListCard
               variant={variant}
-              thumbnail={hasThumbnail ? <EthereumIcon size={80} /> : undefined}
+              thumbnail={hasThumbnail ? <EthereumIcon size={56} /> : undefined}
               badges={hasBadges ? <TrendBadge trend="up" value="+5.2%" /> : undefined}
               title="Ethereum"
               subtitle={hasSubtitle ? "0.7812 ETH" : undefined}
