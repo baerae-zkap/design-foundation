@@ -6,7 +6,7 @@
  *
  * @example
  * <ListCard
- *   thumbnail={<img src="product.jpg" />}
+ *   thumbnail={<img src="product.jpg" alt="상품 이미지" />}
  *   title="상품명"
  *   subtitle="상품 설명"
  *   meta="₩59,000"
@@ -24,14 +24,11 @@ import { opacity, borderWidth } from '../../tokens/general';
 import { usePressable } from '../../utils/usePressable';
 import { transitions } from '../../utils/styles';
 
-export type ListCardSize = 'small' | 'medium' | 'large';
 export type ListCardVariant = 'elevated' | 'outlined' | 'filled';
 
 export interface ListCardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   /** 카드 스타일 */
   variant?: ListCardVariant;
-  /** 크기 */
-  size?: ListCardSize;
   /** 좌측 썸네일 영역 */
   thumbnail?: ReactNode;
   /** 메인 타이틀 */
@@ -42,7 +39,7 @@ export interface ListCardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'tit
   meta?: ReactNode;
   /** 우측 액션 영역 */
   action?: ReactNode;
-  /** 상단 뱃지 영역 */
+  /** 상단 배지 영역 */
   badges?: ReactNode;
   /** 썸네일 왼쪽 인디케이터 (선택, 상태 등) */
   leadingContent?: ReactNode;
@@ -53,41 +50,6 @@ export interface ListCardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'tit
   /** 비활성화 */
   disabled?: boolean;
 }
-
-// Size configurations
-const sizeConfig: Record<ListCardSize, {
-  padding: number;
-  thumbnailSize: number;
-  gap: number;
-  titleSize: number;
-  subtitleSize: number;
-  metaSize: number;
-}> = {
-  small: {
-    padding: spacing.primitive[3],
-    thumbnailSize: spacing.component.listCard.thumbnailSize.sm,
-    gap: spacing.primitive[3],
-    titleSize: typography.fontSize.sm,
-    subtitleSize: typography.fontSize.xs,
-    metaSize: typography.fontSize.compact,
-  },
-  medium: {
-    padding: spacing.primitive[4],
-    thumbnailSize: spacing.component.listCard.thumbnailSize.md,
-    gap: spacing.primitive[3],
-    titleSize: typography.fontSize.md,
-    subtitleSize: typography.fontSize.compact,
-    metaSize: typography.fontSize.sm,
-  },
-  large: {
-    padding: spacing.primitive[4],
-    thumbnailSize: spacing.component.listCard.thumbnailSize.lg,
-    gap: spacing.primitive[4],
-    titleSize: typography.fontSize.md,
-    subtitleSize: typography.fontSize.sm,
-    metaSize: typography.fontSize.md,
-  },
-};
 
 // Variant styles
 const variantStyles: Record<ListCardVariant, React.CSSProperties> = {
@@ -103,7 +65,7 @@ const variantStyles: Record<ListCardVariant, React.CSSProperties> = {
   },
   filled: {
     backgroundColor: cssVarColors.surface.base.default,
-    boxShadow: cssVarShadow.semantic.card.default,
+    boxShadow: 'none',
     border: 'none',
   },
 };
@@ -112,7 +74,6 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
   (
     {
       variant = 'filled',
-      size = 'medium',
       thumbnail,
       title,
       subtitle,
@@ -130,11 +91,12 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
       onMouseEnter,
       onFocus,
       onBlur,
+      onKeyDown: externalKeyDown,
+      onKeyUp: externalKeyUp,
       ...props
     },
     ref
   ) => {
-    const sizeStyle = sizeConfig[size];
     const variantStyle = variantStyles[variant];
     const isInteractive = !!onClick && !disabled;
 
@@ -159,7 +121,7 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
     const containerStyle: React.CSSProperties = {
       display: 'flex',
       flexDirection: 'column',
-      padding: sizeStyle.padding,
+      padding: spacing.primitive[4],
       borderRadius: radius.component.card.sm,
       cursor: isInteractive ? 'pointer' : 'default',
       opacity: disabled ? opacity.disabled : 1,
@@ -172,8 +134,8 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
     };
 
     const thumbnailContainerStyle: React.CSSProperties = {
-      width: sizeStyle.thumbnailSize,
-      height: sizeStyle.thumbnailSize,
+      width: spacing.component.listCard.thumbnailSize.md,
+      height: spacing.component.listCard.thumbnailSize.md,
       borderRadius: radius.primitive.sm,
       overflow: 'hidden',
       flexShrink: 0,
@@ -192,7 +154,7 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
     };
 
     const titleStyle: React.CSSProperties = {
-      fontSize: sizeStyle.titleSize,
+      fontSize: typography.fontSize.md,
       fontWeight: typography.fontWeight.semibold,
       color: cssVarColors.content.base.default,
       lineHeight: 1.4,
@@ -204,7 +166,7 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
     };
 
     const subtitleStyle: React.CSSProperties = {
-      fontSize: sizeStyle.subtitleSize,
+      fontSize: typography.fontSize.compact,
       fontWeight: typography.fontWeight.regular,
       color: cssVarColors.content.base.secondary,
       lineHeight: 1.4,
@@ -214,7 +176,7 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
     };
 
     const metaStyle: React.CSSProperties = {
-      fontSize: sizeStyle.metaSize,
+      fontSize: typography.fontSize.sm,
       fontWeight: typography.fontWeight.bold,
       color: cssVarColors.content.base.default,
       marginTop: spacing.primitive[1],
@@ -235,16 +197,18 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
         onKeyDown={(e) => {
           if (isInteractive && e.key === 'Enter') {
             e.preventDefault();
-            onClick();
+            onClick!();
           }
           if (isInteractive && e.key === ' ') {
             e.preventDefault();
           }
+          externalKeyDown?.(e);
         }}
         onKeyUp={(e) => {
           if (isInteractive && e.key === ' ') {
-            onClick();
+            onClick!();
           }
+          externalKeyUp?.(e);
         }}
         onFocus={(e) => {
           setIsFocusVisible(true);
@@ -259,7 +223,7 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
         {...props}
       >
         {/* Main row */}
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: sizeStyle.gap }}>
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: spacing.primitive[3] }}>
           {/* Leading Content */}
           {leadingContent && (
             <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center', alignSelf: 'center' }}>
