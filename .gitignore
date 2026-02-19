@@ -54,3 +54,6 @@ test-*.tsx
 
 # project management (AI context files)
 CLAUDE.md
+
+# npm lock file (CI uses pnpm)
+package-lock.json
