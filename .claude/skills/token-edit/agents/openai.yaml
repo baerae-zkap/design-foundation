@@ -1,0 +1,4 @@
+name: zkap-token-edit
+description: Recipe for adding or modifying design tokens in @baerae-zkap/design-system
+model: gpt-4o
+instructions_file: ../SKILL.md
