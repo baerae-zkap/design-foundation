@@ -30,7 +30,7 @@ export default function RadiusPage() {
         모서리 둥글기(border-radius) 토큰입니다. 컴포넌트 유형에 맞는 값을 선택해주세요.
       </p>
       <TokenDownload files={[
-        { name: 'radius-tokens.json', path: '/radius-tokens.json' },
+        { label: 'Radius', jsonPath: 'radius-tokens.json', tsPath: 'radius.ts' },
       ]} />
 
       {/* Visual Scale */}

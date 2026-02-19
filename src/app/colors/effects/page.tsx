@@ -288,7 +288,7 @@ export default function EffectsPage() {
         Gradient와 Alpha 계열을 별도 레이어로 관리합니다. 각 토큰은 목적 설명과 함께 제공되며, 색상 카드를 클릭하면 값이 복사됩니다.
       </p>
 
-      <TokenDownload files={[{ name: "effects-tokens.json", path: "/effects-tokens.json" }]} />
+      <TokenDownload files={[{ label: 'Effects', jsonPath: 'effects-tokens.json', tsPath: 'effects.ts' }]} />
 
       <EffectSection
         title="Alpha Brand"

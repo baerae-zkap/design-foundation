@@ -345,7 +345,7 @@ export default function SemanticPage() {
         </span>
       </p>
       <TokenDownload files={[
-        { name: 'semantic-tokens.json', path: '/semantic-tokens.json' },
+        { label: 'Semantic Colors', jsonPath: 'semantic-tokens.json', tsPath: 'colors.ts' },
       ]} />
 
       {[

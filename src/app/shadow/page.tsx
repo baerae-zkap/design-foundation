@@ -31,7 +31,7 @@ export default function ShadowPage() {
         레이어가 높을수록 그림자가 짙어집니다.
       </p>
       <TokenDownload files={[
-        { name: 'shadow-tokens.json', path: '/shadow-tokens.json' },
+        { label: 'Shadow', jsonPath: 'shadow-tokens.json', tsPath: 'shadow.ts' },
       ]} />
 
       {/* Visual Scale */}

@@ -18,7 +18,7 @@ export default function TypographyPage() {
         ZKAP 타이포그래피는 <strong style={{ color: 'var(--text-primary)' }}>가독성</strong>과 <strong style={{ color: 'var(--text-primary)' }}>시각적 위계</strong>를 고려해 설계되었습니다.
       </p>
       <TokenDownload files={[
-        { name: 'typography-tokens.json', path: '/typography-tokens.json' },
+        { label: 'Typography', jsonPath: 'typography-tokens.json', tsPath: 'typography.ts' },
       ]} />
 
       {/* Font Family */}

@@ -20,7 +20,7 @@ export default function InteractionPage() {
         앱 인터랙션을 위한 시스템입니다. <strong style={{ color: 'var(--text-primary)' }}>Duration</strong>과 <strong style={{ color: 'var(--text-primary)' }}>Easing</strong> 조합으로 일관된 느낌을 만듭니다.
       </p>
       <TokenDownload files={[
-        { name: 'interaction-tokens.json', path: '/interaction-tokens.json' },
+        { label: 'Motion', jsonPath: 'interaction-tokens.json', tsPath: 'motion.ts' },
       ]} />
 
       {/* Duration */}

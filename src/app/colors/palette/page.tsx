@@ -118,7 +118,7 @@ export default function PalettePage() {
       </p>
 
       <TokenDownload files={[
-        { name: 'palette.json', path: '/palette.json' },
+        { label: 'Colors', jsonPath: 'palette.json', tsPath: 'colors.ts' },
       ]} />
 
       {paletteColors.map(([colorName, shades]) => {

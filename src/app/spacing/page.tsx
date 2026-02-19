@@ -306,7 +306,7 @@ export default function SpacingPage() {
         ZKAP 스페이싱은 <strong style={{ color: 'var(--text-primary)' }}>4px 단위</strong> 그리드를 따릅니다. 일관된 여백과 간격을 유지해주세요.
       </p>
       <TokenDownload files={[
-        { name: 'spacing-tokens.json', path: '/spacing-tokens.json' },
+        { label: 'Spacing', jsonPath: 'spacing-tokens.json', tsPath: 'spacing.ts' },
       ]} />
 
       {/* Visual Scale */}
