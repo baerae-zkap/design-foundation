@@ -231,7 +231,7 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
 
           {/* Action */}
           {action && (
-            <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center' }}>
+            <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center', alignSelf: 'center' }}>
               {action}
             </div>
           )}
