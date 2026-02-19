@@ -38,35 +38,51 @@ export default function SectionHeaderPage() {
 }
 
 function SectionHeaderPlayground() {
-  const [size, setSize] = useState<SectionHeaderSize>("medium");
-  const [headingContentType, setHeadingContentType] = useState<"none" | "badge" | "chip">("none");
-  const [trailingType, setTrailingType] = useState<"none" | "text">("text");
+  const [platform, setPlatform] = useState<"mobile" | "desktop">("mobile");
+  const [headingContentType, setHeadingContentType] = useState<"none" | "filter" | "icon">("none");
+  const [trailingType, setTrailingType] = useState<"none" | "text" | "pagination" | "icon">("text");
+
+  const size: SectionHeaderSize = platform === "mobile" ? "small" : "medium";
 
   const headingContent =
-    headingContentType === "badge" ? <ContentBadge color="primary" size="small">12</ContentBadge> :
-    headingContentType === "chip" ? (
-      <span style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.medium, color: "var(--content-base-secondary)", display: "inline-flex", alignItems: "center", gap: 2 }}>
-        30일 ↑
+    headingContentType === "filter" ? (
+      <span style={{ display: "inline-flex", alignItems: "center", gap: 4, padding: "2px 8px", border: "1px solid var(--border-solid-default)", borderRadius: 99, fontSize: typography.fontSize.xs, color: "var(--content-base-secondary)" }}>
+        Filter
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </span>
+    ) :
+    headingContentType === "icon" ? (
+      <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 20, height: 20, color: "var(--content-base-secondary)", cursor: "pointer" }}>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="14" y2="12"/><line x1="4" y1="18" x2="11" y2="18"/></svg>
       </span>
     ) : undefined;
 
-  const trailing = trailingType === "text" ? <ActionButton>전체보기</ActionButton> : undefined;
+  const trailing =
+    trailingType === "text" ? <ActionButton>전체보기</ActionButton> :
+    trailingType === "pagination" ? (
+      <span style={{ fontSize: typography.fontSize.compact, color: "var(--content-base-secondary)", display: "inline-flex", alignItems: "center", gap: 4 }}>
+        1 / 5
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </span>
+    ) :
+    trailingType === "icon" ? (
+      <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 20, height: 20, color: "var(--content-base-secondary)", cursor: "pointer" }}>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="5" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="19" r="1" fill="currentColor"/></svg>
+      </span>
+    ) : undefined;
 
   return (
     <div style={{ marginBottom: spacing.primitive[8] }}>
       <div style={{ borderRadius: radius.primitive.xl, overflow: "hidden", backgroundColor: "var(--surface-base-alternative)" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
-          <div style={{ padding: 60, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <div style={{ width: 320, backgroundColor: "var(--surface-base-default)", borderRadius: radius.primitive.lg, overflow: "hidden", boxShadow: "0 1px 3px var(--shadow-primitive-xs)" }}>
+          <div style={{ padding: "40px 24px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <div style={{ width: "100%", backgroundColor: "var(--surface-base-default)" }}>
               <SectionHeader
                 size={size}
                 title="내 자산"
                 headingContent={headingContent}
                 trailing={trailing}
               />
-              <ListCellSimple title="Ethereum" value="₩3,245,000" />
-              <ListCellSimple title="Bitcoin" value="₩2,890,000" />
-              <ListCellSimple title="Solana" value="₩1,560,000" />
             </div>
           </div>
 
@@ -91,33 +107,34 @@ function SectionHeaderPlayground() {
               borderRadius: radius.primitive.lg,
             }}>
               <RadioGroup
-                label="Size"
+                label="Platform"
                 options={[
-                  { value: "small", label: "Small (16px)" },
-                  { value: "medium", label: "Medium (20px)" },
-                  { value: "large", label: "Large (24px)" },
+                  { value: "mobile", label: "Mobile" },
+                  { value: "desktop", label: "Desktop" },
                 ]}
-                value={size}
-                onChange={(v) => setSize(v as SectionHeaderSize)}
+                value={platform}
+                onChange={(v) => setPlatform(v as "mobile" | "desktop")}
               />
               <RadioGroup
-                label="Heading Content"
+                label="Heading content"
                 options={[
                   { value: "none", label: "None" },
-                  { value: "badge", label: "Badge" },
-                  { value: "chip", label: "Count chip" },
+                  { value: "filter", label: "Filter button" },
+                  { value: "icon", label: "Icon button" },
                 ]}
                 value={headingContentType}
-                onChange={(v) => setHeadingContentType(v as "none" | "badge" | "chip")}
+                onChange={(v) => setHeadingContentType(v as "none" | "filter" | "icon")}
               />
               <RadioGroup
-                label="Trailing"
+                label="Trailing content"
                 options={[
                   { value: "none", label: "None" },
                   { value: "text", label: "Text button" },
+                  { value: "pagination", label: "Pagination" },
+                  { value: "icon", label: "Icon button" },
                 ]}
                 value={trailingType}
-                onChange={(v) => setTrailingType(v as "none" | "text")}
+                onChange={(v) => setTrailingType(v as "none" | "text" | "pagination" | "icon")}
               />
             </div>
           </div>
