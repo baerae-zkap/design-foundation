@@ -1,4 +1,0 @@
-name: zkap-doc-page
-description: Recipe for creating documentation pages for @baerae-zkap/design-system components
-model: gpt-4o
-instructions_file: ../SKILL.md

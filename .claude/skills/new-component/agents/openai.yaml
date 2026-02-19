@@ -1,4 +1,0 @@
-name: zkap-new-component
-description: Recipe for creating new @baerae-zkap/design-system components
-model: gpt-4o
-instructions_file: ../SKILL.md
