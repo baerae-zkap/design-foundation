@@ -40,6 +40,8 @@ export default function SectionHeaderPage() {
 function SectionHeaderPlayground() {
   const [size, setSize] = useState<SectionHeaderSize>("medium");
   const [hasAction, setHasAction] = useState(false);
+  const [hasDescription, setHasDescription] = useState(false);
+  const [descriptionPosition, setDescriptionPosition] = useState<'top' | 'bottom'>('top');
 
   return (
     <div style={{ marginBottom: spacing.primitive[8] }}>
@@ -50,6 +52,8 @@ function SectionHeaderPlayground() {
               <SectionHeaderDemo
                 size={size}
                 title="내 자산"
+                description={hasDescription ? "최근 30일 기준" : undefined}
+                descriptionPosition={descriptionPosition}
                 action={hasAction ? <ActionButton>전체보기</ActionButton> : undefined}
               />
               <ListCellSimple title="Ethereum" value="₩3,245,000" />
@@ -81,9 +85,9 @@ function SectionHeaderPlayground() {
               <RadioGroup
                 label="Size"
                 options={[
-                  { value: "small", label: "Small (13px)" },
-                  { value: "medium", label: "Medium (14px)" },
-                  { value: "large", label: "Large (15px)" },
+                  { value: "small", label: "Small" },
+                  { value: "medium", label: "Medium" },
+                  { value: "large", label: "Large" },
                 ]}
                 value={size}
                 onChange={(v) => setSize(v as SectionHeaderSize)}
@@ -97,6 +101,26 @@ function SectionHeaderPlayground() {
                 value={hasAction ? "true" : "false"}
                 onChange={(v) => setHasAction(v === "true")}
               />
+              <RadioGroup
+                label="Description"
+                options={[
+                  { value: "false", label: "False" },
+                  { value: "true", label: "True" },
+                ]}
+                value={hasDescription ? "true" : "false"}
+                onChange={(v) => setHasDescription(v === "true")}
+              />
+              {hasDescription && (
+                <RadioGroup
+                  label="Description Position"
+                  options={[
+                    { value: "top", label: "Top" },
+                    { value: "bottom", label: "Bottom" },
+                  ]}
+                  value={descriptionPosition}
+                  onChange={(v) => setDescriptionPosition(v as 'top' | 'bottom')}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -159,9 +183,10 @@ function DesignContent() {
             <text x="310" y="64" textAnchor="middle" fill="var(--content-base-onColor)" fontSize="10" fontWeight="600">2</text>
           </svg>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4], marginTop: spacing.primitive[5], fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.medium, color: "var(--text-primary)" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: spacing.primitive[4], marginTop: spacing.primitive[5], fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.medium, color: "var(--text-primary)" }}>
           <div>1. Title</div>
-          <div style={{ textAlign: "right" }}>2. Action (Optional)</div>
+          <div style={{ textAlign: "center" }}>2. Description (Optional)</div>
+          <div style={{ textAlign: "right" }}>3. Action (Optional)</div>
         </div>
       </Section>
 
@@ -190,29 +215,20 @@ function DesignContent() {
             </div>
           </VariantCard>
           <VariantCard
-            name="With Subtitle"
-            description="타이틀 아래에 보조 설명을 추가하여 섹션의 맥락을 제공합니다."
+            name="With Description (top)"
+            description="타이틀 위에 보조 설명을 추가하여 섹션 맥락을 제공합니다. 날짜, 기간, 개수 등에 사용합니다."
           >
             <div style={{ width: "100%", maxWidth: 280 }}>
-              <div style={{ paddingLeft: spacing.primitive[4], paddingRight: spacing.primitive[4], paddingTop: spacing.primitive[4], paddingBottom: spacing.primitive[2] }}>
-                <div style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-neutral)", textTransform: "uppercase" as const, letterSpacing: "0.02em" }}>내 자산</div>
-                <div style={{ fontSize: typography.fontSize.xs, color: "var(--content-base-assistive)", marginTop: 2 }}>총 3개 자산 보유 중</div>
-              </div>
+              <SectionHeaderDemo title="내 자산" description="최근 30일" descriptionPosition="top" />
               <div style={{ borderTop: "1px solid var(--border-solid-alternative)", padding: "8px 16px", fontSize: typography.fontSize.compact, color: "var(--content-base-neutral)" }}>List items...</div>
             </div>
           </VariantCard>
           <VariantCard
-            name="With Subtitle + Action"
-            description="보조 설명과 액션 버튼을 모두 포함하는 가장 풍부한 형태입니다."
+            name="With Description (bottom)"
+            description="타이틀 아래에 보조 설명을 배치합니다. 섹션 제목 강조 후 부연 설명이 필요할 때 사용합니다."
           >
             <div style={{ width: "100%", maxWidth: 280 }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", paddingLeft: spacing.primitive[4], paddingRight: spacing.primitive[4], paddingTop: spacing.primitive[4], paddingBottom: spacing.primitive[2] }}>
-                <div>
-                  <div style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-neutral)", textTransform: "uppercase" as const, letterSpacing: "0.02em" }}>거래소 연동</div>
-                  <div style={{ fontSize: typography.fontSize.xs, color: "var(--content-base-assistive)", marginTop: 2 }}>2개 연결됨</div>
-                </div>
-                <ActionButton>+ 추가</ActionButton>
-              </div>
+              <SectionHeaderDemo title="거래소 연동" description="2개 연결됨" descriptionPosition="bottom" action={<ActionButton>+ 추가</ActionButton>} />
               <div style={{ borderTop: "1px solid var(--border-solid-alternative)", padding: "8px 16px", fontSize: typography.fontSize.compact, color: "var(--content-base-neutral)" }}>List items...</div>
             </div>
           </VariantCard>
@@ -280,21 +296,21 @@ function DesignContent() {
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>Title</td>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: spacing.primitive[2] }}>
-                    <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "var(--content-base-neutral)" }} />
-                    <InlineCode>var(--content-base-neutral)</InlineCode>
+                    <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "var(--content-base-default)" }} />
+                    <InlineCode>var(--content-base-default)</InlineCode>
                   </div>
                 </td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: typography.fontSize.xs, color: "var(--text-secondary)" }}>content.base.neutral</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: typography.fontSize.xs, color: "var(--text-secondary)" }}>content.base.default</td>
               </tr>
               <tr>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>Subtitle</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>Description</td>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: spacing.primitive[2] }}>
-                    <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "var(--content-base-assistive)" }} />
-                    <InlineCode>var(--content-base-assistive)</InlineCode>
+                    <div style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: "var(--content-base-secondary)" }} />
+                    <InlineCode>var(--content-base-secondary)</InlineCode>
                   </div>
                 </td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: typography.fontSize.xs, color: "var(--text-secondary)" }}>content.base.assistive</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: typography.fontSize.xs, color: "var(--text-secondary)" }}>content.base.secondary</td>
               </tr>
               <tr>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>Action (Brand)</td>
@@ -474,7 +490,7 @@ function DesignContent() {
             <PrincipleCard
               number={2}
               title="Consistent Styling"
-              desc="uppercase 스타일과 회색 컬러를 사용하여 일관된 스타일을 유지합니다."
+              desc="semibold 타이틀과 secondary 색상의 description으로 시각적 계층을 만듭니다."
             />
             <PrincipleCard
               number={3}
@@ -667,9 +683,14 @@ function DesignContent() {
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>600</td>
               </tr>
               <tr>
-                <td style={{ padding: "12px 16px" }}>Text Color</td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--text-secondary)", fontSize: typography.fontSize.xs }}>content.base.neutral</td>
-                <td style={{ padding: "12px 16px" }}>var(--content-base-neutral)</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>Title Color</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", color: "var(--text-secondary)", fontSize: typography.fontSize.xs }}>content.base.default</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>var(--content-base-default)</td>
+              </tr>
+              <tr>
+                <td style={{ padding: "12px 16px" }}>Description Color</td>
+                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--text-secondary)", fontSize: typography.fontSize.xs }}>content.base.secondary</td>
+                <td style={{ padding: "12px 16px" }}>var(--content-base-secondary)</td>
               </tr>
             </tbody>
           </table>
@@ -785,6 +806,38 @@ function WebContent() {
 />`} />
       </Section>
 
+      <Section title="With Description">
+        <PreviewBox>
+          <div style={{ padding: spacing.primitive[6], display: "flex", flexDirection: "column", gap: spacing.primitive[4] }}>
+            <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: radius.primitive.lg, overflow: "hidden", maxWidth: 360, boxShadow: "0 1px 3px var(--shadow-primitive-xs)" }}>
+              <SectionHeaderDemo title="내 자산" description="최근 30일" descriptionPosition="top" action={<ActionButton>전체보기</ActionButton>} />
+              <ListCellSimple title="Ethereum" value="₩3,245,000" />
+              <ListCellSimple title="Bitcoin" value="₩2,890,000" />
+            </div>
+            <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: radius.primitive.lg, overflow: "hidden", maxWidth: 360, boxShadow: "0 1px 3px var(--shadow-primitive-xs)" }}>
+              <SectionHeaderDemo title="거래소 연동" description="2개 연결됨" descriptionPosition="bottom" action={<ActionButton>+ 추가</ActionButton>} />
+              <ListCellSimple title="업비트" value="연결됨" valueColor="var(--content-success-default)" />
+              <ListCellSimple title="빗썸" value="연결하기" valueColor="var(--content-brand-default)" />
+            </div>
+          </div>
+        </PreviewBox>
+        <CodeBlock code={`// description top (기본값) — 날짜, 기간, 개수 등
+<SectionHeader
+  title="내 자산"
+  description="최근 30일"
+  descriptionPosition="top"
+  action={<TextButton size="small">전체보기</TextButton>}
+/>
+
+// description bottom — 제목 강조 후 부연 설명
+<SectionHeader
+  title="거래소 연동"
+  description="2개 연결됨"
+  descriptionPosition="bottom"
+  action={<TextButton size="small">+ 추가</TextButton>}
+/>`} />
+      </Section>
+
       <Section title="Sizes">
         <PreviewBox>
           <div style={{ padding: spacing.primitive[6], display: "flex", flexDirection: "column", gap: spacing.primitive[4] }}>
@@ -811,9 +864,11 @@ function WebContent() {
         <Subsection title="Common Props">
           <PropsTable
             props={[
-              { name: "title", type: "string", required: true, description: "섹션 타이틀" },
-              { name: "action", type: "ReactNode", required: false, description: "우측 액션 영역 (버튼, 링크 등)" },
-              { name: "size", type: '"small" | "medium" | "large"', required: false, defaultVal: '"medium"', description: "타이틀 크기" },
+              { name: "title", type: "ReactNode", required: true, description: "섹션 타이틀" },
+              { name: "description", type: "ReactNode", required: false, description: "보조 설명 텍스트 (날짜, 카운트 등)" },
+              { name: "descriptionPosition", type: '"top" | "bottom"', required: false, defaultVal: '"top"', description: "description 표시 위치. top=타이틀 위, bottom=타이틀 아래" },
+              { name: "action", type: "ReactNode", required: false, description: "우측 액션 영역 (TextButton, 링크 등)" },
+              { name: "size", type: '"small" | "medium" | "large"', required: false, defaultVal: '"medium"', description: "타이틀 크기 및 패딩" },
             ]}
           />
         </Subsection>
@@ -832,9 +887,9 @@ function WebContent() {
 }
 
 // Demo Components
-function SectionHeaderDemo({ title, action, size = "medium" }: { title: string; action?: React.ReactNode; size?: SectionHeaderSize }) {
+function SectionHeaderDemo({ title, description, descriptionPosition, action, size = "medium" }: { title: React.ReactNode; description?: React.ReactNode; descriptionPosition?: 'top' | 'bottom'; action?: React.ReactNode; size?: SectionHeaderSize }) {
   return (
-    <SectionHeader title={title} action={action} size={size} />
+    <SectionHeader title={title} description={description} descriptionPosition={descriptionPosition} action={action} size={size} />
   );
 }
 
