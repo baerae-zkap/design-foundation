@@ -34,6 +34,12 @@ const componentsNav = [
   { title: "List Card", href: "/components/contents/list-card" },
   { title: "List Cell", href: "/components/contents/list-cell" },
   { title: "Section Header", href: "/components/contents/section-header" },
+  { title: "Alert Dialog", href: "/components/feedback/alert-dialog" },
+  { title: "Push Badge", href: "/components/feedback/push-badge" },
+  { title: "Section Message", href: "/components/feedback/section-message" },
+  { title: "Snackbar", href: "/components/feedback/snackbar" },
+  { title: "Toast", href: "/components/feedback/toast" },
+  { title: "State View", href: "/components/feedback/state-view" },
 ];
 
 interface MobileMenuProps {
