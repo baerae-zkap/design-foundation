@@ -51,3 +51,6 @@ storybook-static/
 ALERT_FALLBACKVIEW_ANALYSIS.md
 SELECT_UPGRADE_COMPLETE.md
 test-*.tsx
+
+# project management (AI context files)
+CLAUDE.md
