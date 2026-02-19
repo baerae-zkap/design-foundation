@@ -1,0 +1,4 @@
+name: zkap-a11y-check
+description: Accessibility audit checklist for @baerae-zkap/design-system components
+model: gpt-5.3-codex
+instructions_file: ../SKILL.md

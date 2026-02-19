@@ -11,7 +11,7 @@ Before returning any generated UI code, verify every item below. If any check fa
 ## Colors
 - [ ] Zero hardcoded hex/rgb/hsl values in styles
 - [ ] CSS variables used for all color references: `var(--content-base-default)`, `var(--surface-brand-default)`, etc.
-- [ ] Maximum one `variant="filled" color="primary"` button per action group
+- [ ] Maximum one `buttonType="filled" color="primary"` button per action group
 - [ ] Destructive actions use `color="error"`, not manually styled red
 
 ## States

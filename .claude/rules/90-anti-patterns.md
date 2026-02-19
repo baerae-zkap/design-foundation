@@ -11,7 +11,7 @@ These patterns produce off-brand, inconsistent, or inaccessible UI. Reject any g
 | Importing `lightColors` for inline styles | CSS variables via `var(--...)` |
 | Using `success` color for a primary CTA | `color="primary"` for CTAs |
 | Using `error` color for non-destructive actions | `color="neutral"` or `color="primary"` |
-| Two `color="primary"` buttons side by side | One primary, one `color="neutral" variant="weak"` |
+| Two `color="primary"` buttons side by side | One primary, one `color="neutral" buttonType="weak"` |
 
 ## Component Anti-Patterns
 
@@ -41,7 +41,7 @@ These patterns produce off-brand, inconsistent, or inaccessible UI. Reject any g
 - **DO NOT** build full-screen loading spinners. Use inline skeleton states.
 - **DO NOT** render a blank white section when data is empty. Always show an empty state.
 - **DO NOT** nest Cards inside Cards.
-- **DO NOT** place more than one `variant="filled" color="primary"` button in the same action group.
+- **DO NOT** place more than one `buttonType="filled" color="primary"` button in the same action group.
 - **DO NOT** put destructive actions next to primary CTAs without visual separation.
 - **DO NOT** use fixed pixel widths for buttons. Let content or container define width.
 

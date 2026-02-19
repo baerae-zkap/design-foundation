@@ -1,0 +1,4 @@
+name: zkap-state-patterns
+description: Standardized loading/empty/error/success state patterns for product UI
+model: gpt-5.3-codex
+instructions_file: ../SKILL.md

@@ -1,0 +1,218 @@
+[
+  {
+    "component": "Button",
+    "group": "actions",
+    "status": "stable",
+    "exported": true,
+    "docs_status": "complete",
+    "source_path": "packages/design-system/src/components/Button/Button.tsx",
+    "export_name": "Button"
+  },
+  {
+    "component": "IconButton",
+    "group": "actions",
+    "status": "stable",
+    "exported": true,
+    "docs_status": "complete",
+    "source_path": "packages/design-system/src/components/IconButton/IconButton.tsx",
+    "export_name": "IconButton"
+  },
+  {
+    "component": "TextButton",
+    "group": "actions",
+    "status": "stable",
+    "exported": true,
+    "docs_status": "complete",
+    "source_path": "packages/design-system/src/components/TextButton/TextButton.tsx",
+    "export_name": "TextButton"
+  },
+  {
+    "component": "Chip",
+    "group": "actions",
+    "status": "stable",
+    "exported": true,
+    "docs_status": "complete",
+    "source_path": "packages/design-system/src/components/Chip/Chip.tsx",
+    "export_name": "Chip"
+  },
+  {
+    "component": "ActionArea",
+    "group": "actions",
+    "status": "stable",
+    "exported": true,
+    "docs_status": "complete",
+    "source_path": "packages/design-system/src/components/ActionArea/ActionArea.tsx",
+    "export_name": "ActionArea"
+  },
+  {
+    "component": "Accordion",
+    "group": "contents",
+    "status": "stable",
+    "exported": true,
+    "docs_status": "complete",
+    "source_path": "packages/design-system/src/components/Accordion/Accordion.tsx",
+    "export_name": "Accordion"
+  },
+  {
+    "component": "Card",
+    "group": "contents",
+    "status": "stable",
+    "exported": true,
+    "docs_status": "complete",
+    "source_path": "packages/design-system/src/components/Card/Card.tsx",
+    "export_name": "Card"
+  },
+  {
+    "component": "ContentBadge",
+    "group": "contents",
+    "status": "partial",
+    "exported": true,
+    "docs_status": "style_only",
+    "source_path": "packages/design-system/src/components/ContentBadge/ContentBadge.tsx",
+    "export_name": "ContentBadge"
+  },
+  {
+    "component": "ListCard",
+    "group": "contents",
+    "status": "code_only",
+    "exported": true,
+    "docs_status": "style_only",
+    "source_path": "packages/design-system/src/components/ListCard/ListCard.tsx",
+    "export_name": "ListCard"
+  },
+  {
+    "component": "ListCell",
+    "group": "contents",
+    "status": "code_only",
+    "exported": true,
+    "docs_status": "style_only",
+    "source_path": "packages/design-system/src/components/ListCell/ListCell.tsx",
+    "export_name": "ListCell"
+  },
+  {
+    "component": "SectionHeader",
+    "group": "contents",
+    "status": "code_only",
+    "exported": true,
+    "docs_status": "style_only",
+    "source_path": "packages/design-system/src/components/SectionHeader/SectionHeader.tsx",
+    "export_name": "SectionHeader"
+  },
+  {
+    "component": "Table",
+    "group": "contents",
+    "status": "code_only",
+    "exported": true,
+    "docs_status": "style_only",
+    "source_path": "packages/design-system/src/components/Table/Table.tsx",
+    "export_name": "Table"
+  },
+  {
+    "component": "Thumbnail",
+    "group": "contents",
+    "status": "code_only",
+    "exported": true,
+    "docs_status": "style_only",
+    "source_path": "packages/design-system/src/components/Thumbnail/Thumbnail.tsx",
+    "export_name": "Thumbnail"
+  },
+  {
+    "component": "TextField",
+    "group": "inputs",
+    "status": "code_only",
+    "exported": true,
+    "docs_status": "missing",
+    "source_path": "packages/design-system/src/components/TextField/TextField.tsx",
+    "export_name": "TextField"
+  },
+  {
+    "component": "TextArea",
+    "group": "inputs",
+    "status": "code_only",
+    "exported": true,
+    "docs_status": "missing",
+    "source_path": "packages/design-system/src/components/TextArea/TextArea.tsx",
+    "export_name": "TextArea"
+  },
+  {
+    "component": "SearchField",
+    "group": "inputs",
+    "status": "code_only",
+    "exported": true,
+    "docs_status": "missing",
+    "source_path": "packages/design-system/src/components/SearchField/SearchField.tsx",
+    "export_name": "SearchField"
+  },
+  {
+    "component": "Select",
+    "group": "inputs",
+    "status": "code_only",
+    "exported": true,
+    "docs_status": "missing",
+    "source_path": "packages/design-system/src/components/Select/Select.tsx",
+    "export_name": "Select"
+  },
+  {
+    "component": "Checkbox",
+    "group": "inputs",
+    "status": "code_only",
+    "exported": true,
+    "docs_status": "missing",
+    "source_path": "packages/design-system/src/components/Checkbox/Checkbox.tsx",
+    "export_name": "Checkbox"
+  },
+  {
+    "component": "CheckMark",
+    "group": "inputs",
+    "status": "code_only",
+    "exported": true,
+    "docs_status": "missing",
+    "source_path": "packages/design-system/src/components/CheckMark/CheckMark.tsx",
+    "export_name": "CheckMark"
+  },
+  {
+    "component": "Radio",
+    "group": "inputs",
+    "status": "code_only",
+    "exported": true,
+    "docs_status": "missing",
+    "source_path": "packages/design-system/src/components/Radio/Radio.tsx",
+    "export_name": "Radio"
+  },
+  {
+    "component": "Switch",
+    "group": "inputs",
+    "status": "code_only",
+    "exported": true,
+    "docs_status": "missing",
+    "source_path": "packages/design-system/src/components/Switch/Switch.tsx",
+    "export_name": "Switch"
+  },
+  {
+    "component": "Slider",
+    "group": "inputs",
+    "status": "code_only",
+    "exported": true,
+    "docs_status": "missing",
+    "source_path": "packages/design-system/src/components/Slider/Slider.tsx",
+    "export_name": "Slider"
+  },
+  {
+    "component": "SegmentedControl",
+    "group": "inputs",
+    "status": "code_only",
+    "exported": true,
+    "docs_status": "missing",
+    "source_path": "packages/design-system/src/components/SegmentedControl/SegmentedControl.tsx",
+    "export_name": "SegmentedControl"
+  },
+  {
+    "component": "FramedStyle",
+    "group": "inputs",
+    "status": "code_only",
+    "exported": true,
+    "docs_status": "missing",
+    "source_path": "packages/design-system/src/components/FramedStyle/FramedStyle.tsx",
+    "export_name": "FramedStyle"
+  }
+]

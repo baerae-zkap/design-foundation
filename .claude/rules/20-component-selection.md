@@ -1,15 +1,17 @@
 # Component Selection Guide
 
+> **Note**: Button uses `buttonType` prop (not `variant`). See `.claude/resources/components/actions/Button.md` for full API.
+
 Use this decision tree to pick the correct component. Follow top-to-bottom; use the first match.
 
 ## Actions -- "User does something"
 
 | IF the user needs to... | THEN use | Example |
 |-------------------------|----------|---------|
-| Perform the primary action on screen | `<Button variant="filled" color="primary">` | Submit, Save, Continue |
-| Perform a secondary/cancel action | `<Button variant="weak" color="neutral">` | Cancel, Back, Skip |
-| Perform a destructive action | `<Button variant="filled" color="error">` | Delete, Remove |
-| Perform a soft destructive action | `<Button variant="weak" color="error">` | Remove item from list |
+| Perform the primary action on screen | `<Button buttonType="filled" color="primary">` | Submit, Save, Continue |
+| Perform a secondary/cancel action | `<Button buttonType="weak" color="neutral">` | Cancel, Back, Skip |
+| Perform a destructive action | `<Button buttonType="filled" color="error">` | Delete, Remove |
+| Perform a soft destructive action | `<Button buttonType="weak" color="error">` | Remove item from list |
 | Click a text-only inline link | `<TextButton>` | "Forgot password?", "View all" |
 | Click an icon-only action | `<IconButton aria-label="Close">` | Close, Menu, Share |
 | Toggle/select a tag or filter | `<Chip>` | Category filter, tag selector |
@@ -18,8 +20,8 @@ Use this decision tree to pick the correct component. Follow top-to-bottom; use 
 ```tsx
 // Primary + Secondary pair
 <div style={{ display: 'flex', gap: 12 }}>
-  <Button variant="weak" color="neutral" onClick={onCancel}>Cancel</Button>
-  <Button variant="filled" color="primary" onClick={onSubmit}>Save</Button>
+  <Button buttonType="weak" color="neutral" onClick={onCancel}>Cancel</Button>
+  <Button buttonType="filled" color="primary" onClick={onSubmit}>Save</Button>
 </div>
 ```
 
@@ -62,7 +64,7 @@ Use this decision tree to pick the correct component. Follow top-to-bottom; use 
 // Login form inputs
 <TextField type="email" label="Email" placeholder="example@email.com" />
 <TextField type="password" label="Password" />
-<Button variant="filled" color="primary" onClick={onLogin} style={{ width: '100%' }}>
+<Button buttonType="filled" color="primary" onClick={onLogin} style={{ width: '100%' }}>
   Log In
 </Button>
 ```
@@ -83,7 +85,7 @@ When two components seem equally valid, apply these rules:
 ## Composition Conflict Rules
 
 - `ActionArea` MUST NOT contain `Button` or `IconButton` for the same action. Use one or the other.
-- A section MUST have at most one `variant="filled" color="primary"` Button. Additional CTAs use `weak`/`neutral`.
+- A section MUST have at most one `buttonType="filled" color="primary"` Button. Additional CTAs use `weak`/`neutral`.
 - `Card` MUST NOT nest inside another `Card`.
 - `ListCell` trailing element: use `Switch`, `ContentBadge`, or a text string — not a full `Button`.
 

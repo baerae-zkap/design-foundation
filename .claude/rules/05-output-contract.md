@@ -40,8 +40,8 @@ Component Selection:
 - Page title → SectionHeader title="Edit Profile"
 - Name field → TextField label="Name" value={name} onChange={setName}
 - Email field → TextField label="Email" type="email"
-- Save action → Button variant="filled" color="primary" isLoading={saving}
-- Cancel action → Button variant="weak" color="neutral"
+- Save action → Button buttonType="filled" color="primary" isLoading={saving}
+- Cancel action → Button buttonType="weak" color="neutral"
 
 State Requirements:
 - Save Button: disabled={!isDirty || !isValid}, isLoading={saving}

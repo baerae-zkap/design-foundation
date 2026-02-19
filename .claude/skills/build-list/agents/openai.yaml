@@ -1,0 +1,4 @@
+name: zkap-build-list
+description: Recipe for building list screens, feeds, settings menus, and data tables
+model: gpt-5.3-codex
+instructions_file: ../SKILL.md

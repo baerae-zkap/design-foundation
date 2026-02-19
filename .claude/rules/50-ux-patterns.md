@@ -9,7 +9,7 @@ Every button must handle:
 
 ```tsx
 <Button
-  variant="filled"
+  buttonType="filled"
   color="primary"
   onClick={onSubmit}
   disabled={!isValid}
@@ -48,12 +48,12 @@ The confirm button should use `color="error"`. The cancel button should use `col
 
 ```tsx
 // Dialog pattern
-<Button variant="weak" color="error" onClick={() => setShowConfirm(true)}>
+<Button buttonType="weak" color="error" onClick={() => setShowConfirm(true)}>
   Delete Account
 </Button>
 // In dialog:
-<Button variant="weak" color="neutral" onClick={onCancel}>Cancel</Button>
-<Button variant="filled" color="error" onClick={onConfirmDelete}>Delete</Button>
+<Button buttonType="weak" color="neutral" onClick={onCancel}>Cancel</Button>
+<Button buttonType="filled" color="error" onClick={onConfirmDelete}>Delete</Button>
 ```
 
 ## Empty States
@@ -78,7 +78,7 @@ Every data-fetching section must handle errors:
   <p style={{ ...typography.semantic.body.md, color: 'var(--content-base-secondary)' }}>
     Failed to load data.
   </p>
-  <Button variant="weak" color="primary" onClick={onRetry}>Retry</Button>
+  <Button buttonType="weak" color="primary" onClick={onRetry}>Retry</Button>
 </div>
 ```
 

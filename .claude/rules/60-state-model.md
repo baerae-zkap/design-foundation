@@ -14,7 +14,7 @@ Every interactive element and data section MUST implement the states listed belo
 
 ```tsx
 <Button
-  variant="filled"
+  buttonType="filled"
   color="primary"
   disabled={!formIsValid}
   isLoading={isSubmitting}

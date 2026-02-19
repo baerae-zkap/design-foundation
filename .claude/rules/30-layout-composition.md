@@ -74,7 +74,7 @@ Use `spacing.semantic.screen.paddingX` (20px) for horizontal page padding. Use `
   <TextField label="Name" value={name} onChange={setName} />
   <TextField label="Email" type="email" value={email} onChange={setEmail} />
   <Select label="Role" value={role} onChange={setRole} options={roleOptions} />
-  <Button variant="filled" color="primary" onClick={onSave} style={{ marginTop: 16 }}>
+  <Button buttonType="filled" color="primary" onClick={onSave} style={{ marginTop: 16 }}>
     Save Profile
   </Button>
 </div>
@@ -101,7 +101,7 @@ Center vertically and horizontally. Include:
   <p style={{ ...typography.semantic.body.sm, color: 'var(--content-base-secondary)', margin: 0 }}>
     Try adjusting your search or filters.
   </p>
-  <Button variant="weak" color="primary" onClick={onReset}>Clear Filters</Button>
+  <Button buttonType="weak" color="primary" onClick={onReset}>Clear Filters</Button>
 </div>
 ```
 

@@ -1,0 +1,4 @@
+name: zkap-component-picker
+description: Selects the correct component from @baerae-zkap/design-system for a given UI intent
+model: gpt-5.3-codex
+instructions_file: ../SKILL.md
