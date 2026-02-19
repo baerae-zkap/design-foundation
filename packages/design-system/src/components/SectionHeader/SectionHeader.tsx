@@ -1,17 +1,23 @@
 /**
  * SectionHeader Component (Web)
  *
- * @description 리스트 섹션 상단에 사용되는 타이틀 컴포넌트입니다.
+ * @description 콘텐츠 영역이나 특정 섹션의 시작을 명확하게 알려주는 제목 요소입니다.
  * @see docs/components/SectionHeader.md - AI용 상세 가이드
+ *
+ * Anatomy (Montage 패턴):
+ *   [Heading title]  [headingContent slot]          [trailing slot]
+ *
+ * - headingContent: 타이틀 오른쪽 인라인 슬롯 (Chip, IconButton 등)
+ * - trailing: 맨 우측 슬롯 (TextButton, Pagination, IconButton 등)
+ * - 모든 슬롯은 타이틀 baseline(하단)에 정렬됨
  *
  * @example
  * <SectionHeader title="내 자산" />
  *
  * <SectionHeader
  *   title="최근 주문"
- *   description="최근 30일"
- *   descriptionPosition="top"
- *   action={<TextButton size="small">전체보기</TextButton>}
+ *   headingContent={<ContentBadge color="primary">12</ContentBadge>}
+ *   trailing={<TextButton size="small" onClick={onViewAll}>전체보기</TextButton>}
  * />
  */
 
@@ -23,46 +29,39 @@ import { typography } from '../../tokens/typography';
 export type SectionHeaderSize = 'small' | 'medium' | 'large';
 
 export interface SectionHeaderProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
-  /** 섹션 타이틀 */
+  /** 섹션 타이틀 (최대 2줄) */
   title: ReactNode;
-  /** 보조 설명 텍스트 (날짜, 카운트 등) */
-  description?: ReactNode;
-  /** description 표시 위치 */
-  descriptionPosition?: 'top' | 'bottom';
-  /** 우측 액션 영역 (TextButton, 링크 등) */
-  action?: ReactNode;
-  /** 크기 */
+  /** 타이틀 오른쪽 인라인 슬롯 — Chip, ContentBadge, IconButton 등 */
+  headingContent?: ReactNode;
+  /** 맨 우측 슬롯 — TextButton, Pagination, IconButton 등 */
+  trailing?: ReactNode;
+  /** 크기 (폰트 및 패딩 스케일) */
   size?: SectionHeaderSize;
 }
 
-// Size configurations (from Foundation tokens)
 const sizeConfig: Record<SectionHeaderSize, {
-  titleFontSize: number;
-  descFontSize: number;
+  fontSize: number;
   paddingX: number;
   paddingTop: number;
   paddingBottom: number;
 }> = {
   small: {
-    titleFontSize: typography.fontSize.compact,
-    descFontSize: typography.fontSize.xs,
+    fontSize: typography.fontSize.md,    // 16px
     paddingX: spacing.primitive[4],
-    paddingTop: spacing.primitive[2],
-    paddingBottom: spacing.primitive[1],
+    paddingTop: spacing.primitive[3],    // 12px
+    paddingBottom: spacing.primitive[2], // 8px
   },
   medium: {
-    titleFontSize: typography.fontSize.sm,
-    descFontSize: typography.fontSize.compact,
+    fontSize: typography.fontSize.xl,    // 20px
     paddingX: spacing.primitive[4],
-    paddingTop: spacing.primitive[4],
-    paddingBottom: spacing.primitive[2],
+    paddingTop: spacing.primitive[4],    // 16px
+    paddingBottom: spacing.primitive[3], // 12px
   },
   large: {
-    titleFontSize: typography.fontSize.md,
-    descFontSize: typography.fontSize.sm,
+    fontSize: typography.fontSize['2xl'], // 24px
     paddingX: spacing.primitive[4],
-    paddingTop: spacing.primitive[5],
-    paddingBottom: spacing.primitive[2],
+    paddingTop: spacing.primitive[5],    // 20px
+    paddingBottom: spacing.primitive[3], // 12px
   },
 };
 
@@ -70,9 +69,8 @@ export const SectionHeader = forwardRef<HTMLDivElement, SectionHeaderProps>(
   (
     {
       title,
-      description,
-      descriptionPosition = 'top',
-      action,
+      headingContent,
+      trailing,
       size = 'medium',
       style,
       ...props
@@ -83,46 +81,49 @@ export const SectionHeader = forwardRef<HTMLDivElement, SectionHeaderProps>(
 
     const containerStyle: React.CSSProperties = {
       display: 'flex',
-      flexDirection: 'column',
+      alignItems: 'flex-end',
+      gap: spacing.primitive[4],
       paddingLeft: sizeStyle.paddingX,
       paddingRight: sizeStyle.paddingX,
       paddingTop: sizeStyle.paddingTop,
       paddingBottom: sizeStyle.paddingBottom,
-      gap: description ? spacing.primitive[1] : 0,
       ...style,
     };
 
-    const titleRowStyle: React.CSSProperties = {
+    // Heading area: title + optional headingContent (inline, baseline-aligned)
+    const headingAreaStyle: React.CSSProperties = {
+      flex: 1,
       display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
+      alignItems: 'flex-end',
+      gap: spacing.primitive[2],
+      minWidth: 0,
     };
 
     const titleStyle: React.CSSProperties = {
-      fontSize: sizeStyle.titleFontSize,
-      fontWeight: typography.fontWeight.semibold,
+      fontSize: sizeStyle.fontSize,
+      fontWeight: typography.fontWeight.bold,
       color: cssVarColors.content.base.default,
       lineHeight: 1.4,
-    };
-
-    const descriptionStyle: React.CSSProperties = {
-      fontSize: sizeStyle.descFontSize,
-      fontWeight: typography.fontWeight.regular,
-      color: cssVarColors.content.base.secondary,
-      lineHeight: 1.4,
+      overflow: 'hidden',
+      display: '-webkit-box',
+      WebkitLineClamp: 2,
+      WebkitBoxOrient: 'vertical',
+      wordBreak: 'break-word',
     };
 
     return (
       <div ref={ref} style={containerStyle} {...props}>
-        {description && descriptionPosition === 'top' && (
-          <div style={descriptionStyle}>{description}</div>
-        )}
-        <div style={titleRowStyle}>
+        {/* Heading area: title + headingContent (baseline-aligned) */}
+        <div style={headingAreaStyle}>
           <div style={titleStyle}>{title}</div>
-          {action && <div style={{ flexShrink: 0 }}>{action}</div>}
+          {headingContent && (
+            <div style={{ flexShrink: 0 }}>{headingContent}</div>
+          )}
         </div>
-        {description && descriptionPosition === 'bottom' && (
-          <div style={descriptionStyle}>{description}</div>
+
+        {/* Trailing: rightmost slot (baseline-aligned) */}
+        {trailing && (
+          <div style={{ flexShrink: 0 }}>{trailing}</div>
         )}
       </div>
     );
