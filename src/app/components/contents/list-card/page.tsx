@@ -15,7 +15,7 @@ const GITHUB_BASE = "https://github.com/baerae-zkap/design-foundation/tree/main/
 const LISTCARD_SOURCE = `${GITHUB_BASE}/ListCard.tsx`;
 
 // Types
-type ListCardVariant = "elevated" | "outlined" | "filled";
+type ListCardVariant = "filled" | "outlined";
 
 export default function ListCardPage() {
   return (
@@ -109,7 +109,6 @@ function ListCardPlayground() {
                 label="Variant"
                 options={[
                   { value: "filled", label: "Filled" },
-                  { value: "elevated", label: "Elevated" },
                   { value: "outlined", label: "Outlined" },
                 ]}
                 value={variant}
@@ -286,22 +285,18 @@ function DesignContent() {
       {/* Variants */}
       <Section title="Variants">
         <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginBottom: spacing.primitive[4], lineHeight: 1.7 }}>
-          <InlineCode>variant</InlineCode> prop을 통해 3가지 스타일을 사용할 수 있어요. 각 variant는 시각적 구분 방식이 달라요.
+          <InlineCode>variant</InlineCode> prop을 통해 2가지 스타일을 사용할 수 있어요. 각 variant는 시각적 구분 방식이 달라요.
         </p>
 
         <PreviewBox>
           <div style={{ padding: spacing.primitive[6], display: "flex", flexDirection: "column", gap: spacing.primitive[3] }}>
             <div>
-              <p style={{ fontSize: typography.fontSize.xs, color: "var(--content-base-secondary)", marginBottom: spacing.primitive[2] }}>Elevated - 그림자로 떠있는 느낌</p>
-              <ListCardDemo variant="elevated" thumbnail={<EthereumIcon size={40} />} title="Ethereum" subtitle="0.7812 ETH" meta="₩3,245,000" />
+              <p style={{ fontSize: typography.fontSize.xs, color: "var(--content-base-secondary)", marginBottom: spacing.primitive[2] }}>Filled - 배경색으로 영역 표시</p>
+              <ListCardDemo variant="filled" thumbnail={<EthereumIcon size={40} />} title="Ethereum" subtitle="0.5000 ETH" meta="₩2,100,000" />
             </div>
             <div>
               <p style={{ fontSize: typography.fontSize.xs, color: "var(--content-base-secondary)", marginBottom: spacing.primitive[2] }}>Outlined - 테두리로 영역 구분</p>
               <ListCardDemo variant="outlined" thumbnail={<BitcoinIcon size={40} />} title="Bitcoin" subtitle="0.0234 BTC" meta="₩2,890,000" />
-            </div>
-            <div>
-              <p style={{ fontSize: typography.fontSize.xs, color: "var(--content-base-secondary)", marginBottom: spacing.primitive[2] }}>Filled - 배경색으로 영역 표시</p>
-              <ListCardDemo variant="filled" thumbnail={<EthereumIcon size={40} />} title="Ethereum" subtitle="0.5000 ETH" meta="₩2,100,000" />
             </div>
           </div>
         </PreviewBox>
@@ -324,12 +319,6 @@ function DesignContent() {
               </tr>
             </thead>
             <tbody>
-              <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px` }}><InlineCode>elevated</InlineCode></td>
-                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>surface.base.default</td>
-                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>none</td>
-                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>var(--shadow-semantic-card-elevated)</td>
-              </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                 <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px` }}><InlineCode>outlined</InlineCode></td>
                 <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>surface.base.default</td>
@@ -371,25 +360,25 @@ function DesignContent() {
           <div style={{ padding: spacing.primitive[6], display: "flex", flexDirection: "column", gap: spacing.primitive[4] }}>
             <div>
               <p style={{ fontSize: typography.fontSize.xs, color: "var(--content-base-secondary)", marginBottom: spacing.primitive[2] }}>Default</p>
-              <ListCardDemo variant="elevated" thumbnail={<EthereumIcon size={40} />} title="Ethereum" subtitle="0.7812 ETH" meta="₩3,245,000" onClick={() => {}} />
+              <ListCardDemo variant="filled" thumbnail={<EthereumIcon size={40} />} title="Ethereum" subtitle="0.7812 ETH" meta="₩3,245,000" onClick={() => {}} />
             </div>
             <div>
               <p style={{ fontSize: typography.fontSize.xs, color: "var(--content-base-secondary)", marginBottom: spacing.primitive[2] }}>Pressed</p>
-              <div style={{ backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.md }}>
-                <ListCardDemo variant="elevated" thumbnail={<EthereumIcon size={40} />} title="Ethereum" subtitle="0.7812 ETH" meta="₩3,245,000" />
+              <div style={{ backgroundColor: "var(--surface-base-container)", borderRadius: radius.primitive.md }}>
+                <ListCardDemo variant="filled" thumbnail={<EthereumIcon size={40} />} title="Ethereum" subtitle="0.7812 ETH" meta="₩3,245,000" />
               </div>
             </div>
             <div>
               <p style={{ fontSize: typography.fontSize.xs, color: "var(--content-base-secondary)", marginBottom: spacing.primitive[2] }}>Disabled</p>
-              <ListCardDemo variant="elevated" thumbnail={<EthereumIcon size={40} />} title="Ethereum" subtitle="0.7812 ETH" meta="₩3,245,000" disabled />
+              <ListCardDemo variant="filled" thumbnail={<EthereumIcon size={40} />} title="Ethereum" subtitle="0.7812 ETH" meta="₩3,245,000" disabled />
             </div>
           </div>
         </PreviewBox>
 
         <div style={{ marginTop: spacing.primitive[4], padding: spacing.primitive[4], backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.md, fontSize: typography.fontSize.compact }}>
           <p style={{ margin: 0, color: "var(--text-secondary)", lineHeight: 1.7 }}>
-            <strong style={{ color: "var(--text-primary)" }}>Default:</strong> 기본 스타일 (variant별 배경/테두리/그림자)<br />
-            <strong style={{ color: "var(--text-primary)" }}>Pressed/Hover:</strong> elevated/outlined → <InlineCode>surface.base.alternative</InlineCode>, filled → <InlineCode>surface.base.container</InlineCode><br />
+            <strong style={{ color: "var(--text-primary)" }}>Default:</strong> 기본 스타일 (variant별 배경/테두리)<br />
+            <strong style={{ color: "var(--text-primary)" }}>Pressed/Hover:</strong> outlined → <InlineCode>surface.base.alternative</InlineCode>, filled → <InlineCode>surface.base.container</InlineCode><br />
             <strong style={{ color: "var(--text-primary)" }}>Disabled:</strong> 전체 opacity 감소, 상호작용 불가
           </p>
         </div>
@@ -457,7 +446,7 @@ function DesignContent() {
             <UsageCard
               situation="Product Listing"
               description="상품 목록에서 썸네일과 함께 정보를 표시하는 카드"
-              config="elevated + thumbnail + badge + meta"
+              config="filled + thumbnail + badge + meta"
               examples={["상품 목록", "검색 결과", "추천 상품"]}
             />
             <UsageCard
@@ -469,7 +458,7 @@ function DesignContent() {
             <UsageCard
               situation="Portfolio Items"
               description="보유 자산이나 포트폴리오 항목을 표시하는 카드"
-              config="elevated + thumbnail + badge + subtitle + meta"
+              config="filled + thumbnail + badge + subtitle + meta"
               examples={["자산 목록", "투자 현황", "보유 코인"]}
             />
           </div>
@@ -480,7 +469,7 @@ function DesignContent() {
             <PrincipleCard
               number={1}
               title="Variant 일관성"
-              desc="같은 목록에서는 동일한 variant를 사용하세요. 강조가 필요한 카드는 border 색상을 변경하여 표현합니다. elevated와 outlined를 혼합하지 마세요."
+              desc="같은 목록에서는 동일한 variant를 사용하세요. 강조가 필요한 카드는 border 색상을 변경하여 표현합니다. filled와 outlined를 혼합하지 마세요."
             />
             <PrincipleCard
               number={2}
@@ -502,13 +491,13 @@ function DesignContent() {
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4] }}>
                 <DoCard>
                   <div style={{ display: "flex", flexDirection: "column", gap: spacing.primitive[2], width: "100%", maxWidth: 260, padding: "0 8px" }}>
-                    <ListCardDemo variant="elevated" thumbnail={<EthereumIcon size={40} />} badges={<TrendBadge trend="up" value="+5.2%" />} title="Ethereum" subtitle="0.7812 ETH" meta="₩3,245,000" />
-                    <ListCardDemo variant="elevated" thumbnail={<BitcoinIcon size={40} />} badges={<TrendBadge trend="down" value="-2.1%" />} title="Bitcoin" subtitle="0.0234 BTC" meta="₩2,890,000" />
+                    <ListCardDemo variant="filled" thumbnail={<EthereumIcon size={40} />} badges={<TrendBadge trend="up" value="+5.2%" />} title="Ethereum" subtitle="0.7812 ETH" meta="₩3,245,000" />
+                    <ListCardDemo variant="filled" thumbnail={<BitcoinIcon size={40} />} badges={<TrendBadge trend="down" value="-2.1%" />} title="Bitcoin" subtitle="0.0234 BTC" meta="₩2,890,000" />
                   </div>
                 </DoCard>
                 <DontCard>
                   <div style={{ display: "flex", flexDirection: "column", gap: spacing.primitive[2], width: "100%", maxWidth: 260, padding: "0 8px" }}>
-                    <ListCardDemo variant="elevated" thumbnail={<EthereumIcon size={40} />} badges={<TrendBadge trend="up" value="+5.2%" />} title="Ethereum" subtitle="0.7812 ETH" meta="₩3,245,000" />
+                    <ListCardDemo variant="filled" thumbnail={<EthereumIcon size={40} />} badges={<TrendBadge trend="up" value="+5.2%" />} title="Ethereum" subtitle="0.7812 ETH" meta="₩3,245,000" />
                     <ListCardDemo variant="outlined" thumbnail={<BitcoinIcon size={48} />} title="Bitcoin" meta="₩2,890,000" />
                   </div>
                 </DontCard>
@@ -530,12 +519,12 @@ function DesignContent() {
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4] }}>
                 <DoCard>
                   <div style={{ width: "100%", maxWidth: 260, padding: "0 8px" }}>
-                    <ListCardDemo variant="elevated" thumbnail={<EthereumIcon size={40} />} title="Ethereum" subtitle="0.7812 ETH" meta="₩3.2M" />
+                    <ListCardDemo variant="filled" thumbnail={<EthereumIcon size={40} />} title="Ethereum" subtitle="0.7812 ETH" meta="₩3.2M" />
                   </div>
                 </DoCard>
                 <DontCard>
                   <div style={{ width: "100%", maxWidth: 260, padding: "0 8px" }}>
-                    <ListCardDemo variant="elevated" title="Ethereum 이더리움 코인" subtitle="보유량: 0.7812 ETH, 매수가: ₩3,100,000" meta="현재가: ₩3,245,000 (수익률 +4.7%)" />
+                    <ListCardDemo variant="filled" title="Ethereum 이더리움 코인" subtitle="보유량: 0.7812 ETH, 매수가: ₩3,100,000" meta="현재가: ₩3,245,000 (수익률 +4.7%)" />
                   </div>
                 </DontCard>
               </div>
@@ -749,14 +738,11 @@ function DesignContent() {
               </thead>
               <tbody>
                 {[
-                  ["BG (elevated)", "surface.base.default", "var(--surface-base-default)"],
-                  ["BG (outlined)", "surface.base.default", "var(--surface-base-default)"],
                   ["BG (filled)", "surface.base.default", "var(--surface-base-default)"],
-                  ["BG pressed (elevated/outlined)", "surface.base.alternative", "var(--surface-base-alternative)"],
+                  ["BG (outlined)", "surface.base.default", "var(--surface-base-default)"],
+                  ["BG pressed (outlined)", "surface.base.alternative", "var(--surface-base-alternative)"],
                   ["BG pressed (filled)", "surface.base.container", "var(--surface-base-container)"],
                   ["Border (outlined)", "border.base.default", "var(--border-base-default)"],
-                  ["Shadow (elevated)", "shadow.semantic.card.elevated", "var(--shadow-semantic-card-elevated)"],
-                  ["Shadow (filled)", "none", "none"],
                   ["Thumbnail BG", "surface.base.container", "var(--surface-base-container)"],
                   ["Title color", "content.base.default", "var(--content-base-default)"],
                   ["Subtitle color", "content.base.secondary", "var(--content-base-secondary)"],
@@ -894,7 +880,7 @@ function WebContent() {
       <Section title="Basic Usage">
         <PreviewBox>
           <div style={{ padding: spacing.primitive[6] }}>
-            <ListCardDemo variant="elevated" thumbnail={<ThumbnailDemo />} badges={<BadgeDemo />} title="프리미엄 무선 이어폰" subtitle="고음질 블루투스 5.3 지원" meta="₩89,000" onClick={() => {}} />
+            <ListCardDemo variant="filled" thumbnail={<ThumbnailDemo />} badges={<BadgeDemo />} title="프리미엄 무선 이어폰" subtitle="고음질 블루투스 5.3 지원" meta="₩89,000" onClick={() => {}} />
           </div>
         </PreviewBox>
         <CodeBlock code={`<ListCard
@@ -910,14 +896,12 @@ function WebContent() {
       <Section title="Variants">
         <PreviewBox>
           <div style={{ padding: spacing.primitive[6], display: "flex", flexDirection: "column", gap: spacing.primitive[3] }}>
-            <ListCardDemo variant="elevated" thumbnail={<EthereumIcon size={40} />} title="Elevated" subtitle="그림자 스타일" meta="₩3,245,000" onClick={() => {}} />
-            <ListCardDemo variant="outlined" thumbnail={<EthereumIcon size={40} />} title="Outlined" subtitle="테두리 스타일" meta="₩3,245,000" onClick={() => {}} />
             <ListCardDemo variant="filled" thumbnail={<EthereumIcon size={40} />} title="Filled" subtitle="배경 스타일" meta="₩3,245,000" onClick={() => {}} />
+            <ListCardDemo variant="outlined" thumbnail={<EthereumIcon size={40} />} title="Outlined" subtitle="테두리 스타일" meta="₩3,245,000" onClick={() => {}} />
           </div>
         </PreviewBox>
-        <CodeBlock code={`<ListCard variant="elevated" title="Elevated" onClick={() => {}} />
-<ListCard variant="outlined" title="Outlined" onClick={() => {}} />
-<ListCard variant="filled" title="Filled" onClick={() => {}} />`} />
+        <CodeBlock code={`<ListCard variant="filled" title="Filled" onClick={() => {}} />
+<ListCard variant="outlined" title="Outlined" onClick={() => {}} />`} />
       </Section>
 
       <Section title="Colors">
@@ -957,8 +941,8 @@ function WebContent() {
       <Section title="States">
         <PreviewBox>
           <div style={{ padding: spacing.primitive[6], display: "flex", flexDirection: "column", gap: spacing.primitive[3] }}>
-            <ListCardDemo variant="elevated" thumbnail={<EthereumIcon size={40} />} title="Default" subtitle="클릭 가능" meta="₩3,245,000" onClick={() => {}} />
-            <ListCardDemo variant="elevated" thumbnail={<EthereumIcon size={40} />} title="Disabled" subtitle="비활성화" meta="₩3,245,000" disabled />
+            <ListCardDemo variant="filled" thumbnail={<EthereumIcon size={40} />} title="Default" subtitle="클릭 가능" meta="₩3,245,000" onClick={() => {}} />
+            <ListCardDemo variant="filled" thumbnail={<EthereumIcon size={40} />} title="Disabled" subtitle="비활성화" meta="₩3,245,000" disabled />
           </div>
         </PreviewBox>
         <CodeBlock code={`{/* Default */}
@@ -982,7 +966,7 @@ function WebContent() {
         <Subsection title="Common Props">
           <PropsTable
             props={[
-              { name: "variant", type: '"elevated" | "outlined" | "filled"', required: false, defaultVal: '"filled"', description: "카드 스타일" },
+              { name: "variant", type: '"filled" | "outlined"', required: false, defaultVal: '"filled"', description: "카드 스타일" },
               { name: "thumbnail", type: "ReactNode", required: false, description: "좌측 썸네일" },
               { name: "title", type: "ReactNode", required: true, description: "메인 타이틀" },
               { name: "subtitle", type: "ReactNode", required: false, description: "서브타이틀" },
@@ -1110,7 +1094,7 @@ function TrendBadge({ trend, value }: { trend: "up" | "down"; value: string }) {
 }
 
 function ListCardDemo({
-  variant = "elevated",
+  variant = "filled",
   thumbnail,
   badges,
   title,

@@ -16,7 +16,6 @@
 
 import { useState, forwardRef, type HTMLAttributes, type ReactNode } from 'react';
 import { cssVarColors } from '../../tokens/colors';
-import { cssVarShadow } from '../../tokens/shadow';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
@@ -24,7 +23,7 @@ import { opacity, borderWidth } from '../../tokens/general';
 import { usePressable } from '../../utils/usePressable';
 import { transitions } from '../../utils/styles';
 
-export type ListCardVariant = 'elevated' | 'outlined' | 'filled';
+export type ListCardVariant = 'filled' | 'outlined';
 
 export interface ListCardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   /** 카드 스타일 */
@@ -53,11 +52,6 @@ export interface ListCardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'tit
 
 // Variant styles
 const variantStyles: Record<ListCardVariant, React.CSSProperties> = {
-  elevated: {
-    backgroundColor: cssVarColors.surface.base.default,
-    boxShadow: cssVarShadow.semantic.card.elevated,
-    border: 'none',
-  },
   outlined: {
     backgroundColor: cssVarColors.surface.base.default,
     boxShadow: 'none',

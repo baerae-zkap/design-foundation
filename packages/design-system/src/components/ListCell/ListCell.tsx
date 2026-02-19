@@ -8,13 +8,13 @@
  * <ListCell
  *   leading={<Avatar src="user.jpg" />}
  *   title="홍길동"
- *   subtitle="hong@example.com"
+ *   description="hong@example.com"
  *   trailing={<ChevronRight />}
  *   onClick={() => {}}
  * />
  */
 
-import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
+import { useState, forwardRef, type HTMLAttributes, type ReactNode } from 'react';
 import { cssVarColors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { typography } from '../../tokens/typography';
@@ -29,12 +29,14 @@ export interface ListCellProps extends Omit<HTMLAttributes<HTMLDivElement>, 'tit
   leading?: ReactNode;
   /** 메인 타이틀 */
   title: ReactNode;
-  /** 서브타이틀 (선택) */
-  subtitle?: ReactNode;
+  /** 설명 텍스트 (선택) */
+  description?: ReactNode;
   /** 우측 영역 (화살표, 버튼, 값 등) */
   trailing?: ReactNode;
   /** 크기 */
   size?: ListCellSize;
+  /** 수직 정렬 */
+  verticalAlign?: 'top' | 'center';
   /** 클릭 핸들러 (있으면 인터랙티브) */
   onClick?: () => void;
   /** 비활성화 */
@@ -49,7 +51,7 @@ const sizeConfig: Record<ListCellSize, {
   paddingY: number;
   paddingX: number;
   titleSize: number;
-  subtitleSize: number;
+  descriptionSize: number;
   gap: number;
 }> = {
   small: {
@@ -57,7 +59,7 @@ const sizeConfig: Record<ListCellSize, {
     paddingY: spacing.primitive[2],
     paddingX: spacing.primitive[4],
     titleSize: typography.fontSize.sm,
-    subtitleSize: typography.fontSize.xs,
+    descriptionSize: typography.fontSize.xs,
     gap: spacing.primitive[3],
   },
   medium: {
@@ -65,7 +67,7 @@ const sizeConfig: Record<ListCellSize, {
     paddingY: spacing.primitive[3],
     paddingX: spacing.primitive[4],
     titleSize: typography.fontSize.md,
-    subtitleSize: typography.fontSize.sm,
+    descriptionSize: typography.fontSize.sm,
     gap: spacing.primitive[3],
   },
   large: {
@@ -73,7 +75,7 @@ const sizeConfig: Record<ListCellSize, {
     paddingY: spacing.primitive[4],
     paddingX: spacing.primitive[4],
     titleSize: typography.fontSize.md,
-    subtitleSize: typography.fontSize.sm,
+    descriptionSize: typography.fontSize.sm,
     gap: spacing.primitive[4],
   },
 };
@@ -83,9 +85,10 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
     {
       leading,
       title,
-      subtitle,
+      description,
       trailing,
       size = 'medium',
+      verticalAlign = 'center',
       onClick,
       disabled = false,
       divider = false,
@@ -93,6 +96,11 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
       onMouseDown,
       onMouseUp,
       onMouseLeave,
+      onMouseEnter,
+      onFocus,
+      onBlur,
+      onKeyDown: externalKeyDown,
+      onKeyUp: externalKeyUp,
       ...props
     },
     ref
@@ -105,11 +113,14 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
       onMouseDown,
       onMouseUp,
       onMouseLeave,
+      onMouseEnter,
     });
+
+    const [isFocusVisible, setIsFocusVisible] = useState(false);
 
     const containerStyle: React.CSSProperties = {
       display: 'flex',
-      alignItems: 'center',
+      alignItems: verticalAlign === 'top' ? 'flex-start' : 'center',
       gap: sizeStyle.gap,
       minHeight: sizeStyle.minHeight,
       padding: `${sizeStyle.paddingY}px ${sizeStyle.paddingX}px`,
@@ -120,6 +131,8 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
           : 'transparent',
       cursor: isInteractive ? 'pointer' : 'default',
       opacity: disabled ? opacity.disabled : 1,
+      outline: isFocusVisible && isInteractive ? `2px solid var(--content-brand-default)` : 'none',
+      outlineOffset: 2,
       borderBottom: divider ? `${borderWidth.default}px solid ${cssVarColors.border.base.default}` : 'none',
       transition: transitions.background,
       ...style,
@@ -130,7 +143,7 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
       minWidth: 0,
       display: 'flex',
       flexDirection: 'column',
-      gap: 2,
+      gap: spacing.primitive[1],
     };
 
     const titleStyle: React.CSSProperties = {
@@ -143,8 +156,8 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
       whiteSpace: 'nowrap',
     };
 
-    const subtitleStyle: React.CSSProperties = {
-      fontSize: sizeStyle.subtitleSize,
+    const descriptionStyle: React.CSSProperties = {
+      fontSize: sizeStyle.descriptionSize,
       fontWeight: typography.fontWeight.regular,
       color: cssVarColors.content.base.secondary,
       lineHeight: 1.4,
@@ -164,12 +177,31 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
         ref={ref}
         role={isInteractive ? 'button' : undefined}
         tabIndex={isInteractive ? 0 : undefined}
+        aria-disabled={disabled ? true : undefined}
         onClick={handleClick}
         onKeyDown={(e) => {
-          if (isInteractive && (e.key === 'Enter' || e.key === ' ')) {
+          if (isInteractive && e.key === 'Enter') {
             e.preventDefault();
-            onClick();
+            onClick!();
           }
+          if (isInteractive && e.key === ' ') {
+            e.preventDefault();
+          }
+          externalKeyDown?.(e);
+        }}
+        onKeyUp={(e) => {
+          if (isInteractive && e.key === ' ') {
+            onClick!();
+          }
+          externalKeyUp?.(e);
+        }}
+        onFocus={(e) => {
+          setIsFocusVisible(true);
+          onFocus?.(e);
+        }}
+        onBlur={(e) => {
+          setIsFocusVisible(false);
+          onBlur?.(e);
         }}
         style={containerStyle}
         {...handlers}
@@ -185,7 +217,7 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
         {/* Content */}
         <div style={contentStyle}>
           <div style={titleStyle}>{title}</div>
-          {subtitle && <div style={subtitleStyle}>{subtitle}</div>}
+          {description && <div style={descriptionStyle}>{description}</div>}
         </div>
 
         {/* Trailing */}

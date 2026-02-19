@@ -52,10 +52,11 @@ export default function ListCellPage() {
 function ListCellPlayground() {
   const [size, setSize] = useState<ListCellSize>("medium");
   const [hasLeading, setHasLeading] = useState(true);
-  const [hasSubtitle, setHasSubtitle] = useState(true);
+  const [hasDescription, setHasDescription] = useState(true);
   const [hasTrailing, setHasTrailing] = useState(true);
   const [hasDivider, setHasDivider] = useState(true);
   const [hasSectionHeader, setHasSectionHeader] = useState(true);
+  const [verticalAlign, setVerticalAlign] = useState<'top' | 'center'>('center');
 
   return (
     <div style={{ marginBottom: spacing.primitive[8] }}>
@@ -66,27 +67,30 @@ function ListCellPlayground() {
               {hasSectionHeader && <SectionHeader title="내 자산" />}
               <ListCellDemo
                 size={size}
+                verticalAlign={verticalAlign}
                 leading={hasLeading ? <CryptoIcon symbol="ETH" color={BRAND_EXTERNAL_COLORS.crypto.ethereum} /> : undefined}
                 title="Ethereum"
-                subtitle={hasSubtitle ? "0.7812 ETH" : undefined}
+                description={hasDescription ? "0.7812 ETH" : undefined}
                 trailing={hasTrailing ? <span style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-default)" }}>₩3,245,000</span> : undefined}
                 divider={hasDivider}
                 onClick={() => {}}
               />
               <ListCellDemo
                 size={size}
+                verticalAlign={verticalAlign}
                 leading={hasLeading ? <CryptoIcon symbol="BTC" color={BRAND_EXTERNAL_COLORS.crypto.bitcoin} /> : undefined}
                 title="Bitcoin"
-                subtitle={hasSubtitle ? "0.0234 BTC" : undefined}
+                description={hasDescription ? "0.0234 BTC" : undefined}
                 trailing={hasTrailing ? <span style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-default)" }}>₩2,890,000</span> : undefined}
                 divider={hasDivider}
                 onClick={() => {}}
               />
               <ListCellDemo
                 size={size}
+                verticalAlign={verticalAlign}
                 leading={hasLeading ? <CryptoIcon symbol="SOL" color={BRAND_EXTERNAL_COLORS.crypto.solana} /> : undefined}
                 title="Solana"
-                subtitle={hasSubtitle ? "12.5 SOL" : undefined}
+                description={hasDescription ? "12.5 SOL" : undefined}
                 trailing={hasTrailing ? <span style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-default)" }}>₩1,560,000</span> : undefined}
                 onClick={() => {}}
               />
@@ -146,13 +150,13 @@ function ListCellPlayground() {
                 onChange={(v) => setHasLeading(v === "true")}
               />
               <RadioGroup
-                label="Subtitle"
+                label="Description"
                 options={[
                   { value: "false", label: "False" },
                   { value: "true", label: "True" },
                 ]}
-                value={hasSubtitle ? "true" : "false"}
-                onChange={(v) => setHasSubtitle(v === "true")}
+                value={hasDescription ? "true" : "false"}
+                onChange={(v) => setHasDescription(v === "true")}
               />
               <RadioGroup
                 label="Trailing"
@@ -171,6 +175,15 @@ function ListCellPlayground() {
                 ]}
                 value={hasDivider ? "true" : "false"}
                 onChange={(v) => setHasDivider(v === "true")}
+              />
+              <RadioGroup
+                label="Vertical Align"
+                options={[
+                  { value: "center", label: "Center" },
+                  { value: "top", label: "Top" },
+                ]}
+                value={verticalAlign}
+                onChange={(v) => setVerticalAlign(v as 'top' | 'center')}
               />
             </div>
           </div>
@@ -209,7 +222,7 @@ function DesignContent() {
             {/* Leading area - circle icon */}
             <circle cx="58" cy="45" r="18" fill="var(--surface-base-container)" />
 
-            {/* Content area - title + subtitle */}
+            {/* Content area - title + description */}
             <rect x="90" y="32" width="120" height="10" rx="4" fill="var(--content-base-default)" />
             <rect x="90" y="48" width="80" height="8" rx="4" fill="var(--content-base-alternative)" />
 
@@ -235,7 +248,7 @@ function DesignContent() {
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: spacing.primitive[4], marginTop: spacing.primitive[5], fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.medium, color: "var(--text-primary)" }}>
           <div>1. Leading</div>
-          <div style={{ textAlign: "center" }}>2. Content (Title + Subtitle)</div>
+          <div style={{ textAlign: "center" }}>2. Content (Title + Description)</div>
           <div style={{ textAlign: "right" }}>3. Trailing</div>
         </div>
       </Section>
@@ -243,18 +256,18 @@ function DesignContent() {
       {/* Variants */}
       <Section title="Variants">
         <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginBottom: spacing.primitive[5], lineHeight: 1.7 }}>
-          ListCell은 leading, subtitle, trailing 영역의 조합으로 다양한 변형을 만들 수 있습니다.
+          ListCell은 leading, description, trailing 영역의 조합으로 다양한 변형을 만들 수 있습니다.
         </p>
 
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4] }}>
           <VariantCard name="Icon + Title + Trailing" description="아이콘, 제목, 우측 액션이 모두 있는 기본 형태">
             <ListCellDemo leading={<SettingsIconDemo />} title="알림 설정" trailing={<ChevronIcon />} onClick={() => {}} />
           </VariantCard>
-          <VariantCard name="Title + Subtitle" description="제목과 부제목만 있는 간결한 형태">
-            <ListCellDemo title="홍길동" subtitle="hong@example.com" />
+          <VariantCard name="Title + Description" description="제목과 설명만 있는 간결한 형태">
+            <ListCellDemo title="홍길동" description="hong@example.com" />
           </VariantCard>
           <VariantCard name="Full (Icon + Content + Value)" description="모든 영역이 채워진 정보 표시형">
-            <ListCellDemo leading={<CryptoIcon symbol="ETH" color={BRAND_EXTERNAL_COLORS.crypto.ethereum} />} title="Ethereum" subtitle="0.7812 ETH" trailing={<span style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-default)" }}>₩3.2M</span>} />
+            <ListCellDemo leading={<CryptoIcon symbol="ETH" color={BRAND_EXTERNAL_COLORS.crypto.ethereum} />} title="Ethereum" description="0.7812 ETH" trailing={<span style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-default)" }}>₩3.2M</span>} />
           </VariantCard>
           <VariantCard name="Title Only + Chevron" description="단순 네비게이션 용도">
             <ListCellDemo title="도움말" trailing={<ChevronIcon />} onClick={() => {}} />
@@ -268,8 +281,8 @@ function DesignContent() {
           <div style={{ padding: spacing.primitive[6], width: "100%" }}>
             <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: radius.primitive.lg, overflow: "hidden", maxWidth: 360, boxShadow: "var(--shadow-sm)" }}>
               <SectionHeader title="내 자산" />
-              <ListCellDemo leading={<CryptoIcon symbol="ETH" color={BRAND_EXTERNAL_COLORS.crypto.ethereum} />} title="Ethereum" subtitle="0.7812 ETH" trailing={<span style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-default)" }}>₩3,245,000</span>} divider onClick={() => {}} />
-              <ListCellDemo leading={<CryptoIcon symbol="BTC" color={BRAND_EXTERNAL_COLORS.crypto.bitcoin} />} title="Bitcoin" subtitle="0.0234 BTC" trailing={<span style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-default)" }}>₩2,890,000</span>} onClick={() => {}} />
+              <ListCellDemo leading={<CryptoIcon symbol="ETH" color={BRAND_EXTERNAL_COLORS.crypto.ethereum} />} title="Ethereum" description="0.7812 ETH" trailing={<span style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-default)" }}>₩3,245,000</span>} divider onClick={() => {}} />
+              <ListCellDemo leading={<CryptoIcon symbol="BTC" color={BRAND_EXTERNAL_COLORS.crypto.bitcoin} />} title="Bitcoin" description="0.0234 BTC" trailing={<span style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-default)" }}>₩2,890,000</span>} onClick={() => {}} />
               <SectionHeader title="설정" />
               <ListCellDemo leading={<SettingsIconDemo />} title="알림 설정" trailing={<ChevronIcon />} divider onClick={() => {}} />
               <ListCellDemo leading={<SettingsIconDemo />} title="보안" trailing={<ChevronIcon />} onClick={() => {}} />
@@ -326,7 +339,7 @@ function DesignContent() {
                   size={s}
                   leading={<AvatarDemo />}
                   title={`${s.charAt(0).toUpperCase() + s.slice(1)} Size`}
-                  subtitle={`minHeight: ${sizeInfo[s].minHeight}px`}
+                  description={`minHeight: ${sizeInfo[s].minHeight}px`}
                   trailing={<ChevronIcon />}
                   divider={i < arr.length - 1}
                   onClick={() => {}}
@@ -340,7 +353,7 @@ function DesignContent() {
       {/* Colors */}
       <Section title="Colors">
         <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginBottom: spacing.primitive[5], lineHeight: 1.7 }}>
-          ListCell의 텍스트 색상은 <InlineCode>title</InlineCode>과 <InlineCode>subtitle</InlineCode>에 의미에 맞는 색상을 적용할 수 있습니다.
+          ListCell의 텍스트 색상은 <InlineCode>title</InlineCode>과 <InlineCode>description</InlineCode>에 의미에 맞는 색상을 적용할 수 있습니다.
         </p>
 
         <div style={{ marginBottom: spacing.primitive[6], overflow: "auto" }}>
@@ -359,7 +372,7 @@ function DesignContent() {
                 <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>기본 타이틀 텍스트</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "10px 14px" }}>Subtitle</td>
+                <td style={{ padding: "10px 14px" }}>Description</td>
                 <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>var(--content-base-secondary)</td>
                 <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>보조 텍스트, 설명</td>
               </tr>
@@ -385,9 +398,9 @@ function DesignContent() {
         <PreviewBox>
           <div style={{ padding: spacing.primitive[6], width: "100%" }}>
             <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: radius.primitive.md, border: "1px solid var(--border-solid-alternative)", overflow: "hidden", maxWidth: 360 }}>
-              <ListCellDemo leading={<StatusDot color="var(--content-success-default)" />} title="업비트" subtitle="연동됨" trailing={<span style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, color: "var(--content-success-default)" }}>연결됨</span>} divider onClick={() => {}} />
-              <ListCellDemo leading={<StatusDot color="var(--content-brand-default)" />} title="빗썸" subtitle="미연동" trailing={<span style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, color: "var(--content-brand-default)" }}>연결하기</span>} divider onClick={() => {}} />
-              <ListCellDemo leading={<StatusDot color="var(--content-error-default)" />} title="코인원" subtitle="연동 오류" trailing={<span style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, color: "var(--content-error-default)" }}>재연결</span>} onClick={() => {}} />
+              <ListCellDemo leading={<StatusDot color="var(--content-success-default)" />} title="업비트" description="연동됨" trailing={<span style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, color: "var(--content-success-default)" }}>연결됨</span>} divider onClick={() => {}} />
+              <ListCellDemo leading={<StatusDot color="var(--content-brand-default)" />} title="빗썸" description="미연동" trailing={<span style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, color: "var(--content-brand-default)" }}>연결하기</span>} divider onClick={() => {}} />
+              <ListCellDemo leading={<StatusDot color="var(--content-error-default)" />} title="코인원" description="연동 오류" trailing={<span style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, color: "var(--content-error-default)" }}>재연결</span>} onClick={() => {}} />
             </div>
           </div>
         </PreviewBox>
@@ -402,15 +415,13 @@ function DesignContent() {
         <PreviewBox>
           <div style={{ padding: spacing.primitive[6], width: "100%" }}>
             <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: radius.primitive.md, border: "1px solid var(--border-solid-alternative)", overflow: "hidden", maxWidth: 400 }}>
-              <ListCellDemo leading={<AvatarDemo />} title="Default" subtitle="기본 상태" trailing={<ChevronIcon />} divider onClick={() => {}} />
+              <ListCellDemo leading={<AvatarDemo />} title="Default" description="기본 상태" trailing={<ChevronIcon />} divider onClick={() => {}} />
               <div style={{ backgroundColor: "var(--surface-base-containerPressed)" }}>
-                <ListCellDemo leading={<AvatarDemo />} title="Pressed / Hover" subtitle="마우스 오버 또는 터치 시" trailing={<ChevronIcon />} divider />
+                <ListCellDemo leading={<AvatarDemo />} title="Pressed / Hover" description="마우스 오버 또는 터치 시" trailing={<ChevronIcon />} divider />
               </div>
-              <div style={{ opacity: 0.4, pointerEvents: "none" as const }}>
-                <ListCellDemo leading={<AvatarDemo />} title="Disabled" subtitle="비활성화 상태" trailing={<ChevronIcon />} divider />
-              </div>
+              <ListCellDemo leading={<AvatarDemo />} title="Disabled" description="비활성화 상태" trailing={<ChevronIcon />} divider disabled onClick={() => {}} />
               <div style={{ backgroundColor: "var(--surface-brand-secondary)" }}>
-                <ListCellDemo leading={<AvatarDemo />} title="Selected" subtitle="선택된 상태" trailing={<CheckIcon />} />
+                <ListCellDemo leading={<AvatarDemo />} title="Selected" description="선택된 상태" trailing={<CheckIcon />} />
               </div>
             </div>
           </div>
@@ -419,7 +430,8 @@ function DesignContent() {
         <div style={{ marginTop: spacing.primitive[4], padding: spacing.primitive[4], backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.md, fontSize: typography.fontSize.compact }}>
           <p style={{ margin: 0, color: "var(--text-secondary)", lineHeight: 1.7 }}>
             <strong style={{ color: "var(--text-primary)" }}>Default:</strong> 기본 배경 (투명)<br />
-            <strong style={{ color: "var(--text-primary)" }}>Pressed/Hover:</strong> 배경색이 <InlineCode>surface.base.containerPressed</InlineCode>로 변경<br />
+            <strong style={{ color: "var(--text-primary)" }}>Pressed:</strong> 배경색이 <InlineCode>fill.normal</InlineCode>로 변경<br />
+            <strong style={{ color: "var(--text-primary)" }}>Hover:</strong> 배경색이 <InlineCode>fill.alternative</InlineCode>로 변경<br />
             <strong style={{ color: "var(--text-primary)" }}>Disabled:</strong> 전체 opacity 감소, 상호작용 불가<br />
             <strong style={{ color: "var(--text-primary)" }}>Selected:</strong> 배경색 변경 + 체크 아이콘 표시
           </p>
@@ -503,7 +515,7 @@ function DesignContent() {
             <UsageCard
               situation="Navigation List"
               description="섹션 간 이동을 위한 네비게이션 리스트"
-              config="title + subtitle + chevron"
+              config="title + description + chevron"
               examples={["내 자산 보기", "거래 내역", "포트폴리오"]}
             />
             <UsageCard
@@ -515,7 +527,7 @@ function DesignContent() {
             <UsageCard
               situation="Info Display List"
               description="데이터를 보여주는 정보 표시형 리스트"
-              config="icon + title + subtitle + value"
+              config="icon + title + description + value"
               examples={["자산 목록", "거래 내역", "가격 현황"]}
             />
           </div>
@@ -579,14 +591,14 @@ function DesignContent() {
                 <div style={{ display: "flex", flexDirection: "column" }}>
                   <DoCard>
                     <div style={{ width: "100%", maxWidth: 280 }}>
-                      <ListCellDemo title="Ethereum" subtitle="0.7812 ETH" trailing={<span style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-default)" }}>₩3.2M</span>} />
+                      <ListCellDemo title="Ethereum" description="0.7812 ETH" trailing={<span style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-default)" }}>₩3.2M</span>} />
                     </div>
                   </DoCard>
                 </div>
                 <div style={{ display: "flex", flexDirection: "column" }}>
                   <DontCard>
                     <div style={{ width: "100%", maxWidth: 280 }}>
-                      <ListCellDemo title="Ethereum 이더리움 코인 가상화폐 블록체인" subtitle="0.7812 ETH" trailing={<span style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-default)" }}>₩3,245,000원</span>} />
+                      <ListCellDemo title="Ethereum 이더리움 코인 가상화폐 블록체인" description="0.7812 ETH" trailing={<span style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-default)" }}>₩3,245,000원</span>} />
                     </div>
                   </DontCard>
                 </div>
@@ -607,14 +619,14 @@ function DesignContent() {
                 <div style={{ display: "flex", flexDirection: "column" }}>
                   <DoCard>
                     <div style={{ width: "100%", maxWidth: 280 }}>
-                      <ListCellDemo title="삼성전자" subtitle="005930" trailing={<span style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-default)" }}>72,300원</span>} />
+                      <ListCellDemo title="삼성전자" description="005930" trailing={<span style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-default)" }}>72,300원</span>} />
                     </div>
                   </DoCard>
                 </div>
                 <div style={{ display: "flex", flexDirection: "column" }}>
                   <DontCard>
                     <div style={{ width: "100%", maxWidth: 280 }}>
-                      <ListCellDemo title="삼성전자 주식회사" subtitle="005930" trailing={<span style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-default)" }}>현재가: 72,300원</span>} />
+                      <ListCellDemo title="삼성전자 주식회사" description="005930" trailing={<span style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-default)" }}>현재가: 72,300원</span>} />
                     </div>
                   </DontCard>
                 </div>
@@ -686,7 +698,7 @@ function DesignContent() {
             <tbody>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                 <td style={{ padding: "10px 14px" }}><InlineCode>role=&quot;button&quot;</InlineCode></td>
-                <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>onClick/onPress가 있으면 자동 설정</td>
+                <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>onClick가 있으면 자동 설정</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                 <td style={{ padding: "10px 14px" }}><InlineCode>aria-disabled</InlineCode></td>
@@ -702,7 +714,7 @@ function DesignContent() {
 
         <Subsection title="Design Principles">
           <div style={{ display: "grid", gap: spacing.primitive[4] }}>
-            <PrincipleCard number={1} title="Interactive Role" desc="onClick/onPress가 있으면 role='button'이 자동 설정됩니다. 스크린 리더가 인터랙티브 요소로 인식합니다." />
+            <PrincipleCard number={1} title="Interactive Role" desc="onClick가 있으면 role='button'이 자동 설정됩니다. 스크린 리더가 인터랙티브 요소로 인식합니다." />
             <PrincipleCard number={2} title="Keyboard Navigation" desc="Enter/Space 키로 활성화할 수 있습니다. Tab 키로 리스트 항목 간 이동이 가능합니다." />
             <PrincipleCard number={3} title="Touch Target" desc="최소 44px 높이로 터치 영역을 확보합니다. small 사이즈도 iOS HIG 기준을 충족합니다." />
           </div>
@@ -789,15 +801,15 @@ function WebContent() {
         <PreviewBox>
           <div style={{ padding: spacing.primitive[6], width: "100%" }}>
             <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: radius.primitive.md, border: "1px solid var(--border-solid-alternative)", overflow: "hidden", maxWidth: 360 }}>
-              <ListCellDemo leading={<AvatarDemo />} title="홍길동" subtitle="hong@example.com" trailing={<ChevronIcon />} divider onClick={() => {}} />
-              <ListCellDemo leading={<AvatarDemo />} title="김철수" subtitle="kim@example.com" trailing={<ChevronIcon />} onClick={() => {}} />
+              <ListCellDemo leading={<AvatarDemo />} title="홍길동" description="hong@example.com" trailing={<ChevronIcon />} divider onClick={() => {}} />
+              <ListCellDemo leading={<AvatarDemo />} title="김철수" description="kim@example.com" trailing={<ChevronIcon />} onClick={() => {}} />
             </div>
           </div>
         </PreviewBox>
         <CodeBlock code={`<ListCell
   leading={<Avatar src="user.jpg" />}
   title="홍길동"
-  subtitle="hong@example.com"
+  description="hong@example.com"
   trailing={<ChevronRight />}
   onClick={() => {}}
 />`} />
@@ -841,15 +853,15 @@ function WebContent() {
           <PreviewBox>
             <div style={{ padding: spacing.primitive[6], width: "100%" }}>
               <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: radius.primitive.md, border: "1px solid var(--border-solid-alternative)", overflow: "hidden", maxWidth: 360 }}>
-                <ListCellDemo leading={<CryptoIcon symbol="ETH" color={BRAND_EXTERNAL_COLORS.crypto.ethereum} />} title="Ethereum" subtitle="0.7812 ETH" trailing={<span style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-default)" }}>₩3,245,000</span>} divider onClick={() => {}} />
-                <ListCellDemo leading={<CryptoIcon symbol="BTC" color={BRAND_EXTERNAL_COLORS.crypto.bitcoin} />} title="Bitcoin" subtitle="0.0234 BTC" trailing={<span style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-default)" }}>₩2,890,000</span>} onClick={() => {}} />
+                <ListCellDemo leading={<CryptoIcon symbol="ETH" color={BRAND_EXTERNAL_COLORS.crypto.ethereum} />} title="Ethereum" description="0.7812 ETH" trailing={<span style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-default)" }}>₩3,245,000</span>} divider onClick={() => {}} />
+                <ListCellDemo leading={<CryptoIcon symbol="BTC" color={BRAND_EXTERNAL_COLORS.crypto.bitcoin} />} title="Bitcoin" description="0.0234 BTC" trailing={<span style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-default)" }}>₩2,890,000</span>} onClick={() => {}} />
               </div>
             </div>
           </PreviewBox>
           <CodeBlock code={`<ListCell
   leading={<CryptoIcon symbol="ETH" />}
   title="Ethereum"
-  subtitle="0.7812 ETH"
+  description="0.7812 ETH"
   trailing={<span>₩3,245,000</span>}
   onClick={() => navigate('/eth-detail')}
 />`} />
@@ -860,16 +872,16 @@ function WebContent() {
         <PreviewBox>
           <div style={{ padding: spacing.primitive[6], width: "100%" }}>
             <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: radius.primitive.md, border: "1px solid var(--border-solid-alternative)", overflow: "hidden", maxWidth: 360 }}>
-              <ListCellDemo leading={<StatusDot color="var(--content-success-default)" />} title="업비트" subtitle="연동됨" trailing={<span style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, color: "var(--content-success-default)" }}>연결됨</span>} divider onClick={() => {}} />
-              <ListCellDemo leading={<StatusDot color="var(--content-brand-default)" />} title="빗썸" subtitle="미연동" trailing={<span style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, color: "var(--content-brand-default)" }}>연결하기</span>} divider onClick={() => {}} />
-              <ListCellDemo leading={<StatusDot color="var(--content-error-default)" />} title="코인원" subtitle="연동 오류" trailing={<span style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, color: "var(--content-error-default)" }}>재연결</span>} onClick={() => {}} />
+              <ListCellDemo leading={<StatusDot color="var(--content-success-default)" />} title="업비트" description="연동됨" trailing={<span style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, color: "var(--content-success-default)" }}>연결됨</span>} divider onClick={() => {}} />
+              <ListCellDemo leading={<StatusDot color="var(--content-brand-default)" />} title="빗썸" description="미연동" trailing={<span style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, color: "var(--content-brand-default)" }}>연결하기</span>} divider onClick={() => {}} />
+              <ListCellDemo leading={<StatusDot color="var(--content-error-default)" />} title="코인원" description="연동 오류" trailing={<span style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, color: "var(--content-error-default)" }}>재연결</span>} onClick={() => {}} />
             </div>
           </div>
         </PreviewBox>
         <CodeBlock code={`{/* Success - 연결 상태 */}
 <ListCell
   title="업비트"
-  subtitle="연동됨"
+  description="연동됨"
   trailing={<Text color="success">연결됨</Text>}
   onClick={() => {}}
 />
@@ -877,7 +889,7 @@ function WebContent() {
 {/* Brand - 액션 유도 */}
 <ListCell
   title="빗썸"
-  subtitle="미연동"
+  description="미연동"
   trailing={<Text color="brand">연결하기</Text>}
   onClick={() => connectExchange('bithumb')}
 />
@@ -885,7 +897,7 @@ function WebContent() {
 {/* Error - 에러 상태 */}
 <ListCell
   title="코인원"
-  subtitle="연동 오류"
+  description="연동 오류"
   trailing={<Text color="error">재연결</Text>}
   onClick={() => reconnect('coinone')}
 />`} />
@@ -901,7 +913,7 @@ function WebContent() {
                   size={s}
                   leading={<AvatarDemo />}
                   title={`${s.charAt(0).toUpperCase() + s.slice(1)} Size`}
-                  subtitle={`minHeight: ${sizeInfo[s].minHeight}px`}
+                  description={`minHeight: ${sizeInfo[s].minHeight}px`}
                   trailing={<ChevronIcon />}
                   divider={i < arr.length - 1}
                   onClick={() => {}}
@@ -910,33 +922,31 @@ function WebContent() {
             </div>
           </div>
         </PreviewBox>
-        <CodeBlock code={`<ListCell size="small" title="Small" subtitle="44px" onClick={() => {}} />
-<ListCell size="medium" title="Medium" subtitle="56px" onClick={() => {}} />
-<ListCell size="large" title="Large" subtitle="72px" onClick={() => {}} />`} />
+        <CodeBlock code={`<ListCell size="small" title="Small" description="44px" onClick={() => {}} />
+<ListCell size="medium" title="Medium" description="56px" onClick={() => {}} />
+<ListCell size="large" title="Large" description="72px" onClick={() => {}} />`} />
       </Section>
 
       <Section title="States">
         <PreviewBox>
           <div style={{ padding: spacing.primitive[6], width: "100%" }}>
             <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: radius.primitive.md, border: "1px solid var(--border-solid-alternative)", overflow: "hidden", maxWidth: 360 }}>
-              <ListCellDemo leading={<AvatarDemo />} title="Default" subtitle="클릭 가능" trailing={<ChevronIcon />} divider onClick={() => {}} />
-              <div style={{ opacity: 0.4, pointerEvents: "none" as const }}>
-                <ListCellDemo leading={<AvatarDemo />} title="Disabled" subtitle="비활성화" trailing={<ChevronIcon />} />
-              </div>
+              <ListCellDemo leading={<AvatarDemo />} title="Default" description="클릭 가능" trailing={<ChevronIcon />} divider onClick={() => {}} />
+              <ListCellDemo leading={<AvatarDemo />} title="Disabled" description="비활성화" trailing={<ChevronIcon />} disabled onClick={() => {}} />
             </div>
           </div>
         </PreviewBox>
         <CodeBlock code={`{/* Default */}
 <ListCell
   title="Default"
-  subtitle="클릭 가능"
+  description="클릭 가능"
   onClick={() => {}}
 />
 
 {/* Disabled */}
 <ListCell
   title="Disabled"
-  subtitle="비활성화"
+  description="비활성화"
   disabled
 />`} />
       </Section>
@@ -947,10 +957,11 @@ function WebContent() {
             props={[
               { name: "leading", type: "ReactNode", required: false, description: "좌측 영역 (아이콘, 아바타)" },
               { name: "title", type: "ReactNode", required: true, description: "메인 타이틀" },
-              { name: "subtitle", type: "ReactNode", required: false, description: "서브타이틀" },
+              { name: "description", type: "ReactNode", required: false, description: "설명 텍스트" },
               { name: "trailing", type: "ReactNode", required: false, description: "우측 영역" },
               { name: "size", type: '"small" | "medium" | "large"', required: false, defaultVal: '"medium"', description: "크기" },
               { name: "divider", type: "boolean", required: false, defaultVal: "false", description: "하단 구분선" },
+              { name: "verticalAlign", type: '"top" | "center"', required: false, defaultVal: '"center"', description: "수직 정렬" },
               { name: "disabled", type: "boolean", required: false, defaultVal: "false", description: "비활성화" },
             ]}
           />
@@ -960,6 +971,7 @@ function WebContent() {
             props={[
               { name: "onClick", type: "() => void", required: false, description: "클릭 핸들러" },
               { name: "aria-label", type: "string", required: false, description: "스크린 리더용 레이블" },
+              { name: "aria-disabled", type: "boolean", required: false, description: "disabled 시 자동 설정. 보조 기술에 비활성화 상태 전달" },
             ]}
           />
         </Subsection>
@@ -1079,28 +1091,34 @@ function ListCellDemo({
   size = "medium",
   leading,
   title,
-  subtitle,
+  description,
   trailing,
   divider = false,
   onClick,
+  disabled,
+  verticalAlign,
 }: {
   size?: ListCellSize;
   leading?: React.ReactNode;
   title: React.ReactNode;
-  subtitle?: React.ReactNode;
+  description?: React.ReactNode;
   trailing?: React.ReactNode;
   divider?: boolean;
   onClick?: () => void;
+  disabled?: boolean;
+  verticalAlign?: 'top' | 'center';
 }) {
   return (
     <ListCell
       size={size}
       leading={leading}
       title={title}
-      subtitle={subtitle}
+      description={description}
       trailing={trailing}
       divider={divider}
       onClick={onClick}
+      disabled={disabled}
+      verticalAlign={verticalAlign}
     />
   );
 }
