@@ -223,7 +223,7 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
         {...props}
       >
         {/* Main row */}
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: spacing.primitive[3] }}>
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: spacing.primitive[4] }}>
           {/* Leading Content */}
           {leadingContent && (
             <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center', alignSelf: 'center' }}>
