@@ -18,7 +18,7 @@ import { useState, forwardRef, type HTMLAttributes, type ReactNode } from 'react
 import { cssVarColors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { typography } from '../../tokens/typography';
-import { opacity, borderWidth } from '../../tokens/general';
+import { borderWidth } from '../../tokens/general';
 import { usePressable } from '../../utils/usePressable';
 import { transitions } from '../../utils/styles';
 
@@ -39,8 +39,6 @@ export interface ListCellProps extends Omit<HTMLAttributes<HTMLDivElement>, 'tit
   verticalAlign?: 'top' | 'center';
   /** 클릭 핸들러 (있으면 인터랙티브) */
   onClick?: () => void;
-  /** 비활성화 */
-  disabled?: boolean;
   /** 하단 구분선 표시 */
   divider?: boolean;
 }
@@ -90,7 +88,6 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
       size = 'medium',
       verticalAlign = 'center',
       onClick,
-      disabled = false,
       divider = false,
       style,
       onMouseDown,
@@ -106,7 +103,7 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
     ref
   ) => {
     const sizeStyle = sizeConfig[size];
-    const isInteractive = !!onClick && !disabled;
+    const isInteractive = !!onClick;
 
     const { isPressed, isHovered, handlers } = usePressable<HTMLDivElement>({
       disabled: !isInteractive,
@@ -130,7 +127,6 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
           ? cssVarColors.fill.alternative
           : 'transparent',
       cursor: isInteractive ? 'pointer' : 'default',
-      opacity: disabled ? opacity.disabled : 1,
       outline: isFocusVisible && isInteractive ? `2px solid var(--content-brand-default)` : 'none',
       outlineOffset: 2,
       borderBottom: divider ? `${borderWidth.default}px solid ${cssVarColors.border.base.default}` : 'none',
@@ -177,7 +173,6 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
         ref={ref}
         role={isInteractive ? 'button' : undefined}
         tabIndex={isInteractive ? 0 : undefined}
-        aria-disabled={disabled ? true : undefined}
         onClick={handleClick}
         onKeyDown={(e) => {
           if (isInteractive && e.key === 'Enter') {

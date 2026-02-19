@@ -51,9 +51,6 @@ function ListCardPlayground() {
   const [hasSubtitle, setHasSubtitle] = useState(true);
   const [hasMeta, setHasMeta] = useState(true);
   const [hasAction, setHasAction] = useState(false);
-  const [hasLeading, setHasLeading] = useState(false);
-  const [hasBottom, setHasBottom] = useState(false);
-  const [isDisabled, setIsDisabled] = useState(false);
 
   return (
     <div style={{ marginBottom: spacing.primitive[8] }}>
@@ -72,16 +69,7 @@ function ListCardPlayground() {
                   <path d="M9 18l6-6-6-6"/>
                 </svg>
               ) : undefined}
-              leadingContent={hasLeading ? (
-                <div style={{ width: 4, height: 36, backgroundColor: "var(--surface-brand-default)", borderRadius: 2 }} />
-              ) : undefined}
-              bottomContent={hasBottom ? (
-                <div style={{ height: 4, backgroundColor: "var(--surface-base-container)", borderRadius: 2, overflow: "hidden" }}>
-                  <div style={{ width: "72%", height: "100%", backgroundColor: "var(--surface-brand-default)", borderRadius: 2 }} />
-                </div>
-              ) : undefined}
-              disabled={isDisabled}
-              onClick={isDisabled ? undefined : () => {}}
+              onClick={() => {}}
             />
           </div>
 
@@ -159,33 +147,6 @@ function ListCardPlayground() {
                 value={hasAction ? "true" : "false"}
                 onChange={(v) => setHasAction(v === "true")}
               />
-              <RadioGroup
-                label="Leading"
-                options={[
-                  { value: "false", label: "False" },
-                  { value: "true", label: "True" },
-                ]}
-                value={hasLeading ? "true" : "false"}
-                onChange={(v) => setHasLeading(v === "true")}
-              />
-              <RadioGroup
-                label="Bottom"
-                options={[
-                  { value: "false", label: "False" },
-                  { value: "true", label: "True" },
-                ]}
-                value={hasBottom ? "true" : "false"}
-                onChange={(v) => setHasBottom(v === "true")}
-              />
-              <RadioGroup
-                label="Disabled"
-                options={[
-                  { value: "false", label: "False" },
-                  { value: "true", label: "True" },
-                ]}
-                value={isDisabled ? "true" : "false"}
-                onChange={(v) => setIsDisabled(v === "true")}
-              />
             </div>
           </div>
         </div>
@@ -224,8 +185,6 @@ function DesignContent() {
             </defs>
             {/* Card */}
             <rect x="20" y="10" width="360" height="110" rx="12" fill="var(--surface-base-default)" stroke="var(--border-solid-alternative)" strokeWidth="1" filter="url(#shadow)" />
-            {/* Leading Content */}
-            <rect x="28" y="36" width="12" height="38" rx="4" fill="var(--surface-brand-secondary)" />
             {/* Thumbnail */}
             <rect x="46" y="18" width="68" height="68" rx="8" fill="var(--surface-base-container)" />
             {/* Badge */}
@@ -238,8 +197,6 @@ function DesignContent() {
             <rect x="122" y="76" width="60" height="12" rx="4" fill="var(--content-base-default)" />
             {/* Action */}
             <rect x="332" y="28" width="30" height="54" rx="6" fill="var(--surface-base-container)" />
-            {/* Bottom Content */}
-            <rect x="30" y="92" width="320" height="10" rx="4" fill="var(--surface-base-alternative)" />
 
             {/* Label 1: Thumbnail — top */}
             <line x1="80" y1="-4" x2="80" y2="18" stroke="var(--content-base-default)" strokeWidth="1.5" />
@@ -256,20 +213,11 @@ function DesignContent() {
             <circle cx="347" cy="-14" r="10" fill="var(--content-base-default)" />
             <text x="347" y="-10" textAnchor="middle" fill="var(--content-base-onColor)" fontSize="10" fontWeight={typography.fontWeight.semibold}>4</text>
 
-            {/* Label 5: Leading Content — left */}
-            <line x1="18" y1="55" x2="28" y2="55" stroke="var(--content-base-default)" strokeWidth="1.5" />
-            <circle cx="8" cy="55" r="10" fill="var(--content-base-default)" />
-            <text x="8" y="59" textAnchor="middle" fill="var(--content-base-onColor)" fontSize="10" fontWeight={typography.fontWeight.semibold}>5</text>
-
             {/* Label 2: Content — bottom */}
             <line x1="240" y1="120" x2="240" y2="134" stroke="var(--content-base-default)" strokeWidth="1.5" />
             <circle cx="240" cy="144" r="10" fill="var(--content-base-default)" />
             <text x="240" y="148" textAnchor="middle" fill="var(--content-base-onColor)" fontSize="10" fontWeight={typography.fontWeight.semibold}>2</text>
 
-            {/* Label 6: Bottom Content — bottom */}
-            <line x1="160" y1="102" x2="160" y2="134" stroke="var(--content-base-default)" strokeWidth="1.5" />
-            <circle cx="160" cy="144" r="10" fill="var(--content-base-default)" />
-            <text x="160" y="148" textAnchor="middle" fill="var(--content-base-onColor)" fontSize="10" fontWeight={typography.fontWeight.semibold}>6</text>
           </svg>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: spacing.primitive[3], marginTop: spacing.primitive[5], fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.medium, color: "var(--text-primary)" }}>
@@ -277,8 +225,6 @@ function DesignContent() {
           <div>2. Content (Title, Subtitle, Meta)</div>
           <div>3. Badges</div>
           <div>4. Action</div>
-          <div>5. Leading Content</div>
-          <div>6. Bottom Content</div>
         </div>
       </Section>
 
@@ -368,18 +314,13 @@ function DesignContent() {
                 <ListCardDemo variant="filled" thumbnail={<EthereumIcon size={40} />} title="Ethereum" subtitle="0.7812 ETH" meta="₩3,245,000" />
               </div>
             </div>
-            <div>
-              <p style={{ fontSize: typography.fontSize.xs, color: "var(--content-base-secondary)", marginBottom: spacing.primitive[2] }}>Disabled</p>
-              <ListCardDemo variant="filled" thumbnail={<EthereumIcon size={40} />} title="Ethereum" subtitle="0.7812 ETH" meta="₩3,245,000" disabled />
-            </div>
           </div>
         </PreviewBox>
 
         <div style={{ marginTop: spacing.primitive[4], padding: spacing.primitive[4], backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.md, fontSize: typography.fontSize.compact }}>
           <p style={{ margin: 0, color: "var(--text-secondary)", lineHeight: 1.7 }}>
             <strong style={{ color: "var(--text-primary)" }}>Default:</strong> 기본 스타일 (variant별 배경/테두리)<br />
-            <strong style={{ color: "var(--text-primary)" }}>Pressed/Hover:</strong> outlined → <InlineCode>surface.base.alternative</InlineCode>, filled → <InlineCode>surface.base.container</InlineCode><br />
-            <strong style={{ color: "var(--text-primary)" }}>Disabled:</strong> 전체 opacity 감소, 상호작용 불가
+            <strong style={{ color: "var(--text-primary)" }}>Pressed/Hover:</strong> outlined → <InlineCode>surface.base.alternative</InlineCode>, filled → <InlineCode>surface.base.container</InlineCode>
           </p>
         </div>
 
@@ -747,7 +688,6 @@ function DesignContent() {
                   ["Title color", "content.base.default", "var(--content-base-default)"],
                   ["Subtitle color", "content.base.secondary", "var(--content-base-secondary)"],
                   ["Meta color", "content.base.default", "var(--content-base-default)"],
-                  ["Disabled opacity", "opacity.disabled", "0.5"],
                 ].map(([el, token, cssVar], i, arr) => (
                   <tr key={i} style={{ borderBottom: i < arr.length - 1 ? "1px solid var(--divider)" : undefined }}>
                     <td style={{ padding: "12px 16px", color: "var(--text-primary)" }}>{el}</td>
@@ -942,23 +882,13 @@ function WebContent() {
         <PreviewBox>
           <div style={{ padding: spacing.primitive[6], display: "flex", flexDirection: "column", gap: spacing.primitive[3] }}>
             <ListCardDemo variant="filled" thumbnail={<EthereumIcon size={40} />} title="Default" subtitle="클릭 가능" meta="₩3,245,000" onClick={() => {}} />
-            <ListCardDemo variant="filled" thumbnail={<EthereumIcon size={40} />} title="Disabled" subtitle="비활성화" meta="₩3,245,000" disabled />
           </div>
         </PreviewBox>
-        <CodeBlock code={`{/* Default */}
-<ListCard
+        <CodeBlock code={`<ListCard
   title="Default"
   subtitle="클릭 가능"
   meta="₩3,245,000"
   onClick={() => {}}
-/>
-
-{/* Disabled */}
-<ListCard
-  title="Disabled"
-  subtitle="비활성화"
-  meta="₩3,245,000"
-  disabled
 />`} />
       </Section>
 
@@ -973,9 +903,6 @@ function WebContent() {
               { name: "meta", type: "ReactNode", required: false, description: "메타 정보 (가격)" },
               { name: "badges", type: "ReactNode", required: false, description: "상단 배지 영역" },
               { name: "action", type: "ReactNode", required: false, description: "우측 액션 영역" },
-              { name: "leadingContent", type: "ReactNode", required: false, description: "썸네일 왼쪽 인디케이터 (선택, 상태 등)" },
-              { name: "bottomContent", type: "ReactNode", required: false, description: "카드 하단 자유 영역 (진행률 바, 추가 정보 등)" },
-              { name: "disabled", type: "boolean", required: false, defaultVal: "false", description: "비활성화" },
             ]}
           />
         </Subsection>
@@ -1101,7 +1028,6 @@ function ListCardDemo({
   subtitle,
   meta,
   onClick,
-  disabled,
 }: {
   variant?: ListCardVariant;
   thumbnail?: React.ReactNode;
@@ -1110,7 +1036,6 @@ function ListCardDemo({
   subtitle?: React.ReactNode;
   meta?: React.ReactNode;
   onClick?: () => void;
-  disabled?: boolean;
 }) {
   return (
     <ListCard
@@ -1121,7 +1046,6 @@ function ListCardDemo({
       subtitle={subtitle}
       meta={meta}
       onClick={onClick}
-      disabled={disabled}
     />
   );
 }

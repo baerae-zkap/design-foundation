@@ -419,7 +419,6 @@ function DesignContent() {
               <div style={{ backgroundColor: "var(--surface-base-containerPressed)" }}>
                 <ListCellDemo leading={<AvatarDemo />} title="Pressed / Hover" description="마우스 오버 또는 터치 시" trailing={<ChevronIcon />} divider />
               </div>
-              <ListCellDemo leading={<AvatarDemo />} title="Disabled" description="비활성화 상태" trailing={<ChevronIcon />} divider disabled onClick={() => {}} />
               <div style={{ backgroundColor: "var(--surface-brand-secondary)" }}>
                 <ListCellDemo leading={<AvatarDemo />} title="Selected" description="선택된 상태" trailing={<CheckIcon />} />
               </div>
@@ -432,7 +431,6 @@ function DesignContent() {
             <strong style={{ color: "var(--text-primary)" }}>Default:</strong> 기본 배경 (투명)<br />
             <strong style={{ color: "var(--text-primary)" }}>Pressed:</strong> 배경색이 <InlineCode>fill.normal</InlineCode>로 변경<br />
             <strong style={{ color: "var(--text-primary)" }}>Hover:</strong> 배경색이 <InlineCode>fill.alternative</InlineCode>로 변경<br />
-            <strong style={{ color: "var(--text-primary)" }}>Disabled:</strong> 전체 opacity 감소, 상호작용 불가<br />
             <strong style={{ color: "var(--text-primary)" }}>Selected:</strong> 배경색 변경 + 체크 아이콘 표시
           </p>
         </div>
@@ -478,15 +476,6 @@ function DesignContent() {
           </StateCard>
           <StateCard label="Focused" sublabel="키보드 포커스">
             <div style={{ width: 140, height: 48, borderRadius: radius.primitive.sm, backgroundColor: "var(--surface-base-default)", border: "2px solid var(--content-brand-default)", display: "flex", alignItems: "center", padding: "0 10px", gap: spacing.primitive[2] }}>
-              <div style={{ width: 24, height: 24, borderRadius: "50%", backgroundColor: "var(--surface-base-container)", flexShrink: 0 }} />
-              <div style={{ flex: 1 }}>
-                <div style={{ width: 48, height: 6, borderRadius: 2, backgroundColor: "var(--content-base-default)", marginBottom: spacing.primitive[1] }} />
-                <div style={{ width: 32, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-alternative)" }} />
-              </div>
-            </div>
-          </StateCard>
-          <StateCard label="Disabled" sublabel="비활성화">
-            <div style={{ width: 140, height: 48, borderRadius: radius.primitive.sm, backgroundColor: "var(--surface-base-default)", border: "1px solid var(--divider)", display: "flex", alignItems: "center", padding: "0 10px", gap: spacing.primitive[2], opacity: 0.4 }}>
               <div style={{ width: 24, height: 24, borderRadius: "50%", backgroundColor: "var(--surface-base-container)", flexShrink: 0 }} />
               <div style={{ flex: 1 }}>
                 <div style={{ width: 48, height: 6, borderRadius: 2, backgroundColor: "var(--content-base-default)", marginBottom: spacing.primitive[1] }} />
@@ -699,10 +688,6 @@ function DesignContent() {
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
                 <td style={{ padding: "10px 14px" }}><InlineCode>role=&quot;button&quot;</InlineCode></td>
                 <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>onClick가 있으면 자동 설정</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "10px 14px" }}><InlineCode>aria-disabled</InlineCode></td>
-                <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>비활성화 상태를 보조 기술에 전달</td>
               </tr>
               <tr>
                 <td style={{ padding: "10px 14px" }}><InlineCode>keyboard</InlineCode></td>
@@ -931,23 +916,14 @@ function WebContent() {
         <PreviewBox>
           <div style={{ padding: spacing.primitive[6], width: "100%" }}>
             <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: radius.primitive.md, border: "1px solid var(--border-solid-alternative)", overflow: "hidden", maxWidth: 360 }}>
-              <ListCellDemo leading={<AvatarDemo />} title="Default" description="클릭 가능" trailing={<ChevronIcon />} divider onClick={() => {}} />
-              <ListCellDemo leading={<AvatarDemo />} title="Disabled" description="비활성화" trailing={<ChevronIcon />} disabled onClick={() => {}} />
+              <ListCellDemo leading={<AvatarDemo />} title="Default" description="클릭 가능" trailing={<ChevronIcon />} onClick={() => {}} />
             </div>
           </div>
         </PreviewBox>
-        <CodeBlock code={`{/* Default */}
-<ListCell
+        <CodeBlock code={`<ListCell
   title="Default"
   description="클릭 가능"
   onClick={() => {}}
-/>
-
-{/* Disabled */}
-<ListCell
-  title="Disabled"
-  description="비활성화"
-  disabled
 />`} />
       </Section>
 
@@ -962,7 +938,6 @@ function WebContent() {
               { name: "size", type: '"small" | "medium" | "large"', required: false, defaultVal: '"medium"', description: "크기" },
               { name: "divider", type: "boolean", required: false, defaultVal: "false", description: "하단 구분선" },
               { name: "verticalAlign", type: '"top" | "center"', required: false, defaultVal: '"center"', description: "수직 정렬" },
-              { name: "disabled", type: "boolean", required: false, defaultVal: "false", description: "비활성화" },
             ]}
           />
         </Subsection>
@@ -971,7 +946,6 @@ function WebContent() {
             props={[
               { name: "onClick", type: "() => void", required: false, description: "클릭 핸들러" },
               { name: "aria-label", type: "string", required: false, description: "스크린 리더용 레이블" },
-              { name: "aria-disabled", type: "boolean", required: false, description: "disabled 시 자동 설정. 보조 기술에 비활성화 상태 전달" },
             ]}
           />
         </Subsection>
@@ -1095,7 +1069,6 @@ function ListCellDemo({
   trailing,
   divider = false,
   onClick,
-  disabled,
   verticalAlign,
 }: {
   size?: ListCellSize;
@@ -1105,7 +1078,6 @@ function ListCellDemo({
   trailing?: React.ReactNode;
   divider?: boolean;
   onClick?: () => void;
-  disabled?: boolean;
   verticalAlign?: 'top' | 'center';
 }) {
   return (
@@ -1117,7 +1089,6 @@ function ListCellDemo({
       trailing={trailing}
       divider={divider}
       onClick={onClick}
-      disabled={disabled}
       verticalAlign={verticalAlign}
     />
   );

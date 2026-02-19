@@ -19,7 +19,7 @@ import { cssVarColors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
-import { opacity, borderWidth } from '../../tokens/general';
+import { borderWidth } from '../../tokens/general';
 import { usePressable } from '../../utils/usePressable';
 import { transitions } from '../../utils/styles';
 
@@ -40,14 +40,8 @@ export interface ListCardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'tit
   action?: ReactNode;
   /** 상단 배지 영역 */
   badges?: ReactNode;
-  /** 썸네일 왼쪽 인디케이터 (선택, 상태 등) */
-  leadingContent?: ReactNode;
-  /** 카드 하단 자유 영역 (진행률 바, 추가 정보 등) */
-  bottomContent?: ReactNode;
   /** 클릭 핸들러 */
   onClick?: () => void;
-  /** 비활성화 */
-  disabled?: boolean;
 }
 
 // Variant styles
@@ -74,10 +68,7 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
       meta,
       action,
       badges,
-      leadingContent,
-      bottomContent,
       onClick,
-      disabled = false,
       style,
       onMouseDown,
       onMouseUp,
@@ -92,7 +83,7 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
     ref
   ) => {
     const variantStyle = variantStyles[variant];
-    const isInteractive = !!onClick && !disabled;
+    const isInteractive = !!onClick;
 
     const { isPressed, handlers } = usePressable<HTMLDivElement>({
       disabled: !isInteractive,
@@ -118,7 +109,6 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
       padding: spacing.primitive[4],
       borderRadius: radius.component.card.sm,
       cursor: isInteractive ? 'pointer' : 'default',
-      opacity: disabled ? opacity.disabled : 1,
       outline: isFocusVisible && isInteractive ? `2px solid var(--content-brand-default)` : 'none',
       outlineOffset: 2,
       transition: transitions.background,
@@ -218,13 +208,6 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
       >
         {/* Main row */}
         <div style={{ display: 'flex', alignItems: 'flex-start', gap: spacing.primitive[4] }}>
-          {/* Leading Content */}
-          {leadingContent && (
-            <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center', alignSelf: 'center' }}>
-              {leadingContent}
-            </div>
-          )}
-
           {/* Thumbnail */}
           {thumbnail && (
             <div style={thumbnailContainerStyle}>
@@ -254,12 +237,6 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
           )}
         </div>
 
-        {/* Bottom Content */}
-        {bottomContent && (
-          <div style={{ marginTop: spacing.primitive[2] }}>
-            {bottomContent}
-          </div>
-        )}
       </div>
     );
   }
