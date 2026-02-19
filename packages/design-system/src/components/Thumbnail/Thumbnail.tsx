@@ -19,6 +19,7 @@ import { cssVarColors } from '../../tokens/colors';
 import { radius as radiusTokens } from '../../tokens/radius';
 import { spacing } from '../../tokens/spacing';
 import { typography } from '../../tokens/typography';
+import { borderWidth } from '../../tokens/general';
 
 export type ThumbnailAspectRatio = '1:1' | '16:9' | '4:3' | '3:2' | '2:1' | '9:16' | '3:4';
 
@@ -80,7 +81,7 @@ export const Thumbnail = forwardRef<HTMLDivElement, ThumbnailProps>(
       width: typeof size === 'number' ? `${size}px` : size || '100%',
       overflow: 'hidden',
       borderRadius: radius ? radiusTokens.primitive.md : 0,
-      border: border ? `1px solid ${cssVarColors.border.base.default}` : 'none',
+      border: border ? `${borderWidth.default}px solid ${cssVarColors.border.base.default}` : 'none',
       cursor: onClick ? 'pointer' : 'default',
       ...style,
     };

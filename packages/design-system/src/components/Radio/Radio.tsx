@@ -17,7 +17,7 @@ import { cssVarColors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
-import { opacity } from '../../tokens/general';
+import { opacity, borderWidth } from '../../tokens/general';
 import { transitions } from '../../utils/styles';
 
 export type RadioSize = 'small' | 'medium';
@@ -46,7 +46,7 @@ const sizeConfig: Record<
   small: {
     outer: 18,
     inner: 8,
-    fontSize: 13,
+    fontSize: typography.fontSize.compact,
     gap: spacing.primitive[2], // 8px normal
     tightGap: spacing.primitive[1], // 4px tight
   },
@@ -111,7 +111,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
       width: sizeStyle.outer,
       height: sizeStyle.outer,
       borderRadius: radius.primitive.full, // 9999
-      border: `2px solid ${
+      border: `${borderWidth.strong}px solid ${
         disabled
           ? selected
             ? cssVarColors.content.disabled.default
@@ -134,7 +134,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
       borderRadius: radius.primitive.full, // 9999
       backgroundColor: disabled ? cssVarColors.content.disabled.default : cssVarColors.content.brand.default,
       transform: selected ? 'scale(1)' : 'scale(0)',
-      transition: 'transform 150ms ease',
+      transition: transitions.transform,
     };
 
     const labelStyle: React.CSSProperties = {

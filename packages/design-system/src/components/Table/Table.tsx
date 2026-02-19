@@ -26,6 +26,7 @@ import { cssVarColors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
+import { borderWidth } from '../../tokens/general';
 
 export type TableVariant = 'default' | 'striped';
 export type TableSize = 'small' | 'medium' | 'large';
@@ -120,7 +121,7 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
 
     return (
       <TableContext.Provider value={{ variant, size }}>
-        <div style={{ borderRadius: radius.component.card.sm, overflow: 'hidden', border: `1px solid ${cssVarColors.border.base.default}` }}>
+        <div style={{ borderRadius: radius.component.card.sm, overflow: 'hidden', border: `${borderWidth.default}px solid ${cssVarColors.border.base.default}` }}>
           <table
             ref={ref}
             data-variant={variant}
@@ -168,7 +169,7 @@ TableBody.displayName = 'TableBody';
 export const TableRow = forwardRef<HTMLTableRowElement, TableRowProps>(
   ({ children, style, ...props }, ref) => {
     const rowStyle: React.CSSProperties = {
-      borderBottom: `1px solid ${cssVarColors.border.base.default}`,
+      borderBottom: `${borderWidth.default}px solid ${cssVarColors.border.base.default}`,
       ...style,
     };
 
@@ -195,7 +196,7 @@ export const TableHeadCell = forwardRef<HTMLTableCellElement, TableHeadCellProps
       fontWeight: typography.fontWeight.semibold,
       color: cssVarColors.content.base.neutral,
       backgroundColor: cssVarColors.surface.base.alternative,
-      borderBottom: `1px solid ${cssVarColors.border.base.default}`,
+      borderBottom: `${borderWidth.default}px solid ${cssVarColors.border.base.default}`,
       minHeight: sizeStyle.minHeight,
       ...style,
     };

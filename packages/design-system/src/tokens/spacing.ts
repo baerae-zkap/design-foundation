@@ -62,6 +62,7 @@ export const spacing = {
       paddingBottom: 20,
       safeAreaBottom: 32,
     },
+    minTouchTarget: 44,
   },
 
   component: {
@@ -93,6 +94,7 @@ export const spacing = {
       paddingY: 12,
       labelGap: 8,
       helperGap: 4,
+      height: { sm: 36, md: 44, lg: 52 },
     },
     list: {
       itemPaddingX: 20,

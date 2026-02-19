@@ -23,6 +23,8 @@ import { cssVarShadow } from '../../tokens/shadow';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
+import { transitions } from '../../utils/styles';
+import { borderWidth, zIndex as zIndexToken } from '../../tokens/general';
 
 export type SelectSize = 'small' | 'medium' | 'large';
 export type SelectRenderType = 'text' | 'chip';
@@ -320,13 +322,13 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
       paddingTop: renderType === 'chip' && multiple ? spacing.primitive[2] : 0,
       paddingBottom: renderType === 'chip' && multiple ? spacing.primitive[2] : 0,
       borderRadius: radius.component.input.default,
-      border: `1px solid ${getBorderColor()}`,
+      border: `${borderWidth.default}px solid ${getBorderColor()}`,
       backgroundColor: getBackgroundColor(),
       display: 'flex',
       alignItems: 'center',
       gap: spacing.primitive[2],
       cursor: disabled || readOnly ? 'not-allowed' : 'pointer',
-      transition: 'border-color 0.2s ease',
+      transition: transitions.border,
     };
 
     return (
@@ -427,7 +429,7 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
               boxShadow: cssVarShadow.semantic.dropdown.default,
               maxHeight: 400,
               overflowY: 'auto',
-              zIndex: 1000,
+              zIndex: zIndexToken.dropdown,
             }}
           >
             {options.map((item, index) => {
@@ -466,7 +468,7 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
                           width: 18,
                           height: 18,
                           borderRadius: radius.primitive.xs,
-                          border: isSelected ? 'none' : `1.5px solid ${cssVarColors.border.solid.alternative}`,
+                          border: isSelected ? 'none' : `${borderWidth.medium}px solid ${cssVarColors.border.solid.alternative}`,
                           backgroundColor: isSelected ? cssVarColors.surface.brand.default : 'transparent',
                           display: 'flex',
                           alignItems: 'center',

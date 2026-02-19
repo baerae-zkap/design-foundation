@@ -3,113 +3,108 @@
 import { useState } from "react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { PlatformTabs, CodeBlock, PreviewBox, Platform, highlightCode } from "@/components/PlatformTabs";
-import { Chip } from '@baerae-zkap/design-system';
-import { Section, Subsection } from "@/components/docs/Section";
+import { Chip, typography, spacing, radius } from '@baerae-zkap/design-system';
+import { Section, Subsection, InlineCode } from "@/components/docs/Section";
 import { PropsTable } from "@/components/docs/PropsTable";
 import { PrincipleCard, VariantCard, DoCard, DontCard } from "@/components/docs/Cards";
 import { RadioGroup, CopyButton } from "@/components/docs/Playground";
-import { DoLabel, DontLabel } from "@/components/docs/Labels";
+
 
 // Types
-type ChipVariant = "filled" | "outlined";
-type ChipColor = "brandDefault" | "baseDefault" | "successDefault" | "errorDefault" | "warningDefault";
+type ChipVariant = "filled" | "weak";
+type ChipColor = "primary" | "neutral" | "success" | "error" | "warning";
 type ChipSize = "small" | "medium" | "large";
 
 // Size configurations
 const sizeConfig: Record<ChipSize, { height: number; fontSize: number; paddingX: number; iconSize: number }> = {
-  small: { height: 24, fontSize: 12, paddingX: 8, iconSize: 14 },
-  medium: { height: 32, fontSize: 14, paddingX: 12, iconSize: 18 },
-  large: { height: 40, fontSize: 16, paddingX: 16, iconSize: 22 },
+  small: { height: spacing.primitive[6], fontSize: typography.fontSize.xs, paddingX: spacing.primitive[2], iconSize: 14 },
+  medium: { height: spacing.primitive[8], fontSize: typography.fontSize.sm, paddingX: spacing.primitive[3], iconSize: 18 },
+  large: { height: spacing.primitive[10], fontSize: typography.fontSize.md, paddingX: spacing.primitive[4], iconSize: 22 },
 };
 
 // Color configurations
 const colorConfig: Record<ChipColor, {
   filled: { bg: string; bgPressed: string; bgSelected: string; text: string; textSelected: string };
-  outlined: { bg: string; bgPressed: string; bgSelected: string; border: string; text: string; textSelected: string };
+  weak: { bg: string; bgPressed: string; bgSelected: string; text: string; textSelected: string };
 }> = {
-  brandDefault: {
+  primary: {
     filled: {
+      bg: 'var(--surface-brand-default)',
+      bgPressed: 'var(--surface-brand-defaultPressed)',
+      bgSelected: 'var(--surface-brand-default)',
+      text: 'var(--content-base-onColor)',
+      textSelected: 'var(--content-base-onColor)',
+    },
+    weak: {
       bg: 'var(--surface-brand-secondary)',
       bgPressed: 'var(--surface-brand-secondaryPressed)',
-      bgSelected: 'var(--content-brand-default)',
+      bgSelected: 'var(--surface-brand-default)',
       text: 'var(--content-brand-default)',
-      textSelected: 'var(--static-white)',
-    },
-    outlined: {
-      bg: 'transparent',
-      bgPressed: 'var(--effect-alpha-brand-selection)',
-      bgSelected: 'var(--content-brand-default)',
-      border: 'var(--content-brand-default)',
-      text: 'var(--content-brand-default)',
-      textSelected: 'var(--static-white)',
+      textSelected: 'var(--content-base-onColor)',
     },
   },
-  baseDefault: {
+  neutral: {
     filled: {
-      bg: 'var(--surface-base-alternative)',
-      bgPressed: 'var(--border-base-default)',
-      bgSelected: 'var(--content-base-strong)',
-      text: 'var(--content-base-strong)',
-      textSelected: 'var(--static-white)',
+      bg: 'var(--surface-base-container)',
+      bgPressed: 'var(--surface-base-containerPressed)',
+      bgSelected: 'var(--content-base-default)',
+      text: 'var(--content-base-default)',
+      textSelected: 'var(--content-base-onColor)',
     },
-    outlined: {
-      bg: 'transparent',
-      bgPressed: 'var(--effect-alpha-fill-alternative)',
-      bgSelected: 'var(--content-base-strong)',
-      border: 'var(--border-base-default)',
-      text: 'var(--content-base-strong)',
-      textSelected: 'var(--static-white)',
+    weak: {
+      bg: 'var(--fill-alternative)',
+      bgPressed: 'var(--fill-normal)',
+      bgSelected: 'var(--content-base-default)',
+      text: 'var(--content-base-default)',
+      textSelected: 'var(--content-base-onColor)',
     },
   },
-  successDefault: {
+  success: {
     filled: {
+      bg: 'var(--surface-success-solid)',
+      bgPressed: 'var(--surface-success-solidPressed)',
+      bgSelected: 'var(--surface-success-solid)',
+      text: 'var(--content-base-onColor)',
+      textSelected: 'var(--content-base-onColor)',
+    },
+    weak: {
       bg: 'var(--surface-success-default)',
       bgPressed: 'var(--surface-success-defaultPressed)',
-      bgSelected: 'var(--content-success-default)',
+      bgSelected: 'var(--surface-success-solid)',
       text: 'var(--content-success-strong)',
-      textSelected: 'var(--static-white)',
-    },
-    outlined: {
-      bg: 'transparent',
-      bgPressed: 'var(--surface-success-default)',
-      bgSelected: 'var(--content-success-default)',
-      border: 'var(--border-success-default)',
-      text: 'var(--content-success-strong)',
-      textSelected: 'var(--static-white)',
+      textSelected: 'var(--content-base-onColor)',
     },
   },
-  errorDefault: {
+  error: {
     filled: {
+      bg: 'var(--surface-error-solid)',
+      bgPressed: 'var(--surface-error-solidPressed)',
+      bgSelected: 'var(--surface-error-solid)',
+      text: 'var(--content-base-onColor)',
+      textSelected: 'var(--content-base-onColor)',
+    },
+    weak: {
       bg: 'var(--surface-error-default)',
       bgPressed: 'var(--surface-error-defaultPressed)',
-      bgSelected: 'var(--content-error-default)',
+      bgSelected: 'var(--surface-error-solid)',
       text: 'var(--content-error-default)',
-      textSelected: 'var(--static-white)',
-    },
-    outlined: {
-      bg: 'transparent',
-      bgPressed: 'var(--surface-error-default)',
-      bgSelected: 'var(--content-error-default)',
-      border: 'var(--border-error-default)',
-      text: 'var(--content-error-default)',
-      textSelected: 'var(--static-white)',
+      textSelected: 'var(--content-base-onColor)',
     },
   },
-  warningDefault: {
+  warning: {
     filled: {
-      bg: 'var(--surface-warning-default)',
-      bgPressed: 'var(--surface-warning-default)',
-      bgSelected: 'var(--content-warning-default)',
-      text: 'var(--content-warning-strong)',
-      textSelected: 'var(--static-white)',
+      bg: 'var(--surface-warning-solid)',
+      bgPressed: 'var(--surface-warning-solidPressed)',
+      bgSelected: 'var(--surface-warning-solid)',
+      text: 'var(--content-base-onColor)',
+      textSelected: 'var(--content-base-onColor)',
     },
-    outlined: {
-      bg: 'transparent',
-      bgPressed: 'var(--surface-warning-default)',
-      bgSelected: 'var(--content-warning-default)',
-      border: 'var(--border-warning-default)',
+    weak: {
+      bg: 'var(--surface-warning-default)',
+      bgPressed: 'var(--surface-warning-defaultPressed)',
+      bgSelected: 'var(--surface-warning-solid)',
       text: 'var(--content-warning-strong)',
-      textSelected: 'var(--static-white)',
+      textSelected: 'var(--content-base-onColor)',
     },
   },
 };
@@ -126,10 +121,10 @@ export default function ChipPage() {
       />
 
       {/* Header */}
-      <h1 style={{ fontSize: 28, fontWeight: 700, marginBottom: 8, color: "var(--text-primary)", letterSpacing: "-0.02em" }}>
+      <h1 style={{ fontSize: typography.fontSize['3xl'], fontWeight: typography.fontWeight.bold, marginBottom: spacing.primitive[2], color: "var(--text-primary)", letterSpacing: "-0.02em" }}>
         Chip
       </h1>
-      <p style={{ fontSize: 15, color: "var(--text-secondary)", marginBottom: 32, lineHeight: 1.6 }}>
+      <p style={{ fontSize: typography.fontSize.md, color: "var(--text-secondary)", marginBottom: spacing.primitive[8], lineHeight: 1.7 }}>
         사용자의 선택, 필터링, 입력값을 시각적으로 나타내는 컴팩트한 인터랙티브 요소입니다.
         짧은 텍스트로 상태를 표현하며, 선택/해제 토글이나 태그 제거 등의 인터랙션을 제공합니다.
       </p>
@@ -147,14 +142,14 @@ export default function ChipPage() {
 
 function ChipPlayground() {
   const [variant, setVariant] = useState<ChipVariant>("filled");
-  const [color, setColor] = useState<ChipColor>("baseDefault");
+  const [color, setColor] = useState<ChipColor>("neutral");
   const [size, setSize] = useState<ChipSize>("medium");
   const [selected, setSelected] = useState(false);
   const [showClose, setShowClose] = useState(false);
   const generateCode = () => {
     const props = [];
     if (variant !== "filled") props.push(`variant="${variant}"`);
-    if (color !== "baseDefault") props.push(`color="${color}"`);
+    if (color !== "neutral") props.push(`color="${color}"`);
     if (size !== "medium") props.push(`size="${size}"`);
     if (selected) props.push("selected");
     if (showClose) props.push("onClose={() => {}}");
@@ -167,10 +162,10 @@ function ChipPlayground() {
   };
 
   return (
-    <div style={{ marginBottom: 32 }}>
+    <div style={{ marginBottom: spacing.primitive[8] }}>
       <div
         style={{
-          borderRadius: 20,
+          borderRadius: radius.primitive.xl,
           overflow: "hidden",
           backgroundColor: "var(--surface-base-alternative)",
         }}
@@ -203,7 +198,7 @@ function ChipPlayground() {
               backgroundColor: "var(--surface-base-alternative)",
               display: "flex",
               flexDirection: "column",
-              padding: 16,
+              padding: spacing.primitive[4],
               overflow: "hidden",
               height: "100%",
               boxSizing: "border-box",
@@ -213,13 +208,13 @@ function ChipPlayground() {
               style={{
                 flex: 1,
                 minHeight: 0,
-                padding: 24,
+                padding: spacing.primitive[6],
                 overflowY: "auto",
                 display: "flex",
                 flexDirection: "column",
                 gap: 28,
                 backgroundColor: "var(--surface-base-default)",
-                borderRadius: 16,
+                borderRadius: spacing.primitive[4],
               }}
             >
               {/* Variant */}
@@ -227,7 +222,7 @@ function ChipPlayground() {
                 label="Variant"
                 options={[
                   { value: "filled", label: "Filled" },
-                  { value: "outlined", label: "Outlined" },
+                  { value: "weak", label: "Weak" },
                 ]}
                 value={variant}
                 onChange={(v) => setVariant(v as ChipVariant)}
@@ -237,11 +232,11 @@ function ChipPlayground() {
               <RadioGroup
                 label="Color"
                 options={[
-                  { value: "brandDefault", label: "Brand" },
-                  { value: "baseDefault", label: "Base" },
-                  { value: "successDefault", label: "Success" },
-                  { value: "errorDefault", label: "Error" },
-                  { value: "warningDefault", label: "Warning" },
+                  { value: "primary", label: "Primary" },
+                  { value: "neutral", label: "Neutral" },
+                  { value: "success", label: "Success" },
+                  { value: "error", label: "Error" },
+                  { value: "warning", label: "Warning" },
                 ]}
                 value={color}
                 onChange={(v) => setColor(v as ChipColor)}
@@ -287,7 +282,7 @@ function ChipPlayground() {
       </div>
 
       {/* Generated Code */}
-      <div style={{ marginTop: 16, borderRadius: 12, overflow: "hidden", border: "1px solid var(--divider)" }}>
+      <div style={{ marginTop: spacing.primitive[4], borderRadius: radius.primitive.md, overflow: "hidden", border: "1px solid var(--divider)" }}>
         <div
           style={{
             padding: "10px 16px",
@@ -297,15 +292,15 @@ function ChipPlayground() {
             justifyContent: "space-between",
           }}
         >
-          <span style={{ fontSize: 13, fontWeight: 500, color: "var(--docs-code-active-text)" }}>Web</span>
+          <span style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.medium, color: "var(--docs-code-active-text)" }}>Web</span>
           <CopyButton text={generateCode()} />
         </div>
         <pre
           style={{
             margin: 0,
-            padding: 16,
-            fontSize: 13,
-            lineHeight: 1.6,
+            padding: spacing.primitive[4],
+            fontSize: typography.fontSize.compact,
+            lineHeight: 1.7,
             color: "var(--docs-code-text)",
             backgroundColor: "var(--docs-code-surface)",
             fontFamily: "'SF Mono', 'Fira Code', monospace",
@@ -328,40 +323,21 @@ function PlatformContent({ platform }: { platform: Platform }) {
 
 function DesignContent() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
-      {/* Overview */}
+    <div style={{ display: "flex", flexDirection: "column", gap: spacing.primitive[12] }}>
+      {/* 1. Overview */}
       <Section title="Overview">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 24, lineHeight: 1.7 }}>
-          Chip은 <strong style={{ color: "var(--text-primary)" }}>짧은 텍스트로 선택 상태, 카테고리, 속성을 나타내는 인터랙티브 요소</strong>입니다.
-          Button보다 작고 가벼우며, Badge와 달리 사용자가 직접 조작할 수 있습니다.
-          필터 선택/해제, 태그 입력/삭제 등 <strong style={{ color: "var(--text-primary)" }}>반복적이고 가역적인 선택 인터랙션</strong>에 적합합니다.
+        <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", lineHeight: 1.7 }}>
+          <InlineCode>Chip</InlineCode> 컴포넌트는 필터, 태그, 선택 등을 나타내는 컴팩트한 인터랙티브 요소예요.
+          카테고리 필터링, 태그 입력/삭제 등 반복적이고 가역적인 선택 인터랙션에 적합해요.
         </p>
-
-        <Subsection title="When to use">
-          <ul style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.8, paddingLeft: 20, margin: 0 }}>
-            <li>카테고리 필터를 선택/해제할 때 (예: 상품 목록 필터링)</li>
-            <li>여러 옵션 중 하나 또는 다수를 선택할 때 (예: 관심 분야 선택)</li>
-            <li>사용자가 입력한 태그를 표시하고 삭제할 수 있을 때 (예: 검색 태그, 수신자)</li>
-            <li>상태를 간결하게 표시하면서 인터랙션이 필요할 때 (예: 거래 상태 필터)</li>
-          </ul>
-        </Subsection>
-
-        <Subsection title="When NOT to use">
-          <ul style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.8, paddingLeft: 20, margin: 0 }}>
-            <li><strong style={{ color: "var(--text-primary)" }}>주요 CTA 액션</strong>이 필요하면 → <code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>Button</code> 사용</li>
-            <li><strong style={{ color: "var(--text-primary)" }}>읽기 전용 상태 표시</strong>만 필요하면 → <code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>ContentBadge</code> 사용</li>
-            <li><strong style={{ color: "var(--text-primary)" }}>텍스트 링크 스타일</strong>의 보조 액션이면 → <code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>TextButton</code> 사용</li>
-            <li><strong style={{ color: "var(--text-primary)" }}>긴 텍스트</strong>가 들어가야 하면 → Chip 대신 다른 컴포넌트 고려</li>
-          </ul>
-        </Subsection>
       </Section>
 
-      {/* Anatomy */}
+      {/* 2. Anatomy */}
       <Section title="Anatomy">
         <div style={{
           backgroundColor: "var(--surface-base-alternative)",
-          borderRadius: 16,
-          padding: "48px 40px",
+          borderRadius: radius.primitive.md,
+          padding: `${spacing.primitive[12]}px ${spacing.primitive[10]}px`,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -375,7 +351,7 @@ function DesignContent() {
             <path d="M144 60 L147 63 L153 57" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
 
             {/* Label text */}
-            <text x="200" y="65" textAnchor="middle" fill="white" fontSize="14" fontWeight="500">Selected Tag</text>
+            <text x="200" y="65" textAnchor="middle" fill="white" fontSize={typography.fontSize.sm} fontWeight={typography.fontWeight.medium}>Selected Tag</text>
 
             {/* Close button */}
             <circle cx="272" cy="60" r="10" fill="white" fillOpacity="0.2" />
@@ -396,25 +372,25 @@ function DesignContent() {
 
             {/* Numbered circles */}
             <circle cx="55" cy="60" r="14" fill="var(--content-base-default)" />
-            <text x="55" y="65" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">1</text>
+            <text x="55" y="65" textAnchor="middle" fill="white" fontSize={typography.fontSize.xs} fontWeight={typography.fontWeight.semibold}>1</text>
 
             <circle cx="148" cy="15" r="14" fill="var(--content-base-default)" />
-            <text x="148" y="20" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">2</text>
+            <text x="148" y="20" textAnchor="middle" fill="white" fontSize={typography.fontSize.xs} fontWeight={typography.fontWeight.semibold}>2</text>
 
             <circle cx="200" cy="105" r="14" fill="var(--content-base-default)" />
-            <text x="200" y="110" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">3</text>
+            <text x="200" y="110" textAnchor="middle" fill="white" fontSize={typography.fontSize.xs} fontWeight={typography.fontWeight.semibold}>3</text>
 
             <circle cx="272" cy="15" r="14" fill="var(--content-base-default)" />
-            <text x="272" y="20" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">4</text>
+            <text x="272" y="20" textAnchor="middle" fill="white" fontSize={typography.fontSize.xs} fontWeight={typography.fontWeight.semibold}>4</text>
           </svg>
         </div>
         <div style={{
           display: "grid",
           gridTemplateColumns: "1fr 1fr 1fr 1fr",
-          gap: 16,
-          marginTop: 20,
-          fontSize: 14,
-          fontWeight: 500,
+          gap: spacing.primitive[4],
+          marginTop: spacing.primitive[5],
+          fontSize: typography.fontSize.sm,
+          fontWeight: typography.fontWeight.medium,
           color: "var(--text-primary)",
         }}>
           <div>1. Container</div>
@@ -424,354 +400,159 @@ function DesignContent() {
         </div>
       </Section>
 
-      {/* Interaction States */}
-      <Section title="Interaction States">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 24 }}>
-          Chip은 선택 상태를 포함하여 다양한 인터랙션 상태를 지원합니다. 선택/해제 토글과 호버, 누름 피드백이 시각적으로 명확히 구분됩니다.
-        </p>
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
-          gap: 16,
-          padding: 24,
-          backgroundColor: "var(--surface-base-alternative)",
-          borderRadius: 16,
-        }}>
-          <InteractionStateCard label="Default" sublabel="기본 상태" color="var(--content-brand-default)" bgColor="var(--surface-brand-secondary)" />
-          <InteractionStateCard label="Selected" sublabel="선택됨" color="var(--static-white)" bgColor="var(--content-brand-default)" />
-          <InteractionStateCard label="Hover" sublabel="마우스 오버" color="var(--content-brand-default)" bgColor="var(--surface-brand-secondaryPressed)" />
-          <InteractionStateCard label="Pressed" sublabel="누름" color="var(--content-brand-default)" bgColor="var(--surface-brand-secondaryPressed)" />
-          <InteractionStateCard label="Disabled" sublabel="비활성화" color="var(--content-disabled-default)" bgColor="var(--surface-disabled-default)" opacity={0.4} />
-          <InteractionStateCard label="Focused" sublabel="키보드 포커스" color="var(--content-brand-default)" bgColor="var(--surface-brand-secondary)" showFocusRing />
-        </div>
-      </Section>
-
-      {/* Design Tokens (New) */}
-      <Section title="Design Tokens">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 16 }}>
-          컴포넌트에 적용된 디자인 토큰입니다. 커스터마이징 시 아래 토큰을 참조하세요.
-        </p>
-        <div style={{ overflowX: "auto" }}>
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
-            <thead>
-              <tr style={{ borderBottom: "2px solid var(--border-default)" }}>
-                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: 600 }}>속성</th>
-                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: 600 }}>토큰</th>
-                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: 600 }}>값 (Light)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>배경색 (filled)</td>
-                <td style={{ padding: "10px 12px" }}>
-                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>--surface-brand-secondary</code>
-                </td>
-                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>
-                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
-                    <span style={{ width: 12, height: 12, borderRadius: 3, backgroundColor: "var(--surface-brand-secondary)" }} />
-                    Brand Light
-                  </span>
-                </td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>텍스트 색상</td>
-                <td style={{ padding: "10px 12px" }}>
-                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>--content-brand-default</code>
-                </td>
-                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>
-                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
-                    <span style={{ width: 12, height: 12, borderRadius: 3, backgroundColor: "var(--content-brand-default)" }} />
-                    Brand Blue
-                  </span>
-                </td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>높이 (sm / md / lg)</td>
-                <td style={{ padding: "10px 12px" }}>
-                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>chip.height</code>
-                </td>
-                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>24px / 32px / 40px</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>수평 패딩 (sm / md / lg)</td>
-                <td style={{ padding: "10px 12px" }}>
-                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>primitive.2 / 3 / 4</code>
-                </td>
-                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>8px / 12px / 16px</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>모서리 반경</td>
-                <td style={{ padding: "10px 12px" }}>
-                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>height / 2</code>
-                </td>
-                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>12px / 16px / 20px (완전 라운드)</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </Section>
-
-      {/* UX Writing */}
-      <Section title="UX Writing">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 24 }}>
-          사용자에게 명확한 경험을 전달하기 위한 텍스트 작성 가이드입니다.
-        </p>
-        <div style={{ display: "grid", gap: 12 }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-            <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-success-default)", border: "1px solid var(--border-success-default)" }}>
-              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-success-default)", marginBottom: 8 }}>DO</div>
-              <code style={{ fontSize: 14, color: "var(--text-primary)" }}>&quot;최신순&quot;</code>
-              <p style={{ fontSize: 12, color: "var(--text-tertiary)", margin: 0, marginTop: 4 }}>짧고 간결하게 표현합니다</p>
-            </div>
-            <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-error-default)", border: "1px solid var(--border-error-default)" }}>
-              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-error-default)", marginBottom: 8 }}>DON&apos;T</div>
-              <code style={{ fontSize: 14, color: "var(--text-primary)" }}>&quot;최신순으로 정렬합니다&quot;</code>
-              <p style={{ fontSize: 12, color: "var(--text-tertiary)", margin: 0, marginTop: 4 }}>Chip에는 문장을 넣지 않습니다</p>
-            </div>
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-            <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-success-default)", border: "1px solid var(--border-success-default)" }}>
-              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-success-default)", marginBottom: 8 }}>DO</div>
-              <code style={{ fontSize: 14, color: "var(--text-primary)" }}>&quot;서울&quot;</code>
-              <p style={{ fontSize: 12, color: "var(--text-tertiary)", margin: 0, marginTop: 4 }}>가능한 한 짧게 작성합니다</p>
-            </div>
-            <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-error-default)", border: "1px solid var(--border-error-default)" }}>
-              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-error-default)", marginBottom: 8 }}>DON&apos;T</div>
-              <code style={{ fontSize: 14, color: "var(--text-primary)" }}>&quot;서울특별시&quot;</code>
-              <p style={{ fontSize: 12, color: "var(--text-tertiary)", margin: 0, marginTop: 4 }}>공식 명칭보다 축약형을 사용합니다</p>
-            </div>
-          </div>
-        </div>
-      </Section>
-
-      {/* Behaviors */}
-      <Section title="Behaviors">
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
-          <VariantCard name="Selectable (selected)" description="필터/카테고리 선택. selected=true 시 체크 아이콘 표시.">
-            <div style={{ display: "flex", gap: 8 }}>
-              <ChipDemo color="brandDefault">전체</ChipDemo>
-              <ChipDemo color="brandDefault" selected>전자제품</ChipDemo>
-            </div>
-          </VariantCard>
-          <VariantCard name="Removable (onClose)" description="태그 삭제. onClose 제공 시 X 버튼 표시.">
-            <div style={{ display: "flex", gap: 8 }}>
-              <ChipDemo onClose={() => {}}>React</ChipDemo>
-              <ChipDemo onClose={() => {}}>TypeScript</ChipDemo>
-            </div>
-          </VariantCard>
-        </div>
-      </Section>
-
-      {/* Variants */}
+      {/* 3. Variants (+ Behaviors subsection) */}
       <Section title="Variants">
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4] }}>
           <VariantCard name="Filled" description="배경색이 채워진 기본 스타일">
-            <div style={{ display: "flex", gap: 8 }}>
-              <ChipDemo variant="filled" color="brandDefault">Brand</ChipDemo>
-              <ChipDemo variant="filled" color="baseDefault">Base</ChipDemo>
+            <div style={{ display: "flex", gap: spacing.primitive[2] }}>
+              <ChipDemo variant="filled" color="primary">Primary</ChipDemo>
+              <ChipDemo variant="filled" color="neutral">Neutral</ChipDemo>
             </div>
           </VariantCard>
-          <VariantCard name="Outlined" description="테두리만 있는 가벼운 스타일">
-            <div style={{ display: "flex", gap: 8 }}>
-              <ChipDemo variant="outlined" color="brandDefault">Brand</ChipDemo>
-              <ChipDemo variant="outlined" color="baseDefault">Base</ChipDemo>
+          <VariantCard name="Weak" description="투명 배경의 가벼운 스타일. 보더 없이 텍스트 색상으로만 구분합니다.">
+            <div style={{ display: "flex", gap: spacing.primitive[2] }}>
+              <ChipDemo variant="weak" color="primary">Primary</ChipDemo>
+              <ChipDemo variant="weak" color="neutral">Neutral</ChipDemo>
             </div>
           </VariantCard>
         </div>
+
+        <Subsection title="Behaviors">
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4] }}>
+            <VariantCard name="Selectable (selected)" description="필터/카테고리 선택. selected=true 시 체크 아이콘 표시.">
+              <div style={{ display: "flex", gap: spacing.primitive[2] }}>
+                <ChipDemo color="primary">전체</ChipDemo>
+                <ChipDemo color="primary" selected>전자제품</ChipDemo>
+              </div>
+            </VariantCard>
+            <VariantCard name="Removable (onClose)" description="태그 삭제. onClose 제공 시 X 버튼 표시.">
+              <div style={{ display: "flex", gap: spacing.primitive[2] }}>
+                <ChipDemo onClose={() => {}}>React</ChipDemo>
+                <ChipDemo onClose={() => {}}>TypeScript</ChipDemo>
+              </div>
+            </VariantCard>
+          </div>
+        </Subsection>
       </Section>
 
-      {/* Sizes */}
+      {/* 4. Sizes */}
       <Section title="Sizes">
         <PreviewBox>
-          <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
+          <div style={{ display: "flex", gap: spacing.primitive[4], alignItems: "center" }}>
             <div style={{ textAlign: "center" }}>
               <ChipDemo size="small">Small</ChipDemo>
-              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginTop: 8 }}>24px</p>
+              <p style={{ fontSize: typography.fontSize["2xs"], color: "var(--content-base-secondary)", marginTop: spacing.primitive[2] }}>24px</p>
             </div>
             <div style={{ textAlign: "center" }}>
               <ChipDemo size="medium">Medium</ChipDemo>
-              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginTop: 8 }}>32px</p>
+              <p style={{ fontSize: typography.fontSize["2xs"], color: "var(--content-base-secondary)", marginTop: spacing.primitive[2] }}>32px</p>
             </div>
             <div style={{ textAlign: "center" }}>
               <ChipDemo size="large">Large</ChipDemo>
-              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginTop: 8 }}>40px</p>
+              <p style={{ fontSize: typography.fontSize["2xs"], color: "var(--content-base-secondary)", marginTop: spacing.primitive[2] }}>40px</p>
             </div>
           </div>
         </PreviewBox>
       </Section>
 
-      {/* Colors */}
+      {/* 5. Colors */}
       <Section title="Colors">
         <Subsection title="Filled">
           <PreviewBox>
-            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-              <ChipDemo color="brandDefault">Brand</ChipDemo>
-              <ChipDemo color="baseDefault">Base</ChipDemo>
-              <ChipDemo color="successDefault">Success</ChipDemo>
-              <ChipDemo color="errorDefault">Error</ChipDemo>
-              <ChipDemo color="warningDefault">Warning</ChipDemo>
+            <div style={{ display: "flex", gap: spacing.primitive[2], flexWrap: "wrap" }}>
+              <ChipDemo color="primary">Primary</ChipDemo>
+              <ChipDemo color="neutral">Neutral</ChipDemo>
+              <ChipDemo color="success">Success</ChipDemo>
+              <ChipDemo color="error">Error</ChipDemo>
+              <ChipDemo color="warning">Warning</ChipDemo>
             </div>
           </PreviewBox>
         </Subsection>
-        <Subsection title="Outlined">
+        <Subsection title="Weak">
           <PreviewBox>
-            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-              <ChipDemo variant="outlined" color="brandDefault">Brand</ChipDemo>
-              <ChipDemo variant="outlined" color="baseDefault">Base</ChipDemo>
-              <ChipDemo variant="outlined" color="successDefault">Success</ChipDemo>
-              <ChipDemo variant="outlined" color="errorDefault">Error</ChipDemo>
-              <ChipDemo variant="outlined" color="warningDefault">Warning</ChipDemo>
+            <div style={{ display: "flex", gap: spacing.primitive[2], flexWrap: "wrap" }}>
+              <ChipDemo variant="weak" color="primary">Primary</ChipDemo>
+              <ChipDemo variant="weak" color="neutral">Neutral</ChipDemo>
+              <ChipDemo variant="weak" color="success">Success</ChipDemo>
+              <ChipDemo variant="weak" color="error">Error</ChipDemo>
+              <ChipDemo variant="weak" color="warning">Warning</ChipDemo>
             </div>
           </PreviewBox>
         </Subsection>
       </Section>
 
-      {/* States */}
+      {/* 6. States (+ Interaction States subsection) */}
       <Section title="States">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
+        <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginBottom: spacing.primitive[4], lineHeight: 1.7 }}>
           Chip의 다양한 상태를 확인할 수 있습니다. 직접 클릭해서 Pressed 상태를 확인해보세요.
         </p>
         <PreviewBox>
-          <div style={{ display: "flex", gap: 16, flexWrap: "wrap", alignItems: "center" }}>
+          <div style={{ display: "flex", gap: spacing.primitive[4], flexWrap: "wrap", alignItems: "center" }}>
             <div style={{ textAlign: "center" }}>
-              <ChipDemo color="brandDefault">Default</ChipDemo>
-              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginTop: 8 }}>기본</p>
+              <ChipDemo color="primary">Default</ChipDemo>
+              <p style={{ fontSize: typography.fontSize["2xs"], color: "var(--content-base-secondary)", marginTop: spacing.primitive[2] }}>기본</p>
             </div>
             <div style={{ textAlign: "center" }}>
-              <ChipDemo color="brandDefault" selected>Selected</ChipDemo>
-              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginTop: 8 }}>선택됨</p>
+              <ChipDemo color="primary" selected>Selected</ChipDemo>
+              <p style={{ fontSize: typography.fontSize["2xs"], color: "var(--content-base-secondary)", marginTop: spacing.primitive[2] }}>선택됨</p>
             </div>
             <div style={{ textAlign: "center" }}>
-              <ChipDemo color="brandDefault" disabled>Disabled</ChipDemo>
-              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginTop: 8 }}>비활성화</p>
+              <ChipDemo color="primary" disabled>Disabled</ChipDemo>
+              <p style={{ fontSize: typography.fontSize["2xs"], color: "var(--content-base-secondary)", marginTop: spacing.primitive[2] }}>비활성화</p>
             </div>
           </div>
         </PreviewBox>
-      </Section>
 
-      {/* Design Tokens */}
-      <Section title="Design Tokens">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
-          Chip 컴포넌트에 적용된 Foundation 기반 디자인 토큰입니다.
-        </p>
-
-        <Subsection title="Size별 토큰">
-          <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)" }}>
-            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
-              <thead>
-                <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Property</th>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Small</th>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Medium</th>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Large</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                  <td style={{ padding: "12px 16px" }}>Height</td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>24px</td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>32px</td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>40px</td>
-                </tr>
-                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                  <td style={{ padding: "12px 16px" }}>Padding X</td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>8px (primitive.2)</td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>12px (primitive.3)</td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>16px (primitive.4)</td>
-                </tr>
-                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                  <td style={{ padding: "12px 16px" }}>Font Size</td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>12px (xs)</td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>14px (sm)</td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>16px (base)</td>
-                </tr>
-                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                  <td style={{ padding: "12px 16px" }}>Icon Size</td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>14px</td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>18px</td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>22px</td>
-                </tr>
-                <tr>
-                  <td style={{ padding: "12px 16px" }}>Border Radius</td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>12px (height/2)</td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>16px (height/2)</td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>20px (height/2)</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </Subsection>
-
-        <Subsection title="Color 토큰">
-          <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)" }}>
-            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
-              <thead>
-                <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Property</th>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Foundation Token</th>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Value (brandDefault)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                  <td style={{ padding: "12px 16px" }}>Background (filled)</td>
-                  <td style={{ padding: "12px 16px" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>surface.brand.secondary</code></td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>var(--surface-brand-secondary) (palette.blue.95)</td>
-                </tr>
-                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                  <td style={{ padding: "12px 16px" }}>Background (selected)</td>
-                  <td style={{ padding: "12px 16px" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>surface.brand.default</code></td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>var(--content-brand-default) (palette.blue.50)</td>
-                </tr>
-                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                  <td style={{ padding: "12px 16px" }}>Border (outlined)</td>
-                  <td style={{ padding: "12px 16px" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>border.brand.default</code></td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>var(--content-brand-default) (palette.blue.50)</td>
-                </tr>
-                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                  <td style={{ padding: "12px 16px" }}>Text (filled)</td>
-                  <td style={{ padding: "12px 16px" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>content.brand.strong</code></td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>var(--content-brand-default) (palette.blue.50)</td>
-                </tr>
-                <tr>
-                  <td style={{ padding: "12px 16px" }}>Text (selected)</td>
-                  <td style={{ padding: "12px 16px" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>content.base.onColor</code></td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>var(--static-white) (palette.static.white)</td>
-                </tr>
-              </tbody>
-            </table>
+        <Subsection title="Interaction States">
+          <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", lineHeight: 1.7, marginBottom: spacing.primitive[4] }}>
+            Chip은 선택 상태를 포함하여 다양한 인터랙션 상태를 지원합니다. 선택/해제 토글과 호버, 누름 피드백이 시각적으로 명확히 구분됩니다.
+          </p>
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
+            gap: spacing.primitive[4],
+            padding: spacing.primitive[6],
+            backgroundColor: "var(--surface-base-alternative)",
+            borderRadius: radius.primitive.md,
+          }}>
+            <InteractionStateCard label="Default" sublabel="기본 상태" color="var(--content-brand-default)" bgColor="var(--surface-brand-secondary)" />
+            <InteractionStateCard label="Selected" sublabel="선택됨" color="var(--static-white)" bgColor="var(--content-brand-default)" />
+            <InteractionStateCard label="Hover" sublabel="마우스 오버" color="var(--content-brand-default)" bgColor="var(--surface-brand-secondaryPressed)" />
+            <InteractionStateCard label="Pressed" sublabel="누름" color="var(--content-brand-default)" bgColor="var(--surface-brand-secondaryPressed)" />
+            <InteractionStateCard label="Disabled" sublabel="비활성화" color="var(--content-disabled-default)" bgColor="var(--surface-disabled-default)" opacity={0.5} />
+            <InteractionStateCard label="Focused" sublabel="키보드 포커스" color="var(--content-brand-default)" bgColor="var(--surface-brand-secondary)" showFocusRing />
           </div>
         </Subsection>
       </Section>
 
-      {/* Usage Guidelines */}
+      {/* 7. Usage Guidelines (+ Best Practices + UX Writing subsections) */}
       <Section title="Usage Guidelines">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 24, lineHeight: 1.6 }}>
+        <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginBottom: spacing.primitive[4], lineHeight: 1.7 }}>
           일관된 UX를 위해 아래 권고 조합을 따르세요. Chip은 <strong style={{ color: "var(--text-primary)" }}>컴팩트한 정보 표현과 인터랙션</strong>이 필요한 상황에서 사용합니다.
         </p>
 
         <Subsection title="Recommended Combinations">
-          <div style={{ display: "grid", gap: 12 }}>
+          <div style={{ display: "grid", gap: spacing.primitive[3] }}>
             <UsageCard
               situation="Filter Chips"
               desc="카테고리, 태그 등 필터 선택/해제"
               variant="filled"
-              color="brandDefault"
+              color="primary"
               chipLabel="전자제품"
               selected
             />
             <UsageCard
               situation="Selection Chips"
               desc="여러 옵션 중 하나 또는 다수 선택"
-              variant="outlined"
-              color="brandDefault"
+              variant="weak"
+              color="primary"
               chipLabel="옵션 A"
             />
             <UsageCard
               situation="Input Chips"
               desc="태그 입력, 이메일 수신자 등 제거 가능한 항목"
               variant="filled"
-              color="baseDefault"
+              color="neutral"
               chipLabel="React"
               showClose
             />
@@ -779,41 +560,27 @@ function DesignContent() {
               situation="Status Indicator"
               desc="상태 표시 (성공, 에러, 경고)"
               variant="filled"
-              color="successDefault"
+              color="success"
               chipLabel="완료"
             />
           </div>
         </Subsection>
 
         <Subsection title="Do / Don&apos;t">
-          <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)", marginBottom: 16 }}>
-            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
-              <thead>
-                <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)", color: "var(--content-success-default)" }}>Do</th>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)", color: "var(--content-error-default)" }}>Don&apos;t</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>짧고 간결한 라벨을 사용하세요 (2-4글자)</td>
-                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>긴 문장을 Chip에 넣지 마세요</td>
-                </tr>
-                <tr>
-                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>필터/선택 용도로 사용하세요</td>
-                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>주요 CTA 액션에 Chip을 사용하지 마세요</td>
-                </tr>
-                <tr>
-                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>의미에 맞는 색상을 사용하세요</td>
-                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>한 영역에 5개 이상의 색상을 혼용하지 마세요</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <PropsTable
+            props={[
+              { name: "Do", type: "", required: false, description: "짧고 간결한 라벨을 사용하세요 (2-4글자)" },
+              { name: "Don't", type: "", required: false, description: "긴 문장을 Chip에 넣지 마세요" },
+              { name: "Do", type: "", required: false, description: "필터/선택 용도로 사용하세요" },
+              { name: "Don't", type: "", required: false, description: "주요 CTA 액션에 Chip을 사용하지 마세요" },
+              { name: "Do", type: "", required: false, description: "의미에 맞는 색상을 사용하세요" },
+              { name: "Don't", type: "", required: false, description: "한 영역에 5개 이상의 색상을 혼용하지 마세요" },
+            ]}
+          />
         </Subsection>
 
         <Subsection title="Design Principles">
-          <div style={{ display: "grid", gap: 16 }}>
+          <div style={{ display: "grid", gap: spacing.primitive[4] }}>
             <PrincipleCard
               number={1}
               title="컴팩트한 정보 전달"
@@ -831,110 +598,350 @@ function DesignContent() {
             />
           </div>
         </Subsection>
+
+        <Subsection title="Best Practices">
+          <div style={{ display: "grid", gap: spacing.primitive[5] }}>
+            <div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4] }}>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <DoCard>
+                    <div style={{ display: "flex", gap: spacing.primitive[2] }}>
+                      <ChipDemo color="primary">전체</ChipDemo>
+                      <ChipDemo color="primary" selected>전자제품</ChipDemo>
+                      <ChipDemo color="primary">의류</ChipDemo>
+                    </div>
+                  </DoCard>
+                </div>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <DontCard>
+                    <div style={{ display: "flex", gap: spacing.primitive[2] }}>
+                      <ChipDemo color="primary" selected>전자제품 카테고리 전체 보기</ChipDemo>
+                    </div>
+                  </DontCard>
+                </div>
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4], marginTop: spacing.primitive[2] }}>
+                <p style={{ fontSize: typography.fontSize.compact, color: "var(--content-success-default)", margin: 0 }}>
+                  <span style={{ fontWeight: typography.fontWeight.bold }}>Do</span> Chip 라벨은 간결하게 작성합니다
+                </p>
+                <p style={{ fontSize: typography.fontSize.compact, color: "var(--content-error-default)", margin: 0, fontStyle: "italic" }}>
+                  <span style={{ fontWeight: typography.fontWeight.bold }}>Don&apos;t</span> 긴 텍스트를 Chip에 사용하지 않습니다
+                </p>
+              </div>
+            </div>
+
+            <div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4] }}>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <DoCard>
+                    <div style={{ display: "flex", gap: spacing.primitive[2] }}>
+                      <ChipDemo color="primary" selected>React</ChipDemo>
+                      <ChipDemo color="primary">TypeScript</ChipDemo>
+                    </div>
+                  </DoCard>
+                </div>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <DontCard>
+                    <div style={{ display: "flex", gap: spacing.primitive[2] }}>
+                      <ChipDemo color="primary" selected>React</ChipDemo>
+                      <ChipDemo color="success" selected>TypeScript</ChipDemo>
+                      <ChipDemo color="error" selected>Vue</ChipDemo>
+                    </div>
+                  </DontCard>
+                </div>
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4], marginTop: spacing.primitive[2] }}>
+                <p style={{ fontSize: typography.fontSize.compact, color: "var(--content-success-default)", margin: 0 }}>
+                  <span style={{ fontWeight: typography.fontWeight.bold }}>Do</span> 같은 용도의 Chip 그룹에는 동일한 색상을 사용합니다
+                </p>
+                <p style={{ fontSize: typography.fontSize.compact, color: "var(--content-error-default)", margin: 0, fontStyle: "italic" }}>
+                  <span style={{ fontWeight: typography.fontWeight.bold }}>Don&apos;t</span> 같은 그룹에서 여러 색상을 혼용하지 않습니다
+                </p>
+              </div>
+            </div>
+
+            <div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4] }}>
+                <DoCard>
+                  <div style={{ textAlign: "center" }}>
+                    <InlineCode>&quot;최신순&quot;</InlineCode>
+                    <p style={{ fontSize: typography.fontSize.xs, color: "var(--text-tertiary)", margin: 0, marginTop: spacing.primitive[1] }}>짧고 간결하게 표현합니다</p>
+                  </div>
+                </DoCard>
+                <DontCard>
+                  <div style={{ textAlign: "center" }}>
+                    <InlineCode>&quot;최신순으로 정렬합니다&quot;</InlineCode>
+                    <p style={{ fontSize: typography.fontSize.xs, color: "var(--text-tertiary)", margin: 0, marginTop: spacing.primitive[1] }}>Chip에는 문장을 넣지 않습니다</p>
+                  </div>
+                </DontCard>
+              </div>
+            </div>
+
+            <div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4] }}>
+                <DoCard>
+                  <div style={{ textAlign: "center" }}>
+                    <InlineCode>&quot;서울&quot;</InlineCode>
+                    <p style={{ fontSize: typography.fontSize.xs, color: "var(--text-tertiary)", margin: 0, marginTop: spacing.primitive[1] }}>가능한 한 짧게 작성합니다</p>
+                  </div>
+                </DoCard>
+                <DontCard>
+                  <div style={{ textAlign: "center" }}>
+                    <InlineCode>&quot;서울특별시&quot;</InlineCode>
+                    <p style={{ fontSize: typography.fontSize.xs, color: "var(--text-tertiary)", margin: 0, marginTop: spacing.primitive[1] }}>공식 명칭보다 축약형을 사용합니다</p>
+                  </div>
+                </DontCard>
+              </div>
+            </div>
+          </div>
+        </Subsection>
       </Section>
 
-      {/* Best Practices */}
-      <Section title="Best Practices">
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
-          <DoCard>
-            <div style={{ display: "flex", gap: 8 }}>
-              <ChipDemo color="brandDefault">전체</ChipDemo>
-              <ChipDemo color="brandDefault" selected>전자제품</ChipDemo>
-              <ChipDemo color="brandDefault">의류</ChipDemo>
-            </div>
-          </DoCard>
-          <DontCard>
-            <div style={{ display: "flex", gap: 8 }}>
-              <ChipDemo color="brandDefault" selected>전자제품 카테고리 전체 보기</ChipDemo>
-            </div>
-          </DontCard>
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 4 }}>
-          <DoLabel>Chip 라벨은 간결하게 작성합니다.</DoLabel>
-          <DontLabel>긴 텍스트를 Chip에 사용하지 않습니다.</DontLabel>
-        </div>
+      {/* 8. Design Tokens (single merged instance) */}
+      <Section title="Design Tokens">
+        <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginBottom: spacing.primitive[4], lineHeight: 1.7 }}>
+          Chip 컴포넌트에 적용된 Foundation 기반 디자인 토큰입니다.
+        </p>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 16 }}>
-          <DoCard>
-            <div style={{ display: "flex", gap: 8 }}>
-              <ChipDemo color="brandDefault" selected>React</ChipDemo>
-              <ChipDemo color="brandDefault">TypeScript</ChipDemo>
-            </div>
-          </DoCard>
-          <DontCard>
-            <div style={{ display: "flex", gap: 8 }}>
-              <ChipDemo color="brandDefault" selected>React</ChipDemo>
-              <ChipDemo color="successDefault" selected>TypeScript</ChipDemo>
-              <ChipDemo color="errorDefault" selected>Vue</ChipDemo>
-            </div>
-          </DontCard>
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 4 }}>
-          <DoLabel>같은 용도의 Chip 그룹에는 동일한 색상을 사용합니다.</DoLabel>
-          <DontLabel>같은 그룹에서 여러 색상을 혼용하지 않습니다.</DontLabel>
-        </div>
+        <Subsection title="Size별 토큰">
+          <div style={{ overflow: "auto" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.compact }}>
+              <thead>
+                <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
+                  <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Property</th>
+                  <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Small</th>
+                  <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Medium</th>
+                  <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Large</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                  <td style={{ padding: "10px 14px" }}>Height</td>
+                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>24px</td>
+                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>32px</td>
+                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>40px</td>
+                </tr>
+                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                  <td style={{ padding: "10px 14px" }}>Padding X</td>
+                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>8px (primitive.2)</td>
+                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>12px (primitive.3)</td>
+                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>16px (primitive.4)</td>
+                </tr>
+                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                  <td style={{ padding: "10px 14px" }}>Font Size</td>
+                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>12px (xs)</td>
+                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>14px (sm)</td>
+                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>16px (base)</td>
+                </tr>
+                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                  <td style={{ padding: "10px 14px" }}>Icon Size</td>
+                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>14px</td>
+                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>18px</td>
+                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>22px</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "10px 14px" }}>Border Radius</td>
+                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>12px (height/2)</td>
+                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>16px (height/2)</td>
+                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>20px (height/2)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </Subsection>
+
+        <Subsection title="Color 토큰 (Filled Variant)">
+          <div style={{ overflow: "auto" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.compact }}>
+              <thead>
+                <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
+                  <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Property</th>
+                  <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Foundation Token</th>
+                  <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Value (primary)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                  <td style={{ padding: "10px 14px" }}>Background</td>
+                  <td style={{ padding: "10px 14px" }}><InlineCode>surface.brand.default</InlineCode></td>
+                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>var(--surface-brand-default) (palette.blue.50)</td>
+                </tr>
+                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                  <td style={{ padding: "10px 14px" }}>Background (pressed)</td>
+                  <td style={{ padding: "10px 14px" }}><InlineCode>surface.brand.defaultPressed</InlineCode></td>
+                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>var(--surface-brand-defaultPressed) (palette.blue.45)</td>
+                </tr>
+                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                  <td style={{ padding: "10px 14px" }}>Background (selected)</td>
+                  <td style={{ padding: "10px 14px" }}><InlineCode>surface.brand.default</InlineCode></td>
+                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>var(--surface-brand-default) (palette.blue.50)</td>
+                </tr>
+                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                  <td style={{ padding: "10px 14px" }}>Text</td>
+                  <td style={{ padding: "10px 14px" }}><InlineCode>content.base.onColor</InlineCode></td>
+                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>var(--content-base-onColor) (palette.static.white)</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "10px 14px" }}>Text (selected)</td>
+                  <td style={{ padding: "10px 14px" }}><InlineCode>content.base.onColor</InlineCode></td>
+                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>var(--content-base-onColor) (palette.static.white)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </Subsection>
+
+        <Subsection title="Color 토큰 (Weak Variant)">
+          <div style={{ overflow: "auto" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.compact }}>
+              <thead>
+                <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
+                  <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Property</th>
+                  <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Foundation Token</th>
+                  <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Value (primary)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                  <td style={{ padding: "10px 14px" }}>Background</td>
+                  <td style={{ padding: "10px 14px" }}><InlineCode>surface.brand.secondary</InlineCode></td>
+                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>var(--surface-brand-secondary) (palette.blue.95)</td>
+                </tr>
+                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                  <td style={{ padding: "10px 14px" }}>Background (pressed)</td>
+                  <td style={{ padding: "10px 14px" }}><InlineCode>surface.brand.secondaryPressed</InlineCode></td>
+                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>var(--surface-brand-secondaryPressed) (palette.blue.90)</td>
+                </tr>
+                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                  <td style={{ padding: "10px 14px" }}>Background (selected)</td>
+                  <td style={{ padding: "10px 14px" }}><InlineCode>surface.brand.default</InlineCode></td>
+                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>var(--surface-brand-default) (palette.blue.50)</td>
+                </tr>
+                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                  <td style={{ padding: "10px 14px" }}>Text</td>
+                  <td style={{ padding: "10px 14px" }}><InlineCode>content.brand.default</InlineCode></td>
+                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>var(--content-brand-default) (palette.blue.50)</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "10px 14px" }}>Text (selected)</td>
+                  <td style={{ padding: "10px 14px" }}><InlineCode>content.base.onColor</InlineCode></td>
+                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>var(--content-base-onColor) (palette.static.white)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </Subsection>
+
+        <Subsection title="Interaction">
+          <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginBottom: spacing.primitive[3], lineHeight: 1.7 }}>
+            Chip은 비활성화 시 <InlineCode>opacity.disabled</InlineCode> (0.5) 감소와 텍스트 색상을 <InlineCode>content.disabled.default</InlineCode>로 교체를 모두 적용합니다.
+          </p>
+          <div style={{ overflow: "auto" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.compact }}>
+              <thead>
+                <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
+                  <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>속성</th>
+                  <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>토큰</th>
+                  <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>설명</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                  <td style={{ padding: "10px 14px" }}>Disabled Opacity</td>
+                  <td style={{ padding: "10px 14px" }}><InlineCode>opacity.disabled</InlineCode></td>
+                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>0.5 — 비활성화 시 전체 투명도</td>
+                </tr>
+                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                  <td style={{ padding: "10px 14px" }}>Disabled Text</td>
+                  <td style={{ padding: "10px 14px" }}><InlineCode>content.disabled.default</InlineCode></td>
+                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>var(--content-disabled-default) — 비활성화 텍스트 색상</td>
+                </tr>
+                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                  <td style={{ padding: "10px 14px" }}>Gap</td>
+                  <td style={{ padding: "10px 14px" }}><InlineCode>spacing.component.chip.gap</InlineCode></td>
+                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>4px — 아이콘/텍스트 간 간격</td>
+                </tr>
+                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                  <td style={{ padding: "10px 14px" }}>Font Weight</td>
+                  <td style={{ padding: "10px 14px" }}><InlineCode>typography.fontWeight.medium</InlineCode></td>
+                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>500 — 라벨 폰트 웨이트</td>
+                </tr>
+                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                  <td style={{ padding: "10px 14px" }}>Transition</td>
+                  <td style={{ padding: "10px 14px" }}><InlineCode>transitions.all</InlineCode></td>
+                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>background-color, color, border-color 150ms ease — 모든 속성에 부드러운 전환</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "10px 14px" }}>Cursor (disabled)</td>
+                  <td style={{ padding: "10px 14px" }}><InlineCode>not-allowed</InlineCode></td>
+                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>비활성화 시 커서</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </Subsection>
       </Section>
 
-      {/* Accessibility */}
+      {/* 9. Accessibility */}
       <Section title="Accessibility">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
+        <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginBottom: spacing.primitive[4], lineHeight: 1.7 }}>
           Chip 컴포넌트는 선택 상태와 제거 기능의 접근성을 보장합니다.
         </p>
 
-        <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)", marginBottom: 24 }}>
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+        <div style={{ overflow: "auto", marginBottom: spacing.primitive[6] }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.sm }}>
             <thead>
-              <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>속성</th>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>설명</th>
+              <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
+                <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>속성</th>
+                <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>설명</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>role=&quot;button&quot;</code></td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>스크린 리더가 버튼으로 인식</td>
+                <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)" }}><InlineCode>role=&quot;button&quot;</InlineCode></td>
+                <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>스크린 리더가 버튼으로 인식</td>
               </tr>
               <tr>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>aria-pressed</code></td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>selected 상태를 보조 기술에 전달</td>
+                <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)" }}><InlineCode>aria-pressed</InlineCode></td>
+                <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>selected 상태를 보조 기술에 전달</td>
               </tr>
               <tr>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>aria-label</code> (Close)</td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>닫기 버튼에 목적을 설명하는 레이블 제공</td>
+                <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)" }}><InlineCode>aria-label</InlineCode> (Close)</td>
+                <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>닫기 버튼에 목적을 설명하는 레이블 제공</td>
               </tr>
               <tr>
-                <td style={{ padding: "12px 16px" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>aria-disabled</code></td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>비활성화 상태를 보조 기술에 전달</td>
+                <td style={{ padding: "10px 14px" }}><InlineCode>aria-disabled</InlineCode></td>
+                <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>비활성화 상태를 보조 기술에 전달</td>
               </tr>
             </tbody>
           </table>
         </div>
 
         <Subsection title="Keyboard Interaction">
-          <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)" }}>
-            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+          <div style={{ overflow: "auto" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.sm }}>
               <thead>
-                <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>키</th>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>동작</th>
+                <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
+                  <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>키</th>
+                  <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>동작</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--bg-secondary)", borderRadius: 4, fontSize: 12 }}>Tab</kbd></td>
-                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>Chip으로 포커스 이동</td>
+                  <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.xs }}>Tab</kbd></td>
+                  <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>Chip으로 포커스 이동</td>
                 </tr>
                 <tr>
-                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--bg-secondary)", borderRadius: 4, fontSize: 12 }}>Enter</kbd> / <kbd style={{ padding: "2px 6px", backgroundColor: "var(--bg-secondary)", borderRadius: 4, fontSize: 12 }}>Space</kbd></td>
-                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>Chip 선택/해제 토글</td>
+                  <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.xs }}>Enter</kbd> / <kbd style={{ padding: "2px 6px", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.xs }}>Space</kbd></td>
+                  <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>Chip 선택/해제 토글</td>
                 </tr>
                 <tr>
-                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--bg-secondary)", borderRadius: 4, fontSize: 12 }}>Tab</kbd> (Close)</td>
-                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>닫기 버튼으로 포커스 이동 (별도 탭 타겟)</td>
+                  <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.xs }}>Tab</kbd> (Close)</td>
+                  <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>닫기 버튼으로 포커스 이동 (별도 탭 타겟)</td>
                 </tr>
                 <tr>
-                  <td style={{ padding: "12px 16px" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--bg-secondary)", borderRadius: 4, fontSize: 12 }}>Delete</kbd> / <kbd style={{ padding: "2px 6px", backgroundColor: "var(--bg-secondary)", borderRadius: 4, fontSize: 12 }}>Backspace</kbd></td>
-                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>onClose가 있는 Chip 제거</td>
+                  <td style={{ padding: "10px 14px" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.xs }}>Delete</kbd> / <kbd style={{ padding: "2px 6px", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.xs }}>Backspace</kbd></td>
+                  <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>onClose가 있는 Chip 제거</td>
                 </tr>
               </tbody>
             </table>
@@ -942,7 +949,7 @@ function DesignContent() {
         </Subsection>
 
         <Subsection title="Design Principles">
-          <div style={{ display: "grid", gap: 16 }}>
+          <div style={{ display: "grid", gap: spacing.primitive[4] }}>
             <PrincipleCard
               number={1}
               title="aria-pressed로 선택 상태 전달"
@@ -967,37 +974,37 @@ function DesignContent() {
         </Subsection>
       </Section>
 
-      {/* Related Components */}
+      {/* 10. Related Components */}
       <Section title="Related Components">
-        <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)" }}>
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+        <div style={{ overflow: "auto" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.sm }}>
             <thead>
-              <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>컴포넌트</th>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>용도</th>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>차이점</th>
+              <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
+                <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>컴포넌트</th>
+                <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>용도</th>
+                <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>차이점</th>
               </tr>
             </thead>
             <tbody>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "12px 16px", fontWeight: 500 }}>Button</td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>주요/보조 액션 트리거</td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>Chip은 선택/필터용, Button은 액션 실행용</td>
+                <td style={{ padding: "10px 14px", fontWeight: typography.fontWeight.medium }}>Button</td>
+                <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>주요/보조 액션 트리거</td>
+                <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>Chip은 선택/필터용, Button은 액션 실행용</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "12px 16px", fontWeight: 500 }}>ContentBadge</td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>읽기 전용 상태/라벨 표시</td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>Chip은 인터랙티브, Badge는 비인터랙티브</td>
+                <td style={{ padding: "10px 14px", fontWeight: typography.fontWeight.medium }}>ContentBadge</td>
+                <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>읽기 전용 상태/라벨 표시</td>
+                <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>Chip은 인터랙티브, Badge는 비인터랙티브</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "12px 16px", fontWeight: 500 }}>TextButton</td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>텍스트 링크 스타일 보조 액션</td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>Chip은 선택 상태 표현, TextButton은 네비게이션/액션</td>
+                <td style={{ padding: "10px 14px", fontWeight: typography.fontWeight.medium }}>TextButton</td>
+                <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>텍스트 링크 스타일 보조 액션</td>
+                <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>Chip은 선택 상태 표현, TextButton은 네비게이션/액션</td>
               </tr>
               <tr>
-                <td style={{ padding: "12px 16px", fontWeight: 500 }}>IconButton</td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>아이콘만으로 액션 표현</td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>Chip은 텍스트 기반, IconButton은 아이콘 전용</td>
+                <td style={{ padding: "10px 14px", fontWeight: typography.fontWeight.medium }}>IconButton</td>
+                <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>아이콘만으로 액션 표현</td>
+                <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>Chip은 텍스트 기반, IconButton은 아이콘 전용</td>
               </tr>
             </tbody>
           </table>
@@ -1009,13 +1016,13 @@ function DesignContent() {
 
 function WebContent() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
-      {/* Source Code */}
+    <div style={{ display: "flex", flexDirection: "column", gap: spacing.primitive[12] }}>
+      {/* 1. Source Code */}
       <Section title="Source Code">
-        <div style={{ padding: 16, backgroundColor: "var(--bg-secondary)", borderRadius: 12, marginBottom: 24, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <div style={{ padding: spacing.primitive[4], backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.md, marginBottom: spacing.primitive[6], display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div>
-            <p style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", margin: 0 }}>Chip Component</p>
-            <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: "4px 0 0 0" }}>실제 컴포넌트 소스 코드를 GitHub에서 확인하세요.</p>
+            <p style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)", margin: 0 }}>Chip Component</p>
+            <p style={{ fontSize: typography.fontSize.compact, color: "var(--text-secondary)", margin: "4px 0 0 0" }}>실제 컴포넌트 소스 코드를 GitHub에서 확인하세요.</p>
           </div>
           <a
             href="https://github.com/baerae-zkap/design-foundation/blob/main/packages/design-system/src/components/Chip/Chip.tsx"
@@ -1025,12 +1032,12 @@ function WebContent() {
               display: "inline-flex",
               alignItems: "center",
               gap: 6,
-              padding: "8px 16px",
-              fontSize: 13,
-              fontWeight: 500,
+              padding: `${spacing.primitive[2]}px ${spacing.primitive[4]}px`,
+              fontSize: typography.fontSize.compact,
+              fontWeight: typography.fontWeight.medium,
               color: "white",
               backgroundColor: "var(--inverse-surface-default)",
-              borderRadius: 12,
+              borderRadius: radius.primitive.md,
               textDecoration: "none",
             }}
           >
@@ -1042,12 +1049,12 @@ function WebContent() {
         </div>
       </Section>
 
-      {/* Import */}
+      {/* 2. Import */}
       <Section title="Import">
         <CodeBlock code={`import { Chip } from '@baerae-zkap/design-system';`} />
       </Section>
 
-      {/* Basic Usage */}
+      {/* 3. Basic Usage */}
       <Section title="Basic Usage">
         <PreviewBox>
           <ChipDemo>기본 칩</ChipDemo>
@@ -1055,7 +1062,7 @@ function WebContent() {
         <CodeBlock code={`<Chip onClick={() => {}}>기본 칩</Chip>`} />
       </Section>
 
-      {/* Filter Example */}
+      {/* 4. Filter Example */}
       <Section title="Filter Example">
         <PreviewBox>
           <FilterChipDemo />
@@ -1074,7 +1081,7 @@ const toggle = (filter: string) => {
   {['전자제품', '의류', '식품'].map(filter => (
     <Chip
       key={filter}
-      color="brandDefault"
+      color="primary"
       selected={selected.includes(filter)}
       onClick={() => toggle(filter)}
     >
@@ -1084,7 +1091,7 @@ const toggle = (filter: string) => {
 </div>`} />
       </Section>
 
-      {/* Input Example */}
+      {/* 5. Input Example */}
       <Section title="Input Example">
         <PreviewBox>
           <InputChipDemo />
@@ -1107,17 +1114,20 @@ const remove = (tag: string) => {
 </div>`} />
       </Section>
 
-      {/* API Reference */}
+      {/* 6. API Reference */}
       <Section title="API Reference">
         <PropsTable
           props={[
-            { name: "variant", type: '"filled" | "outlined"', required: false, defaultVal: '"filled"', description: "스타일 변형" },
-            { name: "color", type: '"brandDefault" | "baseDefault" | "successDefault" | "errorDefault" | "warningDefault"', required: false, defaultVal: '"baseDefault"', description: "색상 테마" },
+            { name: "children", type: "ReactNode", required: true, description: "칩 레이블 텍스트" },
+            { name: "variant", type: '"filled" | "weak"', required: false, defaultVal: '"filled"', description: "스타일 변형 - filled(채움), weak(연한 배경)" },
+            { name: "color", type: '"primary" | "neutral" | "success" | "error" | "warning"', required: false, defaultVal: '"neutral"', description: "색상 테마" },
             { name: "size", type: '"small" | "medium" | "large"', required: false, defaultVal: '"medium"', description: "크기" },
             { name: "selected", type: "boolean", required: false, defaultVal: "false", description: "선택 상태" },
             { name: "disabled", type: "boolean", required: false, defaultVal: "false", description: "비활성화 상태" },
             { name: "leftIcon", type: "ReactNode", required: false, description: "좌측 아이콘" },
+            { name: "avatar", type: "ReactNode", required: false, description: "아바타 (leftIcon과 배타적)" },
             { name: "onClose", type: "() => void", required: false, description: "닫기 버튼 핸들러" },
+            { name: "closeIcon", type: "ReactNode", required: false, description: "닫기 아이콘 커스텀" },
             { name: "onClick", type: "() => void", required: false, description: "클릭 핸들러" },
           ]}
         />
@@ -1140,7 +1150,7 @@ interface ChipDemoProps {
 
 function ChipDemo({
   variant = "filled",
-  color = "baseDefault",
+  color = "neutral",
   size = "medium",
   selected = false,
   disabled = false,
@@ -1174,11 +1184,11 @@ function FilterChipDemo() {
   };
 
   return (
-    <div style={{ display: 'flex', gap: 8 }}>
+    <div style={{ display: 'flex', gap: spacing.primitive[2] }}>
       {filters.map(filter => (
         <ChipDemo
           key={filter}
-          color="brandDefault"
+          color="primary"
           selected={selected.includes(filter)}
         >
           {filter}
@@ -1196,7 +1206,7 @@ function InputChipDemo() {
   };
 
   return (
-    <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+    <div style={{ display: 'flex', gap: spacing.primitive[2], flexWrap: 'wrap' }}>
       {tags.map(tag => (
         <ChipDemo
           key={tag}
@@ -1216,20 +1226,20 @@ function InteractionStateCard({ label, sublabel, color, bgColor, opacity, showFo
 }) {
   return (
     <div style={{
-      display: "flex", flexDirection: "column", alignItems: "center", gap: 12, padding: 16,
+      display: "flex", flexDirection: "column", alignItems: "center", gap: spacing.primitive[3], padding: spacing.primitive[4],
     }}>
       <div style={{
-        width: "100%", height: 48, borderRadius: 12,
+        width: "100%", height: spacing.primitive[12], borderRadius: radius.primitive.md,
         backgroundColor: bgColor,
         display: "flex", alignItems: "center", justifyContent: "center",
         opacity: opacity ?? 1,
         outline: showFocusRing ? "2px solid var(--content-brand-default)" : "none",
         outlineOffset: showFocusRing ? 2 : 0,
-        color: color, fontSize: 13, fontWeight: 500,
+        color: color, fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.medium,
       }}>
         {label}
       </div>
-      <span style={{ fontSize: 12, color: "var(--text-tertiary)", textAlign: "center" }}>{sublabel}</span>
+      <span style={{ fontSize: typography.fontSize.xs, color: "var(--text-tertiary)", textAlign: "center" }}>{sublabel}</span>
     </div>
   );
 }
@@ -1247,28 +1257,28 @@ function UsageCard({ situation, desc, variant = "filled", color, chipLabel, sele
     <div style={{
       display: "grid",
       gridTemplateColumns: "1fr auto",
-      gap: 16,
-      padding: 16,
+      gap: spacing.primitive[4],
+      padding: spacing.primitive[4],
       backgroundColor: "var(--surface-base-default)",
-      borderRadius: 12,
+      borderRadius: radius.primitive.md,
       border: "1px solid var(--divider)",
       alignItems: "center",
     }}>
       <div>
-        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
-          <span style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)" }}>{situation}</span>
+        <div style={{ display: "flex", alignItems: "center", gap: spacing.primitive[2], marginBottom: spacing.primitive[1] }}>
+          <span style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)" }}>{situation}</span>
           <span style={{
-            fontSize: 11,
+            fontSize: typography.fontSize["2xs"],
             padding: "2px 6px",
             backgroundColor: variant === "filled" ? "var(--surface-brand-secondary)" : "var(--surface-base-alternative)",
             color: variant === "filled" ? "var(--surface-brand-defaultPressed)" : "var(--content-base-secondary)",
-            borderRadius: 4,
-            fontWeight: 500,
+            borderRadius: radius.primitive.xs,
+            fontWeight: typography.fontWeight.medium,
           }}>
             {variant} + {color}
           </span>
         </div>
-        <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0 }}>{desc}</p>
+        <p style={{ fontSize: typography.fontSize.compact, color: "var(--text-secondary)", margin: 0 }}>{desc}</p>
       </div>
       <ChipDemo
         variant={variant}

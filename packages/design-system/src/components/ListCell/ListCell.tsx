@@ -18,7 +18,7 @@ import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
 import { cssVarColors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { typography } from '../../tokens/typography';
-import { opacity } from '../../tokens/general';
+import { opacity, borderWidth } from '../../tokens/general';
 import { usePressable } from '../../utils/usePressable';
 import { transitions } from '../../utils/styles';
 
@@ -120,7 +120,7 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
           : 'transparent',
       cursor: isInteractive ? 'pointer' : 'default',
       opacity: disabled ? opacity.disabled : 1,
-      borderBottom: divider ? `1px solid ${cssVarColors.border.base.default}` : 'none',
+      borderBottom: divider ? `${borderWidth.default}px solid ${cssVarColors.border.base.default}` : 'none',
       transition: transitions.background,
       ...style,
     };

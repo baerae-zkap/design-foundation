@@ -21,6 +21,7 @@ import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
 import { opacity } from '../../tokens/general';
+import { transitions } from '../../utils/styles';
 
 export type SliderSize = 'small' | 'medium' | 'large';
 
@@ -213,7 +214,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
       minWidth: 32,
       textAlign: 'center',
       opacity: isDragging && shouldShowTooltip ? 1 : 0,
-      transition: 'opacity 150ms',
+      transition: transitions.opacity,
       pointerEvents: 'none',
     };
 

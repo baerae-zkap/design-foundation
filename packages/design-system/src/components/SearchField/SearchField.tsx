@@ -19,6 +19,8 @@ import { cssVarColors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
+import { transitions } from '../../utils/styles';
+import { borderWidth } from '../../tokens/general';
 
 export type SearchFieldSize = 'small' | 'medium';
 
@@ -143,10 +145,10 @@ export const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       paddingLeft: sizeStyle.paddingHorizontal,
       paddingRight: sizeStyle.paddingHorizontal,
       borderRadius: radius.component.input.search, // 9999 (pill shape)
-      border: `1px solid ${getBorderColor()}`,
+      border: `${borderWidth.default}px solid ${getBorderColor()}`,
       backgroundColor: getBackgroundColor(),
       flex: 1,
-      transition: 'border-color 0.2s ease',
+      transition: transitions.border,
     };
 
     const inputStyle: React.CSSProperties = {

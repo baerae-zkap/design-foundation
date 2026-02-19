@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { TokenDownload } from "@/components/TokenDownload";
 import paletteJson from "../../../../public/palette.json";
+import { typography, spacing } from '@baerae-zkap/design-system';
 
 function ColorBar({ name, value, fullName }: { name: string; value: string; fullName: string }) {
   const [copied, setCopied] = useState(false);
@@ -21,7 +22,7 @@ function ColorBar({ name, value, fullName }: { name: string; value: string; full
       className="color-bar"
       style={{
         width: '100%',
-        padding: '0 16px',
+        padding: `0 ${spacing.primitive[4]}px`,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -36,8 +37,8 @@ function ColorBar({ name, value, fullName }: { name: string; value: string; full
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', minWidth: 0, overflow: 'hidden' }}>
         <span
           style={{
-            fontSize: '14px',
-            fontWeight: 500,
+            fontSize: typography.fontSize.sm,
+            fontWeight: typography.fontWeight.medium,
             color: isLight ? 'var(--grey-15)' : 'var(--static-white)',
             whiteSpace: 'nowrap',
             overflow: 'hidden',
@@ -49,7 +50,7 @@ function ColorBar({ name, value, fullName }: { name: string; value: string; full
         </span>
         <span
           style={{
-            fontSize: '12px',
+            fontSize: typography.fontSize.xs,
             fontFamily: 'var(--font-mono)',
             color: isLight ? 'var(--grey-40)' : 'var(--inverse-content-secondary)'
           }}
@@ -60,11 +61,11 @@ function ColorBar({ name, value, fullName }: { name: string; value: string; full
       {copied && (
         <span
           style={{
-            fontSize: '12px',
-            fontWeight: 500,
+            fontSize: typography.fontSize.xs,
+            fontWeight: typography.fontWeight.medium,
             color: isLight ? 'var(--grey-40)' : 'var(--inverse-content-secondary)',
             flexShrink: 0,
-            marginLeft: '8px',
+            marginLeft: spacing.primitive[2],
           }}
         >
           Copied!
@@ -111,7 +112,7 @@ export default function PalettePage() {
       <p className="mb-6 leading-relaxed" style={{ color: 'var(--content-base-default)' }}>
         기본 색상 팔레트입니다. 직접 사용보다는 <strong style={{ color: 'var(--content-base-strong)' }}>Semantic 토큰</strong>을 통해 참조하세요.
         <br />
-        <span style={{ fontSize: '14px', color: 'var(--content-base-secondary)' }}>
+        <span style={{ fontSize: typography.fontSize.sm, color: 'var(--content-base-secondary)' }}>
           숫자가 클수록 밝은 색상입니다 (99 = 거의 흰색, 5 = 거의 검정). 테마 분기는 Semantic에서 관리합니다.
         </span>
       </p>

@@ -697,7 +697,6 @@ export function PreviewBox({ children, padding = 40 }: PreviewBoxProps) {
     <div
       style={{
         borderRadius: 12,
-        border: "1px solid var(--divider)",
         overflow: "hidden",
         marginBottom: 16,
       }}
@@ -705,7 +704,7 @@ export function PreviewBox({ children, padding = 40 }: PreviewBoxProps) {
       <div
         style={{
           padding: padding,
-          backgroundColor: "var(--surface-base-container)",
+          backgroundColor: "var(--surface-base-alternative)",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",

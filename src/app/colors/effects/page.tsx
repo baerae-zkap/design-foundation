@@ -5,6 +5,7 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { TokenDownload } from "@/components/TokenDownload";
 import paletteJson from "../../../../public/palette.json";
 import effectsJson from "../../../../public/effects-tokens.json";
+import { typography, spacing, radius } from '@baerae-zkap/design-system';
 
 type JsonMap = Record<string, unknown>;
 
@@ -94,7 +95,7 @@ function EffectSwatch({ value, label }: { value: string; label: string }) {
         flexDirection: "column",
         alignItems: "center",
         gap: "6px",
-        padding: "8px",
+        padding: spacing.primitive[2],
         background: "none",
         border: "none",
         cursor: "pointer",
@@ -108,7 +109,7 @@ function EffectSwatch({ value, label }: { value: string; label: string }) {
         style={{
           width: "48px",
           height: "48px",
-          borderRadius: "8px",
+          borderRadius: radius.primitive.sm,
           border: "1px solid var(--border-base-default)",
           background: value,
         }}
@@ -116,7 +117,7 @@ function EffectSwatch({ value, label }: { value: string; label: string }) {
       <div
         style={{
           marginTop: "6px",
-          fontSize: "10px",
+          fontSize: typography.fontSize['3xs'],
           fontFamily: "var(--font-mono)",
           color: copied ? "var(--content-brand-default)" : "var(--content-base-secondary)",
           textAlign: "center",
@@ -154,10 +155,10 @@ function EffectSection({
 
   return (
     <section style={{ marginBottom: "var(--space-8)" }}>
-      <h3 className="text-sm font-semibold uppercase tracking-wider" style={{ color: "var(--content-base-strong)", marginBottom: "4px" }}>
+      <h3 className="text-sm font-semibold uppercase tracking-wider" style={{ color: "var(--content-base-strong)", marginBottom: spacing.primitive[1] }}>
         {title}
       </h3>
-      <p className="text-xs" style={{ color: "var(--content-base-secondary)", marginBottom: "12px" }}>
+      <p className="text-xs" style={{ color: "var(--content-base-secondary)", marginBottom: spacing.primitive[3] }}>
         {description}
       </p>
 
@@ -165,19 +166,19 @@ function EffectSection({
         style={{
           display: "flex",
           alignItems: "center",
-          padding: "8px 16px",
+          padding: `${spacing.primitive[2]}px ${spacing.primitive[4]}px`,
           backgroundColor: "var(--surface-base-container)",
           borderRadius: "var(--radius-lg) var(--radius-lg) 0 0",
           border: "1px solid var(--border-base-default)",
           borderBottom: "none",
         }}
       >
-        <div style={{ flex: 1, fontSize: "12px", fontWeight: 500, color: "var(--content-base-secondary)" }}>Token</div>
-        <div style={{ display: "flex", gap: "8px", flexShrink: 0 }}>
-          <div style={{ width: "104px", textAlign: "center", fontSize: "12px", fontWeight: 500, color: "var(--content-base-secondary)" }}>
+        <div style={{ flex: 1, fontSize: typography.fontSize.xs, fontWeight: typography.fontWeight.medium, color: "var(--content-base-secondary)" }}>Token</div>
+        <div style={{ display: "flex", gap: spacing.primitive[2], flexShrink: 0 }}>
+          <div style={{ width: "104px", textAlign: "center", fontSize: typography.fontSize.xs, fontWeight: typography.fontWeight.medium, color: "var(--content-base-secondary)" }}>
             Light
           </div>
-          <div style={{ width: "104px", textAlign: "center", fontSize: "12px", fontWeight: 500, color: "var(--content-base-secondary)" }}>
+          <div style={{ width: "104px", textAlign: "center", fontSize: typography.fontSize.xs, fontWeight: typography.fontWeight.medium, color: "var(--content-base-secondary)" }}>
             Dark
           </div>
         </div>
@@ -203,27 +204,27 @@ function EffectSection({
               style={{
                 display: "flex",
                 alignItems: "center",
-                padding: "12px 16px",
-                gap: "16px",
+                padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`,
+                gap: spacing.primitive[4],
                 borderBottom: index < lightTokens.length - 1 ? "1px solid var(--border-base-default)" : "none",
               }}
             >
               <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ fontSize: "14px", fontWeight: 500, color: "var(--content-base-strong)", marginBottom: "2px" }}>
+                <div style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.medium, color: "var(--content-base-strong)", marginBottom: "2px" }}>
                   {`${prefix}.${lightToken.name}`}
                 </div>
                 {tokenDescription && (
-                  <div style={{ fontSize: "12px", color: "var(--content-base-secondary)", lineHeight: 1.4 }}>{tokenDescription}</div>
+                  <div style={{ fontSize: typography.fontSize.xs, color: "var(--content-base-secondary)", lineHeight: 1.4 }}>{tokenDescription}</div>
                 )}
               </div>
 
-              <div style={{ display: "flex", gap: "8px", flexShrink: 0 }}>
+              <div style={{ display: "flex", gap: spacing.primitive[2], flexShrink: 0 }}>
                 <div
                   style={{
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
-                    padding: "8px 12px",
+                    padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`,
                     backgroundColor: "var(--static-white)",
                     borderRadius: "var(--radius-md)",
                     width: "104px",
@@ -237,7 +238,7 @@ function EffectSection({
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
-                    padding: "8px 12px",
+                    padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`,
                     backgroundColor: "var(--grey-15)",
                     borderRadius: "var(--radius-md)",
                     width: "104px",

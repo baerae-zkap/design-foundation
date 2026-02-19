@@ -3,16 +3,15 @@
 import { useState } from "react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { PlatformTabs, CodeBlock, PreviewBox, Platform, highlightCode } from "@/components/PlatformTabs";
-import { IconButton } from '@baerae-zkap/design-system';
-import { Section, Subsection } from "@/components/docs/Section";
+import { IconButton, typography, spacing, radius } from '@baerae-zkap/design-system';
+import { Section, Subsection, InlineCode } from "@/components/docs/Section";
 import { PropsTable } from "@/components/docs/PropsTable";
 import { PrincipleCard, VariantCard, DoCard, DontCard } from "@/components/docs/Cards";
 import { RadioGroup, CopyButton } from "@/components/docs/Playground";
-import { DoLabel, DontLabel } from "@/components/docs/Labels";
 
 // Types
-type IconButtonVariant = "filled" | "ghost" | "outlined";
-type IconButtonColor = "brandDefault" | "baseDefault" | "errorDefault";
+type IconButtonVariant = "filled" | "ghost" | "weak";
+type IconButtonColor = "primary" | "neutral" | "error";
 type IconButtonSize = "small" | "medium" | "large";
 
 // Size configurations
@@ -34,10 +33,10 @@ export default function IconButtonPage() {
       />
 
       {/* Header */}
-      <h1 style={{ fontSize: 28, fontWeight: 700, marginBottom: 8, color: "var(--text-primary)", letterSpacing: "-0.02em" }}>
+      <h1 style={{ fontSize: typography.fontSize['3xl'], fontWeight: 700, marginBottom: spacing.primitive[2], color: "var(--text-primary)", letterSpacing: "-0.02em" }}>
         Icon Button
       </h1>
-      <p style={{ fontSize: 15, color: "var(--text-secondary)", marginBottom: 32, lineHeight: 1.6 }}>
+      <p style={{ fontSize: typography.fontSize.md, color: "var(--text-secondary)", marginBottom: spacing.primitive[8], lineHeight: 1.7 }}>
         아이콘만으로 의미를 전달하는 원형 버튼입니다. 닫기, 메뉴, 검색 등 보편적으로 인식되는 아이콘 액션에 사용하며, 공간이 제한된 툴바나 네비게이션 영역에 최적화되어 있습니다.
       </p>
 
@@ -54,14 +53,14 @@ export default function IconButtonPage() {
 
 function IconButtonPlayground() {
   const [variant, setVariant] = useState<IconButtonVariant>("ghost");
-  const [color, setColor] = useState<IconButtonColor>("baseDefault");
+  const [color, setColor] = useState<IconButtonColor>("neutral");
   const [size, setSize] = useState<IconButtonSize>("medium");
   const [disabled, setDisabled] = useState(false);
 
   const generateCode = () => {
     const props = [];
     if (variant !== "ghost") props.push(`variant="${variant}"`);
-    if (color !== "baseDefault") props.push(`color="${color}"`);
+    if (color !== "neutral") props.push(`color="${color}"`);
     if (size !== "medium") props.push(`size="${size}"`);
     if (disabled) props.push("disabled");
 
@@ -72,17 +71,11 @@ function IconButtonPlayground() {
 </IconButton>`;
   };
 
-  const colorLabels: Record<IconButtonColor, string> = {
-    brandDefault: "Brand",
-    baseDefault: "Base",
-    errorDefault: "Error",
-  };
-
   return (
-    <div style={{ marginBottom: 32 }}>
+    <div style={{ marginBottom: spacing.primitive[8] }}>
       <div
         style={{
-          borderRadius: 20,
+          borderRadius: radius.primitive.xl,
           overflow: "hidden",
           backgroundColor: "var(--surface-base-alternative)",
         }}
@@ -112,7 +105,7 @@ function IconButtonPlayground() {
               backgroundColor: "var(--surface-base-alternative)",
               display: "flex",
               flexDirection: "column",
-              padding: 16,
+              padding: spacing.primitive[4],
               overflow: "hidden",
               height: "100%",
               boxSizing: "border-box",
@@ -122,13 +115,13 @@ function IconButtonPlayground() {
               style={{
                 flex: 1,
                 minHeight: 0,
-                padding: 24,
+                padding: spacing.primitive[6],
                 overflowY: "auto",
                 display: "flex",
                 flexDirection: "column",
-                gap: 28,
+                gap: spacing.primitive[7],
                 backgroundColor: "var(--surface-base-default)",
-                borderRadius: 16,
+                borderRadius: radius.primitive.lg,
               }}
             >
               {/* Variant */}
@@ -137,37 +130,23 @@ function IconButtonPlayground() {
                 options={[
                   { value: "ghost", label: "Ghost" },
                   { value: "filled", label: "Filled" },
-                  { value: "outlined", label: "Outlined" },
+                  { value: "weak", label: "Weak" },
                 ]}
                 value={variant}
                 onChange={(v) => setVariant(v as IconButtonVariant)}
               />
 
               {/* Color */}
-              <div>
-                <label style={{ fontSize: 12, fontWeight: 600, color: "var(--text-secondary)", marginBottom: 8, display: "block" }}>
-                  Color
-                </label>
-                <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-                  {(Object.keys(colorLabels) as IconButtonColor[]).map((c) => (
-                    <button
-                      key={c}
-                      onClick={() => setColor(c)}
-                      style={{
-                        padding: "6px 10px",
-                        fontSize: 12,
-                        borderRadius: 6,
-                        border: color === c ? "2px solid var(--content-brand-default)" : "1px solid var(--border-base-default)",
-                        backgroundColor: color === c ? "var(--surface-brand-secondary)" : "var(--surface-base-default)",
-                        color: color === c ? "var(--content-brand-default)" : "var(--content-base-secondary)",
-                        cursor: "pointer",
-                      }}
-                    >
-                      {colorLabels[c]}
-                    </button>
-                  ))}
-                </div>
-              </div>
+              <RadioGroup
+                label="Color"
+                options={[
+                  { value: "primary", label: "Brand" },
+                  { value: "neutral", label: "Base" },
+                  { value: "error", label: "Error" },
+                ]}
+                value={color}
+                onChange={(v) => setColor(v as IconButtonColor)}
+              />
 
               {/* Size */}
               <RadioGroup
@@ -197,7 +176,7 @@ function IconButtonPlayground() {
       </div>
 
       {/* Generated Code */}
-      <div style={{ marginTop: 16, borderRadius: 12, overflow: "hidden", border: "1px solid var(--divider)" }}>
+      <div style={{ marginTop: spacing.primitive[4], borderRadius: radius.primitive.md, overflow: "hidden", border: "1px solid var(--divider)" }}>
         <div
           style={{
             padding: "10px 16px",
@@ -207,15 +186,15 @@ function IconButtonPlayground() {
             justifyContent: "space-between",
           }}
         >
-          <span style={{ fontSize: 13, fontWeight: 500, color: "var(--docs-code-active-text)" }}>Web</span>
+          <span style={{ fontSize: typography.fontSize.compact, fontWeight: 500, color: "var(--docs-code-active-text)" }}>Web</span>
           <CopyButton text={generateCode()} />
         </div>
         <pre
           style={{
             margin: 0,
-            padding: 16,
-            fontSize: 13,
-            lineHeight: 1.6,
+            padding: spacing.primitive[4],
+            fontSize: typography.fontSize.compact,
+            lineHeight: 1.7,
             color: "var(--docs-code-text)",
             backgroundColor: "var(--docs-code-surface)",
             fontFamily: "'SF Mono', 'Fira Code', monospace",
@@ -238,44 +217,20 @@ function PlatformContent({ platform }: { platform: Platform }) {
 
 function DesignContent() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: spacing.primitive[12] }}>
       {/* Overview */}
       <Section title="Overview">
-        <div style={{ display: "grid", gap: 24 }}>
-          <div>
-            <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6, margin: 0 }}>
-              IconButton은 <strong style={{ color: "var(--text-primary)" }}>아이콘만으로 의미가 명확히 전달되는 단일 액션</strong>을 위한 원형 버튼입니다.
-              텍스트 없이 아이콘으로만 기능을 표현하므로 공간 효율이 높고, 툴바나 네비게이션 등 반복적으로 나타나는 UI 패턴에 적합합니다.
-            </p>
-          </div>
-
-          <div>
-            <h4 style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", marginBottom: 12 }}>When to use</h4>
-            <ul style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.8, margin: 0, paddingLeft: 20 }}>
-              <li>아이콘의 의미가 <strong style={{ color: "var(--text-primary)" }}>보편적으로 인식</strong>되는 액션 (닫기, 메뉴, 검색, 추가 등)</li>
-              <li><strong style={{ color: "var(--text-primary)" }}>공간이 제한된</strong> 툴바, 헤더, 카드 액션 영역</li>
-              <li>테이블 행별 편집/삭제 등 <strong style={{ color: "var(--text-primary)" }}>반복되는 액션 패턴</strong></li>
-              <li>원형 버튼의 시각적 일관성이 필요할 때 (FAB, 모달 닫기 등)</li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", marginBottom: 12 }}>When NOT to use</h4>
-            <ul style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.8, margin: 0, paddingLeft: 20 }}>
-              <li><strong style={{ color: "var(--text-primary)" }}>아이콘만으로 의미 전달이 어렵다면</strong> → Button에 텍스트 + 아이콘 조합 사용</li>
-              <li><strong style={{ color: "var(--text-primary)" }}>주요 CTA 액션이라면</strong> → Button filled variant 사용 (텍스트로 명확성 확보)</li>
-              <li><strong style={{ color: "var(--text-primary)" }}>텍스트 링크 스타일이 필요하면</strong> → TextButton 사용</li>
-              <li><strong style={{ color: "var(--text-primary)" }}>Button의 icon-only 모드와 비교:</strong> Button은 직사각형 기반 icon-only 지원, IconButton은 원형 전용 설계로 툴바/네비게이션 패턴에 최적화</li>
-            </ul>
-          </div>
-        </div>
+        <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", lineHeight: 1.7, margin: 0 }}>
+          <InlineCode>IconButton</InlineCode> 컴포넌트는 아이콘만으로 의미가 전달되는 단일 액션을 위한 원형 버튼이에요.
+          공간이 제한된 툴바, 헤더, 카드 액션 영역에서 사용해요.
+        </p>
       </Section>
 
       {/* Anatomy */}
       <Section title="Anatomy">
         <div style={{
           backgroundColor: "var(--surface-base-alternative)",
-          borderRadius: 16,
+          borderRadius: radius.primitive.lg,
           padding: "48px 40px",
           display: "flex",
           alignItems: "center",
@@ -308,9 +263,9 @@ function DesignContent() {
         <div style={{
           display: "grid",
           gridTemplateColumns: "1fr 1fr",
-          gap: 16,
-          marginTop: 20,
-          fontSize: 14,
+          gap: spacing.primitive[4],
+          marginTop: spacing.primitive[5],
+          fontSize: typography.fontSize.sm,
           fontWeight: 500,
           color: "var(--text-primary)",
         }}>
@@ -319,193 +274,17 @@ function DesignContent() {
         </div>
       </Section>
 
-      {/* Interaction States */}
-      <Section title="Interaction States">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 24 }}>
-          IconButton은 원형 버튼으로 사용자 상호작용에 따라 배경색과 아이콘 색상이 변화합니다. 각 상태는 시각적으로 명확히 구분되어 터치/클릭 피드백을 제공합니다.
-        </p>
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
-          gap: 16,
-          padding: 24,
-          backgroundColor: "var(--surface-base-alternative)",
-          borderRadius: 16,
-        }}>
-          <InteractionStateCard label="Default" sublabel="기본 상태" color="var(--content-base-default)" bgColor="transparent" />
-          <InteractionStateCard label="Hover" sublabel="마우스 오버" color="var(--content-base-default)" bgColor="var(--effect-alpha-fill-alternative)" />
-          <InteractionStateCard label="Pressed" sublabel="누름" color="var(--content-base-default)" bgColor="var(--effect-alpha-fill-normal)" />
-          <InteractionStateCard label="Disabled" sublabel="비활성화" color="var(--content-disabled-default)" bgColor="transparent" opacity={0.4} />
-          <InteractionStateCard label="Focused" sublabel="키보드 포커스" color="var(--content-base-default)" bgColor="transparent" showFocusRing />
-        </div>
-      </Section>
-
-      {/* Design Tokens (New) */}
-      <Section title="Design Tokens">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 16 }}>
-          컴포넌트에 적용된 디자인 토큰입니다. 커스터마이징 시 아래 토큰을 참조하세요.
-        </p>
-        <div style={{ overflowX: "auto" }}>
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
-            <thead>
-              <tr style={{ borderBottom: "2px solid var(--border-default)" }}>
-                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: 600 }}>속성</th>
-                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: 600 }}>토큰</th>
-                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: 600 }}>값 (Light)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>배경색 (ghost)</td>
-                <td style={{ padding: "10px 12px" }}>
-                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>transparent</code>
-                </td>
-                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>투명</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>아이콘 색상</td>
-                <td style={{ padding: "10px 12px" }}>
-                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>--content-base-default</code>
-                </td>
-                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>
-                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
-                    <span style={{ width: 12, height: 12, borderRadius: 3, backgroundColor: "var(--content-base-default)" }} />
-                    Base Default
-                  </span>
-                </td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>크기 (sm / md / lg)</td>
-                <td style={{ padding: "10px 12px" }}>
-                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>primitive.8 / 10 / 12</code>
-                </td>
-                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>32px / 40px / 48px</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>아이콘 크기 (sm / md / lg)</td>
-                <td style={{ padding: "10px 12px" }}>
-                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>iconSize</code>
-                </td>
-                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>18px / 22px / 26px</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>모서리 반경</td>
-                <td style={{ padding: "10px 12px" }}>
-                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>primitive.full</code>
-                </td>
-                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>9999px (원형)</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </Section>
-
-      {/* UX Writing */}
-      <Section title="UX Writing">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 24 }}>
-          사용자에게 명확한 경험을 전달하기 위한 텍스트 작성 가이드입니다.
-        </p>
-        <div style={{ display: "grid", gap: 12 }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-            <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-success-default)", border: "1px solid var(--border-success-default)" }}>
-              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-success-default)", marginBottom: 8 }}>DO</div>
-              <code style={{ fontSize: 14, color: "var(--text-primary)" }}>aria-label=&quot;검색&quot;</code>
-              <p style={{ fontSize: 12, color: "var(--text-tertiary)", margin: 0, marginTop: 4 }}>반드시 접근성 레이블을 제공합니다</p>
-            </div>
-            <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-error-default)", border: "1px solid var(--border-error-default)" }}>
-              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-error-default)", marginBottom: 8 }}>DON&apos;T</div>
-              <code style={{ fontSize: 14, color: "var(--text-primary)" }}>aria-label=&quot;&quot;</code>
-              <p style={{ fontSize: 12, color: "var(--text-tertiary)", margin: 0, marginTop: 4 }}>빈 레이블은 스크린 리더가 인식할 수 없습니다</p>
-            </div>
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-            <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-success-default)", border: "1px solid var(--border-success-default)" }}>
-              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-success-default)", marginBottom: 8 }}>DO</div>
-              <code style={{ fontSize: 14, color: "var(--text-primary)" }}>aria-label=&quot;닫기&quot;</code>
-              <p style={{ fontSize: 12, color: "var(--text-tertiary)", margin: 0, marginTop: 4 }}>기능을 설명하는 레이블을 사용합니다</p>
-            </div>
-            <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-error-default)", border: "1px solid var(--border-error-default)" }}>
-              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-error-default)", marginBottom: 8 }}>DON&apos;T</div>
-              <code style={{ fontSize: 14, color: "var(--text-primary)" }}>aria-label=&quot;X 아이콘&quot;</code>
-              <p style={{ fontSize: 12, color: "var(--text-tertiary)", margin: 0, marginTop: 4 }}>외형이 아닌 기능을 설명해야 합니다</p>
-            </div>
-          </div>
-        </div>
-      </Section>
-
-      {/* Usage Guidelines */}
-      <Section title="Usage Guidelines">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 24, lineHeight: 1.6 }}>
-          일관된 UX를 위해 아래 권고 조합을 따르세요. Icon Button은 <strong style={{ color: "var(--text-primary)" }}>원형 버튼이 필요하고 아이콘만으로 의미가 전달</strong>되어야 하는 상황에서 사용합니다. Button 컴포넌트도 icon-only 모드를 제공하나 직사각형 기반이며, IconButton은 원형 전용으로 시각적 일관성이 중요한 패턴에 적합합니다.
-        </p>
-
-        <Subsection title="Recommended Combinations">
-          <div style={{ display: "grid", gap: 12 }}>
-            <UsageCard
-              situation="Navigation Actions"
-              desc="뒤로가기, 닫기, 메뉴 열기 등 네비게이션"
-              variant="ghost"
-              color="baseDefault"
-              iconType="menu"
-            />
-            <UsageCard
-              situation="Toolbar Buttons"
-              desc="에디터, 뷰어 등의 툴바 액션"
-              variant="ghost"
-              color="baseDefault"
-              iconType="edit"
-            />
-            <UsageCard
-              situation="Close / Dismiss"
-              desc="모달, 토스트, 패널 닫기"
-              variant="ghost"
-              color="baseDefault"
-              iconType="close"
-            />
-            <UsageCard
-              situation="Primary Action (Floating)"
-              desc="FAB 등 화면에서 가장 중요한 액션"
-              variant="filled"
-              color="brandDefault"
-              iconType="plus"
-            />
-            <UsageCard
-              situation="Destructive Action"
-              desc="삭제, 제거 등 위험한 액션"
-              variant="ghost"
-              color="errorDefault"
-              iconType="close"
-            />
-          </div>
-        </Subsection>
-
-        <Subsection title="Design Principles">
-          <div style={{ display: "grid", gap: 16 }}>
-            <PrincipleCard
-              number={1}
-              title="반드시 접근성 레이블 제공"
-              desc="아이콘만 있으므로 aria-label을 필수로 제공해야 합니다. 스크린 리더 사용자가 버튼의 목적을 알 수 있어야 합니다."
-            />
-            <PrincipleCard
-              number={2}
-              title="variant로 계층 구조 표현"
-              desc="filled는 가장 강조된 액션, ghost는 보조 액션, outlined는 중간 강조에 사용합니다. 화면당 filled Icon Button은 1-2개로 제한하세요."
-            />
-          </div>
-        </Subsection>
-      </Section>
-
       {/* Variants */}
       <Section title="Variants">
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: spacing.primitive[4] }}>
           <VariantCard name="Ghost" description="투명 배경, 기본 스타일">
-            <IconButtonDemo variant="ghost" color="baseDefault" />
+            <IconButtonDemo variant="ghost" color="neutral" />
           </VariantCard>
           <VariantCard name="Filled" description="채워진 배경, 강조 액션">
-            <IconButtonDemo variant="filled" color="brandDefault" />
+            <IconButtonDemo variant="filled" color="primary" />
           </VariantCard>
-          <VariantCard name="Outlined" description="테두리만 표시">
-            <IconButtonDemo variant="outlined" color="baseDefault" />
+          <VariantCard name="Weak" description="연한 배경 틴트">
+            <IconButtonDemo variant="weak" color="neutral" />
           </VariantCard>
         </div>
       </Section>
@@ -513,18 +292,18 @@ function DesignContent() {
       {/* Sizes */}
       <Section title="Sizes">
         <PreviewBox>
-          <div style={{ display: "flex", gap: 24, alignItems: "center" }}>
+          <div style={{ display: "flex", gap: spacing.primitive[6], alignItems: "center" }}>
             <div style={{ textAlign: "center" }}>
               <IconButtonDemo size="small" />
-              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginTop: 8 }}>32px</p>
+              <p style={{ fontSize: typography.fontSize['2xs'], color: "var(--content-base-secondary)", marginTop: spacing.primitive[2] }}>32px</p>
             </div>
             <div style={{ textAlign: "center" }}>
               <IconButtonDemo size="medium" />
-              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginTop: 8 }}>40px</p>
+              <p style={{ fontSize: typography.fontSize['2xs'], color: "var(--content-base-secondary)", marginTop: spacing.primitive[2] }}>40px</p>
             </div>
             <div style={{ textAlign: "center" }}>
               <IconButtonDemo size="large" />
-              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginTop: 8 }}>48px</p>
+              <p style={{ fontSize: typography.fontSize['2xs'], color: "var(--content-base-secondary)", marginTop: spacing.primitive[2] }}>48px</p>
             </div>
           </div>
         </PreviewBox>
@@ -534,28 +313,28 @@ function DesignContent() {
       <Section title="Colors">
         <Subsection title="Ghost">
           <PreviewBox>
-            <div style={{ display: "flex", gap: 16 }}>
-              <IconButtonDemo variant="ghost" color="brandDefault" />
-              <IconButtonDemo variant="ghost" color="baseDefault" />
-              <IconButtonDemo variant="ghost" color="errorDefault" />
+            <div style={{ display: "flex", gap: spacing.primitive[4] }}>
+              <IconButtonDemo variant="ghost" color="primary" />
+              <IconButtonDemo variant="ghost" color="neutral" />
+              <IconButtonDemo variant="ghost" color="error" />
             </div>
           </PreviewBox>
         </Subsection>
         <Subsection title="Filled">
           <PreviewBox>
-            <div style={{ display: "flex", gap: 16 }}>
-              <IconButtonDemo variant="filled" color="brandDefault" />
-              <IconButtonDemo variant="filled" color="baseDefault" />
-              <IconButtonDemo variant="filled" color="errorDefault" />
+            <div style={{ display: "flex", gap: spacing.primitive[4] }}>
+              <IconButtonDemo variant="filled" color="primary" />
+              <IconButtonDemo variant="filled" color="neutral" />
+              <IconButtonDemo variant="filled" color="error" />
             </div>
           </PreviewBox>
         </Subsection>
-        <Subsection title="Outlined">
+        <Subsection title="Weak">
           <PreviewBox>
-            <div style={{ display: "flex", gap: 16 }}>
-              <IconButtonDemo variant="outlined" color="brandDefault" />
-              <IconButtonDemo variant="outlined" color="baseDefault" />
-              <IconButtonDemo variant="outlined" color="errorDefault" />
+            <div style={{ display: "flex", gap: spacing.primitive[4] }}>
+              <IconButtonDemo variant="weak" color="primary" />
+              <IconButtonDemo variant="weak" color="neutral" />
+              <IconButtonDemo variant="weak" color="error" />
             </div>
           </PreviewBox>
         </Subsection>
@@ -564,117 +343,385 @@ function DesignContent() {
       {/* States */}
       <Section title="States">
         <PreviewBox>
-          <div style={{ display: "flex", gap: 24, alignItems: "center" }}>
+          <div style={{ display: "flex", gap: spacing.primitive[6], alignItems: "center" }}>
             <div style={{ textAlign: "center" }}>
-              <IconButtonDemo variant="ghost" color="baseDefault" />
-              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginTop: 8 }}>Default</p>
+              <IconButtonDemo variant="ghost" color="neutral" />
+              <p style={{ fontSize: typography.fontSize['2xs'], color: "var(--content-base-secondary)", marginTop: spacing.primitive[2] }}>Default</p>
             </div>
             <div style={{ textAlign: "center" }}>
-              <IconButtonDemo variant="ghost" color="baseDefault" disabled />
-              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginTop: 8 }}>Disabled</p>
+              <IconButtonDemo variant="ghost" color="neutral" disabled />
+              <p style={{ fontSize: typography.fontSize['2xs'], color: "var(--content-base-secondary)", marginTop: spacing.primitive[2] }}>Disabled</p>
             </div>
           </div>
         </PreviewBox>
+
+        <Subsection title="Interaction States">
+          <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", lineHeight: 1.7, marginBottom: spacing.primitive[6] }}>
+            IconButton은 원형 버튼으로 사용자 상호작용에 따라 배경색과 아이콘 색상이 변화합니다. 각 상태는 시각적으로 명확히 구분되어 터치/클릭 피드백을 제공합니다.
+          </p>
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
+            gap: spacing.primitive[4],
+            padding: spacing.primitive[6],
+            backgroundColor: "var(--surface-base-alternative)",
+            borderRadius: radius.primitive.lg,
+          }}>
+            <InteractionStateCard label="Default" sublabel="기본 상태" color="var(--content-base-default)" bgColor="transparent" />
+            <InteractionStateCard label="Hover" sublabel="마우스 오버" color="var(--content-base-default)" bgColor="var(--effect-alpha-fill-alternative)" />
+            <InteractionStateCard label="Pressed" sublabel="누름" color="var(--content-base-default)" bgColor="var(--effect-alpha-fill-normal)" />
+            <InteractionStateCard label="Disabled" sublabel="비활성화" color="var(--content-disabled-default)" bgColor="transparent" opacity={0.5} />
+            <InteractionStateCard label="Focused" sublabel="키보드 포커스" color="var(--content-base-default)" bgColor="transparent" showFocusRing />
+          </div>
+        </Subsection>
       </Section>
 
-      {/* Best Practices */}
-      <Section title="Best Practices">
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
-          <DoCard>
-            <div style={{ display: "flex", gap: 8 }}>
-              <IconButtonDemo variant="ghost" color="baseDefault" />
-              <IconButtonDemo variant="ghost" color="baseDefault" />
-            </div>
-          </DoCard>
-          <DontCard>
-            <div style={{ display: "flex", gap: 8 }}>
-              <IconButtonDemo variant="filled" color="brandDefault" />
-              <IconButtonDemo variant="filled" color="errorDefault" />
-              <IconButtonDemo variant="filled" color="baseDefault" />
-            </div>
-          </DontCard>
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 4 }}>
-          <DoLabel>보조 액션에는 ghost variant를 사용합니다.</DoLabel>
-          <DontLabel>한 영역에 filled Icon Button을 과도하게 사용하지 않습니다.</DontLabel>
-        </div>
+      {/* Usage Guidelines */}
+      <Section title="Usage Guidelines">
+        <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginBottom: spacing.primitive[6], lineHeight: 1.7 }}>
+          일관된 UX를 위해 아래 권고 조합을 따르세요. Icon Button은 <strong style={{ color: "var(--text-primary)" }}>원형 버튼이 필요하고 아이콘만으로 의미가 전달</strong>되어야 하는 상황에서 사용합니다. Button 컴포넌트도 icon-only 모드를 제공하나 직사각형 기반이며, IconButton은 원형 전용으로 시각적 일관성이 중요한 패턴에 적합합니다.
+        </p>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 16 }}>
-          <DoCard>
-            <IconButtonDemo variant="ghost" color="baseDefault" size="medium" />
-          </DoCard>
-          <DontCard>
-            <IconButtonDemo variant="ghost" color="baseDefault" size="small" />
-          </DontCard>
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 4 }}>
-          <DoLabel>모바일에서는 medium 이상 사이즈를 사용하여 터치 영역을 확보합니다.</DoLabel>
-          <DontLabel>모바일에서 small 사이즈만 사용하면 터치 오류가 발생할 수 있습니다.</DontLabel>
-        </div>
+        <Subsection title="Recommended Combinations">
+          <div style={{ display: "grid", gap: spacing.primitive[3] }}>
+            <UsageCard
+              situation="Navigation Actions"
+              desc="뒤로가기, 닫기, 메뉴 열기 등 네비게이션"
+              variant="ghost"
+              color="neutral"
+              iconType="menu"
+            />
+            <UsageCard
+              situation="Toolbar Buttons"
+              desc="에디터, 뷰어 등의 툴바 액션"
+              variant="ghost"
+              color="neutral"
+              iconType="edit"
+            />
+            <UsageCard
+              situation="Close / Dismiss"
+              desc="모달, 토스트, 패널 닫기"
+              variant="ghost"
+              color="neutral"
+              iconType="close"
+            />
+            <UsageCard
+              situation="Primary Action (Floating)"
+              desc="FAB 등 화면에서 가장 중요한 액션"
+              variant="filled"
+              color="primary"
+              iconType="plus"
+            />
+            <UsageCard
+              situation="Emphasized Toolbar Action"
+              desc="현재 활성화된 도구, 강조 보조 액션"
+              variant="weak"
+              color="primary"
+              iconType="edit"
+            />
+            <UsageCard
+              situation="Destructive Action"
+              desc="삭제, 제거 등 위험한 액션"
+              variant="ghost"
+              color="error"
+              iconType="close"
+            />
+          </div>
+        </Subsection>
+
+        <Subsection title="Design Principles">
+          <div style={{ display: "grid", gap: spacing.primitive[4] }}>
+            <PrincipleCard
+              number={1}
+              title="variant로 계층 구조 표현"
+              desc="filled는 가장 강조된 액션(FAB), ghost는 보조 액션(툴바, 닫기), weak는 중간 강조(활성 도구)에 사용합니다. 화면당 filled Icon Button은 1-2개로 제한하세요."
+            />
+            <PrincipleCard
+              number={2}
+              title="색상의 의미를 지키세요"
+              desc="primary는 핵심 브랜드 액션, neutral은 일반 보조 액션, error는 삭제/제거 등 위험한 액션에만 사용합니다."
+            />
+            <PrincipleCard
+              number={3}
+              title="모바일에서 터치 영역 확보"
+              desc="모바일 환경에서는 medium(40px) 이상 사이즈를 사용하세요. small(32px)은 데스크톱 전용으로 권장합니다."
+            />
+          </div>
+        </Subsection>
+
+        <Subsection title="Best Practices">
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4] }}>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <DoCard>
+                <div style={{ display: "flex", gap: spacing.primitive[2] }}>
+                  <IconButtonDemo variant="ghost" color="neutral" />
+                  <IconButtonDemo variant="ghost" color="neutral" />
+                </div>
+              </DoCard>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <DontCard>
+                <div style={{ display: "flex", gap: spacing.primitive[2] }}>
+                  <IconButtonDemo variant="filled" color="primary" />
+                  <IconButtonDemo variant="filled" color="error" />
+                  <IconButtonDemo variant="filled" color="neutral" />
+                </div>
+              </DontCard>
+            </div>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4], marginTop: spacing.primitive[2] }}>
+            <p style={{ fontSize: typography.fontSize.compact, color: "var(--content-success-default)", margin: 0, lineHeight: 1.7 }}>
+              <strong>Do</strong> 보조 액션에는 ghost variant를 사용합니다.
+            </p>
+            <p style={{ fontSize: typography.fontSize.compact, color: "var(--content-error-default)", margin: 0, lineHeight: 1.7, fontStyle: "italic" }}>
+              <strong>Don&apos;t</strong> 한 영역에 filled Icon Button을 과도하게 사용하지 않습니다.
+            </p>
+          </div>
+
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4], marginTop: spacing.primitive[5] }}>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <DoCard>
+                <IconButtonDemo variant="ghost" color="neutral" size="medium" />
+              </DoCard>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <DontCard>
+                <IconButtonDemo variant="ghost" color="neutral" size="small" />
+              </DontCard>
+            </div>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4], marginTop: spacing.primitive[2] }}>
+            <p style={{ fontSize: typography.fontSize.compact, color: "var(--content-success-default)", margin: 0, lineHeight: 1.7 }}>
+              <strong>Do</strong> 모바일에서는 medium 이상 사이즈를 사용하여 터치 영역을 확보합니다.
+            </p>
+            <p style={{ fontSize: typography.fontSize.compact, color: "var(--content-error-default)", margin: 0, lineHeight: 1.7, fontStyle: "italic" }}>
+              <strong>Don&apos;t</strong> 모바일에서 small 사이즈만 사용하면 터치 오류가 발생할 수 있습니다.
+            </p>
+          </div>
+        </Subsection>
       </Section>
 
       {/* Design Tokens */}
       <Section title="Design Tokens">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
+        <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginBottom: spacing.primitive[5], lineHeight: 1.7 }}>
           IconButton 컴포넌트에 적용된 Foundation 기반 디자인 토큰입니다.
         </p>
-        <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)" }}>
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
-            <thead>
-              <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Property</th>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Small</th>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Medium</th>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Large</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "12px 16px" }}>Button Size</td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>32px (primitive.8)</td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>40px (primitive.10)</td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>48px (primitive.12)</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "12px 16px" }}>Icon Size</td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>18px</td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>22px</td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>26px</td>
-              </tr>
-              <tr>
-                <td style={{ padding: "12px 16px" }}>Border Radius</td>
-                <td colSpan={3} style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>9999px (primitive.full)</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+
+        <Subsection title="Size">
+          <div style={{ overflow: "auto", borderRadius: radius.primitive.md }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.sm }}>
+              <thead>
+                <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Property</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Small</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Medium</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Large</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                  <td style={{ padding: "12px 16px", color: "var(--text-primary)" }}>Button Size</td>
+                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>32px (<InlineCode>primitive.8</InlineCode>)</td>
+                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>40px (<InlineCode>primitive.10</InlineCode>)</td>
+                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>48px (<InlineCode>primitive.12</InlineCode>)</td>
+                </tr>
+                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                  <td style={{ padding: "12px 16px", color: "var(--text-primary)" }}>Icon Size</td>
+                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>18px</td>
+                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>22px</td>
+                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>26px</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "12px 16px", color: "var(--text-primary)" }}>Border Radius</td>
+                  <td colSpan={3} style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>9999px (<InlineCode>primitive.full</InlineCode>)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </Subsection>
+
+        <Subsection title="Colors">
+          {/* Filled */}
+          <p style={{ fontSize: typography.fontSize.sm, fontWeight: 600, color: "var(--text-primary)", marginBottom: spacing.primitive[3] }}>Filled</p>
+          <div style={{ overflow: "auto", borderRadius: radius.primitive.md, marginBottom: spacing.primitive[6] }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.sm }}>
+              <thead>
+                <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Color</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Background</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Bg Pressed</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Text Color</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                  <td style={{ padding: "12px 16px", color: "var(--text-primary)" }}>primary</td>
+                  <td style={{ padding: "12px 16px" }}><InlineCode>surface.brand.default</InlineCode></td>
+                  <td style={{ padding: "12px 16px" }}><InlineCode>surface.brand.defaultPressed</InlineCode></td>
+                  <td style={{ padding: "12px 16px" }}><InlineCode>content.base.onColor</InlineCode></td>
+                </tr>
+                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                  <td style={{ padding: "12px 16px", color: "var(--text-primary)" }}>neutral</td>
+                  <td style={{ padding: "12px 16px" }}><InlineCode>content.base.default</InlineCode></td>
+                  <td style={{ padding: "12px 16px" }}><InlineCode>inverse.surface.default</InlineCode></td>
+                  <td style={{ padding: "12px 16px" }}><InlineCode>content.base.onColor</InlineCode></td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "12px 16px", color: "var(--text-primary)" }}>error</td>
+                  <td style={{ padding: "12px 16px" }}><InlineCode>surface.error.solid</InlineCode></td>
+                  <td style={{ padding: "12px 16px" }}><InlineCode>surface.error.solidPressed</InlineCode></td>
+                  <td style={{ padding: "12px 16px" }}><InlineCode>content.base.onColor</InlineCode></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          {/* Weak */}
+          <p style={{ fontSize: typography.fontSize.sm, fontWeight: 600, color: "var(--text-primary)", marginBottom: spacing.primitive[3] }}>Weak</p>
+          <div style={{ overflow: "auto", borderRadius: radius.primitive.md, marginBottom: spacing.primitive[6] }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.sm }}>
+              <thead>
+                <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Color</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Background</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Bg Pressed</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Text Color</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                  <td style={{ padding: "12px 16px", color: "var(--text-primary)" }}>primary</td>
+                  <td style={{ padding: "12px 16px" }}><InlineCode>surface.brand.secondary</InlineCode></td>
+                  <td style={{ padding: "12px 16px" }}><InlineCode>surface.brand.secondaryPressed</InlineCode></td>
+                  <td style={{ padding: "12px 16px" }}><InlineCode>content.brand.default</InlineCode></td>
+                </tr>
+                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                  <td style={{ padding: "12px 16px", color: "var(--text-primary)" }}>neutral</td>
+                  <td style={{ padding: "12px 16px" }}><InlineCode>surface.base.container</InlineCode></td>
+                  <td style={{ padding: "12px 16px" }}><InlineCode>surface.base.containerPressed</InlineCode></td>
+                  <td style={{ padding: "12px 16px" }}><InlineCode>content.base.default</InlineCode></td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "12px 16px", color: "var(--text-primary)" }}>error</td>
+                  <td style={{ padding: "12px 16px" }}><InlineCode>surface.error.default</InlineCode></td>
+                  <td style={{ padding: "12px 16px" }}><InlineCode>surface.error.defaultPressed</InlineCode></td>
+                  <td style={{ padding: "12px 16px" }}><InlineCode>content.error.default</InlineCode></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          {/* Ghost */}
+          <p style={{ fontSize: typography.fontSize.sm, fontWeight: 600, color: "var(--text-primary)", marginBottom: spacing.primitive[3] }}>Ghost</p>
+          <div style={{ overflow: "auto", borderRadius: radius.primitive.md }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.sm }}>
+              <thead>
+                <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Color</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Background</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Bg Hover</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Bg Pressed</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Text</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Text Pressed</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                  <td style={{ padding: "12px 16px", color: "var(--text-primary)" }}>primary</td>
+                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>transparent</td>
+                  <td style={{ padding: "12px 16px" }}><InlineCode>fill.alternative</InlineCode></td>
+                  <td style={{ padding: "12px 16px" }}><InlineCode>fill.normal</InlineCode></td>
+                  <td style={{ padding: "12px 16px" }}><InlineCode>content.brand.default</InlineCode></td>
+                  <td style={{ padding: "12px 16px" }}><InlineCode>surface.brand.defaultPressed</InlineCode></td>
+                </tr>
+                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                  <td style={{ padding: "12px 16px", color: "var(--text-primary)" }}>neutral</td>
+                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>transparent</td>
+                  <td style={{ padding: "12px 16px" }}><InlineCode>fill.alternative</InlineCode></td>
+                  <td style={{ padding: "12px 16px" }}><InlineCode>fill.normal</InlineCode></td>
+                  <td style={{ padding: "12px 16px" }}><InlineCode>content.base.default</InlineCode></td>
+                  <td style={{ padding: "12px 16px" }}><InlineCode>inverse.surface.default</InlineCode></td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "12px 16px", color: "var(--text-primary)" }}>error</td>
+                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>transparent</td>
+                  <td style={{ padding: "12px 16px" }}><InlineCode>surface.error.default</InlineCode></td>
+                  <td style={{ padding: "12px 16px" }}><InlineCode>surface.error.default</InlineCode></td>
+                  <td style={{ padding: "12px 16px" }}><InlineCode>content.error.default</InlineCode></td>
+                  <td style={{ padding: "12px 16px" }}><InlineCode>surface.error.solidPressed</InlineCode></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </Subsection>
+
+        <Subsection title="Interaction">
+          <div style={{ overflow: "auto", borderRadius: radius.primitive.md }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.sm }}>
+              <thead>
+                <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Property</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Value</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>설명</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                  <td style={{ padding: "12px 16px", color: "var(--text-primary)" }}>Disabled Opacity</td>
+                  <td style={{ padding: "12px 16px" }}><InlineCode>opacity.disabled</InlineCode> (0.5)</td>
+                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>비활성화 시 전체 투명도</td>
+                </tr>
+                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                  <td style={{ padding: "12px 16px", color: "var(--text-primary)" }}>Cursor (disabled)</td>
+                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>not-allowed</td>
+                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>비활성화 시 커서</td>
+                </tr>
+                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                  <td style={{ padding: "12px 16px", color: "var(--text-primary)" }}>Transition</td>
+                  <td style={{ padding: "12px 16px" }}><InlineCode>transitions.all</InlineCode></td>
+                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>모든 속성에 부드러운 전환</td>
+                </tr>
+                <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                  <td style={{ padding: "12px 16px", color: "var(--text-primary)" }}>Border</td>
+                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>none</td>
+                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>모든 variant에서 테두리 없음</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "12px 16px", color: "var(--text-primary)" }}>Border Radius</td>
+                  <td style={{ padding: "12px 16px" }}><InlineCode>radius.full</InlineCode></td>
+                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>원형</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </Subsection>
       </Section>
 
       {/* Accessibility */}
       <Section title="Accessibility">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
+        <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginBottom: spacing.primitive[5], lineHeight: 1.7 }}>
           Icon Button은 텍스트 레이블이 없으므로 접근성에 특별한 주의가 필요합니다.
         </p>
 
-        <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)", marginBottom: 24 }}>
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+        <div style={{ overflow: "auto", borderRadius: radius.primitive.md, marginBottom: spacing.primitive[6] }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.sm }}>
             <thead>
-              <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
+              <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
                 <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>속성</th>
                 <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>설명</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>role=&quot;button&quot;</code></td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><code style={{ backgroundColor: "var(--surface-base-alternative)", padding: "2px 6px", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.xs }}>role=&quot;button&quot;</code></td>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>스크린 리더가 버튼으로 인식</td>
               </tr>
               <tr>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>aria-label</code> (필수)</td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><code style={{ backgroundColor: "var(--surface-base-alternative)", padding: "2px 6px", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.xs }}>aria-label</code> (필수)</td>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>아이콘의 목적을 설명하는 텍스트. Icon Button에서 필수</td>
               </tr>
               <tr>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>aria-disabled</code></td>
+                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><code style={{ backgroundColor: "var(--surface-base-alternative)", padding: "2px 6px", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.xs }}>aria-disabled</code></td>
                 <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>비활성화 상태를 보조 기술에 전달</td>
               </tr>
             </tbody>
@@ -682,25 +729,25 @@ function DesignContent() {
         </div>
 
         <Subsection title="Keyboard Interaction">
-          <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)" }}>
-            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+          <div style={{ overflow: "auto", borderRadius: radius.primitive.md }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.sm }}>
               <thead>
-                <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
+                <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
                   <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>키</th>
                   <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>동작</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--bg-secondary)", borderRadius: 4, fontSize: 12 }}>Tab</kbd></td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.xs }}>Tab</kbd></td>
                   <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>버튼으로 포커스 이동</td>
                 </tr>
                 <tr>
-                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--bg-secondary)", borderRadius: 4, fontSize: 12 }}>Enter</kbd></td>
+                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.xs }}>Enter</kbd></td>
                   <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>버튼 클릭 실행</td>
                 </tr>
                 <tr>
-                  <td style={{ padding: "12px 16px" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--bg-secondary)", borderRadius: 4, fontSize: 12 }}>Space</kbd></td>
+                  <td style={{ padding: "12px 16px" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.xs }}>Space</kbd></td>
                   <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>버튼 클릭 실행</td>
                 </tr>
               </tbody>
@@ -709,7 +756,7 @@ function DesignContent() {
         </Subsection>
 
         <Subsection title="Design Principles">
-          <div style={{ display: "grid", gap: 16 }}>
+          <div style={{ display: "grid", gap: spacing.primitive[4] }}>
             <PrincipleCard
               number={1}
               title="Accessibility Label 필수"
@@ -736,10 +783,10 @@ function DesignContent() {
 
       {/* Related Components */}
       <Section title="Related Components">
-        <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)" }}>
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+        <div style={{ overflow: "auto", borderRadius: radius.primitive.md }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.sm }}>
             <thead>
-              <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
+              <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
                 <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>컴포넌트</th>
                 <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>용도</th>
                 <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>차이점</th>
@@ -779,13 +826,13 @@ const ICONBUTTON_SOURCE = `${GITHUB_BASE}/components/IconButton/IconButton.tsx`;
 
 function WebContent() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: spacing.primitive[12] }}>
       {/* Source Code */}
       <Section title="Source Code">
-        <div style={{ padding: 16, backgroundColor: "var(--bg-secondary)", borderRadius: 12, marginBottom: 24, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <div style={{ padding: spacing.primitive[4], backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.md, marginBottom: spacing.primitive[6], display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div>
-            <p style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", margin: 0 }}>IconButton Component</p>
-            <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: "4px 0 0 0" }}>실제 컴포넌트 소스 코드를 GitHub에서 확인하세요.</p>
+            <p style={{ fontSize: typography.fontSize.sm, fontWeight: 600, color: "var(--text-primary)", margin: 0 }}>IconButton Component</p>
+            <p style={{ fontSize: typography.fontSize.compact, color: "var(--text-secondary)", margin: `${spacing.primitive[1]}px 0 0 0` }}>실제 컴포넌트 소스 코드를 GitHub에서 확인하세요.</p>
           </div>
           <a
             href={ICONBUTTON_SOURCE}
@@ -795,12 +842,12 @@ function WebContent() {
               display: "inline-flex",
               alignItems: "center",
               gap: 6,
-              padding: "8px 16px",
-              fontSize: 13,
+              padding: `${spacing.primitive[2]}px ${spacing.primitive[4]}px`,
+              fontSize: typography.fontSize.compact,
               fontWeight: 500,
               color: "var(--content-base-onColor)",
               backgroundColor: "var(--docs-code-surface)",
-              borderRadius: 12,
+              borderRadius: radius.primitive.md,
               textDecoration: "none",
             }}
           >
@@ -820,8 +867,8 @@ function WebContent() {
       {/* Basic Usage */}
       <Section title="Basic Usage">
         <PreviewBox>
-          <div style={{ display: "flex", gap: 16, alignItems: "center", padding: 24 }}>
-            <IconButtonDemo variant="ghost" color="baseDefault" />
+          <div style={{ display: "flex", gap: spacing.primitive[4], alignItems: "center", padding: spacing.primitive[6] }}>
+            <IconButtonDemo variant="ghost" color="neutral" />
           </div>
         </PreviewBox>
         <CodeBlock code={`<IconButton onClick={() => {}}>
@@ -832,21 +879,21 @@ function WebContent() {
       {/* Variants */}
       <Section title="Variants">
         <PreviewBox>
-          <div style={{ display: "flex", gap: 16, alignItems: "center", padding: 24 }}>
-            <IconButtonDemo variant="ghost" color="baseDefault" />
-            <IconButtonDemo variant="filled" color="brandDefault" />
-            <IconButtonDemo variant="outlined" color="baseDefault" />
+          <div style={{ display: "flex", gap: spacing.primitive[4], alignItems: "center", padding: spacing.primitive[6] }}>
+            <IconButtonDemo variant="ghost" color="neutral" />
+            <IconButtonDemo variant="filled" color="primary" />
+            <IconButtonDemo variant="weak" color="neutral" />
           </div>
         </PreviewBox>
         <CodeBlock code={`<IconButton variant="ghost" onClick={() => {}}>
   <MenuIcon />
 </IconButton>
 
-<IconButton variant="filled" color="brandDefault" onClick={() => {}}>
+<IconButton variant="filled" color="primary" onClick={() => {}}>
   <PlusIcon />
 </IconButton>
 
-<IconButton variant="outlined" onClick={() => {}}>
+<IconButton variant="weak" onClick={() => {}}>
   <SettingsIcon />
 </IconButton>`} />
       </Section>
@@ -855,8 +902,8 @@ function WebContent() {
       <Section title="API Reference">
         <PropsTable
           props={[
-            { name: "variant", type: '"filled" | "ghost" | "outlined"', required: false, defaultVal: '"ghost"', description: "버튼 스타일" },
-            { name: "color", type: '"brandDefault" | "baseDefault" | "errorDefault"', required: false, defaultVal: '"baseDefault"', description: "색상 테마" },
+            { name: "variant", type: '"filled" | "ghost" | "weak"', required: false, defaultVal: '"ghost"', description: "버튼 스타일" },
+            { name: "color", type: '"primary" | "neutral" | "error"', required: false, defaultVal: '"neutral"', description: "색상 테마" },
             { name: "size", type: '"small" | "medium" | "large"', required: false, defaultVal: '"medium"', description: "버튼 크기" },
             { name: "disabled", type: "boolean", required: false, defaultVal: "false", description: "비활성화 상태" },
             { name: "children", type: "ReactNode", required: true, description: "아이콘 콘텐츠" },
@@ -908,28 +955,28 @@ function UsageCard({ situation, desc, variant, color, iconType }: {
     <div style={{
       display: "grid",
       gridTemplateColumns: "1fr auto",
-      gap: 16,
-      padding: 16,
+      gap: spacing.primitive[4],
+      padding: spacing.primitive[4],
       backgroundColor: "var(--surface-base-default)",
-      borderRadius: 12,
+      borderRadius: radius.primitive.md,
       border: "1px solid var(--divider)",
       alignItems: "center",
     }}>
       <div>
-        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
-          <span style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)" }}>{situation}</span>
+        <div style={{ display: "flex", alignItems: "center", gap: spacing.primitive[2], marginBottom: spacing.primitive[1] }}>
+          <span style={{ fontSize: typography.fontSize.sm, fontWeight: 600, color: "var(--text-primary)" }}>{situation}</span>
           <span style={{
-            fontSize: 11,
+            fontSize: typography.fontSize['2xs'],
             padding: "2px 6px",
             backgroundColor: variant === "filled" ? "var(--surface-brand-secondary)" : "var(--surface-base-alternative)",
             color: variant === "filled" ? "var(--surface-brand-defaultPressed)" : "var(--content-base-secondary)",
-            borderRadius: 4,
+            borderRadius: radius.primitive.xs,
             fontWeight: 500,
           }}>
             {variant} + {color}
           </span>
         </div>
-        <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0 }}>{desc}</p>
+        <p style={{ fontSize: typography.fontSize.compact, color: "var(--text-secondary)", margin: 0 }}>{desc}</p>
       </div>
       <IconButtonDemo variant={variant} color={color} size="small" />
     </div>
@@ -945,27 +992,27 @@ function InteractionStateCard({ label, sublabel, color, bgColor, opacity, showFo
 }) {
   return (
     <div style={{
-      display: "flex", flexDirection: "column", alignItems: "center", gap: 12, padding: 16,
+      display: "flex", flexDirection: "column", alignItems: "center", gap: spacing.primitive[3], padding: spacing.primitive[4],
     }}>
       <div style={{
-        width: "100%", height: 48, borderRadius: 12,
+        width: "100%", height: 48, borderRadius: radius.primitive.md,
         backgroundColor: bgColor,
         display: "flex", alignItems: "center", justifyContent: "center",
         opacity: opacity ?? 1,
         outline: showFocusRing ? "2px solid var(--content-brand-default)" : "none",
         outlineOffset: showFocusRing ? 2 : 0,
-        color: color, fontSize: 13, fontWeight: 500,
+        color: color, fontSize: typography.fontSize.compact, fontWeight: 500,
       }}>
         {label}
       </div>
-      <span style={{ fontSize: 12, color: "var(--text-tertiary)", textAlign: "center" }}>{sublabel}</span>
+      <span style={{ fontSize: typography.fontSize.xs, color: "var(--text-tertiary)", textAlign: "center" }}>{sublabel}</span>
     </div>
   );
 }
 
 function IconButtonDemo({
   variant = "ghost",
-  color = "baseDefault",
+  color = "neutral",
   size = "medium",
   disabled = false,
 }: {

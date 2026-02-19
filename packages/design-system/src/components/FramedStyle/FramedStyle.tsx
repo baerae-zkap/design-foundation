@@ -15,7 +15,7 @@ import { cssVarColors } from '../../tokens/colors';
 import { cssVarShadow } from '../../tokens/shadow';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
-import { opacity } from '../../tokens/general';
+import { opacity, borderWidth as borderWidthToken } from '../../tokens/general';
 import { usePressable } from '../../utils/usePressable';
 import { transitions } from '../../utils/styles';
 
@@ -87,7 +87,7 @@ export const FramedStyle = forwardRef<HTMLDivElement, FramedStyleProps>(
       backgroundColor: isPressed && isInteractive
         ? cssVarColors.surface.base.container
         : cssVarColors.surface.base.default,
-      borderWidth: selected ? 1.5 : 1,
+      borderWidth: selected ? borderWidthToken.medium : borderWidthToken.default,
       borderStyle: 'solid',
       borderColor: getBorderColor(),
       borderRadius: customBorderRadius ?? sizeStyle.borderRadius,

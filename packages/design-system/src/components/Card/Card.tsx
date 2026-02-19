@@ -1,47 +1,56 @@
 /**
  * Card Component (Web)
  *
- * @description 콘텐츠를 담는 카드 컨테이너입니다.
+ * @description 콘텐츠를 담는 클릭 가능한 카드 컨테이너입니다.
  * @see docs/components/Card.md - AI용 상세 가이드
  *
  * @example
+ * // Slot mode (structured)
  * <Card
- *   variant="elevated"
- *   padding="medium"
+ *   thumbnail={<img src="/image.jpg" alt="..." style={{ width: '100%', height: 200, objectFit: 'cover' }} />}
+ *   heading="Card Title"
+ *   caption="Card description text"
  *   onClick={() => {}}
- * >
- *   <h3>Card Title</h3>
- *   <p>Card content...</p>
+ * />
+ *
+ * // Children mode (free-form)
+ * <Card variant="outlined" padding="medium" onClick={() => {}}>
+ *   <h3>Custom Content</h3>
+ *   <p>Any content here...</p>
  * </Card>
  */
 
-import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
+import { forwardRef, type HTMLAttributes, type KeyboardEvent, type ReactNode } from 'react';
 import { cssVarColors } from '../../tokens/colors';
 import { cssVarShadow } from '../../tokens/shadow';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { usePressable } from '../../utils/usePressable';
 import { transitions } from '../../utils/styles';
-import { opacity } from '../../tokens/general';
+import { borderWidth } from '../../tokens/general';
+import { typography } from '../../tokens/typography';
 
-export type CardVariant = 'elevated' | 'outlined' | 'filled';
-export type CardPadding = 'none' | 'small' | 'medium' | 'large';
+export type CardVariant = 'filled' | 'elevated' | 'outlined';
+export type CardPadding = 'small' | 'medium' | 'large';
 
 export interface CardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onClick'> {
-  /** 카드 스타일 - elevated(그림자), outlined(테두리), filled(채워진 배경) */
+  /** 카드 스타일 - filled(기본/흰색), elevated(그림자), outlined(테두리) */
   variant?: CardVariant;
   /** 내부 패딩 크기 */
   padding?: CardPadding;
-  /** 자식 요소 */
-  children: ReactNode;
-  /** 클릭 가능한 카드 */
-  onClick?: () => void;
-  /** 비활성화 상태 */
-  disabled?: boolean;
+  /** 자식 요소 (children 사용 시 slot props 무시) */
+  children?: ReactNode;
+  /** 썸네일 영역 (이미지, Thumbnail 컴포넌트 등) */
+  thumbnail?: ReactNode;
+  /** 제목 */
+  heading?: ReactNode;
+  /** 설명 텍스트 */
+  caption?: ReactNode;
+  /** 클릭 핸들러 */
+  onClick: () => void;
 }
 
 const paddingStyles: Record<CardPadding, number> = {
-  none: 0,
   small: spacing.primitive[3],
   medium: spacing.semantic.inset.md,
   large: spacing.semantic.inset.lg,
@@ -53,6 +62,10 @@ const variantStyles: Record<CardVariant, {
   border?: string;
   shadow?: string;
 }> = {
+  filled: {
+    bg: cssVarColors.surface.base.default,
+    bgPressed: cssVarColors.surface.base.alternative,
+  },
   elevated: {
     bg: cssVarColors.surface.base.default,
     bgPressed: cssVarColors.surface.base.alternative,
@@ -63,66 +76,99 @@ const variantStyles: Record<CardVariant, {
     bgPressed: cssVarColors.surface.base.alternative,
     border: cssVarColors.border.base.default,
   },
-  filled: {
-    bg: cssVarColors.surface.base.alternative,
-    bgPressed: cssVarColors.surface.base.containerPressed,
-  },
 };
 
 export const Card = forwardRef<HTMLDivElement, CardProps>(
   (
     {
-      variant = 'elevated',
+      variant = 'filled',
       padding = 'medium',
-      disabled = false,
       onClick,
       children,
+      thumbnail,
+      heading,
+      caption,
       style,
       onMouseDown,
       onMouseUp,
       onMouseLeave,
+      onKeyDown,
       ...props
     },
     ref
   ) => {
-    const isClickable = !!onClick && !disabled;
+    const useSlotMode = !children && (!!thumbnail || !!heading || !!caption);
     const { isPressed, handlers } = usePressable<HTMLDivElement>({
-      disabled: !isClickable,
+      disabled: false,
       onMouseDown,
       onMouseUp,
       onMouseLeave,
     });
 
     const variantStyle = variantStyles[variant];
-    const backgroundColor = isPressed && isClickable ? variantStyle.bgPressed : variantStyle.bg;
+    const backgroundColor = isPressed ? variantStyle.bgPressed : variantStyle.bg;
+    const borderRadiusValue = radius.component.card.sm;
 
     const cardStyle: React.CSSProperties = {
       display: 'flex',
       flexDirection: 'column',
-      borderRadius: radius.component.card.sm,
+      borderRadius: borderRadiusValue,
       backgroundColor,
-      padding: paddingStyles[padding],
-      border: variant === 'outlined' ? `1px solid ${variantStyle.border}` : 'none',
+      padding: useSlotMode ? 0 : paddingStyles[padding],
+      border: variant === 'outlined' ? `${borderWidth.default}px solid ${variantStyle.border}` : 'none',
       boxShadow: variant === 'elevated' ? variantStyle.shadow : 'none',
-      cursor: isClickable ? 'pointer' : 'default',
-      opacity: disabled ? opacity.disabled : 1,
+      cursor: 'pointer',
       transition: transitions.all,
+      overflow: 'hidden',
       ...style,
     };
 
-    const handleClick = () => {
-      if (isClickable) onClick();
+    const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        onClick();
+      }
+      onKeyDown?.(e);
     };
 
     return (
       <div
         ref={ref}
+        role="button"
+        tabIndex={0}
         style={cardStyle}
-        onClick={isClickable ? handleClick : undefined}
+        onClick={onClick}
+        onKeyDown={handleKeyDown}
         {...handlers}
         {...props}
       >
-        {children}
+        {useSlotMode ? (
+          <>
+            {thumbnail && (
+              <div style={{
+                borderRadius: `${borderRadiusValue}px ${borderRadiusValue}px 0 0`,
+                overflow: 'hidden',
+              }}>
+                {thumbnail}
+              </div>
+            )}
+            <div style={{
+              padding: paddingStyles[padding],
+              display: 'flex',
+              flexDirection: 'column',
+              gap: spacing.primitive[1],
+            }}>
+              {heading && (typeof heading === 'string'
+                ? <span style={{ fontSize: typography.fontSize.md, fontWeight: typography.fontWeight.semibold, color: cssVarColors.content.base.strong }}>{heading}</span>
+                : heading)}
+              {caption && (typeof caption === 'string'
+                ? <span style={{ fontSize: typography.fontSize.sm, color: cssVarColors.content.base.secondary, lineHeight: 1.5 }}>{caption}</span>
+                : caption)}
+            </div>
+          </>
+        ) : (
+          children
+        )}
       </div>
     );
   }

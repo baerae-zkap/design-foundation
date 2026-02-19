@@ -158,6 +158,17 @@
           "value": "{primitive.md}",
           "_comment": "12px. 이미지 스켈레톤"
         }
+      },
+
+      "segmentedControl": {
+        "container": {
+          "value": 8,
+          "_comment": "8px. SegmentedControl 컨테이너 라운드"
+        },
+        "segment": {
+          "value": 6,
+          "_comment": "6px. SegmentedControl 개별 세그먼트 라운드"
+        }
       }
     },
 

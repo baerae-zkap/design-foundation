@@ -18,7 +18,7 @@ import { cssVarShadow } from '../../tokens/shadow';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
-import { opacity } from '../../tokens/general';
+import { opacity, borderWidth } from '../../tokens/general';
 import { usePressable } from '../../utils/usePressable';
 import { transitions } from '../../utils/styles';
 
@@ -146,7 +146,7 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(
       borderRadius: radius.primitive.full,
       backgroundColor: cssVarColors.surface.base.default,
       boxShadow: cssVarShadow.semantic.button.pressed,
-      transition: 'transform 200ms cubic-bezier(0.4, 0, 0.2, 1)',
+      transition: transitions.transform,
       transform: `translateX(${thumbTranslateX}px)`,
       display: 'flex',
       alignItems: 'center',
@@ -185,14 +185,26 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(
 
 Switch.displayName = 'Switch';
 
+const SPIN_KEYFRAME_ID = 'switch-spin-keyframe';
+
+function ensureSpinKeyframe() {
+  if (typeof document === 'undefined') return;
+  if (document.getElementById(SPIN_KEYFRAME_ID)) return;
+  const style = document.createElement('style');
+  style.id = SPIN_KEYFRAME_ID;
+  style.textContent = `@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`;
+  document.head.appendChild(style);
+}
+
 function LoadingSpinner({ size }: { size: number }) {
+  ensureSpinKeyframe();
   return (
     <span
       style={{
         width: size,
         height: size,
         borderRadius: radius.primitive.full,
-        border: `2px solid ${cssVarColors.border.base.default}`,
+        border: `${borderWidth.strong}px solid ${cssVarColors.border.base.default}`,
         borderTopColor: 'transparent',
         animation: 'spin 1s linear infinite',
       }}

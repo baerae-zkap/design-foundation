@@ -1,15 +1,7 @@
 import type { CSSProperties } from 'react';
 
-/**
- * 공통 transition 값
- */
-export const transitions = {
-  background: 'background-color 150ms ease',
-  color: 'color 150ms ease',
-  border: 'border-color 150ms ease',
-  opacity: 'opacity 150ms ease',
-  all: 'background-color 150ms ease, color 150ms ease, border-color 150ms ease',
-} as const;
+// Re-export transitions from token file for backwards compatibility
+export { transitions } from '../tokens/motion';
 
 /**
  * disabled 상태 공통 스타일

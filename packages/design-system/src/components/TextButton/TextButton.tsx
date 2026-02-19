@@ -7,7 +7,7 @@
  * @example
  * <TextButton
  *   variant="clear"
- *   color="brandDefault"
+ *   color="primary"
  *   size="medium"
  *   onClick={() => {}}
  * >
@@ -24,7 +24,7 @@ import { usePressable } from '../../utils/usePressable';
 import { transitions } from '../../utils/styles';
 
 export type TextButtonVariant = 'clear' | 'underline' | 'arrow';
-export type TextButtonColor = 'brandDefault' | 'baseDefault' | 'errorDefault';
+export type TextButtonColor = 'primary' | 'neutral' | 'muted' | 'error';
 export type TextButtonSize = 'xSmall' | 'small' | 'medium' | 'large' | 'xLarge';
 
 export interface TextButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'color'> {
@@ -47,17 +47,22 @@ const sizeStyles: Record<TextButtonSize, number> = {
 };
 
 const colorStyles: Record<TextButtonColor, { default: string; pressed: string; pressedBg: string }> = {
-  brandDefault: {
+  primary: {
     default: cssVarColors.content.brand.default,
     pressed: cssVarColors.surface.brand.defaultPressed,
     pressedBg: cssVarColors.fill.alternative
   },
-  baseDefault: {
+  neutral: {
     default: cssVarColors.content.base.default,
     pressed: cssVarColors.content.base.strong,
     pressedBg: cssVarColors.fill.alternative
   },
-  errorDefault: {
+  muted: {
+    default: cssVarColors.content.base.neutral,
+    pressed: cssVarColors.content.base.default,
+    pressedBg: cssVarColors.fill.alternative
+  },
+  error: {
     default: cssVarColors.content.error.default,
     pressed: cssVarColors.surface.error.solidPressed,
     pressedBg: cssVarColors.fill.alternative
@@ -68,7 +73,7 @@ export const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(
   (
     {
       variant = 'clear',
-      color = 'brandDefault',
+      color = 'primary',
       size = 'medium',
       disabled = false,
       children,

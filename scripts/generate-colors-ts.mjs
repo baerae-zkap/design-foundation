@@ -18,6 +18,7 @@ const isIdentifier = (key) => /^[A-Za-z_$][A-Za-z0-9_$]*$/.test(key);
 
 const hslaRegex = /^hsla\(\s*([\d.]+)\s*,\s*([\d.]+)%\s*,\s*([\d.]+)%\s*,\s*([\d.]+)\s*\)$/i;
 const paletteRefRegex = /^\{palette\.([^.}]+)\.([^.}]+)\}$/;
+const alphaCallRegex = /^alpha\(\{palette\.([^.}]+)\.([^.}]+)\},\s*([\d.]+)\)$/;
 
 function formatKey(key) {
   return isIdentifier(key) ? key : JSON.stringify(key);
@@ -63,6 +64,31 @@ function collectPaletteReferences(palette) {
 }
 
 const paletteRefs = collectPaletteReferences(paletteJson);
+
+function lookupPaletteHsla(group, token, path) {
+  const ref = `${group}.${token}`;
+  if (!paletteRefs.has(ref)) {
+    throw new Error(`Invalid palette reference at "${path}": {palette.${ref}}`);
+  }
+  const raw = paletteJson[group]?.[token];
+  if (typeof raw !== 'string') {
+    throw new Error(`Palette value at "${ref}" is not a string`);
+  }
+  const hsla = parseHsla(raw);
+  if (!hsla) {
+    throw new Error(`Palette value at "${ref}" is not valid HSLA: ${raw}`);
+  }
+  return hsla;
+}
+
+function toAlphaExpressionOrNull(value, path) {
+  if (typeof value !== 'string') return null;
+  const match = value.match(alphaCallRegex);
+  if (!match) return null;
+  const [, group, token, alpha] = match;
+  const hsla = lookupPaletteHsla(group, token, path);
+  return `hslaToHex(${hsla.h}, ${hsla.s}, ${hsla.l}, ${alpha})`;
+}
 
 function toPaletteExpressionOrNull(value, path) {
   if (typeof value !== 'string') {
@@ -159,7 +185,8 @@ function buildSemanticThemeLines(theme) {
       }
 
       const tokenPath = entryPath.join('.');
-      const paletteExpr = toPaletteExpressionOrNull(value, tokenPath);
+      const alphaExpr = toAlphaExpressionOrNull(value, tokenPath);
+      const paletteExpr = alphaExpr ?? toPaletteExpressionOrNull(value, tokenPath);
       const expr = paletteExpr ?? toLiteralExpression(value);
       lines.push(`  ${renderedKey}: ${expr},`);
     }
@@ -257,15 +284,19 @@ const content = [
   `export const palette = ${paletteLines.join('\n')} as const;`,
   '',
   '/** Semantic color tokens (light) from public/semantic-tokens.json */',
-  `export const colors = ${colorsLines.join('\n')} as const;`,
+  `export const lightColors = ${colorsLines.join('\n')} as const;`,
+  '',
+  '/** @deprecated Use lightColors instead */',
+  'export const colors = lightColors;',
   '',
   '/** Semantic color tokens (dark) from public/semantic-tokens.json */',
   `export const darkColors = ${darkColorsLines.join('\n')} as const;`,
   '',
   '/**',
-  ' * CSS Variable reference map for web components.',
-  ' * Same shape as `colors` but values are CSS variable strings.',
-  ' * Use this instead of `colors` in web components for theme-aware rendering.',
+  ' * @internal CSS Variable reference map for web components.',
+  ' * Same shape as `lightColors` but values are CSS variable strings.',
+  ' * NOTE: Internal only — not exported from public API.',
+  ' * Will be replaced by ThemeProvider in the future.',
   ' */',
   `export const cssVarColors = ${cssVarColorsLines.join('\n')} as const;`,
   '',
@@ -274,11 +305,11 @@ const content = [
   ' */',
   'export const darkPalette = palette;',
   '',
-  'export const brandColors = colors.surface.brand;',
-  'export const errorColors = colors.surface.error;',
-  'export const successColors = colors.surface.success;',
-  'export const warningColors = colors.surface.warning;',
-  'export const infoColors = colors.surface.info;',
+  'export const brandColors = lightColors.surface.brand;',
+  'export const errorColors = lightColors.surface.error;',
+  'export const successColors = lightColors.surface.success;',
+  'export const warningColors = lightColors.surface.warning;',
+  'export const infoColors = lightColors.surface.info;',
   '',
   'export const darkBrandColors = darkColors.surface.brand;',
   'export const darkErrorColors = darkColors.surface.error;',
@@ -286,7 +317,8 @@ const content = [
   'export const darkWarningColors = darkColors.surface.warning;',
   'export const darkInfoColors = darkColors.surface.info;',
   '',
-  'export type ColorToken = typeof colors;',
+  'export type LightColorToken = typeof lightColors;',
+  'export type ColorToken = typeof lightColors;',
   'export type DarkColorToken = typeof darkColors;',
   'export type PaletteToken = typeof palette;',
   'export type DarkPaletteToken = typeof darkPalette;',

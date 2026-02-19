@@ -222,22 +222,6 @@ export const palette = {
       kakaoPressed: "#D4BF00",
       googlePressed: "#f1f3f4",
     },
-  alphaComposite: {
-      brandSelectionLight: hslaToHex(216, 100, 47, 0.15),
-      brandSelectionDark: hslaToHex(220, 100, 57, 0.2),
-      fillLightNormal: hslaToHex(216, 9, 45, 0.22),
-      fillLightStrong: hslaToHex(216, 9, 45, 0.28),
-      fillLightAlternative: hslaToHex(216, 9, 45, 0.12),
-      fillDarkNormal: hslaToHex(216, 9, 77, 0.22),
-      fillDarkStrong: hslaToHex(216, 9, 77, 0.28),
-      fillDarkAlternative: hslaToHex(216, 9, 77, 0.12),
-      overlayLightTransparent: hslaToHex(222, 33, 11, 0),
-      overlayLightDim: hslaToHex(222, 33, 11, 0.4),
-      overlayLightHeavy: hslaToHex(222, 33, 11, 0.85),
-      overlayDarkTransparent: hslaToHex(222, 33, 11, 0),
-      overlayDarkDim: hslaToHex(222, 33, 11, 0.72),
-      overlayDarkHeavy: hslaToHex(222, 33, 11, 0.93),
-    },
   opacity: {
       "5": 0.05,
       "8": 0.08,
@@ -256,7 +240,7 @@ export const palette = {
 } as const;
 
 /** Semantic color tokens (light) from public/semantic-tokens.json */
-export const colors = {
+export const lightColors = {
   surface: {
     base: {
       default: palette.static.white,
@@ -393,9 +377,9 @@ export const colors = {
     },
   },
   fill: {
-    normal: palette.alphaComposite.fillLightNormal,
-    strong: palette.alphaComposite.fillLightStrong,
-    alternative: palette.alphaComposite.fillLightAlternative,
+    normal: hslaToHex(216, 9, 45, 0.22),
+    strong: hslaToHex(216, 9, 45, 0.28),
+    alternative: hslaToHex(216, 9, 45, 0.12),
   },
   interaction: {
     inactive: palette.grey["70"],
@@ -424,8 +408,8 @@ export const colors = {
     info: palette.teal["50"],
   },
   overlay: {
-    dim: palette.alphaComposite.overlayLightDim,
-    heavy: palette.alphaComposite.overlayLightHeavy,
+    dim: hslaToHex(222, 33, 11, 0.40),
+    heavy: hslaToHex(222, 33, 11, 0.85),
   },
   inverse: {
     surface: {
@@ -444,52 +428,10 @@ export const colors = {
       default: palette.grey["95"],
     },
   },
-  component: {
-    button: {
-      surface: {
-        primary: palette.blue["50"],
-        primaryPressed: palette.blue["45"],
-        secondary: palette.blue["95"],
-        secondaryPressed: palette.blue["90"],
-        destructive: palette.red["50"],
-        destructivePressed: palette.red["40"],
-      },
-      content: {
-        primary: palette.static.white,
-        secondary: palette.blue["50"],
-        destructive: palette.static.white,
-      },
-      border: {
-        secondary: palette.blue["50"],
-      },
-    },
-    input: {
-      surface: palette.static.white,
-      border: {
-        default: palette.grey["95"],
-        focus: palette.blue["50"],
-      },
-      content: palette.grey["30"],
-      placeholder: palette.grey["70"],
-      ring: {
-        focus: palette.alphaComposite.brandSelectionLight,
-      },
-    },
-    chip: {
-      surface: {
-        neutral: palette.alphaComposite.fillLightNormal,
-        selected: palette.blue["95"],
-      },
-      content: {
-        neutral: palette.grey["30"],
-        selected: palette.blue["50"],
-      },
-      border: {
-        neutral: palette.grey["95"],
-      },
-    },
-  },
 } as const;
+
+/** @deprecated Use lightColors instead */
+export const colors = lightColors;
 
 /** Semantic color tokens (dark) from public/semantic-tokens.json */
 export const darkColors = {
@@ -629,9 +571,9 @@ export const darkColors = {
     },
   },
   fill: {
-    normal: palette.alphaComposite.fillDarkNormal,
-    strong: palette.alphaComposite.fillDarkStrong,
-    alternative: palette.alphaComposite.fillDarkAlternative,
+    normal: hslaToHex(216, 9, 77, 0.22),
+    strong: hslaToHex(216, 9, 77, 0.28),
+    alternative: hslaToHex(216, 9, 77, 0.12),
   },
   interaction: {
     inactive: palette.grey["40"],
@@ -660,8 +602,8 @@ export const darkColors = {
     info: palette.teal["60"],
   },
   overlay: {
-    dim: palette.alphaComposite.overlayDarkDim,
-    heavy: palette.alphaComposite.overlayDarkHeavy,
+    dim: hslaToHex(222, 33, 11, 0.72),
+    heavy: hslaToHex(222, 33, 11, 0.93),
   },
   inverse: {
     surface: {
@@ -680,57 +622,13 @@ export const darkColors = {
       default: palette.grey["30"],
     },
   },
-  component: {
-    button: {
-      surface: {
-        primary: palette.blue["55"],
-        primaryPressed: palette.blue["60"],
-        secondary: palette.blue["20"],
-        secondaryPressed: palette.blue["30"],
-        destructive: palette.red["60"],
-        destructivePressed: palette.red["70"],
-      },
-      content: {
-        primary: palette.static.white,
-        secondary: palette.blue["60"],
-        destructive: palette.static.white,
-      },
-      border: {
-        secondary: palette.blue["55"],
-      },
-    },
-    input: {
-      surface: palette.grey["20"],
-      border: {
-        default: palette.grey["25"],
-        focus: palette.blue["55"],
-      },
-      content: palette.grey["95"],
-      placeholder: palette.grey["50"],
-      ring: {
-        focus: palette.alphaComposite.brandSelectionDark,
-      },
-    },
-    chip: {
-      surface: {
-        neutral: palette.alphaComposite.fillDarkNormal,
-        selected: palette.blue["20"],
-      },
-      content: {
-        neutral: palette.grey["95"],
-        selected: palette.blue["60"],
-      },
-      border: {
-        neutral: palette.grey["25"],
-      },
-    },
-  },
 } as const;
 
 /**
- * CSS Variable reference map for web components.
- * Same shape as `colors` but values are CSS variable strings.
- * Use this instead of `colors` in web components for theme-aware rendering.
+ * @internal CSS Variable reference map for web components.
+ * Same shape as `lightColors` but values are CSS variable strings.
+ * NOTE: Internal only — not exported from public API.
+ * Will be replaced by ThemeProvider in the future.
  */
 export const cssVarColors = {
   surface: {
@@ -920,51 +818,6 @@ export const cssVarColors = {
       default: 'var(--inverse-icon-default)' as const,
     },
   },
-  component: {
-    button: {
-      surface: {
-        primary: 'var(--component-button-surface-primary)' as const,
-        primaryPressed: 'var(--component-button-surface-primaryPressed)' as const,
-        secondary: 'var(--component-button-surface-secondary)' as const,
-        secondaryPressed: 'var(--component-button-surface-secondaryPressed)' as const,
-        destructive: 'var(--component-button-surface-destructive)' as const,
-        destructivePressed: 'var(--component-button-surface-destructivePressed)' as const,
-      },
-      content: {
-        primary: 'var(--component-button-content-primary)' as const,
-        secondary: 'var(--component-button-content-secondary)' as const,
-        destructive: 'var(--component-button-content-destructive)' as const,
-      },
-      border: {
-        secondary: 'var(--component-button-border-secondary)' as const,
-      },
-    },
-    input: {
-      surface: 'var(--component-input-surface)' as const,
-      border: {
-        default: 'var(--component-input-border-default)' as const,
-        focus: 'var(--component-input-border-focus)' as const,
-      },
-      content: 'var(--component-input-content)' as const,
-      placeholder: 'var(--component-input-placeholder)' as const,
-      ring: {
-        focus: 'var(--component-input-ring-focus)' as const,
-      },
-    },
-    chip: {
-      surface: {
-        neutral: 'var(--component-chip-surface-neutral)' as const,
-        selected: 'var(--component-chip-surface-selected)' as const,
-      },
-      content: {
-        neutral: 'var(--component-chip-content-neutral)' as const,
-        selected: 'var(--component-chip-content-selected)' as const,
-      },
-      border: {
-        neutral: 'var(--component-chip-border-neutral)' as const,
-      },
-    },
-  },
 } as const;
 
 /**
@@ -972,11 +825,11 @@ export const cssVarColors = {
  */
 export const darkPalette = palette;
 
-export const brandColors = colors.surface.brand;
-export const errorColors = colors.surface.error;
-export const successColors = colors.surface.success;
-export const warningColors = colors.surface.warning;
-export const infoColors = colors.surface.info;
+export const brandColors = lightColors.surface.brand;
+export const errorColors = lightColors.surface.error;
+export const successColors = lightColors.surface.success;
+export const warningColors = lightColors.surface.warning;
+export const infoColors = lightColors.surface.info;
 
 export const darkBrandColors = darkColors.surface.brand;
 export const darkErrorColors = darkColors.surface.error;
@@ -984,7 +837,8 @@ export const darkSuccessColors = darkColors.surface.success;
 export const darkWarningColors = darkColors.surface.warning;
 export const darkInfoColors = darkColors.surface.info;
 
-export type ColorToken = typeof colors;
+export type LightColorToken = typeof lightColors;
+export type ColorToken = typeof lightColors;
 export type DarkColorToken = typeof darkColors;
 export type PaletteToken = typeof palette;
 export type DarkPaletteToken = typeof darkPalette;

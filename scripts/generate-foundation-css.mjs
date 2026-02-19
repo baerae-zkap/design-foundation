@@ -10,6 +10,7 @@ const radiusPath = resolve(rootDir, 'public/radius-tokens.json');
 const typographyPath = resolve(rootDir, 'public/typography-tokens.json');
 const shadowPath = resolve(rootDir, 'public/shadow-tokens.json');
 const interactionPath = resolve(rootDir, 'public/interaction-tokens.json');
+const generalPath = resolve(rootDir, 'public/general-tokens.json');
 const outputPath = resolve(rootDir, 'src/app/generated-foundation-tokens.css');
 
 const spacingJson = JSON.parse(readFileSync(spacingPath, 'utf8'));
@@ -17,6 +18,7 @@ const radiusJson = JSON.parse(readFileSync(radiusPath, 'utf8'));
 const typographyJson = JSON.parse(readFileSync(typographyPath, 'utf8'));
 const shadowJson = JSON.parse(readFileSync(shadowPath, 'utf8'));
 const interactionJson = JSON.parse(readFileSync(interactionPath, 'utf8'));
+const generalJson = JSON.parse(readFileSync(generalPath, 'utf8'));
 
 const isSkippableKey = (key) => key.startsWith('_') || key.endsWith('_comment');
 const isObject = (value) => value && typeof value === 'object' && !Array.isArray(value);
@@ -226,6 +228,23 @@ function buildInteractionLines() {
   return lines;
 }
 
+function buildGeneralLines() {
+  const generalRoot = generalJson.general ?? {};
+  const lines = ['  /* General tokens (opacity, borderWidth, zIndex) */'];
+
+  const nodes = collectValueNodes(generalRoot);
+  for (const { path, value } of nodes) {
+    const resolved = resolveRefValue(value, generalRoot);
+    const variable = `--general-${path.map(toKebab).join('-')}`;
+    // borderWidth needs px units for use as a CSS length value
+    const needsPx = path[0] === 'borderWidth';
+    lines.push(`  ${variable}: ${formatNumberWithUnit(resolved, needsPx ? 'px' : 'none')};`);
+  }
+
+  lines.push('');
+  return lines;
+}
+
 function buildDarkShadowOverrideLines() {
   const shadowRoot = shadowJson.shadow ?? {};
   const dark = isObject(shadowRoot.dark) ? shadowRoot.dark : {};
@@ -265,13 +284,14 @@ function buildDarkShadowOverrideLines() {
 
 const rootLines = [
   '/* AUTO-GENERATED FILE. DO NOT EDIT DIRECTLY. */',
-  '/* Source: public/spacing-tokens.json + public/radius-tokens.json + public/typography-tokens.json + public/shadow-tokens.json + public/interaction-tokens.json */',
+  '/* Source: public/spacing-tokens.json + public/radius-tokens.json + public/typography-tokens.json + public/shadow-tokens.json + public/interaction-tokens.json + public/general-tokens.json */',
   ':root {',
   ...buildSpacingLines(),
   ...buildRadiusLines(),
   ...buildTypographyLines(),
   ...buildShadowLines(),
   ...buildInteractionLines(),
+  ...buildGeneralLines(),
   '}',
   '',
 ];

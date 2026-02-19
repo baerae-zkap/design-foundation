@@ -7,7 +7,7 @@
  * @example
  * <Button
  *   buttonType="filled"
- *   color="brandDefault"
+ *   color="primary"
  *   size="medium"
  *   onClick={() => {}}
  * >
@@ -20,23 +20,23 @@ import { cssVarColors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
+import { opacity } from '../../tokens/general';
 import { usePressable } from '../../utils/usePressable';
 import { transitions } from '../../utils/styles';
 
-export type ButtonType = 'filled' | 'outlined';
+export type ButtonType = 'filled' | 'weak';
 export type ButtonColor =
-  | 'brandDefault'
-  | 'brandSecondary'
-  | 'baseContainer'
-  | 'successDefault'
-  | 'errorDefault'
-  | 'kakaoDefault'
-  | 'googleDefault';
+  | 'primary'
+  | 'neutral'
+  | 'success'
+  | 'error'
+  | 'kakao'
+  | 'google';
 export type ButtonSize = 'small' | 'medium' | 'large' | 'xLarge';
 export type ButtonLayout = 'hug' | 'fillWidth';
 
 export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'color'> {
-  /** 버튼 스타일 - filled(채워진) 또는 outlined(테두리) */
+  /** 버튼 스타일 - filled(채워진) 또는 weak(연한 배경) */
   buttonType?: ButtonType;
   /** 색상 테마 */
   color?: ButtonColor;
@@ -63,97 +63,78 @@ const sizeStyles: Record<ButtonSize, { height: number; fontSize: number; padding
 
 const colorStyles: Record<ButtonColor, {
   filled: { bg: string; bgPressed: string; color: string };
-  outlined: { bg: string; bgPressed: string; color: string; border: string };
+  weak: { bg: string; bgPressed: string; color: string };
 }> = {
-  brandDefault: {
+  primary: {
     filled: {
-      bg: cssVarColors.component.button.surface.primary,
-      bgPressed: cssVarColors.component.button.surface.primaryPressed,
-      color: cssVarColors.component.button.content.primary,
+      bg: cssVarColors.surface.brand.default,
+      bgPressed: cssVarColors.surface.brand.defaultPressed,
+      color: cssVarColors.content.base.onColor,
     },
-    outlined: {
-      bg: cssVarColors.surface.base.default,
-      bgPressed: cssVarColors.surface.brand.secondary,
+    weak: {
+      bg: cssVarColors.surface.brand.secondary,
+      bgPressed: cssVarColors.surface.brand.secondaryPressed,
       color: cssVarColors.content.brand.default,
-      border: cssVarColors.border.brand.default,
     },
   },
-  brandSecondary: {
-    filled: {
-      bg: cssVarColors.component.button.surface.secondary,
-      bgPressed: cssVarColors.component.button.surface.secondaryPressed,
-      color: cssVarColors.component.button.content.secondary,
-    },
-    outlined: {
-      bg: cssVarColors.surface.base.default,
-      bgPressed: cssVarColors.surface.brand.secondary,
-      color: cssVarColors.content.brand.default,
-      border: cssVarColors.component.button.border.secondary,
-    },
-  },
-  baseContainer: {
+  neutral: {
     filled: {
       bg: cssVarColors.surface.base.container,
       bgPressed: cssVarColors.surface.base.containerPressed,
       color: cssVarColors.content.base.default,
     },
-    outlined: {
-      bg: cssVarColors.surface.base.default,
-      bgPressed: cssVarColors.surface.base.alternative,
+    weak: {
+      bg: cssVarColors.surface.base.container,
+      bgPressed: cssVarColors.surface.base.containerPressed,
       color: cssVarColors.content.base.default,
-      border: cssVarColors.border.secondary.default,
     },
   },
-  successDefault: {
+  success: {
     filled: {
       bg: cssVarColors.surface.success.solid,
       bgPressed: cssVarColors.surface.success.solidPressed,
       color: cssVarColors.content.base.onColor,
     },
-    outlined: {
-      bg: cssVarColors.surface.base.default,
-      bgPressed: cssVarColors.surface.success.default,
+    weak: {
+      bg: cssVarColors.surface.success.default,
+      bgPressed: cssVarColors.surface.success.defaultPressed,
       color: cssVarColors.content.success.default,
-      border: cssVarColors.border.success.default,
     },
   },
-  errorDefault: {
+  error: {
     filled: {
-      bg: cssVarColors.component.button.surface.destructive,
-      bgPressed: cssVarColors.component.button.surface.destructivePressed,
-      color: cssVarColors.component.button.content.destructive,
+      bg: cssVarColors.surface.error.solid,
+      bgPressed: cssVarColors.surface.error.solidPressed,
+      color: cssVarColors.content.base.onColor,
     },
-    outlined: {
-      bg: cssVarColors.surface.base.default,
-      bgPressed: cssVarColors.surface.error.default,
+    weak: {
+      bg: cssVarColors.surface.error.default,
+      bgPressed: cssVarColors.surface.error.defaultPressed,
       color: cssVarColors.content.error.default,
-      border: cssVarColors.border.error.default,
     },
   },
-  kakaoDefault: {
+  kakao: {
     filled: {
       bg: cssVarColors.surface.kakao.default,
       bgPressed: cssVarColors.surface.kakao.defaultPressed,
       color: cssVarColors.content.base.strong,
     },
-    outlined: {
-      bg: cssVarColors.surface.base.default,
-      bgPressed: cssVarColors.surface.kakao.defaultPressed,
+    weak: {
+      bg: cssVarColors.fill.alternative,
+      bgPressed: cssVarColors.fill.normal,
       color: cssVarColors.content.base.strong,
-      border: cssVarColors.surface.kakao.default,
     },
   },
-  googleDefault: {
+  google: {
     filled: {
       bg: cssVarColors.surface.google.default,
       bgPressed: cssVarColors.surface.google.defaultPressed,
       color: cssVarColors.content.base.default,
     },
-    outlined: {
-      bg: cssVarColors.surface.base.default,
-      bgPressed: cssVarColors.surface.google.defaultPressed,
+    weak: {
+      bg: cssVarColors.surface.base.container,
+      bgPressed: cssVarColors.surface.base.containerPressed,
       color: cssVarColors.content.base.default,
-      border: cssVarColors.border.base.default,
     },
   },
 };
@@ -162,7 +143,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       buttonType = 'filled',
-      color = 'brandDefault',
+      color = 'primary',
       size = 'medium',
       layout = 'hug',
       isLoading = false,
@@ -205,14 +186,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       cursor: isDisabled ? 'not-allowed' : 'pointer',
       transition: transitions.background,
       width: layout === 'fillWidth' ? '100%' : 'auto',
-      opacity: isDisabled ? 0.5 : 1,
-      background: isDisabled
+      opacity: disabled ? opacity.disabled : 1,
+      background: disabled
         ? cssVarColors.surface.disabled.default
-        : (isPressed ? colorStyle.bgPressed : colorStyle.bg),
-      color: isDisabled ? cssVarColors.content.disabled.default : colorStyle.color,
-      border: buttonType === 'outlined'
-        ? `1px solid ${isDisabled ? cssVarColors.border.disabled.default : (colorStyle as { border: string }).border}`
-        : 'none',
+        : (isPressed && !isLoading ? colorStyle.bgPressed : colorStyle.bg),
+      color: disabled ? cssVarColors.content.disabled.default : colorStyle.color,
+      border: 'none',
       ...style,
     };
 
@@ -242,9 +221,21 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
 Button.displayName = 'Button';
 
+const PULSE_KEYFRAME_ID = 'btn-pulse-keyframe';
+
+function ensurePulseKeyframe() {
+  if (typeof document === 'undefined') return;
+  if (document.getElementById(PULSE_KEYFRAME_ID)) return;
+  const style = document.createElement('style');
+  style.id = PULSE_KEYFRAME_ID;
+  style.textContent = `@keyframes btn-pulse { 0%, 100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1); } }`;
+  document.head.appendChild(style);
+}
+
 function LoadingDots() {
+  ensurePulseKeyframe();
   return (
-    <span style={{ display: 'flex', gap: spacing.primitive[1] }}>
+    <span style={{ display: 'flex', gap: spacing.primitive[1], alignItems: 'center' }}>
       {[0, 1, 2].map((i) => (
         <span
           key={i}
@@ -253,7 +244,7 @@ function LoadingDots() {
             height: 6,
             borderRadius: '50%',
             backgroundColor: 'currentColor',
-            animation: `pulse 1.2s ease-in-out infinite`,
+            animation: `btn-pulse 1.2s ease-in-out infinite`,
             animationDelay: `${i * 0.15}s`,
           }}
         />

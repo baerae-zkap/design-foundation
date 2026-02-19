@@ -16,6 +16,8 @@ const effects = existsSync(effectsPath) ? JSON.parse(readFileSync(effectsPath, '
 
 const isSkippableKey = (key) => key.startsWith('_') || key.endsWith('_comment');
 const toPaletteVar = (group, token) => `--${group}-${token}`;
+const hslaRegex = /^hsla\(\s*([\d.]+)\s*,\s*([\d.]+)%\s*,\s*([\d.]+)%\s*,\s*([\d.]+)\s*\)$/i;
+const alphaCallRegex = /alpha\(\{palette\.([^.}]+)\.([^.}]+)\},\s*([\d.]+)\)/g;
 
 const paletteTokenSet = new Set();
 
@@ -36,12 +38,36 @@ for (const [group, tokens] of Object.entries(palette)) {
   }
 }
 
+const resolveAlphaCall = (group, token, alpha, tokenPath) => {
+  const paletteKey = `${group}.${token}`;
+  if (!paletteTokenSet.has(paletteKey)) {
+    throw new Error(
+      `Invalid token reference at "${tokenPath}": {palette.${paletteKey}} is missing in palette.json`,
+    );
+  }
+  const raw = palette[group]?.[token];
+  if (typeof raw !== 'string') {
+    throw new Error(`Palette value at "${paletteKey}" is not a string`);
+  }
+  const match = raw.match(hslaRegex);
+  if (!match) {
+    throw new Error(`Palette value at "${paletteKey}" is not valid HSLA: ${raw}`);
+  }
+  return `hsla(${match[1]}, ${match[2]}%, ${match[3]}%, ${alpha})`;
+};
+
 const resolvePaletteReferences = (value, tokenPath) => {
   if (typeof value !== 'string') {
     return String(value);
   }
 
-  return value.replace(/\{palette\.([^.}]+)\.([^.}]+)\}/g, (_, group, token) => {
+  // First resolve alpha() calls to raw HSLA values
+  let resolved = value.replace(alphaCallRegex, (_, group, token, alpha) => {
+    return resolveAlphaCall(group, token, alpha, tokenPath);
+  });
+
+  // Then resolve remaining palette references to CSS vars
+  resolved = resolved.replace(/\{palette\.([^.}]+)\.([^.}]+)\}/g, (_, group, token) => {
     const paletteKey = `${group}.${token}`;
 
     if (!paletteTokenSet.has(paletteKey)) {
@@ -52,6 +78,8 @@ const resolvePaletteReferences = (value, tokenPath) => {
 
     return `var(${toPaletteVar(group, token)})`;
   });
+
+  return resolved;
 };
 
 const buildPaletteLines = (paletteTokens) => {

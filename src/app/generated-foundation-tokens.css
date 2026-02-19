@@ -1,5 +1,5 @@
 /* AUTO-GENERATED FILE. DO NOT EDIT DIRECTLY. */
-/* Source: public/spacing-tokens.json + public/radius-tokens.json + public/typography-tokens.json + public/shadow-tokens.json + public/interaction-tokens.json */
+/* Source: public/spacing-tokens.json + public/radius-tokens.json + public/typography-tokens.json + public/shadow-tokens.json + public/interaction-tokens.json + public/general-tokens.json */
 :root {
   /* Spacing tokens */
   --spacing-primitive-0: 0px;
@@ -47,6 +47,7 @@
   --spacing-semantic-screen-padding-top: 16px;
   --spacing-semantic-screen-padding-bottom: 20px;
   --spacing-semantic-screen-safe-area-bottom: 32px;
+  --spacing-semantic-min-touch-target: 44px;
   --spacing-semantic-component-button-padding-x-lg: 24px;
   --spacing-semantic-component-button-padding-x-md: 20px;
   --spacing-semantic-component-button-padding-x-sm: 16px;
@@ -64,6 +65,9 @@
   --spacing-semantic-component-input-padding-y: 12px;
   --spacing-semantic-component-input-label-gap: 8px;
   --spacing-semantic-component-input-helper-gap: 4px;
+  --spacing-semantic-component-input-height-sm: 36px;
+  --spacing-semantic-component-input-height-md: 44px;
+  --spacing-semantic-component-input-height-lg: 52px;
   --spacing-semantic-component-list-item-padding-x: 20px;
   --spacing-semantic-component-list-item-padding-y: 16px;
   --spacing-semantic-component-list-item-gap: 0px;
@@ -133,6 +137,9 @@
   --spacing-semantic-component-text-button-font-size-md: 16px;
   --spacing-semantic-component-text-button-font-size-lg: 18px;
   --spacing-semantic-component-text-button-font-size-xl: 20px;
+  --spacing-semantic-component-list-card-thumbnail-size-sm: 56px;
+  --spacing-semantic-component-list-card-thumbnail-size-md: 80px;
+  --spacing-semantic-component-list-card-thumbnail-size-lg: 100px;
 
   /* Radius tokens */
   --radius-primitive-none: 0px;
@@ -168,6 +175,8 @@
   --radius-semantic-tooltip-default: 8px;
   --radius-semantic-skeleton-text: 4px;
   --radius-semantic-skeleton-image: 12px;
+  --radius-semantic-segmented-control-container: 8px;
+  --radius-semantic-segmented-control-segment: 6px;
 
   /* Typography tokens */
   --typography-primitive-font-family-base: Pretendard;
@@ -432,6 +441,21 @@
   --interaction-semantic-fade-in-easing: cubic-bezier(0.16, 1, 0.3, 1);
   --interaction-semantic-fade-out-duration: 100ms;
   --interaction-semantic-fade-out-easing: cubic-bezier(0.7, 0, 0.84, 0);
+
+  /* General tokens (opacity, borderWidth, zIndex) */
+  --general-opacity-disabled: 0.5;
+  --general-opacity-dimmed: 0.6;
+  --general-opacity-overlay: 0.4;
+  --general-opacity-pressed: 0.8;
+  --general-border-width-hairline: 0.5px;
+  --general-border-width-default: 1px;
+  --general-border-width-medium: 1.5px;
+  --general-border-width-strong: 2px;
+  --general-z-index-base: 0;
+  --general-z-index-sticky: 100;
+  --general-z-index-dropdown: 1000;
+  --general-z-index-modal: 1100;
+  --general-z-index-toast: 1200;
 
 }
 

@@ -215,24 +215,6 @@
     "googlePressed": "#f1f3f4"
   },
 
-  "alphaComposite": {
-    "_description": "알파 합성 원시 색상 (fill/overlay)",
-    "brandSelectionLight": "hsla(216, 100%, 47%, 0.15)",
-    "brandSelectionDark": "hsla(220, 100%, 57%, 0.20)",
-    "fillLightNormal": "hsla(216, 9%, 45%, 0.22)",
-    "fillLightStrong": "hsla(216, 9%, 45%, 0.28)",
-    "fillLightAlternative": "hsla(216, 9%, 45%, 0.12)",
-    "fillDarkNormal": "hsla(216, 9%, 77%, 0.22)",
-    "fillDarkStrong": "hsla(216, 9%, 77%, 0.28)",
-    "fillDarkAlternative": "hsla(216, 9%, 77%, 0.12)",
-    "overlayLightTransparent": "hsla(222, 33%, 11%, 0)",
-    "overlayLightDim": "hsla(222, 33%, 11%, 0.40)",
-    "overlayLightHeavy": "hsla(222, 33%, 11%, 0.85)",
-    "overlayDarkTransparent": "hsla(222, 33%, 11%, 0)",
-    "overlayDarkDim": "hsla(222, 33%, 11%, 0.72)",
-    "overlayDarkHeavy": "hsla(222, 33%, 11%, 0.93)"
-  },
-
   "opacity": {
     "_description": "투명도 토큰 - Fill, Line 등에서 사용",
     "5": 0.05,

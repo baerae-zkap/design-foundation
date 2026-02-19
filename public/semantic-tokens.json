@@ -229,11 +229,11 @@
 
     "fill": {
       "_description": "컴포넌트 채움 (버튼, 칩 등) - opacity 활용",
-      "normal": "{palette.alphaComposite.fillLightNormal}",
+      "normal": "alpha({palette.grey.50}, 0.22)",
       "normal_comment": "기본 채움 (grey.50 + 22% opacity)",
-      "strong": "{palette.alphaComposite.fillLightStrong}",
+      "strong": "alpha({palette.grey.50}, 0.28)",
       "strong_comment": "강한 채움 (grey.50 + 28% opacity)",
-      "alternative": "{palette.alphaComposite.fillLightAlternative}",
+      "alternative": "alpha({palette.grey.50}, 0.12)",
       "alternative_comment": "약한 채움 (grey.50 + 12% opacity)"
     },
 
@@ -289,9 +289,9 @@
 
     "overlay": {
       "_description": "오버레이/딤 배경",
-      "dim": "{palette.alphaComposite.overlayLightDim}",
+      "dim": "alpha({palette.grey.15}, 0.40)",
       "dim_comment": "기본 딤 배경 (grey.15 + 40% alpha)",
-      "heavy": "{palette.alphaComposite.overlayLightHeavy}",
+      "heavy": "alpha({palette.grey.15}, 0.85)",
       "heavy_comment": "강한 딤 배경 (grey.15 + 85% alpha)"
     },
 
@@ -318,74 +318,6 @@
       "icon": {
         "default": "{palette.grey.95}",
         "default_comment": "반전 배경 기본 아이콘"
-      }
-    },
-
-    "component": {
-      "_description": "Toss 방식 컴포넌트 목적별 semantic alias",
-      "button": {
-        "surface": {
-          "primary": "{palette.blue.50}",
-          "primary_comment": "Primary 버튼 배경",
-          "primaryPressed": "{palette.blue.45}",
-          "primaryPressed_comment": "Primary 버튼 pressed",
-          "secondary": "{palette.blue.95}",
-          "secondary_comment": "Secondary 버튼 배경",
-          "secondaryPressed": "{palette.blue.90}",
-          "secondaryPressed_comment": "Secondary 버튼 pressed",
-          "destructive": "{palette.red.50}",
-          "destructive_comment": "Destructive 버튼 배경",
-          "destructivePressed": "{palette.red.40}",
-          "destructivePressed_comment": "Destructive 버튼 pressed"
-        },
-        "content": {
-          "primary": "{palette.static.white}",
-          "primary_comment": "Primary 버튼 텍스트",
-          "secondary": "{palette.blue.50}",
-          "secondary_comment": "Secondary 버튼 텍스트",
-          "destructive": "{palette.static.white}",
-          "destructive_comment": "Destructive 버튼 텍스트"
-        },
-        "border": {
-          "secondary": "{palette.blue.50}",
-          "secondary_comment": "Secondary 버튼 경계선"
-        }
-      },
-      "input": {
-        "surface": "{palette.static.white}",
-        "surface_comment": "입력 필드 배경",
-        "border": {
-          "default": "{palette.grey.95}",
-          "default_comment": "입력 필드 기본 경계선",
-          "focus": "{palette.blue.50}",
-          "focus_comment": "입력 필드 포커스 경계선"
-        },
-        "content": "{palette.grey.30}",
-        "content_comment": "입력 필드 텍스트",
-        "placeholder": "{palette.grey.70}",
-        "placeholder_comment": "입력 필드 플레이스홀더",
-        "ring": {
-          "focus": "{palette.alphaComposite.brandSelectionLight}",
-          "focus_comment": "입력 필드 포커스 링"
-        }
-      },
-      "chip": {
-        "surface": {
-          "neutral": "{palette.alphaComposite.fillLightNormal}",
-          "neutral_comment": "기본 칩 배경",
-          "selected": "{palette.blue.95}",
-          "selected_comment": "선택 칩 배경"
-        },
-        "content": {
-          "neutral": "{palette.grey.30}",
-          "neutral_comment": "기본 칩 텍스트",
-          "selected": "{palette.blue.50}",
-          "selected_comment": "선택 칩 텍스트"
-        },
-        "border": {
-          "neutral": "{palette.grey.95}",
-          "neutral_comment": "기본 칩 경계선"
-        }
       }
     }
   },
@@ -610,11 +542,11 @@
 
     "fill": {
       "_description": "컴포넌트 채움 - 다크모드",
-      "normal": "{palette.alphaComposite.fillDarkNormal}",
+      "normal": "alpha({palette.grey.90}, 0.22)",
       "normal_comment": "기본 채움 (grey.90 + 22% opacity)",
-      "strong": "{palette.alphaComposite.fillDarkStrong}",
+      "strong": "alpha({palette.grey.90}, 0.28)",
       "strong_comment": "강한 채움 (grey.90 + 28% opacity)",
-      "alternative": "{palette.alphaComposite.fillDarkAlternative}",
+      "alternative": "alpha({palette.grey.90}, 0.12)",
       "alternative_comment": "약한 채움 (grey.90 + 12% opacity)"
     },
 
@@ -670,9 +602,9 @@
 
     "overlay": {
       "_description": "오버레이/딤 배경 - 다크모드",
-      "dim": "{palette.alphaComposite.overlayDarkDim}",
+      "dim": "alpha({palette.grey.15}, 0.72)",
       "dim_comment": "기본 딤 배경 (grey.15 + 72% alpha)",
-      "heavy": "{palette.alphaComposite.overlayDarkHeavy}",
+      "heavy": "alpha({palette.grey.15}, 0.93)",
       "heavy_comment": "강한 딤 배경 (grey.15 + 93% alpha)"
     },
 
@@ -699,74 +631,6 @@
       "icon": {
         "default": "{palette.grey.30}",
         "default_comment": "반전 배경 기본 아이콘"
-      }
-    },
-
-    "component": {
-      "_description": "Toss 방식 컴포넌트 목적별 semantic alias",
-      "button": {
-        "surface": {
-          "primary": "{palette.blue.55}",
-          "primary_comment": "Primary 버튼 배경",
-          "primaryPressed": "{palette.blue.60}",
-          "primaryPressed_comment": "Primary 버튼 pressed",
-          "secondary": "{palette.blue.20}",
-          "secondary_comment": "Secondary 버튼 배경",
-          "secondaryPressed": "{palette.blue.30}",
-          "secondaryPressed_comment": "Secondary 버튼 pressed",
-          "destructive": "{palette.red.60}",
-          "destructive_comment": "Destructive 버튼 배경",
-          "destructivePressed": "{palette.red.70}",
-          "destructivePressed_comment": "Destructive 버튼 pressed"
-        },
-        "content": {
-          "primary": "{palette.static.white}",
-          "primary_comment": "Primary 버튼 텍스트",
-          "secondary": "{palette.blue.60}",
-          "secondary_comment": "Secondary 버튼 텍스트",
-          "destructive": "{palette.static.white}",
-          "destructive_comment": "Destructive 버튼 텍스트"
-        },
-        "border": {
-          "secondary": "{palette.blue.55}",
-          "secondary_comment": "Secondary 버튼 경계선"
-        }
-      },
-      "input": {
-        "surface": "{palette.grey.20}",
-        "surface_comment": "입력 필드 배경",
-        "border": {
-          "default": "{palette.grey.25}",
-          "default_comment": "입력 필드 기본 경계선",
-          "focus": "{palette.blue.55}",
-          "focus_comment": "입력 필드 포커스 경계선"
-        },
-        "content": "{palette.grey.95}",
-        "content_comment": "입력 필드 텍스트",
-        "placeholder": "{palette.grey.50}",
-        "placeholder_comment": "입력 필드 플레이스홀더",
-        "ring": {
-          "focus": "{palette.alphaComposite.brandSelectionDark}",
-          "focus_comment": "입력 필드 포커스 링"
-        }
-      },
-      "chip": {
-        "surface": {
-          "neutral": "{palette.alphaComposite.fillDarkNormal}",
-          "neutral_comment": "기본 칩 배경",
-          "selected": "{palette.blue.20}",
-          "selected_comment": "선택 칩 배경"
-        },
-        "content": {
-          "neutral": "{palette.grey.95}",
-          "neutral_comment": "기본 칩 텍스트",
-          "selected": "{palette.blue.60}",
-          "selected_comment": "선택 칩 텍스트"
-        },
-        "border": {
-          "neutral": "{palette.grey.25}",
-          "neutral_comment": "기본 칩 경계선"
-        }
       }
     }
   }

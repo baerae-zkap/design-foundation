@@ -17,7 +17,7 @@ import { cssVarColors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
-import { opacity } from '../../tokens/general';
+import { opacity, borderWidth } from '../../tokens/general';
 import { transitions } from '../../utils/styles';
 
 export type CheckboxSize = 'small' | 'medium';
@@ -120,7 +120,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      border: checked || indeterminate ? 'none' : `1.5px solid ${cssVarColors.border.solid.alternative}`,
+      border: checked || indeterminate ? 'none' : `${borderWidth.medium}px solid ${cssVarColors.border.solid.alternative}`,
       backgroundColor: checked || indeterminate ? cssVarColors.surface.brand.default : 'transparent',
       transition: transitions.all,
       pointerEvents: 'none',

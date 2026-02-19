@@ -9,17 +9,17 @@ import { palette } from './colors';
 export const effects = {
   alpha: {
     brand: {
-      selection: palette.alphaComposite.brandSelectionLight,
+      selection: "hsla(216, 100%, 47%, 0.15)",
     },
     fill: {
-      normal: palette.alphaComposite.fillLightNormal,
-      strong: palette.alphaComposite.fillLightStrong,
-      alternative: palette.alphaComposite.fillLightAlternative,
+      normal: "hsla(216, 9%, 45%, 0.22)",
+      strong: "hsla(216, 9%, 45%, 0.28)",
+      alternative: "hsla(216, 9%, 45%, 0.12)",
     },
     overlay: {
-      transparent: palette.alphaComposite.overlayLightTransparent,
-      dim: palette.alphaComposite.overlayLightDim,
-      heavy: palette.alphaComposite.overlayLightHeavy,
+      transparent: "hsla(222, 33%, 11%, 0)",
+      dim: "hsla(222, 33%, 11%, 0.40)",
+      heavy: "hsla(222, 33%, 11%, 0.85)",
     },
   },
   gradient: {
@@ -32,8 +32,8 @@ export const effects = {
       container: `linear-gradient(180deg, ${palette.grey["99"]} 0%, ${palette.grey["97"]} 100%)`,
     },
     overlay: {
-      topScrim: `linear-gradient(0deg, ${palette.alphaComposite.overlayLightHeavy} 0%, ${palette.alphaComposite.overlayLightTransparent} 100%)`,
-      bottomScrim: `linear-gradient(180deg, ${palette.alphaComposite.overlayLightTransparent} 0%, ${palette.alphaComposite.overlayLightHeavy} 100%)`,
+      topScrim: `linear-gradient(0deg, hsla(222, 33%, 11%, 0.85) 0%, hsla(222, 33%, 11%, 0) 100%)`,
+      bottomScrim: `linear-gradient(180deg, hsla(222, 33%, 11%, 0) 0%, hsla(222, 33%, 11%, 0.85) 100%)`,
     },
   },
 } as const;
@@ -42,17 +42,17 @@ export const effects = {
 export const darkEffects = {
   alpha: {
     brand: {
-      selection: palette.alphaComposite.brandSelectionDark,
+      selection: "hsla(220, 100%, 57%, 0.20)",
     },
     fill: {
-      normal: palette.alphaComposite.fillDarkNormal,
-      strong: palette.alphaComposite.fillDarkStrong,
-      alternative: palette.alphaComposite.fillDarkAlternative,
+      normal: "hsla(216, 9%, 77%, 0.22)",
+      strong: "hsla(216, 9%, 77%, 0.28)",
+      alternative: "hsla(216, 9%, 77%, 0.12)",
     },
     overlay: {
-      transparent: palette.alphaComposite.overlayDarkTransparent,
-      dim: palette.alphaComposite.overlayDarkDim,
-      heavy: palette.alphaComposite.overlayDarkHeavy,
+      transparent: "hsla(222, 33%, 11%, 0)",
+      dim: "hsla(222, 33%, 11%, 0.72)",
+      heavy: "hsla(222, 33%, 11%, 0.93)",
     },
   },
   gradient: {
@@ -65,8 +65,8 @@ export const darkEffects = {
       container: `linear-gradient(180deg, ${palette.grey["20"]} 0%, ${palette.grey["23"]} 100%)`,
     },
     overlay: {
-      topScrim: `linear-gradient(0deg, ${palette.alphaComposite.overlayDarkHeavy} 0%, ${palette.alphaComposite.overlayDarkTransparent} 100%)`,
-      bottomScrim: `linear-gradient(180deg, ${palette.alphaComposite.overlayDarkTransparent} 0%, ${palette.alphaComposite.overlayDarkHeavy} 100%)`,
+      topScrim: `linear-gradient(0deg, hsla(222, 33%, 11%, 0.93) 0%, hsla(222, 33%, 11%, 0) 100%)`,
+      bottomScrim: `linear-gradient(180deg, hsla(222, 33%, 11%, 0) 0%, hsla(222, 33%, 11%, 0.93) 100%)`,
     },
   },
 } as const;

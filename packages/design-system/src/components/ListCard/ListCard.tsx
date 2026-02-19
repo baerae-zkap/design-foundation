@@ -14,13 +14,13 @@
  * />
  */
 
-import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
+import { useState, forwardRef, type HTMLAttributes, type ReactNode } from 'react';
 import { cssVarColors } from '../../tokens/colors';
 import { cssVarShadow } from '../../tokens/shadow';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
-import { opacity } from '../../tokens/general';
+import { opacity, borderWidth } from '../../tokens/general';
 import { usePressable } from '../../utils/usePressable';
 import { transitions } from '../../utils/styles';
 
@@ -44,6 +44,10 @@ export interface ListCardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'tit
   action?: ReactNode;
   /** 상단 뱃지 영역 */
   badges?: ReactNode;
+  /** 썸네일 왼쪽 인디케이터 (선택, 상태 등) */
+  leadingContent?: ReactNode;
+  /** 카드 하단 자유 영역 (진행률 바, 추가 정보 등) */
+  bottomContent?: ReactNode;
   /** 클릭 핸들러 */
   onClick?: () => void;
   /** 비활성화 */
@@ -95,11 +99,11 @@ const variantStyles: Record<ListCardVariant, React.CSSProperties> = {
   outlined: {
     backgroundColor: cssVarColors.surface.base.default,
     boxShadow: 'none',
-    border: `1px solid ${cssVarColors.border.base.default}`,
+    border: `${borderWidth.default}px solid ${cssVarColors.border.base.default}`,
   },
   filled: {
-    backgroundColor: cssVarColors.surface.base.alternative,
-    boxShadow: 'none',
+    backgroundColor: cssVarColors.surface.base.default,
+    boxShadow: cssVarShadow.semantic.card.default,
     border: 'none',
   },
 };
@@ -107,7 +111,7 @@ const variantStyles: Record<ListCardVariant, React.CSSProperties> = {
 export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
   (
     {
-      variant = 'elevated',
+      variant = 'filled',
       size = 'medium',
       thumbnail,
       title,
@@ -115,9 +119,17 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
       meta,
       action,
       badges,
+      leadingContent,
+      bottomContent,
       onClick,
       disabled = false,
       style,
+      onMouseDown,
+      onMouseUp,
+      onMouseLeave,
+      onMouseEnter,
+      onFocus,
+      onBlur,
       ...props
     },
     ref
@@ -128,9 +140,10 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
 
     const { isPressed, handlers } = usePressable<HTMLDivElement>({
       disabled: !isInteractive,
-      onMouseDown: undefined,
-      onMouseUp: undefined,
-      onMouseLeave: undefined,
+      onMouseDown,
+      onMouseUp,
+      onMouseLeave,
+      onMouseEnter,
     });
 
     const getPressedBackground = () => {
@@ -141,14 +154,17 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
       }
     };
 
+    const [isFocusVisible, setIsFocusVisible] = useState(false);
+
     const containerStyle: React.CSSProperties = {
       display: 'flex',
-      alignItems: 'flex-start',
-      gap: sizeStyle.gap,
+      flexDirection: 'column',
       padding: sizeStyle.padding,
       borderRadius: radius.component.card.sm,
       cursor: isInteractive ? 'pointer' : 'default',
       opacity: disabled ? opacity.disabled : 1,
+      outline: isFocusVisible && isInteractive ? `2px solid var(--content-brand-default)` : 'none',
+      outlineOffset: 2,
       transition: transitions.background,
       ...variantStyle,
       ...(isPressed && isInteractive ? { backgroundColor: getPressedBackground() } : {}),
@@ -217,40 +233,73 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
         tabIndex={isInteractive ? 0 : undefined}
         onClick={handleClick}
         onKeyDown={(e) => {
-          if (isInteractive && (e.key === 'Enter' || e.key === ' ')) {
+          if (isInteractive && e.key === 'Enter') {
             e.preventDefault();
             onClick();
           }
+          if (isInteractive && e.key === ' ') {
+            e.preventDefault();
+          }
+        }}
+        onKeyUp={(e) => {
+          if (isInteractive && e.key === ' ') {
+            onClick();
+          }
+        }}
+        onFocus={(e) => {
+          setIsFocusVisible(true);
+          onFocus?.(e);
+        }}
+        onBlur={(e) => {
+          setIsFocusVisible(false);
+          onBlur?.(e);
         }}
         style={containerStyle}
         {...handlers}
         {...props}
       >
-        {/* Thumbnail */}
-        {thumbnail && (
-          <div style={thumbnailContainerStyle}>
-            {thumbnail}
-          </div>
-        )}
-
-        {/* Content */}
-        <div style={contentStyle}>
-          {/* Badges */}
-          {badges && (
-            <div style={{ display: 'flex', gap: spacing.primitive[1], marginBottom: spacing.primitive[1] }}>
-              {badges}
+        {/* Main row */}
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: sizeStyle.gap }}>
+          {/* Leading Content */}
+          {leadingContent && (
+            <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center', alignSelf: 'center' }}>
+              {leadingContent}
             </div>
           )}
 
-          <div style={titleStyle}>{title}</div>
-          {subtitle && <div style={subtitleStyle}>{subtitle}</div>}
-          {meta && <div style={metaStyle}>{meta}</div>}
+          {/* Thumbnail */}
+          {thumbnail && (
+            <div style={thumbnailContainerStyle}>
+              {thumbnail}
+            </div>
+          )}
+
+          {/* Content */}
+          <div style={contentStyle}>
+            {/* Badges */}
+            {badges && (
+              <div style={{ display: 'flex', gap: spacing.primitive[1], marginBottom: spacing.primitive[1] }}>
+                {badges}
+              </div>
+            )}
+
+            <div style={titleStyle}>{title}</div>
+            {subtitle && <div style={subtitleStyle}>{subtitle}</div>}
+            {meta && <div style={metaStyle}>{meta}</div>}
+          </div>
+
+          {/* Action */}
+          {action && (
+            <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center' }}>
+              {action}
+            </div>
+          )}
         </div>
 
-        {/* Action */}
-        {action && (
-          <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center' }}>
-            {action}
+        {/* Bottom Content */}
+        {bottomContent && (
+          <div style={{ marginTop: spacing.primitive[2] }}>
+            {bottomContent}
           </div>
         )}
       </div>

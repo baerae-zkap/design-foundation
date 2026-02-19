@@ -4,6 +4,7 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { TokenDownload } from "@/components/TokenDownload";
 import radiusJson from "../../../public/radius-tokens.json";
 import { formatTokenName } from "@/utils/formatTokenName";
+import { typography, spacing, radius } from '@baerae-zkap/design-system';
 
 const primitive = radiusJson.radius.primitive;
 const semantic = radiusJson.radius.semantic;
@@ -33,16 +34,16 @@ export default function RadiusPage() {
       ]} />
 
       {/* Visual Scale */}
-      <section style={{ marginBottom: 48 }}>
-        <h2 id="scale" style={{ fontSize: 20, fontWeight: 700, marginBottom: 12, color: 'var(--text-primary)' }}>스케일 시각화</h2>
-        <div style={{ padding: 24, borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', backgroundColor: 'var(--bg-elevated)' }}>
+      <section style={{ marginBottom: spacing.primitive[12] }}>
+        <h2 id="scale" style={{ fontSize: typography.fontSize.xl, fontWeight: typography.fontWeight.bold, marginBottom: spacing.primitive[3], color: 'var(--text-primary)' }}>스케일 시각화</h2>
+        <div style={{ padding: spacing.primitive[6], borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', backgroundColor: 'var(--bg-elevated)' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             {Object.entries(primitive).filter(([k]) => !k.startsWith("_")).map(([key, value]) => (
-              <div key={key} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+              <div key={key} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: spacing.primitive[2] }}>
                 <div
                   style={{ width: 48, height: 48, backgroundColor: 'var(--brand-primary)', borderRadius: value === 9999 ? "50%" : value }}
                 />
-                <span style={{ fontSize: 12, fontFamily: 'var(--font-mono)', color: 'var(--text-tertiary)' }}>{key}</span>
+                <span style={{ fontSize: typography.fontSize.xs, fontFamily: 'var(--font-mono)', color: 'var(--text-tertiary)' }}>{key}</span>
               </div>
             ))}
           </div>
@@ -50,19 +51,19 @@ export default function RadiusPage() {
       </section>
 
       {/* Primitive */}
-      <section style={{ marginBottom: 48 }}>
-        <h2 id="primitive" style={{ fontSize: 20, fontWeight: 700, marginBottom: 4, color: 'var(--text-primary)' }}>Primitive</h2>
-        <p style={{ marginBottom: 16, color: 'var(--text-secondary)' }}>기본 라운딩 값 목록입니다.</p>
+      <section style={{ marginBottom: spacing.primitive[12] }}>
+        <h2 id="primitive" style={{ fontSize: typography.fontSize.xl, fontWeight: typography.fontWeight.bold, marginBottom: spacing.primitive[1], color: 'var(--text-primary)' }}>Primitive</h2>
+        <p style={{ marginBottom: spacing.primitive[4], color: 'var(--text-secondary)' }}>기본 라운딩 값 목록입니다.</p>
         <div style={{ backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', overflow: 'hidden' }}>
           {Object.entries(primitive).filter(([k]) => !k.startsWith("_")).map(([key, value], i, arr) => (
-            <div key={key} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: 16, borderBottom: i < arr.length - 1 ? '1px solid var(--divider)' : 'none' }}>
+            <div key={key} style={{ display: 'flex', alignItems: 'center', gap: spacing.primitive[4], padding: spacing.primitive[4], borderBottom: i < arr.length - 1 ? '1px solid var(--divider)' : 'none' }}>
               <div style={{ width: 64, display: 'flex', justifyContent: 'center' }}>
                 <div style={{ width: 48, height: 48, backgroundColor: 'var(--brand-primary)', borderRadius: value === 9999 ? "50%" : value }} />
               </div>
               <div style={{ flex: 1 }}>
-                <span style={{ fontSize: 14, fontWeight: 500, color: 'var(--text-primary)' }}>{formatTokenName('radius', key)}</span>
+                <span style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.medium, color: 'var(--text-primary)' }}>{formatTokenName('radius', key)}</span>
               </div>
-              <span style={{ fontSize: 14, fontFamily: 'var(--font-mono)', color: 'var(--text-tertiary)' }}>{value === 9999 ? "9999px" : `${value}px`}</span>
+              <span style={{ fontSize: typography.fontSize.sm, fontFamily: 'var(--font-mono)', color: 'var(--text-tertiary)' }}>{value === 9999 ? "9999px" : `${value}px`}</span>
             </div>
           ))}
         </div>
@@ -83,7 +84,7 @@ export default function RadiusPage() {
         <button style={{
           padding: key === 'lg' ? '10px 20px' : '8px 16px',
           fontSize: key === 'lg' ? 14 : 13,
-          fontWeight: 500,
+          fontWeight: typography.fontWeight.medium,
           backgroundColor: 'var(--content-brand-default)',
           color: 'white',
           border: 'none',
@@ -94,12 +95,12 @@ export default function RadiusPage() {
 
       {/* Chip */}
       <SemanticSection id="chip" title="Chip" description="칩/태그 컴포넌트용 라운딩입니다." data={semantic.chip} renderPreview={(value) => (
-        <span style={{ display: 'inline-block', padding: '4px 12px', fontSize: 13, backgroundColor: 'var(--surface-brand-secondary)', color: 'var(--content-brand-default)', borderRadius: value === 9999 ? 9999 : value }}>Tag</span>
+        <span style={{ display: 'inline-block', padding: `${spacing.primitive[1]}px ${spacing.primitive[3]}px`, fontSize: typography.fontSize.compact, backgroundColor: 'var(--surface-brand-secondary)', color: 'var(--content-brand-default)', borderRadius: value === 9999 ? 9999 : value }}>Tag</span>
       )} />
 
       {/* Badge */}
       <SemanticSection id="badge" title="Badge" description="뱃지 컴포넌트용 라운딩입니다." data={semantic.badge} renderPreview={(value) => (
-        <span style={{ display: 'inline-block', padding: '2px 8px', fontSize: 12, fontWeight: 500, backgroundColor: 'var(--content-error-default)', color: 'white', borderRadius: value === 9999 ? 9999 : value }}>NEW</span>
+        <span style={{ display: 'inline-block', padding: `2px ${spacing.primitive[2]}px`, fontSize: typography.fontSize.xs, fontWeight: typography.fontWeight.medium, backgroundColor: 'var(--content-error-default)', color: 'white', borderRadius: value === 9999 ? 9999 : value }}>NEW</span>
       )} />
 
       {/* Avatar */}
@@ -124,9 +125,9 @@ export default function RadiusPage() {
       )} />
 
       {/* Surface Components */}
-      <section style={{ marginBottom: 48 }}>
-        <h2 id="surface" style={{ fontSize: 20, fontWeight: 700, marginBottom: 4, color: 'var(--text-primary)' }}>Surface</h2>
-        <p style={{ marginBottom: 16, color: 'var(--text-secondary)' }}>모달, 바텀시트, 토스트 등 서피스 컴포넌트용 라운딩입니다.</p>
+      <section style={{ marginBottom: spacing.primitive[12] }}>
+        <h2 id="surface" style={{ fontSize: typography.fontSize.xl, fontWeight: typography.fontWeight.bold, marginBottom: spacing.primitive[1], color: 'var(--text-primary)' }}>Surface</h2>
+        <p style={{ marginBottom: spacing.primitive[4], color: 'var(--text-secondary)' }}>모달, 바텀시트, 토스트 등 서피스 컴포넌트용 라운딩입니다.</p>
         <div style={{ backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', overflow: 'hidden' }}>
           {[
             { key: 'modal', token: semantic.modal.default },
@@ -136,14 +137,14 @@ export default function RadiusPage() {
           ].map(({ key, token }, i, arr) => {
             const value = resolveRef(token);
             return (
-              <div key={key} style={{ display: 'flex', alignItems: 'center', gap: 24, padding: '20px 16px', borderBottom: i < arr.length - 1 ? '1px solid var(--divider)' : 'none' }}>
+              <div key={key} style={{ display: 'flex', alignItems: 'center', gap: spacing.primitive[6], padding: `${spacing.primitive[5]}px ${spacing.primitive[4]}px`, borderBottom: i < arr.length - 1 ? '1px solid var(--divider)' : 'none' }}>
                 <div style={{ width: 140, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                   {key === 'modal' && (
                     <div style={{ width: 120, height: 80, backgroundColor: 'var(--static-white)', border: '1px solid var(--border-base-default)', borderRadius: value, boxShadow: '0 8px 24px var(--shadow-primitive-sm)', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
                       <div style={{ padding: '8px 10px', borderBottom: '1px solid var(--border-base-default)' }}>
                         <div style={{ width: 40, height: 6, backgroundColor: 'var(--border-base-default)', borderRadius: 2 }} />
                       </div>
-                      <div style={{ flex: 1, padding: 10, display: 'flex', flexDirection: 'column', gap: 4 }}>
+                      <div style={{ flex: 1, padding: 10, display: 'flex', flexDirection: 'column', gap: spacing.primitive[1] }}>
                         <div style={{ width: '100%', height: 4, backgroundColor: 'var(--surface-base-alternative)', borderRadius: 2 }} />
                         <div style={{ width: '70%', height: 4, backgroundColor: 'var(--surface-base-alternative)', borderRadius: 2 }} />
                       </div>
@@ -151,28 +152,28 @@ export default function RadiusPage() {
                   )}
                   {key === 'bottomSheet' && (
                     <div style={{ width: 120, height: 70, backgroundColor: 'var(--static-white)', border: '1px solid var(--border-base-default)', borderTopLeftRadius: value, borderTopRightRadius: value, borderBottomLeftRadius: 0, borderBottomRightRadius: 0, boxShadow: '0 -4px 16px var(--shadow-primitive-xs)', display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: 8 }}>
-                      <div style={{ width: 32, height: 4, backgroundColor: 'var(--border-base-default)', borderRadius: 2, marginBottom: 12 }} />
+                      <div style={{ width: 32, height: 4, backgroundColor: 'var(--border-base-default)', borderRadius: 2, marginBottom: spacing.primitive[3] }} />
                       <div style={{ width: '80%', height: 4, backgroundColor: 'var(--surface-base-alternative)', borderRadius: 2, marginBottom: 6 }} />
                       <div style={{ width: '60%', height: 4, backgroundColor: 'var(--surface-base-alternative)', borderRadius: 2 }} />
                     </div>
                   )}
                   {key === 'toast' && (
-                    <div style={{ width: 120, height: 36, backgroundColor: 'var(--inverse-surface-default)', borderRadius: value, display: 'flex', alignItems: 'center', padding: '0 12px', gap: 8, boxShadow: '0 4px 12px var(--shadow-primitive-sm)' }}>
+                    <div style={{ width: 120, height: 36, backgroundColor: 'var(--inverse-surface-default)', borderRadius: value, display: 'flex', alignItems: 'center', padding: `0 ${spacing.primitive[3]}px`, gap: spacing.primitive[2], boxShadow: '0 4px 12px var(--shadow-primitive-sm)' }}>
                       <div style={{ width: 14, height: 14, backgroundColor: 'var(--content-success-default)', borderRadius: '50%' }} />
-                      <span style={{ fontSize: 11, color: 'var(--static-white)' }}>완료!</span>
+                      <span style={{ fontSize: typography.fontSize['2xs'], color: 'var(--static-white)' }}>완료!</span>
                     </div>
                   )}
                   {key === 'tooltip' && (
                     <div style={{ width: 80, height: 28, backgroundColor: 'var(--inverse-surface-default)', borderRadius: value, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 8px var(--shadow-primitive-sm)' }}>
-                      <span style={{ fontSize: 11, color: 'var(--static-white)' }}>도움말</span>
+                      <span style={{ fontSize: typography.fontSize['2xs'], color: 'var(--static-white)' }}>도움말</span>
                     </div>
                   )}
                 </div>
                 <div style={{ flex: 1 }}>
-                  <span style={{ fontSize: 14, fontWeight: 500, color: 'var(--text-primary)' }}>{key}</span>
-                  <p style={{ fontSize: 12, color: 'var(--text-tertiary)', marginTop: 2 }}>{token._comment || ''}</p>
+                  <span style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.medium, color: 'var(--text-primary)' }}>{key}</span>
+                  <p style={{ fontSize: typography.fontSize.xs, color: 'var(--text-tertiary)', marginTop: 2 }}>{token._comment || ''}</p>
                 </div>
-                <span style={{ fontSize: 14, fontFamily: 'var(--font-mono)', color: 'var(--text-tertiary)' }}>{value}px</span>
+                <span style={{ fontSize: typography.fontSize.sm, fontFamily: 'var(--font-mono)', color: 'var(--text-tertiary)' }}>{value}px</span>
               </div>
             );
           })}
@@ -195,22 +196,22 @@ function SemanticSection({ id, title, description, data, renderPreview }: {
   renderPreview: (value: number, key: string) => React.ReactNode;
 }) {
   return (
-    <section style={{ marginBottom: 48 }}>
-      <h2 id={id} style={{ fontSize: 20, fontWeight: 700, marginBottom: 4, color: 'var(--text-primary)' }}>{title}</h2>
-      <p style={{ marginBottom: 16, color: 'var(--text-secondary)' }}>{description}</p>
+    <section style={{ marginBottom: spacing.primitive[12] }}>
+      <h2 id={id} style={{ fontSize: typography.fontSize.xl, fontWeight: typography.fontWeight.bold, marginBottom: spacing.primitive[1], color: 'var(--text-primary)' }}>{title}</h2>
+      <p style={{ marginBottom: spacing.primitive[4], color: 'var(--text-secondary)' }}>{description}</p>
       <div style={{ backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', overflow: 'hidden' }}>
         {Object.entries(data).filter(([k]) => !k.startsWith("_")).map(([key, token], i, arr) => {
           const value = resolveRef(token);
           return (
-            <div key={key} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: 16, borderBottom: i < arr.length - 1 ? '1px solid var(--divider)' : 'none' }}>
+            <div key={key} style={{ display: 'flex', alignItems: 'center', gap: spacing.primitive[4], padding: spacing.primitive[4], borderBottom: i < arr.length - 1 ? '1px solid var(--divider)' : 'none' }}>
               <div style={{ width: 96, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 {renderPreview(value, key)}
               </div>
               <div style={{ flex: 1 }}>
-                <span style={{ fontSize: 14, fontWeight: 500, color: 'var(--text-primary)' }}>{formatTokenName(id, key)}</span>
-                <p style={{ fontSize: 12, color: 'var(--text-tertiary)', marginTop: 2 }}>{token._comment || ''}</p>
+                <span style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.medium, color: 'var(--text-primary)' }}>{formatTokenName(id, key)}</span>
+                <p style={{ fontSize: typography.fontSize.xs, color: 'var(--text-tertiary)', marginTop: 2 }}>{token._comment || ''}</p>
               </div>
-              <span style={{ fontSize: 14, fontFamily: 'var(--font-mono)', color: 'var(--text-tertiary)' }}>{value === 9999 ? "9999px" : `${value}px`}</span>
+              <span style={{ fontSize: typography.fontSize.sm, fontFamily: 'var(--font-mono)', color: 'var(--text-tertiary)' }}>{value === 9999 ? "9999px" : `${value}px`}</span>
             </div>
           );
         })}

@@ -19,6 +19,7 @@ import { spacing } from '../../tokens/spacing';
 import { typography } from '../../tokens/typography';
 import { usePressable } from '../../utils/usePressable';
 import { transitions } from '../../utils/styles';
+import { opacity } from '../../tokens/general';
 
 export type CheckMarkSize = 'small' | 'medium';
 
@@ -97,8 +98,7 @@ export const CheckMark = forwardRef<HTMLDivElement, CheckMarkProps>(
 
     const getOpacity = () => {
       if (disabled) return 1;
-      // TODO: Replace with opacity.pressed token when available
-      return isPressed ? 0.8 : 1;
+      return isPressed ? opacity.pressed : 1;
     };
 
     const containerStyle: React.CSSProperties = {

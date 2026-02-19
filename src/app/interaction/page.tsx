@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { TokenDownload } from "@/components/TokenDownload";
 import interactionJson from "../../../public/interaction-tokens.json";
+import { typography, spacing, radius } from '@baerae-zkap/design-system';
 
 const duration = interactionJson.interaction.duration;
 const easing = interactionJson.interaction.easing;
@@ -14,8 +15,8 @@ export default function InteractionPage() {
     <div style={{ maxWidth: 720 }}>
       <Breadcrumb items={[{ label: "파운데이션", href: "/" }, { label: "Interaction" }]} />
 
-      <h1 style={{ fontSize: 30, fontWeight: 700, marginBottom: 8, color: 'var(--text-primary)' }}>Interaction</h1>
-      <p style={{ marginBottom: 24, lineHeight: 1.6, color: 'var(--text-secondary)' }}>
+      <h1 style={{ fontSize: 30, fontWeight: typography.fontWeight.bold, marginBottom: spacing.primitive[2], color: 'var(--text-primary)' }}>Interaction</h1>
+      <p style={{ marginBottom: spacing.primitive[6], lineHeight: 1.6, color: 'var(--text-secondary)' }}>
         앱 인터랙션을 위한 시스템입니다. <strong style={{ color: 'var(--text-primary)' }}>Duration</strong>과 <strong style={{ color: 'var(--text-primary)' }}>Easing</strong> 조합으로 일관된 느낌을 만듭니다.
       </p>
       <TokenDownload files={[
@@ -23,9 +24,9 @@ export default function InteractionPage() {
       ]} />
 
       {/* Duration */}
-      <section style={{ marginBottom: 48 }}>
-        <h2 id="duration" style={{ fontSize: 20, fontWeight: 700, marginBottom: 4, color: 'var(--text-primary)' }}>Duration</h2>
-        <p style={{ marginBottom: 16, color: 'var(--text-secondary)' }}>지속 시간입니다. 컴포넌트 크기와 복잡도에 따라 선택합니다.</p>
+      <section style={{ marginBottom: spacing.primitive[12] }}>
+        <h2 id="duration" style={{ fontSize: typography.fontSize.xl, fontWeight: typography.fontWeight.bold, marginBottom: spacing.primitive[1], color: 'var(--text-primary)' }}>Duration</h2>
+        <p style={{ marginBottom: spacing.primitive[4], color: 'var(--text-secondary)' }}>지속 시간입니다. 컴포넌트 크기와 복잡도에 따라 선택합니다.</p>
         <div style={{ backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', overflow: 'hidden' }}>
           {Object.entries(duration).filter(([k, v]) => !k.startsWith("_") && typeof v === 'object').map(([key, token], i, arr) => (
             <DurationRow key={key} name={key} token={token as { value: string; _comment?: string }} isLast={i === arr.length - 1} />
@@ -34,9 +35,9 @@ export default function InteractionPage() {
       </section>
 
       {/* Easing */}
-      <section style={{ marginBottom: 48 }}>
-        <h2 id="easing" style={{ fontSize: 20, fontWeight: 700, marginBottom: 4, color: 'var(--text-primary)' }}>Easing</h2>
-        <p style={{ marginBottom: 16, color: 'var(--text-secondary)' }}>가속 곡선입니다. 동작의 특성에 따라 선택합니다.</p>
+      <section style={{ marginBottom: spacing.primitive[12] }}>
+        <h2 id="easing" style={{ fontSize: typography.fontSize.xl, fontWeight: typography.fontWeight.bold, marginBottom: spacing.primitive[1], color: 'var(--text-primary)' }}>Easing</h2>
+        <p style={{ marginBottom: spacing.primitive[4], color: 'var(--text-secondary)' }}>가속 곡선입니다. 동작의 특성에 따라 선택합니다.</p>
         <div style={{ backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', overflow: 'hidden' }}>
           {Object.entries(easing).filter(([k, v]) => !k.startsWith("_") && typeof v === 'object').map(([key, token], i, arr) => (
             <EasingRow key={key} name={key} token={token as { value: string; _comment?: string }} isLast={i === arr.length - 1} />
@@ -45,36 +46,36 @@ export default function InteractionPage() {
       </section>
 
       {/* Interactive Demo */}
-      <section style={{ marginBottom: 48 }}>
-        <h2 id="demo" style={{ fontSize: 20, fontWeight: 700, marginBottom: 4, color: 'var(--text-primary)' }}>Interactive Demo</h2>
-        <p style={{ marginBottom: 16, color: 'var(--text-secondary)' }}>Duration과 Easing 조합을 테스트해보세요.</p>
+      <section style={{ marginBottom: spacing.primitive[12] }}>
+        <h2 id="demo" style={{ fontSize: typography.fontSize.xl, fontWeight: typography.fontWeight.bold, marginBottom: spacing.primitive[1], color: 'var(--text-primary)' }}>Interactive Demo</h2>
+        <p style={{ marginBottom: spacing.primitive[4], color: 'var(--text-secondary)' }}>Duration과 Easing 조합을 테스트해보세요.</p>
         <InteractiveDemo />
       </section>
 
       {/* Live Examples */}
-      <section style={{ marginBottom: 48 }}>
-        <h2 id="examples" style={{ fontSize: 20, fontWeight: 700, marginBottom: 4, color: 'var(--text-primary)' }}>Live Examples</h2>
-        <p style={{ marginBottom: 16, color: 'var(--text-secondary)' }}>실제 컴포넌트에서 인터랙션을 확인하세요.</p>
+      <section style={{ marginBottom: spacing.primitive[12] }}>
+        <h2 id="examples" style={{ fontSize: typography.fontSize.xl, fontWeight: typography.fontWeight.bold, marginBottom: spacing.primitive[1], color: 'var(--text-primary)' }}>Live Examples</h2>
+        <p style={{ marginBottom: spacing.primitive[4], color: 'var(--text-secondary)' }}>실제 컴포넌트에서 인터랙션을 확인하세요.</p>
         <LiveExamples />
       </section>
 
       {/* Semantic Reference */}
-      <section style={{ marginBottom: 48 }}>
-        <h2 id="semantic" style={{ fontSize: 20, fontWeight: 700, marginBottom: 4, color: 'var(--text-primary)' }}>Semantic Reference</h2>
-        <p style={{ marginBottom: 16, color: 'var(--text-secondary)' }}>컴포넌트별 권장 모션 조합입니다.</p>
+      <section style={{ marginBottom: spacing.primitive[12] }}>
+        <h2 id="semantic" style={{ fontSize: typography.fontSize.xl, fontWeight: typography.fontWeight.bold, marginBottom: spacing.primitive[1], color: 'var(--text-primary)' }}>Semantic Reference</h2>
+        <p style={{ marginBottom: spacing.primitive[4], color: 'var(--text-secondary)' }}>컴포넌트별 권장 모션 조합입니다.</p>
         <div style={{ backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)', overflow: 'hidden' }}>
           {Object.entries(semantic).filter(([k]) => !k.startsWith("_")).map(([component, actions], i, arr) => (
             <div key={component} style={{ borderBottom: i < arr.length - 1 ? '1px solid var(--divider)' : 'none' }}>
-              <div style={{ padding: '12px 16px', backgroundColor: 'var(--bg-secondary)' }}>
-                <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-primary)' }}>{component}</span>
+              <div style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, backgroundColor: 'var(--bg-secondary)' }}>
+                <span style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: 'var(--text-primary)' }}>{component}</span>
               </div>
               {Object.entries(actions as Record<string, { duration: string; easing: string; _comment?: string }>).filter(([k]) => !k.startsWith("_")).map(([action, config]) => (
-                <div key={action} style={{ display: 'flex', alignItems: 'center', padding: '12px 16px', paddingLeft: 32, borderTop: '1px solid var(--divider)' }}>
-                  <span style={{ width: 80, fontSize: 13, color: 'var(--text-secondary)' }}>{action}</span>
-                  <span style={{ flex: 1, fontSize: 12, fontFamily: 'var(--font-mono)', color: 'var(--text-tertiary)' }}>
+                <div key={action} style={{ display: 'flex', alignItems: 'center', padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, paddingLeft: spacing.primitive[8], borderTop: '1px solid var(--divider)' }}>
+                  <span style={{ width: 80, fontSize: typography.fontSize.compact, color: 'var(--text-secondary)' }}>{action}</span>
+                  <span style={{ flex: 1, fontSize: typography.fontSize.xs, fontFamily: 'var(--font-mono)', color: 'var(--text-tertiary)' }}>
                     {config.duration.replace('{duration.', '').replace('}', '')} + {config.easing.replace('{easing.', '').replace('}', '')}
                   </span>
-                  <span style={{ fontSize: 12, color: 'var(--text-tertiary)' }}>{config._comment}</span>
+                  <span style={{ fontSize: typography.fontSize.xs, color: 'var(--text-tertiary)' }}>{config._comment}</span>
                 </div>
               ))}
             </div>
@@ -83,10 +84,10 @@ export default function InteractionPage() {
       </section>
 
       {/* Usage Guidelines */}
-      <section style={{ marginBottom: 48 }}>
-        <h2 id="guidelines" style={{ fontSize: 20, fontWeight: 700, marginBottom: 4, color: 'var(--text-primary)' }}>Usage Guidelines</h2>
-        <p style={{ marginBottom: 16, color: 'var(--text-secondary)' }}>모션 적용 시 참고하세요.</p>
-        <div style={{ display: 'grid', gap: 12 }}>
+      <section style={{ marginBottom: spacing.primitive[12] }}>
+        <h2 id="guidelines" style={{ fontSize: typography.fontSize.xl, fontWeight: typography.fontWeight.bold, marginBottom: spacing.primitive[1], color: 'var(--text-primary)' }}>Usage Guidelines</h2>
+        <p style={{ marginBottom: spacing.primitive[4], color: 'var(--text-secondary)' }}>모션 적용 시 참고하세요.</p>
+        <div style={{ display: 'grid', gap: spacing.primitive[3] }}>
           {[
             { title: '등장 vs 퇴장', desc: '등장은 easeOut (천천히 멈춤), 퇴장은 easeIn (빠르게 사라짐)' },
             { title: '크기 기반', desc: '작은 요소는 빠르게 (instant/fast), 큰 요소는 느리게 (normal/slow)' },
@@ -94,9 +95,9 @@ export default function InteractionPage() {
             { title: '접근성', desc: 'prefers-reduced-motion 미디어 쿼리 필수 적용' },
             { title: '성능', desc: 'transform, opacity만 애니메이션 (GPU 가속)' },
           ].map((item) => (
-            <div key={item.title} style={{ padding: 16, backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-md)', border: '1px solid var(--divider)' }}>
-              <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-primary)' }}>{item.title}</span>
-              <p style={{ marginTop: 4, fontSize: 13, color: 'var(--text-secondary)' }}>{item.desc}</p>
+            <div key={item.title} style={{ padding: spacing.primitive[4], backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-md)', border: '1px solid var(--divider)' }}>
+              <span style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: 'var(--text-primary)' }}>{item.title}</span>
+              <p style={{ marginTop: spacing.primitive[1], fontSize: typography.fontSize.compact, color: 'var(--text-secondary)' }}>{item.desc}</p>
             </div>
           ))}
         </div>
@@ -110,10 +111,10 @@ function DurationRow({ name, token, isLast }: { name: string; token: { value: st
   const ms = parseInt(token.value);
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 16, padding: 16, borderBottom: isLast ? 'none' : '1px solid var(--divider)' }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: spacing.primitive[4], padding: spacing.primitive[4], borderBottom: isLast ? 'none' : '1px solid var(--divider)' }}>
       <div style={{ width: 100 }}>
-        <span style={{ fontSize: 14, fontWeight: 500, color: 'var(--text-primary)' }}>{name}</span>
-        <p style={{ fontSize: 12, color: 'var(--text-tertiary)', marginTop: 2 }}>{token.value}</p>
+        <span style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.medium, color: 'var(--text-primary)' }}>{name}</span>
+        <p style={{ fontSize: typography.fontSize.xs, color: 'var(--text-tertiary)', marginTop: 2 }}>{token.value}</p>
       </div>
       <div style={{ flex: 1, position: 'relative', height: 40, backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-sm)', overflow: 'hidden' }}>
         <div
@@ -132,9 +133,9 @@ function DurationRow({ name, token, isLast }: { name: string; token: { value: st
       <button
         onClick={() => setAnimate(!animate)}
         style={{
-          padding: '8px 16px',
-          fontSize: 13,
-          fontWeight: 500,
+          padding: `${spacing.primitive[2]}px ${spacing.primitive[4]}px`,
+          fontSize: typography.fontSize.compact,
+          fontWeight: typography.fontWeight.medium,
           backgroundColor: 'var(--bg-secondary)',
           color: 'var(--text-primary)',
           border: '1px solid var(--divider)',
@@ -144,7 +145,7 @@ function DurationRow({ name, token, isLast }: { name: string; token: { value: st
       >
         Play
       </button>
-      <span style={{ width: 160, fontSize: 12, color: 'var(--text-tertiary)' }}>{token._comment}</span>
+      <span style={{ width: 160, fontSize: typography.fontSize.xs, color: 'var(--text-tertiary)' }}>{token._comment}</span>
     </div>
   );
 }
@@ -153,9 +154,9 @@ function EasingRow({ name, token, isLast }: { name: string; token: { value: stri
   const [animate, setAnimate] = useState(false);
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 16, padding: 16, borderBottom: isLast ? 'none' : '1px solid var(--divider)' }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: spacing.primitive[4], padding: spacing.primitive[4], borderBottom: isLast ? 'none' : '1px solid var(--divider)' }}>
       <div style={{ width: 100 }}>
-        <span style={{ fontSize: 14, fontWeight: 500, color: 'var(--text-primary)' }}>{name}</span>
+        <span style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.medium, color: 'var(--text-primary)' }}>{name}</span>
       </div>
       <div style={{ flex: 1, position: 'relative', height: 40, backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-sm)', overflow: 'hidden' }}>
         <div
@@ -174,9 +175,9 @@ function EasingRow({ name, token, isLast }: { name: string; token: { value: stri
       <button
         onClick={() => setAnimate(!animate)}
         style={{
-          padding: '8px 16px',
-          fontSize: 13,
-          fontWeight: 500,
+          padding: `${spacing.primitive[2]}px ${spacing.primitive[4]}px`,
+          fontSize: typography.fontSize.compact,
+          fontWeight: typography.fontWeight.medium,
           backgroundColor: 'var(--bg-secondary)',
           color: 'var(--text-primary)',
           border: '1px solid var(--divider)',
@@ -186,7 +187,7 @@ function EasingRow({ name, token, isLast }: { name: string; token: { value: stri
       >
         Play
       </button>
-      <span style={{ width: 200, fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-tertiary)' }}>{token.value}</span>
+      <span style={{ width: 200, fontSize: typography.fontSize['2xs'], fontFamily: 'var(--font-mono)', color: 'var(--text-tertiary)' }}>{token.value}</span>
     </div>
   );
 }
@@ -202,16 +203,16 @@ function InteractiveDemo() {
   const easingValue = (easing as any)[selectedEasing]?.value || 'ease-out';
 
   return (
-    <div style={{ padding: 24, backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
-      <div style={{ display: 'flex', gap: 24, marginBottom: 24 }}>
+    <div style={{ padding: spacing.primitive[6], backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
+      <div style={{ display: 'flex', gap: spacing.primitive[6], marginBottom: spacing.primitive[6] }}>
         <div>
-          <label style={{ display: 'block', fontSize: 12, fontWeight: 500, color: 'var(--text-secondary)', marginBottom: 8 }}>Duration</label>
+          <label style={{ display: 'block', fontSize: typography.fontSize.xs, fontWeight: typography.fontWeight.medium, color: 'var(--text-secondary)', marginBottom: spacing.primitive[2] }}>Duration</label>
           <select
             value={selectedDuration}
             onChange={(e) => setSelectedDuration(e.target.value)}
             style={{
-              padding: '8px 12px',
-              fontSize: 14,
+              padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`,
+              fontSize: typography.fontSize.sm,
               borderRadius: 'var(--radius-md)',
               border: '1px solid var(--divider)',
               backgroundColor: 'var(--bg-primary)',
@@ -224,13 +225,13 @@ function InteractiveDemo() {
           </select>
         </div>
         <div>
-          <label style={{ display: 'block', fontSize: 12, fontWeight: 500, color: 'var(--text-secondary)', marginBottom: 8 }}>Easing</label>
+          <label style={{ display: 'block', fontSize: typography.fontSize.xs, fontWeight: typography.fontWeight.medium, color: 'var(--text-secondary)', marginBottom: spacing.primitive[2] }}>Easing</label>
           <select
             value={selectedEasing}
             onChange={(e) => setSelectedEasing(e.target.value)}
             style={{
-              padding: '8px 12px',
-              fontSize: 14,
+              padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`,
+              fontSize: typography.fontSize.sm,
               borderRadius: 'var(--radius-md)',
               border: '1px solid var(--divider)',
               backgroundColor: 'var(--bg-primary)',
@@ -247,8 +248,8 @@ function InteractiveDemo() {
             onClick={() => setAnimate(!animate)}
             style={{
               padding: '10px 24px',
-              fontSize: 14,
-              fontWeight: 600,
+              fontSize: typography.fontSize.sm,
+              fontWeight: typography.fontWeight.semibold,
               backgroundColor: 'var(--content-brand-default)',
               color: 'white',
               border: 'none',
@@ -283,8 +284,8 @@ function InteractiveDemo() {
         </div>
       </div>
 
-      <div style={{ marginTop: 16, padding: 12, backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-sm)' }}>
-        <code style={{ fontSize: 13, fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)' }}>
+      <div style={{ marginTop: spacing.primitive[4], padding: spacing.primitive[3], backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-sm)' }}>
+        <code style={{ fontSize: typography.fontSize.compact, fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)' }}>
           transition: all {durationValue} {easingValue};
         </code>
       </div>
@@ -322,20 +323,20 @@ function LiveExamples() {
   };
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16 }}>
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: spacing.primitive[4] }}>
       {/* Button Demo */}
-      <div style={{ padding: 24, backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
-        <h3 style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-primary)', marginBottom: 4 }}>Button</h3>
-        <p style={{ fontSize: 12, color: 'var(--text-tertiary)', marginBottom: 16 }}>hover: 200ms easeOut / press: 150ms easeOut</p>
+      <div style={{ padding: spacing.primitive[6], backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
+        <h3 style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: 'var(--text-primary)', marginBottom: spacing.primitive[1] }}>Button</h3>
+        <p style={{ fontSize: typography.fontSize.xs, color: 'var(--text-tertiary)', marginBottom: spacing.primitive[4] }}>hover: 200ms easeOut / press: 150ms easeOut</p>
         <button
           style={{
-            padding: '12px 24px',
-            fontSize: 14,
-            fontWeight: 600,
+            padding: `${spacing.primitive[3]}px ${spacing.primitive[6]}px`,
+            fontSize: typography.fontSize.sm,
+            fontWeight: typography.fontWeight.semibold,
             backgroundColor: 'var(--content-brand-default)',
             color: 'white',
             border: 'none',
-            borderRadius: 8,
+            borderRadius: radius.primitive.sm,
             cursor: 'pointer',
             transition: 'all 200ms cubic-bezier(0.16, 1, 0.3, 1)',
           }}
@@ -349,9 +350,9 @@ function LiveExamples() {
       </div>
 
       {/* Toggle Demo */}
-      <div style={{ padding: 24, backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
-        <h3 style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-primary)', marginBottom: 4 }}>Toggle</h3>
-        <p style={{ fontSize: 12, color: 'var(--text-tertiary)', marginBottom: 16 }}>switch: 200ms spring</p>
+      <div style={{ padding: spacing.primitive[6], backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
+        <h3 style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: 'var(--text-primary)', marginBottom: spacing.primitive[1] }}>Toggle</h3>
+        <p style={{ fontSize: typography.fontSize.xs, color: 'var(--text-tertiary)', marginBottom: spacing.primitive[4] }}>switch: 200ms spring</p>
         <button
           onClick={() => setToggleOn(!toggleOn)}
           style={{
@@ -380,23 +381,23 @@ function LiveExamples() {
       </div>
 
       {/* Dropdown Demo */}
-      <div style={{ padding: 24, backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
-        <h3 style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-primary)', marginBottom: 4 }}>Dropdown</h3>
-        <p style={{ fontSize: 12, color: 'var(--text-tertiary)', marginBottom: 16 }}>open: 200ms easeOut / close: 100ms easeIn</p>
+      <div style={{ padding: spacing.primitive[6], backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
+        <h3 style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: 'var(--text-primary)', marginBottom: spacing.primitive[1] }}>Dropdown</h3>
+        <p style={{ fontSize: typography.fontSize.xs, color: 'var(--text-tertiary)', marginBottom: spacing.primitive[4] }}>open: 200ms easeOut / close: 100ms easeIn</p>
         <div style={{ position: 'relative' }}>
           <button
             onClick={() => setDropdownOpen(!dropdownOpen)}
             style={{
               padding: '10px 16px',
-              fontSize: 14,
+              fontSize: typography.fontSize.sm,
               backgroundColor: 'var(--bg-secondary)',
               color: 'var(--text-primary)',
               border: '1px solid var(--divider)',
-              borderRadius: 8,
+              borderRadius: radius.primitive.sm,
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
-              gap: 8,
+              gap: spacing.primitive[2],
             }}
           >
             Select option
@@ -409,10 +410,10 @@ function LiveExamples() {
             top: '100%',
             left: 0,
             right: 0,
-            marginTop: 4,
+            marginTop: spacing.primitive[1],
             backgroundColor: 'white',
             border: '1px solid var(--divider)',
-            borderRadius: 8,
+            borderRadius: radius.primitive.sm,
             boxShadow: '0 4px 12px var(--shadow-primitive-xs)',
             overflow: 'hidden',
             opacity: dropdownOpen ? 1 : 0,
@@ -423,7 +424,7 @@ function LiveExamples() {
               : 'all 100ms cubic-bezier(0.7, 0, 0.84, 0)',
           }}>
             {['Option 1', 'Option 2', 'Option 3'].map((opt) => (
-              <div key={opt} style={{ padding: '10px 16px', fontSize: 14, cursor: 'pointer' }} onClick={() => setDropdownOpen(false)}>
+              <div key={opt} style={{ padding: '10px 16px', fontSize: typography.fontSize.sm, cursor: 'pointer' }} onClick={() => setDropdownOpen(false)}>
                 {opt}
               </div>
             ))}
@@ -432,19 +433,19 @@ function LiveExamples() {
       </div>
 
       {/* Modal Demo */}
-      <div style={{ padding: 24, backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
-        <h3 style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-primary)', marginBottom: 4 }}>Modal</h3>
-        <p style={{ fontSize: 12, color: 'var(--text-tertiary)', marginBottom: 16 }}>enter: 300ms easeOut / exit: 200ms easeIn</p>
+      <div style={{ padding: spacing.primitive[6], backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
+        <h3 style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: 'var(--text-primary)', marginBottom: spacing.primitive[1] }}>Modal</h3>
+        <p style={{ fontSize: typography.fontSize.xs, color: 'var(--text-tertiary)', marginBottom: spacing.primitive[4] }}>enter: 300ms easeOut / exit: 200ms easeIn</p>
         <button
           onClick={() => setModalOpen(true)}
           style={{
             padding: '10px 20px',
-            fontSize: 14,
-            fontWeight: 500,
+            fontSize: typography.fontSize.sm,
+            fontWeight: typography.fontWeight.medium,
             backgroundColor: 'var(--content-brand-default)',
             color: 'white',
             border: 'none',
-            borderRadius: 8,
+            borderRadius: radius.primitive.sm,
             cursor: 'pointer',
             transition: 'all 200ms cubic-bezier(0.16, 1, 0.3, 1)',
           }}
@@ -458,19 +459,19 @@ function LiveExamples() {
       </div>
 
       {/* Toast Demo */}
-      <div style={{ padding: 24, backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
-        <h3 style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-primary)', marginBottom: 4 }}>Toast</h3>
-        <p style={{ fontSize: 12, color: 'var(--text-tertiary)', marginBottom: 16 }}>enter: 300ms spring / exit: 200ms easeIn</p>
+      <div style={{ padding: spacing.primitive[6], backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
+        <h3 style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: 'var(--text-primary)', marginBottom: spacing.primitive[1] }}>Toast</h3>
+        <p style={{ fontSize: typography.fontSize.xs, color: 'var(--text-tertiary)', marginBottom: spacing.primitive[4] }}>enter: 300ms spring / exit: 200ms easeIn</p>
         <button
           onClick={addToast}
           style={{
             padding: '10px 20px',
-            fontSize: 14,
-            fontWeight: 500,
+            fontSize: typography.fontSize.sm,
+            fontWeight: typography.fontWeight.medium,
             backgroundColor: 'var(--content-success-default)',
             color: 'white',
             border: 'none',
-            borderRadius: 8,
+            borderRadius: radius.primitive.sm,
             cursor: 'pointer',
             transition: 'all 200ms cubic-bezier(0.16, 1, 0.3, 1)',
           }}
@@ -484,19 +485,19 @@ function LiveExamples() {
       </div>
 
       {/* BottomSheet Demo */}
-      <div style={{ padding: 24, backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
-        <h3 style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-primary)', marginBottom: 4 }}>Bottom Sheet</h3>
-        <p style={{ fontSize: 12, color: 'var(--text-tertiary)', marginBottom: 16 }}>enter: 400ms easeOut / exit: 300ms easeIn</p>
+      <div style={{ padding: spacing.primitive[6], backgroundColor: 'var(--bg-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
+        <h3 style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: 'var(--text-primary)', marginBottom: spacing.primitive[1] }}>Bottom Sheet</h3>
+        <p style={{ fontSize: typography.fontSize.xs, color: 'var(--text-tertiary)', marginBottom: spacing.primitive[4] }}>enter: 400ms easeOut / exit: 300ms easeIn</p>
         <button
           onClick={() => setBottomSheetOpen(true)}
           style={{
             padding: '10px 20px',
-            fontSize: 14,
-            fontWeight: 500,
+            fontSize: typography.fontSize.sm,
+            fontWeight: typography.fontWeight.medium,
             backgroundColor: 'var(--bg-secondary)',
             color: 'var(--text-primary)',
             border: '1px solid var(--divider)',
-            borderRadius: 8,
+            borderRadius: radius.primitive.sm,
             cursor: 'pointer',
             transition: 'all 200ms cubic-bezier(0.16, 1, 0.3, 1)',
           }}
@@ -530,22 +531,22 @@ function LiveExamples() {
               width: 400,
               backgroundColor: 'white',
               borderRadius: 24,
-              padding: 24,
+              padding: spacing.primitive[6],
               animation: 'modalIn 300ms cubic-bezier(0.16, 1, 0.3, 1)',
             }}
           >
-            <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>Modal Title</h3>
-            <p style={{ fontSize: 14, color: 'var(--content-base-secondary)', marginBottom: 24 }}>This modal uses 300ms easeOut for enter animation.</p>
+            <h3 style={{ fontSize: typography.fontSize.lg, fontWeight: typography.fontWeight.semibold, marginBottom: spacing.primitive[2] }}>Modal Title</h3>
+            <p style={{ fontSize: typography.fontSize.sm, color: 'var(--content-base-secondary)', marginBottom: spacing.primitive[6] }}>This modal uses 300ms easeOut for enter animation.</p>
             <button
               onClick={() => setModalOpen(false)}
               style={{
                 padding: '10px 20px',
-                fontSize: 14,
-                fontWeight: 500,
+                fontSize: typography.fontSize.sm,
+                fontWeight: typography.fontWeight.medium,
                 backgroundColor: 'var(--content-brand-default)',
                 color: 'white',
                 border: 'none',
-                borderRadius: 8,
+                borderRadius: radius.primitive.sm,
                 cursor: 'pointer',
                 transition: 'all 200ms cubic-bezier(0.16, 1, 0.3, 1)',
               }}
@@ -561,7 +562,7 @@ function LiveExamples() {
       )}
 
       {/* Toast Stack */}
-      <div style={{ position: 'fixed', bottom: 24, right: 24, zIndex: 1000, display: 'flex', flexDirection: 'column-reverse', gap: 8 }}>
+      <div style={{ position: 'fixed', bottom: spacing.primitive[6], right: spacing.primitive[6], zIndex: 1000, display: 'flex', flexDirection: 'column-reverse', gap: spacing.primitive[2] }}>
         {toasts.map((toast, index) => (
           <div
             key={toast.id}
@@ -569,10 +570,10 @@ function LiveExamples() {
               backgroundColor: 'var(--inverse-surface-default)',
               color: 'white',
               padding: '14px 20px',
-              borderRadius: 12,
+              borderRadius: radius.primitive.md,
               display: 'flex',
               alignItems: 'center',
-              gap: 12,
+              gap: spacing.primitive[3],
               boxShadow: '0 4px 12px var(--shadow-primitive-sm)',
               animation: toast.exiting
                 ? 'toastOut 200ms cubic-bezier(0.7, 0, 0.84, 0) forwards'
@@ -584,7 +585,7 @@ function LiveExamples() {
             <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--content-success-default)">
               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
             </svg>
-            <span style={{ fontSize: 14, fontWeight: 500 }}>Successfully saved!</span>
+            <span style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.medium }}>Successfully saved!</span>
             <button
               onClick={() => removeToast(toast.id)}
               style={{
@@ -592,7 +593,7 @@ function LiveExamples() {
                 border: 'none',
                 color: 'var(--content-base-placeholder)',
                 cursor: 'pointer',
-                marginLeft: 8,
+                marginLeft: spacing.primitive[2],
                 transition: 'color 150ms',
               }}
               onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--static-white)'; }}
@@ -628,25 +629,25 @@ function LiveExamples() {
               backgroundColor: 'white',
               borderTopLeftRadius: 20,
               borderTopRightRadius: 20,
-              padding: 24,
-              paddingBottom: 40,
+              padding: spacing.primitive[6],
+              paddingBottom: spacing.primitive[10],
               animation: 'sheetIn 400ms cubic-bezier(0.16, 1, 0.3, 1)',
             }}
           >
             <div style={{ width: 40, height: 4, backgroundColor: 'var(--border-base-default)', borderRadius: 2, margin: '0 auto 20px' }} />
-            <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>Bottom Sheet</h3>
-            <p style={{ fontSize: 14, color: 'var(--content-base-secondary)', marginBottom: 24 }}>This sheet uses 400ms easeOut for enter animation.</p>
+            <h3 style={{ fontSize: typography.fontSize.lg, fontWeight: typography.fontWeight.semibold, marginBottom: spacing.primitive[2] }}>Bottom Sheet</h3>
+            <p style={{ fontSize: typography.fontSize.sm, color: 'var(--content-base-secondary)', marginBottom: spacing.primitive[6] }}>This sheet uses 400ms easeOut for enter animation.</p>
             <button
               onClick={() => setBottomSheetOpen(false)}
               style={{
                 width: '100%',
                 padding: '14px',
-                fontSize: 14,
-                fontWeight: 500,
+                fontSize: typography.fontSize.sm,
+                fontWeight: typography.fontWeight.medium,
                 backgroundColor: 'var(--bg-secondary)',
                 color: 'var(--text-primary)',
                 border: 'none',
-                borderRadius: 8,
+                borderRadius: radius.primitive.sm,
                 cursor: 'pointer',
                 transition: 'all 200ms cubic-bezier(0.16, 1, 0.3, 1)',
               }}

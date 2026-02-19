@@ -4,6 +4,7 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { TokenDownload } from "@/components/TokenDownload";
 import spacingJson from "../../../public/spacing-tokens.json";
 import { formatTokenName } from "@/utils/formatTokenName";
+import { typography, spacing, radius } from '@baerae-zkap/design-system';
 
 const primitive = spacingJson.spacing.primitive;
 const semantic = spacingJson.spacing.semantic;
@@ -58,7 +59,7 @@ function MeasurementLine({ direction, value, label, color, style }: {
       display: 'flex',
       flexDirection: isHorizontal ? 'column' : 'row',
       alignItems: 'center',
-      gap: 4,
+      gap: spacing.primitive[1],
       ...style,
     }}>
       <div style={{
@@ -86,8 +87,8 @@ function MeasurementLine({ direction, value, label, color, style }: {
         }} />
       </div>
       <span style={{
-        fontSize: 10,
-        fontWeight: 600,
+        fontSize: typography.fontSize['3xs'],
+        fontWeight: typography.fontWeight.semibold,
         color,
         whiteSpace: 'nowrap',
       }}>
@@ -128,9 +129,9 @@ function DetailedSpacingSection({ title, description, tokens, renderMockup }: {
   return (
     <div className="mb-10">
       {/* Header */}
-      <div style={{ marginBottom: 12 }}>
-        <h3 style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-primary)', margin: 0 }}>{title}</h3>
-        <p style={{ fontSize: 13, color: 'var(--text-tertiary)', margin: '2px 0 0 0' }}>{description}</p>
+      <div style={{ marginBottom: spacing.primitive[3] }}>
+        <h3 style={{ fontSize: 15, fontWeight: typography.fontWeight.semibold, color: 'var(--text-primary)', margin: 0 }}>{title}</h3>
+        <p style={{ fontSize: typography.fontSize.compact, color: 'var(--text-tertiary)', margin: '2px 0 0 0' }}>{description}</p>
       </div>
 
       {/* Mockup */}
@@ -138,7 +139,7 @@ function DetailedSpacingSection({ title, description, tokens, renderMockup }: {
         backgroundColor: 'var(--bg-elevated)',
         borderRadius: 'var(--radius-xl)',
         border: '1px solid var(--divider)',
-        marginBottom: 12,
+        marginBottom: spacing.primitive[3],
       }}>
         {renderMockup(values)}
       </div>
@@ -148,29 +149,29 @@ function DetailedSpacingSection({ title, description, tokens, renderMockup }: {
         backgroundColor: 'var(--bg-elevated)',
         borderRadius: 'var(--radius-lg)',
         border: '1px solid var(--divider)',
-        padding: '4px 16px',
+        padding: `${spacing.primitive[1]}px ${spacing.primitive[4]}px`,
       }}>
         <table style={{ width: '100%', borderCollapse: 'collapse' }}>
           <tbody>
             {tokens.map((token, idx) => (
               <tr key={token.name} style={{ borderBottom: idx < tokens.length - 1 ? '1px solid var(--divider)' : 'none' }}>
-                <td style={{ padding: '12px 0', fontSize: 13 }}>
-                  <code style={{ color: 'var(--brand-primary)', fontFamily: 'var(--font-mono)', fontSize: 12 }}>component.{title.toLowerCase()}.{token.name}</code>
+                <td style={{ padding: `${spacing.primitive[3]}px 0`, fontSize: typography.fontSize.compact }}>
+                  <code style={{ color: 'var(--brand-primary)', fontFamily: 'var(--font-mono)', fontSize: typography.fontSize.xs }}>component.{title.toLowerCase()}.{token.name}</code>
                 </td>
-                <td style={{ padding: '12px 0', fontSize: 13, textAlign: 'right' }}>
+                <td style={{ padding: `${spacing.primitive[3]}px 0`, fontSize: typography.fontSize.compact, textAlign: 'right' }}>
                   {token.sizes ? (
-                    <div style={{ display: 'flex', gap: 12, justifyContent: 'flex-end', flexWrap: 'wrap' }}>
+                    <div style={{ display: 'flex', gap: spacing.primitive[3], justifyContent: 'flex-end', flexWrap: 'wrap' }}>
                       {Object.entries(token.sizes).filter(([k]) => !k.startsWith('_')).map(([size, val]) => (
-                        <span key={size} style={{ fontSize: 12, color: 'var(--text-secondary)' }}>
+                        <span key={size} style={{ fontSize: typography.fontSize.xs, color: 'var(--text-secondary)' }}>
                           {size}: <strong style={{ color: 'var(--text-primary)' }}>{resolveRef(val)}px</strong>
                         </span>
                       ))}
                     </div>
                   ) : (
-                    <span style={{ fontWeight: 600, color: 'var(--text-primary)', fontFamily: 'var(--font-mono)' }}>{values[token.name]}px</span>
+                    <span style={{ fontWeight: typography.fontWeight.semibold, color: 'var(--text-primary)', fontFamily: 'var(--font-mono)' }}>{values[token.name]}px</span>
                   )}
                 </td>
-                <td style={{ padding: '12px 0', width: 32, paddingLeft: 12 }}>
+                <td style={{ padding: `${spacing.primitive[3]}px 0`, width: 32, paddingLeft: spacing.primitive[3] }}>
                   <div style={{ width: 16, height: 16, backgroundColor: token.color, borderRadius: 3, border: '1px solid var(--divider)' }} />
                 </td>
               </tr>
@@ -206,11 +207,11 @@ function ComponentTokenSection({ title, tokens }: { title: string; tokens: Token
               // 여러 사이즈가 있는 토큰 (lg, md, sm 등)
               <div>
                 {/* 토큰 헤더 */}
-                <div style={{ padding: '12px 16px', backgroundColor: 'var(--bg-secondary)' }}>
-                  <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-primary)', marginBottom: 2 }}>
+                <div style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, backgroundColor: 'var(--bg-secondary)' }}>
+                  <div style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, color: 'var(--text-primary)', marginBottom: 2 }}>
                     {token.name}
                   </div>
-                  <div style={{ fontSize: 12, color: 'var(--text-tertiary)' }}>
+                  <div style={{ fontSize: typography.fontSize.xs, color: 'var(--text-tertiary)' }}>
                     {token.description}
                   </div>
                 </div>
@@ -225,15 +226,15 @@ function ComponentTokenSection({ title, tokens }: { title: string; tokens: Token
                         style={{
                           display: 'flex',
                           alignItems: 'center',
-                          padding: '12px 16px',
-                          gap: 16,
+                          padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`,
+                          gap: spacing.primitive[4],
                           borderBottom: sizeIdx < arr.length - 1 ? '1px solid var(--divider)' : 'none',
                         }}
                       >
                         <div style={{ width: 60 }}>
                           <span style={{
-                            fontSize: 12,
-                            fontWeight: 500,
+                            fontSize: typography.fontSize.xs,
+                            fontWeight: typography.fontWeight.medium,
                             color: 'var(--brand-primary)',
                             fontFamily: 'var(--font-mono)',
                           }}>
@@ -242,8 +243,8 @@ function ComponentTokenSection({ title, tokens }: { title: string; tokens: Token
                         </div>
                         <div style={{ width: 50, textAlign: 'right' }}>
                           <span style={{
-                            fontSize: 13,
-                            fontWeight: 600,
+                            fontSize: typography.fontSize.compact,
+                            fontWeight: typography.fontWeight.semibold,
                             color: 'var(--text-primary)',
                             fontFamily: 'var(--font-mono)',
                           }}>
@@ -262,21 +263,21 @@ function ComponentTokenSection({ title, tokens }: { title: string; tokens: Token
               <div style={{
                 display: 'flex',
                 alignItems: 'center',
-                padding: '16px',
-                gap: 16,
+                padding: spacing.primitive[4],
+                gap: spacing.primitive[4],
               }}>
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-primary)', marginBottom: 2 }}>
+                  <div style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, color: 'var(--text-primary)', marginBottom: 2 }}>
                     {token.name}
                   </div>
-                  <div style={{ fontSize: 12, color: 'var(--text-tertiary)' }}>
+                  <div style={{ fontSize: typography.fontSize.xs, color: 'var(--text-tertiary)' }}>
                     {token.description}
                   </div>
                 </div>
                 <div style={{ width: 50, textAlign: 'right', flexShrink: 0 }}>
                   <span style={{
-                    fontSize: 14,
-                    fontWeight: 600,
+                    fontSize: typography.fontSize.sm,
+                    fontWeight: typography.fontWeight.semibold,
                     color: 'var(--text-primary)',
                     fontFamily: 'var(--font-mono)',
                   }}>
@@ -362,8 +363,8 @@ export default function SpacingPage() {
             const py = values.paddingY || 12;
             const gap = values.gap || 8;
             return (
-              <div style={{ padding: '32px 48px', display: 'flex', justifyContent: 'center' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
+              <div style={{ padding: `${spacing.primitive[8]}px ${spacing.primitive[12]}px`, display: 'flex', justifyContent: 'center' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: spacing.primitive[6] }}>
                   {/* Button */}
                   <div style={{
                     display: 'inline-flex',
@@ -374,16 +375,16 @@ export default function SpacingPage() {
                   }}>
                     {/* PaddingX overlays with dashed borders */}
                     <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: px, backgroundColor: 'var(--surface-error-default)', borderRadius: 'var(--radius-md) 0 0 var(--radius-md)', borderRight: '1px dashed var(--border-error-default)' }}>
-                      <span style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%) rotate(-90deg)', fontSize: 10, fontWeight: 600, color: 'white' }}>{px}</span>
+                      <span style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%) rotate(-90deg)', fontSize: typography.fontSize['3xs'], fontWeight: typography.fontWeight.semibold, color: 'white' }}>{px}</span>
                     </div>
                     <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: px, backgroundColor: 'var(--surface-error-default)', borderRadius: '0 var(--radius-md) var(--radius-md) 0', borderLeft: '1px dashed var(--border-error-default)' }} />
                     {/* PaddingY overlays with dashed borders */}
                     <div style={{ position: 'absolute', left: px, right: px, top: 0, height: py, backgroundColor: 'var(--surface-brand-secondary)', borderBottom: '1px dashed var(--content-brand-default)' }}>
-                      <span style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', fontSize: 10, fontWeight: 600, color: 'white' }}>{py}</span>
+                      <span style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', fontSize: typography.fontSize['3xs'], fontWeight: typography.fontWeight.semibold, color: 'white' }}>{py}</span>
                     </div>
                     <div style={{ position: 'absolute', left: px, right: px, bottom: 0, height: py, backgroundColor: 'var(--surface-brand-secondary)', borderTop: '1px dashed var(--content-brand-default)' }} />
 
-                    <div style={{ display: 'flex', alignItems: 'center', gap: gap, padding: `${py}px ${px}px`, color: 'white', fontSize: 14, fontWeight: 500, position: 'relative', zIndex: 1 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: gap, padding: `${py}px ${px}px`, color: 'white', fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.medium, position: 'relative', zIndex: 1 }}>
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                         <path d="M12 5v14M5 12h14" strokeLinecap="round"/>
                       </svg>
@@ -392,21 +393,21 @@ export default function SpacingPage() {
 
                     {/* Gap indicator overlay */}
                     <div style={{ position: 'absolute', left: px + 16, top: py, bottom: py, width: gap, backgroundColor: 'var(--surface-success-default)', border: '1px dashed var(--border-success-default)', borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <span style={{ fontSize: 9, fontWeight: 600, color: 'white', writingMode: 'vertical-rl' }}>{gap}</span>
+                      <span style={{ fontSize: 9, fontWeight: typography.fontWeight.semibold, color: 'white', writingMode: 'vertical-rl' }}>{gap}</span>
                     </div>
                   </div>
 
                   {/* Legend */}
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 11 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: spacing.primitive[2], fontSize: typography.fontSize['2xs'] }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: spacing.primitive[2] }}>
                       <div style={{ width: 14, height: 14, backgroundColor: 'var(--surface-error-default)', border: '1px dashed var(--border-error-default)', borderRadius: 2 }} />
                       <span style={{ color: 'var(--text-secondary)' }}>paddingX <strong>{px}px</strong></span>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: spacing.primitive[2] }}>
                       <div style={{ width: 14, height: 14, backgroundColor: 'var(--surface-brand-secondary)', border: '1px dashed var(--content-brand-default)', borderRadius: 2 }} />
                       <span style={{ color: 'var(--text-secondary)' }}>paddingY <strong>{py}px</strong></span>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: spacing.primitive[2] }}>
                       <div style={{ width: 14, height: 14, backgroundColor: 'var(--surface-success-default)', border: '1px dashed var(--border-success-default)', borderRadius: 2 }} />
                       <span style={{ color: 'var(--text-secondary)' }}>gap <strong>{gap}px</strong></span>
                     </div>
@@ -433,8 +434,8 @@ export default function SpacingPage() {
             const footerGap = values.footerGap || 20;
             const buttonGap = values.buttonGap || 12;
             return (
-              <div style={{ padding: '24px 48px', display: 'flex', justifyContent: 'center' }}>
-                <div style={{ display: 'flex', gap: 24 }}>
+              <div style={{ padding: `${spacing.primitive[6]}px ${spacing.primitive[12]}px`, display: 'flex', justifyContent: 'center' }}>
+                <div style={{ display: 'flex', gap: spacing.primitive[6] }}>
                   {/* Modal */}
                   <div style={{
                     width: 300,
@@ -445,21 +446,21 @@ export default function SpacingPage() {
                   }}>
                     {/* Padding overlays with dashed borders */}
                     <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: padding, backgroundColor: 'var(--surface-error-default)', borderRadius: 'var(--radius-xl) var(--radius-xl) 0 0', borderBottom: '1px dashed var(--border-error-default)' }}>
-                      <span style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', fontSize: 10, fontWeight: 600, color: 'var(--content-error-default)' }}>{padding}</span>
+                      <span style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', fontSize: typography.fontSize['3xs'], fontWeight: typography.fontWeight.semibold, color: 'var(--content-error-default)' }}>{padding}</span>
                     </div>
                     <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: padding, backgroundColor: 'var(--surface-error-default)', borderRadius: '0 0 var(--radius-xl) var(--radius-xl)', borderTop: '1px dashed var(--border-error-default)' }} />
                     <div style={{ position: 'absolute', top: padding, bottom: padding, left: 0, width: padding, backgroundColor: 'var(--surface-error-default)', borderRight: '1px dashed var(--border-error-default)' }}>
-                      <span style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%) rotate(-90deg)', fontSize: 10, fontWeight: 600, color: 'var(--content-error-default)' }}>{padding}</span>
+                      <span style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%) rotate(-90deg)', fontSize: typography.fontSize['3xs'], fontWeight: typography.fontWeight.semibold, color: 'var(--content-error-default)' }}>{padding}</span>
                     </div>
                     <div style={{ position: 'absolute', top: padding, bottom: padding, right: 0, width: padding, backgroundColor: 'var(--surface-error-default)', borderLeft: '1px dashed var(--border-error-default)' }} />
 
                     <div style={{ padding, position: 'relative', zIndex: 1 }}>
                       {/* Header */}
-                      <div style={{ fontSize: 16, fontWeight: 600, color: 'var(--text-primary)' }}>모달 제목</div>
+                      <div style={{ fontSize: typography.fontSize.md, fontWeight: typography.fontWeight.semibold, color: 'var(--text-primary)' }}>모달 제목</div>
 
                       {/* HeaderGap indicator - inline */}
                       <div style={{ height: headerGap, backgroundColor: 'var(--surface-warning-default)', border: '1px dashed var(--border-warning-default)', borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--content-warning-default)' }}>{headerGap}</span>
+                        <span style={{ fontSize: typography.fontSize['3xs'], fontWeight: typography.fontWeight.semibold, color: 'var(--content-warning-default)' }}>{headerGap}</span>
                       </div>
 
                       {/* Content */}
@@ -469,36 +470,36 @@ export default function SpacingPage() {
 
                       {/* FooterGap indicator - inline */}
                       <div style={{ height: footerGap, backgroundColor: 'var(--surface-brand-secondary)', border: '1px dashed var(--content-brand-default)', borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--content-brand-default)' }}>{footerGap}</span>
+                        <span style={{ fontSize: typography.fontSize['3xs'], fontWeight: typography.fontWeight.semibold, color: 'var(--content-brand-default)' }}>{footerGap}</span>
                       </div>
 
                       {/* Buttons */}
                       <div style={{ display: 'flex', position: 'relative' }}>
-                        <button style={{ flex: 1, padding: '10px 14px', backgroundColor: 'var(--grey-95)', border: 'none', borderRadius: 'var(--radius-md)', fontSize: 13, fontWeight: 500, color: 'var(--text-primary)', cursor: 'pointer' }}>취소</button>
+                        <button style={{ flex: 1, padding: '10px 14px', backgroundColor: 'var(--grey-95)', border: 'none', borderRadius: 'var(--radius-md)', fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.medium, color: 'var(--text-primary)', cursor: 'pointer' }}>취소</button>
                         {/* ButtonGap indicator - inline */}
                         <div style={{ width: buttonGap, backgroundColor: 'var(--surface-success-default)', border: '1px dashed var(--border-success-default)', borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          <span style={{ fontSize: 9, fontWeight: 600, color: 'var(--content-success-default)', writingMode: 'vertical-rl' }}>{buttonGap}</span>
+                          <span style={{ fontSize: 9, fontWeight: typography.fontWeight.semibold, color: 'var(--content-success-default)', writingMode: 'vertical-rl' }}>{buttonGap}</span>
                         </div>
-                        <button style={{ flex: 1, padding: '10px 14px', backgroundColor: 'var(--brand-primary)', border: 'none', borderRadius: 'var(--radius-md)', fontSize: 13, fontWeight: 500, color: 'white', cursor: 'pointer' }}>확인</button>
+                        <button style={{ flex: 1, padding: '10px 14px', backgroundColor: 'var(--brand-primary)', border: 'none', borderRadius: 'var(--radius-md)', fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.medium, color: 'white', cursor: 'pointer' }}>확인</button>
                       </div>
                     </div>
                   </div>
 
                   {/* Legend */}
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 11, paddingTop: 8 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: spacing.primitive[2], fontSize: typography.fontSize['2xs'], paddingTop: spacing.primitive[2] }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: spacing.primitive[2] }}>
                       <div style={{ width: 14, height: 14, backgroundColor: 'var(--surface-error-default)', border: '1px dashed var(--border-error-default)', borderRadius: 2 }} />
                       <span style={{ color: 'var(--text-secondary)' }}>padding <strong>{padding}px</strong></span>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: spacing.primitive[2] }}>
                       <div style={{ width: 14, height: 14, backgroundColor: 'var(--surface-warning-default)', border: '1px dashed var(--border-warning-default)', borderRadius: 2 }} />
                       <span style={{ color: 'var(--text-secondary)' }}>headerGap <strong>{headerGap}px</strong></span>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: spacing.primitive[2] }}>
                       <div style={{ width: 14, height: 14, backgroundColor: 'var(--surface-brand-secondary)', border: '1px dashed var(--content-brand-default)', borderRadius: 2 }} />
                       <span style={{ color: 'var(--text-secondary)' }}>footerGap <strong>{footerGap}px</strong></span>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: spacing.primitive[2] }}>
                       <div style={{ width: 14, height: 14, backgroundColor: 'var(--surface-success-default)', border: '1px dashed var(--border-success-default)', borderRadius: 2 }} />
                       <span style={{ color: 'var(--text-secondary)' }}>buttonGap <strong>{buttonGap}px</strong></span>
                     </div>
@@ -525,27 +526,27 @@ export default function SpacingPage() {
             const labelGap = values.labelGap || 8;
             const helperGap = values.helperGap || 4;
             return (
-              <div style={{ padding: '24px 48px', display: 'flex', justifyContent: 'center' }}>
-                <div style={{ display: 'flex', gap: 24 }}>
+              <div style={{ padding: `${spacing.primitive[6]}px ${spacing.primitive[12]}px`, display: 'flex', justifyContent: 'center' }}>
+                <div style={{ display: 'flex', gap: spacing.primitive[6] }}>
                   {/* Input Field */}
                   <div style={{ width: 300 }}>
                     {/* Label */}
-                    <label style={{ display: 'block', fontSize: 14, fontWeight: 500, color: 'var(--text-primary)' }}>이메일 주소</label>
+                    <label style={{ display: 'block', fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.medium, color: 'var(--text-primary)' }}>이메일 주소</label>
 
                     {/* LabelGap indicator - inline */}
                     <div style={{ height: labelGap, backgroundColor: 'var(--surface-warning-default)', border: '1px dashed var(--border-warning-default)', borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      {labelGap >= 8 && <span style={{ fontSize: 9, fontWeight: 600, color: 'var(--content-warning-default)' }}>{labelGap}</span>}
+                      {labelGap >= 8 && <span style={{ fontSize: 9, fontWeight: typography.fontWeight.semibold, color: 'var(--content-warning-default)' }}>{labelGap}</span>}
                     </div>
 
                     {/* Input */}
                     <div style={{ position: 'relative', backgroundColor: 'var(--bg-elevated)', border: '1px solid var(--divider)', borderRadius: 'var(--radius-md)' }}>
                       {/* Padding overlays with dashed borders */}
                       <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: px, backgroundColor: 'var(--surface-error-default)', borderRadius: 'var(--radius-md) 0 0 var(--radius-md)', borderRight: '1px dashed var(--border-error-default)' }}>
-                        <span style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%) rotate(-90deg)', fontSize: 10, fontWeight: 600, color: 'var(--content-error-default)' }}>{px}</span>
+                        <span style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%) rotate(-90deg)', fontSize: typography.fontSize['3xs'], fontWeight: typography.fontWeight.semibold, color: 'var(--content-error-default)' }}>{px}</span>
                       </div>
                       <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: px, backgroundColor: 'var(--surface-error-default)', borderRadius: '0 var(--radius-md) var(--radius-md) 0', borderLeft: '1px dashed var(--border-error-default)' }} />
                       <div style={{ position: 'absolute', left: px, right: px, top: 0, height: py, backgroundColor: 'var(--surface-brand-secondary)', borderBottom: '1px dashed var(--content-brand-default)' }}>
-                        <span style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', fontSize: 10, fontWeight: 600, color: 'var(--content-brand-default)' }}>{py}</span>
+                        <span style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', fontSize: typography.fontSize['3xs'], fontWeight: typography.fontWeight.semibold, color: 'var(--content-brand-default)' }}>{py}</span>
                       </div>
                       <div style={{ position: 'absolute', left: px, right: px, bottom: 0, height: py, backgroundColor: 'var(--surface-brand-secondary)', borderTop: '1px dashed var(--content-brand-default)' }} />
 
@@ -557,7 +558,7 @@ export default function SpacingPage() {
                           padding: `${py}px ${px}px`,
                           border: 'none',
                           backgroundColor: 'transparent',
-                          fontSize: 14,
+                          fontSize: typography.fontSize.sm,
                           color: 'var(--text-primary)',
                           outline: 'none',
                           position: 'relative',
@@ -570,24 +571,24 @@ export default function SpacingPage() {
                     <div style={{ height: helperGap, backgroundColor: 'var(--surface-brand-secondary)', border: '1px dashed var(--content-brand-default)', borderRadius: 2 }} />
 
                     {/* Helper text */}
-                    <p style={{ fontSize: 12, color: 'var(--text-tertiary)', margin: 0 }}>로그인에 사용할 이메일을 입력해주세요.</p>
+                    <p style={{ fontSize: typography.fontSize.xs, color: 'var(--text-tertiary)', margin: 0 }}>로그인에 사용할 이메일을 입력해주세요.</p>
                   </div>
 
                   {/* Legend */}
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 11, paddingTop: 8 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: spacing.primitive[2], fontSize: typography.fontSize['2xs'], paddingTop: spacing.primitive[2] }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: spacing.primitive[2] }}>
                       <div style={{ width: 14, height: 14, backgroundColor: 'var(--surface-error-default)', border: '1px dashed var(--border-error-default)', borderRadius: 2 }} />
                       <span style={{ color: 'var(--text-secondary)' }}>paddingX <strong>{px}px</strong></span>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: spacing.primitive[2] }}>
                       <div style={{ width: 14, height: 14, backgroundColor: 'var(--surface-brand-secondary)', border: '1px dashed var(--content-brand-default)', borderRadius: 2 }} />
                       <span style={{ color: 'var(--text-secondary)' }}>paddingY <strong>{py}px</strong></span>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: spacing.primitive[2] }}>
                       <div style={{ width: 14, height: 14, backgroundColor: 'var(--surface-warning-default)', border: '1px dashed var(--border-warning-default)', borderRadius: 2 }} />
                       <span style={{ color: 'var(--text-secondary)' }}>labelGap <strong>{labelGap}px</strong></span>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: spacing.primitive[2] }}>
                       <div style={{ width: 14, height: 14, backgroundColor: 'var(--surface-brand-secondary)', border: '1px dashed var(--content-brand-default)', borderRadius: 2 }} />
                       <span style={{ color: 'var(--text-secondary)' }}>helperGap <strong>{helperGap}px</strong></span>
                     </div>
@@ -610,8 +611,8 @@ export default function SpacingPage() {
             const padding = values.padding || 20;
             const gap = values.gap || 16;
             return (
-              <div style={{ padding: '24px 48px', display: 'flex', justifyContent: 'center' }}>
-                <div style={{ display: 'flex', gap: 24 }}>
+              <div style={{ padding: `${spacing.primitive[6]}px ${spacing.primitive[12]}px`, display: 'flex', justifyContent: 'center' }}>
+                <div style={{ display: 'flex', gap: spacing.primitive[6] }}>
                   {/* Card */}
                   <div style={{
                     width: 280,
@@ -622,11 +623,11 @@ export default function SpacingPage() {
                   }}>
                     {/* Padding overlays with dashed borders */}
                     <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: padding, backgroundColor: 'var(--surface-error-default)', borderRadius: 'var(--radius-xl) var(--radius-xl) 0 0', borderBottom: '1px dashed var(--border-error-default)' }}>
-                      <span style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', fontSize: 10, fontWeight: 600, color: 'var(--content-error-default)' }}>{padding}</span>
+                      <span style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', fontSize: typography.fontSize['3xs'], fontWeight: typography.fontWeight.semibold, color: 'var(--content-error-default)' }}>{padding}</span>
                     </div>
                     <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: padding, backgroundColor: 'var(--surface-error-default)', borderRadius: '0 0 var(--radius-xl) var(--radius-xl)', borderTop: '1px dashed var(--border-error-default)' }} />
                     <div style={{ position: 'absolute', top: padding, bottom: padding, left: 0, width: padding, backgroundColor: 'var(--surface-error-default)', borderRight: '1px dashed var(--border-error-default)' }}>
-                      <span style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%) rotate(-90deg)', fontSize: 10, fontWeight: 600, color: 'var(--content-error-default)' }}>{padding}</span>
+                      <span style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%) rotate(-90deg)', fontSize: typography.fontSize['3xs'], fontWeight: typography.fontWeight.semibold, color: 'var(--content-error-default)' }}>{padding}</span>
                     </div>
                     <div style={{ position: 'absolute', top: padding, bottom: padding, right: 0, width: padding, backgroundColor: 'var(--surface-error-default)', borderLeft: '1px dashed var(--border-error-default)' }} />
 
@@ -642,22 +643,22 @@ export default function SpacingPage() {
 
                       {/* Gap indicator - inline */}
                       <div style={{ height: gap, backgroundColor: 'var(--surface-success-default)', border: '1px dashed var(--border-success-default)', borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--content-success-default)' }}>{gap}</span>
+                        <span style={{ fontSize: typography.fontSize['3xs'], fontWeight: typography.fontWeight.semibold, color: 'var(--content-success-default)' }}>{gap}</span>
                       </div>
 
                       {/* Content */}
-                      <h3 style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-primary)', margin: 0 }}>카드 제목</h3>
-                      <p style={{ fontSize: 13, color: 'var(--text-secondary)', margin: '6px 0 0 0', lineHeight: 1.5 }}>카드 설명 텍스트입니다.</p>
+                      <h3 style={{ fontSize: 15, fontWeight: typography.fontWeight.semibold, color: 'var(--text-primary)', margin: 0 }}>카드 제목</h3>
+                      <p style={{ fontSize: typography.fontSize.compact, color: 'var(--text-secondary)', margin: '6px 0 0 0', lineHeight: 1.5 }}>카드 설명 텍스트입니다.</p>
                     </div>
                   </div>
 
                   {/* Legend */}
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 11, paddingTop: 8 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: spacing.primitive[2], fontSize: typography.fontSize['2xs'], paddingTop: spacing.primitive[2] }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: spacing.primitive[2] }}>
                       <div style={{ width: 14, height: 14, backgroundColor: 'var(--surface-error-default)', border: '1px dashed var(--border-error-default)', borderRadius: 2 }} />
                       <span style={{ color: 'var(--text-secondary)' }}>padding <strong>{padding}px</strong></span>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: spacing.primitive[2] }}>
                       <div style={{ width: 14, height: 14, backgroundColor: 'var(--surface-success-default)', border: '1px dashed var(--border-success-default)', borderRadius: 2 }} />
                       <span style={{ color: 'var(--text-secondary)' }}>gap <strong>{gap}px</strong></span>
                     </div>
@@ -696,16 +697,16 @@ export default function SpacingPage() {
                           <div style={{ position: 'absolute', left: px, right: px, top: 0, height: py, backgroundColor: 'var(--surface-brand-secondary)', borderBottom: '1px dashed var(--surface-brand-secondary)', zIndex: 2 }} />
                           <div style={{ position: 'absolute', left: px, right: px, bottom: 0, height: py, backgroundColor: 'var(--surface-brand-secondary)', borderTop: '1px dashed var(--surface-brand-secondary)', zIndex: 2 }} />
 
-                          <span style={{ position: 'absolute', left: px / 2, top: '50%', transform: 'translateX(-50%) rotate(-90deg)', fontSize: 9, fontWeight: 600, color: 'var(--content-error-default)', whiteSpace: 'nowrap', zIndex: 3 }}>{px}</span>
-                          <span style={{ position: 'absolute', left: '50%', top: py / 2, transform: 'translate(-50%, -50%)', fontSize: 9, fontWeight: 600, color: 'var(--content-brand-default)', whiteSpace: 'nowrap', zIndex: 3 }}>{py}</span>
+                          <span style={{ position: 'absolute', left: px / 2, top: '50%', transform: 'translateX(-50%) rotate(-90deg)', fontSize: 9, fontWeight: typography.fontWeight.semibold, color: 'var(--content-error-default)', whiteSpace: 'nowrap', zIndex: 3 }}>{px}</span>
+                          <span style={{ position: 'absolute', left: '50%', top: py / 2, transform: 'translate(-50%, -50%)', fontSize: 9, fontWeight: typography.fontWeight.semibold, color: 'var(--content-brand-default)', whiteSpace: 'nowrap', zIndex: 3 }}>{py}</span>
                         </>
                       )}
 
                       <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: `${py}px ${px}px`, position: 'relative', zIndex: 1 }}>
                         <div style={{ width: 40, height: 40, backgroundColor: 'var(--grey-95)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20 }}>{item.avatar}</div>
                         <div>
-                          <div style={{ fontSize: 14, fontWeight: 500, color: 'var(--text-primary)' }}>{item.name}</div>
-                          <div style={{ fontSize: 12, color: 'var(--text-tertiary)' }}>{item.role}</div>
+                          <div style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.medium, color: 'var(--text-primary)' }}>{item.name}</div>
+                          <div style={{ fontSize: typography.fontSize.xs, color: 'var(--text-tertiary)' }}>{item.role}</div>
                         </div>
                         <div style={{ marginLeft: 'auto' }}>
                           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--grey-70)" strokeWidth="2">
@@ -730,59 +731,59 @@ export default function SpacingPage() {
         {/* Page Title Layout */}
         <div className="mb-10">
           <div style={{ marginBottom: 12 }}>
-            <h3 style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-primary)', margin: 0 }}>타이틀 & 본문 간격</h3>
-            <p style={{ fontSize: 13, color: 'var(--text-tertiary)', margin: '2px 0 0 0' }}>페이지 제목과 설명, 본문 콘텐츠 사이의 간격</p>
+            <h3 style={{ fontSize: 15, fontWeight: typography.fontWeight.semibold, color: 'var(--text-primary)', margin: 0 }}>타이틀 & 본문 간격</h3>
+            <p style={{ fontSize: typography.fontSize.compact, color: 'var(--text-tertiary)', margin: '2px 0 0 0' }}>페이지 제목과 설명, 본문 콘텐츠 사이의 간격</p>
           </div>
 
           <div style={{
             backgroundColor: 'var(--bg-elevated)',
             borderRadius: 'var(--radius-xl)',
             border: '1px solid var(--divider)',
-            padding: '32px 48px',
-            marginBottom: 12,
+            padding: `${spacing.primitive[8]}px ${spacing.primitive[12]}px`,
+            marginBottom: spacing.primitive[3],
           }}>
-            <div style={{ display: 'flex', gap: 32 }}>
+            <div style={{ display: 'flex', gap: spacing.primitive[8] }}>
               {/* Mockup */}
               <div style={{ flex: 1, maxWidth: 400 }}>
                 {/* Page Title */}
-                <div style={{ fontSize: 24, fontWeight: 700, color: 'var(--text-primary)' }}>
+                <div style={{ fontSize: typography.fontSize['2xl'], fontWeight: typography.fontWeight.bold, color: 'var(--text-primary)' }}>
                   페이지 제목
                 </div>
 
                 {/* Title-Description gap indicator - inline */}
                 <div style={{ height: 8, backgroundColor: 'var(--surface-brand-secondary)', border: '1px dashed var(--content-brand-default)', borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <span style={{ fontSize: 9, fontWeight: 600, color: 'var(--content-brand-default)' }}>8</span>
+                  <span style={{ fontSize: 9, fontWeight: typography.fontWeight.semibold, color: 'var(--content-brand-default)' }}>8</span>
                 </div>
 
                 {/* Description */}
-                <p style={{ fontSize: 14, color: 'var(--text-secondary)', lineHeight: 1.6, margin: 0 }}>
+                <p style={{ fontSize: typography.fontSize.sm, color: 'var(--text-secondary)', lineHeight: 1.6, margin: 0 }}>
                   페이지에 대한 설명입니다. 사용자가 이 페이지에서 무엇을 할 수 있는지 안내합니다.
                 </p>
 
                 {/* Description-Content gap indicator - inline */}
                 <div style={{ height: 24, backgroundColor: 'var(--surface-warning-default)', border: '1px dashed var(--border-warning-default)', borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--content-warning-default)' }}>24</span>
+                  <span style={{ fontSize: typography.fontSize['3xs'], fontWeight: typography.fontWeight.semibold, color: 'var(--content-warning-default)' }}>24</span>
                 </div>
 
                 {/* Content */}
-                <div style={{ padding: 16, backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
-                  <div style={{ fontSize: 13, color: 'var(--text-tertiary)' }}>본문 콘텐츠 영역</div>
+                <div style={{ padding: spacing.primitive[4], backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
+                  <div style={{ fontSize: typography.fontSize.compact, color: 'var(--text-tertiary)' }}>본문 콘텐츠 영역</div>
                 </div>
               </div>
 
               {/* Legend */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 12, fontSize: 12, minWidth: 180 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: spacing.primitive[3], fontSize: typography.fontSize.xs, minWidth: 180 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: spacing.primitive[2] }}>
                   <div style={{ width: 16, height: 16, backgroundColor: 'var(--surface-brand-secondary)', border: '1px dashed var(--content-brand-default)', borderRadius: 2 }} />
                   <span style={{ color: 'var(--text-secondary)' }}>제목 → 설명 <strong>8px</strong></span>
                 </div>
-                <div style={{ fontSize: 11, color: 'var(--text-tertiary)', marginLeft: 24 }}>vertical.2xs</div>
+                <div style={{ fontSize: typography.fontSize['2xs'], color: 'var(--text-tertiary)', marginLeft: spacing.primitive[6] }}>vertical.2xs</div>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 8 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: spacing.primitive[2], marginTop: spacing.primitive[2] }}>
                   <div style={{ width: 16, height: 16, backgroundColor: 'var(--surface-warning-default)', border: '1px dashed var(--border-warning-default)', borderRadius: 2 }} />
                   <span style={{ color: 'var(--text-secondary)' }}>설명 → 콘텐츠 <strong>24px</strong></span>
                 </div>
-                <div style={{ fontSize: 11, color: 'var(--text-tertiary)', marginLeft: 24 }}>vertical.lg</div>
+                <div style={{ fontSize: typography.fontSize['2xs'], color: 'var(--text-tertiary)', marginLeft: spacing.primitive[6] }}>vertical.lg</div>
               </div>
             </div>
           </div>
@@ -797,31 +798,31 @@ export default function SpacingPage() {
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <tbody>
                 <tr style={{ borderBottom: '1px solid var(--divider)' }}>
-                  <td style={{ padding: '12px 0', fontSize: 13 }}>
+                  <td style={{ padding: `${spacing.primitive[3]}px 0`, fontSize: typography.fontSize.compact }}>
                     <span style={{ color: 'var(--text-secondary)' }}>제목 → 설명</span>
                   </td>
-                  <td style={{ padding: '12px 0', fontSize: 13, textAlign: 'right' }}>
+                  <td style={{ padding: `${spacing.primitive[3]}px 0`, fontSize: typography.fontSize.compact, textAlign: 'right' }}>
                     <code style={{ color: 'var(--brand-primary)', fontFamily: 'var(--font-mono)', fontSize: 12 }}>vertical.2xs</code>
                   </td>
-                  <td style={{ padding: '12px 0', fontSize: 13, textAlign: 'right', fontWeight: 600, fontFamily: 'var(--font-mono)', width: 60 }}>8px</td>
+                  <td style={{ padding: `${spacing.primitive[3]}px 0`, fontSize: typography.fontSize.compact, textAlign: 'right', fontWeight: typography.fontWeight.semibold, fontFamily: 'var(--font-mono)', width: 60 }}>8px</td>
                 </tr>
                 <tr style={{ borderBottom: '1px solid var(--divider)' }}>
-                  <td style={{ padding: '12px 0', fontSize: 13 }}>
+                  <td style={{ padding: `${spacing.primitive[3]}px 0`, fontSize: typography.fontSize.compact }}>
                     <span style={{ color: 'var(--text-secondary)' }}>설명 → 콘텐츠</span>
                   </td>
-                  <td style={{ padding: '12px 0', fontSize: 13, textAlign: 'right' }}>
+                  <td style={{ padding: `${spacing.primitive[3]}px 0`, fontSize: typography.fontSize.compact, textAlign: 'right' }}>
                     <code style={{ color: 'var(--brand-primary)', fontFamily: 'var(--font-mono)', fontSize: 12 }}>vertical.lg</code>
                   </td>
-                  <td style={{ padding: '12px 0', fontSize: 13, textAlign: 'right', fontWeight: 600, fontFamily: 'var(--font-mono)', width: 60 }}>24px</td>
+                  <td style={{ padding: `${spacing.primitive[3]}px 0`, fontSize: typography.fontSize.compact, textAlign: 'right', fontWeight: typography.fontWeight.semibold, fontFamily: 'var(--font-mono)', width: 60 }}>24px</td>
                 </tr>
                 <tr>
-                  <td style={{ padding: '12px 0', fontSize: 13 }}>
+                  <td style={{ padding: `${spacing.primitive[3]}px 0`, fontSize: typography.fontSize.compact }}>
                     <span style={{ color: 'var(--text-secondary)' }}>섹션 → 섹션</span>
                   </td>
-                  <td style={{ padding: '12px 0', fontSize: 13, textAlign: 'right' }}>
+                  <td style={{ padding: `${spacing.primitive[3]}px 0`, fontSize: typography.fontSize.compact, textAlign: 'right' }}>
                     <code style={{ color: 'var(--brand-primary)', fontFamily: 'var(--font-mono)', fontSize: 12 }}>vertical.3xl</code>
                   </td>
-                  <td style={{ padding: '12px 0', fontSize: 13, textAlign: 'right', fontWeight: 600, fontFamily: 'var(--font-mono)', width: 60 }}>48px</td>
+                  <td style={{ padding: `${spacing.primitive[3]}px 0`, fontSize: typography.fontSize.compact, textAlign: 'right', fontWeight: typography.fontWeight.semibold, fontFamily: 'var(--font-mono)', width: 60 }}>48px</td>
                 </tr>
               </tbody>
             </table>
@@ -831,47 +832,47 @@ export default function SpacingPage() {
         {/* Section Layout */}
         <div className="mb-10">
           <div style={{ marginBottom: 12 }}>
-            <h3 style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-primary)', margin: 0 }}>섹션 간격</h3>
-            <p style={{ fontSize: 13, color: 'var(--text-tertiary)', margin: '2px 0 0 0' }}>페이지 내 섹션들 사이의 간격</p>
+            <h3 style={{ fontSize: 15, fontWeight: typography.fontWeight.semibold, color: 'var(--text-primary)', margin: 0 }}>섹션 간격</h3>
+            <p style={{ fontSize: typography.fontSize.compact, color: 'var(--text-tertiary)', margin: '2px 0 0 0' }}>페이지 내 섹션들 사이의 간격</p>
           </div>
 
           <div style={{
             backgroundColor: 'var(--bg-elevated)',
             borderRadius: 'var(--radius-xl)',
             border: '1px solid var(--divider)',
-            padding: '32px 48px',
-            marginBottom: 12,
+            padding: `${spacing.primitive[8]}px ${spacing.primitive[12]}px`,
+            marginBottom: spacing.primitive[3],
           }}>
-            <div style={{ display: 'flex', gap: 32 }}>
+            <div style={{ display: 'flex', gap: spacing.primitive[8] }}>
               {/* Mockup */}
               <div style={{ flex: 1, maxWidth: 400 }}>
                 {/* Section 1 */}
-                <div style={{ padding: 16, backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
-                  <div style={{ fontSize: 16, fontWeight: 600, color: 'var(--text-primary)', marginBottom: 8 }}>섹션 제목 1</div>
-                  <div style={{ fontSize: 13, color: 'var(--text-secondary)' }}>섹션 내용...</div>
+                <div style={{ padding: spacing.primitive[4], backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
+                  <div style={{ fontSize: typography.fontSize.md, fontWeight: typography.fontWeight.semibold, color: 'var(--text-primary)', marginBottom: spacing.primitive[2] }}>섹션 제목 1</div>
+                  <div style={{ fontSize: typography.fontSize.compact, color: 'var(--text-secondary)' }}>섹션 내용...</div>
                 </div>
 
                 {/* Section gap indicator - inline, not absolute */}
                 <div style={{ height: 48, backgroundColor: 'var(--surface-brand-secondary)', border: '1px dashed var(--content-brand-default)', borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0' }}>
-                  <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--content-brand-default)' }}>48</span>
+                  <span style={{ fontSize: typography.fontSize['2xs'], fontWeight: typography.fontWeight.semibold, color: 'var(--content-brand-default)' }}>48</span>
                 </div>
 
                 {/* Section 2 */}
-                <div style={{ padding: 16, backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
-                  <div style={{ fontSize: 16, fontWeight: 600, color: 'var(--text-primary)', marginBottom: 8 }}>섹션 제목 2</div>
-                  <div style={{ fontSize: 13, color: 'var(--text-secondary)' }}>섹션 내용...</div>
+                <div style={{ padding: spacing.primitive[4], backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--divider)' }}>
+                  <div style={{ fontSize: typography.fontSize.md, fontWeight: typography.fontWeight.semibold, color: 'var(--text-primary)', marginBottom: spacing.primitive[2] }}>섹션 제목 2</div>
+                  <div style={{ fontSize: typography.fontSize.compact, color: 'var(--text-secondary)' }}>섹션 내용...</div>
                 </div>
               </div>
 
               {/* Legend */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 12, fontSize: 12, minWidth: 180 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: spacing.primitive[3], fontSize: typography.fontSize.xs, minWidth: 180 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: spacing.primitive[2] }}>
                   <div style={{ width: 16, height: 16, backgroundColor: 'var(--surface-brand-secondary)', border: '1px dashed var(--content-brand-default)', borderRadius: 2 }} />
                   <span style={{ color: 'var(--text-secondary)' }}>섹션 간격 <strong>48px</strong></span>
                 </div>
-                <div style={{ fontSize: 11, color: 'var(--text-tertiary)', marginLeft: 24 }}>vertical.3xl</div>
+                <div style={{ fontSize: typography.fontSize['2xs'], color: 'var(--text-tertiary)', marginLeft: spacing.primitive[6] }}>vertical.3xl</div>
 
-                <div style={{ marginTop: 16, fontSize: 11, color: 'var(--text-tertiary)', lineHeight: 1.5 }}>
+                <div style={{ marginTop: spacing.primitive[4], fontSize: typography.fontSize['2xs'], color: 'var(--text-tertiary)', lineHeight: 1.5 }}>
                   주요 섹션 사이에는 충분한 여백을 두어 시각적으로 분리합니다.
                 </div>
               </div>
@@ -882,71 +883,71 @@ export default function SpacingPage() {
         {/* Content Spacing */}
         <div className="mb-10">
           <div style={{ marginBottom: 12 }}>
-            <h3 style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-primary)', margin: 0 }}>콘텐츠 내부 간격</h3>
-            <p style={{ fontSize: 13, color: 'var(--text-tertiary)', margin: '2px 0 0 0' }}>본문 내 요소들 사이의 간격</p>
+            <h3 style={{ fontSize: 15, fontWeight: typography.fontWeight.semibold, color: 'var(--text-primary)', margin: 0 }}>콘텐츠 내부 간격</h3>
+            <p style={{ fontSize: typography.fontSize.compact, color: 'var(--text-tertiary)', margin: '2px 0 0 0' }}>본문 내 요소들 사이의 간격</p>
           </div>
 
           <div style={{
             backgroundColor: 'var(--bg-elevated)',
             borderRadius: 'var(--radius-xl)',
             border: '1px solid var(--divider)',
-            padding: '32px 48px',
-            marginBottom: 12,
+            padding: `${spacing.primitive[8]}px ${spacing.primitive[12]}px`,
+            marginBottom: spacing.primitive[3],
           }}>
-            <div style={{ display: 'flex', gap: 32 }}>
+            <div style={{ display: 'flex', gap: spacing.primitive[8] }}>
               {/* Mockup */}
               <div style={{ flex: 1, maxWidth: 400 }}>
                 {/* Section Title */}
-                <div style={{ fontSize: 18, fontWeight: 600, color: 'var(--text-primary)' }}>섹션 제목</div>
+                <div style={{ fontSize: typography.fontSize.lg, fontWeight: typography.fontWeight.semibold, color: 'var(--text-primary)' }}>섹션 제목</div>
 
                 {/* Title-Description gap indicator - inline (4px, no number) */}
                 <div style={{ height: 4, backgroundColor: 'var(--surface-success-default)', border: '1px dashed var(--border-success-default)', borderRadius: 2 }} />
 
                 {/* Section Description */}
-                <p style={{ fontSize: 13, color: 'var(--text-tertiary)', margin: 0 }}>섹션에 대한 짧은 설명</p>
+                <p style={{ fontSize: typography.fontSize.compact, color: 'var(--text-tertiary)', margin: 0 }}>섹션에 대한 짧은 설명</p>
 
                 {/* Description-Items gap indicator - inline */}
                 <div style={{ height: 16, backgroundColor: 'var(--surface-brand-secondary)', border: '1px dashed var(--content-brand-default)', borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <span style={{ fontSize: 9, fontWeight: 600, color: 'var(--content-brand-default)' }}>16</span>
+                  <span style={{ fontSize: 9, fontWeight: typography.fontWeight.semibold, color: 'var(--content-brand-default)' }}>16</span>
                 </div>
 
                 {/* List items with inline gap indicators */}
-                <div style={{ padding: 12, backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', fontSize: 13, color: 'var(--text-secondary)' }}>리스트 아이템 1</div>
+                <div style={{ padding: spacing.primitive[3], backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', fontSize: typography.fontSize.compact, color: 'var(--text-secondary)' }}>리스트 아이템 1</div>
 
                 {/* Item gap indicator - inline */}
                 <div style={{ height: 12, backgroundColor: 'var(--surface-warning-default)', border: '1px dashed var(--border-warning-default)', borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <span style={{ fontSize: 9, fontWeight: 600, color: 'var(--content-warning-default)' }}>12</span>
+                  <span style={{ fontSize: 9, fontWeight: typography.fontWeight.semibold, color: 'var(--content-warning-default)' }}>12</span>
                 </div>
 
-                <div style={{ padding: 12, backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', fontSize: 13, color: 'var(--text-secondary)' }}>리스트 아이템 2</div>
+                <div style={{ padding: spacing.primitive[3], backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', fontSize: typography.fontSize.compact, color: 'var(--text-secondary)' }}>리스트 아이템 2</div>
 
                 {/* Item gap indicator - inline */}
                 <div style={{ height: 12, backgroundColor: 'var(--surface-warning-default)', border: '1px dashed var(--border-warning-default)', borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <span style={{ fontSize: 9, fontWeight: 600, color: 'var(--content-warning-default)' }}>12</span>
+                  <span style={{ fontSize: 9, fontWeight: typography.fontWeight.semibold, color: 'var(--content-warning-default)' }}>12</span>
                 </div>
 
-                <div style={{ padding: 12, backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', fontSize: 13, color: 'var(--text-secondary)' }}>리스트 아이템 3</div>
+                <div style={{ padding: spacing.primitive[3], backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', fontSize: typography.fontSize.compact, color: 'var(--text-secondary)' }}>리스트 아이템 3</div>
               </div>
 
               {/* Legend */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 12, fontSize: 12, minWidth: 180 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: spacing.primitive[3], fontSize: typography.fontSize.xs, minWidth: 180 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: spacing.primitive[2] }}>
                   <div style={{ width: 16, height: 16, backgroundColor: 'var(--surface-success-default)', border: '1px dashed var(--border-success-default)', borderRadius: 2 }} />
                   <span style={{ color: 'var(--text-secondary)' }}>제목 → 설명 <strong>4px</strong></span>
                 </div>
-                <div style={{ fontSize: 11, color: 'var(--text-tertiary)', marginLeft: 24 }}>vertical.3xs</div>
+                <div style={{ fontSize: typography.fontSize['2xs'], color: 'var(--text-tertiary)', marginLeft: spacing.primitive[6] }}>vertical.3xs</div>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 8 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: spacing.primitive[2], marginTop: spacing.primitive[2] }}>
                   <div style={{ width: 16, height: 16, backgroundColor: 'var(--surface-brand-secondary)', border: '1px dashed var(--content-brand-default)', borderRadius: 2 }} />
                   <span style={{ color: 'var(--text-secondary)' }}>설명 → 목록 <strong>16px</strong></span>
                 </div>
-                <div style={{ fontSize: 11, color: 'var(--text-tertiary)', marginLeft: 24 }}>vertical.sm</div>
+                <div style={{ fontSize: typography.fontSize['2xs'], color: 'var(--text-tertiary)', marginLeft: spacing.primitive[6] }}>vertical.sm</div>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 8 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: spacing.primitive[2], marginTop: spacing.primitive[2] }}>
                   <div style={{ width: 16, height: 16, backgroundColor: 'var(--surface-warning-default)', border: '1px dashed var(--border-warning-default)', borderRadius: 2 }} />
                   <span style={{ color: 'var(--text-secondary)' }}>아이템 간격 <strong>12px</strong></span>
                 </div>
-                <div style={{ fontSize: 11, color: 'var(--text-tertiary)', marginLeft: 24 }}>vertical.xs</div>
+                <div style={{ fontSize: typography.fontSize['2xs'], color: 'var(--text-tertiary)', marginLeft: spacing.primitive[6] }}>vertical.xs</div>
               </div>
             </div>
           </div>

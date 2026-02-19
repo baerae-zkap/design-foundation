@@ -29,7 +29,7 @@ export function TableOfContents() {
   // Function to scan headings from DOM
   const scanHeadings = useCallback(() => {
     // Find only h2 elements in the main content (중제목만)
-    const elements = document.querySelectorAll("main h2");
+    const elements = document.querySelectorAll("main h2, main h3");
     const items: TocItem[] = [];
     const idCounts: Record<string, number> = {};
 
@@ -149,7 +149,7 @@ export function TableOfContents() {
                 display: "block",
                 padding: "6px 0",
                 paddingLeft: heading.level === 3 ? "12px" : "0",
-                fontSize: "13px",
+                fontSize: heading.level === 3 ? "12px" : "13px",
                 color: activeId === heading.id ? "var(--brand-primary)" : "var(--text-tertiary)",
                 textDecoration: "none",
                 borderLeft: heading.level === 3 ? "none" : undefined,

@@ -9,19 +9,22 @@
  *
  * @example
  * <ActionArea variant="strong" position="sticky">
- *   <Button buttonType="filled" color="brandDefault" onClick={() => {}}>
+ *   <Button buttonType="filled" color="primary" onClick={() => {}}>
  *     확인
  *   </Button>
- *   <Button buttonType="outlined" color="brandDefault" onClick={() => {}}>
+ *   <Button buttonType="weak" color="primary" onClick={() => {}}>
  *     취소
  *   </Button>
  * </ActionArea>
  */
 
-import React, { forwardRef, type HTMLAttributes, type ReactNode, Children, isValidElement, cloneElement } from 'react';
+import React, { forwardRef, useId, type HTMLAttributes, type ReactNode, Children, isValidElement, cloneElement } from 'react';
 import { cssVarColors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { typography } from '../../tokens/typography';
+import { zIndex as zIndexToken } from '../../tokens/general';
+import { Button } from '../Button/Button';
+import { TextButton } from '../TextButton/TextButton';
 
 // ============================================
 // Types
@@ -45,6 +48,8 @@ export interface ActionAreaProps extends Omit<HTMLAttributes<HTMLDivElement>, 'c
   useSafeArea?: boolean;
   /** 배경색 */
   backgroundColor?: string;
+  /** 버튼 그룹의 접근성 레이블 (스크린 리더용) */
+  'aria-label'?: string;
   /** 버튼 요소들 (Button, TextButton 컴포넌트) */
   children: ReactNode;
 }
@@ -99,7 +104,7 @@ export const ActionArea = forwardRef<HTMLDivElement, ActionAreaProps>(
       left: position === 'fixed' ? 0 : undefined,
       right: position === 'fixed' ? 0 : undefined,
       width: position === 'fixed' ? '100%' : undefined,
-      zIndex: position !== 'static' ? 100 : undefined,
+      zIndex: position !== 'static' ? zIndexToken.sticky : undefined,
       ...style,
     };
 
@@ -119,9 +124,8 @@ export const ActionArea = forwardRef<HTMLDivElement, ActionAreaProps>(
     // Process children to add proper styling for layout
     const processedChildren = Children.map(children, (child) => {
       if (isValidElement(child)) {
-        const childType = child.type as { displayName?: string };
-        const isButton = childType.displayName === 'Button';
-        const isTextButton = childType.displayName === 'TextButton';
+        const isButton = child.type === Button;
+        const isTextButton = child.type === TextButton;
 
         if (isButton) {
           // In non-compact horizontal layouts, buttons should fill width equally
@@ -151,8 +155,17 @@ export const ActionArea = forwardRef<HTMLDivElement, ActionAreaProps>(
       return child;
     });
 
+    const autoId = useId();
+    const captionId = caption ? `${props.id ?? autoId}-caption` : undefined;
+
     return (
-      <div ref={ref} style={containerStyle} {...props}>
+      <div
+        ref={ref}
+        role="group"
+        aria-describedby={captionId}
+        style={containerStyle}
+        {...props}
+      >
         {/* Gradient Overlay */}
         {showGradient && position !== 'static' && (
           <div
@@ -173,6 +186,7 @@ export const ActionArea = forwardRef<HTMLDivElement, ActionAreaProps>(
           {/* Caption */}
           {caption && (
             <p
+              id={captionId}
               style={{
                 fontSize: typography.fontSize.sm,
                 color: cssVarColors.content.base.neutral,

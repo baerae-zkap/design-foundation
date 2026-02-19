@@ -23,7 +23,7 @@ import { cssVarColors } from '../../tokens/colors';
 import { cssVarShadow } from '../../tokens/shadow';
 import { typography } from '../../tokens/typography';
 import { transitions } from '../../utils/styles';
-import { opacity } from '../../tokens/general';
+import { opacity, borderWidth } from '../../tokens/general';
 
 // ─── Types ───────────────────────────────────────────────────────────
 
@@ -187,7 +187,7 @@ export const SegmentedControl = forwardRef<HTMLDivElement, SegmentedControlProps
       padding: variant === 'solid' ? scTokens.containerPadding : 0,
       overflow: variant === 'solid' ? 'hidden' : 'visible',
       ...(variant === 'outlined' && {
-        border: `1px solid ${cssVarColors.border.base.default}`,
+        border: `${borderWidth.default}px solid ${cssVarColors.border.base.default}`,
       }),
       opacity: disabled ? opacity.disabled : 1,
       ...(fullWidth && { width: '100%' }),
@@ -266,7 +266,7 @@ export const SegmentedControl = forwardRef<HTMLDivElement, SegmentedControlProps
           borderRadius: isOutlined ? rcTokens.container : rcTokens.segment,
           zIndex: 1,
           opacity: 0,
-          transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1)',
+          transition: transitions.slide,
         };
       }
 
@@ -284,13 +284,13 @@ export const SegmentedControl = forwardRef<HTMLDivElement, SegmentedControlProps
             : cssVarColors.surface.brand.secondary,
         borderRadius: isOutlined ? rcTokens.container : rcTokens.segment,
         zIndex: 1,
-        transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1)',
+        transition: transitions.slide,
         ...(variant === 'solid'
           ? {
               boxShadow: cssVarShadow.semantic.button.pressed,
             }
           : {
-              border: `1px solid ${cssVarColors.border.brand.default}`,
+              border: `${borderWidth.default}px solid ${cssVarColors.border.brand.default}`,
             }),
       };
     };

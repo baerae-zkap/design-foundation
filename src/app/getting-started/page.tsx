@@ -2,16 +2,17 @@
 
 import Link from "next/link";
 import { PreviewBox, CodeBlock } from "@/components/PlatformTabs";
+import { typography, spacing, radius } from '@baerae-zkap/design-system';
 
 export default function GettingStartedPage() {
   return (
     <div style={{ maxWidth: 720 }}>
-      <header style={{ marginBottom: 48 }}>
+      <header style={{ marginBottom: spacing.primitive[12] }}>
         <h1
           style={{
             fontSize: 32,
-            fontWeight: 700,
-            marginBottom: 12,
+            fontWeight: typography.fontWeight.bold,
+            marginBottom: spacing.primitive[3],
             color: "var(--text-primary)",
             letterSpacing: "-0.02em",
           }}
@@ -20,7 +21,7 @@ export default function GettingStartedPage() {
         </h1>
         <p
           style={{
-            fontSize: 16,
+            fontSize: typography.fontSize.md,
             color: "var(--text-secondary)",
             lineHeight: 1.6,
           }}
@@ -31,7 +32,7 @@ export default function GettingStartedPage() {
 
       {/* Installation */}
       <Section title="Installation">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
+        <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginBottom: spacing.primitive[4], lineHeight: 1.6 }}>
           npm, yarn, 또는 pnpm을 사용하여 패키지를 설치합니다.
         </p>
         <CodeBlock
@@ -49,7 +50,7 @@ pnpm add @zkap/design-system`}
 
       {/* Usage - Web */}
       <Section title="Usage (Web)">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
+        <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginBottom: spacing.primitive[4], lineHeight: 1.6 }}>
           React 웹 프로젝트에서 컴포넌트를 import하여 사용합니다.
         </p>
         <CodeBlock
@@ -60,7 +61,7 @@ function App() {
     <>
       <Button
         buttonType="filled"
-        color="brandDefault"
+        color="primary"
         size="medium"
         onClick={() => console.log('clicked')}
       >
@@ -69,7 +70,7 @@ function App() {
 
       <TextButton
         variant="arrow"
-        color="brandDefault"
+        color="primary"
         onClick={() => console.log('clicked')}
       >
         Learn More
@@ -83,8 +84,8 @@ function App() {
 
       {/* Usage - React Native */}
       <Section title="Usage (React Native)">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
-          React Native 프로젝트에서는 <code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 13 }}>/native</code> 경로에서 import합니다.
+        <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginBottom: spacing.primitive[4], lineHeight: 1.6 }}>
+          React Native 프로젝트에서는 <code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.compact }}>/native</code> 경로에서 import합니다.
         </p>
         <CodeBlock
           code={`import { Button, TextButton } from '@zkap/design-system/native';
@@ -94,7 +95,7 @@ function App() {
     <>
       <Button
         buttonType="filled"
-        color="brandDefault"
+        color="primary"
         size="medium"
         onPress={() => console.log('pressed')}
       >
@@ -103,7 +104,7 @@ function App() {
 
       <TextButton
         variant="arrow"
-        color="brandDefault"
+        color="primary"
         onPress={() => console.log('pressed')}
       >
         Learn More
@@ -117,10 +118,10 @@ function App() {
 
       {/* Available Components */}
       <Section title="Available Components">
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: spacing.primitive[4] }}>
           <ComponentCard
             name="Button"
-            description="Primary action button with filled/outlined variants"
+            description="Primary action button with filled/weak variants"
             href="/components/actions/button"
           />
           <ComponentCard
@@ -139,8 +140,8 @@ function App() {
       {/* AI Documentation */}
       <Section title="AI Documentation">
         <PreviewBox>
-          <div style={{ padding: 24 }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
+          <div style={{ padding: spacing.primitive[6] }}>
+            <div style={{ display: "flex", alignItems: "center", gap: spacing.primitive[3], marginBottom: spacing.primitive[4] }}>
               <span style={{
                 width: 40,
                 height: 40,
@@ -149,22 +150,22 @@ function App() {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                fontSize: 20,
+                fontSize: typography.fontSize.xl,
               }}>
                 AI
               </span>
               <div>
-                <div style={{ fontSize: 15, fontWeight: 600, color: "var(--text-primary)" }}>
+                <div style={{ fontSize: 15, fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)" }}>
                   AI-Readable Documentation
                 </div>
-                <div style={{ fontSize: 13, color: "var(--text-secondary)" }}>
+                <div style={{ fontSize: typography.fontSize.compact, color: "var(--text-secondary)" }}>
                   Vibe Coding을 위한 마크다운 문서가 패키지에 포함되어 있습니다.
                 </div>
               </div>
             </div>
           </div>
         </PreviewBox>
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginTop: 16, marginBottom: 16, lineHeight: 1.6 }}>
+        <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginTop: spacing.primitive[4], marginBottom: spacing.primitive[4], lineHeight: 1.6 }}>
           AI가 컴포넌트의 디자인 규칙과 사용법을 이해할 수 있도록 마크다운 문서가 패키지에 포함됩니다.
         </p>
         <CodeBlock
@@ -179,32 +180,32 @@ node_modules/@zkap/design-system/docs/components/ActionArea.md`}
 
       {/* Peer Dependencies */}
       <Section title="Peer Dependencies">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
+        <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginBottom: spacing.primitive[4], lineHeight: 1.6 }}>
           이 패키지는 다음 peer dependencies를 필요로 합니다.
         </p>
         <div style={{
           backgroundColor: "var(--bg-secondary)",
-          borderRadius: 8,
-          padding: 16,
+          borderRadius: radius.primitive.sm,
+          padding: spacing.primitive[4],
         }}>
           <table style={{ width: "100%", borderCollapse: "collapse" }}>
             <thead>
               <tr>
-                <th style={{ textAlign: "left", padding: "8px 12px", fontSize: 13, fontWeight: 600, color: "var(--text-secondary)" }}>Package</th>
-                <th style={{ textAlign: "left", padding: "8px 12px", fontSize: 13, fontWeight: 600, color: "var(--text-secondary)" }}>Version</th>
-                <th style={{ textAlign: "left", padding: "8px 12px", fontSize: 13, fontWeight: 600, color: "var(--text-secondary)" }}>Required</th>
+                <th style={{ textAlign: "left", padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, color: "var(--text-secondary)" }}>Package</th>
+                <th style={{ textAlign: "left", padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, color: "var(--text-secondary)" }}>Version</th>
+                <th style={{ textAlign: "left", padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, color: "var(--text-secondary)" }}>Required</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td style={{ padding: "8px 12px", fontSize: 14, color: "var(--text-primary)" }}>react</td>
-                <td style={{ padding: "8px 12px", fontSize: 13, fontFamily: "monospace", color: "var(--content-brand-default)" }}>&gt;= 18.0.0</td>
-                <td style={{ padding: "8px 12px", fontSize: 14, color: "var(--text-primary)" }}>Yes</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontSize: typography.fontSize.sm, color: "var(--text-primary)" }}>react</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontSize: typography.fontSize.compact, fontFamily: "monospace", color: "var(--content-brand-default)" }}>&gt;= 18.0.0</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontSize: typography.fontSize.sm, color: "var(--text-primary)" }}>Yes</td>
               </tr>
               <tr>
-                <td style={{ padding: "8px 12px", fontSize: 14, color: "var(--text-primary)" }}>react-native</td>
-                <td style={{ padding: "8px 12px", fontSize: 13, fontFamily: "monospace", color: "var(--content-brand-default)" }}>&gt;= 0.70.0</td>
-                <td style={{ padding: "8px 12px", fontSize: 14, color: "var(--text-secondary)" }}>Optional (for native)</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontSize: typography.fontSize.sm, color: "var(--text-primary)" }}>react-native</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontSize: typography.fontSize.compact, fontFamily: "monospace", color: "var(--content-brand-default)" }}>&gt;= 0.70.0</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontSize: typography.fontSize.sm, color: "var(--text-secondary)" }}>Optional (for native)</td>
               </tr>
             </tbody>
           </table>
@@ -216,12 +217,12 @@ node_modules/@zkap/design-system/docs/components/ActionArea.md`}
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <section style={{ marginBottom: 56 }}>
+    <section style={{ marginBottom: spacing.primitive[14] }}>
       <h2
         style={{
-          fontSize: 20,
-          fontWeight: 700,
-          marginBottom: 20,
+          fontSize: typography.fontSize.xl,
+          fontWeight: typography.fontWeight.bold,
+          marginBottom: spacing.primitive[5],
           color: "var(--text-primary)",
           letterSpacing: "-0.01em",
         }}
@@ -239,9 +240,9 @@ function ComponentCard({ name, description, href }: { name: string; description:
       href={href}
       style={{
         display: "block",
-        padding: 20,
+        padding: spacing.primitive[5],
         backgroundColor: "white",
-        borderRadius: 12,
+        borderRadius: radius.primitive.md,
         border: "1px solid var(--divider)",
         textDecoration: "none",
         transition: "all 150ms ease",
@@ -255,10 +256,10 @@ function ComponentCard({ name, description, href }: { name: string; description:
         e.currentTarget.style.boxShadow = "none";
       }}
     >
-      <div style={{ fontSize: 15, fontWeight: 600, color: "var(--text-primary)", marginBottom: 6 }}>
+      <div style={{ fontSize: 15, fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)", marginBottom: 6 }}>
         {name}
       </div>
-      <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0, lineHeight: 1.5 }}>
+      <p style={{ fontSize: typography.fontSize.compact, color: "var(--text-secondary)", margin: 0, lineHeight: 1.5 }}>
         {description}
       </p>
     </Link>

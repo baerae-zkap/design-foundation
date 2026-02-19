@@ -2,12 +2,14 @@
  * @baerae-zkap/design-system
  *
  * Design Tokens + Web Components를 export합니다.
- * React Native 컴포넌트: import from '@baerae-zkap/design-system/native'
- * AI 문서: import docs from '@baerae-zkap/design-system/docs'
+ * 컬러 토큰: lightColors (라이트 테마), darkColors (다크 테마)
+ * 플랫폼별 변환은 ThemeProvider에서 처리합니다.
  */
 
 // Design Tokens
 export {
+  lightColors,
+  /** @deprecated Use lightColors instead */
   colors,
   darkColors,
   palette,
@@ -24,8 +26,12 @@ export {
   successColors,
   warningColors,
   infoColors,
+  duration,
+  easing,
+  transitions,
 } from './tokens';
 export type {
+  LightColorToken,
   ColorToken,
   DarkColorToken,
   PaletteToken,

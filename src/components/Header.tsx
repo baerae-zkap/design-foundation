@@ -17,15 +17,24 @@ const mainNavigation = [
 export function Header({ onMenuClick }: HeaderProps) {
   const pathname = usePathname();
   const [isMobile, setIsMobile] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
     };
+    const checkScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
 
     checkMobile();
+    checkScroll();
     window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener('scroll', checkScroll, { passive: true });
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+      window.removeEventListener('scroll', checkScroll);
+    };
   }, []);
 
   const isActive = (href: string) => {
@@ -44,7 +53,8 @@ export function Header({ onMenuClick }: HeaderProps) {
         right: 0,
         height: '56px',
         backgroundColor: 'var(--bg-primary)',
-        borderBottom: '1px solid var(--divider)',
+        borderBottom: isScrolled ? '1px solid var(--border-solid-alternative)' : '1px solid transparent',
+        transition: 'border-color 200ms ease',
         zIndex: 50,
       }}
     >

@@ -184,9 +184,9 @@ const CONTRAST_PAIRS = {
       level: "AA normal",
     },
     {
-      text: "component.button.content.primary",
+      text: "content.base.onColor",
       textColor: "white",
-      surface: "component.button.surface.primary",
+      surface: "surface.brand.default",
       surfaceColor: "blue.50",
       minRatio: 4.5,
       level: "AA normal",
@@ -282,9 +282,9 @@ const CONTRAST_PAIRS = {
       level: "AA normal",
     },
     {
-      text: "component.button.content.primary",
+      text: "content.base.onColor",
       textColor: "white",
-      surface: "component.button.surface.primary",
+      surface: "surface.brand.default",
       surfaceColor: "blue.55",
       minRatio: 4.5,
       level: "AA normal",

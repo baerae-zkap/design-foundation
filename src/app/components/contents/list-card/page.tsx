@@ -3,12 +3,11 @@
 import { useState } from "react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { PlatformTabs, CodeBlock, PreviewBox, Platform } from "@/components/PlatformTabs";
-import { ListCard, ContentBadge } from '@baerae-zkap/design-system';
+import { ListCard, ContentBadge, typography, spacing, radius } from '@baerae-zkap/design-system';
 import { Section, Subsection, InlineCode } from "@/components/docs/Section";
 import { PropsTable } from "@/components/docs/PropsTable";
 import { PrincipleCard, DoCard, DontCard } from "@/components/docs/Cards";
 import { RadioGroup } from "@/components/docs/Playground";
-import { DoLabel, DontLabel } from "@/components/docs/Labels";
 import { BRAND_EXTERNAL_COLORS } from "@/tokens/brandExternal";
 
 // GitHub source URLs
@@ -21,9 +20,9 @@ type ListCardVariant = "elevated" | "outlined" | "filled";
 
 // Size configurations
 const sizeConfig: Record<ListCardSize, { padding: number; thumbnailSize: number; gap: number; titleSize: number; subtitleSize: number; metaSize: number; minWidth: number }> = {
-  small: { padding: 12, thumbnailSize: 40, gap: 12, titleSize: 14, subtitleSize: 12, metaSize: 13, minWidth: 280 },
-  medium: { padding: 16, thumbnailSize: 48, gap: 12, titleSize: 15, subtitleSize: 13, metaSize: 14, minWidth: 320 },
-  large: { padding: 20, thumbnailSize: 56, gap: 16, titleSize: 16, subtitleSize: 14, metaSize: 15, minWidth: 360 },
+  small: { padding: spacing.primitive[3], thumbnailSize: spacing.component.listCard.thumbnailSize.sm, gap: spacing.primitive[3], titleSize: typography.fontSize.sm, subtitleSize: typography.fontSize.xs, metaSize: typography.fontSize.compact, minWidth: 280 },
+  medium: { padding: spacing.primitive[4], thumbnailSize: spacing.component.listCard.thumbnailSize.md, gap: spacing.primitive[3], titleSize: typography.fontSize.md, subtitleSize: typography.fontSize.compact, metaSize: typography.fontSize.sm, minWidth: 320 },
+  large: { padding: spacing.primitive[4], thumbnailSize: spacing.component.listCard.thumbnailSize.lg, gap: spacing.primitive[4], titleSize: typography.fontSize.md, subtitleSize: typography.fontSize.sm, metaSize: typography.fontSize.md, minWidth: 360 },
 };
 
 export default function ListCardPage() {
@@ -37,10 +36,10 @@ export default function ListCardPage() {
         ]}
       />
 
-      <h1 style={{ fontSize: 28, fontWeight: 700, marginBottom: 8, color: "var(--text-primary)", letterSpacing: "-0.02em" }}>
+      <h1 style={{ fontSize: typography.fontSize['3xl'], fontWeight: typography.fontWeight.bold, marginBottom: spacing.primitive[2], color: "var(--text-primary)", letterSpacing: "-0.02em" }}>
         List Card
       </h1>
-      <p style={{ fontSize: 15, color: "var(--text-secondary)", marginBottom: 32, lineHeight: 1.6 }}>
+      <p style={{ fontSize: typography.fontSize.md, color: "var(--text-secondary)", marginBottom: spacing.primitive[8], lineHeight: 1.7 }}>
         썸네일과 텍스트 정보를 수평으로 배치하여 리스트 형태로 표시하는 컴포넌트입니다.
       </p>
 
@@ -54,29 +53,47 @@ export default function ListCardPage() {
 }
 
 function ListCardPlayground() {
-  const [variant, setVariant] = useState<ListCardVariant>("elevated");
+  const [variant, setVariant] = useState<ListCardVariant>("filled");
   const [size, setSize] = useState<ListCardSize>("medium");
   const [hasThumbnail, setHasThumbnail] = useState(true);
-  const [hasBadge, setHasBadge] = useState(true);
+  const [hasBadges, setHasBadges] = useState(true);
   const [hasSubtitle, setHasSubtitle] = useState(true);
   const [hasMeta, setHasMeta] = useState(true);
+  const [hasAction, setHasAction] = useState(false);
+  const [hasLeading, setHasLeading] = useState(false);
+  const [hasBottom, setHasBottom] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const s = sizeConfig[size];
 
   return (
-    <div style={{ marginBottom: 32 }}>
-      <div style={{ borderRadius: 20, overflow: "hidden", backgroundColor: "var(--surface-base-alternative)" }}>
+    <div style={{ marginBottom: spacing.primitive[8] }}>
+      <div style={{ borderRadius: radius.primitive.xl, overflow: "hidden", backgroundColor: "var(--surface-base-alternative)" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
           <div style={{ padding: 60, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <ListCardDemo
+            <ListCard
               variant={variant}
               size={size}
               thumbnail={hasThumbnail ? <EthereumIcon size={s.thumbnailSize} /> : undefined}
-              badges={hasBadge ? <TrendBadge trend="up" value="+5.2%" /> : undefined}
+              badges={hasBadges ? <TrendBadge trend="up" value="+5.2%" /> : undefined}
               title="Ethereum"
               subtitle={hasSubtitle ? "0.7812 ETH" : undefined}
               meta={hasMeta ? "₩3,245,000" : undefined}
-              onClick={() => {}}
+              action={hasAction ? (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--content-base-secondary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 18l6-6-6-6"/>
+                </svg>
+              ) : undefined}
+              leadingContent={hasLeading ? (
+                <div style={{ width: 4, height: 36, backgroundColor: "var(--surface-brand-default)", borderRadius: 2 }} />
+              ) : undefined}
+              bottomContent={hasBottom ? (
+                <div style={{ height: 4, backgroundColor: "var(--surface-base-container)", borderRadius: 2, overflow: "hidden" }}>
+                  <div style={{ width: "72%", height: "100%", backgroundColor: "var(--surface-brand-default)", borderRadius: 2 }} />
+                </div>
+              ) : undefined}
+              disabled={isDisabled}
+              onClick={isDisabled ? undefined : () => {}}
             />
           </div>
 
@@ -84,7 +101,7 @@ function ListCardPlayground() {
             backgroundColor: "var(--surface-base-alternative)",
             display: "flex",
             flexDirection: "column",
-            padding: 16,
+            padding: spacing.primitive[4],
             overflow: "hidden",
             height: "100%",
             boxSizing: "border-box",
@@ -92,13 +109,13 @@ function ListCardPlayground() {
             <div style={{
               flex: 1,
               minHeight: 0,
-              padding: 24,
+              padding: spacing.primitive[6],
               overflowY: "auto",
               display: "flex",
               flexDirection: "column",
-              gap: 28,
+              gap: spacing.primitive[7],
               backgroundColor: "var(--surface-base-default)",
-              borderRadius: 16,
+              borderRadius: radius.primitive.lg,
             }}>
               <RadioGroup
                 label="Variant"
@@ -130,13 +147,13 @@ function ListCardPlayground() {
                 onChange={(v) => setHasThumbnail(v === "true")}
               />
               <RadioGroup
-                label="Badge"
+                label="Badges"
                 options={[
                   { value: "false", label: "False" },
                   { value: "true", label: "True" },
                 ]}
-                value={hasBadge ? "true" : "false"}
-                onChange={(v) => setHasBadge(v === "true")}
+                value={hasBadges ? "true" : "false"}
+                onChange={(v) => setHasBadges(v === "true")}
               />
               <RadioGroup
                 label="Subtitle"
@@ -156,6 +173,42 @@ function ListCardPlayground() {
                 value={hasMeta ? "true" : "false"}
                 onChange={(v) => setHasMeta(v === "true")}
               />
+              <RadioGroup
+                label="Action"
+                options={[
+                  { value: "false", label: "False" },
+                  { value: "true", label: "True" },
+                ]}
+                value={hasAction ? "true" : "false"}
+                onChange={(v) => setHasAction(v === "true")}
+              />
+              <RadioGroup
+                label="Leading"
+                options={[
+                  { value: "false", label: "False" },
+                  { value: "true", label: "True" },
+                ]}
+                value={hasLeading ? "true" : "false"}
+                onChange={(v) => setHasLeading(v === "true")}
+              />
+              <RadioGroup
+                label="Bottom"
+                options={[
+                  { value: "false", label: "False" },
+                  { value: "true", label: "True" },
+                ]}
+                value={hasBottom ? "true" : "false"}
+                onChange={(v) => setHasBottom(v === "true")}
+              />
+              <RadioGroup
+                label="Disabled"
+                options={[
+                  { value: "false", label: "False" },
+                  { value: "true", label: "True" },
+                ]}
+                value={isDisabled ? "true" : "false"}
+                onChange={(v) => setIsDisabled(v === "true")}
+              />
             </div>
           </div>
         </div>
@@ -174,139 +227,206 @@ function PlatformContent({ platform }: { platform: Platform }) {
 // ============================================
 function DesignContent() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: spacing.primitive[12] }}>
       {/* Overview */}
-      <div>
-        <h2 style={{ fontSize: 24, fontWeight: 700, color: "var(--text-primary)", marginBottom: 8 }}>개요</h2>
-        <p style={{ fontSize: 16, lineHeight: 1.6, color: "var(--text-secondary)", marginBottom: 24 }}>
-          ListCard는 썸네일, 제목, 설명 등의 정보를 수평으로 배치하여 리스트 형태로 표시하는 컴포넌트입니다. 미디어 콘텐츠와 텍스트 정보를 함께 보여줄 때 적합합니다.
+      <Section title="Overview">
+        <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", lineHeight: 1.7, marginBottom: spacing.primitive[4] }}>
+          <InlineCode>ListCard</InlineCode> 컴포넌트는 썸네일과 텍스트 정보를 수평으로 배치하여 리스트 형태로 표시해요.
+          미디어 콘텐츠와 텍스트 정보를 함께 보여줄 때 적합해요.
         </p>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
-          <div style={{ padding: 24, borderRadius: 12, backgroundColor: "var(--surface-success-default)", border: "1px solid var(--border-success-default)" }}>
-            <h3 style={{ fontSize: 16, fontWeight: 600, color: "var(--content-success-default)", marginBottom: 12 }}>이런 경우 사용하세요</h3>
-            <ul style={{ fontSize: 14, lineHeight: 1.8, color: "var(--text-secondary)", paddingLeft: 20, margin: 0 }}>
-              <li>음악, 영상, 상품 등 미디어와 텍스트를 함께 표시할 때</li>
-              <li>검색 결과를 썸네일과 함께 나열할 때</li>
-              <li>히스토리나 최근 항목 목록을 보여줄 때</li>
-            </ul>
-          </div>
-          <div style={{ padding: 24, borderRadius: 12, backgroundColor: "var(--surface-error-default)", border: "1px solid var(--border-error-default)" }}>
-            <h3 style={{ fontSize: 16, fontWeight: 600, color: "var(--content-error-default)", marginBottom: 12 }}>이런 경우 사용하지 마세요</h3>
-            <ul style={{ fontSize: 14, lineHeight: 1.8, color: "var(--text-secondary)", paddingLeft: 20, margin: 0 }}>
-              <li>썸네일 없이 텍스트만 나열할 때는 ListCell을 사용하세요</li>
-              <li>카드 형태의 자유 레이아웃이 필요하면 Card를 사용하세요</li>
-            </ul>
-          </div>
-        </div>
-      </div>
+      </Section>
 
       {/* Anatomy */}
       <Section title="Anatomy">
-        <div style={{ backgroundColor: "var(--surface-base-container)", borderRadius: 16, padding: "48px 40px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <svg width="400" height="120" viewBox="0 0 400 120">
-            <rect x="20" y="10" width="360" height="100" rx="12" fill="var(--surface-base-default)" stroke="var(--border-solid-alternative)" strokeWidth="1" filter="url(#shadow)" />
+        <div style={{ backgroundColor: "var(--surface-base-container)", borderRadius: radius.primitive.lg, padding: "48px 40px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <svg width="400" height="130" viewBox="0 0 400 130" overflow="visible">
             <defs>
               <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
                 <feDropShadow dx="0" dy="1" stdDeviation="2" floodOpacity="0.1"/>
               </filter>
             </defs>
-            <rect x="36" y="26" width="68" height="68" rx="8" fill="var(--surface-base-container)" />
-            <rect x="120" y="30" width="40" height="14" rx="4" fill="var(--surface-brand-default)" />
-            <rect x="120" y="50" width="160" height="12" rx="4" fill="var(--content-base-default)" />
-            <rect x="120" y="68" width="120" height="10" rx="4" fill="var(--content-base-alternative)" />
-            <rect x="120" y="86" width="60" height="12" rx="4" fill="var(--content-base-default)" />
+            {/* Card */}
+            <rect x="20" y="10" width="360" height="110" rx="12" fill="var(--surface-base-default)" stroke="var(--border-solid-alternative)" strokeWidth="1" filter="url(#shadow)" />
+            {/* Leading Content */}
+            <rect x="28" y="36" width="12" height="38" rx="4" fill="var(--surface-brand-secondary)" />
+            {/* Thumbnail */}
+            <rect x="46" y="18" width="68" height="68" rx="8" fill="var(--surface-base-container)" />
+            {/* Badge */}
+            <rect x="122" y="22" width="40" height="14" rx="4" fill="var(--surface-brand-default)" />
+            {/* Title */}
+            <rect x="122" y="42" width="140" height="12" rx="4" fill="var(--content-base-default)" />
+            {/* Subtitle */}
+            <rect x="122" y="60" width="110" height="10" rx="4" fill="var(--content-base-alternative)" />
+            {/* Meta */}
+            <rect x="122" y="76" width="60" height="12" rx="4" fill="var(--content-base-default)" />
+            {/* Action */}
+            <rect x="332" y="28" width="30" height="54" rx="6" fill="var(--surface-base-container)" />
+            {/* Bottom Content */}
+            <rect x="30" y="92" width="320" height="10" rx="4" fill="var(--surface-base-alternative)" />
 
-            <line x1="70" y1="0" x2="70" y2="10" stroke="var(--content-base-default)" strokeWidth="1.5" />
-            <circle cx="70" cy="0" r="10" fill="var(--content-base-default)" />
-            <text x="70" y="4" textAnchor="middle" fill="var(--content-base-onColor)" fontSize="10" fontWeight="600">1</text>
+            {/* Label 1: Thumbnail — top */}
+            <line x1="80" y1="-4" x2="80" y2="18" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <circle cx="80" cy="-14" r="10" fill="var(--content-base-default)" />
+            <text x="80" y="-10" textAnchor="middle" fill="var(--content-base-onColor)" fontSize="10" fontWeight={typography.fontWeight.semibold}>1</text>
 
-            <line x1="200" y1="110" x2="200" y2="125" stroke="var(--content-base-default)" strokeWidth="1.5" />
-            <circle cx="200" cy="125" r="10" fill="var(--content-base-default)" />
-            <text x="200" y="129" textAnchor="middle" fill="var(--content-base-onColor)" fontSize="10" fontWeight="600">2</text>
+            {/* Label 3: Badges — top */}
+            <line x1="142" y1="-4" x2="142" y2="22" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <circle cx="142" cy="-14" r="10" fill="var(--content-base-default)" />
+            <text x="142" y="-10" textAnchor="middle" fill="var(--content-base-onColor)" fontSize="10" fontWeight={typography.fontWeight.semibold}>3</text>
 
-            <line x1="140" y1="30" x2="140" y2="10" stroke="var(--content-base-default)" strokeWidth="1.5" />
-            <circle cx="140" cy="0" r="10" fill="var(--content-base-default)" />
-            <text x="140" y="4" textAnchor="middle" fill="var(--content-base-onColor)" fontSize="10" fontWeight="600">3</text>
+            {/* Label 4: Action — top */}
+            <line x1="347" y1="-4" x2="347" y2="28" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <circle cx="347" cy="-14" r="10" fill="var(--content-base-default)" />
+            <text x="347" y="-10" textAnchor="middle" fill="var(--content-base-onColor)" fontSize="10" fontWeight={typography.fontWeight.semibold}>4</text>
+
+            {/* Label 5: Leading Content — left */}
+            <line x1="18" y1="55" x2="28" y2="55" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <circle cx="8" cy="55" r="10" fill="var(--content-base-default)" />
+            <text x="8" y="59" textAnchor="middle" fill="var(--content-base-onColor)" fontSize="10" fontWeight={typography.fontWeight.semibold}>5</text>
+
+            {/* Label 2: Content — bottom */}
+            <line x1="240" y1="120" x2="240" y2="134" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <circle cx="240" cy="144" r="10" fill="var(--content-base-default)" />
+            <text x="240" y="148" textAnchor="middle" fill="var(--content-base-onColor)" fontSize="10" fontWeight={typography.fontWeight.semibold}>2</text>
+
+            {/* Label 6: Bottom Content — bottom */}
+            <line x1="160" y1="102" x2="160" y2="134" stroke="var(--content-base-default)" strokeWidth="1.5" />
+            <circle cx="160" cy="144" r="10" fill="var(--content-base-default)" />
+            <text x="160" y="148" textAnchor="middle" fill="var(--content-base-onColor)" fontSize="10" fontWeight={typography.fontWeight.semibold}>6</text>
           </svg>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16, marginTop: 20, fontSize: 14, fontWeight: 500, color: "var(--text-primary)" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: spacing.primitive[3], marginTop: spacing.primitive[5], fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.medium, color: "var(--text-primary)" }}>
           <div>1. Thumbnail</div>
-          <div style={{ textAlign: "center" }}>2. Content (Title, Subtitle, Meta)</div>
-          <div style={{ textAlign: "right" }}>3. Badges</div>
+          <div>2. Content (Title, Subtitle, Meta)</div>
+          <div>3. Badges</div>
+          <div>4. Action</div>
+          <div>5. Leading Content</div>
+          <div>6. Bottom Content</div>
         </div>
       </Section>
 
       {/* Variants */}
       <Section title="Variants">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
-          <InlineCode>variant</InlineCode> prop을 통해 3가지 스타일을 사용할 수 있습니다. 각 variant는 시각적 구분 방식이 다릅니다.
+        <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginBottom: spacing.primitive[4], lineHeight: 1.7 }}>
+          <InlineCode>variant</InlineCode> prop을 통해 3가지 스타일을 사용할 수 있어요. 각 variant는 시각적 구분 방식이 달라요.
         </p>
 
         <PreviewBox>
-          <div style={{ padding: 24, display: "flex", flexDirection: "column", gap: 12 }}>
+          <div style={{ padding: spacing.primitive[6], display: "flex", flexDirection: "column", gap: spacing.primitive[3] }}>
             <div>
-              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginBottom: 8 }}>Elevated - 그림자로 떠있는 느낌</p>
+              <p style={{ fontSize: typography.fontSize.xs, color: "var(--content-base-secondary)", marginBottom: spacing.primitive[2] }}>Elevated - 그림자로 떠있는 느낌</p>
               <ListCardDemo variant="elevated" size="small" thumbnail={<EthereumIcon size={40} />} title="Ethereum" subtitle="0.7812 ETH" meta="₩3,245,000" />
             </div>
             <div>
-              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginBottom: 8 }}>Outlined - 테두리로 영역 구분</p>
+              <p style={{ fontSize: typography.fontSize.xs, color: "var(--content-base-secondary)", marginBottom: spacing.primitive[2] }}>Outlined - 테두리로 영역 구분</p>
               <ListCardDemo variant="outlined" size="small" thumbnail={<BitcoinIcon size={40} />} title="Bitcoin" subtitle="0.0234 BTC" meta="₩2,890,000" />
             </div>
             <div>
-              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginBottom: 8 }}>Filled - 배경색으로 영역 표시</p>
+              <p style={{ fontSize: typography.fontSize.xs, color: "var(--content-base-secondary)", marginBottom: spacing.primitive[2] }}>Filled - 배경색으로 영역 표시</p>
               <ListCardDemo variant="filled" size="small" thumbnail={<EthereumIcon size={40} />} title="Ethereum" subtitle="0.5000 ETH" meta="₩2,100,000" />
             </div>
           </div>
         </PreviewBox>
       </Section>
 
-      {/* Colors */}
-      <Section title="Colors">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
-          ListCard의 배경색과 테두리는 variant에 따라 결정되며, 강조 표시를 위해 border 색상을 커스터마이징할 수 있습니다.
+      {/* Sizes */}
+      <Section title="Sizes">
+        <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginBottom: spacing.primitive[4], lineHeight: 1.7 }}>
+          <InlineCode>size</InlineCode> prop을 통해 3가지 크기를 사용할 수 있어요. 크기에 따라 padding, 썸네일 크기, 텍스트 크기가 변경돼요.
         </p>
 
-        <div style={{ marginBottom: 24, overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)" }}>
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+        <div style={{ marginBottom: spacing.primitive[6], overflow: "auto", borderRadius: radius.primitive.md }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.sm }}>
             <thead>
-              <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Variant</th>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Background</th>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Border</th>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Shadow</th>
+              <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
+                <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Size</th>
+                <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Padding</th>
+                <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Thumbnail</th>
+                <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>용도</th>
               </tr>
             </thead>
             <tbody>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "12px 16px" }}><InlineCode>elevated</InlineCode></td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>surface.base.default</td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>none</td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>0 1px 3px var(--shadow-primitive-xs)</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px` }}><InlineCode>small</InlineCode></td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>12px</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>56px</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>밀도 높은 리스트, 검색 결과</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "12px 16px" }}><InlineCode>outlined</InlineCode></td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>surface.base.default</td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>border.solid.alternative</td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>none</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px` }}><InlineCode>medium</InlineCode></td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>16px</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>80px</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>기본값, 상품 목록</td>
               </tr>
               <tr>
-                <td style={{ padding: "12px 16px" }}><InlineCode>filled</InlineCode></td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>surface.base.alternative</td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>none</td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>none</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px` }}><InlineCode>large</InlineCode></td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>16px</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>100px</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>강조 카드, 거래소 비교</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <PreviewBox>
+          <div style={{ padding: spacing.primitive[6], display: "flex", flexDirection: "column", gap: spacing.primitive[4] }}>
+            {(["small", "medium", "large"] as ListCardSize[]).map((s) => (
+              <div key={s}>
+                <p style={{ fontSize: typography.fontSize.xs, color: "var(--content-base-secondary)", marginBottom: spacing.primitive[2] }}>{s} (thumbnail: {sizeConfig[s].thumbnailSize}px)</p>
+                <ListCardDemo variant="elevated" size={s} thumbnail={<EthereumIcon size={sizeConfig[s].thumbnailSize} />} badges={<TrendBadge trend="up" value="+5.2%" />} title="Ethereum" subtitle="0.7812 ETH" meta="₩3,245,000" onClick={() => {}} />
+              </div>
+            ))}
+          </div>
+        </PreviewBox>
+      </Section>
+
+      {/* Colors */}
+      <Section title="Colors">
+        <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginBottom: spacing.primitive[4], lineHeight: 1.7 }}>
+          ListCard의 배경색과 테두리는 variant에 따라 결정되며, 강조 표시를 위해 border 색상을 커스터마이징할 수 있어요.
+        </p>
+
+        <div style={{ marginBottom: spacing.primitive[6], overflow: "auto", borderRadius: radius.primitive.md }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.sm }}>
+            <thead>
+              <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
+                <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Variant</th>
+                <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Background</th>
+                <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Border</th>
+                <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Shadow</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px` }}><InlineCode>elevated</InlineCode></td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>surface.base.default</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>none</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>var(--shadow-semantic-card-elevated)</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px` }}><InlineCode>outlined</InlineCode></td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>surface.base.default</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>border.base.default</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>none</td>
+              </tr>
+              <tr>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px` }}><InlineCode>filled</InlineCode></td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>surface.base.alternative</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>none</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>none</td>
               </tr>
             </tbody>
           </table>
         </div>
 
         <Subsection title="Highlighted Border">
-          <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
-            특정 카드를 강조하기 위해 border 색상을 변경할 수 있습니다. 예를 들어 &quot;Best&quot; 옵션을 표시할 때 사용합니다.
+          <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginBottom: spacing.primitive[4], lineHeight: 1.7 }}>
+            특정 카드를 강조하기 위해 border 색상을 변경할 수 있어요. 예를 들어 &quot;Best&quot; 옵션을 표시할 때 사용해요.
           </p>
           <PreviewBox>
-            <div style={{ padding: 24, display: "flex", flexDirection: "column", gap: 12 }}>
-              <div style={{ border: "2px solid var(--border-brand-default)", borderRadius: 12 }}>
-                <ListCardDemo variant="outlined" size="small" thumbnail={<EthereumIcon size={40} />} badges={<span style={{ display: "inline-flex", padding: "2px 8px", fontSize: 11, fontWeight: 600, color: "var(--content-brand-default)", backgroundColor: "var(--surface-brand-secondary)", borderRadius: 4 }}>Best</span>} title="ZKAP 최적구매" subtitle="0.7812 ETH" meta="₩3,245,000" onClick={() => {}} />
+            <div style={{ padding: spacing.primitive[6], display: "flex", flexDirection: "column", gap: spacing.primitive[3] }}>
+              <div style={{ border: "2px solid var(--border-brand-default)", borderRadius: radius.primitive.md }}>
+                <ListCardDemo variant="outlined" size="small" thumbnail={<EthereumIcon size={40} />} badges={<span style={{ display: "inline-flex", padding: "2px 8px", fontSize: typography.fontSize.xs, fontWeight: typography.fontWeight.semibold, color: "var(--content-brand-default)", backgroundColor: "var(--surface-brand-secondary)", borderRadius: radius.primitive.xs }}>Best</span>} title="ZKAP 최적구매" subtitle="0.7812 ETH" meta="₩3,245,000" onClick={() => {}} />
               </div>
               <ListCardDemo variant="outlined" size="small" thumbnail={<BitcoinIcon size={40} />} title="빗썸" subtitle="0.7788 ETH" meta="- 1,600원" onClick={() => {}} />
             </div>
@@ -316,24 +436,24 @@ function DesignContent() {
 
       {/* States */}
       <Section title="States">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
-          ListCard는 사용자 상호작용에 따라 다양한 상태를 가집니다. 각 상태는 시각적으로 구분되어 피드백을 제공합니다.
+        <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginBottom: spacing.primitive[4], lineHeight: 1.7 }}>
+          ListCard는 사용자 상호작용에 따라 다양한 상태를 가져요. 각 상태는 시각적으로 구분되어 피드백을 제공해요.
         </p>
 
         <PreviewBox>
-          <div style={{ padding: 24, display: "flex", flexDirection: "column", gap: 16 }}>
+          <div style={{ padding: spacing.primitive[6], display: "flex", flexDirection: "column", gap: spacing.primitive[4] }}>
             <div>
-              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginBottom: 8 }}>Default</p>
+              <p style={{ fontSize: typography.fontSize.xs, color: "var(--content-base-secondary)", marginBottom: spacing.primitive[2] }}>Default</p>
               <ListCardDemo variant="elevated" size="small" thumbnail={<EthereumIcon size={40} />} title="Ethereum" subtitle="0.7812 ETH" meta="₩3,245,000" onClick={() => {}} />
             </div>
             <div>
-              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginBottom: 8 }}>Pressed / Hover</p>
-              <div style={{ backgroundColor: "var(--surface-base-containerPressed)", borderRadius: 12 }}>
+              <p style={{ fontSize: typography.fontSize.xs, color: "var(--content-base-secondary)", marginBottom: spacing.primitive[2] }}>Pressed / Hover</p>
+              <div style={{ backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.md }}>
                 <ListCardDemo variant="elevated" size="small" thumbnail={<EthereumIcon size={40} />} title="Ethereum" subtitle="0.7812 ETH" meta="₩3,245,000" />
               </div>
             </div>
             <div>
-              <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginBottom: 8 }}>Disabled</p>
+              <p style={{ fontSize: typography.fontSize.xs, color: "var(--content-base-secondary)", marginBottom: spacing.primitive[2] }}>Disabled</p>
               <div style={{ opacity: 0.4, pointerEvents: "none" as const }}>
                 <ListCardDemo variant="elevated" size="small" thumbnail={<EthereumIcon size={40} />} title="Ethereum" subtitle="0.7812 ETH" meta="₩3,245,000" />
               </div>
@@ -341,255 +461,74 @@ function DesignContent() {
           </div>
         </PreviewBox>
 
-        <div style={{ marginTop: 16, padding: 16, backgroundColor: "var(--bg-secondary)", borderRadius: 12, fontSize: 13 }}>
-          <p style={{ margin: 0, color: "var(--text-secondary)", lineHeight: 1.8 }}>
+        <div style={{ marginTop: spacing.primitive[4], padding: spacing.primitive[4], backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.md, fontSize: typography.fontSize.compact }}>
+          <p style={{ margin: 0, color: "var(--text-secondary)", lineHeight: 1.7 }}>
             <strong style={{ color: "var(--text-primary)" }}>Default:</strong> 기본 스타일 (variant별 배경/테두리/그림자)<br />
-            <strong style={{ color: "var(--text-primary)" }}>Pressed/Hover:</strong> 배경색에 <InlineCode>surface.base.containerPressed</InlineCode> 적용<br />
+            <strong style={{ color: "var(--text-primary)" }}>Pressed/Hover:</strong> elevated/outlined → <InlineCode>surface.base.alternative</InlineCode>, filled → <InlineCode>surface.base.container</InlineCode><br />
             <strong style={{ color: "var(--text-primary)" }}>Disabled:</strong> 전체 opacity 감소, 상호작용 불가
           </p>
         </div>
-      </Section>
 
-      {/* Sizes */}
-      <Section title="Sizes">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
-          <InlineCode>size</InlineCode> prop을 통해 3가지 크기를 사용할 수 있습니다. 크기에 따라 padding, 썸네일 크기, 텍스트 크기가 변경됩니다.
-        </p>
-
-        <div style={{ marginBottom: 24, overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)" }}>
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
-            <thead>
-              <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Size</th>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Padding</th>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Thumbnail</th>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>용도</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "12px 16px" }}><InlineCode>small</InlineCode></td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>12px</td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>40px</td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>밀도 높은 리스트, 검색 결과</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "12px 16px" }}><InlineCode>medium</InlineCode></td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>16px</td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>48px</td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>기본값, 상품 목록</td>
-              </tr>
-              <tr>
-                <td style={{ padding: "12px 16px" }}><InlineCode>large</InlineCode></td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>20px</td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>56px</td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>강조 카드, 거래소 비교</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <PreviewBox>
-          <div style={{ padding: 24, display: "flex", flexDirection: "column", gap: 16 }}>
-            {(["small", "medium", "large"] as ListCardSize[]).map((s) => (
-              <div key={s}>
-                <p style={{ fontSize: 11, color: "var(--content-base-secondary)", marginBottom: 8 }}>{s} (thumbnail: {sizeConfig[s].thumbnailSize}px)</p>
-                <ListCardDemo variant="elevated" size={s} thumbnail={<EthereumIcon size={sizeConfig[s].thumbnailSize} />} badges={<TrendBadge trend="up" value="+5.2%" />} title="Ethereum" subtitle="0.7812 ETH" meta="₩3,245,000" onClick={() => {}} />
+        <Subsection title="Interaction States">
+          <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", lineHeight: 1.7, marginBottom: spacing.primitive[6] }}>
+            ListCard는 클릭 가능한 카드로, 사용자 상호작용에 따라 배경색과 그림자 변화로 피드백을 제공해요.
+          </p>
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
+            gap: spacing.primitive[4],
+            padding: spacing.primitive[6],
+            backgroundColor: "var(--surface-base-alternative)",
+            borderRadius: radius.primitive.lg,
+          }}>
+            <StateCard label="Default" sublabel="기본 상태">
+              <div style={{ width: 130, height: 48, borderRadius: radius.primitive.sm, backgroundColor: "var(--surface-base-default)", boxShadow: "var(--shadow-semantic-card-default)", display: "flex", alignItems: "center", padding: "0 10px", gap: spacing.primitive[2] }}>
+                <div style={{ width: 28, height: 28, borderRadius: 14, backgroundColor: "var(--surface-base-alternative)", flexShrink: 0 }} />
+                <div style={{ flex: 1 }}>
+                  <div style={{ height: 6, width: "70%", backgroundColor: "var(--border-base-default)", borderRadius: radius.primitive.xs }} />
+                  <div style={{ height: 5, width: "50%", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, marginTop: spacing.primitive[1] }} />
+                </div>
               </div>
-            ))}
+            </StateCard>
+            <StateCard label="Hover" sublabel="마우스 오버">
+              <div style={{ width: 130, height: 48, borderRadius: radius.primitive.sm, backgroundColor: "var(--surface-base-default)", boxShadow: "var(--shadow-semantic-card-default)", display: "flex", alignItems: "center", padding: "0 10px", gap: spacing.primitive[2] }}>
+                <div style={{ width: 28, height: 28, borderRadius: 14, backgroundColor: "var(--surface-base-alternative)", flexShrink: 0 }} />
+                <div style={{ flex: 1 }}>
+                  <div style={{ height: 6, width: "70%", backgroundColor: "var(--border-base-default)", borderRadius: radius.primitive.xs }} />
+                  <div style={{ height: 5, width: "50%", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, marginTop: spacing.primitive[1] }} />
+                </div>
+              </div>
+            </StateCard>
+            <StateCard label="Pressed" sublabel="눌림 상태">
+              <div style={{ width: 130, height: 48, borderRadius: radius.primitive.sm, backgroundColor: "var(--surface-base-alternative)", boxShadow: "none", display: "flex", alignItems: "center", padding: "0 10px", gap: spacing.primitive[2] }}>
+                <div style={{ width: 28, height: 28, borderRadius: 14, backgroundColor: "var(--surface-base-alternative)", flexShrink: 0 }} />
+                <div style={{ flex: 1 }}>
+                  <div style={{ height: 6, width: "70%", backgroundColor: "var(--border-base-default)", borderRadius: radius.primitive.xs }} />
+                  <div style={{ height: 5, width: "50%", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, marginTop: spacing.primitive[1] }} />
+                </div>
+              </div>
+            </StateCard>
+            <StateCard label="Focused" sublabel="키보드 포커스">
+              <div style={{ width: 130, height: 48, borderRadius: radius.primitive.sm, backgroundColor: "var(--surface-base-default)", boxShadow: "var(--shadow-semantic-card-default)", outline: "2px solid var(--content-brand-default)", outlineOffset: 2, display: "flex", alignItems: "center", padding: "0 10px", gap: spacing.primitive[2] }}>
+                <div style={{ width: 28, height: 28, borderRadius: 14, backgroundColor: "var(--surface-base-alternative)", flexShrink: 0 }} />
+                <div style={{ flex: 1 }}>
+                  <div style={{ height: 6, width: "70%", backgroundColor: "var(--border-base-default)", borderRadius: radius.primitive.xs }} />
+                  <div style={{ height: 5, width: "50%", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, marginTop: spacing.primitive[1] }} />
+                </div>
+              </div>
+            </StateCard>
           </div>
-        </PreviewBox>
-      </Section>
-
-      {/* Interaction States */}
-      <Section title="Interaction States">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 24 }}>
-          ListCard는 클릭 가능한 카드로, 사용자 상호작용에 따라 배경색과 그림자 변화로 피드백을 제공합니다.
-        </p>
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
-          gap: 16,
-          padding: 24,
-          backgroundColor: "var(--surface-base-alternative)",
-          borderRadius: 16,
-        }}>
-          <StateCard label="Default" sublabel="기본 상태">
-            <div style={{ width: 130, height: 48, borderRadius: 10, backgroundColor: "var(--surface-base-default)", boxShadow: "var(--shadow-semantic-card-default)", display: "flex", alignItems: "center", padding: "0 10px", gap: 8 }}>
-              <div style={{ width: 28, height: 28, borderRadius: 14, backgroundColor: "var(--surface-base-alternative)", flexShrink: 0 }} />
-              <div style={{ flex: 1 }}>
-                <div style={{ height: 6, width: "70%", backgroundColor: "var(--border-base-default)", borderRadius: 3 }} />
-                <div style={{ height: 5, width: "50%", backgroundColor: "var(--surface-base-alternative)", borderRadius: 3, marginTop: 4 }} />
-              </div>
-            </div>
-          </StateCard>
-          <StateCard label="Hover" sublabel="마우스 오버">
-            <div style={{ width: 130, height: 48, borderRadius: 10, backgroundColor: "var(--surface-base-default)", boxShadow: "var(--shadow-semantic-card-elevated)", display: "flex", alignItems: "center", padding: "0 10px", gap: 8 }}>
-              <div style={{ width: 28, height: 28, borderRadius: 14, backgroundColor: "var(--surface-base-alternative)", flexShrink: 0 }} />
-              <div style={{ flex: 1 }}>
-                <div style={{ height: 6, width: "70%", backgroundColor: "var(--border-base-default)", borderRadius: 3 }} />
-                <div style={{ height: 5, width: "50%", backgroundColor: "var(--surface-base-alternative)", borderRadius: 3, marginTop: 4 }} />
-              </div>
-            </div>
-          </StateCard>
-          <StateCard label="Pressed" sublabel="눌림 상태">
-            <div style={{ width: 130, height: 48, borderRadius: 10, backgroundColor: "var(--surface-base-containerPressed)", boxShadow: "var(--shadow-primitive-xs)", display: "flex", alignItems: "center", padding: "0 10px", gap: 8 }}>
-              <div style={{ width: 28, height: 28, borderRadius: 14, backgroundColor: "var(--surface-base-alternative)", flexShrink: 0 }} />
-              <div style={{ flex: 1 }}>
-                <div style={{ height: 6, width: "70%", backgroundColor: "var(--border-base-default)", borderRadius: 3 }} />
-                <div style={{ height: 5, width: "50%", backgroundColor: "var(--surface-base-alternative)", borderRadius: 3, marginTop: 4 }} />
-              </div>
-            </div>
-          </StateCard>
-          <StateCard label="Focused" sublabel="키보드 포커스">
-            <div style={{ width: 130, height: 48, borderRadius: 10, backgroundColor: "var(--surface-base-default)", boxShadow: "var(--shadow-semantic-card-default)", outline: "2px solid var(--content-brand-default)", outlineOffset: 2, display: "flex", alignItems: "center", padding: "0 10px", gap: 8 }}>
-              <div style={{ width: 28, height: 28, borderRadius: 14, backgroundColor: "var(--surface-base-alternative)", flexShrink: 0 }} />
-              <div style={{ flex: 1 }}>
-                <div style={{ height: 6, width: "70%", backgroundColor: "var(--border-base-default)", borderRadius: 3 }} />
-                <div style={{ height: 5, width: "50%", backgroundColor: "var(--surface-base-alternative)", borderRadius: 3, marginTop: 4 }} />
-              </div>
-            </div>
-          </StateCard>
-        </div>
-      </Section>
-
-      {/* Design Tokens (Spec) */}
-      <Section title="Design Tokens">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 16 }}>
-          컴포넌트에 적용된 디자인 토큰입니다. 커스터마이징 시 아래 토큰을 참조하세요.
-        </p>
-        <div style={{ overflowX: "auto" }}>
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
-            <thead>
-              <tr style={{ borderBottom: "2px solid var(--border-default)" }}>
-                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: 600 }}>속성</th>
-                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: 600 }}>토큰</th>
-                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: 600 }}>값</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>배경색</td>
-                <td style={{ padding: "10px 12px" }}>
-                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>--surface-base-default</code>
-                </td>
-                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>
-                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
-                    <span style={{ width: 12, height: 12, borderRadius: 3, backgroundColor: "var(--surface-base-default)", border: "1px solid var(--border-default)" }} />
-                    White / Dark Grey
-                  </span>
-                </td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>텍스트</td>
-                <td style={{ padding: "10px 12px" }}>
-                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>--content-base-default</code>
-                </td>
-                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>
-                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
-                    <span style={{ width: 12, height: 12, borderRadius: 3, backgroundColor: "var(--content-base-default)", border: "1px solid var(--border-default)" }} />
-                    Title
-                  </span>
-                </td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>서브텍스트</td>
-                <td style={{ padding: "10px 12px" }}>
-                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>--text-secondary</code>
-                </td>
-                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>
-                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
-                    <span style={{ width: 12, height: 12, borderRadius: 3, backgroundColor: "var(--text-secondary)", border: "1px solid var(--border-default)" }} />
-                    Subtitle
-                  </span>
-                </td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>썸네일 크기 (sm)</td>
-                <td style={{ padding: "10px 12px" }}>
-                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>spacing.component.thumbnail.sm</code>
-                </td>
-                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>56px</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>썸네일 크기 (md)</td>
-                <td style={{ padding: "10px 12px" }}>
-                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>spacing.component.thumbnail.md</code>
-                </td>
-                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>80px</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>썸네일 크기 (lg)</td>
-                <td style={{ padding: "10px 12px" }}>
-                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>spacing.component.thumbnail.lg</code>
-                </td>
-                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>100px</td>
-              </tr>
-              <tr>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>border-radius</td>
-                <td style={{ padding: "10px 12px" }}>
-                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>radius.semantic.card.sm</code>
-                </td>
-                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>12px</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </Section>
-
-      {/* UX Writing */}
-      <Section title="UX Writing">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 24 }}>
-          ListCard의 타이틀과 서브텍스트는 정보 계층을 명확히 구분하고, 핵심 정보만 간결하게 표시합니다.
-        </p>
-        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-            <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-success-default)", border: "1px solid var(--border-success-default)" }}>
-              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-success-default)", marginBottom: 8 }}>DO</div>
-              <code style={{ fontSize: 14, color: "var(--text-primary)" }}>&quot;삼성전자 005930&quot;</code>
-              <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4, margin: 0 }}>핵심 식별 정보만 타이틀에 표시</p>
-            </div>
-            <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-error-default)", border: "1px solid var(--border-error-default)" }}>
-              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-error-default)", marginBottom: 8 }}>DON&apos;T</div>
-              <code style={{ fontSize: 14, color: "var(--text-primary)" }}>&quot;삼성전자 주식회사 (005930)&quot;</code>
-              <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4, margin: 0 }}>불필요한 정보는 서브텍스트로 분리하세요</p>
-            </div>
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-            <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-success-default)", border: "1px solid var(--border-success-default)" }}>
-              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-success-default)", marginBottom: 8 }}>DO</div>
-              <code style={{ fontSize: 14, color: "var(--text-primary)" }}>서브텍스트에 보조 정보</code>
-              <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4, margin: 0 }}>정보 계층을 활용하세요</p>
-            </div>
-            <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-error-default)", border: "1px solid var(--border-error-default)" }}>
-              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-error-default)", marginBottom: 8 }}>DON&apos;T</div>
-              <code style={{ fontSize: 14, color: "var(--text-primary)" }}>타이틀에 모든 정보 넣기</code>
-              <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4, margin: 0 }}>타이틀이 길어지면 가독성이 떨어집니다</p>
-            </div>
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-            <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-success-default)", border: "1px solid var(--border-success-default)" }}>
-              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-success-default)", marginBottom: 8 }}>DO</div>
-              <code style={{ fontSize: 14, color: "var(--text-primary)" }}>&quot;72,300원&quot;</code>
-              <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4, margin: 0 }}>Meta에는 수치만 표시</p>
-            </div>
-            <div style={{ padding: 16, borderRadius: 12, backgroundColor: "var(--surface-error-default)", border: "1px solid var(--border-error-default)" }}>
-              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--content-error-default)", marginBottom: 8 }}>DON&apos;T</div>
-              <code style={{ fontSize: 14, color: "var(--text-primary)" }}>&quot;현재가: 72,300원&quot;</code>
-              <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4, margin: 0 }}>레이블이 이미 있으면 반복하지 마세요</p>
-            </div>
-          </div>
-        </div>
+        </Subsection>
       </Section>
 
       {/* Usage Guidelines */}
       <Section title="Usage Guidelines">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 24, lineHeight: 1.6 }}>
-          일관된 UX를 위해 아래 권고 조합을 따르세요. <strong style={{ color: "var(--text-primary)" }}>권장 패턴</strong>을 사용하면 사용자가 예측 가능한 경험을 할 수 있습니다.
+        <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginBottom: spacing.primitive[6], lineHeight: 1.7 }}>
+          일관된 UX를 위해 아래 권고 조합을 따르세요. <strong style={{ color: "var(--text-primary)" }}>권장 패턴</strong>을 사용하면 사용자가 예측 가능한 경험을 할 수 있어요.
         </p>
 
         <Subsection title="Recommended Combinations">
-          <div style={{ display: "grid", gap: 12 }}>
+          <div style={{ display: "grid", gap: spacing.primitive[3] }}>
             <UsageCard
               situation="Product Listing"
               description="상품 목록에서 썸네일과 함께 정보를 표시하는 카드"
@@ -612,7 +551,7 @@ function DesignContent() {
         </Subsection>
 
         <Subsection title="Design Principles">
-          <div style={{ display: "grid", gap: 16 }}>
+          <div style={{ display: "grid", gap: spacing.primitive[4] }}>
             <PrincipleCard
               number={1}
               title="Variant 일관성"
@@ -626,158 +565,361 @@ function DesignContent() {
             <PrincipleCard
               number={3}
               title="적절한 밀도"
-              desc="카드 간 gap은 8-16px를 유지하세요. 너무 빽빽하면 가독성이 떨어지고, 너무 넓으면 연관성이 약해집니다. small size는 12px, medium/large는 16px gap을 권장합니다."
+              desc="카드 간 gap은 8-16px를 유지하세요. 너무 빽빽하면 가독성이 떨어지고, 너무 넓으면 연관성이 약해져요. small size는 12px, medium/large는 16px gap을 권장해요."
             />
+          </div>
+        </Subsection>
+
+        <Subsection title="Best Practices">
+          <div style={{ display: "grid", gap: spacing.primitive[5] }}>
+            {/* Pair 1: Consistent variant and size */}
+            <div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4] }}>
+                <DoCard>
+                  <div style={{ display: "flex", flexDirection: "column", gap: spacing.primitive[2], width: "100%", maxWidth: 260, padding: "0 8px" }}>
+                    <ListCardDemo variant="elevated" size="small" thumbnail={<EthereumIcon size={40} />} badges={<TrendBadge trend="up" value="+5.2%" />} title="Ethereum" subtitle="0.7812 ETH" meta="₩3,245,000" />
+                    <ListCardDemo variant="elevated" size="small" thumbnail={<BitcoinIcon size={40} />} badges={<TrendBadge trend="down" value="-2.1%" />} title="Bitcoin" subtitle="0.0234 BTC" meta="₩2,890,000" />
+                  </div>
+                </DoCard>
+                <DontCard>
+                  <div style={{ display: "flex", flexDirection: "column", gap: spacing.primitive[2], width: "100%", maxWidth: 260, padding: "0 8px" }}>
+                    <ListCardDemo variant="elevated" size="small" thumbnail={<EthereumIcon size={40} />} badges={<TrendBadge trend="up" value="+5.2%" />} title="Ethereum" subtitle="0.7812 ETH" meta="₩3,245,000" />
+                    <ListCardDemo variant="outlined" size="medium" thumbnail={<BitcoinIcon size={48} />} title="Bitcoin" meta="₩2,890,000" />
+                  </div>
+                </DontCard>
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4], marginTop: spacing.primitive[2] }}>
+                <p style={{ fontSize: typography.fontSize.compact, color: "var(--content-success-default)", display: "flex", alignItems: "flex-start", gap: spacing.primitive[2], margin: 0 }}>
+                  <span style={{ fontWeight: typography.fontWeight.bold, flexShrink: 0 }}>Do</span>
+                  <span style={{ color: "var(--text-secondary)" }}>같은 목록에서 동일한 variant와 size를 사용합니다.</span>
+                </p>
+                <p style={{ fontSize: typography.fontSize.compact, color: "var(--content-error-default)", display: "flex", alignItems: "flex-start", gap: spacing.primitive[2], margin: 0 }}>
+                  <span style={{ fontWeight: typography.fontWeight.bold, flexShrink: 0 }}>Don&apos;t</span>
+                  <span style={{ color: "var(--text-secondary)", fontStyle: "italic" }}>같은 목록에서 서로 다른 variant, size, 구조를 혼합하지 않습니다.</span>
+                </p>
+              </div>
+            </div>
+
+            {/* Pair 2: Concise info */}
+            <div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4] }}>
+                <DoCard>
+                  <div style={{ width: "100%", maxWidth: 260, padding: "0 8px" }}>
+                    <ListCardDemo variant="elevated" size="small" thumbnail={<EthereumIcon size={40} />} title="Ethereum" subtitle="0.7812 ETH" meta="₩3.2M" />
+                  </div>
+                </DoCard>
+                <DontCard>
+                  <div style={{ width: "100%", maxWidth: 260, padding: "0 8px" }}>
+                    <ListCardDemo variant="elevated" size="small" title="Ethereum 이더리움 코인" subtitle="보유량: 0.7812 ETH, 매수가: ₩3,100,000" meta="현재가: ₩3,245,000 (수익률 +4.7%)" />
+                  </div>
+                </DontCard>
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4], marginTop: spacing.primitive[2] }}>
+                <p style={{ fontSize: typography.fontSize.compact, color: "var(--content-success-default)", display: "flex", alignItems: "flex-start", gap: spacing.primitive[2], margin: 0 }}>
+                  <span style={{ fontWeight: typography.fontWeight.bold, flexShrink: 0 }}>Do</span>
+                  <span style={{ color: "var(--text-secondary)" }}>정보를 간결하게 정리하고 Meta는 핵심 수치만 표시합니다.</span>
+                </p>
+                <p style={{ fontSize: typography.fontSize.compact, color: "var(--content-error-default)", display: "flex", alignItems: "flex-start", gap: spacing.primitive[2], margin: 0 }}>
+                  <span style={{ fontWeight: typography.fontWeight.bold, flexShrink: 0 }}>Don&apos;t</span>
+                  <span style={{ color: "var(--text-secondary)", fontStyle: "italic" }}>한 카드에 너무 많은 정보를 담으면 가독성이 떨어져요.</span>
+                </p>
+              </div>
+            </div>
+
+            {/* Pair 3: UX Writing - title naming */}
+            <div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4] }}>
+                <DoCard>
+                  <div style={{ textAlign: "center" }}>
+                    <InlineCode>&quot;삼성전자 005930&quot;</InlineCode>
+                    <p style={{ fontSize: typography.fontSize.xs, color: "var(--text-tertiary)", margin: 0, marginTop: spacing.primitive[1] }}>핵심 식별 정보만 타이틀에 표시</p>
+                  </div>
+                </DoCard>
+                <DontCard>
+                  <div style={{ textAlign: "center" }}>
+                    <InlineCode>&quot;삼성전자 주식회사 (005930)&quot;</InlineCode>
+                    <p style={{ fontSize: typography.fontSize.xs, color: "var(--text-tertiary)", margin: 0, marginTop: spacing.primitive[1] }}>불필요한 정보는 서브텍스트로 분리하세요</p>
+                  </div>
+                </DontCard>
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4], marginTop: spacing.primitive[2] }}>
+                <p style={{ fontSize: typography.fontSize.compact, color: "var(--content-success-default)", display: "flex", alignItems: "flex-start", gap: spacing.primitive[2], margin: 0 }}>
+                  <span style={{ fontWeight: typography.fontWeight.bold, flexShrink: 0 }}>Do</span>
+                  <span style={{ color: "var(--text-secondary)" }}>타이틀에는 핵심 식별 정보만 표시합니다.</span>
+                </p>
+                <p style={{ fontSize: typography.fontSize.compact, color: "var(--content-error-default)", display: "flex", alignItems: "flex-start", gap: spacing.primitive[2], margin: 0 }}>
+                  <span style={{ fontWeight: typography.fontWeight.bold, flexShrink: 0 }}>Don&apos;t</span>
+                  <span style={{ color: "var(--text-secondary)", fontStyle: "italic" }}>불필요한 정보를 타이틀에 포함하지 마세요.</span>
+                </p>
+              </div>
+            </div>
+
+            {/* Pair 4: UX Writing - meta formatting */}
+            <div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4] }}>
+                <DoCard>
+                  <div style={{ textAlign: "center" }}>
+                    <InlineCode>&quot;72,300원&quot;</InlineCode>
+                    <p style={{ fontSize: typography.fontSize.xs, color: "var(--text-tertiary)", margin: 0, marginTop: spacing.primitive[1] }}>Meta에는 수치만 표시</p>
+                  </div>
+                </DoCard>
+                <DontCard>
+                  <div style={{ textAlign: "center" }}>
+                    <InlineCode>&quot;현재가: 72,300원&quot;</InlineCode>
+                    <p style={{ fontSize: typography.fontSize.xs, color: "var(--text-tertiary)", margin: 0, marginTop: spacing.primitive[1] }}>레이블이 이미 있으면 반복하지 마세요</p>
+                  </div>
+                </DontCard>
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4], marginTop: spacing.primitive[2] }}>
+                <p style={{ fontSize: typography.fontSize.compact, color: "var(--content-success-default)", display: "flex", alignItems: "flex-start", gap: spacing.primitive[2], margin: 0 }}>
+                  <span style={{ fontWeight: typography.fontWeight.bold, flexShrink: 0 }}>Do</span>
+                  <span style={{ color: "var(--text-secondary)" }}>Meta에는 수치만 간결하게 표시합니다.</span>
+                </p>
+                <p style={{ fontSize: typography.fontSize.compact, color: "var(--content-error-default)", display: "flex", alignItems: "flex-start", gap: spacing.primitive[2], margin: 0 }}>
+                  <span style={{ fontWeight: typography.fontWeight.bold, flexShrink: 0 }}>Don&apos;t</span>
+                  <span style={{ color: "var(--text-secondary)", fontStyle: "italic" }}>레이블이 이미 있으면 반복하지 마세요.</span>
+                </p>
+              </div>
+            </div>
+
+            {/* Pair 5: UX Writing - subtitle hierarchy */}
+            <div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4] }}>
+                <DoCard>
+                  <div style={{ textAlign: "center" }}>
+                    <InlineCode>서브텍스트에 보조 정보</InlineCode>
+                    <p style={{ fontSize: typography.fontSize.xs, color: "var(--text-tertiary)", margin: 0, marginTop: spacing.primitive[1] }}>정보 계층을 활용하세요</p>
+                  </div>
+                </DoCard>
+                <DontCard>
+                  <div style={{ textAlign: "center" }}>
+                    <InlineCode>타이틀에 모든 정보 넣기</InlineCode>
+                    <p style={{ fontSize: typography.fontSize.xs, color: "var(--text-tertiary)", margin: 0, marginTop: spacing.primitive[1] }}>타이틀이 길어지면 가독성이 떨어져요</p>
+                  </div>
+                </DontCard>
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4], marginTop: spacing.primitive[2] }}>
+                <p style={{ fontSize: typography.fontSize.compact, color: "var(--content-success-default)", display: "flex", alignItems: "flex-start", gap: spacing.primitive[2], margin: 0 }}>
+                  <span style={{ fontWeight: typography.fontWeight.bold, flexShrink: 0 }}>Do</span>
+                  <span style={{ color: "var(--text-secondary)" }}>정보 계층을 활용하여 Title/Subtitle/Meta를 구분합니다.</span>
+                </p>
+                <p style={{ fontSize: typography.fontSize.compact, color: "var(--content-error-default)", display: "flex", alignItems: "flex-start", gap: spacing.primitive[2], margin: 0 }}>
+                  <span style={{ fontWeight: typography.fontWeight.bold, flexShrink: 0 }}>Don&apos;t</span>
+                  <span style={{ color: "var(--text-secondary)", fontStyle: "italic" }}>타이틀에 모든 정보를 넣으면 가독성이 떨어져요.</span>
+                </p>
+              </div>
+            </div>
           </div>
         </Subsection>
       </Section>
 
-      {/* Best Practices */}
-      <Section title="Best Practices">
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
-          <DoCard>
-            <div style={{ display: "flex", flexDirection: "column", gap: 8, width: "100%", maxWidth: 260, padding: "0 8px" }}>
-              <ListCardDemo variant="elevated" size="small" thumbnail={<EthereumIcon size={40} />} badges={<TrendBadge trend="up" value="+5.2%" />} title="Ethereum" subtitle="0.7812 ETH" meta="₩3,245,000" />
-              <ListCardDemo variant="elevated" size="small" thumbnail={<BitcoinIcon size={40} />} badges={<TrendBadge trend="down" value="-2.1%" />} title="Bitcoin" subtitle="0.0234 BTC" meta="₩2,890,000" />
-            </div>
-          </DoCard>
-          <DontCard>
-            <div style={{ display: "flex", flexDirection: "column", gap: 8, width: "100%", maxWidth: 260, padding: "0 8px" }}>
-              <ListCardDemo variant="elevated" size="small" thumbnail={<EthereumIcon size={40} />} badges={<TrendBadge trend="up" value="+5.2%" />} title="Ethereum" subtitle="0.7812 ETH" meta="₩3,245,000" />
-              <ListCardDemo variant="outlined" size="medium" thumbnail={<BitcoinIcon size={48} />} title="Bitcoin" meta="₩2,890,000" />
-            </div>
-          </DontCard>
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 8 }}>
-          <DoLabel>같은 목록에서 동일한 variant와 size를 사용합니다.</DoLabel>
-          <DontLabel>같은 목록에서 서로 다른 variant, size, 구조를 혼합하지 않습니다.</DontLabel>
-        </div>
-
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 24 }}>
-          <DoCard>
-            <div style={{ width: "100%", maxWidth: 260, padding: "0 8px" }}>
-              <ListCardDemo variant="elevated" size="small" thumbnail={<EthereumIcon size={40} />} title="Ethereum" subtitle="0.7812 ETH" meta="₩3.2M" />
-            </div>
-          </DoCard>
-          <DontCard>
-            <div style={{ width: "100%", maxWidth: 260, padding: "0 8px" }}>
-              <ListCardDemo variant="elevated" size="small" title="Ethereum 이더리움 코인" subtitle="보유량: 0.7812 ETH, 매수가: ₩3,100,000" meta="현재가: ₩3,245,000 (수익률 +4.7%)" />
-            </div>
-          </DontCard>
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 8 }}>
-          <DoLabel>정보를 간결하게 정리하고 Meta는 핵심 수치만 표시합니다.</DoLabel>
-          <DontLabel>한 카드에 너무 많은 정보를 담으면 가독성이 떨어집니다.</DontLabel>
-        </div>
-      </Section>
-
       {/* Design Tokens */}
       <Section title="Design Tokens">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
-          ListCard 컴포넌트에 적용된 Foundation 기반 디자인 토큰입니다.
+        <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", lineHeight: 1.7, marginBottom: spacing.primitive[4] }}>
+          ListCard 컴포넌트에 적용된 Foundation 기반 디자인 토큰이에요.
         </p>
-        <div style={{ overflowX: "auto", borderRadius: 12, border: "1px solid var(--divider)" }}>
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
-            <thead>
-              <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Property</th>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Foundation Token</th>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>Value</th>
-              </tr>
-            </thead>
-            <tbody>
-              {[
-                ["Border Radius", "radius.semantic.card.sm", "12px"],
-                ["Thumbnail Radius", "radius.primitive.full", "50%"],
-                ["Padding (small)", "spacing.primitive.3", "12px"],
-                ["Padding (medium)", "spacing.primitive.4", "16px"],
-                ["Padding (large)", "spacing.primitive.5", "20px"],
-                ["Thumbnail (small)", "-", "40px"],
-                ["Thumbnail (medium)", "-", "48px"],
-                ["Thumbnail (large)", "-", "56px"],
-                ["Gap", "spacing.primitive.3", "12px"],
-              ].map(([prop, token, value], i) => (
-                <tr key={i} style={{ borderBottom: "1px solid var(--divider)" }}>
-                  <td style={{ padding: "12px 16px" }}>{prop}</td>
-                  <td style={{ padding: "12px 16px" }}>{token !== "-" ? <code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: 4, fontSize: 12 }}>{token}</code> : "-"}</td>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--content-brand-default)" }}>{value}</td>
+
+        <Subsection title="Spacing & Layout">
+          <div style={{ overflowX: "auto", borderRadius: radius.primitive.md, border: "1px solid var(--divider)", marginBottom: spacing.primitive[5] }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.compact }}>
+              <thead>
+                <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Property</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Foundation Token</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Value</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {[
+                  ["Border Radius", "radius.component.card.sm", "12px"],
+                  ["Thumbnail Radius", "radius.primitive.sm", "8px"],
+                  ["Padding (small)", "spacing.primitive[3]", "12px"],
+                  ["Padding (medium)", "spacing.primitive[4]", "16px"],
+                  ["Padding (large)", "spacing.primitive[4]", "16px"],
+                  ["Gap (small/medium)", "spacing.primitive[3]", "12px"],
+                  ["Gap (large)", "spacing.primitive[4]", "16px"],
+                  ["Content gap", "spacing.primitive[1]", "4px"],
+                  ["Badge margin-bottom", "spacing.primitive[1]", "4px"],
+                  ["Meta margin-top", "spacing.primitive[1]", "4px"],
+                ].map(([prop, token, value], i, arr) => (
+                  <tr key={i} style={{ borderBottom: i < arr.length - 1 ? "1px solid var(--divider)" : undefined }}>
+                    <td style={{ padding: "12px 16px", color: "var(--text-primary)" }}>{prop}</td>
+                    <td style={{ padding: "12px 16px" }}><InlineCode>{token}</InlineCode></td>
+                    <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>{value}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </Subsection>
+
+        <Subsection title="Thumbnail Size (Size별)">
+          <div style={{ overflowX: "auto", borderRadius: radius.primitive.md, border: "1px solid var(--divider)", marginBottom: spacing.primitive[5] }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.compact }}>
+              <thead>
+                <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Size</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Foundation Token</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  ["small", "spacing.component.listCard.thumbnailSize.sm", "56px"],
+                  ["medium", "spacing.component.listCard.thumbnailSize.md", "80px"],
+                  ["large", "spacing.component.listCard.thumbnailSize.lg", "100px"],
+                ].map(([size, token, value], i, arr) => (
+                  <tr key={i} style={{ borderBottom: i < arr.length - 1 ? "1px solid var(--divider)" : undefined }}>
+                    <td style={{ padding: "12px 16px" }}><InlineCode>{size}</InlineCode></td>
+                    <td style={{ padding: "12px 16px" }}><InlineCode>{token}</InlineCode></td>
+                    <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>{value}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </Subsection>
+
+        <Subsection title="Typography">
+          <div style={{ overflowX: "auto", borderRadius: radius.primitive.md, border: "1px solid var(--divider)", marginBottom: spacing.primitive[5] }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.compact }}>
+              <thead>
+                <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Element</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Foundation Token</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  ["Title (small)", "typography.fontSize.sm + fontWeight.semibold", "14px / 600"],
+                  ["Title (medium/large)", "typography.fontSize.md + fontWeight.semibold", "16px / 600"],
+                  ["Subtitle (small)", "typography.fontSize.xs + fontWeight.regular", "12px / 400"],
+                  ["Subtitle (medium)", "typography.fontSize.compact + fontWeight.regular", "13px / 400"],
+                  ["Subtitle (large)", "typography.fontSize.sm + fontWeight.regular", "14px / 400"],
+                  ["Meta (small)", "typography.fontSize.compact + fontWeight.bold", "13px / 700"],
+                  ["Meta (medium)", "typography.fontSize.sm + fontWeight.bold", "14px / 700"],
+                  ["Meta (large)", "typography.fontSize.md + fontWeight.bold", "16px / 700"],
+                ].map(([el, token, value], i, arr) => (
+                  <tr key={i} style={{ borderBottom: i < arr.length - 1 ? "1px solid var(--divider)" : undefined }}>
+                    <td style={{ padding: "12px 16px", color: "var(--text-primary)" }}>{el}</td>
+                    <td style={{ padding: "12px 16px" }}><InlineCode>{token}</InlineCode></td>
+                    <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>{value}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </Subsection>
+
+        <Subsection title="Colors">
+          <div style={{ overflowX: "auto", borderRadius: radius.primitive.md, border: "1px solid var(--divider)", marginBottom: spacing.primitive[5] }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.compact }}>
+              <thead>
+                <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Element</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Foundation Token</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>CSS Variable</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  ["BG (elevated)", "surface.base.default", "var(--surface-base-default)"],
+                  ["BG (outlined)", "surface.base.default", "var(--surface-base-default)"],
+                  ["BG (filled)", "surface.base.alternative", "var(--surface-base-alternative)"],
+                  ["BG pressed (elevated/outlined)", "surface.base.alternative", "var(--surface-base-alternative)"],
+                  ["BG pressed (filled)", "surface.base.container", "var(--surface-base-container)"],
+                  ["Border (outlined)", "border.base.default", "var(--border-base-default)"],
+                  ["Shadow (elevated)", "shadow.semantic.card.elevated", "var(--shadow-semantic-card-elevated)"],
+                  ["Thumbnail BG", "surface.base.container", "var(--surface-base-container)"],
+                  ["Title color", "content.base.default", "var(--content-base-default)"],
+                  ["Subtitle color", "content.base.secondary", "var(--content-base-secondary)"],
+                  ["Meta color", "content.base.default", "var(--content-base-default)"],
+                  ["Disabled opacity", "opacity.disabled", "0.5"],
+                ].map(([el, token, cssVar], i, arr) => (
+                  <tr key={i} style={{ borderBottom: i < arr.length - 1 ? "1px solid var(--divider)" : undefined }}>
+                    <td style={{ padding: "12px 16px", color: "var(--text-primary)" }}>{el}</td>
+                    <td style={{ padding: "12px 16px" }}><InlineCode>{token}</InlineCode></td>
+                    <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--text-secondary)" }}>{cssVar}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </Subsection>
       </Section>
 
       {/* Accessibility */}
       <Section title="Accessibility">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
-          ListCard 컴포넌트는 웹 접근성 표준을 준수합니다.
+        <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginBottom: spacing.primitive[4], lineHeight: 1.7 }}>
+          ListCard 컴포넌트는 웹 접근성 표준을 준수해요.
         </p>
 
-        <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)", marginBottom: 24 }}>
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+        <div style={{ overflow: "auto", borderRadius: radius.primitive.md, border: "1px solid var(--divider)", marginBottom: spacing.primitive[6] }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.sm }}>
             <thead>
-              <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>속성</th>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>설명</th>
+              <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
+                <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>속성</th>
+                <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>설명</th>
               </tr>
             </thead>
             <tbody>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "12px 16px" }}><InlineCode>role=&quot;button&quot;</InlineCode></td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>onClick/onPress가 있으면 자동 설정</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px` }}><InlineCode>role=&quot;button&quot;</InlineCode></td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>onClick/onPress가 있으면 자동 설정</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "12px 16px" }}><InlineCode>alt</InlineCode></td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>썸네일 이미지에 적절한 alt 텍스트 필수</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px` }}><InlineCode>alt</InlineCode></td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>썸네일 이미지에 적절한 alt 텍스트 필수</td>
               </tr>
               <tr>
-                <td style={{ padding: "12px 16px" }}><InlineCode>keyboard</InlineCode></td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>Enter/Space 키로 활성화 가능</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px` }}><InlineCode>keyboard</InlineCode></td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>Enter/Space 키로 활성화 가능</td>
               </tr>
             </tbody>
           </table>
         </div>
 
         <Subsection title="Design Principles">
-          <div style={{ display: "grid", gap: 16 }}>
-            <PrincipleCard number={1} title="Interactive Card" desc="onClick/onPress가 있으면 role='button'이 자동 설정됩니다. 전체 카드 영역이 클릭 가능합니다." />
-            <PrincipleCard number={2} title="Image Alt" desc="썸네일 이미지에 적절한 alt 텍스트를 제공하세요. 아이콘의 경우 역할을 설명하는 텍스트를 사용합니다." />
-            <PrincipleCard number={3} title="Focus Indicator" desc="키보드 포커스 시 시각적 표시가 나타납니다. outline이 카드 외곽에 2px offset으로 표시됩니다." />
+          <div style={{ display: "grid", gap: spacing.primitive[4] }}>
+            <PrincipleCard number={1} title="Interactive Card" desc="onClick/onPress가 있으면 role='button'이 자동 설정돼요. 전체 카드 영역이 클릭 가능해요." />
+            <PrincipleCard number={2} title="Image Alt" desc="썸네일 이미지에 적절한 alt 텍스트를 제공하세요. 아이콘의 경우 역할을 설명하는 텍스트를 사용해요." />
+            <PrincipleCard number={3} title="Focus Indicator" desc="키보드 포커스 시 시각적 표시가 나타나요. outline이 카드 외곽에 2px offset으로 표시돼요." />
           </div>
         </Subsection>
       </Section>
 
       {/* Related Components */}
-      <div>
-        <h2 style={{ fontSize: 24, fontWeight: 700, color: "var(--text-primary)", marginBottom: 16 }}>관련 컴포넌트</h2>
-        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
-          <thead>
-            <tr style={{ borderBottom: "2px solid var(--border-default)" }}>
-              <th style={{ textAlign: "left", padding: "12px 16px", color: "var(--text-primary)" }}>컴포넌트</th>
-              <th style={{ textAlign: "left", padding: "12px 16px", color: "var(--text-primary)" }}>용도</th>
-              <th style={{ textAlign: "left", padding: "12px 16px", color: "var(--text-primary)" }}>차이점</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
-              <td style={{ padding: "12px 16px", fontWeight: 600, color: "var(--text-primary)" }}>ListCell</td>
-              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>리스트 항목</td>
-              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>ListCell은 텍스트 위주, ListCard는 썸네일 포함</td>
-            </tr>
-            <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
-              <td style={{ padding: "12px 16px", fontWeight: 600, color: "var(--text-primary)" }}>Card</td>
-              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>콘텐츠 그룹화</td>
-              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>Card는 자유 레이아웃, ListCard는 수평 정렬 고정</td>
-            </tr>
-            <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
-              <td style={{ padding: "12px 16px", fontWeight: 600, color: "var(--text-primary)" }}>Thumbnail</td>
-              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>이미지 표시</td>
-              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>Thumbnail은 ListCard 내부 썸네일 영역에 사용</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <Section title="Related Components">
+        <div style={{ overflow: "auto", borderRadius: radius.primitive.md, border: "1px solid var(--divider)" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.sm }}>
+            <thead>
+              <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
+                <th style={{ textAlign: "left", padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>컴포넌트</th>
+                <th style={{ textAlign: "left", padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>용도</th>
+                <th style={{ textAlign: "left", padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>차이점</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)" }}>ListCell</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>리스트 항목</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>ListCell은 텍스트 위주, ListCard는 썸네일 포함</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--divider)" }}>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)" }}>Card</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>콘텐츠 그룹화</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>Card는 자유 레이아웃, ListCard는 수평 정렬 고정</td>
+              </tr>
+              <tr>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)" }}>Thumbnail</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>이미지 표시</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>Thumbnail은 ListCard 내부 썸네일 영역에 사용</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </Section>
     </div>
   );
 }
@@ -789,10 +931,10 @@ function WebContent() {
   return (
     <>
       <Section title="Source Code">
-        <div style={{ padding: 16, backgroundColor: "var(--bg-secondary)", borderRadius: 12, marginBottom: 24, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <div style={{ padding: spacing.primitive[4], backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.md, marginBottom: spacing.primitive[6], display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div>
-            <p style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", margin: 0 }}>ListCard Component</p>
-            <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: "4px 0 0 0" }}>실제 컴포넌트 소스 코드를 GitHub에서 확인하세요.</p>
+            <p style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)", margin: 0 }}>ListCard Component</p>
+            <p style={{ fontSize: typography.fontSize.compact, color: "var(--text-secondary)", margin: `${spacing.primitive[1]}px 0 0 0` }}>실제 컴포넌트 소스 코드를 GitHub에서 확인하세요.</p>
           </div>
           <a
             href={LISTCARD_SOURCE}
@@ -802,12 +944,12 @@ function WebContent() {
               display: "inline-flex",
               alignItems: "center",
               gap: 6,
-              padding: "8px 16px",
-              fontSize: 13,
-              fontWeight: 500,
+              padding: `${spacing.primitive[2]}px ${spacing.primitive[4]}px`,
+              fontSize: typography.fontSize.compact,
+              fontWeight: typography.fontWeight.medium,
               color: "var(--content-base-onColor)",
               backgroundColor: "var(--docs-code-surface)",
-              borderRadius: 12,
+              borderRadius: radius.primitive.md,
               textDecoration: "none",
             }}
           >
@@ -825,13 +967,13 @@ function WebContent() {
 
       <Section title="Basic Usage">
         <PreviewBox>
-          <div style={{ padding: 24 }}>
+          <div style={{ padding: spacing.primitive[6] }}>
             <ListCardDemo variant="elevated" size="medium" thumbnail={<ThumbnailDemo />} badges={<BadgeDemo />} title="프리미엄 무선 이어폰" subtitle="고음질 블루투스 5.3 지원" meta="₩89,000" onClick={() => {}} />
           </div>
         </PreviewBox>
         <CodeBlock code={`<ListCard
   thumbnail={<img src="product.jpg" />}
-  badges={<ContentBadge color="brandDefault">NEW</ContentBadge>}
+  badges={<ContentBadge color="primary">NEW</ContentBadge>}
   title="프리미엄 무선 이어폰"
   subtitle="고음질 블루투스 5.3 지원"
   meta="₩89,000"
@@ -841,7 +983,7 @@ function WebContent() {
 
       <Section title="Variants">
         <PreviewBox>
-          <div style={{ padding: 24, display: "flex", flexDirection: "column", gap: 12 }}>
+          <div style={{ padding: spacing.primitive[6], display: "flex", flexDirection: "column", gap: spacing.primitive[3] }}>
             <ListCardDemo variant="elevated" size="small" thumbnail={<EthereumIcon size={40} />} title="Elevated" subtitle="그림자 스타일" meta="₩3,245,000" onClick={() => {}} />
             <ListCardDemo variant="outlined" size="small" thumbnail={<EthereumIcon size={40} />} title="Outlined" subtitle="테두리 스타일" meta="₩3,245,000" onClick={() => {}} />
             <ListCardDemo variant="filled" size="small" thumbnail={<EthereumIcon size={40} />} title="Filled" subtitle="배경 스타일" meta="₩3,245,000" onClick={() => {}} />
@@ -855,9 +997,9 @@ function WebContent() {
       <Section title="Colors">
         <Subsection title="Highlighted Card">
           <PreviewBox>
-            <div style={{ padding: 24, display: "flex", flexDirection: "column", gap: 12 }}>
-              <div style={{ border: "2px solid var(--border-brand-default)", borderRadius: 12 }}>
-                <ListCardDemo variant="outlined" size="small" thumbnail={<EthereumIcon size={40} />} badges={<span style={{ display: "inline-flex", padding: "2px 8px", fontSize: 11, fontWeight: 600, color: "var(--content-brand-default)", backgroundColor: "var(--surface-brand-secondary)", borderRadius: 4 }}>Best</span>} title="ZKAP 최적구매" subtitle="0.7812 ETH" meta="₩3,245,000" onClick={() => {}} />
+            <div style={{ padding: spacing.primitive[6], display: "flex", flexDirection: "column", gap: spacing.primitive[3] }}>
+              <div style={{ border: "2px solid var(--border-brand-default)", borderRadius: radius.primitive.md }}>
+                <ListCardDemo variant="outlined" size="small" thumbnail={<EthereumIcon size={40} />} badges={<span style={{ display: "inline-flex", padding: "2px 8px", fontSize: typography.fontSize.xs, fontWeight: typography.fontWeight.semibold, color: "var(--content-brand-default)", backgroundColor: "var(--surface-brand-secondary)", borderRadius: radius.primitive.xs }}>Best</span>} title="ZKAP 최적구매" subtitle="0.7812 ETH" meta="₩3,245,000" onClick={() => {}} />
               </div>
               <ListCardDemo variant="outlined" size="small" thumbnail={<BitcoinIcon size={40} />} title="빗썸" subtitle="0.7788 ETH" meta="- 1,600원" onClick={() => {}} />
             </div>
@@ -888,7 +1030,7 @@ function WebContent() {
 
       <Section title="Sizes">
         <PreviewBox>
-          <div style={{ padding: 24, display: "flex", flexDirection: "column", gap: 16 }}>
+          <div style={{ padding: spacing.primitive[6], display: "flex", flexDirection: "column", gap: spacing.primitive[4] }}>
             {(["small", "medium", "large"] as ListCardSize[]).map((s) => (
               <ListCardDemo key={s} variant="elevated" size={s} thumbnail={<EthereumIcon size={sizeConfig[s].thumbnailSize} />} title={`${s.charAt(0).toUpperCase() + s.slice(1)} Size`} subtitle="0.7812 ETH" meta="₩3,245,000" onClick={() => {}} />
             ))}
@@ -901,7 +1043,7 @@ function WebContent() {
 
       <Section title="States">
         <PreviewBox>
-          <div style={{ padding: 24, display: "flex", flexDirection: "column", gap: 12 }}>
+          <div style={{ padding: spacing.primitive[6], display: "flex", flexDirection: "column", gap: spacing.primitive[3] }}>
             <ListCardDemo variant="elevated" size="small" thumbnail={<EthereumIcon size={40} />} title="Default" subtitle="클릭 가능" meta="₩3,245,000" onClick={() => {}} />
             <div style={{ opacity: 0.4, pointerEvents: "none" as const }}>
               <ListCardDemo variant="elevated" size="small" thumbnail={<EthereumIcon size={40} />} title="Disabled" subtitle="비활성화" meta="₩3,245,000" />
@@ -929,14 +1071,16 @@ function WebContent() {
         <Subsection title="Common Props">
           <PropsTable
             props={[
-              { name: "variant", type: '"elevated" | "outlined" | "filled"', required: false, defaultVal: '"elevated"', description: "카드 스타일" },
+              { name: "variant", type: '"elevated" | "outlined" | "filled"', required: false, defaultVal: '"filled"', description: "카드 스타일" },
               { name: "size", type: '"small" | "medium" | "large"', required: false, defaultVal: '"medium"', description: "크기" },
               { name: "thumbnail", type: "ReactNode", required: false, description: "좌측 썸네일" },
               { name: "title", type: "ReactNode", required: true, description: "메인 타이틀" },
               { name: "subtitle", type: "ReactNode", required: false, description: "서브타이틀" },
               { name: "meta", type: "ReactNode", required: false, description: "메타 정보 (가격)" },
-              { name: "badges", type: "ReactNode", required: false, description: "상단 뱃지 영역" },
+              { name: "badges", type: "ReactNode", required: false, description: "상단 뽃지 영역" },
               { name: "action", type: "ReactNode", required: false, description: "우측 액션 영역" },
+              { name: "leadingContent", type: "ReactNode", required: false, description: "썸네일 왼쪽 인디케이터 (선택, 상태 등)" },
+              { name: "bottomContent", type: "ReactNode", required: false, description: "카드 하단 자유 영역 (진행률 바, 추가 정보 등)" },
               { name: "disabled", type: "boolean", required: false, defaultVal: "false", description: "비활성화" },
             ]}
           />
@@ -966,26 +1110,26 @@ function UsageCard({ situation, description, config, examples }: {
 }) {
   return (
     <div style={{
-      padding: 16,
+      padding: spacing.primitive[4],
       backgroundColor: "var(--surface-base-default)",
-      borderRadius: 12,
+      borderRadius: radius.primitive.md,
       border: "1px solid var(--divider)",
     }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
-        <span style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)" }}>{situation}</span>
+      <div style={{ display: "flex", alignItems: "center", gap: spacing.primitive[2], marginBottom: spacing.primitive[1] }}>
+        <span style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)" }}>{situation}</span>
         <span style={{
-          fontSize: 11,
+          fontSize: typography.fontSize.xs,
           padding: "2px 6px",
           backgroundColor: "var(--surface-base-alternative)",
           color: "var(--content-base-secondary)",
-          borderRadius: 4,
-          fontWeight: 500,
+          borderRadius: radius.primitive.xs,
+          fontWeight: typography.fontWeight.medium,
         }}>
           {config}
         </span>
       </div>
-      <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0, marginBottom: 6 }}>{description}</p>
-      <p style={{ fontSize: 12, color: "var(--text-tertiary)", margin: 0 }}>
+      <p style={{ fontSize: typography.fontSize.compact, color: "var(--text-secondary)", margin: 0, marginBottom: 6 }}>{description}</p>
+      <p style={{ fontSize: typography.fontSize.xs, color: "var(--text-tertiary)", margin: 0 }}>
         예시: {examples.join(", ")}
       </p>
     </div>
@@ -1019,7 +1163,7 @@ function BitcoinIcon({ size = 48 }: { size?: number }) {
 
 function ThumbnailDemo({ size = 80 }: { size?: number }) {
   return (
-    <div style={{ width: size, height: size, backgroundColor: "var(--surface-base-container)", borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <div style={{ width: size, height: size, backgroundColor: "var(--surface-base-container)", borderRadius: radius.primitive.sm, display: "flex", alignItems: "center", justifyContent: "center" }}>
       <svg width={size * 0.4} height={size * 0.4} viewBox="0 0 24 24" fill="none" stroke="var(--icon-secondary)" strokeWidth="2">
         <rect x="3" y="3" width="18" height="18" rx="2" />
         <circle cx="8.5" cy="8.5" r="1.5" />
@@ -1031,7 +1175,7 @@ function ThumbnailDemo({ size = 80 }: { size?: number }) {
 
 function BadgeDemo() {
   return (
-    <ContentBadge color="brandDefault" size="small">NEW</ContentBadge>
+    <ContentBadge color="primary" size="small">NEW</ContentBadge>
   );
 }
 
@@ -1044,11 +1188,11 @@ function TrendBadge({ trend, value }: { trend: "up" | "down"; value: string }) {
       gap: 2,
       height: 20,
       padding: "0 8px",
-      fontSize: 11,
-      fontWeight: 600,
+      fontSize: typography.fontSize.xs,
+      fontWeight: typography.fontWeight.semibold,
       color: isUp ? "var(--content-success-default)" : "var(--content-error-default)",
       backgroundColor: isUp ? "var(--surface-success-default)" : "var(--surface-error-default)",
-      borderRadius: 4
+      borderRadius: radius.primitive.xs
     }}>
       {isUp ? "▲" : "▼"} {value}
     </span>
@@ -1092,11 +1236,11 @@ function StateCard({ label, sublabel, children }: {
   label: string; sublabel: string; children: React.ReactNode;
 }) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12, padding: 16 }}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: spacing.primitive[3], padding: spacing.primitive[4] }}>
       {children}
       <div style={{ textAlign: "center" }}>
-        <div style={{ fontSize: 13, fontWeight: 600, color: "var(--text-primary)" }}>{label}</div>
-        <div style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 2 }}>{sublabel}</div>
+        <div style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)" }}>{label}</div>
+        <div style={{ fontSize: typography.fontSize.xs, color: "var(--text-tertiary)", marginTop: 2 }}>{sublabel}</div>
       </div>
     </div>
   );

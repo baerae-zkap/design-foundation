@@ -194,6 +194,8 @@
         }
       },
 
+      "minTouchTarget": { "value": 44, "_comment": "44px. 최소 터치 영역 (iOS HIG 기준)" },
+
       "component": {
         "_comment": "특정 컴포넌트용 시멘틱 토큰",
 
@@ -244,6 +246,11 @@
           "helperGap": {
             "value": "{primitive.1}",
             "_comment": "4px. 입력 필드와 도움말 텍스트 사이"
+          },
+          "height": {
+            "sm": { "value": 36, "_comment": "36px. 소형 입력 필드 높이" },
+            "md": { "value": 44, "_comment": "44px. 기본 입력 필드 높이" },
+            "lg": { "value": 52, "_comment": "52px. 대형 입력 필드 높이" }
           }
         },
 
@@ -450,6 +457,14 @@
             "md": { "value": "{primitive.4}", "_comment": "16px. 기본 텍스트 버튼" },
             "lg": { "value": 18, "_comment": "18px. 대형 텍스트 버튼" },
             "xl": { "value": "{primitive.5}", "_comment": "20px. 특대 텍스트 버튼" }
+          }
+        },
+
+        "listCard": {
+          "thumbnailSize": {
+            "sm": { "value": 56, "_comment": "56px. 소형 리스트카드 썸네일" },
+            "md": { "value": 80, "_comment": "80px. 기본 리스트카드 썸네일" },
+            "lg": { "value": 100, "_comment": "100px. 대형 리스트카드 썸네일" }
           }
         }
       }

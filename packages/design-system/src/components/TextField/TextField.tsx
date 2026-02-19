@@ -21,6 +21,7 @@ import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
 import { transitions } from '../../utils/styles';
+import { borderWidth } from '../../tokens/general';
 
 export type TextFieldSize = 'small' | 'medium' | 'large';
 
@@ -178,7 +179,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     const inputContainerStyle: React.CSSProperties = {
       height: sizeStyle.height,
       borderRadius: radius.component.input.default,
-      border: `1px solid ${getBorderColor()}`,
+      border: `${borderWidth.default}px solid ${getBorderColor()}`,
       backgroundColor: getBackgroundColor(),
       display: 'flex',
       flexDirection: 'row',
@@ -232,7 +233,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       justifyContent: 'center',
       paddingLeft: spacing.primitive[3],
       paddingRight: spacing.primitive[3],
-      borderLeft: `1px solid ${cssVarColors.border.solid.alternative}`,
+      borderLeft: `${borderWidth.default}px solid ${cssVarColors.border.solid.alternative}`,
       cursor: 'pointer',
       transition: transitions.background,
     };

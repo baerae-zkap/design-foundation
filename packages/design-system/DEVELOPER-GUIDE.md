@@ -319,10 +319,10 @@ import { Card } from '@baerae-zkap/design-system/native';
 
 | Props | 타입 | 기본값 | 설명 |
 |-------|------|--------|------|
-| `variant` | `'filled' \| 'outlined' \| 'subtle'` | `'filled'` | 스타일 |
-| `color` | `'brandDefault' \| 'baseDefault' \| 'successDefault' \| 'errorDefault' \| 'warningDefault' \| 'infoDefault'` | `'baseDefault'` | 색상 |
+| `variant` | `'filled' \| 'weak'` | `'filled'` | 스타일 |
+| `color` | `'primary' \| 'neutral' \| 'success' \| 'error' \| 'warning' \| 'info'` | `'neutral'` | 색상 |
 | `size` | `'small' \| 'medium' \| 'large'` | `'medium'` | 크기 |
-| `dot` | `boolean` | `false` | 상태 점 표시 |
+| `leftIcon` | `ReactNode` | - | 좌측 아이콘 |
 
 **사용 예시:**
 
@@ -330,16 +330,17 @@ import { Card } from '@baerae-zkap/design-system/native';
 import { ContentBadge } from '@baerae-zkap/design-system/native';
 
 // 상태 표시
-<ContentBadge variant="filled" color="successDefault">
+<ContentBadge variant="filled" color="success">
   완료
 </ContentBadge>
 
-<ContentBadge variant="outlined" color="errorDefault" dot>
-  진행 중
+// 보조 정보
+<ContentBadge variant="weak" color="error">
+  품절
 </ContentBadge>
 
 // 카테고리
-<ContentBadge variant="subtle" color="infoDefault" size="small">
+<ContentBadge variant="weak" color="neutral" size="small">
   공지사항
 </ContentBadge>
 ```

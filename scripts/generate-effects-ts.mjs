@@ -17,6 +17,9 @@ const isObject = (value) => value && typeof value === 'object' && !Array.isArray
 const isIdentifier = (key) => /^[A-Za-z_$][A-Za-z0-9_$]*$/.test(key);
 const exactPaletteRefRegex = /^\{palette\.([^.}]+)\.([^.}]+)\}$/;
 const paletteRefRegex = /\{palette\.([^.}]+)\.([^.}]+)\}/g;
+const exactAlphaRegex = /^alpha\(\{palette\.([^.}]+)\.([^.}]+)\},\s*([\d.]+)\)$/;
+const alphaCallRegex = /alpha\(\{palette\.([^.}]+)\.([^.}]+)\},\s*([\d.]+)\)/g;
+const hslaRegex = /^hsla\(\s*([\d.]+)\s*,\s*([\d.]+)%\s*,\s*([\d.]+)%\s*,\s*[\d.]+\s*\)$/i;
 
 function formatKey(key) {
   return isIdentifier(key) ? key : JSON.stringify(key);
@@ -51,6 +54,23 @@ function assertPaletteRef(group, token, path) {
   }
 }
 
+/**
+ * Resolves alpha({palette.X.Y}, Z) at generation time to an inline HSLA string.
+ * This avoids the runtime mismatch where palette values are hex but hslaWithAlpha expects HSLA.
+ */
+function resolveAlphaToHsla(group, token, alpha, path) {
+  assertPaletteRef(group, token, path);
+  const raw = paletteJson[group]?.[token];
+  if (typeof raw !== 'string') {
+    throw new Error(`Palette value at "${group}.${token}" is not a string`);
+  }
+  const match = raw.match(hslaRegex);
+  if (!match) {
+    throw new Error(`Palette value at "${group}.${token}" is not valid HSLA: ${raw}`);
+  }
+  return `hsla(${match[1]}, ${match[2]}%, ${match[3]}%, ${alpha})`;
+}
+
 function toValueExpression(value, path) {
   if (typeof value === 'number') {
     return String(value);
@@ -58,6 +78,13 @@ function toValueExpression(value, path) {
 
   if (typeof value !== 'string') {
     return JSON.stringify(value);
+  }
+
+  // Exact alpha() call: resolve at generation time to inline HSLA string
+  const exactAlphaMatch = value.match(exactAlphaRegex);
+  if (exactAlphaMatch) {
+    const [, group, token, alpha] = exactAlphaMatch;
+    return JSON.stringify(resolveAlphaToHsla(group, token, alpha, path));
   }
 
   const exactMatch = value.match(exactPaletteRefRegex);
@@ -71,10 +98,15 @@ function toValueExpression(value, path) {
     return JSON.stringify(value);
   }
 
+  // String with embedded references (alpha() calls and/or palette refs)
   let hasRef = false;
   const escaped = value
     .replace(/\\/g, '\\\\')
     .replace(/`/g, '\\`')
+    .replace(alphaCallRegex, (_, group, token, alpha) => {
+      hasRef = true;
+      return resolveAlphaToHsla(group, token, alpha, path);
+    })
     .replace(paletteRefRegex, (_, group, token) => {
       hasRef = true;
       assertPaletteRef(group, token, path);

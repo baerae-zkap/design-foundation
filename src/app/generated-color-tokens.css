@@ -179,22 +179,6 @@
   --brandExternal-kakaoPressed: #D4BF00;
   --brandExternal-googlePressed: #f1f3f4;
 
-  /* Palette: alphaComposite */
-  --alphaComposite-brandSelectionLight: hsla(216, 100%, 47%, 0.15);
-  --alphaComposite-brandSelectionDark: hsla(220, 100%, 57%, 0.20);
-  --alphaComposite-fillLightNormal: hsla(216, 9%, 45%, 0.22);
-  --alphaComposite-fillLightStrong: hsla(216, 9%, 45%, 0.28);
-  --alphaComposite-fillLightAlternative: hsla(216, 9%, 45%, 0.12);
-  --alphaComposite-fillDarkNormal: hsla(216, 9%, 77%, 0.22);
-  --alphaComposite-fillDarkStrong: hsla(216, 9%, 77%, 0.28);
-  --alphaComposite-fillDarkAlternative: hsla(216, 9%, 77%, 0.12);
-  --alphaComposite-overlayLightTransparent: hsla(222, 33%, 11%, 0);
-  --alphaComposite-overlayLightDim: hsla(222, 33%, 11%, 0.40);
-  --alphaComposite-overlayLightHeavy: hsla(222, 33%, 11%, 0.85);
-  --alphaComposite-overlayDarkTransparent: hsla(222, 33%, 11%, 0);
-  --alphaComposite-overlayDarkDim: hsla(222, 33%, 11%, 0.72);
-  --alphaComposite-overlayDarkHeavy: hsla(222, 33%, 11%, 0.93);
-
   /* Palette: opacity */
   --opacity-5: 0.05;
   --opacity-8: 0.08;
@@ -284,9 +268,9 @@
   --border-warning-defaultPressed: var(--orange-40);
   --border-info-default: var(--teal-50);
   --border-info-defaultPressed: var(--teal-40);
-  --fill-normal: var(--alphaComposite-fillLightNormal);
-  --fill-strong: var(--alphaComposite-fillLightStrong);
-  --fill-alternative: var(--alphaComposite-fillLightAlternative);
+  --fill-normal: hsla(216, 9%, 45%, 0.22);
+  --fill-strong: hsla(216, 9%, 45%, 0.28);
+  --fill-alternative: hsla(216, 9%, 45%, 0.12);
   --interaction-inactive: var(--grey-70);
   --interaction-disabled: var(--grey-90);
   --visualization-categorical-1: var(--blue-50);
@@ -305,8 +289,8 @@
   --icon-success: var(--green-50);
   --icon-warning: var(--orange-50);
   --icon-info: var(--teal-50);
-  --overlay-dim: var(--alphaComposite-overlayLightDim);
-  --overlay-heavy: var(--alphaComposite-overlayLightHeavy);
+  --overlay-dim: hsla(222, 33%, 11%, 0.40);
+  --overlay-heavy: hsla(222, 33%, 11%, 0.85);
   --inverse-surface-default: var(--grey-15);
   --inverse-surface-alternative: var(--grey-20);
   --inverse-content-default: var(--grey-99);
@@ -314,42 +298,21 @@
   --inverse-border-default: var(--grey-40);
   --inverse-border-secondary: var(--grey-50);
   --inverse-icon-default: var(--grey-95);
-  --component-button-surface-primary: var(--blue-50);
-  --component-button-surface-primaryPressed: var(--blue-45);
-  --component-button-surface-secondary: var(--blue-95);
-  --component-button-surface-secondaryPressed: var(--blue-90);
-  --component-button-surface-destructive: var(--red-50);
-  --component-button-surface-destructivePressed: var(--red-40);
-  --component-button-content-primary: var(--static-white);
-  --component-button-content-secondary: var(--blue-50);
-  --component-button-content-destructive: var(--static-white);
-  --component-button-border-secondary: var(--blue-50);
-  --component-input-surface: var(--static-white);
-  --component-input-border-default: var(--grey-95);
-  --component-input-border-focus: var(--blue-50);
-  --component-input-content: var(--grey-30);
-  --component-input-placeholder: var(--grey-70);
-  --component-input-ring-focus: var(--alphaComposite-brandSelectionLight);
-  --component-chip-surface-neutral: var(--alphaComposite-fillLightNormal);
-  --component-chip-surface-selected: var(--blue-95);
-  --component-chip-content-neutral: var(--grey-30);
-  --component-chip-content-selected: var(--blue-50);
-  --component-chip-border-neutral: var(--grey-95);
 
   /* Effects tokens (light) */
-  --effect-alpha-brand-selection: var(--alphaComposite-brandSelectionLight);
-  --effect-alpha-fill-normal: var(--alphaComposite-fillLightNormal);
-  --effect-alpha-fill-strong: var(--alphaComposite-fillLightStrong);
-  --effect-alpha-fill-alternative: var(--alphaComposite-fillLightAlternative);
-  --effect-alpha-overlay-transparent: var(--alphaComposite-overlayLightTransparent);
-  --effect-alpha-overlay-dim: var(--alphaComposite-overlayLightDim);
-  --effect-alpha-overlay-heavy: var(--alphaComposite-overlayLightHeavy);
+  --effect-alpha-brand-selection: hsla(216, 100%, 47%, 0.15);
+  --effect-alpha-fill-normal: hsla(216, 9%, 45%, 0.22);
+  --effect-alpha-fill-strong: hsla(216, 9%, 45%, 0.28);
+  --effect-alpha-fill-alternative: hsla(216, 9%, 45%, 0.12);
+  --effect-alpha-overlay-transparent: hsla(222, 33%, 11%, 0);
+  --effect-alpha-overlay-dim: hsla(222, 33%, 11%, 0.40);
+  --effect-alpha-overlay-heavy: hsla(222, 33%, 11%, 0.85);
   --effect-gradient-brand-primary: linear-gradient(135deg, var(--blue-65) 0%, var(--blue-45) 100%);
   --effect-gradient-brand-subtle: linear-gradient(180deg, var(--blue-99) 0%, var(--blue-90) 100%);
   --effect-gradient-surface-elevated: linear-gradient(180deg, var(--static-white) 0%, var(--grey-99) 100%);
   --effect-gradient-surface-container: linear-gradient(180deg, var(--grey-99) 0%, var(--grey-97) 100%);
-  --effect-gradient-overlay-topScrim: linear-gradient(0deg, var(--alphaComposite-overlayLightHeavy) 0%, var(--alphaComposite-overlayLightTransparent) 100%);
-  --effect-gradient-overlay-bottomScrim: linear-gradient(180deg, var(--alphaComposite-overlayLightTransparent) 0%, var(--alphaComposite-overlayLightHeavy) 100%);
+  --effect-gradient-overlay-topScrim: linear-gradient(0deg, hsla(222, 33%, 11%, 0.85) 0%, hsla(222, 33%, 11%, 0) 100%);
+  --effect-gradient-overlay-bottomScrim: linear-gradient(180deg, hsla(222, 33%, 11%, 0) 0%, hsla(222, 33%, 11%, 0.85) 100%);
 }
 
 /* System preference fallback (no JS needed) */
@@ -429,9 +392,9 @@
     --border-warning-defaultPressed: var(--orange-70);
     --border-info-default: var(--teal-60);
     --border-info-defaultPressed: var(--teal-70);
-    --fill-normal: var(--alphaComposite-fillDarkNormal);
-    --fill-strong: var(--alphaComposite-fillDarkStrong);
-    --fill-alternative: var(--alphaComposite-fillDarkAlternative);
+    --fill-normal: hsla(216, 9%, 77%, 0.22);
+    --fill-strong: hsla(216, 9%, 77%, 0.28);
+    --fill-alternative: hsla(216, 9%, 77%, 0.12);
     --interaction-inactive: var(--grey-40);
     --interaction-disabled: var(--grey-25);
     --visualization-categorical-1: var(--blue-60);
@@ -450,8 +413,8 @@
     --icon-success: var(--green-60);
     --icon-warning: var(--orange-60);
     --icon-info: var(--teal-60);
-    --overlay-dim: var(--alphaComposite-overlayDarkDim);
-    --overlay-heavy: var(--alphaComposite-overlayDarkHeavy);
+    --overlay-dim: hsla(222, 33%, 11%, 0.72);
+    --overlay-heavy: hsla(222, 33%, 11%, 0.93);
     --inverse-surface-default: var(--grey-99);
     --inverse-surface-alternative: var(--grey-95);
     --inverse-content-default: var(--grey-15);
@@ -459,42 +422,21 @@
     --inverse-border-default: var(--grey-80);
     --inverse-border-secondary: var(--grey-70);
     --inverse-icon-default: var(--grey-30);
-    --component-button-surface-primary: var(--blue-55);
-    --component-button-surface-primaryPressed: var(--blue-60);
-    --component-button-surface-secondary: var(--blue-20);
-    --component-button-surface-secondaryPressed: var(--blue-30);
-    --component-button-surface-destructive: var(--red-60);
-    --component-button-surface-destructivePressed: var(--red-70);
-    --component-button-content-primary: var(--static-white);
-    --component-button-content-secondary: var(--blue-60);
-    --component-button-content-destructive: var(--static-white);
-    --component-button-border-secondary: var(--blue-55);
-    --component-input-surface: var(--grey-20);
-    --component-input-border-default: var(--grey-25);
-    --component-input-border-focus: var(--blue-55);
-    --component-input-content: var(--grey-95);
-    --component-input-placeholder: var(--grey-50);
-    --component-input-ring-focus: var(--alphaComposite-brandSelectionDark);
-    --component-chip-surface-neutral: var(--alphaComposite-fillDarkNormal);
-    --component-chip-surface-selected: var(--blue-20);
-    --component-chip-content-neutral: var(--grey-95);
-    --component-chip-content-selected: var(--blue-60);
-    --component-chip-border-neutral: var(--grey-25);
   
     /* Effects tokens (dark overrides) */
-    --effect-alpha-brand-selection: var(--alphaComposite-brandSelectionDark);
-    --effect-alpha-fill-normal: var(--alphaComposite-fillDarkNormal);
-    --effect-alpha-fill-strong: var(--alphaComposite-fillDarkStrong);
-    --effect-alpha-fill-alternative: var(--alphaComposite-fillDarkAlternative);
-    --effect-alpha-overlay-transparent: var(--alphaComposite-overlayDarkTransparent);
-    --effect-alpha-overlay-dim: var(--alphaComposite-overlayDarkDim);
-    --effect-alpha-overlay-heavy: var(--alphaComposite-overlayDarkHeavy);
+    --effect-alpha-brand-selection: hsla(220, 100%, 57%, 0.20);
+    --effect-alpha-fill-normal: hsla(216, 9%, 77%, 0.22);
+    --effect-alpha-fill-strong: hsla(216, 9%, 77%, 0.28);
+    --effect-alpha-fill-alternative: hsla(216, 9%, 77%, 0.12);
+    --effect-alpha-overlay-transparent: hsla(222, 33%, 11%, 0);
+    --effect-alpha-overlay-dim: hsla(222, 33%, 11%, 0.72);
+    --effect-alpha-overlay-heavy: hsla(222, 33%, 11%, 0.93);
     --effect-gradient-brand-primary: linear-gradient(135deg, var(--blue-70) 0%, var(--blue-50) 100%);
     --effect-gradient-brand-subtle: linear-gradient(180deg, var(--blue-30) 0%, var(--blue-20) 100%);
     --effect-gradient-surface-elevated: linear-gradient(180deg, var(--grey-17) 0%, var(--grey-20) 100%);
     --effect-gradient-surface-container: linear-gradient(180deg, var(--grey-20) 0%, var(--grey-23) 100%);
-    --effect-gradient-overlay-topScrim: linear-gradient(0deg, var(--alphaComposite-overlayDarkHeavy) 0%, var(--alphaComposite-overlayDarkTransparent) 100%);
-    --effect-gradient-overlay-bottomScrim: linear-gradient(180deg, var(--alphaComposite-overlayDarkTransparent) 0%, var(--alphaComposite-overlayDarkHeavy) 100%);
+    --effect-gradient-overlay-topScrim: linear-gradient(0deg, hsla(222, 33%, 11%, 0.93) 0%, hsla(222, 33%, 11%, 0) 100%);
+    --effect-gradient-overlay-bottomScrim: linear-gradient(180deg, hsla(222, 33%, 11%, 0) 0%, hsla(222, 33%, 11%, 0.93) 100%);
   }
 }
 
@@ -574,9 +516,9 @@
   --border-warning-defaultPressed: var(--orange-70);
   --border-info-default: var(--teal-60);
   --border-info-defaultPressed: var(--teal-70);
-  --fill-normal: var(--alphaComposite-fillDarkNormal);
-  --fill-strong: var(--alphaComposite-fillDarkStrong);
-  --fill-alternative: var(--alphaComposite-fillDarkAlternative);
+  --fill-normal: hsla(216, 9%, 77%, 0.22);
+  --fill-strong: hsla(216, 9%, 77%, 0.28);
+  --fill-alternative: hsla(216, 9%, 77%, 0.12);
   --interaction-inactive: var(--grey-40);
   --interaction-disabled: var(--grey-25);
   --visualization-categorical-1: var(--blue-60);
@@ -595,8 +537,8 @@
   --icon-success: var(--green-60);
   --icon-warning: var(--orange-60);
   --icon-info: var(--teal-60);
-  --overlay-dim: var(--alphaComposite-overlayDarkDim);
-  --overlay-heavy: var(--alphaComposite-overlayDarkHeavy);
+  --overlay-dim: hsla(222, 33%, 11%, 0.72);
+  --overlay-heavy: hsla(222, 33%, 11%, 0.93);
   --inverse-surface-default: var(--grey-99);
   --inverse-surface-alternative: var(--grey-95);
   --inverse-content-default: var(--grey-15);
@@ -604,40 +546,19 @@
   --inverse-border-default: var(--grey-80);
   --inverse-border-secondary: var(--grey-70);
   --inverse-icon-default: var(--grey-30);
-  --component-button-surface-primary: var(--blue-55);
-  --component-button-surface-primaryPressed: var(--blue-60);
-  --component-button-surface-secondary: var(--blue-20);
-  --component-button-surface-secondaryPressed: var(--blue-30);
-  --component-button-surface-destructive: var(--red-60);
-  --component-button-surface-destructivePressed: var(--red-70);
-  --component-button-content-primary: var(--static-white);
-  --component-button-content-secondary: var(--blue-60);
-  --component-button-content-destructive: var(--static-white);
-  --component-button-border-secondary: var(--blue-55);
-  --component-input-surface: var(--grey-20);
-  --component-input-border-default: var(--grey-25);
-  --component-input-border-focus: var(--blue-55);
-  --component-input-content: var(--grey-95);
-  --component-input-placeholder: var(--grey-50);
-  --component-input-ring-focus: var(--alphaComposite-brandSelectionDark);
-  --component-chip-surface-neutral: var(--alphaComposite-fillDarkNormal);
-  --component-chip-surface-selected: var(--blue-20);
-  --component-chip-content-neutral: var(--grey-95);
-  --component-chip-content-selected: var(--blue-60);
-  --component-chip-border-neutral: var(--grey-25);
 
   /* Effects tokens (dark overrides) */
-  --effect-alpha-brand-selection: var(--alphaComposite-brandSelectionDark);
-  --effect-alpha-fill-normal: var(--alphaComposite-fillDarkNormal);
-  --effect-alpha-fill-strong: var(--alphaComposite-fillDarkStrong);
-  --effect-alpha-fill-alternative: var(--alphaComposite-fillDarkAlternative);
-  --effect-alpha-overlay-transparent: var(--alphaComposite-overlayDarkTransparent);
-  --effect-alpha-overlay-dim: var(--alphaComposite-overlayDarkDim);
-  --effect-alpha-overlay-heavy: var(--alphaComposite-overlayDarkHeavy);
+  --effect-alpha-brand-selection: hsla(220, 100%, 57%, 0.20);
+  --effect-alpha-fill-normal: hsla(216, 9%, 77%, 0.22);
+  --effect-alpha-fill-strong: hsla(216, 9%, 77%, 0.28);
+  --effect-alpha-fill-alternative: hsla(216, 9%, 77%, 0.12);
+  --effect-alpha-overlay-transparent: hsla(222, 33%, 11%, 0);
+  --effect-alpha-overlay-dim: hsla(222, 33%, 11%, 0.72);
+  --effect-alpha-overlay-heavy: hsla(222, 33%, 11%, 0.93);
   --effect-gradient-brand-primary: linear-gradient(135deg, var(--blue-70) 0%, var(--blue-50) 100%);
   --effect-gradient-brand-subtle: linear-gradient(180deg, var(--blue-30) 0%, var(--blue-20) 100%);
   --effect-gradient-surface-elevated: linear-gradient(180deg, var(--grey-17) 0%, var(--grey-20) 100%);
   --effect-gradient-surface-container: linear-gradient(180deg, var(--grey-20) 0%, var(--grey-23) 100%);
-  --effect-gradient-overlay-topScrim: linear-gradient(0deg, var(--alphaComposite-overlayDarkHeavy) 0%, var(--alphaComposite-overlayDarkTransparent) 100%);
-  --effect-gradient-overlay-bottomScrim: linear-gradient(180deg, var(--alphaComposite-overlayDarkTransparent) 0%, var(--alphaComposite-overlayDarkHeavy) 100%);
+  --effect-gradient-overlay-topScrim: linear-gradient(0deg, hsla(222, 33%, 11%, 0.93) 0%, hsla(222, 33%, 11%, 0) 100%);
+  --effect-gradient-overlay-bottomScrim: linear-gradient(180deg, hsla(222, 33%, 11%, 0) 0%, hsla(222, 33%, 11%, 0.93) 100%);
 }

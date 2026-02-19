@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { typography, spacing, radius } from '@baerae-zkap/design-system';
 
 export function RadioGroup({ label, options, value, onChange, disabled }: {
   label: string;
@@ -11,7 +12,7 @@ export function RadioGroup({ label, options, value, onChange, disabled }: {
 }) {
   return (
     <div>
-      <div style={{ fontSize: 14, fontWeight: 500, color: "var(--content-base-assistive)", marginBottom: 14 }}>
+      <div style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.medium, color: "var(--content-base-assistive)", marginBottom: 14 }}>
         {label}
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
@@ -25,10 +26,10 @@ export function RadioGroup({ label, options, value, onChange, disabled }: {
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: 12,
+                gap: spacing.primitive[3],
                 cursor: disabled ? "not-allowed" : "pointer",
                 fontSize: 15,
-                fontWeight: 500,
+                fontWeight: typography.fontWeight.medium,
                 color: disabled
                   ? "var(--content-disabled-default)"
                   : isSelected
@@ -70,8 +71,8 @@ export function RadioGroup({ label, options, value, onChange, disabled }: {
                 {isSelected && (
                   <div
                     style={{
-                      width: 12,
-                      height: 12,
+                      width: spacing.primitive[3],
+                      height: spacing.primitive[3],
                       borderRadius: "50%",
                       backgroundColor: "var(--content-brand-default)",
                     }}
@@ -92,13 +93,13 @@ export function CodeTypeTab({ active, onClick, children }: { active: boolean; on
     <button
       onClick={onClick}
       style={{
-        padding: "4px 12px",
-        fontSize: 12,
-        fontWeight: 500,
+        padding: `${spacing.primitive[1]}px ${spacing.primitive[3]}px`,
+        fontSize: typography.fontSize.xs,
+        fontWeight: typography.fontWeight.medium,
         color: active ? "var(--docs-code-active-text)" : "var(--docs-code-muted)",
         backgroundColor: active ? "var(--docs-code-active-bg)" : "transparent",
         border: "none",
-        borderRadius: 4,
+        borderRadius: radius.primitive.xs,
         cursor: "pointer",
         transition: "all 0.15s ease",
       }}
@@ -121,17 +122,17 @@ export function CopyButton({ text }: { text: string }) {
     <button
       onClick={handleCopy}
       style={{
-        padding: "4px 10px",
-        fontSize: 11,
-        fontWeight: 500,
+        padding: `${spacing.primitive[1]}px 10px`,
+        fontSize: typography.fontSize['3xs'],
+        fontWeight: typography.fontWeight.medium,
         color: copied ? "var(--docs-code-success)" : "var(--docs-code-muted)",
         backgroundColor: "transparent",
         border: "1px solid var(--docs-code-border)",
-        borderRadius: 4,
+        borderRadius: radius.primitive.xs,
         cursor: "pointer",
         display: "flex",
         alignItems: "center",
-        gap: 4,
+        gap: spacing.primitive[1],
         transition: "all 0.15s ease",
       }}
     >

@@ -7,7 +7,7 @@
  * @example
  * <IconButton
  *   variant="filled"
- *   color="brandDefault"
+ *   color="primary"
  *   size="medium"
  *   onClick={() => {}}
  * >
@@ -15,19 +15,20 @@
  * </IconButton>
  */
 
-import { forwardRef, useState, type ButtonHTMLAttributes, type ReactNode } from 'react';
+import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
 import { cssVarColors } from '../../tokens/colors';
 import { radius } from '../../tokens/radius';
 import { spacing } from '../../tokens/spacing';
 import { opacity } from '../../tokens/general';
 import { transitions } from '../../utils/styles';
+import { usePressable } from '../../utils/usePressable';
 
-export type IconButtonVariant = 'filled' | 'ghost' | 'outlined';
-export type IconButtonColor = 'brandDefault' | 'baseDefault' | 'errorDefault';
+export type IconButtonVariant = 'filled' | 'ghost' | 'weak';
+export type IconButtonColor = 'primary' | 'neutral' | 'error';
 export type IconButtonSize = 'small' | 'medium' | 'large';
 
 export interface IconButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'color'> {
-  /** 버튼 스타일 - filled(채워진), ghost(투명), outlined(테두리) */
+  /** 버튼 스타일 - filled(채워진), ghost(투명), weak(연한 배경) */
   variant?: IconButtonVariant;
   /** 색상 테마 */
   color?: IconButtonColor;
@@ -47,9 +48,9 @@ const sizeStyles: Record<IconButtonSize, { size: number; iconSize: number }> = {
 const colorStyles: Record<IconButtonColor, {
   filled: { bg: string; bgPressed: string; color: string };
   ghost: { bg: string; bgHover: string; bgPressed: string; color: string; colorPressed: string };
-  outlined: { bg: string; bgPressed: string; color: string; border: string };
+  weak: { bg: string; bgPressed: string; color: string };
 }> = {
-  brandDefault: {
+  primary: {
     filled: {
       bg: cssVarColors.surface.brand.default,
       bgPressed: cssVarColors.surface.brand.defaultPressed,
@@ -62,14 +63,13 @@ const colorStyles: Record<IconButtonColor, {
       color: cssVarColors.content.brand.default,
       colorPressed: cssVarColors.surface.brand.defaultPressed
     },
-    outlined: {
-      bg: cssVarColors.surface.base.default,
-      bgPressed: cssVarColors.surface.brand.secondary,
+    weak: {
+      bg: cssVarColors.surface.brand.secondary,
+      bgPressed: cssVarColors.surface.brand.secondaryPressed,
       color: cssVarColors.content.brand.default,
-      border: cssVarColors.border.brand.default
     },
   },
-  baseDefault: {
+  neutral: {
     filled: {
       bg: cssVarColors.content.base.default,
       bgPressed: cssVarColors.inverse.surface.default,
@@ -82,14 +82,13 @@ const colorStyles: Record<IconButtonColor, {
       color: cssVarColors.content.base.default,
       colorPressed: cssVarColors.inverse.surface.default
     },
-    outlined: {
-      bg: cssVarColors.surface.base.default,
-      bgPressed: cssVarColors.surface.base.alternative,
+    weak: {
+      bg: cssVarColors.surface.base.container,
+      bgPressed: cssVarColors.surface.base.containerPressed,
       color: cssVarColors.content.base.default,
-      border: cssVarColors.border.secondary.default
     },
   },
-  errorDefault: {
+  error: {
     filled: {
       bg: cssVarColors.surface.error.solid,
       bgPressed: cssVarColors.surface.error.solidPressed,
@@ -102,11 +101,10 @@ const colorStyles: Record<IconButtonColor, {
       color: cssVarColors.content.error.default,
       colorPressed: cssVarColors.surface.error.solidPressed
     },
-    outlined: {
-      bg: cssVarColors.surface.base.default,
-      bgPressed: cssVarColors.surface.error.default,
+    weak: {
+      bg: cssVarColors.surface.error.default,
+      bgPressed: cssVarColors.surface.error.defaultPressed,
       color: cssVarColors.content.error.default,
-      border: cssVarColors.border.error.default
     },
   },
 };
@@ -115,7 +113,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
   (
     {
       variant = 'ghost',
-      color = 'baseDefault',
+      color = 'neutral',
       size = 'medium',
       disabled = false,
       children,
@@ -128,54 +126,35 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
     },
     ref
   ) => {
-    const [isPressed, setIsPressed] = useState(false);
-    const [isHovered, setIsHovered] = useState(false);
+    const { isPressed, isHovered, handlers } = usePressable<HTMLButtonElement>({
+      disabled,
+      onMouseDown,
+      onMouseUp,
+      onMouseLeave,
+      onMouseEnter,
+    });
 
     const sizeStyle = sizeStyles[size];
     const colorStyle = colorStyles[color][variant];
 
-    const handleMouseDown = (e: React.MouseEvent<HTMLButtonElement>) => {
-      if (!disabled) setIsPressed(true);
-      onMouseDown?.(e);
-    };
-
-    const handleMouseUp = (e: React.MouseEvent<HTMLButtonElement>) => {
-      setIsPressed(false);
-      onMouseUp?.(e);
-    };
-
-    const handleMouseLeave = (e: React.MouseEvent<HTMLButtonElement>) => {
-      setIsPressed(false);
-      setIsHovered(false);
-      onMouseLeave?.(e);
-    };
-
-    const handleMouseEnter = (e: React.MouseEvent<HTMLButtonElement>) => {
-      if (!disabled) setIsHovered(true);
-      onMouseEnter?.(e);
-    };
-
     // Determine background color based on state
-    let backgroundColor: string;
-    if (variant === 'ghost') {
-      const ghostStyle = colorStyle as typeof colorStyles.brandDefault.ghost;
-      backgroundColor = isPressed ? ghostStyle.bgPressed : isHovered ? ghostStyle.bgHover : ghostStyle.bg;
-    } else if (variant === 'filled') {
-      const filledStyle = colorStyle as typeof colorStyles.brandDefault.filled;
-      backgroundColor = isPressed ? filledStyle.bgPressed : filledStyle.bg;
-    } else {
-      const outlinedStyle = colorStyle as typeof colorStyles.brandDefault.outlined;
-      backgroundColor = isPressed ? outlinedStyle.bgPressed : outlinedStyle.bg;
-    }
+    const getBackgroundColor = (): string => {
+      if (variant === 'ghost') {
+        const s = colorStyle as typeof colorStyles.primary.ghost;
+        return isPressed ? s.bgPressed : isHovered ? s.bgHover : s.bg;
+      }
+      const s = colorStyle as typeof colorStyles.primary[typeof variant];
+      return isPressed ? s.bgPressed : s.bg;
+    };
 
-    // Determine text/icon color
-    let iconColor: string;
-    if (variant === 'ghost') {
-      const ghostStyle = colorStyle as typeof colorStyles.brandDefault.ghost;
-      iconColor = isPressed ? ghostStyle.colorPressed : ghostStyle.color;
-    } else {
-      iconColor = (colorStyle as typeof colorStyles.brandDefault.filled).color;
-    }
+    // Determine icon color
+    const getIconColor = (): string => {
+      if (variant === 'ghost') {
+        const s = colorStyle as typeof colorStyles.primary.ghost;
+        return isPressed ? s.colorPressed : s.color;
+      }
+      return (colorStyle as typeof colorStyles.primary.filled).color;
+    };
 
     const buttonStyle: React.CSSProperties = {
       display: 'inline-flex',
@@ -184,9 +163,9 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
       width: sizeStyle.size,
       height: sizeStyle.size,
       borderRadius: radius.primitive.full,
-      border: variant === 'outlined' ? `1px solid ${(colorStyle as typeof colorStyles.brandDefault.outlined).border}` : 'none',
-      backgroundColor,
-      color: iconColor,
+      border: 'none',
+      backgroundColor: getBackgroundColor(),
+      color: getIconColor(),
       cursor: disabled ? 'not-allowed' : 'pointer',
       opacity: disabled ? opacity.disabled : 1,
       transition: transitions.all,
@@ -209,10 +188,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         type="button"
         disabled={disabled}
         style={buttonStyle}
-        onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseLeave}
-        onMouseEnter={handleMouseEnter}
+        {...handlers}
         {...props}
       >
         <span style={iconWrapperStyle}>{children}</span>

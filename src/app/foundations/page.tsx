@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Breadcrumb } from "@/components/Breadcrumb";
+import { typography, spacing, radius } from '@baerae-zkap/design-system';
 
 const foundations = [
   {
@@ -9,10 +10,10 @@ const foundations = [
     description: "브랜드 아이덴티티를 표현하는 컬러 팔레트와 시맨틱 컬러",
     href: "/colors/palette",
     icon: (
-      <div style={{ display: "flex", gap: 4 }}>
-        <div style={{ width: 16, height: 16, borderRadius: 4, backgroundColor: "var(--content-brand-default)" }} />
-        <div style={{ width: 16, height: 16, borderRadius: 4, backgroundColor: "var(--content-success-default)" }} />
-        <div style={{ width: 16, height: 16, borderRadius: 4, backgroundColor: "var(--content-warning-default)" }} />
+      <div style={{ display: "flex", gap: spacing.primitive[1] }}>
+        <div style={{ width: 16, height: 16, borderRadius: radius.primitive.xs, backgroundColor: "var(--content-brand-default)" }} />
+        <div style={{ width: 16, height: 16, borderRadius: radius.primitive.xs, backgroundColor: "var(--content-success-default)" }} />
+        <div style={{ width: 16, height: 16, borderRadius: radius.primitive.xs, backgroundColor: "var(--content-warning-default)" }} />
       </div>
     ),
   },
@@ -76,35 +77,35 @@ export default function FoundationsPage() {
     <div style={{ maxWidth: 720 }}>
       <Breadcrumb items={[{ label: "Foundations" }]} />
 
-      <h1 style={{ fontSize: 32, fontWeight: 700, marginBottom: 8, color: "var(--text-primary)" }}>
+      <h1 style={{ fontSize: 32, fontWeight: typography.fontWeight.bold, marginBottom: spacing.primitive[2], color: "var(--text-primary)" }}>
         Foundations
       </h1>
-      <p style={{ fontSize: 16, color: "var(--text-secondary)", marginBottom: 40, lineHeight: 1.6 }}>
+      <p style={{ fontSize: typography.fontSize.md, color: "var(--text-secondary)", marginBottom: spacing.primitive[10], lineHeight: 1.6 }}>
         모든 디자인 요소의 기반이 되는 가장 원자적인 단위들로 컬러, 타이포그래피, 스페이싱, 그리드 등 시각적 언어의 최소 단위들로 구성됩니다.
       </p>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 16 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: spacing.primitive[4] }}>
         {foundations.map((item) => (
           <Link
             key={item.title}
             href={item.href}
             style={{
               display: "block",
-              padding: 24,
+              padding: spacing.primitive[6],
               backgroundColor: "var(--bg-elevated)",
-              borderRadius: 16,
+              borderRadius: radius.primitive.lg,
               border: "1px solid var(--divider)",
               textDecoration: "none",
               transition: "all 200ms cubic-bezier(0.16, 1, 0.3, 1)",
             }}
           >
-            <div style={{ marginBottom: 16, color: "var(--text-secondary)" }}>
+            <div style={{ marginBottom: spacing.primitive[4], color: "var(--text-secondary)" }}>
               {item.icon}
             </div>
-            <h3 style={{ fontSize: 18, fontWeight: 600, color: "var(--text-primary)", marginBottom: 8 }}>
+            <h3 style={{ fontSize: typography.fontSize.lg, fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)", marginBottom: spacing.primitive[2] }}>
               {item.title}
             </h3>
-            <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.5 }}>
+            <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", lineHeight: 1.5 }}>
               {item.description}
             </p>
           </Link>

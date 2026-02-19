@@ -21,7 +21,7 @@ import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
 import { transitions } from '../../utils/styles';
-import { opacity } from '../../tokens/general';
+import { opacity, borderWidth } from '../../tokens/general';
 
 export type TextAreaResize = 'normal' | 'limited' | 'fixed';
 
@@ -177,7 +177,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       maxHeight,
       padding: `${spacing.component.input.paddingY}px ${spacing.component.input.paddingX}px`,
       borderRadius: radius.component.input.default,
-      border: `1px solid ${getBorderColor()}`,
+      border: `${borderWidth.default}px solid ${getBorderColor()}`,
       backgroundColor: getBackgroundColor(),
       transition: transitions.border,
     };

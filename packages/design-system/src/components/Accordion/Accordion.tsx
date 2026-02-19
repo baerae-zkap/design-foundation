@@ -1,7 +1,7 @@
 /**
  * Accordion Component (Web)
  *
- * @description 펼침/접힘 가능한 콘텐츠 컨테이너입니다.
+ * @description 접힘/펼침이 가능한 콘텐츠 컨테이너입니다. WAI-ARIA Accordion 패턴을 준수합니다.
  * @see docs/components/Accordion.md - AI용 상세 가이드
  *
  * @example
@@ -10,13 +10,13 @@
  * </Accordion>
  */
 
-import { forwardRef, useState, useEffect, useRef, type HTMLAttributes, type ReactNode } from 'react';
+import { forwardRef, useState, useEffect, useRef, useId, type HTMLAttributes, type ReactNode } from 'react';
 import { cssVarColors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
 import { transitions } from '../../utils/styles';
-import { opacity } from '../../tokens/general';
+import { borderWidth } from '../../tokens/general';
 
 export type AccordionSize = 'medium' | 'large';
 
@@ -31,8 +31,6 @@ export interface AccordionProps extends Omit<HTMLAttributes<HTMLDivElement>, 'ti
   expanded?: boolean;
   /** 펼침 상태 변경 핸들러 */
   onChange?: (expanded: boolean) => void;
-  /** 비활성화 상태 */
-  disabled?: boolean;
   /** 크기 */
   size?: AccordionSize;
 }
@@ -50,7 +48,6 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
       defaultExpanded = false,
       expanded: controlledExpanded,
       onChange,
-      disabled = false,
       size = 'medium',
       style,
       ...props
@@ -63,6 +60,9 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
 
     const contentRef = useRef<HTMLDivElement>(null);
     const [contentHeight, setContentHeight] = useState<number>(0);
+    const id = useId();
+    const headerId = `${id}-header`;
+    const panelId = `${id}-panel`;
 
     useEffect(() => {
       if (contentRef.current) {
@@ -71,8 +71,6 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
     }, [children, expanded]);
 
     const handleToggle = () => {
-      if (disabled) return;
-
       const newExpanded = !expanded;
       if (!isControlled) {
         setUncontrolledExpanded(newExpanded);
@@ -80,11 +78,18 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
       onChange?.(newExpanded);
     };
 
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        handleToggle();
+      }
+    };
+
     const sizeStyle = sizeStyles[size];
 
     const containerStyle: React.CSSProperties = {
       borderRadius: radius.component.card.sm,
-      border: `1px solid ${cssVarColors.border.base.default}`,
+      border: `${borderWidth.default}px solid ${cssVarColors.border.base.default}`,
       backgroundColor: cssVarColors.surface.base.default,
       overflow: 'hidden',
       ...style,
@@ -97,10 +102,9 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
-      cursor: disabled ? 'not-allowed' : 'pointer',
+      cursor: 'pointer',
       backgroundColor: expanded ? cssVarColors.surface.elevated.alternative : cssVarColors.surface.base.default,
       transition: transitions.background,
-      opacity: disabled ? opacity.disabled : 1,
     };
 
     const titleStyle: React.CSSProperties = {
@@ -115,14 +119,15 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
       width: sizeStyle.iconSize,
       height: sizeStyle.iconSize,
       transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)',
-      transition: transitions.all,
+      transition: transitions.transform,
       color: cssVarColors.content.base.secondary,
     };
 
     const contentWrapperStyle: React.CSSProperties = {
       height: expanded ? contentHeight : 0,
+      opacity: expanded ? 1 : 0,
       overflow: 'hidden',
-      transition: transitions.all,
+      transition: transitions.expand,
     };
 
     const contentStyle: React.CSSProperties = {
@@ -131,7 +136,16 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
 
     return (
       <div ref={ref} style={containerStyle} {...props}>
-        <div style={headerStyle} onClick={handleToggle}>
+        <div
+          id={headerId}
+          role="button"
+          tabIndex={0}
+          aria-expanded={expanded}
+          aria-controls={panelId}
+          style={headerStyle}
+          onClick={handleToggle}
+          onKeyDown={handleKeyDown}
+        >
           <div style={titleStyle}>{title}</div>
           <svg
             style={iconStyle}
@@ -143,7 +157,12 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
             <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
           </svg>
         </div>
-        <div style={contentWrapperStyle}>
+        <div
+          id={panelId}
+          role="region"
+          aria-labelledby={headerId}
+          style={contentWrapperStyle}
+        >
           <div ref={contentRef} style={contentStyle}>
             {children}
           </div>

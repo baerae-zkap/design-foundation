@@ -5,10 +5,11 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { PlatformTabs, CodeBlock, PreviewBox, Platform } from "@/components/PlatformTabs";
 import { Thumbnail } from '@baerae-zkap/design-system';
 import type { ThumbnailAspectRatio } from '@baerae-zkap/design-system';
-import { Section, Subsection } from "@/components/docs/Section";
+import { Section, Subsection, InlineCode } from "@/components/docs/Section";
 import { PropsTable } from "@/components/docs/PropsTable";
 import { PrincipleCard, DoCard, DontCard } from "@/components/docs/Cards";
 import { RadioGroup } from "@/components/docs/Playground";
+import { typography, spacing, radius } from '@baerae-zkap/design-system';
 
 // GitHub source URLs
 const GITHUB_BASE = "https://github.com/baerae-zkap/design-foundation/blob/main/packages/design-system";
@@ -25,10 +26,10 @@ export default function ThumbnailPage() {
         ]}
       />
 
-      <h1 style={{ fontSize: 28, fontWeight: 700, marginBottom: 8, color: "var(--text-primary)", letterSpacing: "-0.02em" }}>
+      <h1 style={{ fontSize: typography.fontSize['3xl'], fontWeight: typography.fontWeight.bold, marginBottom: spacing.primitive[2], color: "var(--text-primary)", letterSpacing: "-0.02em" }}>
         Thumbnail
       </h1>
-      <p style={{ fontSize: 15, color: "var(--text-secondary)", marginBottom: 32, lineHeight: 1.6 }}>
+      <p style={{ fontSize: typography.fontSize.md, color: "var(--text-secondary)", marginBottom: spacing.primitive[8], lineHeight: 1.7 }}>
         이미지, 비디오 등 미디어 콘텐츠의 미리보기를 다양한 크기와 형태로 일관되게 표현하는 컴포넌트입니다.
       </p>
 
@@ -44,12 +45,12 @@ export default function ThumbnailPage() {
 function ThumbnailPlayground() {
   const [aspectRatio, setAspectRatio] = useState<ThumbnailAspectRatio>("16:9");
   const [size, setSize] = useState<number>(160);
-  const [radius, setRadius] = useState(true);
+  const [hasRadius, setHasRadius] = useState(true);
   const [border, setBorder] = useState(false);
   const [playIcon, setPlayIcon] = useState(false);
 
   return (
-    <div style={{ marginBottom: 32 }}>
+    <div style={{ marginBottom: spacing.primitive[8] }}>
       <div style={{ borderRadius: 20, overflow: "hidden", backgroundColor: "var(--surface-base-alternative)" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
           <div style={{ padding: 60, display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -57,7 +58,7 @@ function ThumbnailPlayground() {
               src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400"
               aspectRatio={aspectRatio}
               size={size}
-              radius={radius}
+              radius={hasRadius}
               border={border}
               playIcon={playIcon}
             />
@@ -67,7 +68,7 @@ function ThumbnailPlayground() {
             backgroundColor: "var(--surface-base-alternative)",
             display: "flex",
             flexDirection: "column",
-            padding: 16,
+            padding: spacing.primitive[4],
             overflow: "hidden",
             height: "100%",
             boxSizing: "border-box",
@@ -75,13 +76,13 @@ function ThumbnailPlayground() {
             <div style={{
               flex: 1,
               minHeight: 0,
-              padding: 24,
+              padding: spacing.primitive[6],
               overflowY: "auto",
               display: "flex",
               flexDirection: "column",
               gap: 28,
               backgroundColor: "var(--surface-base-default)",
-              borderRadius: 16,
+              borderRadius: radius.primitive.lg,
             }}>
               <RadioGroup
                 label="Aspect Ratio"
@@ -111,8 +112,8 @@ function ThumbnailPlayground() {
                   { value: "false", label: "False" },
                   { value: "true", label: "True" },
                 ]}
-                value={radius ? "true" : "false"}
-                onChange={(v) => setRadius(v === "true")}
+                value={hasRadius ? "true" : "false"}
+                onChange={(v) => setHasRadius(v === "true")}
               />
               <RadioGroup
                 label="Border"
@@ -155,15 +156,15 @@ function UsageCard({ situation, description, example }: {
     <div style={{
       display: "grid",
       gridTemplateColumns: "1fr",
-      gap: 4,
-      padding: 16,
+      gap: spacing.primitive[1],
+      padding: spacing.primitive[4],
       backgroundColor: "var(--surface-base-default)",
-      borderRadius: 12,
+      borderRadius: radius.primitive.md,
       border: "1px solid var(--divider)",
     }}>
-      <span style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)" }}>{situation}</span>
-      <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0, marginBottom: 2 }}>{description}</p>
-      <p style={{ fontSize: 12, color: "var(--text-tertiary)", margin: 0 }}>{example}</p>
+      <span style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)" }}>{situation}</span>
+      <p style={{ fontSize: typography.fontSize.compact, color: "var(--text-secondary)", margin: 0, marginBottom: 2 }}>{description}</p>
+      <p style={{ fontSize: typography.fontSize.xs, color: "var(--text-tertiary)", margin: 0 }}>{example}</p>
     </div>
   );
 }
@@ -171,42 +172,25 @@ function UsageCard({ situation, description, example }: {
 
 function DesignContent() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: spacing.primitive[12] }}>
       {/* Overview */}
-      <div>
-        <h2 style={{ fontSize: 24, fontWeight: 700, color: "var(--text-primary)", marginBottom: 8 }}>개요</h2>
-        <p style={{ fontSize: 16, lineHeight: 1.6, color: "var(--text-secondary)", marginBottom: 24 }}>
-          Thumbnail은 이미지, 비디오 등 미디어 콘텐츠의 미리보기를 표시하는 컴포넌트입니다. 다양한 크기와 형태의 미디어 프리뷰를 일관되게 표현합니다.
+      <Section title="Overview">
+        <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", lineHeight: 1.7 }}>
+          <InlineCode>Thumbnail</InlineCode> 컴포넌트는 이미지, 비디오 등 미디어 콘텐츠의 미리보기를 다양한 크기와 형태로 일관되게 표현해요.
+          리스트나 그리드에서 미디어 프리뷰가 필요할 때 사용해요.
         </p>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
-          <div style={{ padding: 24, borderRadius: 12, backgroundColor: "var(--surface-success-default)", border: "1px solid var(--border-success-default)" }}>
-            <h3 style={{ fontSize: 16, fontWeight: 600, color: "var(--content-success-default)", marginBottom: 12 }}>이런 경우 사용하세요</h3>
-            <ul style={{ fontSize: 14, lineHeight: 1.8, color: "var(--text-secondary)", paddingLeft: 20, margin: 0 }}>
-              <li>미디어 콘텐츠의 미리보기를 표시할 때</li>
-              <li>리스트나 그리드에서 이미지 프리뷰가 필요할 때</li>
-              <li>비디오 콘텐츠에 재생 아이콘 오버레이가 필요할 때</li>
-            </ul>
-          </div>
-          <div style={{ padding: 24, borderRadius: 12, backgroundColor: "var(--surface-error-default)", border: "1px solid var(--border-error-default)" }}>
-            <h3 style={{ fontSize: 16, fontWeight: 600, color: "var(--content-error-default)", marginBottom: 12 }}>이런 경우 사용하지 마세요</h3>
-            <ul style={{ fontSize: 14, lineHeight: 1.8, color: "var(--text-secondary)", paddingLeft: 20, margin: 0 }}>
-              <li>아이콘이나 로고 표시에는 사용하지 마세요</li>
-              <li>전체 크기 이미지 뷰어가 필요하면 별도 갤러리 컴포넌트를 사용하세요</li>
-            </ul>
-          </div>
-        </div>
-      </div>
+      </Section>
 
       {/* Anatomy - SVG Diagram */}
       <Section title="Anatomy">
         <div style={{
           backgroundColor: "var(--surface-base-alternative)",
-          borderRadius: 16,
+          borderRadius: radius.primitive.lg,
           padding: "48px 40px",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          marginBottom: 20,
+          marginBottom: spacing.primitive[5],
         }}>
           <svg width="360" height="240" viewBox="0 0 360 240">
             {/* Container outline */}
@@ -251,9 +235,9 @@ function DesignContent() {
         <div style={{
           display: "grid",
           gridTemplateColumns: "1fr 1fr 1fr 1fr",
-          gap: 16,
-          fontSize: 14,
-          fontWeight: 500,
+          gap: spacing.primitive[4],
+          fontSize: typography.fontSize.sm,
+          fontWeight: typography.fontWeight.medium,
           color: "var(--text-primary)",
         }}>
           <div>1. Container</div>
@@ -263,148 +247,9 @@ function DesignContent() {
         </div>
       </Section>
 
-      {/* 인터랙션 상태 */}
-      <Section title="인터랙션 상태">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 24 }}>
-          Thumbnail은 미디어 콘텐츠 상태와 사용자 인터랙션에 따라 다양한 시각적 상태를 가집니다.
-        </p>
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
-          gap: 16,
-          padding: 24,
-          backgroundColor: "var(--surface-base-alternative)",
-          borderRadius: 16,
-        }}>
-          <ThumbStateCard label="Default" sublabel="기본 상태">
-            <div style={{ width: 120, height: 68, borderRadius: 8, overflow: "hidden", position: "relative" }}>
-              <div style={{ width: "100%", height: "100%", backgroundColor: "var(--content-base-placeholder)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" opacity={0.6}>
-                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                  <circle cx="8.5" cy="8.5" r="1.5" />
-                  <polyline points="21 15 16 10 5 21" />
-                </svg>
-              </div>
-            </div>
-          </ThumbStateCard>
-          <ThumbStateCard label="Hover" sublabel="오버레이 표시">
-            <div style={{ width: 120, height: 68, borderRadius: 8, overflow: "hidden", position: "relative" }}>
-              <div style={{ width: "100%", height: "100%", backgroundColor: "var(--content-base-placeholder)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" opacity={0.6}>
-                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                  <circle cx="8.5" cy="8.5" r="1.5" />
-                  <polyline points="21 15 16 10 5 21" />
-                </svg>
-              </div>
-              <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, backgroundColor: "var(--effect-alpha-overlay-dim)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <span style={{ color: "white", fontSize: 11, fontWeight: 600 }}>View</span>
-              </div>
-            </div>
-          </ThumbStateCard>
-          <ThumbStateCard label="Playing" sublabel="비디오 재생 표시">
-            <div style={{ width: 120, height: 68, borderRadius: 8, overflow: "hidden", position: "relative" }}>
-              <div style={{ width: "100%", height: "100%", backgroundColor: "var(--content-base-placeholder)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <div style={{ width: 32, height: 32, borderRadius: "50%", backgroundColor: "var(--effect-alpha-overlay-dim)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
-                    <polygon points="8,5 20,12 8,19" />
-                  </svg>
-                </div>
-              </div>
-            </div>
-          </ThumbStateCard>
-          <ThumbStateCard label="Error" sublabel="로드 실패">
-            <div style={{ width: 120, height: 68, borderRadius: 8, overflow: "hidden", position: "relative" }}>
-              <div style={{ width: "100%", height: "100%", backgroundColor: "var(--surface-base-alternative)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 4 }}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--content-base-placeholder)" strokeWidth="1.5">
-                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                  <line x1="9" y1="9" x2="15" y2="15" />
-                  <line x1="15" y1="9" x2="9" y2="15" />
-                </svg>
-                <span style={{ fontSize: 9, color: "var(--content-base-placeholder)" }}>Unavailable</span>
-              </div>
-            </div>
-          </ThumbStateCard>
-        </div>
-      </Section>
-
-      {/* 디자인 토큰 */}
-      <Section title="디자인 토큰">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 16 }}>
-          컴포넌트에 적용된 디자인 토큰입니다. 커스터마이징 시 아래 토큰을 참조하세요.
-        </p>
-        <div style={{ overflowX: "auto" }}>
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
-            <thead>
-              <tr style={{ borderBottom: "2px solid var(--border-default)" }}>
-                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: 600 }}>속성</th>
-                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: 600 }}>토큰</th>
-                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: 600 }}>값</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>배경</td>
-                <td style={{ padding: "10px 12px" }}>
-                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>--surface-base-alternative</code>
-                </td>
-                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>
-                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
-                    <span style={{ width: 12, height: 12, borderRadius: 3, backgroundColor: "var(--surface-base-alternative)", border: "1px solid var(--border-default)" }} />
-                    Placeholder 배경
-                  </span>
-                </td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>border-radius</td>
-                <td style={{ padding: "10px 12px" }}>
-                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>-</code>
-                </td>
-                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>12px</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>오버레이</td>
-                <td style={{ padding: "10px 12px" }}>
-                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>--effect-alpha-overlay-dim</code>
-                </td>
-                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>
-                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
-                    <span style={{ width: 12, height: 12, borderRadius: 3, backgroundColor: "var(--effect-alpha-overlay-dim)", border: "1px solid var(--border-default)" }} />
-                    var(--effect-alpha-overlay-dim)
-                  </span>
-                </td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>재생 아이콘</td>
-                <td style={{ padding: "10px 12px" }}>
-                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>--content-base-onColor</code>
-                </td>
-                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>
-                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
-                    <span style={{ width: 12, height: 12, borderRadius: 3, backgroundColor: "white", border: "1px solid var(--border-default)" }} />
-                    White
-                  </span>
-                </td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>캡션</td>
-                <td style={{ padding: "10px 12px" }}>
-                  <code style={{ fontSize: 12, padding: "2px 6px", borderRadius: 4, backgroundColor: "var(--surface-base-alternative)", color: "var(--content-brand-default)" }}>--text-secondary</code>
-                </td>
-                <td style={{ padding: "10px 12px", color: "var(--text-tertiary)" }}>
-                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
-                    <span style={{ width: 12, height: 12, borderRadius: 3, backgroundColor: "var(--text-secondary)", border: "1px solid var(--border-default)" }} />
-                    fontSize: 12
-                  </span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </Section>
-
       {/* Aspect Ratios */}
       <Section title="Aspect Ratios">
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 20 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: spacing.primitive[5] }}>
           <AspectRatioCard name="1:1" description="정사각형 (프로필, NFT)">
             <ThumbnailDemo src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400" aspectRatio="1:1" />
           </AspectRatioCard>
@@ -422,23 +267,23 @@ function DesignContent() {
 
       {/* Sizes */}
       <Section title="Sizes">
-        <div style={{ backgroundColor: "var(--surface-base-alternative)", borderRadius: 12, padding: 32 }}>
-          <div style={{ display: "flex", gap: 24, alignItems: "flex-end", justifyContent: "center" }}>
+        <div style={{ backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.md, padding: spacing.primitive[8] }}>
+          <div style={{ display: "flex", gap: spacing.primitive[6], alignItems: "flex-end", justifyContent: "center" }}>
             <div style={{ textAlign: "center" }}>
               <ThumbnailDemo src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400" aspectRatio="1:1" size={64} />
-              <div style={{ marginTop: 12, fontSize: 13, color: "var(--content-base-secondary)" }}>64px</div>
+              <div style={{ marginTop: spacing.primitive[3], fontSize: typography.fontSize.compact, color: "var(--content-base-secondary)" }}>64px</div>
             </div>
             <div style={{ textAlign: "center" }}>
               <ThumbnailDemo src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400" aspectRatio="1:1" size={80} />
-              <div style={{ marginTop: 12, fontSize: 13, color: "var(--content-base-secondary)" }}>80px</div>
+              <div style={{ marginTop: spacing.primitive[3], fontSize: typography.fontSize.compact, color: "var(--content-base-secondary)" }}>80px</div>
             </div>
             <div style={{ textAlign: "center" }}>
               <ThumbnailDemo src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400" aspectRatio="1:1" size={120} />
-              <div style={{ marginTop: 12, fontSize: 13, color: "var(--content-base-secondary)" }}>120px</div>
+              <div style={{ marginTop: spacing.primitive[3], fontSize: typography.fontSize.compact, color: "var(--content-base-secondary)" }}>120px</div>
             </div>
             <div style={{ textAlign: "center" }}>
               <ThumbnailDemo src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400" aspectRatio="1:1" size={160} />
-              <div style={{ marginTop: 12, fontSize: 13, color: "var(--content-base-secondary)" }}>160px</div>
+              <div style={{ marginTop: spacing.primitive[3], fontSize: typography.fontSize.compact, color: "var(--content-base-secondary)" }}>160px</div>
             </div>
           </div>
         </div>
@@ -446,7 +291,7 @@ function DesignContent() {
 
       {/* Styles */}
       <Section title="Styles">
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 20 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: spacing.primitive[5] }}>
           <StyleCard name="Default" description="라운드 모서리 (12px)">
             <ThumbnailDemo src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400" aspectRatio="16:9" radius />
           </StyleCard>
@@ -464,16 +309,79 @@ function DesignContent() {
 
       {/* States */}
       <Section title="States">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20, lineHeight: 1.6 }}>
+        <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginBottom: spacing.primitive[5], lineHeight: 1.7 }}>
           Thumbnail은 이미지 로드 상태에 따라 다양한 시각적 상태를 가집니다.
         </p>
 
+        <Subsection title="Interaction States">
+          <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", lineHeight: 1.7, marginBottom: spacing.primitive[6] }}>
+            Thumbnail은 미디어 콘텐츠 상태와 사용자 인터랙션에 따라 다양한 시각적 상태를 가집니다.
+          </p>
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
+            gap: spacing.primitive[4],
+            padding: spacing.primitive[6],
+            backgroundColor: "var(--surface-base-alternative)",
+            borderRadius: radius.primitive.lg,
+          }}>
+            <ThumbStateCard label="Default" sublabel="기본 상태">
+              <div style={{ width: 120, height: 68, borderRadius: radius.primitive.sm, overflow: "hidden", position: "relative" }}>
+                <div style={{ width: "100%", height: "100%", backgroundColor: "var(--content-base-placeholder)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" opacity={0.6}>
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                    <circle cx="8.5" cy="8.5" r="1.5" />
+                    <polyline points="21 15 16 10 5 21" />
+                  </svg>
+                </div>
+              </div>
+            </ThumbStateCard>
+            <ThumbStateCard label="Hover" sublabel="오버레이 표시">
+              <div style={{ width: 120, height: 68, borderRadius: radius.primitive.sm, overflow: "hidden", position: "relative" }}>
+                <div style={{ width: "100%", height: "100%", backgroundColor: "var(--content-base-placeholder)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" opacity={0.6}>
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                    <circle cx="8.5" cy="8.5" r="1.5" />
+                    <polyline points="21 15 16 10 5 21" />
+                  </svg>
+                </div>
+                <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, backgroundColor: "var(--effect-alpha-overlay-dim)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <span style={{ color: "white", fontSize: typography.fontSize['2xs'], fontWeight: typography.fontWeight.semibold }}>View</span>
+                </div>
+              </div>
+            </ThumbStateCard>
+            <ThumbStateCard label="Playing" sublabel="비디오 재생 표시">
+              <div style={{ width: 120, height: 68, borderRadius: radius.primitive.sm, overflow: "hidden", position: "relative" }}>
+                <div style={{ width: "100%", height: "100%", backgroundColor: "var(--content-base-placeholder)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <div style={{ width: 32, height: 32, borderRadius: "50%", backgroundColor: "var(--effect-alpha-overlay-dim)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
+                      <polygon points="8,5 20,12 8,19" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </ThumbStateCard>
+            <ThumbStateCard label="Error" sublabel="로드 실패">
+              <div style={{ width: 120, height: 68, borderRadius: radius.primitive.sm, overflow: "hidden", position: "relative" }}>
+                <div style={{ width: "100%", height: "100%", backgroundColor: "var(--surface-base-alternative)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: spacing.primitive[1] }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--content-base-placeholder)" strokeWidth="1.5">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                    <line x1="9" y1="9" x2="15" y2="15" />
+                    <line x1="15" y1="9" x2="9" y2="15" />
+                  </svg>
+                  <span style={{ fontSize: 9, color: "var(--content-base-placeholder)" }}>Unavailable</span>
+                </div>
+              </div>
+            </ThumbStateCard>
+          </div>
+        </Subsection>
+
         <Subsection title="Loading / Skeleton">
           <PreviewBox>
-            <div style={{ display: "flex", gap: 24, justifyContent: "center", padding: 24 }}>
+            <div style={{ display: "flex", gap: spacing.primitive[6], justifyContent: "center", padding: spacing.primitive[6] }}>
               <div style={{
                 width: 160,
-                borderRadius: 12,
+                borderRadius: radius.primitive.md,
                 overflow: "hidden",
               }}>
                 <div style={{
@@ -496,7 +404,7 @@ function DesignContent() {
               </div>
               <div style={{
                 width: 160,
-                borderRadius: 12,
+                borderRadius: radius.primitive.md,
                 overflow: "hidden",
               }}>
                 <div style={{
@@ -520,17 +428,17 @@ function DesignContent() {
               <style>{`@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }`}</style>
             </div>
           </PreviewBox>
-          <div style={{ marginTop: 12, padding: 12, backgroundColor: "var(--bg-secondary)", borderRadius: 8, fontSize: 13, color: "var(--text-secondary)" }}>
+          <div style={{ marginTop: spacing.primitive[3], padding: spacing.primitive[3], backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.sm, fontSize: typography.fontSize.compact, color: "var(--text-secondary)" }}>
             이미지 로딩 중 Skeleton 애니메이션으로 로딩 상태를 표시합니다.
           </div>
         </Subsection>
 
         <Subsection title="Error / Fallback">
           <PreviewBox>
-            <div style={{ display: "flex", gap: 24, justifyContent: "center", padding: 24 }}>
+            <div style={{ display: "flex", gap: spacing.primitive[6], justifyContent: "center", padding: spacing.primitive[6] }}>
               <div style={{
                 width: 160,
-                borderRadius: 12,
+                borderRadius: radius.primitive.md,
                 overflow: "hidden",
               }}>
                 <div style={{
@@ -547,28 +455,28 @@ function DesignContent() {
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
-                    gap: 8,
+                    gap: spacing.primitive[2],
                   }}>
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--content-base-placeholder)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
                       <circle cx="8.5" cy="8.5" r="1.5" />
                       <polyline points="21 15 16 10 5 21" />
                     </svg>
-                    <span style={{ fontSize: 11, color: "var(--content-base-placeholder)" }}>Unavailable</span>
+                    <span style={{ fontSize: typography.fontSize['2xs'], color: "var(--content-base-placeholder)" }}>Unavailable</span>
                   </div>
                 </div>
               </div>
             </div>
           </PreviewBox>
-          <div style={{ marginTop: 12, padding: 12, backgroundColor: "var(--bg-secondary)", borderRadius: 8, fontSize: 13, color: "var(--text-secondary)" }}>
-            이미지 로드 실패 시 fallback UI를 표시합니다. 배경색은 <code style={{ fontSize: 12 }}>var(--surface-base-alternative)</code>입니다.
+          <div style={{ marginTop: spacing.primitive[3], padding: spacing.primitive[3], backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.sm, fontSize: typography.fontSize.compact, color: "var(--text-secondary)" }}>
+            이미지 로드 실패 시 fallback UI를 표시합니다. 배경색은 <InlineCode>var(--surface-base-alternative)</InlineCode>입니다.
           </div>
         </Subsection>
 
         <Subsection title="Hover Overlay">
           <PreviewBox>
-            <div style={{ display: "flex", gap: 24, justifyContent: "center", padding: 24 }}>
-              <div style={{ position: "relative", width: 160, borderRadius: 12, overflow: "hidden" }}>
+            <div style={{ display: "flex", gap: spacing.primitive[6], justifyContent: "center", padding: spacing.primitive[6] }}>
+              <div style={{ position: "relative", width: 160, borderRadius: radius.primitive.md, overflow: "hidden" }}>
                 <ThumbnailDemo
                   src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400"
                   aspectRatio="16:9"
@@ -586,40 +494,27 @@ function DesignContent() {
                       alignItems: "center",
                       justifyContent: "center",
                     }}>
-                      <span style={{ color: "var(--content-base-onColor)", fontSize: 13, fontWeight: 600 }}>View Detail</span>
+                      <span style={{ color: "var(--content-base-onColor)", fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold }}>View Detail</span>
                     </div>
                   }
                 />
               </div>
             </div>
           </PreviewBox>
-          <div style={{ marginTop: 12, padding: 12, backgroundColor: "var(--bg-secondary)", borderRadius: 8, fontSize: 13, color: "var(--text-secondary)" }}>
+          <div style={{ marginTop: spacing.primitive[3], padding: spacing.primitive[3], backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.sm, fontSize: typography.fontSize.compact, color: "var(--text-secondary)" }}>
             클릭 가능한 썸네일에 hover 시 반투명 오버레이로 상호작용 가능성을 표시합니다.
           </div>
         </Subsection>
       </Section>
 
-      {/* Design Tokens */}
-      <Section title="Design Tokens">
-        <DesignTokensTable
-          tokens={[
-            { name: "Border Radius", value: "12px", usage: "radius=true일 때" },
-            { name: "Border Color", value: "var(--border-base-default)", usage: "border=true일 때" },
-            { name: "Play Icon Size", value: "48px", usage: "playIcon 크기" },
-            { name: "Play Icon Background", value: "var(--effect-alpha-overlay-dim)", usage: "반투명 배경" },
-            { name: "Fallback Background", value: "var(--surface-base-alternative)", usage: "에러 시 배경색" },
-          ]}
-        />
-      </Section>
-
-      {/* Usage Guidelines with Recommended Combinations */}
+      {/* Usage Guidelines */}
       <Section title="Usage Guidelines">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 24, lineHeight: 1.6 }}>
+        <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginBottom: spacing.primitive[6], lineHeight: 1.7 }}>
           일관된 UX를 위해 아래 권고 패턴을 따르세요. 콘텐츠 타입에 맞는 <strong style={{ color: "var(--text-primary)" }}>적절한 종횡비와 크기</strong>를 선택합니다.
         </p>
 
         <Subsection title="Recommended Combinations">
-          <div style={{ display: "grid", gap: 12 }}>
+          <div style={{ display: "grid", gap: spacing.primitive[3] }}>
             <UsageCard
               situation="Content Thumbnail"
               description="글, 뉴스, 블로그 등 콘텐츠 목록에서 미리보기 이미지로 사용"
@@ -639,7 +534,7 @@ function DesignContent() {
         </Subsection>
 
         <Subsection title="Design Principles">
-          <div style={{ display: "grid", gap: 16 }}>
+          <div style={{ display: "grid", gap: spacing.primitive[4] }}>
             <PrincipleCard
               number={1}
               title="일관된 종횡비"
@@ -657,11 +552,70 @@ function DesignContent() {
             />
           </div>
         </Subsection>
+
+        <Subsection title="Best Practices">
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4] }}>
+            <DoCard>
+              <div style={{ display: "flex", gap: spacing.primitive[3], alignItems: "center" }}>
+                <ThumbnailDemo src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400" aspectRatio="16:9" size={80} radius />
+                <ThumbnailDemo src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400" aspectRatio="16:9" size={80} radius />
+              </div>
+            </DoCard>
+            <DontCard>
+              <div style={{ display: "flex", gap: spacing.primitive[3], alignItems: "center" }}>
+                <ThumbnailDemo src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400" aspectRatio="16:9" size={80} radius />
+                <ThumbnailDemo src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400" aspectRatio="1:1" size={60} radius={false} />
+              </div>
+            </DontCard>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4], marginTop: spacing.primitive[1] }}>
+            <p style={{ fontSize: typography.fontSize.compact, color: "var(--content-success-default)", margin: 0, paddingLeft: spacing.primitive[1] }}>
+              <strong>Do</strong> 같은 목록에서 일관된 비율과 크기 유지
+            </p>
+            <p style={{ fontSize: typography.fontSize.compact, color: "var(--content-error-default)", margin: 0, paddingLeft: spacing.primitive[1], fontStyle: "italic" }}>
+              <strong>Don't</strong> 무작위 비율과 크기로 시각적 혼란 유발
+            </p>
+          </div>
+
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4], marginTop: spacing.primitive[4] }}>
+            <DoCard>
+              <div style={{ textAlign: "center" }}>
+                <ThumbnailDemo src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400" aspectRatio="16:9" size={100} radius playIcon />
+              </div>
+            </DoCard>
+            <DontCard>
+              <div style={{ textAlign: "center" }}>
+                <ThumbnailDemo src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400" aspectRatio="16:9" size={100} radius />
+              </div>
+            </DontCard>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4], marginTop: spacing.primitive[1] }}>
+            <p style={{ fontSize: typography.fontSize.compact, color: "var(--content-success-default)", margin: 0, paddingLeft: spacing.primitive[1] }}>
+              <strong>Do</strong> 비디오 콘텐츠에 playIcon을 표시
+            </p>
+            <p style={{ fontSize: typography.fontSize.compact, color: "var(--content-error-default)", margin: 0, paddingLeft: spacing.primitive[1], fontStyle: "italic" }}>
+              <strong>Don't</strong> 비디오인지 구분할 수 없는 썸네일
+            </p>
+          </div>
+        </Subsection>
+      </Section>
+
+      {/* Design Tokens */}
+      <Section title="Design Tokens">
+        <DesignTokensTable
+          tokens={[
+            { name: "Border Radius", value: "12px", usage: "radius=true일 때" },
+            { name: "Border Color", value: "var(--border-base-default)", usage: "border=true일 때" },
+            { name: "Play Icon Size", value: "48px", usage: "playIcon 크기" },
+            { name: "Play Icon Background", value: "var(--effect-alpha-overlay-dim)", usage: "반투명 배경" },
+            { name: "Fallback Background", value: "var(--surface-base-alternative)", usage: "에러 시 배경색" },
+          ]}
+        />
       </Section>
 
       {/* Accessibility */}
       <Section title="Accessibility">
-        <div style={{ display: "grid", gap: 16 }}>
+        <div style={{ display: "grid", gap: spacing.primitive[4] }}>
           <PrincipleCard
             number={1}
             title="대체 텍스트"
@@ -680,69 +634,30 @@ function DesignContent() {
         </div>
       </Section>
 
-      {/* Best Practices - 2x2 Do/Don't Grid */}
-      <Section title="Best Practices">
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
-          <DoCard>
-            <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-              <ThumbnailDemo src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400" aspectRatio="16:9" size={80} radius />
-              <ThumbnailDemo src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400" aspectRatio="16:9" size={80} radius />
-            </div>
-          </DoCard>
-          <DontCard>
-            <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-              <ThumbnailDemo src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400" aspectRatio="16:9" size={80} radius />
-              <ThumbnailDemo src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400" aspectRatio="1:1" size={60} radius={false} />
-            </div>
-          </DontCard>
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 4 }}>
-          <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0, paddingLeft: 4 }}>같은 목록에서 일관된 비율과 크기 유지</p>
-          <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0, paddingLeft: 4 }}>무작위 비율과 크기로 시각적 혼란 유발</p>
-        </div>
-
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 16 }}>
-          <DoCard>
-            <div style={{ textAlign: "center" }}>
-              <ThumbnailDemo src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400" aspectRatio="16:9" size={100} radius playIcon />
-            </div>
-          </DoCard>
-          <DontCard>
-            <div style={{ textAlign: "center" }}>
-              <ThumbnailDemo src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400" aspectRatio="16:9" size={100} radius />
-            </div>
-          </DontCard>
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 4 }}>
-          <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0, paddingLeft: 4 }}>비디오 콘텐츠에 playIcon을 표시</p>
-          <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0, paddingLeft: 4 }}>비디오인지 구분할 수 없는 썸네일</p>
-        </div>
-      </Section>
-
       {/* Related Components */}
       <Section title="Related Components">
-        <div style={{ overflow: "auto", borderRadius: 12, border: "1px solid var(--divider)" }}>
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+        <div style={{ overflow: "auto", borderRadius: radius.primitive.md }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.sm }}>
             <thead>
-              <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>컴포넌트</th>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>용도</th>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, borderBottom: "1px solid var(--divider)" }}>차이점</th>
+              <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>컴포넌트</th>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>용도</th>
+                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>차이점</th>
               </tr>
             </thead>
             <tbody>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "12px 16px", fontWeight: 500 }}>ListCard</td>
+                <td style={{ padding: "12px 16px", fontWeight: typography.fontWeight.medium }}>ListCard</td>
                 <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>미디어 리스트</td>
                 <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>ListCard는 Thumbnail을 포함하는 리스트 항목</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "12px 16px", fontWeight: 500 }}>Card</td>
+                <td style={{ padding: "12px 16px", fontWeight: typography.fontWeight.medium }}>Card</td>
                 <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>콘텐츠 컨테이너</td>
                 <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>Card 내부에서 Thumbnail을 미디어 프리뷰로 사용</td>
               </tr>
               <tr>
-                <td style={{ padding: "12px 16px", fontWeight: 500 }}>ContentBadge</td>
+                <td style={{ padding: "12px 16px", fontWeight: typography.fontWeight.medium }}>ContentBadge</td>
                 <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>정보 라벨</td>
                 <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>Thumbnail 위에 ContentBadge로 상태 오버레이 가능</td>
               </tr>
@@ -756,14 +671,14 @@ function DesignContent() {
 
 function WebContent() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: spacing.primitive[12] }}>
       <Section title="Source Code">
         <div style={{
-          padding: 16,
+          padding: spacing.primitive[4],
           backgroundColor: "var(--surface-base-alternative)",
-          borderRadius: 8,
+          borderRadius: radius.primitive.sm,
           border: "1px solid var(--divider)",
-          fontSize: 14,
+          fontSize: typography.fontSize.sm,
         }}>
           <a href={WEB_SOURCE} target="_blank" rel="noopener noreferrer" style={{ color: "var(--content-brand-default)", textDecoration: "none" }}>
             View on GitHub →
@@ -777,7 +692,7 @@ function WebContent() {
 
       <Section title="Basic Usage">
         <PreviewBox>
-          <div style={{ display: "flex", justifyContent: "center", padding: 24 }}>
+          <div style={{ display: "flex", justifyContent: "center", padding: spacing.primitive[6] }}>
             <ThumbnailDemo
               src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400"
               aspectRatio="16:9"
@@ -798,7 +713,7 @@ function WebContent() {
 
       <Section title="Aspect Ratios">
         <PreviewBox>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, padding: 24 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: spacing.primitive[4], padding: spacing.primitive[6] }}>
             <ThumbnailDemo src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400" aspectRatio="1:1" />
             <ThumbnailDemo src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400" aspectRatio="16:9" />
             <ThumbnailDemo src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400" aspectRatio="4:3" />
@@ -811,7 +726,7 @@ function WebContent() {
 
       <Section title="With Play Icon">
         <PreviewBox>
-          <div style={{ display: "flex", justifyContent: "center", padding: 24 }}>
+          <div style={{ display: "flex", justifyContent: "center", padding: spacing.primitive[6] }}>
             <ThumbnailDemo
               src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400"
               aspectRatio="16:9"
@@ -831,7 +746,7 @@ function WebContent() {
 
       <Section title="With Border">
         <PreviewBox>
-          <div style={{ display: "flex", justifyContent: "center", padding: 24 }}>
+          <div style={{ display: "flex", justifyContent: "center", padding: spacing.primitive[6] }}>
             <ThumbnailDemo
               src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400"
               aspectRatio="1:1"
@@ -886,16 +801,16 @@ function WebContent() {
 function AspectRatioCard({ name, description, children }: { name: string; description: string; children: React.ReactNode }) {
   return (
     <div style={{
-      padding: 20,
+      padding: spacing.primitive[5],
       backgroundColor: "var(--surface-base-default)",
-      borderRadius: 12,
+      borderRadius: radius.primitive.md,
       border: "1px solid var(--divider)",
     }}>
-      <div style={{ marginBottom: 16 }}>
+      <div style={{ marginBottom: spacing.primitive[4] }}>
         {children}
       </div>
-      <div style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", marginBottom: 4 }}>{name}</div>
-      <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0, lineHeight: 1.5 }}>{description}</p>
+      <div style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)", marginBottom: spacing.primitive[1] }}>{name}</div>
+      <p style={{ fontSize: typography.fontSize.compact, color: "var(--text-secondary)", margin: 0, lineHeight: 1.5 }}>{description}</p>
     </div>
   );
 }
@@ -903,23 +818,23 @@ function AspectRatioCard({ name, description, children }: { name: string; descri
 function StyleCard({ name, description, children }: { name: string; description: string; children: React.ReactNode }) {
   return (
     <div style={{
-      padding: 20,
+      padding: spacing.primitive[5],
       backgroundColor: "var(--surface-base-default)",
-      borderRadius: 12,
+      borderRadius: radius.primitive.md,
       border: "1px solid var(--divider)",
     }}>
       <div style={{
-        marginBottom: 16,
+        marginBottom: spacing.primitive[4],
         backgroundColor: "var(--surface-base-alternative)",
-        borderRadius: 8,
-        padding: 16,
+        borderRadius: radius.primitive.sm,
+        padding: spacing.primitive[4],
         display: "flex",
         justifyContent: "center",
       }}>
         {children}
       </div>
-      <div style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", marginBottom: 4 }}>{name}</div>
-      <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0, lineHeight: 1.5 }}>{description}</p>
+      <div style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)", marginBottom: spacing.primitive[1] }}>{name}</div>
+      <p style={{ fontSize: typography.fontSize.compact, color: "var(--text-secondary)", margin: 0, lineHeight: 1.5 }}>{description}</p>
     </div>
   );
 }
@@ -928,19 +843,19 @@ function StyleCard({ name, description, children }: { name: string; description:
 function DesignTokensTable({ tokens }: { tokens: { name: string; value: string; usage: string }[] }) {
   return (
     <div style={{ overflowX: "auto" }}>
-      <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+      <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.sm }}>
         <thead>
-          <tr style={{ backgroundColor: "var(--bg-secondary)" }}>
-            <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, color: "var(--text-primary)" }}>Token</th>
-            <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, color: "var(--text-primary)" }}>Value</th>
-            <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, color: "var(--text-primary)" }}>Usage</th>
+          <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
+            <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)" }}>Token</th>
+            <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)" }}>Value</th>
+            <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)" }}>Usage</th>
           </tr>
         </thead>
         <tbody>
           {tokens.map((token, i) => (
             <tr key={i} style={{ borderBottom: "1px solid var(--divider)" }}>
-              <td style={{ padding: "12px 16px", color: "var(--text-primary)", fontWeight: 500 }}>{token.name}</td>
-              <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: 12, color: "var(--content-brand-default)" }}>{token.value}</td>
+              <td style={{ padding: "12px 16px", color: "var(--text-primary)", fontWeight: typography.fontWeight.medium }}>{token.name}</td>
+              <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: typography.fontSize.xs, color: "var(--text-secondary)" }}>{token.value}</td>
               <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>{token.usage}</td>
             </tr>
           ))}
@@ -954,11 +869,11 @@ function ThumbStateCard({ label, sublabel, children }: {
   label: string; sublabel: string; children: React.ReactNode;
 }) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12, padding: 16 }}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: spacing.primitive[3], padding: spacing.primitive[4] }}>
       {children}
       <div style={{ textAlign: "center" }}>
-        <div style={{ fontSize: 13, fontWeight: 600, color: "var(--text-primary)" }}>{label}</div>
-        <div style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 2 }}>{sublabel}</div>
+        <div style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)" }}>{label}</div>
+        <div style={{ fontSize: typography.fontSize.xs, color: "var(--text-tertiary)", marginTop: 2 }}>{sublabel}</div>
       </div>
     </div>
   );

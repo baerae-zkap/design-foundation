@@ -160,17 +160,17 @@ export const button = recipe(({ tokens }) => ({
       },
     },
     color: {
-      brandDefault: {},
+      primary: {},
       brandSecondary: {},
-      baseContainer: {},
-      successDefault: {},
-      errorDefault: {},
-      kakaoDefault: {},
-      googleDefault: {},
+      neutral: {},
+      success: {},
+      error: {},
+      kakao: {},
+      google: {},
     },
     buttonType: {
       filled: {},
-      outlined: {
+      weak: {
         borderWidth: 1,
       },
       plain: {
@@ -188,7 +188,7 @@ export const button = recipe(({ tokens }) => ({
     {
       variants: {
         buttonType: 'filled',
-        color: 'brandDefault',
+        color: 'primary',
       },
       style: {
         backgroundColor: tokens?.surface.brand.default,
@@ -197,7 +197,7 @@ export const button = recipe(({ tokens }) => ({
     {
       variants: {
         buttonType: 'filled',
-        color: 'brandDefault',
+        color: 'primary',
         pressed: true,
       },
       style: {
@@ -207,7 +207,7 @@ export const button = recipe(({ tokens }) => ({
     {
       variants: {
         buttonType: 'filled',
-        color: 'brandDefault',
+        color: 'primary',
         disabled: true,
       },
       style: {
@@ -246,7 +246,7 @@ export const button = recipe(({ tokens }) => ({
     {
       variants: {
         buttonType: 'filled',
-        color: 'baseContainer',
+        color: 'neutral',
       },
       style: {
         backgroundColor: tokens?.surface.base.container,
@@ -255,7 +255,7 @@ export const button = recipe(({ tokens }) => ({
     {
       variants: {
         buttonType: 'filled',
-        color: 'baseContainer',
+        color: 'neutral',
         pressed: true,
       },
       style: {
@@ -265,7 +265,7 @@ export const button = recipe(({ tokens }) => ({
     {
       variants: {
         buttonType: 'filled',
-        color: 'baseContainer',
+        color: 'neutral',
         disabled: true,
       },
       style: {
@@ -275,7 +275,7 @@ export const button = recipe(({ tokens }) => ({
     {
       variants: {
         buttonType: 'filled',
-        color: 'successDefault',
+        color: 'success',
       },
       style: {
         backgroundColor: tokens?.surface.success.default,
@@ -284,7 +284,7 @@ export const button = recipe(({ tokens }) => ({
     {
       variants: {
         buttonType: 'filled',
-        color: 'successDefault',
+        color: 'success',
         pressed: true,
       },
       style: {
@@ -294,7 +294,7 @@ export const button = recipe(({ tokens }) => ({
     {
       variants: {
         buttonType: 'filled',
-        color: 'successDefault',
+        color: 'success',
         disabled: true,
       },
       style: {
@@ -304,7 +304,7 @@ export const button = recipe(({ tokens }) => ({
     {
       variants: {
         buttonType: 'filled',
-        color: 'errorDefault',
+        color: 'error',
       },
       style: {
         backgroundColor: tokens?.surface.error.default,
@@ -313,7 +313,7 @@ export const button = recipe(({ tokens }) => ({
     {
       variants: {
         buttonType: 'filled',
-        color: 'errorDefault',
+        color: 'error',
         pressed: true,
       },
       style: {
@@ -323,7 +323,7 @@ export const button = recipe(({ tokens }) => ({
     {
       variants: {
         buttonType: 'filled',
-        color: 'errorDefault',
+        color: 'error',
         disabled: true,
       },
       style: {
@@ -332,8 +332,8 @@ export const button = recipe(({ tokens }) => ({
     },
     {
       variants: {
-        buttonType: 'outlined',
-        color: 'brandDefault',
+        buttonType: 'weak',
+        color: 'primary',
       },
       style: {
         borderColor: tokens?.border.brand.default,
@@ -342,8 +342,8 @@ export const button = recipe(({ tokens }) => ({
     },
     {
       variants: {
-        buttonType: 'outlined',
-        color: 'brandDefault',
+        buttonType: 'weak',
+        color: 'primary',
         pressed: true,
       },
       style: {
@@ -353,8 +353,8 @@ export const button = recipe(({ tokens }) => ({
     },
     {
       variants: {
-        buttonType: 'outlined',
-        color: 'brandDefault',
+        buttonType: 'weak',
+        color: 'primary',
         disabled: true,
       },
       style: {
@@ -364,7 +364,7 @@ export const button = recipe(({ tokens }) => ({
     },
     {
       variants: {
-        buttonType: 'outlined',
+        buttonType: 'weak',
         color: 'brandSecondary',
       },
       style: {
@@ -374,7 +374,7 @@ export const button = recipe(({ tokens }) => ({
     },
     {
       variants: {
-        buttonType: 'outlined',
+        buttonType: 'weak',
         color: 'brandSecondary',
         pressed: true,
       },
@@ -385,7 +385,7 @@ export const button = recipe(({ tokens }) => ({
     },
     {
       variants: {
-        buttonType: 'outlined',
+        buttonType: 'weak',
         color: 'brandSecondary',
         disabled: true,
       },
@@ -396,8 +396,8 @@ export const button = recipe(({ tokens }) => ({
     },
     {
       variants: {
-        buttonType: 'outlined',
-        color: 'baseContainer',
+        buttonType: 'weak',
+        color: 'neutral',
       },
       style: {
         backgroundColor: tokens?.surface.base.default,
@@ -406,8 +406,8 @@ export const button = recipe(({ tokens }) => ({
     },
     {
       variants: {
-        buttonType: 'outlined',
-        color: 'baseContainer',
+        buttonType: 'weak',
+        color: 'neutral',
         pressed: true,
       },
       style: {
@@ -417,8 +417,8 @@ export const button = recipe(({ tokens }) => ({
     },
     {
       variants: {
-        buttonType: 'outlined',
-        color: 'baseContainer',
+        buttonType: 'weak',
+        color: 'neutral',
         disabled: true,
       },
       style: {
@@ -428,8 +428,8 @@ export const button = recipe(({ tokens }) => ({
     },
     {
       variants: {
-        buttonType: 'outlined',
-        color: 'successDefault',
+        buttonType: 'weak',
+        color: 'success',
       },
       style: {
         backgroundColor: tokens?.surface.base.default,
@@ -438,8 +438,8 @@ export const button = recipe(({ tokens }) => ({
     },
     {
       variants: {
-        buttonType: 'outlined',
-        color: 'successDefault',
+        buttonType: 'weak',
+        color: 'success',
         pressed: true,
       },
       style: {
@@ -449,8 +449,8 @@ export const button = recipe(({ tokens }) => ({
     },
     {
       variants: {
-        buttonType: 'outlined',
-        color: 'successDefault',
+        buttonType: 'weak',
+        color: 'success',
         disabled: true,
       },
       style: {
@@ -460,8 +460,8 @@ export const button = recipe(({ tokens }) => ({
     },
     {
       variants: {
-        buttonType: 'outlined',
-        color: 'errorDefault',
+        buttonType: 'weak',
+        color: 'error',
       },
       style: {
         backgroundColor: tokens?.surface.base.default,
@@ -470,8 +470,8 @@ export const button = recipe(({ tokens }) => ({
     },
     {
       variants: {
-        buttonType: 'outlined',
-        color: 'errorDefault',
+        buttonType: 'weak',
+        color: 'error',
         pressed: true,
       },
       style: {
@@ -481,8 +481,8 @@ export const button = recipe(({ tokens }) => ({
     },
     {
       variants: {
-        buttonType: 'outlined',
-        color: 'errorDefault',
+        buttonType: 'weak',
+        color: 'error',
         disabled: true,
       },
       style: {
@@ -494,7 +494,7 @@ export const button = recipe(({ tokens }) => ({
     {
       variants: {
         buttonType: 'filled',
-        color: 'kakaoDefault',
+        color: 'kakao',
       },
       style: {
         backgroundColor: '#FEE500',
@@ -503,7 +503,7 @@ export const button = recipe(({ tokens }) => ({
     {
       variants: {
         buttonType: 'filled',
-        color: 'kakaoDefault',
+        color: 'kakao',
         pressed: true,
       },
       style: {
@@ -513,7 +513,7 @@ export const button = recipe(({ tokens }) => ({
     {
       variants: {
         buttonType: 'filled',
-        color: 'kakaoDefault',
+        color: 'kakao',
         disabled: true,
       },
       style: {
@@ -523,8 +523,8 @@ export const button = recipe(({ tokens }) => ({
     //TODO: @JeongEuiwang google 시멘틱 토큰으로 변경될 수 있음
     {
       variants: {
-        buttonType: 'outlined',
-        color: 'googleDefault',
+        buttonType: 'weak',
+        color: 'google',
       },
       style: {
         borderColor: tokens?.border.base.defaultPressed,
@@ -533,8 +533,8 @@ export const button = recipe(({ tokens }) => ({
     },
     {
       variants: {
-        buttonType: 'outlined',
-        color: 'googleDefault',
+        buttonType: 'weak',
+        color: 'google',
         pressed: true,
       },
       style: {
@@ -544,8 +544,8 @@ export const button = recipe(({ tokens }) => ({
     },
     {
       variants: {
-        buttonType: 'outlined',
-        color: 'googleDefault',
+        buttonType: 'weak',
+        color: 'google',
         disabled: true,
       },
       style: {
@@ -592,13 +592,13 @@ export const text = recipe(({ tokens }) => ({
       ],
     },
     color: {
-      brandDefault: {},
+      primary: {},
       brandSecondary: {},
-      baseContainer: {},
-      successDefault: {},
-      errorDefault: {},
-      kakaoDefault: {},
-      googleDefault: {},
+      neutral: {},
+      success: {},
+      error: {},
+      kakao: {},
+      google: {},
     },
     buttonType: {
       filled: {},
@@ -613,7 +613,7 @@ export const text = recipe(({ tokens }) => ({
     {
       variants: {
         buttonType: 'filled',
-        color: 'brandDefault',
+        color: 'primary',
       },
       style: {
         color: tokens?.content.base.onColor,
@@ -622,7 +622,7 @@ export const text = recipe(({ tokens }) => ({
     {
       variants: {
         buttonType: 'filled',
-        color: 'brandDefault',
+        color: 'primary',
         disabled: true,
       },
       style: {
@@ -651,7 +651,7 @@ export const text = recipe(({ tokens }) => ({
     {
       variants: {
         buttonType: 'filled',
-        color: 'baseContainer',
+        color: 'neutral',
       },
       style: {
         color: tokens?.content.base.default,
@@ -660,7 +660,7 @@ export const text = recipe(({ tokens }) => ({
     {
       variants: {
         buttonType: 'filled',
-        color: 'baseContainer',
+        color: 'neutral',
         disabled: true,
       },
       style: {
@@ -670,7 +670,7 @@ export const text = recipe(({ tokens }) => ({
     {
       variants: {
         buttonType: 'filled',
-        color: 'successDefault',
+        color: 'success',
       },
       style: {
         color: tokens?.content.success.default,
@@ -679,7 +679,7 @@ export const text = recipe(({ tokens }) => ({
     {
       variants: {
         buttonType: 'filled',
-        color: 'successDefault',
+        color: 'success',
         disabled: true,
       },
       style: {
@@ -689,7 +689,7 @@ export const text = recipe(({ tokens }) => ({
     {
       variants: {
         buttonType: 'filled',
-        color: 'errorDefault',
+        color: 'error',
       },
       style: {
         color: tokens?.content.error.default,
@@ -698,7 +698,7 @@ export const text = recipe(({ tokens }) => ({
     {
       variants: {
         buttonType: 'filled',
-        color: 'errorDefault',
+        color: 'error',
         disabled: true,
       },
       style: {
@@ -707,8 +707,8 @@ export const text = recipe(({ tokens }) => ({
     },
     {
       variants: {
-        buttonType: 'outlined',
-        color: 'brandDefault',
+        buttonType: 'weak',
+        color: 'primary',
       },
       style: {
         color: tokens?.content.brand.default,
@@ -716,8 +716,8 @@ export const text = recipe(({ tokens }) => ({
     },
     {
       variants: {
-        buttonType: 'outlined',
-        color: 'brandDefault',
+        buttonType: 'weak',
+        color: 'primary',
         disabled: true,
       },
       style: {
@@ -726,7 +726,7 @@ export const text = recipe(({ tokens }) => ({
     },
     {
       variants: {
-        buttonType: 'outlined',
+        buttonType: 'weak',
         color: 'brandSecondary',
       },
       style: {
@@ -735,7 +735,7 @@ export const text = recipe(({ tokens }) => ({
     },
     {
       variants: {
-        buttonType: 'outlined',
+        buttonType: 'weak',
         color: 'brandSecondary',
         disabled: true,
       },
@@ -745,8 +745,8 @@ export const text = recipe(({ tokens }) => ({
     },
     {
       variants: {
-        buttonType: 'outlined',
-        color: 'baseContainer',
+        buttonType: 'weak',
+        color: 'neutral',
       },
       style: {
         color: tokens?.content.base.default,
@@ -754,8 +754,8 @@ export const text = recipe(({ tokens }) => ({
     },
     {
       variants: {
-        buttonType: 'outlined',
-        color: 'baseContainer',
+        buttonType: 'weak',
+        color: 'neutral',
         disabled: true,
       },
       style: {
@@ -764,8 +764,8 @@ export const text = recipe(({ tokens }) => ({
     },
     {
       variants: {
-        buttonType: 'outlined',
-        color: 'successDefault',
+        buttonType: 'weak',
+        color: 'success',
       },
       style: {
         color: tokens?.content.success.default,
@@ -773,8 +773,8 @@ export const text = recipe(({ tokens }) => ({
     },
     {
       variants: {
-        buttonType: 'outlined',
-        color: 'successDefault',
+        buttonType: 'weak',
+        color: 'success',
         disabled: true,
       },
       style: {
@@ -783,8 +783,8 @@ export const text = recipe(({ tokens }) => ({
     },
     {
       variants: {
-        buttonType: 'outlined',
-        color: 'errorDefault',
+        buttonType: 'weak',
+        color: 'error',
       },
       style: {
         color: tokens?.content.error.default,
@@ -792,8 +792,8 @@ export const text = recipe(({ tokens }) => ({
     },
     {
       variants: {
-        buttonType: 'outlined',
-        color: 'errorDefault',
+        buttonType: 'weak',
+        color: 'error',
         disabled: true,
       },
       style: {
@@ -802,7 +802,7 @@ export const text = recipe(({ tokens }) => ({
     },
     {
       variants: {
-        color: 'kakaoDefault',
+        color: 'kakao',
       },
       style: {
         color: tokens?.content.base.strong,
@@ -810,7 +810,7 @@ export const text = recipe(({ tokens }) => ({
     },
     {
       variants: {
-        color: 'kakaoDefault',
+        color: 'kakao',
         disabled: true,
       },
       style: {
@@ -819,7 +819,7 @@ export const text = recipe(({ tokens }) => ({
     },
     {
       variants: {
-        color: 'googleDefault',
+        color: 'google',
       },
       style: {
         color: tokens?.content.base.default,
@@ -827,7 +827,7 @@ export const text = recipe(({ tokens }) => ({
     },
     {
       variants: {
-        color: 'googleDefault',
+        color: 'google',
         disabled: true,
       },
       style: {
