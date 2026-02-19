@@ -19,7 +19,7 @@ export function Section({ title, children }: { title: string; children: React.Re
 
 export function Subsection({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div style={{ marginBottom: spacing.primitive[8] }}>
+    <div style={{ marginTop: spacing.primitive[6], marginBottom: spacing.primitive[8] }}>
       <h3
         id={title.toLowerCase().replace(/\s+/g, "-")}
         style={{ fontSize: typography.fontSize.md, fontWeight: typography.fontWeight.semibold, marginBottom: spacing.primitive[3], color: "var(--text-primary)" }}
