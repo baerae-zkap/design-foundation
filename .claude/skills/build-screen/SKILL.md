@@ -21,10 +21,10 @@ Read the component selection rules. Map every piece of content to a system compo
 | Media list items | `ListCard` |
 | Settings/menu rows | `ListCell` |
 | Status labels | `ContentBadge` |
-| Primary action | `Button variant="filled" color="primary"` |
-| Secondary action | `Button variant="weak" color="neutral"` |
+| Primary action | `Button buttonType="filled" color="primary"` |
+| Secondary action | `Button buttonType="weak" color="neutral"` |
 | Text link | `TextButton` |
-| Form fields | `TextField`, `Select`, `Switch`, etc. |
+| Form fields | *(Form input components coming soon)* |
 
 ## Step 3: Structure the Layout
 
@@ -35,7 +35,7 @@ Apply the layout composition rules:
 4. Place primary CTA at the bottom of the content area
 
 ```tsx
-import { Button, SectionHeader, ListCell } from '@baerae-zkap/design-system';
+import { Button, SectionHeader, ListCell, TextButton } from '@baerae-zkap/design-system';
 import { spacing, typography } from '@baerae-zkap/design-system';
 
 export function SettingsScreen() {
@@ -51,12 +51,15 @@ export function SettingsScreen() {
 
       <div style={{ marginTop: spacing.component.list.sectionGap }}>
         <SectionHeader title="Preferences" />
-        <ListCell title="Notifications" trailing={<Switch checked={notifs} onChange={setNotifs} />} />
+        <ListCell
+          title="Notifications"
+          trailing={<TextButton color="primary" onClick={onNotifSettings}>Manage</TextButton>}
+        />
         <ListCell title="Language" trailing="English" onClick={onLanguage} />
       </div>
 
       <div style={{ marginTop: spacing.primitive[10] }}>
-        <Button variant="weak" color="error" onClick={onLogout} style={{ width: '100%' }}>
+        <Button buttonType="weak" color="error" onClick={onLogout} style={{ width: '100%' }}>
           Log Out
         </Button>
       </div>

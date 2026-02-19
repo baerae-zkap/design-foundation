@@ -2,6 +2,8 @@
 
 Follow these steps to build a consistent, accessible form using `@baerae-zkap/design-system`.
 
+> **Note**: Web input components (TextField, Select, Switch, etc.) are not yet available. This skill applies once they ship. For web forms currently, use native HTML inputs styled with CSS tokens.
+
 ## Step 1: List All Fields
 
 Write out every field the form needs. For each field, determine:
@@ -29,11 +31,11 @@ Write out every field the form needs. For each field, determine:
 ## Step 3: Structure the Form
 
 ```tsx
-import { TextField, Select, Switch, Button } from '@baerae-zkap/design-system';
+import { TextField, Select, Switch, Button, SectionHeader } from '@baerae-zkap/design-system';
 import { spacing } from '@baerae-zkap/design-system';
 
 <form
-  onSubmit={handleSubmit}
+  onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}
   style={{ display: 'flex', flexDirection: 'column', gap: spacing.primitive[4] }}
 >
   {/* Group related fields */}
@@ -47,9 +49,9 @@ import { spacing } from '@baerae-zkap/design-system';
 
   {/* Submit at bottom */}
   <Button
-    variant="filled"
+    buttonType="filled"
     color="primary"
-    onClick={handleSubmit}
+    type="submit"
     isLoading={isSubmitting}
     disabled={!isValid}
     style={{ marginTop: spacing.primitive[4], width: '100%' }}
@@ -119,9 +121,9 @@ async function handleSubmit() {
 
 ```tsx
 <Button
-  variant="filled"
+  buttonType="filled"
   color="primary"
-  onClick={handleSubmit}
+  type="submit"
   isLoading={isSubmitting}
   disabled={!isValid || isSubmitting}
 >

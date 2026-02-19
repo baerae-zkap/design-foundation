@@ -16,6 +16,23 @@ An expandable/collapsible content panel with a clickable header. Follows WAI-ARI
 - Do NOT use for navigation menus -- use a dedicated nav component
 - Do NOT use for tab-like switching between views -- use `SegmentedControl` instead
 
+## Decision Rules
+
+| Intent | Config |
+|--------|--------|
+| FAQ section (all collapsed by default) | `defaultExpanded={false}` (default), `size="medium"` |
+| Detail panel visible on first load | `defaultExpanded={true}` |
+| App-state controlled open/close | Controlled: `expanded={state}` + `onChange={setState}` |
+| Prominent section header | `size="large"` |
+| Dense list of items | `size="medium"` |
+
+**Rules:**
+- Use uncontrolled mode (`defaultExpanded`) for simple show/hide — no state needed
+- Use controlled mode (`expanded` + `onChange`) when parent needs to know or control open state
+- Do NOT nest Accordion inside another Accordion
+- For tab-like view switching, use `SegmentedControl` (when available) — not Accordion
+- Put non-critical, supplementary content inside accordion panels. Never hide required info behind a collapsed accordion
+
 ## Props
 
 | Prop | Type | Default | Description |
