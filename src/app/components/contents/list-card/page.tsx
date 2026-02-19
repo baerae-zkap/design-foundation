@@ -59,7 +59,7 @@ function ListCardPlayground() {
     <div style={{ marginBottom: spacing.primitive[8] }}>
       <div style={{ borderRadius: radius.primitive.xl, overflow: "hidden", backgroundColor: "var(--surface-base-alternative)" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
-          <div style={{ padding: `${spacing.primitive[8]}px ${spacing.primitive[6]}px`, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+          <div style={{ padding: `${spacing.primitive[8]}px ${spacing.primitive[6]}px`, display: "flex", flexDirection: "column", justifyContent: "center", backgroundColor: "var(--surface-base-default)" }}>
             <ListCard
               variant={variant}
               thumbnail={hasThumbnail ? <EthereumIcon size={56} /> : undefined}
