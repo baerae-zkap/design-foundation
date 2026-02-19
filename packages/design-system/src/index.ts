@@ -71,7 +71,7 @@ export { ContentBadge } from './components/ContentBadge/ContentBadge';
 export type { ContentBadgeProps, ContentBadgeVariant, ContentBadgeColor, ContentBadgeSize } from './components/ContentBadge/ContentBadge';
 
 export { ListCard } from './components/ListCard/ListCard';
-export type { ListCardProps, ListCardSize, ListCardVariant } from './components/ListCard/ListCard';
+export type { ListCardProps, ListCardVariant } from './components/ListCard/ListCard';
 
 export { ListCell } from './components/ListCell/ListCell';
 export type { ListCellProps, ListCellSize } from './components/ListCell/ListCell';
