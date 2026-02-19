@@ -33,6 +33,7 @@ const componentsNav = [
   { title: "Content Badge", href: "/components/contents/content-badge" },
   { title: "List Card", href: "/components/contents/list-card" },
   { title: "List Cell", href: "/components/contents/list-cell" },
+  { title: "Section Header", href: "/components/contents/section-header" },
 ];
 
 interface MobileMenuProps {
