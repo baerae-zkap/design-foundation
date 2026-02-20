@@ -31,8 +31,8 @@ function ensureSkeletonKeyframes() {
   style.id = KEYFRAME_ID;
   style.textContent = `
     @keyframes _zkap_sk_shimmer {
-      0% { background-position: 200% center; }
-      100% { background-position: -200% center; }
+      0% { background-position: -100% 0; }
+      100% { background-position: 200% 0; }
     }
 
     @keyframes _zkap_sk_pulse {
@@ -43,9 +43,10 @@ function ensureSkeletonKeyframes() {
   document.head.appendChild(style);
 }
 
-// 'var(--fill-alternative)' = hsla ~12% opacity — more visible than surface.base.alternative (~6%)
+// base: fill-alternative (~12% opacity gray) — more visible than surface.base.alternative
+// highlight: surface.base.alternative (grey-99 light / grey-10 dark) — lighter than base, not white
 const SKELETON_BASE_COLOR = 'var(--fill-alternative)';
-const SKELETON_HIGHLIGHT_COLOR = cssVarColors.surface.base.default;
+const SKELETON_HIGHLIGHT_COLOR = cssVarColors.surface.base.alternative;
 
 function buildAnimationStyle(animation: SkeletonAnimation): SkeletonAnimationStyle {
   if (animation === 'none') {
@@ -62,10 +63,11 @@ function buildAnimationStyle(animation: SkeletonAnimation): SkeletonAnimationSty
   }
 
   return {
-    '--skeleton-base': SKELETON_BASE_COLOR,
     '--skeleton-highlight': SKELETON_HIGHLIGHT_COLOR,
-    backgroundImage: 'linear-gradient(90deg, var(--skeleton-base) 0%, var(--skeleton-highlight) 50%, var(--skeleton-base) 100%)',
-    backgroundSize: '200% 100%',
+    backgroundColor: SKELETON_BASE_COLOR,
+    backgroundImage: 'linear-gradient(90deg, transparent 25%, var(--skeleton-highlight) 50%, transparent 75%)',
+    backgroundSize: '40% 100%',
+    backgroundRepeat: 'no-repeat',
     animation: '_zkap_sk_shimmer 1.5s ease-in-out infinite',
   };
 }
