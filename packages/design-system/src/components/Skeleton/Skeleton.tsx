@@ -18,10 +18,10 @@ export interface SkeletonProps {
 
 const KEYFRAME_ID = '__zkap_skeleton_keyframes';
 
-type SkeletonAnimationStyle = React.CSSProperties & {
-  '--skeleton-base'?: string;
-  '--skeleton-highlight'?: string;
-};
+// base: fill-alternative (~12% gray, renders as a soft gray over white)
+// highlight: surface.base.default (white in light / grey-15 in dark)
+const SKELETON_BASE_COLOR = 'var(--fill-alternative)';
+const SKELETON_HIGHLIGHT_COLOR = cssVarColors.surface.base.default;
 
 function ensureSkeletonKeyframes() {
   if (typeof document === 'undefined') return;
@@ -29,52 +29,36 @@ function ensureSkeletonKeyframes() {
 
   const style = document.createElement('style');
   style.id = KEYFRAME_ID;
+  // ::after pseudo-element sweeps a gradient stripe through the skeleton.
+  // translateX(-100%)→(200%) moves from off-left to off-right, clipped by
+  // the parent's overflow:hidden. This way the base color is always static
+  // and only the stripe moves — not the whole element background.
   style.textContent = `
+    ._zkap_sk_shimmer::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: linear-gradient(
+        to right,
+        var(--skeleton-base) 0%,
+        var(--skeleton-highlight) 50%,
+        var(--skeleton-base) 100%
+      );
+      animation: _zkap_sk_shimmer 1.5s ease-in-out infinite;
+      animation-fill-mode: backwards;
+    }
+
     @keyframes _zkap_sk_shimmer {
-      0% { background-position: 100% 0; }
-      100% { background-position: 0% 0; }
+      0%   { transform: translateX(-100%); }
+      100% { transform: translateX(200%); }
     }
 
     @keyframes _zkap_sk_pulse {
       0%, 100% { opacity: 0.5; }
-      50% { opacity: 1; }
+      50%       { opacity: 1; }
     }
   `;
   document.head.appendChild(style);
-}
-
-// base: fill-alternative (~12% opacity gray) — renders as light gray over white bg
-// highlight: surface.base.default (white in light / grey-15 in dark) — lighter than base in both modes
-const SKELETON_BASE_COLOR = 'var(--fill-alternative)';
-const SKELETON_HIGHLIGHT_COLOR = cssVarColors.surface.base.default;
-
-function buildAnimationStyle(animation: SkeletonAnimation): SkeletonAnimationStyle {
-  if (animation === 'none') {
-    return {
-      backgroundColor: SKELETON_BASE_COLOR,
-    };
-  }
-
-  if (animation === 'pulse') {
-    return {
-      backgroundColor: SKELETON_BASE_COLOR,
-      animation: '_zkap_sk_pulse 2s ease-in-out infinite',
-    };
-  }
-
-  // backgroundSize: 300% makes the gradient 3× the element width.
-  // The element always shows only the CENTER third of the gradient, so the
-  // fade zones (base→highlight transitions) are always outside the visible area.
-  // No backgroundColor layer — the gradient itself covers the element entirely,
-  // avoiding color stacking artifacts from semi-transparent fill-alternative.
-  return {
-    '--skeleton-base': SKELETON_BASE_COLOR,
-    '--skeleton-highlight': SKELETON_HIGHLIGHT_COLOR,
-    backgroundImage: 'linear-gradient(90deg, var(--skeleton-base) 45%, var(--skeleton-highlight) 50%, var(--skeleton-base) 55%)',
-    backgroundSize: '300% 100%',
-    backgroundRepeat: 'no-repeat',
-    animation: '_zkap_sk_shimmer 1.5s ease-in-out infinite',
-  };
 }
 
 export function Skeleton({
@@ -93,22 +77,32 @@ export function Skeleton({
   const resolvedHeight = height ?? (variant === 'text' ? 14 : variant === 'circle' ? (width ?? 40) : 80);
   const resolvedBorderRadius = borderRadius ?? (variant === 'text' ? 4 : variant === 'circle' ? '50%' : 8);
 
-  const animationStyle = buildAnimationStyle(animation);
+  const shimmerClass = '_zkap_sk_shimmer';
+  const combinedClass = animation === 'shimmer'
+    ? (className ? `${shimmerClass} ${className}` : shimmerClass)
+    : className;
 
   return (
     <span
       role="img"
       aria-label={ariaLabel}
-      className={className}
+      className={combinedClass}
       style={{
         display: 'block',
         width: resolvedWidth,
         height: resolvedHeight,
         borderRadius: resolvedBorderRadius,
         flexShrink: 0,
-        ...animationStyle,
+        position: 'relative',
+        overflow: 'hidden',
+        backgroundColor: SKELETON_BASE_COLOR,
+        '--skeleton-base': SKELETON_BASE_COLOR,
+        '--skeleton-highlight': SKELETON_HIGHLIGHT_COLOR,
+        ...(animation === 'pulse' && {
+          animation: '_zkap_sk_pulse 2s ease-in-out infinite',
+        }),
         ...style,
-      }}
+      } as React.CSSProperties & { '--skeleton-base': string; '--skeleton-highlight': string }}
     />
   );
 }
