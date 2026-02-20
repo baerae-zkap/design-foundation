@@ -40,8 +40,10 @@ const componentsNav = [
   { title: "Section Message", href: "/components/feedback/section-message" },
   { title: "Snackbar", href: "/components/feedback/snackbar" },
   { title: "Toast", href: "/components/feedback/toast" },
-  { title: "Loading", href: "/components/feedback/loading" },
   { title: "State View", href: "/components/feedback/state-view" },
+  { title: "Loading", isLabel: true },
+  { title: "Loading", href: "/components/feedback/loading" },
+  { title: "Skeleton", isLabel: true },
 ];
 
 interface SidebarItemProps {
