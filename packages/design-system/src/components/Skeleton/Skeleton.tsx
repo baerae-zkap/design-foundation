@@ -18,10 +18,11 @@ export interface SkeletonProps {
 
 const KEYFRAME_ID = '__zkap_skeleton_keyframes';
 
-// base: fill-alternative (~12% gray, renders as a soft gray over white)
-// highlight: surface.base.default (white in light / grey-15 in dark)
-const SKELETON_BASE_COLOR = 'var(--fill-alternative)';
-const SKELETON_HIGHLIGHT_COLOR = cssVarColors.surface.base.default;
+// Both tokens are OPAQUE — no stacking artifacts when used together.
+// surface.base.alternative: grey-99 (light) / grey-10 (dark)
+// surface.base.default:     white (light) / grey-15 (dark)
+const SKELETON_BASE = cssVarColors.surface.base.alternative;
+const SKELETON_HIGHLIGHT = cssVarColors.surface.base.default;
 
 function ensureSkeletonKeyframes() {
   if (typeof document === 'undefined') return;
@@ -29,20 +30,25 @@ function ensureSkeletonKeyframes() {
 
   const style = document.createElement('style');
   style.id = KEYFRAME_ID;
-  // ::after pseudo-element sweeps a gradient stripe through the skeleton.
-  // translateX(-100%)→(200%) moves from off-left to off-right, clipped by
-  // the parent's overflow:hidden. This way the base color is always static
-  // and only the stripe moves — not the whole element background.
+  // ::after is 300% wide, centered at left:-100%.
+  // The element (overflow:hidden) always shows only the MIDDLE third
+  // of the ::after. The gradient's fade zones (base→highlight) live in
+  // the outer thirds — outside the visible area — so they never appear
+  // cut off at the element edges.
+  // translateX(-100%→+100%) moves the ::after by its own width (3× element),
+  // sweeping the highlight from far-left to far-right of the element.
   style.textContent = `
     ._zkap_sk_shimmer::after {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
+      top: 0; bottom: 0;
+      left: -100%;
+      width: 300%;
       background-image: linear-gradient(
         to right,
-        var(--skeleton-base) 0%,
+        var(--skeleton-base)      35%,
         var(--skeleton-highlight) 50%,
-        var(--skeleton-base) 100%
+        var(--skeleton-base)      65%
       );
       animation: _zkap_sk_shimmer 1.5s ease-in-out infinite;
       animation-fill-mode: backwards;
@@ -50,7 +56,7 @@ function ensureSkeletonKeyframes() {
 
     @keyframes _zkap_sk_shimmer {
       0%   { transform: translateX(-100%); }
-      100% { transform: translateX(200%); }
+      100% { transform: translateX(100%); }
     }
 
     @keyframes _zkap_sk_pulse {
@@ -95,9 +101,9 @@ export function Skeleton({
         flexShrink: 0,
         position: 'relative',
         overflow: 'hidden',
-        backgroundColor: SKELETON_BASE_COLOR,
-        '--skeleton-base': SKELETON_BASE_COLOR,
-        '--skeleton-highlight': SKELETON_HIGHLIGHT_COLOR,
+        backgroundColor: SKELETON_BASE,
+        '--skeleton-base': SKELETON_BASE,
+        '--skeleton-highlight': SKELETON_HIGHLIGHT,
         ...(animation === 'pulse' && {
           animation: '_zkap_sk_pulse 2s ease-in-out infinite',
         }),
