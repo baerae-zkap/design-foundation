@@ -13,8 +13,8 @@ import { radius as radiusImport } from './radius';
 import { opacity as opacityImport, borderWidth as borderWidthImport, zIndex as zIndexImport } from './general';
 import { duration as durationImport, easing as easingImport, transitions as transitionsImport } from './motion';
 
-export { lightColors, colors, palette, brandColors, errorColors, successColors, warningColors, infoColors, darkColors, darkPalette, darkBrandColors, darkErrorColors, darkSuccessColors, darkWarningColors, darkInfoColors } from './colors';
-export type { LightColorToken, ColorToken, PaletteToken, DarkColorToken, DarkPaletteToken } from './colors';
+export { lightColors, colors, palette, brandColors, errorColors, successColors, warningColors, infoColors, darkColors, darkPalette, darkBrandColors, darkErrorColors, darkSuccessColors, darkWarningColors, darkInfoColors, cssVarColors } from './colors';
+export type { LightColorToken, ColorToken, PaletteToken, DarkColorToken, DarkPaletteToken, CssVarColorToken } from './colors';
 
 export { effects, darkEffects } from './effects';
 export type { EffectToken, DarkEffectToken } from './effects';

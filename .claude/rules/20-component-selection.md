@@ -105,6 +105,14 @@ Use this decision tree to pick the correct component. Follow top-to-bottom; use 
 | "저장됐어요" | "저장 완료" + "파일이 업로드됐어요" |
 | Undo action button | Context action ("파일 보기") |
 
+### Spinner vs Skeleton
+| Use `Spinner` | Use `Skeleton` |
+|--------------|----------------|
+| Action in progress (button click, form submit) | Content loading (list, card, image, text) |
+| Duration unknown | Layout of incoming content is known |
+| Overlay / blocking loading | Inline placeholder in content flow |
+| Single loading state | Multiple content placeholders |
+
 ### SectionMessage vs AlertDialog vs Toast
 | Component | When | Persistence | Blocks UI |
 |-----------|------|-------------|-----------|

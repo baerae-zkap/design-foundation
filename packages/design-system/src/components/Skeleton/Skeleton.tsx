@@ -31,8 +31,8 @@ function ensureSkeletonKeyframes() {
   style.id = KEYFRAME_ID;
   style.textContent = `
     @keyframes _zkap_sk_shimmer {
-      from { background-position: -200px 0; }
-      to { background-position: calc(200px + 100%) 0; }
+      0% { background-position: 200% center; }
+      100% { background-position: -200% center; }
     }
 
     @keyframes _zkap_sk_pulse {
@@ -64,9 +64,8 @@ function buildAnimationStyle(animation: SkeletonAnimation): SkeletonAnimationSty
   return {
     '--skeleton-base': SKELETON_BASE_COLOR,
     '--skeleton-highlight': SKELETON_HIGHLIGHT_COLOR,
-    backgroundImage: 'linear-gradient(90deg, var(--skeleton-base) 25%, var(--skeleton-highlight) 50%, var(--skeleton-base) 75%)',
-    backgroundSize: '400px 100%',
-    backgroundRepeat: 'no-repeat',
+    backgroundImage: 'linear-gradient(90deg, var(--skeleton-base) 0%, var(--skeleton-highlight) 50%, var(--skeleton-base) 100%)',
+    backgroundSize: '200% 100%',
     animation: '_zkap_sk_shimmer 1.5s ease-in-out infinite',
   };
 }

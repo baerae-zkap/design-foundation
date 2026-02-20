@@ -103,6 +103,33 @@ When reviewing a component category, verify all 4 areas:
 
 ---
 
+---
+
+## Audit Results: Loading Category — 2026-02-20
+
+### Spinner ⚠️ → Fixed
+- Token usage: ✅ cssVarColors + var(--fill-alternative)
+- Doc sections: ✅ Complete (all 9 Design + all 5 Web)
+- Sync: ✅ Accurate
+- .claude MD: ✅ Created
+- Issues fixed:
+  - Breadcrumb was "Feedback → Loading" → fixed to "Loading → Spinner"
+  - Border shorthand + borderTopColor conflict → fixed to separate longhand props
+
+### Skeleton ✅
+- Token usage: ✅ var(--fill-alternative) + cssVarColors.surface.base.default
+- Doc sections: ✅ Complete
+- Sync: ✅ Accurate
+- .claude MD: ✅ Created
+- Issues fixed:
+  - Initial circle visibility: --surface-base-alternative (~6% opacity) too subtle → changed to var(--fill-alternative) (~12%)
+  - Added backgroundRepeat: 'no-repeat' to shimmer
+
+### Rules Updated
+- `rules/20-component-selection.md`: Added Spinner vs Skeleton decision table
+
+---
+
 ## How to Use This Process For Next Category
 
 1. Read all component source files (parallel)

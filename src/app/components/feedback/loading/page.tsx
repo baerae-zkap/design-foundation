@@ -22,8 +22,8 @@ export default function LoadingPage() {
       <Breadcrumb
         items={[
           { label: "Components", href: "/components" },
-          { label: "Feedback" },
           { label: "Loading" },
+          { label: "Spinner" },
         ]}
       />
 
@@ -36,7 +36,7 @@ export default function LoadingPage() {
           letterSpacing: "-0.02em",
         }}
       >
-        Loading
+        Spinner
       </h1>
       <p
         style={{
