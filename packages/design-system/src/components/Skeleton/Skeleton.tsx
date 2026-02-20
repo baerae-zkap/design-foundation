@@ -43,25 +43,30 @@ function ensureSkeletonKeyframes() {
   document.head.appendChild(style);
 }
 
+// 'var(--fill-alternative)' = hsla ~12% opacity — more visible than surface.base.alternative (~6%)
+const SKELETON_BASE_COLOR = 'var(--fill-alternative)';
+const SKELETON_HIGHLIGHT_COLOR = cssVarColors.surface.base.default;
+
 function buildAnimationStyle(animation: SkeletonAnimation): SkeletonAnimationStyle {
   if (animation === 'none') {
     return {
-      backgroundColor: cssVarColors.surface.base.alternative,
+      backgroundColor: SKELETON_BASE_COLOR,
     };
   }
 
   if (animation === 'pulse') {
     return {
-      backgroundColor: cssVarColors.surface.base.alternative,
+      backgroundColor: SKELETON_BASE_COLOR,
       animation: '_zkap_sk_pulse 2s ease-in-out infinite',
     };
   }
 
   return {
-    '--skeleton-base': cssVarColors.surface.base.alternative,
-    '--skeleton-highlight': cssVarColors.surface.base.default,
+    '--skeleton-base': SKELETON_BASE_COLOR,
+    '--skeleton-highlight': SKELETON_HIGHLIGHT_COLOR,
     backgroundImage: 'linear-gradient(90deg, var(--skeleton-base) 25%, var(--skeleton-highlight) 50%, var(--skeleton-base) 75%)',
     backgroundSize: '400px 100%',
+    backgroundRepeat: 'no-repeat',
     animation: '_zkap_sk_shimmer 1.5s ease-in-out infinite',
   };
 }
