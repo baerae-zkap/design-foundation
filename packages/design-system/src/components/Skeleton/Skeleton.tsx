@@ -70,7 +70,7 @@ function buildAnimationStyle(animation: SkeletonAnimation): SkeletonAnimationSty
   return {
     '--skeleton-base': SKELETON_BASE_COLOR,
     '--skeleton-highlight': SKELETON_HIGHLIGHT_COLOR,
-    backgroundImage: 'linear-gradient(90deg, var(--skeleton-base) 40%, var(--skeleton-highlight) 50%, var(--skeleton-base) 60%)',
+    backgroundImage: 'linear-gradient(90deg, var(--skeleton-base) 45%, var(--skeleton-highlight) 50%, var(--skeleton-base) 55%)',
     backgroundSize: '300% 100%',
     backgroundRepeat: 'no-repeat',
     animation: '_zkap_sk_shimmer 1.5s ease-in-out infinite',
