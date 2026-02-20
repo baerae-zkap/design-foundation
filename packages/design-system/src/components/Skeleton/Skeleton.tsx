@@ -1,7 +1,5 @@
 'use client';
 
-import { cssVarColors } from '../../tokens';
-
 export type SkeletonVariant = 'text' | 'rectangle' | 'circle';
 export type SkeletonAnimation = 'shimmer' | 'pulse' | 'none';
 
@@ -18,22 +16,20 @@ export interface SkeletonProps {
 
 const KEYFRAME_ID = '__zkap_skeleton_keyframes';
 
-// Skeleton color design (all tokens are OPAQUE — no stacking issues):
+// --_sk-base and --_sk-shine are injected globally with dark-mode overrides.
+// The element sets backgroundColor: var(--_sk-base) so it always matches
+// the ::after gradient's base zones — zero visible seam regardless of theme.
 //
-// BASE  = surface.base.container
-//   light: grey-97 (L≈92%) — visible gray against white page
-//   dark:  grey-20 (L≈16%) — raised surface against grey-15 page
+// Light mode:
+//   --_sk-base  = surface.base.containerPressed (grey-95, L≈86%) — clearly visible gray
+//   --_sk-shine = surface.base.default          (white, L=100%)  — lighter stripe ✓
 //
-// SHINE (light) = surface.base.default  → white (L=100%) > grey-97 ✓
-// SHINE (dark)  = surface.base.containerPressed → grey-23 (L≈21%) > grey-20 ✓
+// Dark mode:
+//   --_sk-base  = surface.base.container        (grey-20, L≈16%) — raised surface
+//   --_sk-shine = surface.base.containerPressed (grey-23, L≈21%) — lighter stripe ✓
 //
-// Theme-aware: injected CSS sets --_sk-shine per prefers-color-scheme.
-// The ::after gradient uses the SAME --_sk-base as the element's backgroundColor,
-// so the base zones of the gradient are invisible against the host — no seam.
-
-const BASE  = cssVarColors.surface.base.container;
-const SHINE_LIGHT = cssVarColors.surface.base.default;
-const SHINE_DARK  = cssVarColors.surface.base.containerPressed;
+// Gradient stops at 45%/50%/55%: shine band = 10% of 300%-wide ::after = 30% of parent.
+// Clearly a narrow stripe, not a full-element glow.
 
 function ensureSkeletonKeyframes() {
   if (typeof document === 'undefined') return;
@@ -41,31 +37,15 @@ function ensureSkeletonKeyframes() {
 
   const style = document.createElement('style');
   style.id = KEYFRAME_ID;
-
-  // --_sk-base:  element background AND the solid portions of the ::after gradient.
-  //              Same token → gradient base zones are visually invisible against host.
-  // --_sk-shine: the bright stripe peak; differs per theme.
-  //
-  // ::after is 300% wide, anchored at left: -100%.
-  // Without transform: spans x = [-parent, +2parent].
-  //
-  // @keyframes move the ::after by ±100% of its OWN width (= ±3×parent):
-  //   start (translateX(-100%)): left edge at -4×parent → fully off left
-  //   end   (translateX(+100%)): left edge at +2×parent → fully off right
-  //
-  // Gradient stop positions 45%/50%/55% create a narrow shine band:
-  //   shine band width = 10% of 300% = 30% of parent — clearly a stripe, not a glow.
-  //   Base zones (0-45% and 55-100%) match the host backgroundColor exactly → no seam.
-
   style.textContent = `
     :root {
-      --_sk-base:  ${BASE};
-      --_sk-shine: ${SHINE_LIGHT};
+      --_sk-base:  var(--surface-base-containerPressed);
+      --_sk-shine: var(--surface-base-default);
     }
     @media (prefers-color-scheme: dark) {
       :root {
-        --_sk-base:  ${BASE};
-        --_sk-shine: ${SHINE_DARK};
+        --_sk-base:  var(--surface-base-container);
+        --_sk-shine: var(--surface-base-containerPressed);
       }
     }
 
@@ -132,7 +112,7 @@ export function Skeleton({
         flexShrink: 0,
         position: 'relative',
         overflow: 'hidden',
-        backgroundColor: BASE,
+        backgroundColor: 'var(--_sk-base)',
         ...(animation === 'pulse' && {
           animation: '_zkap_sk_pulse 2s ease-in-out infinite',
         }),
