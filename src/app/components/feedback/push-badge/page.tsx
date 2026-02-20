@@ -21,7 +21,7 @@ function BellIcon() {
 }
 
 // Types
-type PushBadgeVariant = "dot" | "number";
+type PushBadgeVariant = "dot" | "number" | "new";
 type PushBadgeSize = "default" | "small" | "tiny";
 type PushBadgeColor = "error" | "primary" | "success" | "warning";
 
@@ -627,7 +627,7 @@ function DesignContent() {
                   { color: "error", bg: "--surface-error-solid", text: "--content-base-onColor" },
                   { color: "primary", bg: "--surface-brand-default", text: "--content-base-onColor" },
                   { color: "success", bg: "--surface-success-solid", text: "--content-base-onColor" },
-                  { color: "warning", bg: "--content-warning-default", text: "--content-base-onColor" },
+                  { color: "warning", bg: "--surface-warning-solid", text: "--content-base-onColor" },
                 ].map((row, i, arr) => (
                   <tr key={row.color}>
                     <td style={{ padding: "12px 16px", borderBottom: i < arr.length - 1 ? "1px solid var(--divider)" : "none" }}><InlineCode>{row.color}</InlineCode></td>
@@ -919,7 +919,7 @@ function WebContent() {
         <PropsTable
           props={[
             { name: "children", type: "ReactNode", required: true, description: "배지를 오버레이할 대상 요소" },
-            { name: "variant", type: '"dot" | "number"', required: false, defaultVal: '"number"', description: "배지 형태 — number(숫자), dot(점)" },
+            { name: "variant", type: '"dot" | "number" | "new"', required: false, defaultVal: '"number"', description: "배지 형태 — number(숫자), dot(점), new(N 텍스트)" },
             { name: "color", type: '"error" | "primary" | "success" | "warning"', required: false, defaultVal: '"error"', description: "배지 색상 테마" },
             { name: "size", type: '"default" | "small" | "tiny"', required: false, defaultVal: '"default"', description: "배지 크기" },
             { name: "count", type: "number", required: false, description: "number variant에서 표시할 숫자" },

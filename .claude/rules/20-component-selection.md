@@ -69,6 +69,49 @@ Use this decision tree to pick the correct component. Follow top-to-bottom; use 
 </Button>
 ```
 
+## Feedback -- "System communicates to the user"
+
+| IF you need to... | THEN use | Example |
+|-------------------|----------|---------|
+| Show brief auto-dismiss notification (single message) | `<Snackbar>` | "저장됐어요", "복사했어요" |
+| Show richer notification with heading + description | `<Toast>` | "저장 완료" + "클라우드에 업로드됐어요" |
+| Show inline contextual status within page content | `<SectionMessage variant="...">` | Form error, success confirmation, info banner |
+| Block user for critical confirmation before action | `<AlertDialog>` | Delete, logout, irreversible action |
+| Show empty/error/result state for a content area | `<StateView>` | Empty list, error page, payment complete |
+| Show notification count overlay on an icon/button | `<PushBadge>` | Unread count on bell icon |
+
+```tsx
+// Transient feedback
+<Snackbar open={saved} message="저장됐어요." onClose={() => setSaved(false)} />
+<Toast open={saved} heading="저장 완료" description="클라우드에 업로드됐어요." onClose={() => setSaved(false)} />
+
+// Inline contextual
+<SectionMessage variant="error" heading="오류" description="저장에 실패했습니다." />
+
+// Blocking confirmation
+<AlertDialog open={isOpen} onClose={close} title="삭제?" actions={[...]} />
+
+// Empty state
+<StateView figure={<EmptyIcon />} title="항목 없음" primaryAction={<Button>추가</Button>} />
+
+// Notification badge
+<PushBadge count={unread} hidden={unread === 0}><IconButton>...</IconButton></PushBadge>
+```
+
+### Snackbar vs Toast Decision
+| Use `Snackbar` | Use `Toast` |
+|----------------|-------------|
+| Single short message | Heading + supporting detail |
+| "저장됐어요" | "저장 완료" + "파일이 업로드됐어요" |
+| Undo action button | Context action ("파일 보기") |
+
+### SectionMessage vs AlertDialog vs Toast
+| Component | When | Persistence | Blocks UI |
+|-----------|------|-------------|-----------|
+| `SectionMessage` | Inline in content | Persistent | No |
+| `Toast` / `Snackbar` | Global transient | Auto-dismiss | No |
+| `AlertDialog` | Critical confirmation | Until dismissed | Yes |
+
 ## Tie-Breakers
 
 When two components seem equally valid, apply these rules:

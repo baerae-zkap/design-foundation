@@ -491,7 +491,7 @@ function DesignContent() {
               ["surface.success.default", "green.95 / green.20", "success variant background"],
               ["surface.warning.default", "orange.95 / orange.20", "warning variant background"],
               ["surface.error.default", "red.95 / red.20", "error variant background"],
-              ["surface.base.container", "grey.97 / grey.20", "default variant background"],
+              ["surface.brand.secondary", "brand-95 / brand-20", "default variant background"],
               ["content.base.strong", "grey.15 / grey.99", "heading text"],
               ["content.base.secondary", "grey.50 / grey.80", "description text, close icon"],
               ["icon.info / icon.success / icon.warning / icon.error", "teal.50 / green.50 / orange.50 / red.50", "variant icon color"],
