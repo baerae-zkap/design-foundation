@@ -18,8 +18,22 @@ export interface SkeletonProps {
 
 const KEYFRAME_ID = '__zkap_skeleton_keyframes';
 
-const SKELETON_BASE = cssVarColors.surface.base.alternative;
-const SKELETON_HIGHLIGHT = cssVarColors.surface.base.default;
+// Skeleton color design (all tokens are OPAQUE — no stacking issues):
+//
+// BASE  = surface.base.container
+//   light: grey-97 (L≈92%) — visible gray against white page
+//   dark:  grey-20 (L≈16%) — raised surface against grey-15 page
+//
+// SHINE (light) = surface.base.default  → white (L=100%) > grey-97 ✓
+// SHINE (dark)  = surface.base.containerPressed → grey-23 (L≈21%) > grey-20 ✓
+//
+// Theme-aware: injected CSS sets --_sk-shine per prefers-color-scheme.
+// The ::after gradient uses the SAME --_sk-base as the element's backgroundColor,
+// so the base zones of the gradient are invisible against the host — no seam.
+
+const BASE  = cssVarColors.surface.base.container;
+const SHINE_LIGHT = cssVarColors.surface.base.default;
+const SHINE_DARK  = cssVarColors.surface.base.containerPressed;
 
 function ensureSkeletonKeyframes() {
   if (typeof document === 'undefined') return;
@@ -27,27 +41,53 @@ function ensureSkeletonKeyframes() {
 
   const style = document.createElement('style');
   style.id = KEYFRAME_ID;
+
+  // --_sk-base:  element background AND the solid portions of the ::after gradient.
+  //              Same token → gradient base zones are visually invisible against host.
+  // --_sk-shine: the bright stripe peak; differs per theme.
+  //
+  // ::after is 300% wide, anchored at left: -100%.
+  // Without transform: spans x = [-parent, +2parent].
+  //
+  // @keyframes move the ::after by ±100% of its OWN width (= ±3×parent):
+  //   start (translateX(-100%)): left edge at -4×parent → fully off left
+  //   end   (translateX(+100%)): left edge at +2×parent → fully off right
+  //
+  // Gradient stop positions 45%/50%/55% create a narrow shine band:
+  //   shine band width = 10% of 300% = 30% of parent — clearly a stripe, not a glow.
+  //   Base zones (0-45% and 55-100%) match the host backgroundColor exactly → no seam.
+
   style.textContent = `
+    :root {
+      --_sk-base:  ${BASE};
+      --_sk-shine: ${SHINE_LIGHT};
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --_sk-base:  ${BASE};
+        --_sk-shine: ${SHINE_DARK};
+      }
+    }
+
     ._zkap_sk_shimmer::after {
       content: '';
       position: absolute;
-      top: 0;
-      bottom: 0;
-      left: -50%;
-      width: 50%;
+      top: 0; bottom: 0;
+      left: -100%;
+      width: 300%;
       background-image: linear-gradient(
         to right,
-        transparent 0%,
-        var(--skeleton-highlight) 50%,
-        transparent 100%
+        var(--_sk-base)  45%,
+        var(--_sk-shine) 50%,
+        var(--_sk-base)  55%
       );
-      animation: _zkap_sk_shimmer 1.4s linear infinite;
+      animation: _zkap_sk_shimmer 1.6s linear infinite;
       will-change: transform;
     }
 
     @keyframes _zkap_sk_shimmer {
       0%   { transform: translateX(-100%); }
-      100% { transform: translateX(300%); }
+      100% { transform: translateX(100%); }
     }
 
     @keyframes _zkap_sk_pulse {
@@ -92,13 +132,12 @@ export function Skeleton({
         flexShrink: 0,
         position: 'relative',
         overflow: 'hidden',
-        backgroundColor: SKELETON_BASE,
-        '--skeleton-highlight': SKELETON_HIGHLIGHT,
+        backgroundColor: BASE,
         ...(animation === 'pulse' && {
           animation: '_zkap_sk_pulse 2s ease-in-out infinite',
         }),
         ...style,
-      } as React.CSSProperties & { '--skeleton-highlight': string }}
+      }}
     />
   );
 }
