@@ -104,3 +104,6 @@ export type { ToastProps, ToastPosition } from './components/Toast/Toast';
 
 export { Spinner } from './components/Spinner/Spinner';
 export type { SpinnerProps, SpinnerSize, SpinnerColor } from './components/Spinner/Spinner';
+
+export { Skeleton } from './components/Skeleton/Skeleton';
+export type { SkeletonProps, SkeletonVariant, SkeletonAnimation } from './components/Skeleton/Skeleton';

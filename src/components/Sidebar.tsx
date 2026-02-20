@@ -43,7 +43,7 @@ const componentsNav = [
   { title: "State View", href: "/components/feedback/state-view" },
   { title: "Loading", isLabel: true },
   { title: "Loading", href: "/components/feedback/loading" },
-  { title: "Skeleton", isLabel: true },
+  { title: "Skeleton", href: "/components/loading/skeleton" },
 ];
 
 interface SidebarItemProps {

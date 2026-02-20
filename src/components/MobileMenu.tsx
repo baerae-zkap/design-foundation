@@ -41,6 +41,7 @@ const componentsNav = [
   { title: "Toast", href: "/components/feedback/toast" },
   { title: "State View", href: "/components/feedback/state-view" },
   { title: "Loading", href: "/components/feedback/loading" },
+  { title: "Skeleton", href: "/components/loading/skeleton" },
 ];
 
 interface MobileMenuProps {
