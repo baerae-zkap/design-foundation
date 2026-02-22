@@ -79,6 +79,7 @@ export const Switch = React.forwardRef<HTMLLabelElement, SwitchProps>(
     const [internalChecked, setInternalChecked] = useState(defaultChecked);
     const isChecked = isControlled ? checkedProp : internalChecked;
     const [isHovered, setIsHovered] = useState(false);
+    const [isPressed, setIsPressed] = useState(false);
 
     const handleChange = useCallback(
       (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -121,10 +122,10 @@ export const Switch = React.forwardRef<HTMLLabelElement, SwitchProps>(
     };
 
     const trackBg = isChecked
-      ? isHovered
+      ? (isPressed || isHovered)
         ? cssVarColors.surface.brand.defaultPressed
         : cssVarColors.surface.brand.default
-      : isHovered
+      : (isPressed || isHovered)
         ? cssVarColors.surface.base.defaultPressed
         : cssVarColors.fill.normal;
 
@@ -157,7 +158,9 @@ export const Switch = React.forwardRef<HTMLLabelElement, SwitchProps>(
         ref={ref}
         style={labelStyle}
         onMouseEnter={() => !disabled && setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        onMouseLeave={() => { setIsHovered(false); setIsPressed(false); }}
+        onMouseDown={() => !disabled && setIsPressed(true)}
+        onMouseUp={() => setIsPressed(false)}
       >
         {/* Hidden native input for a11y */}
         <input

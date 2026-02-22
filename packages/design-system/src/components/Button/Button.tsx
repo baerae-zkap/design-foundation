@@ -81,12 +81,12 @@ const colorStyles: Record<ButtonColor, {
   neutral: {
     filled: {
       bg: cssVarColors.surface.base.container,
-      bgPressed: cssVarColors.surface.base.alternative,
+      bgPressed: cssVarColors.surface.base.defaultPressed,
       color: cssVarColors.content.base.default,
     },
     weak: {
       bg: cssVarColors.surface.base.container,
-      bgPressed: cssVarColors.surface.base.alternative,
+      bgPressed: cssVarColors.surface.base.defaultPressed,
       color: cssVarColors.content.base.default,
     },
   },
@@ -122,7 +122,7 @@ const colorStyles: Record<ButtonColor, {
     },
     weak: {
       bg: cssVarColors.fill.alternative,
-      bgPressed: cssVarColors.surface.base.alternative,
+      bgPressed: cssVarColors.surface.base.defaultPressed,
       color: cssVarColors.content.base.strong,
     },
   },
@@ -134,7 +134,7 @@ const colorStyles: Record<ButtonColor, {
     },
     weak: {
       bg: cssVarColors.surface.base.container,
-      bgPressed: cssVarColors.surface.base.alternative,
+      bgPressed: cssVarColors.surface.base.defaultPressed,
       color: cssVarColors.content.base.default,
     },
   },
