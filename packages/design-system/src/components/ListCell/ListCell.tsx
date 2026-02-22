@@ -124,12 +124,15 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
       gap: sizeStyle.gap,
       minHeight: sizeStyle.minHeight,
       padding: `${sizeStyle.paddingY}px ${sizeStyle.paddingX}px`,
+      backgroundColor: isPressed && isInteractive
+        ? cssVarColors.surface.base.alternative
+        : 'transparent',
       transform: isPressed && isInteractive ? 'scale(0.98)' : undefined,
       cursor: isInteractive ? 'pointer' : 'default',
       outline: isFocusVisible && isInteractive ? `${borderWidth.strong}px solid ${cssVarColors.content.brand.default}` : 'none',
       outlineOffset: 2,
       borderBottom: divider ? `${borderWidth.default}px solid ${cssVarColors.border.solid.alternative}` : 'none',
-      transition: 'transform 150ms ease',
+      transition: 'background-color 150ms ease, transform 150ms ease',
       ...style,
     };
 
