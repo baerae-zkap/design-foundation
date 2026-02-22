@@ -52,7 +52,7 @@ export interface ListCardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'tit
 
 const variantStyles: Record<ListCardVariant, React.CSSProperties> = {
   filled: {
-    backgroundColor: 'transparent',
+    backgroundColor: cssVarColors.surface.base.default,
     border: 'none',
   },
   outlined: {
@@ -189,21 +189,24 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
       marginTop: spacing.primitive[1],                      // 4px gap from title
     };
 
-    // Meta — 14px bold for prices, below subtitle
+    // Right zone — meta + action stacked, right-aligned
+    const rightZoneStyle: React.CSSProperties = {
+      flexShrink: 0,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'flex-end',
+      justifyContent: 'center',
+      gap: spacing.primitive[1],
+      marginLeft: 'auto',
+    };
+
+    // Meta — 14px bold for prices, right-aligned
     const metaStyle: React.CSSProperties = {
       fontSize: typography.fontSize.sm,                     // 14
       fontWeight: typography.fontWeight.bold,                // 700
       color: cssVarColors.content.base.default,
       lineHeight: 1.4,
-      marginTop: spacing.primitive[1],                      // 4px gap from subtitle
-    };
-
-    // Trailing action — right-aligned, vertically centered
-    const trailingStyle: React.CSSProperties = {
-      flexShrink: 0,
-      display: 'flex',
-      alignItems: 'center',
-      marginLeft: spacing.primitive[1],                     // 4px extra gap from content
+      whiteSpace: 'nowrap',
     };
 
     // -----------------------------------------------------------------------
@@ -267,17 +270,17 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
           </div>
         )}
 
-        {/* Content — badges above title, subtitle and meta below */}
+        {/* Content — badges, title, subtitle (left side) */}
         <div style={contentStyle}>
           {badges && <div style={badgesStyle}>{badges}</div>}
           <div style={titleStyle}>{title}</div>
           {subtitle && <div style={subtitleStyle}>{subtitle}</div>}
-          {meta && <div style={metaStyle}>{meta}</div>}
         </div>
 
-        {/* Action — anchored right, vertically centered */}
-        {action && (
-          <div style={trailingStyle}>
+        {/* Right zone — meta (price) + action, right-aligned */}
+        {(meta || action) && (
+          <div style={rightZoneStyle}>
+            {meta && <div style={metaStyle}>{meta}</div>}
             {action}
           </div>
         )}
