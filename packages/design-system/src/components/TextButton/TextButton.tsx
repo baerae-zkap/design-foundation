@@ -50,22 +50,22 @@ const colorStyles: Record<TextButtonColor, { default: string; pressed: string; p
   primary: {
     default: cssVarColors.content.brand.default,
     pressed: cssVarColors.surface.brand.defaultPressed,
-    pressedBg: cssVarColors.fill.alternative
+    pressedBg: cssVarColors.surface.base.alternative
   },
   neutral: {
     default: cssVarColors.content.base.default,
     pressed: cssVarColors.content.base.strong,
-    pressedBg: cssVarColors.fill.alternative
+    pressedBg: cssVarColors.surface.base.alternative
   },
   muted: {
     default: cssVarColors.content.base.neutral,
     pressed: cssVarColors.content.base.default,
-    pressedBg: cssVarColors.fill.alternative
+    pressedBg: cssVarColors.surface.base.alternative
   },
   error: {
     default: cssVarColors.content.error.default,
     pressed: cssVarColors.surface.error.solidPressed,
-    pressedBg: cssVarColors.fill.alternative
+    pressedBg: cssVarColors.surface.base.alternative
   },
 };
 

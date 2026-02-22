@@ -79,14 +79,14 @@ const colorConfig: Record<ChipColor, {
   neutral: {
     filled: {
       bg: cssVarColors.surface.base.container,
-      bgPressed: cssVarColors.surface.base.containerPressed,
+      bgPressed: cssVarColors.surface.base.alternative,
       bgSelected: cssVarColors.content.base.default,
       text: cssVarColors.content.base.default,
       textSelected: cssVarColors.content.base.onColor,
     },
     weak: {
       bg: cssVarColors.fill.alternative,
-      bgPressed: cssVarColors.fill.normal,
+      bgPressed: cssVarColors.surface.base.alternative,
       bgSelected: cssVarColors.content.base.default,
       text: cssVarColors.content.base.default,
       textSelected: cssVarColors.content.base.onColor,

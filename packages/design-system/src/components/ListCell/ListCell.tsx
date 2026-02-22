@@ -125,9 +125,9 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
       minHeight: sizeStyle.minHeight,
       padding: `${sizeStyle.paddingY}px ${sizeStyle.paddingX}px`,
       backgroundColor: isPressed && isInteractive
-        ? cssVarColors.fill.normal
+        ? cssVarColors.surface.base.alternative
         : isHovered && isInteractive
-          ? cssVarColors.fill.alternative
+          ? cssVarColors.surface.base.alternative
           : 'transparent',
       cursor: isInteractive ? 'pointer' : 'default',
       outline: isFocusVisible && isInteractive ? `${borderWidth.strong}px solid ${cssVarColors.content.brand.default}` : 'none',

@@ -156,7 +156,7 @@ export const Checkbox = React.forwardRef<HTMLLabelElement, CheckboxProps>(
     const controlBg = isActive
       ? cssVarColors.surface.brand.default
       : isPressed
-        ? cssVarColors.surface.base.containerPressed
+        ? cssVarColors.surface.base.alternative
         : isHovered
           ? cssVarColors.surface.base.alternative
           : cssVarColors.surface.base.default;

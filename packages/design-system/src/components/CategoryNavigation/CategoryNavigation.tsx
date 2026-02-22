@@ -91,8 +91,8 @@ function CategoryChip({
         : cssVarColors.surface.brand.default;
     }
 
-    if (isPressed || isHovered) return cssVarColors.fill.normal;
-    return cssVarColors.fill.alternative;
+    if (isPressed || isHovered) return cssVarColors.surface.base.alternative;
+    return 'transparent';
   };
 
   const chipStyle: CSSProperties = {

@@ -58,8 +58,8 @@ const colorStyles: Record<IconButtonColor, {
     },
     ghost: {
       bg: 'transparent',
-      bgHover: cssVarColors.fill.alternative,
-      bgPressed: cssVarColors.fill.normal,
+      bgHover: cssVarColors.surface.base.alternative,
+      bgPressed: cssVarColors.surface.base.alternative,
       color: cssVarColors.content.brand.default,
       colorPressed: cssVarColors.surface.brand.defaultPressed
     },
@@ -77,14 +77,14 @@ const colorStyles: Record<IconButtonColor, {
     },
     ghost: {
       bg: 'transparent',
-      bgHover: cssVarColors.fill.alternative,
-      bgPressed: cssVarColors.fill.normal,
+      bgHover: cssVarColors.surface.base.alternative,
+      bgPressed: cssVarColors.surface.base.alternative,
       color: cssVarColors.content.base.default,
       colorPressed: cssVarColors.inverse.surface.default
     },
     weak: {
       bg: cssVarColors.surface.base.container,
-      bgPressed: cssVarColors.surface.base.containerPressed,
+      bgPressed: cssVarColors.surface.base.alternative,
       color: cssVarColors.content.base.default,
     },
   },
