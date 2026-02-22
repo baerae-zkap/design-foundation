@@ -69,7 +69,7 @@ Also accepts all standard `HTMLAttributes<HTMLDivElement>` except `title`.
 ### With description
 ```tsx
 <ListCell
-  leading={<Avatar src={user.avatar} size={40} />}
+  leading={<Avatar src={user.avatar} alt={user.name} size="md" />}
   title={user.name}
   description={user.email}
   trailing={<ContentBadge color="primary" size="small">Admin</ContentBadge>}

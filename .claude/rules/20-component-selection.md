@@ -15,7 +15,8 @@ Use this decision tree to pick the correct component. Follow top-to-bottom; use 
 | Click a text-only inline link | `<TextButton>` | "Forgot password?", "View all" |
 | Click an icon-only action | `<IconButton aria-label="Close">` | Close, Menu, Share |
 | Toggle/select a tag or filter | `<Chip>` | Category filter, tag selector |
-| Tap a large custom-content area | `<ActionArea>` | Banner, promotional card |
+| Show a button group at the bottom of a modal/sheet/page | `<ActionArea>` | Confirm/Cancel in dialog, submit in bottom sheet |
+| Show a fixed bottom CTA bar | `<BottomCTA>` | Checkout, Confirm booking |
 
 ```tsx
 // Primary + Secondary pair
@@ -29,7 +30,7 @@ Use this decision tree to pick the correct component. Follow top-to-bottom; use 
 
 | IF the content is... | THEN use |
 |----------------------|----------|
-| A self-contained info block, optionally clickable | `<Card>` |
+| A self-contained info block (always interactive, `onClick` required) | `<Card>` |
 | A horizontal thumbnail + text list item | `<ListCard>` |
 | A simple text row in a settings/menu list | `<ListCell>` |
 | A section title with optional action link | `<SectionHeader>` |
@@ -37,6 +38,8 @@ Use this decision tree to pick the correct component. Follow top-to-bottom; use 
 | A small status or category label | `<ContentBadge>` |
 | Tabular data with rows and columns | `<Table>` |
 | An image with controlled aspect ratio | `<Thumbnail>` |
+| A user profile picture | `<Avatar>` (multiple users: `<AvatarGroup>`) |
+| A numeric count or status badge | `<Badge>` |
 
 ```tsx
 // Settings list
@@ -48,15 +51,16 @@ Use this decision tree to pick the correct component. Follow top-to-bottom; use 
 
 ## Inputs -- "User provides data"
 
+> **No Select component exists.** For dropdown-style selection, use `Radio`/`RadioGroup` (small option sets) or `SegmentedControl` (tab-style exclusive selection). Do NOT use native `<select>`.
+
 | IF the field is... | THEN use |
 |--------------------|----------|
 | Single-line text (name, email, phone) | `<TextField>` |
 | Multi-line text (bio, description) | `<TextArea>` |
 | Search with clear button | `<SearchField>` |
-| Select from a dropdown list | `<Select>` |
 | On/off toggle | `<Switch>` |
 | Multiple checkboxes | `<Checkbox>` |
-| Single choice from a group | `<Radio>` |
+| Single choice from a group | `<Radio>` / `<RadioGroup>` |
 | Segmented tab-like selector | `<SegmentedControl>` |
 | Numeric range | `<Slider>` |
 
@@ -76,9 +80,11 @@ Use this decision tree to pick the correct component. Follow top-to-bottom; use 
 | Show brief auto-dismiss notification (single message) | `<Snackbar>` | "저장됐어요", "복사했어요" |
 | Show richer notification with heading + description | `<Toast>` | "저장 완료" + "클라우드에 업로드됐어요" |
 | Show inline contextual status within page content | `<SectionMessage variant="...">` | Form error, success confirmation, info banner |
-| Block user for critical confirmation before action | `<AlertDialog>` | Delete, logout, irreversible action |
+| Block user for critical confirmation before action | `<Dialog>` | Delete, logout, irreversible action |
 | Show empty/error/result state for a content area | `<StateView>` | Empty list, error page, payment complete |
 | Show notification count overlay on an icon/button | `<PushBadge>` | Unread count on bell icon |
+| Show content loading placeholder | `<Skeleton>` | List loading, card loading |
+| Show indeterminate action progress | `<Spinner>` | Button loading, background fetch |
 
 ```tsx
 // Transient feedback
@@ -89,7 +95,7 @@ Use this decision tree to pick the correct component. Follow top-to-bottom; use 
 <SectionMessage variant="error" heading="오류" description="저장에 실패했습니다." />
 
 // Blocking confirmation
-<AlertDialog open={isOpen} onClose={close} title="삭제?" actions={[...]} />
+<Dialog open={isOpen} onClose={close} title="삭제?" actions={[...]} />
 
 // Empty state
 <StateView figure={<EmptyIcon />} title="항목 없음" primaryAction={<Button>추가</Button>} />
@@ -113,12 +119,12 @@ Use this decision tree to pick the correct component. Follow top-to-bottom; use 
 | Overlay / blocking loading | Inline placeholder in content flow |
 | Single loading state | Multiple content placeholders |
 
-### SectionMessage vs AlertDialog vs Toast
+### SectionMessage vs Dialog vs Toast
 | Component | When | Persistence | Blocks UI |
 |-----------|------|-------------|-----------|
 | `SectionMessage` | Inline in content | Persistent | No |
 | `Toast` / `Snackbar` | Global transient | Auto-dismiss | No |
-| `AlertDialog` | Critical confirmation | Until dismissed | Yes |
+| `Dialog` | Critical confirmation | Until dismissed | Yes |
 
 ## Tie-Breakers
 
@@ -126,24 +132,26 @@ When two components seem equally valid, apply these rules:
 
 | Decision | Rule |
 |----------|------|
-| `Radio` vs `Select` | **≤5 options** → Radio; **>5 options** or space-constrained → Select |
 | `Chip` vs `SegmentedControl` | Multi-select / filter behavior → Chip; Exclusive mode/view switching → SegmentedControl |
 | `Switch` vs `Checkbox` | Immediate effect on toggle → Switch; Value submitted with a form → Checkbox |
 | `TextButton` vs `Button` | Inline within sentence/content → TextButton; Standalone CTA → Button |
 | `ListCell` vs `Table` | Single-column mobile-friendly rows → ListCell; Multi-column data comparison → Table |
-| `Card` vs `ActionArea` | Structured content block → Card; Custom layout that needs to be fully tappable → ActionArea |
+| `Card` vs `ActionArea` | Structured content block → Card; Button group at bottom of modal/sheet/page → ActionArea |
+| `Badge` vs `ContentBadge` | Numeric count overlay on another element → Badge; Standalone status/category label in content → ContentBadge |
+| `Spinner` vs `Skeleton` | Unknown-duration action loading → Spinner; Content shape known, loading inline → Skeleton |
 
 ## Composition Conflict Rules
 
-- `ActionArea` MUST NOT contain `Button` or `IconButton` for the same action. Use one or the other.
+- `ActionArea` is a button group container (for modals, sheets, page footers). It expects `Button` and `TextButton` as children. Do NOT use it as a generic tappable region.
 - A section MUST have at most one `buttonType="filled" color="primary"` Button. Additional CTAs use `weak`/`neutral`.
 - `Card` MUST NOT nest inside another `Card`.
 - `ListCell` trailing element: use `Switch`, `ContentBadge`, or a text string — not a full `Button`.
 
 ## What NOT to Do
 
-- **DO NOT** create `<div onClick>` for button-like behavior. Use `Button`, `IconButton`, or `ActionArea`.
-- **DO NOT** use native `<input>`, `<select>`, or `<textarea>`. Always use `TextField`, `Select`, `TextArea`.
+- **DO NOT** create `<div onClick>` for button-like behavior. Use `Button`, `IconButton`, or `Card`.
+- **DO NOT** use native `<input>` or `<textarea>`. Always use `TextField`, `SearchField`, or `TextArea`.
+- **DO NOT** use native `<select>`. There is no system `Select` component. Use `Radio`/`RadioGroup` for small option sets (2-5 items) or `SegmentedControl` for tab-style exclusive selection.
 - **DO NOT** hardcode hex colors. Use CSS variables or token imports.
 - **DO NOT** build custom card containers with `box-shadow`. Use `Card`.
 - **DO NOT** create custom toggle switches. Use `Switch`.

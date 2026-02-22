@@ -189,9 +189,9 @@ export const ActionArea = forwardRef<HTMLDivElement, ActionAreaProps>(
               id={captionId}
               style={{
                 fontSize: typography.fontSize.sm,
+                lineHeight: typography.lineHeight.sm,
                 color: cssVarColors.content.base.neutral,
                 textAlign: 'center',
-                lineHeight: 1.5,
                 margin: 0,
                 marginBottom: spacing.component.modal.buttonGap,
               }}

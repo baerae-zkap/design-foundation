@@ -16,7 +16,7 @@ A clickable content container with two usage modes: slot mode (structured with t
 - Do NOT use for horizontal thumbnail + text list items -- use `ListCard` instead
 - Do NOT use for simple settings rows -- use `ListCell` instead
 - Do NOT nest Card inside another Card
-- Do NOT use as a non-interactive container -- onClick is required
+- Do NOT use as a non-interactive container -- `onClick` is required. For non-clickable grouped content, use a plain `<div>` with token-based styling or use `Card variant="outlined"` with a meaningful navigation target
 
 ## Props
 

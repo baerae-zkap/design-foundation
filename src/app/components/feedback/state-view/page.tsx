@@ -12,7 +12,7 @@ import { RadioGroup, CopyButton } from "@/components/docs/Playground";
 
 export default function StateViewPage() {
   return (
-    <div style={{ maxWidth: 720 }}>
+    <div style={{ maxWidth: 840 }}>
       <Breadcrumb
         items={[
           { label: "Components", href: "/components" },
@@ -22,7 +22,7 @@ export default function StateViewPage() {
       />
 
       {/* Header */}
-      <h1 style={{ fontSize: typography.fontSize["3xl"], fontWeight: 700, marginBottom: spacing.primitive[2], color: "var(--text-primary)", letterSpacing: "-0.02em" }}>
+      <h1 style={{ fontSize: typography.fontSize["3xl"], fontWeight: typography.fontWeight.bold, marginBottom: spacing.primitive[2], color: "var(--text-primary)", letterSpacing: "-0.02em" }}>
         State View
       </h1>
       <p style={{ fontSize: typography.fontSize.md, color: "var(--text-secondary)", marginBottom: spacing.primitive[8], lineHeight: 1.7 }}>
@@ -86,7 +86,7 @@ function StateViewPlayground() {
     <div style={{ marginBottom: spacing.primitive[8] }}>
       <div
         style={{
-          borderRadius: 20,
+          borderRadius: radius.primitive.xl,
           overflow: "hidden",
           backgroundColor: "var(--surface-base-alternative)",
         }}
@@ -95,7 +95,7 @@ function StateViewPlayground() {
           {/* Preview Area */}
           <div
             style={{
-              padding: 40,
+              padding: spacing.primitive[10],
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -157,9 +157,9 @@ function StateViewPlayground() {
                 overflowY: "auto",
                 display: "flex",
                 flexDirection: "column",
-                gap: 28,
+                gap: spacing.primitive[7],
                 backgroundColor: "var(--surface-base-default)",
-                borderRadius: spacing.primitive[4],
+                borderRadius: radius.primitive.lg,
               }}
             >
               <RadioGroup
@@ -235,7 +235,7 @@ function StateViewPlayground() {
       <div style={{ marginTop: spacing.primitive[4], borderRadius: radius.primitive.md, overflow: "hidden", border: "1px solid var(--divider)" }}>
         <div
           style={{
-            padding: "10px 16px",
+            padding: `${spacing.primitive[2]}px ${spacing.primitive[4]}px`,
             backgroundColor: "var(--docs-code-surface)",
             display: "flex",
             alignItems: "center",
@@ -246,8 +246,8 @@ function StateViewPlayground() {
             <span style={{
               fontSize: typography.fontSize.compact,
               fontWeight: typography.fontWeight.semibold,
-              padding: "4px 12px",
-              borderRadius: 6,
+              padding: `${spacing.primitive[1]}px ${spacing.primitive[3]}px`,
+              borderRadius: 6, /* optical: between xs(4) and sm(8), compact tab badge */
               color: "var(--content-base-onColor)",
               backgroundColor: "var(--docs-code-active-bg)",
             }}>Web</span>
@@ -301,7 +301,7 @@ function DesignContent() {
         <div style={{
           backgroundColor: "var(--surface-base-alternative)",
           borderRadius: radius.primitive.lg,
-          padding: "48px 40px",
+          padding: `${spacing.primitive[12]}px ${spacing.primitive[10]}px`,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -400,7 +400,7 @@ function DesignContent() {
           </p>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: spacing.primitive[4] }}>
             <PreviewBox>
-              <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: 12, overflow: "hidden" }}>
+              <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: radius.primitive.md, overflow: "hidden" }}>
                 <StateView
                   figure={<InlineEmptyIcon />}
                   title="항목이 없어요"
@@ -410,7 +410,7 @@ function DesignContent() {
               </div>
             </PreviewBox>
             <PreviewBox>
-              <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: 12, overflow: "hidden" }}>
+              <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: radius.primitive.md, overflow: "hidden" }}>
                 <StateView
                   figure={<InlineErrorIcon />}
                   title="불러오지 못했어요"
@@ -420,7 +420,7 @@ function DesignContent() {
               </div>
             </PreviewBox>
             <PreviewBox>
-              <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: 12, overflow: "hidden" }}>
+              <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: radius.primitive.md, overflow: "hidden" }}>
                 <StateView
                   figure={<InlineSearchIcon />}
                   title="검색 결과 없음"
@@ -450,7 +450,7 @@ function DesignContent() {
                 <PreviewBox>
                   <div style={{
                     backgroundColor: "var(--surface-base-default)",
-                    borderRadius: 12,
+                    borderRadius: radius.primitive.md,
                     overflow: "hidden",
                     height: 220,
                     display: "flex",
@@ -482,7 +482,7 @@ function DesignContent() {
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4] }}>
           <div>
             <PreviewBox>
-              <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: 12, overflow: "hidden", width: "100%" }}>
+              <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: radius.primitive.md, overflow: "hidden", width: "100%" }}>
                 <StateView
                   size="default"
                   figure={<InlineEmptyIcon />}
@@ -498,7 +498,7 @@ function DesignContent() {
           </div>
           <div>
             <PreviewBox>
-              <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: 12, overflow: "hidden", width: "100%" }}>
+              <div style={{ backgroundColor: "var(--surface-base-default)", borderRadius: radius.primitive.md, overflow: "hidden", width: "100%" }}>
                 <StateView
                   size="compact"
                   figure={<InlineEmptyIcon />}
@@ -539,13 +539,13 @@ function DesignContent() {
                 <div style={{
                   width: "100%",
                   backgroundColor: "var(--surface-base-default)",
-                  borderRadius: 8,
+                  borderRadius: radius.primitive.sm,
                   border: "1px solid var(--border-base-default)",
                   padding: spacing.primitive[3],
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  gap: 4,
+                  gap: spacing.primitive[1],
                 }}>
                   <div style={{ width: 28, height: 28, borderRadius: 6, backgroundColor: "var(--surface-base-alternative)" }} />
                   {label !== "Figure only" && (
@@ -555,7 +555,7 @@ function DesignContent() {
                     </>
                   )}
                   {label === "With Actions" && (
-                    <div style={{ width: 60, height: 18, borderRadius: 5, backgroundColor: "var(--content-brand-default)", opacity: 0.8, marginTop: 2 }} />
+                    <div style={{ width: 60, height: 18, borderRadius: radius.primitive.sm, backgroundColor: "var(--content-brand-default)", opacity: 0.8, marginTop: 2 }} />
                   )}
                 </div>
                 <div style={{ textAlign: "center" }}>
@@ -582,11 +582,11 @@ function DesignContent() {
                       width: "100%",
                       maxWidth: 200,
                       backgroundColor: "var(--surface-base-default)",
-                      borderRadius: 10,
+                      borderRadius: 10, /* optical: between sm(8) and md(12), mini card preview */
                       overflow: "hidden",
                       border: "1px solid var(--divider)",
                     }}>
-                      <div style={{ padding: "10px 12px", borderBottom: "1px solid var(--divider)", fontSize: 11, fontWeight: 600, color: "var(--content-base-default)" }}>즐겨찾기</div>
+                      <div style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, borderBottom: "1px solid var(--divider)", fontSize: 11, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-default)" }}>즐겨찾기</div>
                       <StateView
                         size="compact"
                         figure={<MiniEmptyIcon />}
@@ -603,11 +603,11 @@ function DesignContent() {
                       width: "100%",
                       maxWidth: 200,
                       backgroundColor: "var(--surface-base-default)",
-                      borderRadius: 10,
+                      borderRadius: 10, /* optical: between sm(8) and md(12), mini card preview */
                       overflow: "hidden",
                       border: "1px solid var(--divider)",
                     }}>
-                      <div style={{ padding: "10px 12px", borderBottom: "1px solid var(--divider)", fontSize: 11, fontWeight: 600, color: "var(--content-base-default)" }}>즐겨찾기</div>
+                      <div style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, borderBottom: "1px solid var(--divider)", fontSize: 11, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-default)" }}>즐겨찾기</div>
                       <StateView
                         variant="page"
                         figure={<MiniEmptyIcon />}
@@ -629,7 +629,7 @@ function DesignContent() {
                       width: "100%",
                       maxWidth: 180,
                       backgroundColor: "var(--surface-base-default)",
-                      borderRadius: 10,
+                      borderRadius: 10, /* optical: between sm(8) and md(12), mini card preview */
                       overflow: "hidden",
                       height: 140,
                       display: "flex",
@@ -655,11 +655,11 @@ function DesignContent() {
                       width: "100%",
                       maxWidth: 180,
                       backgroundColor: "var(--surface-base-default)",
-                      borderRadius: 10,
+                      borderRadius: 10, /* optical: between sm(8) and md(12), mini card preview */
                       overflow: "hidden",
                       border: "1px solid var(--divider)",
                     }}>
-                      <div style={{ padding: "8px 10px", borderBottom: "1px solid var(--divider)", fontSize: 11, fontWeight: 600, color: "var(--content-base-default)" }}>결제</div>
+                      <div style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[2]}px`, borderBottom: "1px solid var(--divider)", fontSize: 11, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-default)" }}>결제</div>
                       <StateView
                         variant="page"
                         figure={<MiniSuccessIcon />}
@@ -685,9 +685,9 @@ function DesignContent() {
           <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.compact }}>
             <thead>
               <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
-                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Property</th>
-                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Token</th>
-                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Value</th>
+                <th style={{ textAlign: "left", padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-primary)", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Property</th>
+                <th style={{ textAlign: "left", padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-primary)", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Token</th>
+                <th style={{ textAlign: "left", padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-primary)", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Value</th>
               </tr>
             </thead>
             <tbody>
@@ -712,9 +712,9 @@ function DesignContent() {
                 ["Description color", "cssVarColors.content.base.secondary", "var(--content-base-secondary)"],
               ].map(([prop, token, value], i, arr) => (
                 <tr key={prop} style={{ borderBottom: i === arr.length - 1 ? "none" : "1px solid var(--divider)" }}>
-                  <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>{prop}</td>
-                  <td style={{ padding: "10px 12px" }}><InlineCode>{token}</InlineCode></td>
-                  <td style={{ padding: "10px 12px", color: "var(--text-secondary)" }}>{value}</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-primary)" }}>{prop}</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}><InlineCode>{token}</InlineCode></td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>{value}</td>
                 </tr>
               ))}
             </tbody>
@@ -732,26 +732,26 @@ function DesignContent() {
           <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.sm }}>
             <thead>
               <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
-                <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>속성</th>
-                <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>설명</th>
+                <th style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>속성</th>
+                <th style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>설명</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)" }}><InlineCode>role=&quot;status&quot;</InlineCode></td>
-                <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>inline variant에 자동 적용. 스크린 리더에 상태 변화를 알림</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, borderBottom: "1px solid var(--divider)" }}><InlineCode>role=&quot;status&quot;</InlineCode></td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>inline variant에 자동 적용. 스크린 리더에 상태 변화를 알림</td>
               </tr>
               <tr>
-                <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)" }}><InlineCode>&lt;h1&gt; 태그</InlineCode></td>
-                <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>page variant에서 title을 h1으로 렌더링. 페이지 구조 정보 제공</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, borderBottom: "1px solid var(--divider)" }}><InlineCode>&lt;h1&gt; 태그</InlineCode></td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>page variant에서 title을 h1으로 렌더링. 페이지 구조 정보 제공</td>
               </tr>
               <tr>
-                <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)" }}><InlineCode>aria-label (action)</InlineCode></td>
-                <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>IconButton을 action으로 사용할 경우 aria-label 필수</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, borderBottom: "1px solid var(--divider)" }}><InlineCode>aria-label (action)</InlineCode></td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>IconButton을 action으로 사용할 경우 aria-label 필수</td>
               </tr>
               <tr>
-                <td style={{ padding: "10px 14px" }}><InlineCode>figure alt</InlineCode></td>
-                <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>이미지를 figure로 전달할 때 alt 텍스트 또는 aria-hidden 명시 권장</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}><InlineCode>figure alt</InlineCode></td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>이미지를 figure로 전달할 때 alt 텍스트 또는 aria-hidden 명시 권장</td>
               </tr>
             </tbody>
           </table>
@@ -764,26 +764,26 @@ function DesignContent() {
           <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.sm }}>
             <thead>
               <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
-                <th style={{ textAlign: "left", padding: "10px 14px", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>컴포넌트</th>
-                <th style={{ textAlign: "left", padding: "10px 14px", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>용도</th>
-                <th style={{ textAlign: "left", padding: "10px 14px", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>차이점</th>
+                <th style={{ textAlign: "left", padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>컴포넌트</th>
+                <th style={{ textAlign: "left", padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>용도</th>
+                <th style={{ textAlign: "left", padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>차이점</th>
               </tr>
             </thead>
             <tbody>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "10px 14px", fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)" }}>AlertDialog</td>
-                <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>확인/취소가 필요한 중요 알림</td>
-                <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>AlertDialog는 모달, StateView는 인라인/페이지 레이아웃</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)" }}>AlertDialog</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>확인/취소가 필요한 중요 알림</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>AlertDialog는 모달, StateView는 인라인/페이지 레이아웃</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "10px 14px", fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)" }}>Button</td>
-                <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>액션 실행</td>
-                <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>primaryAction/secondaryAction 슬롯에 전달하여 사용</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)" }}>Button</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>액션 실행</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>primaryAction/secondaryAction 슬롯에 전달하여 사용</td>
               </tr>
               <tr>
-                <td style={{ padding: "10px 14px", fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)" }}>TextButton</td>
-                <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>인라인 텍스트 액션</td>
-                <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>compact 인라인 상태에서 secondaryAction으로 적합</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)" }}>TextButton</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>인라인 텍스트 액션</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>compact 인라인 상태에서 secondaryAction으로 적합</td>
               </tr>
             </tbody>
           </table>
@@ -808,7 +808,7 @@ function WebContent() {
         <div style={{ padding: spacing.primitive[4], backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.md, marginBottom: spacing.primitive[6], display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div>
             <p style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)", margin: 0 }}>StateView Component</p>
-            <p style={{ fontSize: typography.fontSize.compact, color: "var(--text-secondary)", margin: "4px 0 0 0" }}>실제 컴포넌트 소스 코드를 GitHub에서 확인하세요.</p>
+            <p style={{ fontSize: typography.fontSize.compact, color: "var(--text-secondary)", margin: `${spacing.primitive[1]}px 0 0 0` }}>실제 컴포넌트 소스 코드를 GitHub에서 확인하세요.</p>
           </div>
           <a
             href={STATE_VIEW_SOURCE}
@@ -817,7 +817,7 @@ function WebContent() {
             style={{
               display: "inline-flex",
               alignItems: "center",
-              gap: 6,
+              gap: 6, // optical: sub-token gap for icon+text in compact link
               padding: `${spacing.primitive[2]}px ${spacing.primitive[4]}px`,
               fontSize: typography.fontSize.compact,
               fontWeight: typography.fontWeight.medium,

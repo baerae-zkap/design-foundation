@@ -162,7 +162,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
       justifyContent: 'center',
       width: sizeStyle.size,
       height: sizeStyle.size,
-      borderRadius: radius.primitive.full,
+      borderRadius: radius.primitive.lg,
       border: 'none',
       backgroundColor: getBackgroundColor(),
       color: getIconColor(),

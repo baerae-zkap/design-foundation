@@ -27,7 +27,7 @@ type PushBadgeColor = "error" | "primary" | "success" | "warning";
 
 export default function PushBadgePage() {
   return (
-    <div style={{ maxWidth: 720 }}>
+    <div style={{ maxWidth: 840 }}>
       <Breadcrumb
         items={[
           { label: "Components", href: "/components" },

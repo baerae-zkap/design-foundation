@@ -22,6 +22,7 @@ import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
 import { zIndex } from '../../tokens/general';
+import { duration, easing } from '../../tokens/motion';
 
 export type ToastPosition = 'bottom-center' | 'bottom-left' | 'bottom-right';
 
@@ -48,7 +49,7 @@ export interface ToastProps {
 
 // ─── Animation injection ──────────────────────────────────────────────────────
 
-const ANIM_DURATION = 220;
+const ANIM_DURATION = duration.fast;
 
 let stylesInjected = false;
 function injectStyles() {
@@ -125,9 +126,9 @@ export function Toast({
 
   const wrapperStyle: React.CSSProperties = {
     position: 'fixed',
-    bottom: 40,
-    left: isCenter ? 0 : (isRight ? 'auto' : 20),
-    right: isRight ? 20 : (isCenter ? 0 : 'auto'),
+    bottom: spacing.primitive[10],
+    left: isCenter ? 0 : (isRight ? 'auto' : spacing.primitive[5]),
+    right: isRight ? spacing.primitive[5] : (isCenter ? 0 : 'auto'),
     display: isCenter ? 'flex' : 'block',
     justifyContent: 'center',
     zIndex: zIndex.toast,
@@ -151,7 +152,7 @@ export function Toast({
     backgroundColor: cssVarColors.inverse.surface.default,
     borderRadius: radius.primitive.md,
     pointerEvents: 'auto',
-    animation: `${visible ? '_zkap_toast_in' : '_zkap_toast_out'} ${ANIM_DURATION}ms cubic-bezier(0.16, 1, 0.3, 1) both`,
+    animation: `${visible ? '_zkap_toast_in' : '_zkap_toast_out'} ${ANIM_DURATION}ms ${easing.easeOut} both`,
   };
 
   const iconWrapStyle: React.CSSProperties = {
@@ -162,7 +163,7 @@ export function Toast({
     alignItems: 'center',
     justifyContent: 'center',
     color: cssVarColors.inverse.icon.default,
-    marginTop: hasTwoLines ? 1 : 0,
+    marginTop: hasTwoLines ? 1 : 0, // optical: sub-token alignment with heading baseline
   };
 
   const contentStyle: React.CSSProperties = {
@@ -170,7 +171,7 @@ export function Toast({
     minWidth: 0,
     display: 'flex',
     flexDirection: 'column',
-    gap: 2,
+    gap: 2, // optical: sub-token value for tight heading↔description spacing
   };
 
   const headingStyle: React.CSSProperties = {
@@ -198,7 +199,7 @@ export function Toast({
     display: 'flex',
     alignItems: 'center',
     color: cssVarColors.inverse.content.default,
-    marginTop: hasTwoLines ? 2 : 0,
+    marginTop: hasTwoLines ? 2 : 0, // optical: sub-token alignment with action slot
   };
 
   const closeButtonStyle: React.CSSProperties = {
@@ -214,8 +215,7 @@ export function Toast({
     cursor: 'pointer',
     color: cssVarColors.inverse.content.secondary,
     borderRadius: radius.primitive.xs,
-    marginRight: -4,
-    marginTop: hasTwoLines ? 0 : 0,
+    marginRight: -spacing.primitive[1],
   };
 
   return createPortal(

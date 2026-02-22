@@ -111,7 +111,7 @@ const colorConfig: Record<ChipColor, {
 
 export default function ChipPage() {
   return (
-    <div style={{ maxWidth: 720 }}>
+    <div style={{ maxWidth: 840 }}>
       <Breadcrumb
         items={[
           { label: "Components", href: "/components" },
@@ -212,9 +212,9 @@ function ChipPlayground() {
                 overflowY: "auto",
                 display: "flex",
                 flexDirection: "column",
-                gap: 28,
+                gap: spacing.primitive[7],
                 backgroundColor: "var(--surface-base-default)",
-                borderRadius: spacing.primitive[4],
+                borderRadius: radius.primitive.lg,
               }}
             >
               {/* Variant */}
@@ -708,42 +708,42 @@ function DesignContent() {
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.compact }}>
               <thead>
                 <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
-                  <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Property</th>
-                  <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Small</th>
-                  <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Medium</th>
-                  <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Large</th>
+                  <th style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Property</th>
+                  <th style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Small</th>
+                  <th style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Medium</th>
+                  <th style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Large</th>
                 </tr>
               </thead>
               <tbody>
                 <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                  <td style={{ padding: "10px 14px" }}>Height</td>
-                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>24px</td>
-                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>32px</td>
-                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>40px</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}>Height</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>24px</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>32px</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>40px</td>
                 </tr>
                 <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                  <td style={{ padding: "10px 14px" }}>Padding X</td>
-                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>8px (primitive.2)</td>
-                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>12px (primitive.3)</td>
-                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>16px (primitive.4)</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}>Padding X</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>8px (primitive.2)</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>12px (primitive.3)</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>16px (primitive.4)</td>
                 </tr>
                 <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                  <td style={{ padding: "10px 14px" }}>Font Size</td>
-                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>12px (xs)</td>
-                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>14px (sm)</td>
-                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>16px (base)</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}>Font Size</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>12px (xs)</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>14px (sm)</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>16px (base)</td>
                 </tr>
                 <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                  <td style={{ padding: "10px 14px" }}>Icon Size</td>
-                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>14px</td>
-                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>18px</td>
-                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>22px</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}>Icon Size</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>14px</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>18px</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>22px</td>
                 </tr>
                 <tr>
-                  <td style={{ padding: "10px 14px" }}>Border Radius</td>
-                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>12px (height/2)</td>
-                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>16px (height/2)</td>
-                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>20px (height/2)</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}>Border Radius</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>12px (height/2)</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>16px (height/2)</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>20px (height/2)</td>
                 </tr>
               </tbody>
             </table>
@@ -755,36 +755,36 @@ function DesignContent() {
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.compact }}>
               <thead>
                 <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
-                  <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Property</th>
-                  <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Foundation Token</th>
-                  <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Value (primary)</th>
+                  <th style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Property</th>
+                  <th style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Foundation Token</th>
+                  <th style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Value (primary)</th>
                 </tr>
               </thead>
               <tbody>
                 <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                  <td style={{ padding: "10px 14px" }}>Background</td>
-                  <td style={{ padding: "10px 14px" }}><InlineCode>surface.brand.default</InlineCode></td>
-                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>var(--surface-brand-default) (palette.blue.50)</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}>Background</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}><InlineCode>surface.brand.default</InlineCode></td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>var(--surface-brand-default) (palette.blue.50)</td>
                 </tr>
                 <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                  <td style={{ padding: "10px 14px" }}>Background (pressed)</td>
-                  <td style={{ padding: "10px 14px" }}><InlineCode>surface.brand.defaultPressed</InlineCode></td>
-                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>var(--surface-brand-defaultPressed) (palette.blue.45)</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}>Background (pressed)</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}><InlineCode>surface.brand.defaultPressed</InlineCode></td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>var(--surface-brand-defaultPressed) (palette.blue.45)</td>
                 </tr>
                 <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                  <td style={{ padding: "10px 14px" }}>Background (selected)</td>
-                  <td style={{ padding: "10px 14px" }}><InlineCode>surface.brand.default</InlineCode></td>
-                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>var(--surface-brand-default) (palette.blue.50)</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}>Background (selected)</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}><InlineCode>surface.brand.default</InlineCode></td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>var(--surface-brand-default) (palette.blue.50)</td>
                 </tr>
                 <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                  <td style={{ padding: "10px 14px" }}>Text</td>
-                  <td style={{ padding: "10px 14px" }}><InlineCode>content.base.onColor</InlineCode></td>
-                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>var(--content-base-onColor) (palette.static.white)</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}>Text</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}><InlineCode>content.base.onColor</InlineCode></td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>var(--content-base-onColor) (palette.static.white)</td>
                 </tr>
                 <tr>
-                  <td style={{ padding: "10px 14px" }}>Text (selected)</td>
-                  <td style={{ padding: "10px 14px" }}><InlineCode>content.base.onColor</InlineCode></td>
-                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>var(--content-base-onColor) (palette.static.white)</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}>Text (selected)</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}><InlineCode>content.base.onColor</InlineCode></td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>var(--content-base-onColor) (palette.static.white)</td>
                 </tr>
               </tbody>
             </table>
@@ -796,36 +796,36 @@ function DesignContent() {
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.compact }}>
               <thead>
                 <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
-                  <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Property</th>
-                  <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Foundation Token</th>
-                  <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Value (primary)</th>
+                  <th style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Property</th>
+                  <th style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Foundation Token</th>
+                  <th style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Value (primary)</th>
                 </tr>
               </thead>
               <tbody>
                 <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                  <td style={{ padding: "10px 14px" }}>Background</td>
-                  <td style={{ padding: "10px 14px" }}><InlineCode>surface.brand.secondary</InlineCode></td>
-                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>var(--surface-brand-secondary) (palette.blue.95)</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}>Background</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}><InlineCode>surface.brand.secondary</InlineCode></td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>var(--surface-brand-secondary) (palette.blue.95)</td>
                 </tr>
                 <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                  <td style={{ padding: "10px 14px" }}>Background (pressed)</td>
-                  <td style={{ padding: "10px 14px" }}><InlineCode>surface.brand.secondaryPressed</InlineCode></td>
-                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>var(--surface-brand-secondaryPressed) (palette.blue.90)</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}>Background (pressed)</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}><InlineCode>surface.brand.secondaryPressed</InlineCode></td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>var(--surface-brand-secondaryPressed) (palette.blue.90)</td>
                 </tr>
                 <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                  <td style={{ padding: "10px 14px" }}>Background (selected)</td>
-                  <td style={{ padding: "10px 14px" }}><InlineCode>surface.brand.default</InlineCode></td>
-                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>var(--surface-brand-default) (palette.blue.50)</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}>Background (selected)</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}><InlineCode>surface.brand.default</InlineCode></td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>var(--surface-brand-default) (palette.blue.50)</td>
                 </tr>
                 <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                  <td style={{ padding: "10px 14px" }}>Text</td>
-                  <td style={{ padding: "10px 14px" }}><InlineCode>content.brand.default</InlineCode></td>
-                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>var(--content-brand-default) (palette.blue.50)</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}>Text</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}><InlineCode>content.brand.default</InlineCode></td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>var(--content-brand-default) (palette.blue.50)</td>
                 </tr>
                 <tr>
-                  <td style={{ padding: "10px 14px" }}>Text (selected)</td>
-                  <td style={{ padding: "10px 14px" }}><InlineCode>content.base.onColor</InlineCode></td>
-                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>var(--content-base-onColor) (palette.static.white)</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}>Text (selected)</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}><InlineCode>content.base.onColor</InlineCode></td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>var(--content-base-onColor) (palette.static.white)</td>
                 </tr>
               </tbody>
             </table>
@@ -840,41 +840,41 @@ function DesignContent() {
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.compact }}>
               <thead>
                 <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
-                  <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>속성</th>
-                  <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>토큰</th>
-                  <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>설명</th>
+                  <th style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>속성</th>
+                  <th style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>토큰</th>
+                  <th style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>설명</th>
                 </tr>
               </thead>
               <tbody>
                 <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                  <td style={{ padding: "10px 14px" }}>Disabled Opacity</td>
-                  <td style={{ padding: "10px 14px" }}><InlineCode>opacity.disabled</InlineCode></td>
-                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>0.5 — 비활성화 시 전체 투명도</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}>Disabled Opacity</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}><InlineCode>opacity.disabled</InlineCode></td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>0.5 — 비활성화 시 전체 투명도</td>
                 </tr>
                 <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                  <td style={{ padding: "10px 14px" }}>Disabled Text</td>
-                  <td style={{ padding: "10px 14px" }}><InlineCode>content.disabled.default</InlineCode></td>
-                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>var(--content-disabled-default) — 비활성화 텍스트 색상</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}>Disabled Text</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}><InlineCode>content.disabled.default</InlineCode></td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>var(--content-disabled-default) — 비활성화 텍스트 색상</td>
                 </tr>
                 <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                  <td style={{ padding: "10px 14px" }}>Gap</td>
-                  <td style={{ padding: "10px 14px" }}><InlineCode>spacing.component.chip.gap</InlineCode></td>
-                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>4px — 아이콘/텍스트 간 간격</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}>Gap</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}><InlineCode>spacing.component.chip.gap</InlineCode></td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>4px — 아이콘/텍스트 간 간격</td>
                 </tr>
                 <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                  <td style={{ padding: "10px 14px" }}>Font Weight</td>
-                  <td style={{ padding: "10px 14px" }}><InlineCode>typography.fontWeight.medium</InlineCode></td>
-                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>500 — 라벨 폰트 웨이트</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}>Font Weight</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}><InlineCode>typography.fontWeight.medium</InlineCode></td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>500 — 라벨 폰트 웨이트</td>
                 </tr>
                 <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                  <td style={{ padding: "10px 14px" }}>Transition</td>
-                  <td style={{ padding: "10px 14px" }}><InlineCode>transitions.all</InlineCode></td>
-                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>background-color, color, border-color 150ms ease — 모든 속성에 부드러운 전환</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}>Transition</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}><InlineCode>transitions.all</InlineCode></td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>background-color, color, border-color 150ms ease — 모든 속성에 부드러운 전환</td>
                 </tr>
                 <tr>
-                  <td style={{ padding: "10px 14px" }}>Cursor (disabled)</td>
-                  <td style={{ padding: "10px 14px" }}><InlineCode>not-allowed</InlineCode></td>
-                  <td style={{ padding: "10px 14px", fontFamily: "monospace", color: "var(--text-secondary)" }}>비활성화 시 커서</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}>Cursor (disabled)</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}><InlineCode>not-allowed</InlineCode></td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>비활성화 시 커서</td>
                 </tr>
               </tbody>
             </table>
@@ -892,26 +892,26 @@ function DesignContent() {
           <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.sm }}>
             <thead>
               <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
-                <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>속성</th>
-                <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>설명</th>
+                <th style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>속성</th>
+                <th style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>설명</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)" }}><InlineCode>role=&quot;button&quot;</InlineCode></td>
-                <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>스크린 리더가 버튼으로 인식</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, borderBottom: "1px solid var(--divider)" }}><InlineCode>role=&quot;button&quot;</InlineCode></td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>스크린 리더가 버튼으로 인식</td>
               </tr>
               <tr>
-                <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)" }}><InlineCode>aria-pressed</InlineCode></td>
-                <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>selected 상태를 보조 기술에 전달</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, borderBottom: "1px solid var(--divider)" }}><InlineCode>aria-pressed</InlineCode></td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>selected 상태를 보조 기술에 전달</td>
               </tr>
               <tr>
-                <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)" }}><InlineCode>aria-label</InlineCode> (Close)</td>
-                <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>닫기 버튼에 목적을 설명하는 레이블 제공</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, borderBottom: "1px solid var(--divider)" }}><InlineCode>aria-label</InlineCode> (Close)</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>닫기 버튼에 목적을 설명하는 레이블 제공</td>
               </tr>
               <tr>
-                <td style={{ padding: "10px 14px" }}><InlineCode>aria-disabled</InlineCode></td>
-                <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>비활성화 상태를 보조 기술에 전달</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}><InlineCode>aria-disabled</InlineCode></td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>비활성화 상태를 보조 기술에 전달</td>
               </tr>
             </tbody>
           </table>
@@ -922,26 +922,26 @@ function DesignContent() {
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.sm }}>
               <thead>
                 <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
-                  <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>키</th>
-                  <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>동작</th>
+                  <th style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>키</th>
+                  <th style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>동작</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.xs }}>Tab</kbd></td>
-                  <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>Chip으로 포커스 이동</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.xs }}>Tab</kbd></td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>Chip으로 포커스 이동</td>
                 </tr>
                 <tr>
-                  <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.xs }}>Enter</kbd> / <kbd style={{ padding: "2px 6px", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.xs }}>Space</kbd></td>
-                  <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>Chip 선택/해제 토글</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.xs }}>Enter</kbd> / <kbd style={{ padding: "2px 6px", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.xs }}>Space</kbd></td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>Chip 선택/해제 토글</td>
                 </tr>
                 <tr>
-                  <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.xs }}>Tab</kbd> (Close)</td>
-                  <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>닫기 버튼으로 포커스 이동 (별도 탭 타겟)</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.xs }}>Tab</kbd> (Close)</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>닫기 버튼으로 포커스 이동 (별도 탭 타겟)</td>
                 </tr>
                 <tr>
-                  <td style={{ padding: "10px 14px" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.xs }}>Delete</kbd> / <kbd style={{ padding: "2px 6px", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.xs }}>Backspace</kbd></td>
-                  <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>onClose가 있는 Chip 제거</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.xs }}>Delete</kbd> / <kbd style={{ padding: "2px 6px", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.xs }}>Backspace</kbd></td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>onClose가 있는 Chip 제거</td>
                 </tr>
               </tbody>
             </table>
@@ -980,31 +980,31 @@ function DesignContent() {
           <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.sm }}>
             <thead>
               <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
-                <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>컴포넌트</th>
-                <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>용도</th>
-                <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>차이점</th>
+                <th style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>컴포넌트</th>
+                <th style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>용도</th>
+                <th style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>차이점</th>
               </tr>
             </thead>
             <tbody>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "10px 14px", fontWeight: typography.fontWeight.medium }}>Button</td>
-                <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>주요/보조 액션 트리거</td>
-                <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>Chip은 선택/필터용, Button은 액션 실행용</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontWeight: typography.fontWeight.medium }}>Button</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>주요/보조 액션 트리거</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>Chip은 선택/필터용, Button은 액션 실행용</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "10px 14px", fontWeight: typography.fontWeight.medium }}>ContentBadge</td>
-                <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>읽기 전용 상태/라벨 표시</td>
-                <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>Chip은 인터랙티브, Badge는 비인터랙티브</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontWeight: typography.fontWeight.medium }}>ContentBadge</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>읽기 전용 상태/라벨 표시</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>Chip은 인터랙티브, Badge는 비인터랙티브</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "10px 14px", fontWeight: typography.fontWeight.medium }}>TextButton</td>
-                <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>텍스트 링크 스타일 보조 액션</td>
-                <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>Chip은 선택 상태 표현, TextButton은 네비게이션/액션</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontWeight: typography.fontWeight.medium }}>TextButton</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>텍스트 링크 스타일 보조 액션</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>Chip은 선택 상태 표현, TextButton은 네비게이션/액션</td>
               </tr>
               <tr>
-                <td style={{ padding: "10px 14px", fontWeight: typography.fontWeight.medium }}>IconButton</td>
-                <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>아이콘만으로 액션 표현</td>
-                <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>Chip은 텍스트 기반, IconButton은 아이콘 전용</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontWeight: typography.fontWeight.medium }}>IconButton</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>아이콘만으로 액션 표현</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>Chip은 텍스트 기반, IconButton은 아이콘 전용</td>
               </tr>
             </tbody>
           </table>
@@ -1031,7 +1031,7 @@ function WebContent() {
             style={{
               display: "inline-flex",
               alignItems: "center",
-              gap: 6,
+              gap: spacing.primitive[1],
               padding: `${spacing.primitive[2]}px ${spacing.primitive[4]}px`,
               fontSize: typography.fontSize.compact,
               fontWeight: typography.fontWeight.medium,

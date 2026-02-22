@@ -770,40 +770,6 @@ import { LoadingDots } from '@baerae-zkap/design-system/native';
 </View>
 ```
 
-#### Skeleton
-> 로딩 플레이스홀더 (shimmer 효과)
-
-**주요 Props:**
-
-| Props | 타입 | 기본값 | 설명 |
-|-------|------|--------|------|
-| `variant` | `'text' \| 'rectangle' \| 'circle'` | `'rectangle'` | 형태 |
-| `width` | `number \| string` | `'100%'` | 너비 |
-| `height` | `number` | - | 높이 |
-| `lines` | `number` | `1` | 텍스트 라인 수 |
-
-**사용 예시:**
-
-```tsx
-import { Skeleton } from '@baerae-zkap/design-system/native';
-
-// 텍스트 스켈레톤
-<Skeleton variant="text" width="80%" lines={3} />
-
-// 이미지 스켈레톤
-<Skeleton variant="rectangle" width="100%" height={200} />
-
-// 프로필 스켈레톤
-<View style={{ flexDirection: 'row', gap: 12 }}>
-  <Skeleton variant="circle" width={48} height={48} />
-  <View style={{ flex: 1 }}>
-    <Skeleton variant="text" width="60%" />
-    <Skeleton variant="text" width="40%" />
-  </View>
-</View>
-```
-
----
 
 ### Navigations (네비게이션 컴포넌트)
 
@@ -1895,26 +1861,6 @@ import { View, Text } from 'react-native';
 />
 ```
 
-### 로딩 스켈레톤
-
-```tsx
-import { Skeleton } from '@baerae-zkap/design-system/native';
-import { View } from 'react-native';
-
-// 리스트 아이템 스켈레톤
-<View style={{ padding: 16, gap: 12 }}>
-  {[1, 2, 3].map((item) => (
-    <View key={item} style={{ flexDirection: 'row', gap: 12 }}>
-      <Skeleton variant="rectangle" width={80} height={80} />
-      <View style={{ flex: 1, gap: 8 }}>
-        <Skeleton variant="text" width="70%" />
-        <Skeleton variant="text" width="50%" />
-        <Skeleton variant="text" width="30%" />
-      </View>
-    </View>
-  ))}
-</View>
-```
 
 ### 필터 칩 리스트
 
@@ -2125,10 +2071,9 @@ export default function App() {
 - Snackbar
 - Toast
 
-### Loading (3개)
+### Loading (2개)
 - Loading
 - LoadingDots
-- Skeleton
 
 ### Navigations (11개)
 - BottomNavigation

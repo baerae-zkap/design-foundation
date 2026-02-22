@@ -39,6 +39,8 @@ A circular button that contains only an icon, with no text label. Used for unive
 
 Also accepts all standard `ButtonHTMLAttributes<HTMLButtonElement>` except `color`.
 
+**Required**: `aria-label` must always be provided since there is no visible text label.
+
 ## Variant Guide
 - `ghost` -- Transparent background, icon color only. Shows subtle hover/press fill. Default choice for most contexts (toolbars, nav).
 - `filled` -- Solid circular background. High emphasis. Use sparingly for prominent icon actions.

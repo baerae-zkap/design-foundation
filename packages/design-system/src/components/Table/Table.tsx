@@ -202,7 +202,7 @@ export const TableHeadCell = forwardRef<HTMLTableCellElement, TableHeadCellProps
     };
 
     return (
-      <th ref={ref} style={headCellStyle} {...props}>
+      <th ref={ref} scope="col" style={headCellStyle} {...props}>
         {children}
       </th>
     );

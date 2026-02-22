@@ -11,7 +11,7 @@ import { RadioGroup, CopyButton } from "@/components/docs/Playground";
 
 export default function SnackbarPage() {
   return (
-    <div style={{ maxWidth: 720 }}>
+    <div style={{ maxWidth: 840 }}>
       <Breadcrumb
         items={[
           { label: "Components", href: "/components" },
@@ -21,7 +21,7 @@ export default function SnackbarPage() {
       />
 
       {/* Header */}
-      <h1 style={{ fontSize: typography.fontSize["3xl"], fontWeight: 700, marginBottom: spacing.primitive[2], color: "var(--text-primary)", letterSpacing: "-0.02em" }}>
+      <h1 style={{ fontSize: typography.fontSize["3xl"], fontWeight: typography.fontWeight.bold, marginBottom: spacing.primitive[2], color: "var(--text-primary)", letterSpacing: "-0.02em" }}>
         Snackbar
       </h1>
       <p style={{ fontSize: typography.fontSize.md, color: "var(--text-secondary)", marginBottom: spacing.primitive[8], lineHeight: 1.7 }}>
@@ -63,10 +63,10 @@ function SnackbarPlayground() {
 
   return (
     <div style={{ marginBottom: spacing.primitive[8] }}>
-      <div style={{ borderRadius: 20, overflow: "hidden", backgroundColor: "var(--surface-base-alternative)" }}>
+      <div style={{ borderRadius: radius.primitive.xl, overflow: "hidden", backgroundColor: "var(--surface-base-alternative)" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", minHeight: 320 }}>
           {/* Preview */}
-          <div style={{ padding: 40, display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "var(--surface-base-alternative)" }}>
+          <div style={{ padding: spacing.primitive[10], display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "var(--surface-base-alternative)" }}>
             <div style={{ width: "100%", maxWidth: 400 }}>
               <SnackbarPreview
                 message="변경사항이 저장되었습니다."
@@ -79,7 +79,7 @@ function SnackbarPlayground() {
 
           {/* Controls */}
           <div style={{ backgroundColor: "var(--surface-base-alternative)", display: "flex", flexDirection: "column", padding: spacing.primitive[4], height: "100%", boxSizing: "border-box" }}>
-            <div style={{ flex: 1, minHeight: 0, padding: spacing.primitive[6], overflowY: "auto", display: "flex", flexDirection: "column", gap: 28, backgroundColor: "var(--surface-base-default)", borderRadius: spacing.primitive[4] }}>
+            <div style={{ flex: 1, minHeight: 0, padding: spacing.primitive[6], overflowY: "auto", display: "flex", flexDirection: "column", gap: spacing.primitive[7], backgroundColor: "var(--surface-base-default)", borderRadius: radius.primitive.lg }}>
               <RadioGroup
                 label="icon"
                 options={[{ value: "no", label: "No" }, { value: "yes", label: "Yes" }]}
@@ -105,9 +105,9 @@ function SnackbarPlayground() {
 
       {/* Generated Code */}
       <div style={{ marginTop: spacing.primitive[4], borderRadius: radius.primitive.md, overflow: "hidden", border: "1px solid var(--divider)" }}>
-        <div style={{ padding: "10px 16px", backgroundColor: "var(--docs-code-surface)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <div style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[4]}px`, backgroundColor: "var(--docs-code-surface)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ display: "flex", gap: spacing.primitive[2] }}>
-            <span style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, padding: "4px 12px", borderRadius: 6, color: "var(--content-base-onColor)", backgroundColor: "var(--docs-code-active-bg)" }}>Web</span>
+            <span style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, padding: `${spacing.primitive[1]}px ${spacing.primitive[3]}px`, borderRadius: 6 /* optical: between xs(4) and sm(8) */, color: "var(--content-base-onColor)", backgroundColor: "var(--docs-code-active-bg)" }}>Web</span>
           </div>
           <CopyButton text={generateCode()} />
         </div>
@@ -139,7 +139,7 @@ function ActionButton({ children, onClick }: { children: React.ReactNode; onClic
         background: "none",
         border: "none",
         cursor: "pointer",
-        padding: "4px 8px",
+        padding: `${spacing.primitive[1]}px ${spacing.primitive[2]}px`,
         fontSize: typography.fontSize.sm,
         fontWeight: typography.fontWeight.semibold,
         color: "var(--inverse-content-default)",
@@ -167,7 +167,7 @@ function DesignContent() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: spacing.primitive[10] }}>
       <Section title="Overview">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.7, margin: 0 }}>
+        <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", lineHeight: 1.7, margin: 0 }}>
           <InlineCode>Snackbar</InlineCode>는 사용자 액션 결과나 시스템 상태 변화를 간결하게 알리는 토스트형 컴포넌트입니다.
           화면 하단에 고정 렌더링되며 일정 시간 후 자동으로 사라집니다.
           모달과 달리 사용자 흐름을 방해하지 않습니다.
@@ -202,13 +202,13 @@ function DesignContent() {
               preview: <SnackbarPreview message="저장이 완료되었습니다." icon={<CheckCircleIcon />} />,
             },
           ].map(({ label, desc, preview }) => (
-            <div key={label} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4], alignItems: "center", background: "var(--surface-base-alternative)", borderRadius: 12, padding: spacing.primitive[5] }}>
+            <div key={label} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4], alignItems: "center", background: "var(--surface-base-alternative)", borderRadius: radius.primitive.md, padding: spacing.primitive[5] }}>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                 {preview}
               </div>
               <div>
-                <p style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", margin: `0 0 ${spacing.primitive[1]}px` }}>{label}</p>
-                <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0, lineHeight: 1.6 }}>{desc}</p>
+                <p style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)", margin: `0 0 ${spacing.primitive[1]}px` }}>{label}</p>
+                <p style={{ fontSize: 13, /* optical: between compact(12) and sm(14), no exact token */ color: "var(--text-secondary)", margin: 0, lineHeight: 1.6 }}>{desc}</p>
               </div>
             </div>
           ))}
@@ -217,12 +217,12 @@ function DesignContent() {
 
       <Section title="Position">
         <Subsection title="bottom-center (기본값)">
-          <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.7, margin: 0 }}>
+          <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", lineHeight: 1.7, margin: 0 }}>
             웹 환경의 기본 위치. 화면 하단 중앙에 표시됩니다.
           </p>
         </Subsection>
         <Subsection title="bottom-left / bottom-right">
-          <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.7, margin: 0 }}>
+          <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", lineHeight: 1.7, margin: 0 }}>
             대시보드, 어드민 같은 고정 레이아웃에서 좌·우 정렬이 필요할 때 사용합니다.
           </p>
         </Subsection>
@@ -232,32 +232,32 @@ function DesignContent() {
         <Subsection title="Best Practices">
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4] }}>
             <DoCard>
-              <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.7, margin: 0 }}>
+              <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", lineHeight: 1.7, margin: 0 }}>
                 짧고 명확한 메시지를 사용하세요. 한 문장, 40자 이내를 권장합니다.
               </p>
             </DoCard>
             <DontCard>
-              <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.7, margin: 0 }}>
+              <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", lineHeight: 1.7, margin: 0 }}>
                 긴 설명이나 여러 액션이 필요한 경우 SectionMessage나 AlertDialog를 사용하세요.
               </p>
             </DontCard>
             <DoCard>
-              <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.7, margin: 0 }}>
+              <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", lineHeight: 1.7, margin: 0 }}>
                 중요하지 않은 액션 피드백에 사용하세요. 저장 완료, 복사 성공, 삭제 완료 등.
               </p>
             </DoCard>
             <DontCard>
-              <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.7, margin: 0 }}>
+              <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", lineHeight: 1.7, margin: 0 }}>
                 오류 복구나 사용자 확인이 반드시 필요한 중요한 메시지에는 사용하지 마세요.
               </p>
             </DontCard>
             <DoCard>
-              <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.7, margin: 0 }}>
+              <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", lineHeight: 1.7, margin: 0 }}>
                 동시에 하나의 Snackbar만 표시하세요. 새 메시지가 생기면 기존 것을 닫고 새로 띄웁니다.
               </p>
             </DoCard>
             <DontCard>
-              <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.7, margin: 0 }}>
+              <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", lineHeight: 1.7, margin: 0 }}>
                 여러 Snackbar를 동시에 쌓아서 표시하지 마세요.
               </p>
             </DontCard>
@@ -269,9 +269,9 @@ function DesignContent() {
         <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
           <thead>
             <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-              <th style={{ textAlign: "left", padding: "8px 12px", color: "var(--text-secondary)", fontWeight: 500 }}>Token</th>
-              <th style={{ textAlign: "left", padding: "8px 12px", color: "var(--text-secondary)", fontWeight: 500 }}>Value</th>
-              <th style={{ textAlign: "left", padding: "8px 12px", color: "var(--text-secondary)", fontWeight: 500 }}>Usage</th>
+              <th style={{ textAlign: "left", padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)", fontWeight: typography.fontWeight.medium }}>Token</th>
+              <th style={{ textAlign: "left", padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)", fontWeight: typography.fontWeight.medium }}>Value</th>
+              <th style={{ textAlign: "left", padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)", fontWeight: typography.fontWeight.medium }}>Usage</th>
             </tr>
           </thead>
           <tbody>
@@ -286,9 +286,9 @@ function DesignContent() {
               ["zIndex.toast", "1200", "레이어 순서"],
             ].map(([token, value, usage]) => (
               <tr key={token} style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "10px 12px", fontFamily: "monospace", fontSize: 12 }}>{token}</td>
-                <td style={{ padding: "10px 12px", color: "var(--text-secondary)", fontFamily: "monospace", fontSize: 12 }}>{value}</td>
-                <td style={{ padding: "10px 12px", color: "var(--text-secondary)" }}>{usage}</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontFamily: "monospace", fontSize: 12 }}>{token}</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)", fontFamily: "monospace", fontSize: 12 }}>{value}</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>{usage}</td>
               </tr>
             ))}
           </tbody>
@@ -296,7 +296,7 @@ function DesignContent() {
       </Section>
 
       <Section title="Accessibility">
-        <ul style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.9, paddingLeft: spacing.primitive[5], margin: 0 }}>
+        <ul style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", lineHeight: 1.9, paddingLeft: spacing.primitive[5], margin: 0 }}>
           <li>컨테이너에 <InlineCode>role="status"</InlineCode>와 <InlineCode>aria-live="polite"</InlineCode>가 적용됩니다.</li>
           <li>스크린리더가 메시지를 자동으로 읽어줍니다.</li>
           <li>닫기 버튼에 <InlineCode>aria-label="닫기"</InlineCode>가 적용됩니다.</li>
@@ -306,7 +306,7 @@ function DesignContent() {
       </Section>
 
       <Section title="Related Components">
-        <ul style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.9, paddingLeft: spacing.primitive[5], margin: 0 }}>
+        <ul style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", lineHeight: 1.9, paddingLeft: spacing.primitive[5], margin: 0 }}>
           <li><strong>SectionMessage</strong> — 페이지 내 인라인 배너. 스크롤 영역 안에서 사용.</li>
           <li><strong>AlertDialog</strong> — 사용자 확인이 필요한 중요 메시지. 흐름 차단.</li>
           <li><strong>PushBadge</strong> — 숫자/점 형태의 소형 알림 뱃지.</li>
@@ -324,7 +324,7 @@ function SnackbarAnatomy() {
   const secondaryColor = "var(--inverse-content-secondary)";
 
   return (
-    <div style={{ background: "var(--surface-base-alternative)", borderRadius: 12, padding: spacing.primitive[6] }}>
+    <div style={{ background: "var(--surface-base-alternative)", borderRadius: radius.primitive.md, padding: spacing.primitive[6] }}>
       <svg
         viewBox="0 0 480 90"
         fill="none"
@@ -356,7 +356,7 @@ function SnackbarAnatomy() {
         <text x="404" y="82" textAnchor="middle" fontSize="9" fill={secondaryColor}>④Close</text>
       </svg>
 
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "8px 24px", marginTop: spacing.primitive[4], fontSize: 12, color: "var(--text-secondary)" }}>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: `${spacing.primitive[2]}px ${spacing.primitive[6]}px`, marginTop: spacing.primitive[4], fontSize: typography.fontSize.compact, color: "var(--text-secondary)" }}>
         <span><strong>① Icon</strong> — 선택적 리딩 아이콘 (20×20)</span>
         <span><strong>② Message</strong> — 주요 메시지 텍스트</span>
         <span><strong>③ Action</strong> — 선택적 인라인 액션 버튼</span>

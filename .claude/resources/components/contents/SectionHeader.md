@@ -23,7 +23,7 @@ A section title component that labels content groups. Uses a 3-slot anatomy (Hea
 |------|------|---------|-------------|
 | `title` | `ReactNode` | (required) | Section title text (max 2 lines) |
 | `headingContent` | `ReactNode` | -- | Inline slot right of title (Chip, ContentBadge, IconButton) |
-| `trailing` | `ReactNode` | -- | Rightmost slot (TextButton, Pagination, IconButton) |
+| `trailing` | `ReactNode` | -- | Rightmost slot (TextButton or Pagination preferred -- avoid IconButton, too visually heavy) |
 | `size` | `"small" \| "medium" \| "large"` | `"medium"` | Title font size and padding scale |
 
 Also accepts all standard `HTMLAttributes<HTMLDivElement>` except `title`.

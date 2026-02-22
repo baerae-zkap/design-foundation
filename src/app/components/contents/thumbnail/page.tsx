@@ -17,7 +17,7 @@ const WEB_SOURCE = `${GITHUB_BASE}/src/components/Thumbnail/Thumbnail.tsx`;
 
 export default function ThumbnailPage() {
   return (
-    <div style={{ maxWidth: 720 }}>
+    <div style={{ maxWidth: 840 }}>
       <Breadcrumb
         items={[
           { label: "Components", href: "/components" },
@@ -51,9 +51,9 @@ function ThumbnailPlayground() {
 
   return (
     <div style={{ marginBottom: spacing.primitive[8] }}>
-      <div style={{ borderRadius: 20, overflow: "hidden", backgroundColor: "var(--surface-base-alternative)" }}>
+      <div style={{ borderRadius: radius.primitive.xl, overflow: "hidden", backgroundColor: "var(--surface-base-alternative)" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
-          <div style={{ padding: 60, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <div style={{ padding: spacing.primitive[14], display: "flex", alignItems: "center", justifyContent: "center" }}>
             <ThumbnailDemo
               src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400"
               aspectRatio={aspectRatio}
@@ -80,7 +80,7 @@ function ThumbnailPlayground() {
               overflowY: "auto",
               display: "flex",
               flexDirection: "column",
-              gap: 28,
+              gap: spacing.primitive[7],
               backgroundColor: "var(--surface-base-default)",
               borderRadius: radius.primitive.lg,
             }}>
@@ -163,7 +163,7 @@ function UsageCard({ situation, description, example }: {
       border: "1px solid var(--divider)",
     }}>
       <span style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)" }}>{situation}</span>
-      <p style={{ fontSize: typography.fontSize.compact, color: "var(--text-secondary)", margin: 0, marginBottom: 2 }}>{description}</p>
+      <p style={{ fontSize: typography.fontSize.compact, color: "var(--text-secondary)", margin: 0, marginBottom: spacing.primitive[1] }}>{description}</p>
       <p style={{ fontSize: typography.fontSize.xs, color: "var(--text-tertiary)", margin: 0 }}>{example}</p>
     </div>
   );
@@ -186,7 +186,7 @@ function DesignContent() {
         <div style={{
           backgroundColor: "var(--surface-base-alternative)",
           borderRadius: radius.primitive.lg,
-          padding: "48px 40px",
+          padding: `${spacing.primitive[12]}px ${spacing.primitive[10]}px`,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -198,38 +198,38 @@ function DesignContent() {
 
             {/* Image area */}
             <rect x="64" y="24" width="232" height="152" rx="10" fill="var(--content-base-placeholder)" />
-            <text x="180" y="100" textAnchor="middle" fill="white" fontSize="14" fontWeight="500" opacity="0.8">Image Area</text>
+            <text x="180" y="100" textAnchor="middle" fill="var(--content-base-onColor)" fontSize="14" fontWeight="500" opacity="0.8">Image Area</text>
 
             {/* Play icon overlay */}
             <circle cx="180" cy="100" r="24" fill="var(--effect-alpha-overlay-dim)" />
-            <polygon points="174,88 174,112 194,100" fill="white" />
+            <polygon points="174,88 174,112 194,100" fill="var(--content-base-onColor)" />
 
             {/* Overlay bar at bottom */}
             <rect x="64" y="144" width="232" height="32" rx="0" fill="var(--effect-alpha-overlay-dim)" />
-            <text x="180" y="164" textAnchor="middle" fill="white" fontSize="11" fontWeight="500">Overlay</text>
+            <text x="180" y="164" textAnchor="middle" fill="var(--content-base-onColor)" fontSize="11" fontWeight="500">Overlay</text>
 
             {/* Numbered annotations */}
             {/* 1 - Container */}
             <line x1="40" y1="40" x2="58" y2="40" stroke="var(--content-base-default)" strokeWidth="1.5" />
             <circle cx="30" cy="40" r="12" fill="var(--content-base-default)" />
-            <text x="30" y="44" textAnchor="middle" fill="white" fontSize="11" fontWeight="600">1</text>
+            <text x="30" y="44" textAnchor="middle" fill="var(--content-base-onColor)" fontSize="11" fontWeight="600">1</text>
 
             {/* 2 - Image */}
             <line x1="310" y1="60" x2="298" y2="60" stroke="var(--content-base-default)" strokeWidth="1.5" />
             <circle cx="320" cy="60" r="12" fill="var(--content-base-default)" />
-            <text x="320" y="64" textAnchor="middle" fill="white" fontSize="11" fontWeight="600">2</text>
+            <text x="320" y="64" textAnchor="middle" fill="var(--content-base-onColor)" fontSize="11" fontWeight="600">2</text>
 
             {/* 3 - Play Icon */}
             <line x1="210" y1="100" x2="230" y2="100" stroke="var(--content-base-default)" strokeWidth="1.5" />
             <line x1="230" y1="100" x2="230" y2="210" stroke="var(--content-base-default)" strokeWidth="1.5" />
             <circle cx="230" cy="220" r="12" fill="var(--content-base-default)" />
-            <text x="230" y="224" textAnchor="middle" fill="white" fontSize="11" fontWeight="600">3</text>
+            <text x="230" y="224" textAnchor="middle" fill="var(--content-base-onColor)" fontSize="11" fontWeight="600">3</text>
 
             {/* 4 - Overlay */}
             <line x1="310" y1="160" x2="330" y2="160" stroke="var(--content-base-default)" strokeWidth="1.5" />
             <line x1="330" y1="160" x2="330" y2="210" stroke="var(--content-base-default)" strokeWidth="1.5" />
             <circle cx="330" cy="220" r="12" fill="var(--content-base-default)" />
-            <text x="330" y="224" textAnchor="middle" fill="white" fontSize="11" fontWeight="600">4</text>
+            <text x="330" y="224" textAnchor="middle" fill="var(--content-base-onColor)" fontSize="11" fontWeight="600">4</text>
           </svg>
         </div>
         <div style={{
@@ -328,7 +328,7 @@ function DesignContent() {
             <ThumbStateCard label="Default" sublabel="기본 상태">
               <div style={{ width: 120, height: 68, borderRadius: radius.primitive.sm, overflow: "hidden", position: "relative" }}>
                 <div style={{ width: "100%", height: "100%", backgroundColor: "var(--content-base-placeholder)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" opacity={0.6}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--content-base-onColor)" strokeWidth="1.5" opacity={0.6}>
                     <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
                     <circle cx="8.5" cy="8.5" r="1.5" />
                     <polyline points="21 15 16 10 5 21" />
@@ -339,22 +339,22 @@ function DesignContent() {
             <ThumbStateCard label="Hover" sublabel="오버레이 표시">
               <div style={{ width: 120, height: 68, borderRadius: radius.primitive.sm, overflow: "hidden", position: "relative" }}>
                 <div style={{ width: "100%", height: "100%", backgroundColor: "var(--content-base-placeholder)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" opacity={0.6}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--content-base-onColor)" strokeWidth="1.5" opacity={0.6}>
                     <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
                     <circle cx="8.5" cy="8.5" r="1.5" />
                     <polyline points="21 15 16 10 5 21" />
                   </svg>
                 </div>
                 <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, backgroundColor: "var(--effect-alpha-overlay-dim)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <span style={{ color: "white", fontSize: typography.fontSize['2xs'], fontWeight: typography.fontWeight.semibold }}>View</span>
+                  <span style={{ color: "var(--content-base-onColor)", fontSize: typography.fontSize['2xs'], fontWeight: typography.fontWeight.semibold }}>View</span>
                 </div>
               </div>
             </ThumbStateCard>
             <ThumbStateCard label="Playing" sublabel="비디오 재생 표시">
               <div style={{ width: 120, height: 68, borderRadius: radius.primitive.sm, overflow: "hidden", position: "relative" }}>
                 <div style={{ width: "100%", height: "100%", backgroundColor: "var(--content-base-placeholder)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <div style={{ width: 32, height: 32, borderRadius: "50%", backgroundColor: "var(--effect-alpha-overlay-dim)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
+                  <div style={{ width: 32, height: 32, borderRadius: radius.primitive.full, backgroundColor: "var(--effect-alpha-overlay-dim)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--content-base-onColor)">
                       <polygon points="8,5 20,12 8,19" />
                     </svg>
                   </div>
@@ -640,26 +640,26 @@ function DesignContent() {
           <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.sm }}>
             <thead>
               <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>컴포넌트</th>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>용도</th>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>차이점</th>
+                <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>컴포넌트</th>
+                <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>용도</th>
+                <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>차이점</th>
               </tr>
             </thead>
             <tbody>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "12px 16px", fontWeight: typography.fontWeight.medium }}>ListCard</td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>미디어 리스트</td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>ListCard는 Thumbnail을 포함하는 리스트 항목</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, fontWeight: typography.fontWeight.medium }}>ListCard</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>미디어 리스트</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>ListCard는 Thumbnail을 포함하는 리스트 항목</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "12px 16px", fontWeight: typography.fontWeight.medium }}>Card</td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>콘텐츠 컨테이너</td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>Card 내부에서 Thumbnail을 미디어 프리뷰로 사용</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, fontWeight: typography.fontWeight.medium }}>Card</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>콘텐츠 컨테이너</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>Card 내부에서 Thumbnail을 미디어 프리뷰로 사용</td>
               </tr>
               <tr>
-                <td style={{ padding: "12px 16px", fontWeight: typography.fontWeight.medium }}>ContentBadge</td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>정보 라벨</td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>Thumbnail 위에 ContentBadge로 상태 오버레이 가능</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, fontWeight: typography.fontWeight.medium }}>ContentBadge</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>정보 라벨</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>Thumbnail 위에 ContentBadge로 상태 오버레이 가능</td>
               </tr>
             </tbody>
           </table>
@@ -846,17 +846,17 @@ function DesignTokensTable({ tokens }: { tokens: { name: string; value: string; 
       <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.sm }}>
         <thead>
           <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
-            <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)" }}>Token</th>
-            <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)" }}>Value</th>
-            <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)" }}>Usage</th>
+            <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)" }}>Token</th>
+            <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)" }}>Value</th>
+            <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)" }}>Usage</th>
           </tr>
         </thead>
         <tbody>
           {tokens.map((token, i) => (
             <tr key={i} style={{ borderBottom: "1px solid var(--divider)" }}>
-              <td style={{ padding: "12px 16px", color: "var(--text-primary)", fontWeight: typography.fontWeight.medium }}>{token.name}</td>
-              <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: typography.fontSize.xs, color: "var(--text-secondary)" }}>{token.value}</td>
-              <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>{token.usage}</td>
+              <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-primary)", fontWeight: typography.fontWeight.medium }}>{token.name}</td>
+              <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, fontFamily: "monospace", fontSize: typography.fontSize.xs, color: "var(--text-secondary)" }}>{token.value}</td>
+              <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>{token.usage}</td>
             </tr>
           ))}
         </tbody>
@@ -873,7 +873,7 @@ function ThumbStateCard({ label, sublabel, children }: {
       {children}
       <div style={{ textAlign: "center" }}>
         <div style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)" }}>{label}</div>
-        <div style={{ fontSize: typography.fontSize.xs, color: "var(--text-tertiary)", marginTop: 2 }}>{sublabel}</div>
+        <div style={{ fontSize: typography.fontSize.xs, color: "var(--text-tertiary)", marginTop: spacing.primitive[1] }}>{sublabel}</div>
       </div>
     </div>
   );

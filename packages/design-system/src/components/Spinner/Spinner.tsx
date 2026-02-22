@@ -1,6 +1,8 @@
 'use client';
 
 import { cssVarColors } from '../../tokens';
+import { easing } from '../../tokens/motion';
+import { radius } from '../../tokens/radius';
 
 export type SpinnerSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 export type SpinnerColor = 'primary' | 'neutral' | 'inverse' | 'inherit';
@@ -60,7 +62,7 @@ export function Spinner({
   const spinnerSize = sizeMap[size];
   const strokeWidth = strokeMap[size];
   const colorValue = colorMap[color];
-  const trackColor = 'var(--fill-alternative)';
+  const trackColor = cssVarColors.fill.alternative;
 
   return (
     <span
@@ -84,12 +86,12 @@ export function Spinner({
           display: 'block',
           width: spinnerSize,
           height: spinnerSize,
-          borderRadius: '50%',
+          borderRadius: radius.primitive.full,
           borderWidth: strokeWidth,
           borderStyle: 'solid',
           borderColor: trackColor,
           borderTopColor: colorValue,
-          animation: '_zkap_spin 0.75s linear infinite',
+          animation: `_zkap_spin 0.75s ${easing.linear} infinite`,
           boxSizing: 'border-box',
         }}
       />

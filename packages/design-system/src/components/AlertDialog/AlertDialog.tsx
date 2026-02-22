@@ -34,6 +34,7 @@ import { typography } from '../../tokens/typography';
 import { radius } from '../../tokens/radius';
 import { zIndex } from '../../tokens/general';
 import { cssVarShadow } from '../../tokens/shadow';
+import { duration, easing } from '../../tokens/motion';
 import { Button } from '../Button/Button';
 import type { ButtonColor } from '../Button/Button';
 
@@ -53,18 +54,18 @@ function injectStyles() {
       to   { opacity: 0; }
     }
     @keyframes _zkap_ad_in {
-      from { opacity: 0; transform: scale(0.95) translateY(6px); }
-      to   { opacity: 1; transform: scale(1)    translateY(0);   }
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0);    }
     }
     @keyframes _zkap_ad_out {
-      from { opacity: 1; transform: scale(1)    translateY(0);   }
-      to   { opacity: 0; transform: scale(0.95) translateY(6px); }
+      from { opacity: 1; transform: translateY(0);    }
+      to   { opacity: 0; transform: translateY(28px); }
     }
   `;
   document.head.appendChild(style);
 }
 
-export interface AlertDialogAction {
+export interface DialogAction {
   /** 버튼 레이블 */
   label: string;
   /** 버튼 클릭 핸들러 */
@@ -75,7 +76,7 @@ export interface AlertDialogAction {
   variant?: 'filled' | 'weak';
 }
 
-export interface AlertDialogProps {
+export interface DialogProps {
   /** 다이얼로그 열림 여부 */
   open: boolean;
   /** 닫기 콜백 */
@@ -85,7 +86,7 @@ export interface AlertDialogProps {
   /** 본문 내용 */
   description?: ReactNode;
   /** 액션 버튼 목록 (1-2개) */
-  actions: AlertDialogAction[];
+  actions: DialogAction[];
   /**
    * 백드롭 클릭 시 닫기 여부
    * @default false — Alert는 의도적 결정을 유도
@@ -95,9 +96,9 @@ export interface AlertDialogProps {
   'aria-label'?: string;
 }
 
-const ANIMATION_DURATION = 180; // ms
+const ANIMATION_DURATION = duration.fast; // ms
 
-export function AlertDialog({
+export function Dialog({
   open,
   onClose,
   title,
@@ -105,7 +106,7 @@ export function AlertDialog({
   actions,
   closeOnDimmerClick = false,
   'aria-label': ariaLabel,
-}: AlertDialogProps): JSX.Element | null {
+}: DialogProps): JSX.Element | null {
   const [mounted, setMounted] = useState(false);
   const [visible, setVisible] = useState(false);
   const id = useId();
@@ -120,9 +121,7 @@ export function AlertDialog({
     if (open) {
       setMounted(true);
       // 한 프레임 후 visible=true → enter animation 트리거
-      const raf = requestAnimationFrame(() => {
-        requestAnimationFrame(() => setVisible(true));
-      });
+      const raf = requestAnimationFrame(() => setVisible(true));
       return () => cancelAnimationFrame(raf);
     } else {
       setVisible(false);
@@ -145,13 +144,13 @@ export function AlertDialog({
   const backdropStyle: React.CSSProperties = {
     position: 'fixed',
     inset: 0,
-    backgroundColor: 'var(--overlay-dim)',
+    backgroundColor: cssVarColors.overlay.dim,
     zIndex: zIndex.modal,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     padding: `0 ${spacing.primitive[5]}px`,
-    animation: `${visible ? '_zkap_ad_backdrop_in' : '_zkap_ad_backdrop_out'} ${ANIMATION_DURATION}ms ease both`,
+    animation: `${visible ? '_zkap_ad_backdrop_in' : '_zkap_ad_backdrop_out'} ${ANIMATION_DURATION}ms ${easing.easeInOut} both`,
   };
 
   const containerStyle: React.CSSProperties = {
@@ -162,7 +161,7 @@ export function AlertDialog({
     maxWidth: 360,
     padding: spacing.primitive[6],
     outline: 'none',
-    animation: `${visible ? '_zkap_ad_in' : '_zkap_ad_out'} ${ANIMATION_DURATION}ms cubic-bezier(0.16, 1, 0.3, 1) both`,
+    animation: `${visible ? '_zkap_ad_in' : '_zkap_ad_out'} ${ANIMATION_DURATION}ms ${easing.easeOut} both`,
   };
 
   const titleStyle: React.CSSProperties = {
@@ -183,7 +182,7 @@ export function AlertDialog({
     display: 'flex',
     gap: spacing.primitive[2],
     marginTop: spacing.primitive[5],
-    justifyContent: actions.length === 1 ? 'stretch' : 'flex-end',
+    justifyContent: 'stretch',
   };
 
   return createPortal(
@@ -214,7 +213,7 @@ export function AlertDialog({
               buttonType={action.variant ?? (i === actions.length - 1 ? 'filled' : 'weak')}
               color={action.color ?? (i === actions.length - 1 ? 'primary' : 'neutral')}
               size="medium"
-              layout={actions.length === 1 ? 'fillWidth' : 'hug'}
+              layout="fillWidth"
               onClick={action.onClick}
             >
               {action.label}
@@ -227,4 +226,4 @@ export function AlertDialog({
   );
 }
 
-AlertDialog.displayName = 'AlertDialog';
+Dialog.displayName = 'Dialog';

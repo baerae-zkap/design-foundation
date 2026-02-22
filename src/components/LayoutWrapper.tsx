@@ -40,7 +40,7 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
       {/* 전체 레이아웃 가운데 정렬 */}
       <div
         style={{
-          maxWidth: '1400px',
+          maxWidth: '1440px',
           width: '100%',
           margin: '0 auto',
           paddingTop: '56px',
@@ -51,8 +51,8 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
           boxSizing: 'border-box',
         }}
       >
-        {/* 사이드바 - sticky로 스크롤 따라감 */}
-        <Sidebar />
+        {/* 사이드바 - 태블릿 이하에서 숨김 (MobileMenu가 대체) */}
+        {!isTablet && <Sidebar />}
 
         {/* 사이드바와 콘텐츠 사이 간격 */}
         {!isTablet && <div style={{ width: '40px', flexShrink: 0 }} />}
@@ -70,7 +70,7 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
           <div
             style={{
               width: '100%',
-              maxWidth: isTablet ? '100%' : '1100px',
+              maxWidth: '100%',
               padding: getContentPadding(),
               boxSizing: 'border-box',
             }}

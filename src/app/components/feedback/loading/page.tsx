@@ -18,7 +18,7 @@ const colorOrder: SpinnerColor[] = ["primary", "neutral", "inverse", "inherit"];
 
 export default function LoadingPage() {
   return (
-    <div style={{ maxWidth: 720 }}>
+    <div style={{ maxWidth: 840 }}>
       <Breadcrumb
         items={[
           { label: "Components", href: "/components" },
@@ -30,7 +30,7 @@ export default function LoadingPage() {
       <h1
         style={{
           fontSize: typography.fontSize["3xl"],
-          fontWeight: 700,
+          fontWeight: typography.fontWeight.bold,
           marginBottom: spacing.primitive[2],
           color: "var(--text-primary)",
           letterSpacing: "-0.02em",
@@ -82,7 +82,7 @@ function SpinnerPlayground() {
     <div style={{ marginBottom: spacing.primitive[8] }}>
       <div
         style={{
-          borderRadius: 20,
+          borderRadius: radius.primitive.xl,
           overflow: "hidden",
           backgroundColor: "var(--surface-base-alternative)",
         }}
@@ -121,7 +121,7 @@ function SpinnerPlayground() {
                 flexDirection: "column",
                 gap: spacing.primitive[7],
                 backgroundColor: "var(--surface-base-default)",
-                borderRadius: spacing.primitive[4],
+                borderRadius: radius.primitive.lg,
               }}
             >
               <RadioGroup
@@ -156,7 +156,7 @@ function SpinnerPlayground() {
       >
         <div
           style={{
-            padding: "10px 16px",
+            padding: `${spacing.primitive[2]}px ${spacing.primitive[4]}px`,
             backgroundColor: "var(--docs-code-surface)",
             display: "flex",
             alignItems: "center",
@@ -168,8 +168,8 @@ function SpinnerPlayground() {
               style={{
                 fontSize: typography.fontSize.compact,
                 fontWeight: typography.fontWeight.semibold,
-                padding: "4px 12px",
-                borderRadius: 6,
+                padding: `${spacing.primitive[1]}px ${spacing.primitive[3]}px`,
+                borderRadius: 6, /* optical: between xs(4) and sm(8), compact tab badge */
                 color: "var(--content-base-onColor)",
                 backgroundColor: "var(--docs-code-active-bg)",
               }}
@@ -217,7 +217,7 @@ function DesignContent() {
         <div
           style={{
             backgroundColor: "var(--surface-base-alternative)",
-            borderRadius: 12,
+            borderRadius: radius.primitive.md,
             padding: spacing.primitive[8],
             display: "flex",
             justifyContent: "center",
@@ -343,7 +343,7 @@ function DesignContent() {
           <thead>
             <tr style={{ borderBottom: "1px solid var(--divider)" }}>
               {["Token", "Value", "Usage"].map((head) => (
-                <th key={head} style={{ textAlign: "left", padding: "8px 12px", color: "var(--text-primary)", fontWeight: typography.fontWeight.semibold }}>
+                <th key={head} style={{ textAlign: "left", padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-primary)", fontWeight: typography.fontWeight.semibold }}>
                   {head}
                 </th>
               ))}
@@ -358,9 +358,9 @@ function DesignContent() {
               ["radius.primitive.md", "12px", "preview/tile rounding"],
             ].map(([token, value, usage]) => (
               <tr key={token} style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "10px 12px" }}><InlineCode>{token}</InlineCode></td>
-                <td style={{ padding: "10px 12px", color: "var(--text-secondary)" }}>{value}</td>
-                <td style={{ padding: "10px 12px", color: "var(--text-secondary)" }}>{usage}</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}><InlineCode>{token}</InlineCode></td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>{value}</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>{usage}</td>
               </tr>
             ))}
           </tbody>

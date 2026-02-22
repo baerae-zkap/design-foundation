@@ -23,6 +23,7 @@ import { typography } from '../../tokens/typography';
 import { opacity } from '../../tokens/general';
 import { usePressable } from '../../utils/usePressable';
 import { transitions } from '../../utils/styles';
+import { easing } from '../../tokens/motion';
 
 export type ButtonType = 'filled' | 'weak';
 export type ButtonColor =
@@ -55,10 +56,10 @@ export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement
 }
 
 const sizeStyles: Record<ButtonSize, { height: number; fontSize: number; padding: string }> = {
-  small: { height: 36, fontSize: typography.fontSize.sm, padding: `0 ${spacing.component.button.paddingX.sm}px` },
-  medium: { height: 40, fontSize: typography.fontSize.sm, padding: `0 ${spacing.component.button.paddingX.sm}px` },
-  large: { height: 44, fontSize: typography.fontSize.sm, padding: `0 ${spacing.component.button.paddingX.md}px` },
-  xLarge: { height: 48, fontSize: typography.fontSize.md, padding: `0 ${spacing.component.button.paddingX.lg}px` },
+  small: { height: spacing.component.input.height.sm, fontSize: typography.fontSize.sm, padding: `0 ${spacing.component.button.paddingX.sm}px` },
+  medium: { height: spacing.primitive[10], fontSize: typography.fontSize.sm, padding: `0 ${spacing.component.button.paddingX.sm}px` },
+  large: { height: spacing.semantic.minTouchTarget, fontSize: typography.fontSize.sm, padding: `0 ${spacing.component.button.paddingX.md}px` },
+  xLarge: { height: spacing.primitive[12], fontSize: typography.fontSize.md, padding: `0 ${spacing.component.button.paddingX.lg}px` },
 };
 
 const colorStyles: Record<ButtonColor, {
@@ -242,9 +243,9 @@ function LoadingDots() {
           style={{
             width: 6,
             height: 6,
-            borderRadius: '50%',
+            borderRadius: radius.primitive.full,
             backgroundColor: 'currentColor',
-            animation: `btn-pulse 1.2s ease-in-out infinite`,
+            animation: `btn-pulse 1.2s ${easing.easeInOut} infinite`,
             animationDelay: `${i * 0.15}s`,
           }}
         />

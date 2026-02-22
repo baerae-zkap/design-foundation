@@ -15,7 +15,7 @@ type CardPadding = "small" | "medium" | "large";
 
 export default function CardPage() {
   return (
-    <div style={{ maxWidth: 720 }}>
+    <div style={{ maxWidth: 840 }}>
       <Breadcrumb
         items={[
           { label: "Components", href: "/components" },
@@ -183,7 +183,7 @@ function CardPlayground() {
       <div style={{ marginTop: spacing.primitive[4], borderRadius: radius.primitive.md, overflow: "hidden" }}>
         <div
           style={{
-            padding: `10px ${spacing.primitive[4]}px`,
+            padding: `${spacing.primitive[2]}px ${spacing.primitive[4]}px`,
             backgroundColor: "var(--docs-code-surface)",
             display: "flex",
             alignItems: "center",
@@ -245,7 +245,7 @@ function DesignContent() {
         <div style={{
           backgroundColor: "var(--surface-base-alternative)",
           borderRadius: radius.primitive.lg,
-          padding: "48px 40px",
+          padding: `${spacing.primitive[12]}px ${spacing.primitive[10]}px`,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -759,7 +759,7 @@ function WebContent() {
             style={{
               display: "inline-flex",
               alignItems: "center",
-              gap: 6,
+              gap: spacing.primitive[1],
               padding: `${spacing.primitive[2]}px ${spacing.primitive[4]}px`,
               fontSize: typography.fontSize.compact,
               fontWeight: typography.fontWeight.medium,
@@ -922,7 +922,7 @@ function UsageCard({ situation, description, recommendation, examples }: {
             {recommendation}
           </span>
         </div>
-        <p style={{ fontSize: typography.fontSize.compact, color: "var(--text-secondary)", margin: 0, marginBottom: 6 }}>{description}</p>
+        <p style={{ fontSize: typography.fontSize.compact, color: "var(--text-secondary)", margin: 0, marginBottom: spacing.primitive[1] }}>{description}</p>
         <p style={{ fontSize: typography.fontSize.xs, color: "var(--text-tertiary)", margin: 0 }}>
           예시: {examples.join(", ")}
         </p>

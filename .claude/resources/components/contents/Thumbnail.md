@@ -13,7 +13,7 @@ An image display component with controlled aspect ratio, rounded corners, error 
 - Use inside `Card` thumbnail slot or `ListCard` thumbnail slot
 
 ## When NOT to Use
-- Do NOT use for user avatars -- use a dedicated avatar pattern (circular img)
+- Do NOT use for user avatars -- use `Avatar` component instead
 - Do NOT use for decorative background images -- use CSS background-image
 - Do NOT use for full-width hero images without aspect ratio constraint
 
@@ -104,7 +104,12 @@ Also accepts all standard `HTMLAttributes<HTMLDivElement>` except `onClick`.
   alt="Photo"
   aspectRatio="1:1"
   overlay={
-    <div style={{ background: 'rgba(0,0,0,0.5)', color: 'white', padding: 8, borderRadius: 4 }}>
+    <div style={{
+      backgroundColor: 'var(--overlay-dim)',
+      color: 'var(--content-base-onColor)',
+      padding: spacing.primitive[2],
+      borderRadius: radius.primitive.xs,
+    }}>
       +3 more
     </div>
   }
@@ -113,7 +118,7 @@ Also accepts all standard `HTMLAttributes<HTMLDivElement>` except `onClick`.
 
 ### With border
 ```tsx
-<Thumbnail src="/avatar.jpg" alt="User" aspectRatio="1:1" size={48} border />
+<Thumbnail src="/product.jpg" alt="Product" aspectRatio="1:1" size={48} border />
 ```
 
 ## Do / Don't

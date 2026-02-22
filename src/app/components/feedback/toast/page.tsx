@@ -11,7 +11,7 @@ import { RadioGroup, CopyButton } from "@/components/docs/Playground";
 
 export default function ToastPage() {
   return (
-    <div style={{ maxWidth: 720 }}>
+    <div style={{ maxWidth: 840 }}>
       <Breadcrumb
         items={[
           { label: "Components", href: "/components" },
@@ -20,7 +20,7 @@ export default function ToastPage() {
         ]}
       />
 
-      <h1 style={{ fontSize: typography.fontSize["3xl"], fontWeight: 700, marginBottom: spacing.primitive[2], color: "var(--text-primary)", letterSpacing: "-0.02em" }}>
+      <h1 style={{ fontSize: typography.fontSize["3xl"], fontWeight: typography.fontWeight.bold, marginBottom: spacing.primitive[2], color: "var(--text-primary)", letterSpacing: "-0.02em" }}>
         Toast
       </h1>
       <p style={{ fontSize: typography.fontSize.md, color: "var(--text-secondary)", marginBottom: spacing.primitive[8], lineHeight: 1.7 }}>
@@ -65,10 +65,10 @@ function ToastPlayground() {
 
   return (
     <div style={{ marginBottom: spacing.primitive[8] }}>
-      <div style={{ borderRadius: 20, overflow: "hidden", backgroundColor: "var(--surface-base-alternative)" }}>
+      <div style={{ borderRadius: radius.primitive.xl, overflow: "hidden", backgroundColor: "var(--surface-base-alternative)" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", minHeight: 320 }}>
           {/* Preview */}
-          <div style={{ padding: 40, display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "var(--surface-base-alternative)" }}>
+          <div style={{ padding: spacing.primitive[10], display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "var(--surface-base-alternative)" }}>
             <div style={{ width: "100%", maxWidth: 400 }}>
               <ToastPreview
                 heading={heading}
@@ -82,7 +82,7 @@ function ToastPlayground() {
 
           {/* Controls */}
           <div style={{ backgroundColor: "var(--surface-base-alternative)", display: "flex", flexDirection: "column", padding: spacing.primitive[4], height: "100%", boxSizing: "border-box" }}>
-            <div style={{ flex: 1, minHeight: 0, padding: spacing.primitive[6], overflowY: "auto", display: "flex", flexDirection: "column", gap: 28, backgroundColor: "var(--surface-base-default)", borderRadius: spacing.primitive[4] }}>
+            <div style={{ flex: 1, minHeight: 0, padding: spacing.primitive[6], overflowY: "auto", display: "flex", flexDirection: "column", gap: spacing.primitive[7], backgroundColor: "var(--surface-base-default)", borderRadius: radius.primitive.lg }}>
               <RadioGroup
                 label="contents"
                 options={[
@@ -118,9 +118,9 @@ function ToastPlayground() {
 
       {/* Generated Code */}
       <div style={{ marginTop: spacing.primitive[4], borderRadius: radius.primitive.md, overflow: "hidden", border: "1px solid var(--divider)" }}>
-        <div style={{ padding: "10px 16px", backgroundColor: "var(--docs-code-surface)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <div style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[4]}px`, backgroundColor: "var(--docs-code-surface)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ display: "flex", gap: spacing.primitive[2] }}>
-            <span style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, padding: "4px 12px", borderRadius: 6, color: "var(--content-base-onColor)", backgroundColor: "var(--docs-code-active-bg)" }}>Web</span>
+            <span style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, padding: `${spacing.primitive[1]}px ${spacing.primitive[3]}px`, borderRadius: 6 /* optical: between xs(4) and sm(8) */, color: "var(--content-base-onColor)", backgroundColor: "var(--docs-code-active-bg)" }}>Web</span>
           </div>
           <CopyButton text={generateCode()} />
         </div>
@@ -152,7 +152,7 @@ function ActionButton({ children, onClick }: { children: React.ReactNode; onClic
         background: "none",
         border: "none",
         cursor: "pointer",
-        padding: "4px 8px",
+        padding: `${spacing.primitive[1]}px ${spacing.primitive[2]}px`,
         fontSize: typography.fontSize.sm,
         fontWeight: typography.fontWeight.semibold,
         color: "var(--inverse-content-default)",
@@ -199,7 +199,7 @@ function ToastPreview({
           {icon}
         </span>
       )}
-      <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: 2 }}>
+      <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: 2 /* optical: sub-token tight heading↔description gap */ }}>
         {heading && (
           <p style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--inverse-content-default)", margin: 0, lineHeight: 1.4, wordBreak: "keep-all" }}>
             {heading}
@@ -240,7 +240,7 @@ function DesignContent() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: spacing.primitive[10] }}>
       <Section title="Overview">
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.7, margin: 0 }}>
+        <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", lineHeight: 1.7, margin: 0 }}>
           <InlineCode>Toast</InlineCode>는 제목(Heading)과 설명(Description) 두 줄 레이아웃을 지원하는 토스트 알림입니다.
           액션 버튼, 닫기 버튼, 아이콘 슬롯을 유연하게 조합할 수 있습니다.
           <InlineCode>Snackbar</InlineCode>와 달리 더 풍부한 내용 표현에 적합합니다.
@@ -275,13 +275,13 @@ function DesignContent() {
               preview: <ToastPreview heading="연결이 끊겼습니다" description="네트워크 상태를 확인해 주세요." closable />,
             },
           ].map(({ label, desc, preview }) => (
-            <div key={label} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4], alignItems: "center", background: "var(--surface-base-alternative)", borderRadius: 12, padding: spacing.primitive[5] }}>
+            <div key={label} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4], alignItems: "center", background: "var(--surface-base-alternative)", borderRadius: radius.primitive.md, padding: spacing.primitive[5] }}>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                 {preview}
               </div>
               <div>
-                <p style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)", margin: `0 0 ${spacing.primitive[1]}px` }}>{label}</p>
-                <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0, lineHeight: 1.6 }}>{desc}</p>
+                <p style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)", margin: `0 0 ${spacing.primitive[1]}px` }}>{label}</p>
+                <p style={{ fontSize: 13, /* optical: between compact(12) and sm(14), no exact token */ color: "var(--text-secondary)", margin: 0, lineHeight: 1.6 }}>{desc}</p>
               </div>
             </div>
           ))}
@@ -292,22 +292,22 @@ function DesignContent() {
         <Subsection title="Best Practices">
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4] }}>
             <DoCard>
-              <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.7, margin: 0 }}>
+              <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", lineHeight: 1.7, margin: 0 }}>
                 설명이 필요한 경우 Heading + Description 조합을 사용하세요. Heading은 결과, Description은 부연 설명.
               </p>
             </DoCard>
             <DontCard>
-              <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.7, margin: 0 }}>
+              <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", lineHeight: 1.7, margin: 0 }}>
                 설명 없이 너무 긴 단일 메시지를 넣지 마세요. Heading은 30자 이내를 권장합니다.
               </p>
             </DontCard>
             <DoCard>
-              <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.7, margin: 0 }}>
+              <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", lineHeight: 1.7, margin: 0 }}>
                 단순 피드백(복사, 저장 등)은 <InlineCode>Snackbar</InlineCode>를, 더 자세한 설명이 필요하면 Toast를 사용하세요.
               </p>
             </DoCard>
             <DontCard>
-              <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.7, margin: 0 }}>
+              <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", lineHeight: 1.7, margin: 0 }}>
                 Toast와 Snackbar를 동시에 여러 개 띄우지 마세요. 하나씩 순서대로 표시하세요.
               </p>
             </DontCard>
@@ -319,9 +319,9 @@ function DesignContent() {
         <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
           <thead>
             <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-              <th style={{ textAlign: "left", padding: "8px 12px", color: "var(--text-secondary)", fontWeight: 500 }}>Token</th>
-              <th style={{ textAlign: "left", padding: "8px 12px", color: "var(--text-secondary)", fontWeight: 500 }}>Value</th>
-              <th style={{ textAlign: "left", padding: "8px 12px", color: "var(--text-secondary)", fontWeight: 500 }}>Usage</th>
+              <th style={{ textAlign: "left", padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)", fontWeight: typography.fontWeight.medium }}>Token</th>
+              <th style={{ textAlign: "left", padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)", fontWeight: typography.fontWeight.medium }}>Value</th>
+              <th style={{ textAlign: "left", padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)", fontWeight: typography.fontWeight.medium }}>Usage</th>
             </tr>
           </thead>
           <tbody>
@@ -336,9 +336,9 @@ function DesignContent() {
               ["zIndex.toast", "1200", "레이어 순서"],
             ].map(([token, value, usage]) => (
               <tr key={token} style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "10px 12px", fontFamily: "monospace", fontSize: 12 }}>{token}</td>
-                <td style={{ padding: "10px 12px", color: "var(--text-secondary)", fontFamily: "monospace", fontSize: 12 }}>{value}</td>
-                <td style={{ padding: "10px 12px", color: "var(--text-secondary)" }}>{usage}</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontFamily: "monospace", fontSize: 12 }}>{token}</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)", fontFamily: "monospace", fontSize: 12 }}>{value}</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>{usage}</td>
               </tr>
             ))}
           </tbody>
@@ -346,7 +346,7 @@ function DesignContent() {
       </Section>
 
       <Section title="Accessibility">
-        <ul style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.9, paddingLeft: spacing.primitive[5], margin: 0 }}>
+        <ul style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", lineHeight: 1.9, paddingLeft: spacing.primitive[5], margin: 0 }}>
           <li><InlineCode>role="status"</InlineCode>와 <InlineCode>aria-live="polite"</InlineCode>로 스크린리더에 알림을 전달합니다.</li>
           <li>닫기 버튼에 <InlineCode>aria-label="닫기"</InlineCode>가 적용됩니다.</li>
           <li>자동 닫힘 시 최소 4초 이상 <InlineCode>duration</InlineCode>을 권장합니다 (WCAG 2.1).</li>
@@ -354,7 +354,7 @@ function DesignContent() {
       </Section>
 
       <Section title="Related Components">
-        <ul style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.9, paddingLeft: spacing.primitive[5], margin: 0 }}>
+        <ul style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", lineHeight: 1.9, paddingLeft: spacing.primitive[5], margin: 0 }}>
           <li><strong>Snackbar</strong> — 단일 메시지 라인, 더 가벼운 피드백에 적합.</li>
           <li><strong>SectionMessage</strong> — 페이지 내 인라인 배너. 스크롤 영역에 위치.</li>
           <li><strong>AlertDialog</strong> — 사용자 확인이 필요한 중요 메시지.</li>
@@ -372,7 +372,7 @@ function ToastAnatomy() {
   const secondaryColor = "var(--inverse-content-secondary)";
 
   return (
-    <div style={{ background: "var(--surface-base-alternative)", borderRadius: 12, padding: spacing.primitive[6] }}>
+    <div style={{ background: "var(--surface-base-alternative)", borderRadius: radius.primitive.md, padding: spacing.primitive[6] }}>
       <svg viewBox="0 0 480 100" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", maxWidth: 480, display: "block", margin: "0 auto" }}>
         <rect x="30" y="12" width="420" height="70" rx="12" fill={bg} />
         {/* Icon */}
@@ -395,7 +395,7 @@ function ToastAnatomy() {
         <text x="334" y="95" textAnchor="middle" fontSize="9" fill={secondaryColor}>③ Action</text>
         <text x="418" y="95" textAnchor="middle" fontSize="9" fill={secondaryColor}>④ Close</text>
       </svg>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "8px 24px", marginTop: spacing.primitive[3], fontSize: 12, color: "var(--text-secondary)" }}>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: `${spacing.primitive[2]}px ${spacing.primitive[6]}px`, marginTop: spacing.primitive[3], fontSize: typography.fontSize.compact, color: "var(--text-secondary)" }}>
         <span><strong>① Icon</strong> — 선택적 리딩 아이콘 (24×24)</span>
         <span><strong>② Heading + Description</strong> — 제목(bold) + 보조 설명</span>
         <span><strong>③ Action</strong> — 선택적 인라인 액션</span>

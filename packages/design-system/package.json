@@ -26,17 +26,21 @@
       "import": "./dist/native/index.mjs",
       "require": "./dist/native/index.js"
     },
+    "./styles.css": "./styles.css",
     "./docs": "./docs/COMPONENTS.md",
     "./docs/*": "./docs/*"
   },
   "files": [
     "dist",
     "docs",
+    "styles.css",
     "src/**/*.md",
     "README.md",
     "COMPONENTS.md"
   ],
-  "sideEffects": false,
+  "sideEffects": [
+    "*.css"
+  ],
   "scripts": {
     "build": "tsup",
     "build:watch": "tsup --watch",

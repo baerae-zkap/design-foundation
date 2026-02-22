@@ -84,6 +84,8 @@ Also accepts all standard `HTMLAttributes<HTMLDivElement>` except `title`.
 - DO: Use `badges` for status labels above the title
 - DON'T: Overload ListCard with too many slots at once
 - DO: Provide `alt` text on thumbnail images for accessibility
+- DO: When using `action` slot with `onClick` on the card, ensure the action uses `stopPropagation` to prevent both from firing
+- DON'T: Use `onClick` on the card AND a destructive action in the `action` slot without clear visual separation
 
 ## Token Usage
 | Property | Token |

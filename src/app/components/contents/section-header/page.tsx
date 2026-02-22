@@ -12,7 +12,7 @@ import { RadioGroup } from "@/components/docs/Playground";
 
 export default function SectionHeaderPage() {
   return (
-    <div style={{ maxWidth: 720 }}>
+    <div style={{ maxWidth: 840 }}>
       <Breadcrumb
         items={[
           { label: "Components", href: "/components" },
@@ -46,7 +46,7 @@ function SectionHeaderPlayground() {
 
   const headingContent =
     headingContentType === "filter" ? (
-      <span style={{ display: "inline-flex", alignItems: "center", gap: 4, padding: "2px 8px", border: "1px solid var(--border-solid-default)", borderRadius: 99, fontSize: typography.fontSize.xs, color: "var(--content-base-secondary)" }}>
+      <span style={{ display: "inline-flex", alignItems: "center", gap: spacing.primitive[1], padding: "2px 8px", border: "1px solid var(--border-solid-default)", borderRadius: radius.primitive.full, fontSize: typography.fontSize.xs, color: "var(--content-base-secondary)" }}>
         Filter
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9l6 6 6-6"/></svg>
       </span>
@@ -60,7 +60,7 @@ function SectionHeaderPlayground() {
   const trailing =
     trailingType === "text" ? <ActionButton>전체보기</ActionButton> :
     trailingType === "pagination" ? (
-      <span style={{ fontSize: typography.fontSize.compact, color: "var(--content-base-secondary)", display: "inline-flex", alignItems: "center", gap: 4 }}>
+      <span style={{ fontSize: typography.fontSize.compact, color: "var(--content-base-secondary)", display: "inline-flex", alignItems: "center", gap: spacing.primitive[1] }}>
         1 / 5
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
       </span>
@@ -75,7 +75,7 @@ function SectionHeaderPlayground() {
     <div style={{ marginBottom: spacing.primitive[8] }}>
       <div style={{ borderRadius: radius.primitive.xl, overflow: "hidden", backgroundColor: "var(--surface-base-alternative)" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
-          <div style={{ padding: "40px 24px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <div style={{ padding: `${spacing.primitive[10]}px ${spacing.primitive[6]}px`, display: "flex", alignItems: "center", justifyContent: "center" }}>
             <div style={{ width: "100%", backgroundColor: "var(--surface-base-default)" }}>
               <SectionHeader
                 size={size}
@@ -102,7 +102,7 @@ function SectionHeaderPlayground() {
               overflowY: "auto",
               display: "flex",
               flexDirection: "column",
-              gap: 28,
+              gap: spacing.primitive[7],
               backgroundColor: "var(--surface-base-default)",
               borderRadius: radius.primitive.lg,
             }}>
@@ -163,14 +163,14 @@ function DesignContent() {
       {/* Anatomy */}
       <Section title="Anatomy">
         <PreviewBox>
-          <div style={{ padding: "48px 40px", width: "100%" }}>
+          <div style={{ padding: `${spacing.primitive[12]}px ${spacing.primitive[10]}px`, width: "100%" }}>
             <div style={{ maxWidth: 400, margin: "0 auto" }}>
               {/* Anatomy diagram */}
               <div style={{
                 display: "flex",
                 alignItems: "flex-end",
                 gap: spacing.primitive[2],
-                padding: "16px",
+                padding: spacing.primitive[4],
                 border: "1px dashed var(--divider)",
                 borderRadius: radius.primitive.md,
                 backgroundColor: "var(--surface-base-default)",
@@ -181,18 +181,18 @@ function DesignContent() {
                   <div style={{ position: "relative" }}>
                     <div style={{ fontSize: typography.fontSize.xl, fontWeight: typography.fontWeight.bold, color: "var(--content-base-default)" }}>Heading</div>
                     {/* Annotation 1 */}
-                    <div style={{ position: "absolute", top: -20, left: 0, display: "flex", alignItems: "center", gap: 4 }}>
+                    <div style={{ position: "absolute", top: -20, left: 0, display: "flex", alignItems: "center", gap: spacing.primitive[1] }}>
                       <div style={{ width: 16, height: 16, borderRadius: "50%", backgroundColor: "var(--content-base-default)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                        <span style={{ fontSize: 9, color: "var(--content-base-onColor)", fontWeight: 700 }}>1</span>
+                        <span style={{ fontSize: 9, color: "var(--content-base-onColor)", fontWeight: typography.fontWeight.bold }}>1</span>
                       </div>
                     </div>
                   </div>
                   {/* Heading content slot */}
                   <div style={{ position: "relative", flexShrink: 0 }}>
                     <div style={{ padding: "2px 8px", border: "1.5px dashed var(--border-brand-default)", borderRadius: radius.primitive.sm, fontSize: typography.fontSize.compact, color: "var(--content-brand-default)", backgroundColor: "var(--surface-brand-secondary)" }}>slot</div>
-                    <div style={{ position: "absolute", bottom: -20, left: "50%", transform: "translateX(-50%)", display: "flex", alignItems: "center", gap: 4 }}>
+                    <div style={{ position: "absolute", bottom: -20, left: "50%", transform: "translateX(-50%)", display: "flex", alignItems: "center", gap: spacing.primitive[1] }}>
                       <div style={{ width: 16, height: 16, borderRadius: "50%", backgroundColor: "var(--content-base-default)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                        <span style={{ fontSize: 9, color: "var(--content-base-onColor)", fontWeight: 700 }}>2</span>
+                        <span style={{ fontSize: 9, color: "var(--content-base-onColor)", fontWeight: typography.fontWeight.bold }}>2</span>
                       </div>
                     </div>
                   </div>
@@ -200,9 +200,9 @@ function DesignContent() {
                 {/* Trailing slot */}
                 <div style={{ position: "relative", flexShrink: 0 }}>
                   <div style={{ padding: "2px 8px", border: "1.5px dashed var(--border-brand-default)", borderRadius: radius.primitive.sm, fontSize: typography.fontSize.compact, color: "var(--content-brand-default)", backgroundColor: "var(--surface-brand-secondary)" }}>slot</div>
-                  <div style={{ position: "absolute", top: -20, right: 0, display: "flex", alignItems: "center", gap: 4 }}>
+                  <div style={{ position: "absolute", top: -20, right: 0, display: "flex", alignItems: "center", gap: spacing.primitive[1] }}>
                     <div style={{ width: 16, height: 16, borderRadius: "50%", backgroundColor: "var(--content-base-default)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      <span style={{ fontSize: 9, color: "var(--content-base-onColor)", fontWeight: 700 }}>3</span>
+                      <span style={{ fontSize: 9, color: "var(--content-base-onColor)", fontWeight: typography.fontWeight.bold }}>3</span>
                     </div>
                   </div>
                 </div>
@@ -227,13 +227,13 @@ function DesignContent() {
           <VariantCard name="Title Only" description="가장 단순한 형태. 섹션 구분만 필요할 때.">
             <div style={{ width: "100%", maxWidth: 280 }}>
               <SectionHeader title="내 자산" size="small" />
-              <div style={{ borderTop: "1px solid var(--border-solid-alternative)", padding: "8px 16px", fontSize: typography.fontSize.compact, color: "var(--content-base-secondary)" }}>List items...</div>
+              <div style={{ borderTop: "1px solid var(--border-solid-alternative)", padding: `${spacing.primitive[2]}px ${spacing.primitive[4]}px`, fontSize: typography.fontSize.compact, color: "var(--content-base-secondary)" }}>List items...</div>
             </div>
           </VariantCard>
           <VariantCard name="With Trailing" description="우측에 TextButton, 페이지네이션, IconButton 등을 배치합니다.">
             <div style={{ width: "100%", maxWidth: 280 }}>
               <SectionHeader title="최근 거래" size="small" trailing={<ActionButton>전체보기</ActionButton>} />
-              <div style={{ borderTop: "1px solid var(--border-solid-alternative)", padding: "8px 16px", fontSize: typography.fontSize.compact, color: "var(--content-base-secondary)" }}>List items...</div>
+              <div style={{ borderTop: "1px solid var(--border-solid-alternative)", padding: `${spacing.primitive[2]}px ${spacing.primitive[4]}px`, fontSize: typography.fontSize.compact, color: "var(--content-base-secondary)" }}>List items...</div>
             </div>
           </VariantCard>
           <VariantCard name="With Heading Content" description="타이틀 오른쪽 인라인 슬롯에 Chip, 카운트 배지, IconButton 등을 배치합니다.">
@@ -243,7 +243,7 @@ function DesignContent() {
                 size="small"
                 headingContent={<ContentBadge color="error" size="small">3</ContentBadge>}
               />
-              <div style={{ borderTop: "1px solid var(--border-solid-alternative)", padding: "8px 16px", fontSize: typography.fontSize.compact, color: "var(--content-base-secondary)" }}>List items...</div>
+              <div style={{ borderTop: "1px solid var(--border-solid-alternative)", padding: `${spacing.primitive[2]}px ${spacing.primitive[4]}px`, fontSize: typography.fontSize.compact, color: "var(--content-base-secondary)" }}>List items...</div>
             </div>
           </VariantCard>
           <VariantCard name="Full (all slots)" description="Heading + Heading content + Trailing 모두 사용하는 가장 풍부한 형태.">
@@ -256,7 +256,7 @@ function DesignContent() {
                 }
                 trailing={<ActionButton>+ 추가</ActionButton>}
               />
-              <div style={{ borderTop: "1px solid var(--border-solid-alternative)", padding: "8px 16px", fontSize: typography.fontSize.compact, color: "var(--content-base-secondary)" }}>List items...</div>
+              <div style={{ borderTop: "1px solid var(--border-solid-alternative)", padding: `${spacing.primitive[2]}px ${spacing.primitive[4]}px`, fontSize: typography.fontSize.compact, color: "var(--content-base-secondary)" }}>List items...</div>
             </div>
           </VariantCard>
         </div>
@@ -282,10 +282,10 @@ function DesignContent() {
           <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.compact }}>
             <thead>
               <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
-                <th style={{ textAlign: "left", padding: "10px 16px", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Size</th>
-                <th style={{ textAlign: "left", padding: "10px 16px", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Font</th>
-                <th style={{ textAlign: "left", padding: "10px 16px", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Padding Top</th>
-                <th style={{ textAlign: "left", padding: "10px 16px", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Padding Bottom</th>
+                <th style={{ textAlign: "left", padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Size</th>
+                <th style={{ textAlign: "left", padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Font</th>
+                <th style={{ textAlign: "left", padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Padding Top</th>
+                <th style={{ textAlign: "left", padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Padding Bottom</th>
               </tr>
             </thead>
             <tbody>
@@ -295,10 +295,10 @@ function DesignContent() {
                 { size: "large", font: "24px / Bold", pt: "20px", pb: "12px" },
               ].map((row) => (
                 <tr key={row.size}>
-                  <td style={{ padding: "10px 16px", borderBottom: "1px solid var(--divider)", fontWeight: typography.fontWeight.medium }}>{row.size}</td>
-                  <td style={{ padding: "10px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", color: "var(--content-brand-default)", fontSize: typography.fontSize.xs }}>{row.font}</td>
-                  <td style={{ padding: "10px 16px", borderBottom: "1px solid var(--divider)" }}>{row.pt}</td>
-                  <td style={{ padding: "10px 16px", borderBottom: "1px solid var(--divider)" }}>{row.pb}</td>
+                  <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)", fontWeight: typography.fontWeight.medium }}>{row.size}</td>
+                  <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)", fontFamily: "monospace", color: "var(--content-brand-default)", fontSize: typography.fontSize.xs }}>{row.font}</td>
+                  <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)" }}>{row.pt}</td>
+                  <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)" }}>{row.pb}</td>
                 </tr>
               ))}
             </tbody>
@@ -336,11 +336,11 @@ function DesignContent() {
           {[
             { label: "Text button", element: <ActionButton>전체보기</ActionButton>, desc: "링크 이동, 더보기 등 텍스트 액션" },
             { label: "Pagination", element: <span style={{ fontSize: typography.fontSize.compact, color: "var(--content-base-secondary)" }}>1 / 5 &gt;</span>, desc: "페이지 이동 컨트롤" },
-            { label: "Icon button", element: <span style={{ fontSize: 18, color: "var(--content-base-secondary)", lineHeight: 1, cursor: "pointer" }}>⋯</span>, desc: "더보기 메뉴, 설정 등" },
+            { label: "Icon button", element: <span style={{ fontSize: typography.fontSize.lg, color: "var(--content-base-secondary)", lineHeight: 1, cursor: "pointer" }}>⋯</span>, desc: "더보기 메뉴, 설정 등" },
           ].map(({ label, element, desc }) => (
             <div key={label} style={{ backgroundColor: "var(--surface-base-default)", border: "1px solid var(--divider)", borderRadius: radius.primitive.md, overflow: "hidden" }}>
               <SectionHeader title={label} size="small" trailing={element} />
-              <div style={{ padding: "8px 16px 10px", fontSize: typography.fontSize.compact, color: "var(--content-base-secondary)" }}>{desc}</div>
+              <div style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[4]}px ${spacing.primitive[3]}px`, fontSize: typography.fontSize.compact, color: "var(--content-base-secondary)" }}>{desc}</div>
             </div>
           ))}
         </div>
@@ -395,10 +395,10 @@ function DesignContent() {
                   </div>
                 </DoCard>
                 <DontCard>
-                  <div style={{ width: "100%", maxWidth: 220, padding: "12px 16px" }}>
+                  <div style={{ width: "100%", maxWidth: 220, padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px` }}>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                      <div style={{ fontSize: 16, fontWeight: 700, color: "var(--content-base-default)" }}>최근 거래</div>
-                      <button style={{ padding: "8px 16px", backgroundColor: "var(--content-brand-default)", color: "white", border: "none", borderRadius: 8, fontSize: 12 }}>전체보기</button>
+                      <div style={{ fontSize: typography.fontSize.md, fontWeight: typography.fontWeight.bold, color: "var(--content-base-default)" }}>최근 거래</div>
+                      <button style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[4]}px`, backgroundColor: "var(--content-brand-default)", color: "var(--content-base-onColor)", border: "none", borderRadius: radius.primitive.sm, fontSize: typography.fontSize.xs }}>전체보기</button>
                     </div>
                   </div>
                 </DontCard>
@@ -418,9 +418,9 @@ function DesignContent() {
           <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.compact }}>
             <thead>
               <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
-                <th style={{ textAlign: "left", padding: "12px 16px", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Property</th>
-                <th style={{ textAlign: "left", padding: "12px 16px", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Token</th>
-                <th style={{ textAlign: "left", padding: "12px 16px", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Value</th>
+                <th style={{ textAlign: "left", padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Property</th>
+                <th style={{ textAlign: "left", padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Token</th>
+                <th style={{ textAlign: "left", padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Value</th>
               </tr>
             </thead>
             <tbody>
@@ -436,9 +436,9 @@ function DesignContent() {
                 { prop: "Alignment", token: "align-items", value: "flex-end (baseline)" },
               ].map(({ prop, token, value }) => (
                 <tr key={prop}>
-                  <td style={{ padding: "10px 16px", borderBottom: "1px solid var(--divider)" }}>{prop}</td>
-                  <td style={{ padding: "10px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", color: "var(--text-secondary)", fontSize: typography.fontSize.xs }}>{token}</td>
-                  <td style={{ padding: "10px 16px", borderBottom: "1px solid var(--divider)" }}>{value}</td>
+                  <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)" }}>{prop}</td>
+                  <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)", fontFamily: "monospace", color: "var(--text-secondary)", fontSize: typography.fontSize.xs }}>{token}</td>
+                  <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)" }}>{value}</td>
                 </tr>
               ))}
             </tbody>
@@ -460,8 +460,8 @@ function DesignContent() {
         <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.sm }}>
           <thead>
             <tr style={{ borderBottom: "2px solid var(--border-default)" }}>
-              <th style={{ textAlign: "left", padding: "12px 16px", color: "var(--text-primary)" }}>컴포넌트</th>
-              <th style={{ textAlign: "left", padding: "12px 16px", color: "var(--text-primary)" }}>차이점</th>
+              <th style={{ textAlign: "left", padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-primary)" }}>컴포넌트</th>
+              <th style={{ textAlign: "left", padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-primary)" }}>차이점</th>
             </tr>
           </thead>
           <tbody>
@@ -471,8 +471,8 @@ function DesignContent() {
               ["Card", "콘텐츠 컨테이너 — SectionHeader는 제목+슬롯만 제공"],
             ].map(([name, desc]) => (
               <tr key={name} style={{ borderBottom: "1px solid var(--border-default)" }}>
-                <td style={{ padding: "12px 16px", fontWeight: typography.fontWeight.semibold }}>{name}</td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>{desc}</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, fontWeight: typography.fontWeight.semibold }}>{name}</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>{desc}</td>
               </tr>
             ))}
           </tbody>
@@ -629,7 +629,7 @@ function ListCellSimple({ title, value, valueColor }: { title: string; value?: s
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
-      padding: "12px 16px",
+      padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`,
       borderBottom: "1px solid var(--border-solid-alternative)",
     }}>
       <span style={{ fontSize: typography.fontSize.sm, color: "var(--content-base-default)" }}>{title}</span>

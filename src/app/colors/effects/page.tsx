@@ -278,7 +278,7 @@ export default function EffectsPage() {
   const darkGradientOverlay = flattenTokens(toMap(toMap(dark.gradient).overlay));
 
   return (
-    <div style={{ maxWidth: 720 }}>
+    <div style={{ maxWidth: 840 }}>
       <Breadcrumb items={[{ label: "파운데이션", href: "/" }, { label: "Effects" }]} />
 
       <h1 className="text-3xl font-bold mb-2" style={{ color: "var(--content-base-strong)" }}>

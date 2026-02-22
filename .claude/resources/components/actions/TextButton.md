@@ -13,7 +13,7 @@ A minimal button that displays only text without a background fill. Used for low
 - Use with `underline` variant for link-style text within paragraphs
 
 ## When NOT to Use
-- Do NOT use as the primary CTA -- use `Button variant="filled"` instead
+- Do NOT use as the primary CTA -- use `Button buttonType="filled"` instead
 - Do NOT use for icon-only actions -- use `IconButton` instead
 - Do NOT use for tag/filter selection -- use `Chip` instead
 

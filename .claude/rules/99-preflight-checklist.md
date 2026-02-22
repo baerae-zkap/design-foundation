@@ -4,9 +4,9 @@ Before returning any generated UI code, verify every item below. If any check fa
 
 ## Components
 - [ ] All interactive elements use system components (`Button`, `IconButton`, `TextField`, etc.)
-- [ ] No native `<button>`, `<input>`, `<select>`, `<textarea>` unless wrapped by system components
-- [ ] No `<div onClick>` used as a button — use `Button`, `ActionArea`, or `Card`
-- [ ] `ActionArea` does not contain nested `Button` or `IconButton` for the same action
+- [ ] No native `<button>`, `<input>`, `<select>`, `<textarea>` (there is no system Select -- use Radio/RadioGroup or SegmentedControl instead)
+- [ ] No `<div onClick>` used as a button — use `Button`, `IconButton`, or `Card` (use `ActionArea` only for button groups at bottom of modals/sheets)
+- [ ] `ActionArea` used only as button group container (for modals, sheets, page footers) with `Button`/`TextButton` children
 
 ## Colors
 - [ ] Zero hardcoded hex/rgb/hsl values in styles

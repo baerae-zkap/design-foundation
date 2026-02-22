@@ -109,7 +109,7 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
       padding: spacing.primitive[4],
       borderRadius: radius.component.card.sm,
       cursor: isInteractive ? 'pointer' : 'default',
-      outline: isFocusVisible && isInteractive ? `2px solid var(--content-brand-default)` : 'none',
+      outline: isFocusVisible && isInteractive ? `${borderWidth.strong}px solid ${cssVarColors.content.brand.default}` : 'none',
       outlineOffset: 2,
       transition: transitions.background,
       ...variantStyle,

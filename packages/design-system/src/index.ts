@@ -87,8 +87,11 @@ export type { TableProps, TableHeadProps, TableBodyProps, TableRowProps, TableHe
 export { Thumbnail } from './components/Thumbnail/Thumbnail';
 export type { ThumbnailProps, ThumbnailAspectRatio } from './components/Thumbnail/Thumbnail';
 
-export { AlertDialog } from './components/AlertDialog/AlertDialog';
-export type { AlertDialogProps, AlertDialogAction } from './components/AlertDialog/AlertDialog';
+export { Avatar, AvatarGroup } from './components/Avatar/Avatar';
+export type { AvatarProps, AvatarGroupProps, AvatarSize } from './components/Avatar/Avatar';
+
+export { Dialog } from './components/AlertDialog/AlertDialog';
+export type { DialogProps, DialogAction } from './components/AlertDialog/AlertDialog';
 
 export { StateView } from './components/StateView/StateView';
 export type { StateViewProps, StateViewVariant, StateViewSize } from './components/StateView/StateView';
@@ -105,5 +108,82 @@ export type { ToastProps, ToastPosition } from './components/Toast/Toast';
 export { Spinner } from './components/Spinner/Spinner';
 export type { SpinnerProps, SpinnerSize, SpinnerColor } from './components/Spinner/Spinner';
 
+export { BottomNavigation } from './components/BottomNavigation/BottomNavigation';
+export type { BottomNavigationProps, BottomNavigationItem } from './components/BottomNavigation/BottomNavigation';
+
+export { CategoryNavigation } from './components/CategoryNavigation/CategoryNavigation';
+export type {
+  CategoryNavigationProps,
+  CategoryNavigationItem,
+  CategoryNavigationSize,
+} from './components/CategoryNavigation/CategoryNavigation';
+
+export { PageCounter } from './components/PageCounter';
+export type { PageCounterProps, PageCounterSize, PageCounterVariant } from './components/PageCounter';
+
+export { ProgressIndicator } from './components/ProgressIndicator';
+export type {
+  ProgressIndicatorProps,
+  ProgressIndicatorSize,
+  ProgressIndicatorColor,
+} from './components/ProgressIndicator';
+
+export { ProgressTracker } from './components/ProgressTracker';
+export type {
+  ProgressTrackerProps,
+  ProgressTrackerStep,
+  ProgressTrackerVariant,
+  ProgressTrackerOrientation,
+} from './components/ProgressTracker';
+
+export { Tab } from './components/Tab/Tab';
+export type { TabProps, TabItem, TabSize, TabResize } from './components/Tab/Tab';
+
+export { TopNavigation } from './components/TopNavigation/TopNavigation';
+export type { TopNavigationProps, TopNavigationScrollEffect, TopNavigationVariant } from './components/TopNavigation/TopNavigation';
+
+export { BottomSheet } from './components/BottomSheet';
+export type { BottomSheetProps } from './components/BottomSheet';
+
+export { Popover } from './components/Popover';
+export type { PopoverProps, PopoverSize } from './components/Popover';
+
+export { Popup } from './components/Popup/Popup';
+export type { PopupProps, PopupAction, PopupSize, PopupNavigation, PopupActionLayout, PopupType } from './components/Popup/Popup';
+
+export { Tooltip } from './components/Tooltip/Tooltip';
+export type { TooltipProps, TooltipPosition, TooltipSize, TooltipMode } from './components/Tooltip/Tooltip';
+
+export { CheckMark } from './components/CheckMark/CheckMark';
+export type { CheckMarkProps, CheckMarkSize } from './components/CheckMark/CheckMark';
+
+export { Checkbox } from './components/Checkbox/Checkbox';
+export type { CheckboxProps, CheckboxSize } from './components/Checkbox/Checkbox';
+
+export { Radio, RadioGroup } from './components/Radio/Radio';
+export type { RadioProps, RadioGroupProps, RadioSize } from './components/Radio/Radio';
+
+export { Switch } from './components/Switch/Switch';
+export type { SwitchProps, SwitchSize } from './components/Switch/Switch';
+
+export { TextField } from './components/TextField/TextField';
+export type { TextFieldProps } from './components/TextField/TextField';
+
+
 export { Skeleton } from './components/Skeleton/Skeleton';
-export type { SkeletonProps, SkeletonVariant, SkeletonAnimation } from './components/Skeleton/Skeleton';
+export type { SkeletonProps, SkeletonVariant } from './components/Skeleton/Skeleton';
+
+export { BottomCTA } from './components/BottomCTA/BottomCTA';
+export type { BottomCTAProps, BottomCTAVariant } from './components/BottomCTA/BottomCTA';
+
+export { TextArea } from './components/TextArea/TextArea';
+export type { TextAreaProps } from './components/TextArea/TextArea';
+
+export { SearchField } from './components/SearchField/SearchField';
+export type { SearchFieldProps } from './components/SearchField/SearchField';
+export { Badge } from './components/Badge/Badge';
+export type { BadgeProps, BadgeColor, BadgeVariant, BadgeSize } from './components/Badge/Badge';
+export { Slider } from './components/Slider/Slider';
+export type { SliderProps } from './components/Slider/Slider';
+export { SegmentedControl } from './components/SegmentedControl/SegmentedControl';
+export type { SegmentedControlProps, SegmentedControlOption, SegmentedControlSize } from './components/SegmentedControl/SegmentedControl';

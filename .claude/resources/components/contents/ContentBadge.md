@@ -15,6 +15,15 @@ A small non-interactive label for displaying status, category, or tag informatio
 - Do NOT use for interactive filters or selections -- use `Chip` instead
 - Do NOT use for clickable actions -- use `Button` or `TextButton` instead
 - Do NOT use for large status banners -- this is meant for compact inline labels
+- Do NOT use for inline status labels in tables or lists -- use `Badge` instead
+- Do NOT use for notification count overlays -- use `PushBadge` instead
+
+## ContentBadge vs Badge vs PushBadge
+| Component | Purpose | Typical Position |
+|-----------|---------|------------------|
+| `ContentBadge` | Standalone status/category label (e.g., NEW, SOLD OUT) | Above titles, in card metadata areas |
+| `Badge` | Inline status/count label with multiple variants | Inline with text, inside table cells |
+| `PushBadge` | Notification count overlay | Overlaid on IconButton or icon |
 
 ## Props
 

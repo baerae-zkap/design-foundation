@@ -30,7 +30,7 @@ An expandable/collapsible content panel with a clickable header. Follows WAI-ARI
 - Use uncontrolled mode (`defaultExpanded`) for simple show/hide — no state needed
 - Use controlled mode (`expanded` + `onChange`) when parent needs to know or control open state
 - Do NOT nest Accordion inside another Accordion
-- For tab-like view switching, use `SegmentedControl` (when available) — not Accordion
+- For tab-like view switching, use `SegmentedControl` — not Accordion
 - Put non-critical, supplementary content inside accordion panels. Never hide required info behind a collapsed accordion
 
 ## Props

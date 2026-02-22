@@ -143,7 +143,7 @@ export default function ToastPage() {
   };
 
   return (
-    <div style={{ maxWidth: 720 }}>
+    <div style={{ maxWidth: 840 }}>
       <style>{`
         @keyframes slideIn {
           from {

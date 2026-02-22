@@ -26,7 +26,7 @@ For any screen or component generation task, return:
 ## Output Rules
 
 - NEVER return code with hardcoded colors (`#hex`, `rgb()`, `hsl()`).
-- NEVER return native HTML controls (`<button>`, `<input>`, `<select>`) when a system equivalent exists.
+- NEVER return native HTML controls (`<button>`, `<input>`, `<textarea>`). Use system equivalents (`Button`, `TextField`, `TextArea`). There is no system `Select` -- use `Radio`/`RadioGroup` or `SegmentedControl` instead of native `<select>`.
 - ALWAYS include `disabled` and loading states for form submission buttons.
 - ALWAYS include empty state for lists and data tables.
 - ALWAYS verify: one primary CTA per section maximum.

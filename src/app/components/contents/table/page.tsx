@@ -29,7 +29,7 @@ function UsageCard({ situation, description, example }: {
       <div style={{ display: "flex", alignItems: "center", gap: spacing.primitive[2], marginBottom: spacing.primitive[1] }}>
         <span style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)" }}>{situation}</span>
       </div>
-      <p style={{ fontSize: typography.fontSize.compact, color: "var(--text-secondary)", margin: 0, marginBottom: 6 }}>{description}</p>
+      <p style={{ fontSize: typography.fontSize.compact, color: "var(--text-secondary)", margin: 0, marginBottom: spacing.primitive[1] }}>{description}</p>
       <p style={{ fontSize: typography.fontSize.xs, color: "var(--text-tertiary)", margin: 0 }}>
         {example}
       </p>
@@ -55,7 +55,7 @@ function DesignContent() {
         <div style={{
           backgroundColor: "var(--surface-base-container)",
           borderRadius: radius.primitive.lg,
-          padding: "48px 40px",
+          padding: `${spacing.primitive[12]}px ${spacing.primitive[10]}px`,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -191,81 +191,81 @@ function DesignContent() {
           <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.sm }}>
             <thead>
               <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Element</th>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Color</th>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Token</th>
+                <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Element</th>
+                <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Color</th>
+                <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Token</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>헤더 배경</td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)" }}>헤더 배경</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: spacing.primitive[2] }}>
                     <div style={{ width: 20, height: 20, borderRadius: radius.primitive.xs, backgroundColor: "var(--surface-base-alternative)", border: "1px solid var(--border-base-default)" }} />
                     <InlineCode>var(--surface-base-alternative)</InlineCode>
                   </div>
                 </td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: typography.fontSize.compact, color: "var(--text-secondary)" }}>surface.base.alternative</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: typography.fontSize.compact, color: "var(--text-secondary)" }}>surface.base.alternative</td>
               </tr>
               <tr>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>데이터 행 배경</td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)" }}>데이터 행 배경</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: spacing.primitive[2] }}>
                     <div style={{ width: 20, height: 20, borderRadius: radius.primitive.xs, backgroundColor: "var(--surface-base-default)", border: "1px solid var(--border-base-default)" }} />
                     <InlineCode>var(--static-white)</InlineCode>
                   </div>
                 </td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: typography.fontSize.compact, color: "var(--text-secondary)" }}>surface.base.default</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: typography.fontSize.compact, color: "var(--text-secondary)" }}>surface.base.default</td>
               </tr>
               <tr>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>Striped 행 배경</td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)" }}>Striped 행 배경</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: spacing.primitive[2] }}>
                     <div style={{ width: 20, height: 20, borderRadius: radius.primitive.xs, backgroundColor: "var(--surface-base-alternative)", border: "1px solid var(--border-base-default)" }} />
                     <InlineCode>var(--surface-base-alternative)</InlineCode>
                   </div>
                 </td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: typography.fontSize.compact, color: "var(--text-secondary)" }}>surface.base.alternative</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: typography.fontSize.compact, color: "var(--text-secondary)" }}>surface.base.alternative</td>
               </tr>
               <tr>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>Hover 행 배경</td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)" }}>Hover 행 배경</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: spacing.primitive[2] }}>
                     <div style={{ width: 20, height: 20, borderRadius: radius.primitive.xs, backgroundColor: "var(--surface-base-containerPressed)" }} />
                     <InlineCode>var(--border-base-default)</InlineCode>
                   </div>
                 </td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: typography.fontSize.compact, color: "var(--text-secondary)" }}>surface.base.containerPressed</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: typography.fontSize.compact, color: "var(--text-secondary)" }}>surface.base.containerPressed</td>
               </tr>
               <tr>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>테두리</td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)" }}>테두리</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: spacing.primitive[2] }}>
                     <div style={{ width: 20, height: 20, borderRadius: radius.primitive.xs, backgroundColor: "var(--border-base-default)" }} />
                     <InlineCode>var(--border-base-default)</InlineCode>
                   </div>
                 </td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: typography.fontSize.compact, color: "var(--text-secondary)" }}>border.base.default</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: typography.fontSize.compact, color: "var(--text-secondary)" }}>border.base.default</td>
               </tr>
               <tr>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>헤더 텍스트</td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)" }}>헤더 텍스트</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: spacing.primitive[2] }}>
                     <div style={{ width: 20, height: 20, borderRadius: radius.primitive.xs, backgroundColor: "var(--content-base-secondary)" }} />
                     <InlineCode>var(--content-base-secondary)</InlineCode>
                   </div>
                 </td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: typography.fontSize.compact, color: "var(--text-secondary)" }}>content.base.secondary</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)", fontFamily: "monospace", fontSize: typography.fontSize.compact, color: "var(--text-secondary)" }}>content.base.secondary</td>
               </tr>
               <tr>
-                <td style={{ padding: "12px 16px" }}>셀 텍스트</td>
-                <td style={{ padding: "12px 16px" }}>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px` }}>셀 텍스트</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px` }}>
                   <div style={{ display: "flex", alignItems: "center", gap: spacing.primitive[2] }}>
                     <div style={{ width: 20, height: 20, borderRadius: radius.primitive.xs, backgroundColor: "var(--content-base-default)" }} />
                     <InlineCode>var(--content-base-default)</InlineCode>
                   </div>
                 </td>
-                <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: typography.fontSize.compact, color: "var(--text-secondary)" }}>content.base.default</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, fontFamily: "monospace", fontSize: typography.fontSize.compact, color: "var(--text-secondary)" }}>content.base.default</td>
               </tr>
             </tbody>
           </table>
@@ -292,15 +292,15 @@ function DesignContent() {
           }}>
             <TableStateCard label="Default Row" sublabel="기본 행 상태">
               <div style={{ width: 140, borderRadius: radius.primitive.xs, overflow: "hidden", border: "1px solid var(--border-default)" }}>
-                <div style={{ height: 20, backgroundColor: "var(--surface-base-alternative)", display: "flex", alignItems: "center", padding: "0 8px", gap: spacing.primitive[4], borderBottom: "1px solid var(--border-default)" }}>
+                <div style={{ height: 20, backgroundColor: "var(--surface-base-alternative)", display: "flex", alignItems: "center", padding: `0 ${spacing.primitive[2]}px`, gap: spacing.primitive[4], borderBottom: "1px solid var(--border-default)" }}>
                   <div style={{ width: 28, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-secondary)" }} />
                   <div style={{ width: 28, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-secondary)" }} />
                 </div>
-                <div style={{ height: 22, backgroundColor: "var(--surface-base-default)", display: "flex", alignItems: "center", padding: "0 8px", gap: spacing.primitive[4], borderBottom: "1px solid var(--border-default)" }}>
+                <div style={{ height: 22, backgroundColor: "var(--surface-base-default)", display: "flex", alignItems: "center", padding: `0 ${spacing.primitive[2]}px`, gap: spacing.primitive[4], borderBottom: "1px solid var(--border-default)" }}>
                   <div style={{ width: 24, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-default)" }} />
                   <div style={{ width: 24, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-default)" }} />
                 </div>
-                <div style={{ height: 22, backgroundColor: "var(--surface-base-default)", display: "flex", alignItems: "center", padding: "0 8px", gap: spacing.primitive[4] }}>
+                <div style={{ height: 22, backgroundColor: "var(--surface-base-default)", display: "flex", alignItems: "center", padding: `0 ${spacing.primitive[2]}px`, gap: spacing.primitive[4] }}>
                   <div style={{ width: 24, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-default)" }} />
                   <div style={{ width: 24, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-default)" }} />
                 </div>
@@ -308,15 +308,15 @@ function DesignContent() {
             </TableStateCard>
             <TableStateCard label="Hover Row" sublabel="마우스 오버 행">
               <div style={{ width: 140, borderRadius: radius.primitive.xs, overflow: "hidden", border: "1px solid var(--border-default)" }}>
-                <div style={{ height: 20, backgroundColor: "var(--surface-base-alternative)", display: "flex", alignItems: "center", padding: "0 8px", gap: spacing.primitive[4], borderBottom: "1px solid var(--border-default)" }}>
+                <div style={{ height: 20, backgroundColor: "var(--surface-base-alternative)", display: "flex", alignItems: "center", padding: `0 ${spacing.primitive[2]}px`, gap: spacing.primitive[4], borderBottom: "1px solid var(--border-default)" }}>
                   <div style={{ width: 28, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-secondary)" }} />
                   <div style={{ width: 28, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-secondary)" }} />
                 </div>
-                <div style={{ height: 22, backgroundColor: "var(--surface-base-containerPressed)", display: "flex", alignItems: "center", padding: "0 8px", gap: spacing.primitive[4], borderBottom: "1px solid var(--border-default)" }}>
+                <div style={{ height: 22, backgroundColor: "var(--surface-base-containerPressed)", display: "flex", alignItems: "center", padding: `0 ${spacing.primitive[2]}px`, gap: spacing.primitive[4], borderBottom: "1px solid var(--border-default)" }}>
                   <div style={{ width: 24, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-default)" }} />
                   <div style={{ width: 24, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-default)" }} />
                 </div>
-                <div style={{ height: 22, backgroundColor: "var(--surface-base-default)", display: "flex", alignItems: "center", padding: "0 8px", gap: spacing.primitive[4] }}>
+                <div style={{ height: 22, backgroundColor: "var(--surface-base-default)", display: "flex", alignItems: "center", padding: `0 ${spacing.primitive[2]}px`, gap: spacing.primitive[4] }}>
                   <div style={{ width: 24, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-default)" }} />
                   <div style={{ width: 24, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-default)" }} />
                 </div>
@@ -324,15 +324,15 @@ function DesignContent() {
             </TableStateCard>
             <TableStateCard label="Selected Row" sublabel="선택된 행">
               <div style={{ width: 140, borderRadius: radius.primitive.xs, overflow: "hidden", border: "1px solid var(--border-default)" }}>
-                <div style={{ height: 20, backgroundColor: "var(--surface-base-alternative)", display: "flex", alignItems: "center", padding: "0 8px", gap: spacing.primitive[4], borderBottom: "1px solid var(--border-default)" }}>
+                <div style={{ height: 20, backgroundColor: "var(--surface-base-alternative)", display: "flex", alignItems: "center", padding: `0 ${spacing.primitive[2]}px`, gap: spacing.primitive[4], borderBottom: "1px solid var(--border-default)" }}>
                   <div style={{ width: 28, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-secondary)" }} />
                   <div style={{ width: 28, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-secondary)" }} />
                 </div>
-                <div style={{ height: 22, backgroundColor: "var(--surface-brand-secondary)", display: "flex", alignItems: "center", padding: "0 8px", gap: spacing.primitive[4], borderBottom: "1px solid var(--border-default)" }}>
+                <div style={{ height: 22, backgroundColor: "var(--surface-brand-secondary)", display: "flex", alignItems: "center", padding: `0 ${spacing.primitive[2]}px`, gap: spacing.primitive[4], borderBottom: "1px solid var(--border-default)" }}>
                   <div style={{ width: 24, height: 4, borderRadius: 2, backgroundColor: "var(--content-brand-default)" }} />
                   <div style={{ width: 24, height: 4, borderRadius: 2, backgroundColor: "var(--content-brand-default)" }} />
                 </div>
-                <div style={{ height: 22, backgroundColor: "var(--surface-base-default)", display: "flex", alignItems: "center", padding: "0 8px", gap: spacing.primitive[4] }}>
+                <div style={{ height: 22, backgroundColor: "var(--surface-base-default)", display: "flex", alignItems: "center", padding: `0 ${spacing.primitive[2]}px`, gap: spacing.primitive[4] }}>
                   <div style={{ width: 24, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-default)" }} />
                   <div style={{ width: 24, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-default)" }} />
                 </div>
@@ -340,18 +340,18 @@ function DesignContent() {
             </TableStateCard>
             <TableStateCard label="Sorted Column" sublabel="정렬 활성 컬럼">
               <div style={{ width: 140, borderRadius: radius.primitive.xs, overflow: "hidden", border: "1px solid var(--border-default)" }}>
-                <div style={{ height: 20, backgroundColor: "var(--surface-base-alternative)", display: "flex", alignItems: "center", padding: "0 8px", gap: spacing.primitive[4], borderBottom: "1px solid var(--border-default)" }}>
+                <div style={{ height: 20, backgroundColor: "var(--surface-base-alternative)", display: "flex", alignItems: "center", padding: `0 ${spacing.primitive[2]}px`, gap: spacing.primitive[4], borderBottom: "1px solid var(--border-default)" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 2 }}>
                     <div style={{ width: 28, height: 4, borderRadius: 2, backgroundColor: "var(--content-brand-default)" }} />
                     <span style={{ fontSize: 8, color: "var(--content-brand-default)" }}>▼</span>
                   </div>
                   <div style={{ width: 28, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-secondary)" }} />
                 </div>
-                <div style={{ height: 22, backgroundColor: "var(--surface-base-default)", display: "flex", alignItems: "center", padding: "0 8px", gap: spacing.primitive[4], borderBottom: "1px solid var(--border-default)" }}>
+                <div style={{ height: 22, backgroundColor: "var(--surface-base-default)", display: "flex", alignItems: "center", padding: `0 ${spacing.primitive[2]}px`, gap: spacing.primitive[4], borderBottom: "1px solid var(--border-default)" }}>
                   <div style={{ width: 24, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-default)" }} />
                   <div style={{ width: 24, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-default)" }} />
                 </div>
-                <div style={{ height: 22, backgroundColor: "var(--surface-base-default)", display: "flex", alignItems: "center", padding: "0 8px", gap: spacing.primitive[4] }}>
+                <div style={{ height: 22, backgroundColor: "var(--surface-base-default)", display: "flex", alignItems: "center", padding: `0 ${spacing.primitive[2]}px`, gap: spacing.primitive[4] }}>
                   <div style={{ width: 24, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-default)" }} />
                   <div style={{ width: 24, height: 4, borderRadius: 2, backgroundColor: "var(--content-base-default)" }} />
                 </div>
@@ -383,18 +383,18 @@ function DesignContent() {
                 <table style={{ width: "100%", borderCollapse: "collapse", backgroundColor: "var(--surface-base-default)" }}>
                   <thead>
                     <tr style={{ backgroundColor: "var(--surface-base-alternative)", borderBottom: "1px solid var(--border-solid-alternative)" }}>
-                      <th style={{ padding: "8px 20px", textAlign: "left", fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-secondary)" }}>Name</th>
-                      <th style={{ padding: "8px 20px", textAlign: "left", fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-secondary)" }}>Value</th>
+                      <th style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[5]}px`, textAlign: "left", fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-secondary)" }}>Name</th>
+                      <th style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[5]}px`, textAlign: "left", fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-secondary)" }}>Value</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr style={{ backgroundColor: "var(--surface-base-container)", borderBottom: "1px solid var(--border-solid-alternative)" }}>
-                      <td style={{ padding: "16px 20px", fontSize: typography.fontSize.sm, color: "var(--content-base-default)" }}>ETH</td>
-                      <td style={{ padding: "16px 20px", fontSize: typography.fontSize.sm, color: "var(--content-base-default)" }}>₩3,245,000</td>
+                      <td style={{ padding: `${spacing.primitive[4]}px ${spacing.primitive[5]}px`, fontSize: typography.fontSize.sm, color: "var(--content-base-default)" }}>ETH</td>
+                      <td style={{ padding: `${spacing.primitive[4]}px ${spacing.primitive[5]}px`, fontSize: typography.fontSize.sm, color: "var(--content-base-default)" }}>₩3,245,000</td>
                     </tr>
                     <tr>
-                      <td style={{ padding: "16px 20px", fontSize: typography.fontSize.sm, color: "var(--content-base-default)" }}>BTC</td>
-                      <td style={{ padding: "16px 20px", fontSize: typography.fontSize.sm, color: "var(--content-base-default)" }}>₩1,850,000</td>
+                      <td style={{ padding: `${spacing.primitive[4]}px ${spacing.primitive[5]}px`, fontSize: typography.fontSize.sm, color: "var(--content-base-default)" }}>BTC</td>
+                      <td style={{ padding: `${spacing.primitive[4]}px ${spacing.primitive[5]}px`, fontSize: typography.fontSize.sm, color: "var(--content-base-default)" }}>₩1,850,000</td>
                     </tr>
                   </tbody>
                 </table>
@@ -418,18 +418,18 @@ function DesignContent() {
                 <table style={{ width: "100%", borderCollapse: "collapse", backgroundColor: "var(--surface-base-default)" }}>
                   <thead>
                     <tr style={{ backgroundColor: "var(--surface-base-alternative)", borderBottom: "1px solid var(--border-solid-alternative)" }}>
-                      <th style={{ padding: "8px 20px", textAlign: "left", fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-secondary)" }}>Name</th>
-                      <th style={{ padding: "8px 20px", textAlign: "left", fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-secondary)" }}>Value</th>
+                      <th style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[5]}px`, textAlign: "left", fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-secondary)" }}>Name</th>
+                      <th style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[5]}px`, textAlign: "left", fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-secondary)" }}>Value</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr style={{ backgroundColor: "var(--surface-brand-secondary)", borderBottom: "1px solid var(--border-solid-alternative)" }}>
-                      <td style={{ padding: "16px 20px", fontSize: typography.fontSize.sm, color: "var(--content-brand-default)", fontWeight: typography.fontWeight.medium }}>ETH</td>
-                      <td style={{ padding: "16px 20px", fontSize: typography.fontSize.sm, color: "var(--content-brand-default)", fontWeight: typography.fontWeight.medium }}>₩3,245,000</td>
+                      <td style={{ padding: `${spacing.primitive[4]}px ${spacing.primitive[5]}px`, fontSize: typography.fontSize.sm, color: "var(--content-brand-default)", fontWeight: typography.fontWeight.medium }}>ETH</td>
+                      <td style={{ padding: `${spacing.primitive[4]}px ${spacing.primitive[5]}px`, fontSize: typography.fontSize.sm, color: "var(--content-brand-default)", fontWeight: typography.fontWeight.medium }}>₩3,245,000</td>
                     </tr>
                     <tr>
-                      <td style={{ padding: "16px 20px", fontSize: typography.fontSize.sm, color: "var(--content-base-default)" }}>BTC</td>
-                      <td style={{ padding: "16px 20px", fontSize: typography.fontSize.sm, color: "var(--content-base-default)" }}>₩1,850,000</td>
+                      <td style={{ padding: `${spacing.primitive[4]}px ${spacing.primitive[5]}px`, fontSize: typography.fontSize.sm, color: "var(--content-base-default)" }}>BTC</td>
+                      <td style={{ padding: `${spacing.primitive[4]}px ${spacing.primitive[5]}px`, fontSize: typography.fontSize.sm, color: "var(--content-base-default)" }}>₩1,850,000</td>
                     </tr>
                   </tbody>
                 </table>
@@ -453,21 +453,21 @@ function DesignContent() {
                 <table style={{ width: "100%", borderCollapse: "collapse", backgroundColor: "var(--surface-base-default)" }}>
                   <thead>
                     <tr style={{ backgroundColor: "var(--surface-base-alternative)", borderBottom: "1px solid var(--border-solid-alternative)" }}>
-                      <th style={{ padding: "8px 20px", textAlign: "left", fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-secondary)" }}>Name</th>
-                      <th style={{ padding: "8px 20px", textAlign: "left", fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-secondary)" }}>Value</th>
-                      <th style={{ padding: "8px 20px", textAlign: "left", fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-secondary)" }}>Change</th>
+                      <th style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[5]}px`, textAlign: "left", fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-secondary)" }}>Name</th>
+                      <th style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[5]}px`, textAlign: "left", fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-secondary)" }}>Value</th>
+                      <th style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[5]}px`, textAlign: "left", fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-secondary)" }}>Change</th>
                     </tr>
                   </thead>
                   <tbody>
                     {[0, 1, 2].map((i) => (
                       <tr key={i} style={{ borderBottom: i < 2 ? "1px solid var(--border-solid-alternative)" : "none" }}>
-                        <td style={{ padding: "16px 20px" }}>
+                        <td style={{ padding: `${spacing.primitive[4]}px ${spacing.primitive[5]}px` }}>
                           <div style={{ width: 60, height: 14, borderRadius: radius.primitive.xs, backgroundColor: "var(--border-solid-alternative)", animation: "pulse 1.5s ease-in-out infinite" }} />
                         </td>
-                        <td style={{ padding: "16px 20px" }}>
+                        <td style={{ padding: `${spacing.primitive[4]}px ${spacing.primitive[5]}px` }}>
                           <div style={{ width: 80, height: 14, borderRadius: radius.primitive.xs, backgroundColor: "var(--border-solid-alternative)", animation: "pulse 1.5s ease-in-out infinite", animationDelay: "0.2s" }} />
                         </td>
-                        <td style={{ padding: "16px 20px" }}>
+                        <td style={{ padding: `${spacing.primitive[4]}px ${spacing.primitive[5]}px` }}>
                           <div style={{ width: 40, height: 14, borderRadius: radius.primitive.xs, backgroundColor: "var(--border-solid-alternative)", animation: "pulse 1.5s ease-in-out infinite", animationDelay: "0.4s" }} />
                         </td>
                       </tr>
@@ -669,16 +669,16 @@ function DesignContent() {
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.sm }}>
               <thead>
                 <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Token</th>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Value</th>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Usage</th>
+                  <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Token</th>
+                  <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Value</th>
+                  <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Usage</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: typography.fontSize.compact, color: "var(--text-secondary)" }}>card.sm</td>
-                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>12px</td>
-                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>테이블 외곽 모서리</td>
+                  <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, fontFamily: "monospace", fontSize: typography.fontSize.compact, color: "var(--text-secondary)" }}>card.sm</td>
+                  <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>12px</td>
+                  <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>테이블 외곽 모서리</td>
                 </tr>
               </tbody>
             </table>
@@ -690,30 +690,30 @@ function DesignContent() {
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.sm }}>
               <thead>
                 <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Size</th>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Header Padding</th>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Cell Padding</th>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Font Size</th>
+                  <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Size</th>
+                  <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Header Padding</th>
+                  <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Cell Padding</th>
+                  <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Font Size</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontWeight: typography.fontWeight.medium }}>Small</td>
-                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>16px / 6px</td>
-                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>16px / 12px</td>
-                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>13px</td>
+                  <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)", fontWeight: typography.fontWeight.medium }}>Small</td>
+                  <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>16px / 6px</td>
+                  <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>16px / 12px</td>
+                  <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>13px</td>
                 </tr>
                 <tr>
-                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", fontWeight: typography.fontWeight.medium }}>Medium</td>
-                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>20px / 8px</td>
-                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>20px / 16px</td>
-                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>14px</td>
+                  <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)", fontWeight: typography.fontWeight.medium }}>Medium</td>
+                  <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>20px / 8px</td>
+                  <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>20px / 16px</td>
+                  <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>14px</td>
                 </tr>
                 <tr>
-                  <td style={{ padding: "12px 16px", fontWeight: typography.fontWeight.medium }}>Large</td>
-                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>24px / 10px</td>
-                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>24px / 20px</td>
-                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>15px</td>
+                  <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, fontWeight: typography.fontWeight.medium }}>Large</td>
+                  <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>24px / 10px</td>
+                  <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>24px / 20px</td>
+                  <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>15px</td>
                 </tr>
               </tbody>
             </table>
@@ -731,26 +731,26 @@ function DesignContent() {
           <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.sm }}>
             <thead>
               <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Attribute</th>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Description</th>
+                <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Attribute</th>
+                <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Description</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><InlineCode>role=&quot;table&quot;</InlineCode></td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>스크린 리더가 테이블 구조로 인식</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)" }}><InlineCode>role=&quot;table&quot;</InlineCode></td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>스크린 리더가 테이블 구조로 인식</td>
               </tr>
               <tr>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><InlineCode>scope=&quot;col&quot;</InlineCode></td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>헤더 셀의 범위를 컬럼으로 명시</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)" }}><InlineCode>scope=&quot;col&quot;</InlineCode></td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>헤더 셀의 범위를 컬럼으로 명시</td>
               </tr>
               <tr>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><InlineCode>aria-sort</InlineCode></td>
-                <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>정렬 상태를 보조 기술에 전달</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)" }}><InlineCode>aria-sort</InlineCode></td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>정렬 상태를 보조 기술에 전달</td>
               </tr>
               <tr>
-                <td style={{ padding: "12px 16px" }}><InlineCode>aria-selected</InlineCode></td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>선택된 행 상태를 전달</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px` }}><InlineCode>aria-selected</InlineCode></td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>선택된 행 상태를 전달</td>
               </tr>
             </tbody>
           </table>
@@ -761,26 +761,26 @@ function DesignContent() {
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.sm }}>
               <thead>
                 <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Key</th>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Action</th>
+                  <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Key</th>
+                  <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Action</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.xs }}>Tab</kbd></td>
-                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>테이블 내 인터랙티브 요소로 포커스 이동</td>
+                  <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.xs }}>Tab</kbd></td>
+                  <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>테이블 내 인터랙티브 요소로 포커스 이동</td>
                 </tr>
                 <tr>
-                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.xs }}>Arrow Up/Down</kbd></td>
-                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>행 간 이동</td>
+                  <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.xs }}>Arrow Up/Down</kbd></td>
+                  <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>행 간 이동</td>
                 </tr>
                 <tr>
-                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.xs }}>Arrow Left/Right</kbd></td>
-                  <td style={{ padding: "12px 16px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>셀 간 이동</td>
+                  <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.xs }}>Arrow Left/Right</kbd></td>
+                  <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>셀 간 이동</td>
                 </tr>
                 <tr>
-                  <td style={{ padding: "12px 16px" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.xs }}>Space / Enter</kbd></td>
-                  <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>행 선택 또는 셀 내 액션 실행</td>
+                  <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px` }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.xs }}>Space / Enter</kbd></td>
+                  <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>행 선택 또는 셀 내 액션 실행</td>
                 </tr>
               </tbody>
             </table>
@@ -814,26 +814,26 @@ function DesignContent() {
           <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.sm }}>
             <thead>
               <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>컴포넌트</th>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>용도</th>
-                <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>차이점</th>
+                <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>컴포넌트</th>
+                <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>용도</th>
+                <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>차이점</th>
               </tr>
             </thead>
             <tbody>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "12px 16px", fontWeight: typography.fontWeight.medium }}>ListCell</td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>데이터 나열</td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>ListCell은 단일 행, Table은 열 기반 구조화</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, fontWeight: typography.fontWeight.medium }}>ListCell</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>데이터 나열</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>ListCell은 단일 행, Table은 열 기반 구조화</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "12px 16px", fontWeight: typography.fontWeight.medium }}>Card</td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>정보 표시</td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>Card는 자유 레이아웃, Table은 정렬된 행/열</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, fontWeight: typography.fontWeight.medium }}>Card</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>정보 표시</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>Card는 자유 레이아웃, Table은 정렬된 행/열</td>
               </tr>
               <tr>
-                <td style={{ padding: "12px 16px", fontWeight: typography.fontWeight.medium }}>ContentBadge</td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>상태 표시</td>
-                <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>ContentBadge는 Table 셀 내 상태 라벨에 사용</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, fontWeight: typography.fontWeight.medium }}>ContentBadge</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>상태 표시</td>
+                <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>ContentBadge는 Table 셀 내 상태 라벨에 사용</td>
               </tr>
             </tbody>
           </table>
@@ -984,7 +984,7 @@ function WebContent() {
 // Main Page Component
 export default function TablePage() {
   return (
-    <div style={{ maxWidth: 720 }}>
+    <div style={{ maxWidth: 840 }}>
       <Breadcrumb
         items={[
           { label: "Components", href: "/components" },
@@ -1017,7 +1017,7 @@ function TablePlayground() {
     <div style={{ marginBottom: spacing.primitive[8] }}>
       <div style={{ borderRadius: radius.primitive.xl, overflow: "hidden", backgroundColor: "var(--surface-base-alternative)" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
-          <div style={{ padding: 60, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <div style={{ padding: spacing.primitive[14], display: "flex", alignItems: "center", justifyContent: "center" }}>
             <TableDemo variant={variant} size={size} />
           </div>
 
@@ -1037,7 +1037,7 @@ function TablePlayground() {
               overflowY: "auto",
               display: "flex",
               flexDirection: "column",
-              gap: 28,
+              gap: spacing.primitive[7],
               backgroundColor: "var(--surface-base-default)",
               borderRadius: radius.primitive.lg,
             }}>
@@ -1081,7 +1081,7 @@ function TableStateCard({ label, sublabel, children }: {
       {children}
       <div style={{ textAlign: "center" }}>
         <div style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)" }}>{label}</div>
-        <div style={{ fontSize: typography.fontSize.xs, color: "var(--text-tertiary)", marginTop: 2 }}>{sublabel}</div>
+        <div style={{ fontSize: typography.fontSize.xs, color: "var(--text-tertiary)", marginTop: spacing.primitive[1] }}>{sublabel}</div>
       </div>
     </div>
   );

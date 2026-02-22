@@ -130,7 +130,7 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
           ? cssVarColors.fill.alternative
           : 'transparent',
       cursor: isInteractive ? 'pointer' : 'default',
-      outline: isFocusVisible && isInteractive ? `2px solid var(--content-brand-default)` : 'none',
+      outline: isFocusVisible && isInteractive ? `${borderWidth.strong}px solid ${cssVarColors.content.brand.default}` : 'none',
       outlineOffset: 2,
       borderBottom: divider ? `${borderWidth.default}px solid ${cssVarColors.border.solid.alternative}` : 'none',
       transition: transitions.background,

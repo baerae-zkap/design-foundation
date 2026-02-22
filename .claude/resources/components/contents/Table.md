@@ -16,6 +16,14 @@ A data table component for displaying tabular information in rows and columns. D
 - Do NOT use for media-rich items -- use `ListCard` instead
 - Do NOT use for single-column mobile layouts -- use `ListCell` instead
 
+## Responsive Strategy
+Table is desktop-oriented. On mobile viewports, consider replacing Table with a list of `ListCell` components, showing key columns as title/description/trailing. Example:
+```tsx
+// Desktop: Table with Name, Role, Status columns
+// Mobile fallback:
+<ListCell title={user.name} description={user.role} trailing={<Badge color={user.active ? 'success' : 'neutral'}>{user.active ? 'Active' : 'Inactive'}</Badge>} />
+```
+
 ## Sub-Components
 
 | Component | HTML Element | Purpose |

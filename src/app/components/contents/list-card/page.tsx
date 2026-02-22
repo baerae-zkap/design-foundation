@@ -19,7 +19,7 @@ type ListCardVariant = "filled" | "outlined";
 
 export default function ListCardPage() {
   return (
-    <div style={{ maxWidth: 720 }}>
+    <div style={{ maxWidth: 840 }}>
       <Breadcrumb
         items={[
           { label: "Components", href: "/components" },
@@ -176,7 +176,7 @@ function DesignContent() {
 
       {/* Anatomy */}
       <Section title="Anatomy">
-        <div style={{ backgroundColor: "var(--surface-base-container)", borderRadius: radius.primitive.lg, padding: "48px 40px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div style={{ backgroundColor: "var(--surface-base-container)", borderRadius: radius.primitive.lg, padding: `${spacing.primitive[12]}px ${spacing.primitive[10]}px`, display: "flex", alignItems: "center", justifyContent: "center" }}>
           <svg width="400" height="130" viewBox="0 0 400 130" overflow="visible">
             <defs>
               <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
@@ -337,8 +337,8 @@ function DesignContent() {
             borderRadius: radius.primitive.lg,
           }}>
             <StateCard label="Default" sublabel="기본 상태">
-              <div style={{ width: 130, height: 48, borderRadius: radius.primitive.sm, backgroundColor: "var(--surface-base-default)", boxShadow: "var(--shadow-semantic-card-default)", display: "flex", alignItems: "center", padding: "0 10px", gap: spacing.primitive[2] }}>
-                <div style={{ width: 28, height: 28, borderRadius: 14, backgroundColor: "var(--surface-base-alternative)", flexShrink: 0 }} />
+              <div style={{ width: 130, height: 48, borderRadius: radius.primitive.sm, backgroundColor: "var(--surface-base-default)", boxShadow: "var(--shadow-semantic-card-default)", display: "flex", alignItems: "center", padding: `0 ${spacing.primitive[2]}px`, gap: spacing.primitive[2] }}>
+                <div style={{ width: 28, height: 28, borderRadius: radius.primitive.full, backgroundColor: "var(--surface-base-alternative)", flexShrink: 0 }} />
                 <div style={{ flex: 1 }}>
                   <div style={{ height: 6, width: "70%", backgroundColor: "var(--border-base-default)", borderRadius: radius.primitive.xs }} />
                   <div style={{ height: 5, width: "50%", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, marginTop: spacing.primitive[1] }} />
@@ -346,8 +346,8 @@ function DesignContent() {
               </div>
             </StateCard>
             <StateCard label="Hover" sublabel="마우스 오버">
-              <div style={{ width: 130, height: 48, borderRadius: radius.primitive.sm, backgroundColor: "var(--surface-base-default)", boxShadow: "var(--shadow-semantic-card-default)", display: "flex", alignItems: "center", padding: "0 10px", gap: spacing.primitive[2] }}>
-                <div style={{ width: 28, height: 28, borderRadius: 14, backgroundColor: "var(--surface-base-alternative)", flexShrink: 0 }} />
+              <div style={{ width: 130, height: 48, borderRadius: radius.primitive.sm, backgroundColor: "var(--surface-base-default)", boxShadow: "var(--shadow-semantic-card-default)", display: "flex", alignItems: "center", padding: `0 ${spacing.primitive[2]}px`, gap: spacing.primitive[2] }}>
+                <div style={{ width: 28, height: 28, borderRadius: radius.primitive.full, backgroundColor: "var(--surface-base-alternative)", flexShrink: 0 }} />
                 <div style={{ flex: 1 }}>
                   <div style={{ height: 6, width: "70%", backgroundColor: "var(--border-base-default)", borderRadius: radius.primitive.xs }} />
                   <div style={{ height: 5, width: "50%", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, marginTop: spacing.primitive[1] }} />
@@ -355,8 +355,8 @@ function DesignContent() {
               </div>
             </StateCard>
             <StateCard label="Pressed" sublabel="눌림 상태">
-              <div style={{ width: 130, height: 48, borderRadius: radius.primitive.sm, backgroundColor: "var(--surface-base-alternative)", boxShadow: "none", display: "flex", alignItems: "center", padding: "0 10px", gap: spacing.primitive[2] }}>
-                <div style={{ width: 28, height: 28, borderRadius: 14, backgroundColor: "var(--surface-base-alternative)", flexShrink: 0 }} />
+              <div style={{ width: 130, height: 48, borderRadius: radius.primitive.sm, backgroundColor: "var(--surface-base-alternative)", boxShadow: "none", display: "flex", alignItems: "center", padding: `0 ${spacing.primitive[2]}px`, gap: spacing.primitive[2] }}>
+                <div style={{ width: 28, height: 28, borderRadius: radius.primitive.full, backgroundColor: "var(--surface-base-alternative)", flexShrink: 0 }} />
                 <div style={{ flex: 1 }}>
                   <div style={{ height: 6, width: "70%", backgroundColor: "var(--border-base-default)", borderRadius: radius.primitive.xs }} />
                   <div style={{ height: 5, width: "50%", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, marginTop: spacing.primitive[1] }} />
@@ -364,8 +364,8 @@ function DesignContent() {
               </div>
             </StateCard>
             <StateCard label="Focused" sublabel="키보드 포커스">
-              <div style={{ width: 130, height: 48, borderRadius: radius.primitive.sm, backgroundColor: "var(--surface-base-default)", boxShadow: "var(--shadow-semantic-card-default)", outline: "2px solid var(--content-brand-default)", outlineOffset: 2, display: "flex", alignItems: "center", padding: "0 10px", gap: spacing.primitive[2] }}>
-                <div style={{ width: 28, height: 28, borderRadius: 14, backgroundColor: "var(--surface-base-alternative)", flexShrink: 0 }} />
+              <div style={{ width: 130, height: 48, borderRadius: radius.primitive.sm, backgroundColor: "var(--surface-base-default)", boxShadow: "var(--shadow-semantic-card-default)", outline: "2px solid var(--content-brand-default)", outlineOffset: 2, display: "flex", alignItems: "center", padding: `0 ${spacing.primitive[2]}px`, gap: spacing.primitive[2] }}>
+                <div style={{ width: 28, height: 28, borderRadius: radius.primitive.full, backgroundColor: "var(--surface-base-alternative)", flexShrink: 0 }} />
                 <div style={{ flex: 1 }}>
                   <div style={{ height: 6, width: "70%", backgroundColor: "var(--border-base-default)", borderRadius: radius.primitive.xs }} />
                   <div style={{ height: 5, width: "50%", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, marginTop: spacing.primitive[1] }} />
@@ -431,13 +431,13 @@ function DesignContent() {
             <div>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4] }}>
                 <DoCard>
-                  <div style={{ display: "flex", flexDirection: "column", gap: spacing.primitive[2], width: "100%", maxWidth: 260, padding: "0 8px" }}>
+                  <div style={{ display: "flex", flexDirection: "column", gap: spacing.primitive[2], width: "100%", maxWidth: 260, padding: `0 ${spacing.primitive[2]}px` }}>
                     <ListCardDemo variant="filled" thumbnail={<EthereumIcon size={40} />} badges={<TrendBadge trend="up" value="+5.2%" />} title="Ethereum" subtitle="0.7812 ETH" meta="₩3,245,000" />
                     <ListCardDemo variant="filled" thumbnail={<BitcoinIcon size={40} />} badges={<TrendBadge trend="down" value="-2.1%" />} title="Bitcoin" subtitle="0.0234 BTC" meta="₩2,890,000" />
                   </div>
                 </DoCard>
                 <DontCard>
-                  <div style={{ display: "flex", flexDirection: "column", gap: spacing.primitive[2], width: "100%", maxWidth: 260, padding: "0 8px" }}>
+                  <div style={{ display: "flex", flexDirection: "column", gap: spacing.primitive[2], width: "100%", maxWidth: 260, padding: `0 ${spacing.primitive[2]}px` }}>
                     <ListCardDemo variant="filled" thumbnail={<EthereumIcon size={40} />} badges={<TrendBadge trend="up" value="+5.2%" />} title="Ethereum" subtitle="0.7812 ETH" meta="₩3,245,000" />
                     <ListCardDemo variant="outlined" thumbnail={<BitcoinIcon size={48} />} title="Bitcoin" meta="₩2,890,000" />
                   </div>
@@ -459,12 +459,12 @@ function DesignContent() {
             <div>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4] }}>
                 <DoCard>
-                  <div style={{ width: "100%", maxWidth: 260, padding: "0 8px" }}>
+                  <div style={{ width: "100%", maxWidth: 260, padding: `0 ${spacing.primitive[2]}px` }}>
                     <ListCardDemo variant="filled" thumbnail={<EthereumIcon size={40} />} title="Ethereum" subtitle="0.7812 ETH" meta="₩3.2M" />
                   </div>
                 </DoCard>
                 <DontCard>
-                  <div style={{ width: "100%", maxWidth: 260, padding: "0 8px" }}>
+                  <div style={{ width: "100%", maxWidth: 260, padding: `0 ${spacing.primitive[2]}px` }}>
                     <ListCardDemo variant="filled" title="Ethereum 이더리움 코인" subtitle="보유량: 0.7812 ETH, 매수가: ₩3,100,000" meta="현재가: ₩3,245,000 (수익률 +4.7%)" />
                   </div>
                 </DontCard>
@@ -579,9 +579,9 @@ function DesignContent() {
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.compact }}>
               <thead>
                 <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Property</th>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Foundation Token</th>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Value</th>
+                  <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Property</th>
+                  <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Foundation Token</th>
+                  <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Value</th>
                 </tr>
               </thead>
               <tbody>
@@ -598,9 +598,9 @@ function DesignContent() {
                   ["Meta margin-top", "spacing.primitive[1]", "4px"],
                 ].map(([prop, token, value], i, arr) => (
                   <tr key={i} style={{ borderBottom: i < arr.length - 1 ? "1px solid var(--divider)" : undefined }}>
-                    <td style={{ padding: "12px 16px", color: "var(--text-primary)" }}>{prop}</td>
-                    <td style={{ padding: "12px 16px" }}><InlineCode>{token}</InlineCode></td>
-                    <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>{value}</td>
+                    <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-primary)" }}>{prop}</td>
+                    <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px` }}><InlineCode>{token}</InlineCode></td>
+                    <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>{value}</td>
                   </tr>
                 ))}
               </tbody>
@@ -613,9 +613,9 @@ function DesignContent() {
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.compact }}>
               <thead>
                 <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Size</th>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Foundation Token</th>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Value</th>
+                  <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Size</th>
+                  <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Foundation Token</th>
+                  <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Value</th>
                 </tr>
               </thead>
               <tbody>
@@ -625,9 +625,9 @@ function DesignContent() {
                   ["large", "spacing.component.listCard.thumbnailSize.lg", "100px"],
                 ].map(([size, token, value], i, arr) => (
                   <tr key={i} style={{ borderBottom: i < arr.length - 1 ? "1px solid var(--divider)" : undefined }}>
-                    <td style={{ padding: "12px 16px" }}><InlineCode>{size}</InlineCode></td>
-                    <td style={{ padding: "12px 16px" }}><InlineCode>{token}</InlineCode></td>
-                    <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>{value}</td>
+                    <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px` }}><InlineCode>{size}</InlineCode></td>
+                    <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px` }}><InlineCode>{token}</InlineCode></td>
+                    <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>{value}</td>
                   </tr>
                 ))}
               </tbody>
@@ -640,9 +640,9 @@ function DesignContent() {
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.compact }}>
               <thead>
                 <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Element</th>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Foundation Token</th>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Value</th>
+                  <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Element</th>
+                  <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Foundation Token</th>
+                  <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Value</th>
                 </tr>
               </thead>
               <tbody>
@@ -657,9 +657,9 @@ function DesignContent() {
                   ["Meta (large)", "typography.fontSize.md + fontWeight.bold", "16px / 700"],
                 ].map(([el, token, value], i, arr) => (
                   <tr key={i} style={{ borderBottom: i < arr.length - 1 ? "1px solid var(--divider)" : undefined }}>
-                    <td style={{ padding: "12px 16px", color: "var(--text-primary)" }}>{el}</td>
-                    <td style={{ padding: "12px 16px" }}><InlineCode>{token}</InlineCode></td>
-                    <td style={{ padding: "12px 16px", color: "var(--text-secondary)" }}>{value}</td>
+                    <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-primary)" }}>{el}</td>
+                    <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px` }}><InlineCode>{token}</InlineCode></td>
+                    <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>{value}</td>
                   </tr>
                 ))}
               </tbody>
@@ -672,9 +672,9 @@ function DesignContent() {
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.compact }}>
               <thead>
                 <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Element</th>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Foundation Token</th>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>CSS Variable</th>
+                  <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Element</th>
+                  <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>Foundation Token</th>
+                  <th style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, borderBottom: "1px solid var(--divider)" }}>CSS Variable</th>
                 </tr>
               </thead>
               <tbody>
@@ -690,9 +690,9 @@ function DesignContent() {
                   ["Meta color", "content.base.default", "var(--content-base-default)"],
                 ].map(([el, token, cssVar], i, arr) => (
                   <tr key={i} style={{ borderBottom: i < arr.length - 1 ? "1px solid var(--divider)" : undefined }}>
-                    <td style={{ padding: "12px 16px", color: "var(--text-primary)" }}>{el}</td>
-                    <td style={{ padding: "12px 16px" }}><InlineCode>{token}</InlineCode></td>
-                    <td style={{ padding: "12px 16px", fontFamily: "monospace", color: "var(--text-secondary)" }}>{cssVar}</td>
+                    <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-primary)" }}>{el}</td>
+                    <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px` }}><InlineCode>{token}</InlineCode></td>
+                    <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, fontFamily: "monospace", color: "var(--text-secondary)" }}>{cssVar}</td>
                   </tr>
                 ))}
               </tbody>
@@ -795,7 +795,7 @@ function WebContent() {
             style={{
               display: "inline-flex",
               alignItems: "center",
-              gap: 6,
+              gap: spacing.primitive[1],
               padding: `${spacing.primitive[2]}px ${spacing.primitive[4]}px`,
               fontSize: typography.fontSize.compact,
               fontWeight: typography.fontWeight.medium,
@@ -949,7 +949,7 @@ function UsageCard({ situation, description, config, examples }: {
           {config}
         </span>
       </div>
-      <p style={{ fontSize: typography.fontSize.compact, color: "var(--text-secondary)", margin: 0, marginBottom: 6 }}>{description}</p>
+      <p style={{ fontSize: typography.fontSize.compact, color: "var(--text-secondary)", margin: 0, marginBottom: spacing.primitive[1] }}>{description}</p>
       <p style={{ fontSize: typography.fontSize.xs, color: "var(--text-tertiary)", margin: 0 }}>
         예시: {examples.join(", ")}
       </p>
@@ -1007,8 +1007,8 @@ function TrendBadge({ trend, value }: { trend: "up" | "down"; value: string }) {
       display: "inline-flex",
       alignItems: "center",
       gap: 2,
-      height: 20,
-      padding: "0 8px",
+      height: spacing.primitive[5],
+      padding: `0 ${spacing.primitive[2]}px`,
       fontSize: typography.fontSize.xs,
       fontWeight: typography.fontWeight.semibold,
       color: isUp ? "var(--content-success-default)" : "var(--content-error-default)",

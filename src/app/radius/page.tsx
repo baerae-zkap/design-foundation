@@ -22,7 +22,7 @@ function resolveRef(token: { value: string; _comment?: string }): number {
 
 export default function RadiusPage() {
   return (
-    <div style={{ maxWidth: 720 }}>
+    <div style={{ maxWidth: 840 }}>
       <Breadcrumb items={[{ label: "파운데이션", href: "/" }, { label: "Radius" }]} />
 
       <h1 className="text-3xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>Radius</h1>

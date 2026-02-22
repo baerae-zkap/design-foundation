@@ -24,12 +24,13 @@ Colors are managed through CSS custom properties. They switch automatically betw
 | `--divider` | Borders and separators |
 | `--fill-base-default` | Default fill for icons/shapes |
 
-**For JS-side token access** (e.g., conditional styling):
+**For JS-side token access** (e.g., conditional logic, charts, canvas):
 ```tsx
 import { lightColors, darkColors } from '@baerae-zkap/design-system';
 // lightColors.content.base.default -> hex string for light mode
 // darkColors.content.base.default -> hex string for dark mode
 ```
+> **Important**: Prefer CSS variables (`var(--...)`) for all inline styles. Only use `lightColors`/`darkColors` when you need hex values in JavaScript logic (e.g., canvas rendering, chart libraries). Never import these just for inline `style` props.
 
 **NEVER hardcode hex values.** Always use CSS variables or token imports.
 

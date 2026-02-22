@@ -17,16 +17,16 @@ These patterns produce off-brand, inconsistent, or inaccessible UI. Reject any g
 
 | ❌ Wrong | ✅ Correct |
 |---------|-----------|
-| `<div onClick={...}>Click me</div>` | `<Button>` or `<ActionArea>` |
+| `<div onClick={...}>Click me</div>` | `<Button>`, `<IconButton>`, or `<Card>` |
 | `<input type="text" />` | `<TextField>` |
-| `<select><option>...</option></select>` | `<Select>` |
+| `<select><option>...</option></select>` | `<Radio>` / `<RadioGroup>` for small sets, `<SegmentedControl>` for tab-style (no Select component exists) |
 | `<textarea>` | `<TextArea>` |
 | `<input type="checkbox">` | `<Checkbox>` |
 | Custom `box-shadow` on a card div | `<Card>` component |
 | Custom toggle built with CSS | `<Switch>` |
 | `<button style={{ borderRadius: 9999 }}>` | `<Button>` with system radius |
-| Nested `<ActionArea>` inside `<ActionArea>` | Single `<ActionArea>` wrapping content |
-| `<ActionArea>` containing `<Button>` | Use either `ActionArea` OR `Button`, not both for the same action |
+| Nested `<ActionArea>` inside `<ActionArea>` | Single `<ActionArea>` with Button/TextButton children |
+| Using `ActionArea` as a generic tappable region | `ActionArea` is a button group container for modals/sheets/page footers. For tappable content areas, use `Card` with `onClick` |
 
 ## Spacing Anti-Patterns
 

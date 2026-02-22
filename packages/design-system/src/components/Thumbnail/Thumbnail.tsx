@@ -119,7 +119,7 @@ export const Thumbnail = forwardRef<HTMLDivElement, ThumbnailProps>(
       transform: 'translate(-50%, -50%)',
       width: spacing.component.thumbnail.playIconSize,
       height: spacing.component.thumbnail.playIconSize,
-      borderRadius: '50%',
+      borderRadius: radiusTokens.primitive.full,
       backgroundColor: cssVarColors.overlay.dim,
       display: 'flex',
       alignItems: 'center',
@@ -131,10 +131,10 @@ export const Thumbnail = forwardRef<HTMLDivElement, ThumbnailProps>(
     const triangleStyle: React.CSSProperties = {
       width: 0,
       height: 0,
-      borderLeft: `12px solid ${cssVarColors.content.base.onColor}`,
-      borderTop: '8px solid transparent',
-      borderBottom: '8px solid transparent',
-      marginLeft: 3,
+      borderLeft: `${spacing.primitive[3]}px solid ${cssVarColors.content.base.onColor}`,
+      borderTop: `${spacing.primitive[2]}px solid transparent`,
+      borderBottom: `${spacing.primitive[2]}px solid transparent`,
+      marginLeft: spacing.primitive[1],
     };
 
     const fallbackStyle: React.CSSProperties = {

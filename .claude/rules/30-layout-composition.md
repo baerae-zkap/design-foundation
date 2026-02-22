@@ -34,12 +34,23 @@ Use `spacing.semantic.screen.paddingX` (20px) for horizontal page padding. Use `
 - Cards do NOT nest inside other cards.
 - Cards have consistent internal padding: 16-20px (`spacing.component.card.padding.sm` or `.md`).
 - Use `Card variant="outlined"` for bordered cards, `Card variant="filled"` for solid background.
-- Clickable cards must have `onClick` -- the Card handles keyboard a11y internally.
+- Card always requires `onClick` -- it is always interactive. The Card handles keyboard a11y internally.
 
 ```tsx
-<Card onClick={() => navigate('/detail')}>
-  <Card.Header>Order #1234</Card.Header>
-  <Card.Body>Delivered on Jan 15</Card.Body>
+// Slot mode (structured)
+<Card
+  variant="outlined"
+  heading="Order #1234"
+  caption="Delivered on Jan 15"
+  onClick={() => navigate('/detail')}
+/>
+
+// Children mode (custom content)
+<Card variant="elevated" padding="medium" onClick={() => navigate('/detail')}>
+  <h3 style={{ ...typography.semantic.title.sm, margin: 0 }}>Order #1234</h3>
+  <p style={{ ...typography.semantic.body.sm, color: 'var(--content-base-secondary)', margin: 0 }}>
+    Delivered on Jan 15
+  </p>
 </Card>
 ```
 
@@ -73,7 +84,7 @@ Use `spacing.semantic.screen.paddingX` (20px) for horizontal page padding. Use `
 <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
   <TextField label="Name" value={name} onChange={setName} />
   <TextField label="Email" type="email" value={email} onChange={setEmail} />
-  <Select label="Role" value={role} onChange={setRole} options={roleOptions} />
+  {/* For selection fields, use Radio/RadioGroup or SegmentedControl -- no Select component exists */}
   <Button buttonType="filled" color="primary" onClick={onSave} style={{ marginTop: 16 }}>
     Save Profile
   </Button>

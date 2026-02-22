@@ -12,7 +12,7 @@ import { RadioGroup, CopyButton } from "@/components/docs/Playground";
 
 export default function SectionMessagePage() {
   return (
-    <div style={{ maxWidth: 720 }}>
+    <div style={{ maxWidth: 840 }}>
       <Breadcrumb
         items={[
           { label: "Components", href: "/components" },
@@ -91,7 +91,7 @@ function SectionMessagePlayground() {
     <div style={{ marginBottom: spacing.primitive[8] }}>
       <div
         style={{
-          borderRadius: 20,
+          borderRadius: radius.primitive.xl,
           overflow: "hidden",
           backgroundColor: "var(--surface-base-alternative)",
         }}
@@ -168,9 +168,9 @@ function SectionMessagePlayground() {
                 overflowY: "auto",
                 display: "flex",
                 flexDirection: "column",
-                gap: 28,
+                gap: spacing.primitive[7],
                 backgroundColor: "var(--surface-base-default)",
-                borderRadius: spacing.primitive[4],
+                borderRadius: radius.primitive.lg,
               }}
             >
               <RadioGroup

@@ -1,267 +1,594 @@
 "use client";
 
 import Link from "next/link";
-import { PreviewBox, CodeBlock } from "@/components/PlatformTabs";
-import { typography, spacing, radius } from '@baerae-zkap/design-system';
+import { typography, spacing, radius } from "@baerae-zkap/design-system";
+import { Section } from "@/components/docs/Section";
+import { CodeBlock } from "@/components/PlatformTabs";
+import { InlineCode } from "@/components/docs/Section";
+
+/* ── Data ────────────────────────────────────────────────────────────── */
+
+const componentCategories = [
+  {
+    title: "Actions",
+    count: 6,
+    description: "Button, IconButton, TextButton, Chip, ActionArea, BottomCTA",
+    href: "/components",
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="8" width="18" height="8" rx="4" />
+      </svg>
+    ),
+  },
+  {
+    title: "Contents",
+    count: 10,
+    description: "Card, ListCard, ListCell, Accordion, Avatar, Badge 등",
+    href: "/components",
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="2" />
+        <line x1="3" y1="9" x2="21" y2="9" />
+      </svg>
+    ),
+  },
+  {
+    title: "Inputs",
+    count: 10,
+    description: "TextField, TextArea, Checkbox, Radio, Switch, Slider 등",
+    href: "/components",
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="6" width="18" height="12" rx="2" />
+        <line x1="7" y1="12" x2="7" y2="12" />
+      </svg>
+    ),
+  },
+  {
+    title: "Feedback",
+    count: 8,
+    description: "Dialog, Snackbar, Toast, Skeleton, StateView 등",
+    href: "/components",
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <line x1="12" y1="8" x2="12" y2="12" />
+        <line x1="12" y1="16" x2="12.01" y2="16" />
+      </svg>
+    ),
+  },
+  {
+    title: "Navigation",
+    count: 7,
+    description: "BottomNavigation, Tab, TopNavigation, ProgressTracker 등",
+    href: "/components",
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <line x1="3" y1="12" x2="21" y2="12" />
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <line x1="3" y1="18" x2="21" y2="18" />
+      </svg>
+    ),
+  },
+  {
+    title: "Presentation",
+    count: 5,
+    description: "BottomSheet, Popover, Popup, Tooltip, Autocomplete",
+    href: "/components",
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="7" width="20" height="14" rx="2" />
+        <path d="M16 3l-4 4-4-4" />
+      </svg>
+    ),
+  },
+];
+
+const nextSteps = [
+  {
+    title: "Foundation Tokens",
+    description: "색상, 타이포그래피, 스페이싱, 라디우스 토큰 확인하기",
+    href: "/foundations",
+  },
+  {
+    title: "Color System",
+    description: "Palette, Semantic, Effects 컬러 토큰 살펴보기",
+    href: "/colors/palette",
+  },
+  {
+    title: "Component Library",
+    description: "45개 컴포넌트 전체 목록과 사용법 확인하기",
+    href: "/components",
+  },
+  {
+    title: "Typography",
+    description: "타이포그래피 스케일과 시맨틱 토큰 확인하기",
+    href: "/typography",
+  },
+];
+
+/* ── Page ─────────────────────────────────────────────────────────────── */
 
 export default function GettingStartedPage() {
   return (
-    <div style={{ maxWidth: 720 }}>
-      <header style={{ marginBottom: spacing.primitive[12] }}>
+    <div style={{ maxWidth: 840 }}>
+      {/* ── Hero ─────────────────────────────────────────────────────── */}
+      <div style={{ marginBottom: spacing.primitive[12] }}>
+        <p
+          style={{
+            fontSize: typography.fontSize.sm,
+            fontWeight: typography.fontWeight.medium,
+            color: "var(--content-brand-default)",
+            marginBottom: spacing.primitive[2],
+            letterSpacing: "0.02em",
+          }}
+        >
+          GETTING STARTED
+        </p>
         <h1
           style={{
-            fontSize: 32,
+            fontSize: typography.fontSize["3xl"],
             fontWeight: typography.fontWeight.bold,
-            marginBottom: spacing.primitive[3],
             color: "var(--text-primary)",
+            marginBottom: spacing.primitive[3],
             letterSpacing: "-0.02em",
           }}
         >
-          Getting Started
+          시작하기
         </h1>
         <p
           style={{
-            fontSize: typography.fontSize.md,
+            fontSize: typography.fontSize.lg,
             color: "var(--text-secondary)",
-            lineHeight: 1.6,
+            lineHeight: 1.7,
+            margin: 0,
           }}
         >
-          ZKAP Design System을 프로젝트에 설치하고 사용하는 방법을 안내합니다.
+          <InlineCode>@baerae-zkap/design-system</InlineCode>을 프로젝트에 설치하고,
+          컴포넌트와 디자인 토큰을 사용하는 방법을 안내합니다.
+          3단계만 따라하면 바로 사용할 수 있습니다.
         </p>
-      </header>
+      </div>
 
-      {/* Installation */}
-      <Section title="Installation">
-        <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginBottom: spacing.primitive[4], lineHeight: 1.6 }}>
-          npm, yarn, 또는 pnpm을 사용하여 패키지를 설치합니다.
+      {/* ── Step 1: Install ──────────────────────────────────────────── */}
+      <Section title="1. 패키지 설치">
+        <p style={descStyle}>
+          npm, yarn, pnpm 등 원하는 패키지 매니저로 설치합니다.
         </p>
-        <CodeBlock
-          code={`# npm
-npm install @zkap/design-system
+        <CodeBlock code="npm install @baerae-zkap/design-system" language="bash" />
+        <div style={{ marginTop: spacing.primitive[3] }}>
+          <CodeBlock code="yarn add @baerae-zkap/design-system" language="bash" />
+        </div>
+        <div style={{ marginTop: spacing.primitive[3] }}>
+          <CodeBlock code="pnpm add @baerae-zkap/design-system" language="bash" />
+        </div>
 
-# yarn
-yarn add @zkap/design-system
-
-# pnpm
-pnpm add @zkap/design-system`}
-          language="bash"
-        />
+        <Callout accent="var(--content-brand-default)">
+          <strong style={{ color: "var(--text-primary)" }}>Peer Dependencies</strong>
+          <br />
+          React 18 이상과 React DOM이 필요합니다. 대부분의 React 프로젝트에는 이미 설치되어 있습니다.
+        </Callout>
       </Section>
 
-      {/* Usage - Web */}
-      <Section title="Usage (Web)">
-        <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginBottom: spacing.primitive[4], lineHeight: 1.6 }}>
-          React 웹 프로젝트에서 컴포넌트를 import하여 사용합니다.
+      {/* ── Step 2: Theme CSS ────────────────────────────────────────── */}
+      <Section title="2. 테마 CSS 설정">
+        <p style={descStyle}>
+          디자인 시스템의 색상 토큰과 파운데이션 토큰을 사용하려면 CSS 파일을 프로젝트에 포함해야 합니다.
+          이 CSS 파일에는 라이트/다크 모드에 대응하는 모든 CSS 변수가 정의되어 있습니다.
+        </p>
+
+        <StepLabel>Next.js 프로젝트</StepLabel>
+        <CodeBlock
+          code={`// app/layout.tsx
+import '@baerae-zkap/design-system/styles.css';`}
+          language="tsx"
+        />
+
+        <div style={{ marginTop: spacing.primitive[4] }}>
+          <StepLabel>Vite 프로젝트</StepLabel>
+          <CodeBlock
+            code={`// main.tsx
+import '@baerae-zkap/design-system/styles.css';`}
+            language="tsx"
+          />
+        </div>
+
+        <Callout accent="var(--content-success-default)">
+          <strong style={{ color: "var(--text-primary)" }}>자동 다크 모드</strong>
+          <br />
+          CSS 변수는 <InlineCode>prefers-color-scheme</InlineCode> 미디어 쿼리를 통해
+          라이트/다크 모드를 자동으로 전환합니다. 별도의 테마 토글 코드가 필요하지 않습니다.
+        </Callout>
+      </Section>
+
+      {/* ── Step 3: First Component ──────────────────────────────────── */}
+      <Section title="3. 첫 번째 컴포넌트 사용">
+        <p style={descStyle}>
+          설치와 CSS 설정이 끝나면 바로 컴포넌트를 사용할 수 있습니다.
+          간단한 Button 예제로 시작해보세요.
         </p>
         <CodeBlock
-          code={`import { Button, TextButton } from '@zkap/design-system';
+          code={`import { Button } from '@baerae-zkap/design-system';
 
-function App() {
+function MyComponent() {
   return (
-    <>
+    <div style={{ display: 'flex', gap: 12 }}>
       <Button
         buttonType="filled"
         color="primary"
-        size="medium"
         onClick={() => console.log('clicked')}
       >
-        Confirm
+        저장하기
       </Button>
-
-      <TextButton
-        variant="arrow"
-        color="primary"
-        onClick={() => console.log('clicked')}
+      <Button
+        buttonType="weak"
+        color="neutral"
+        onClick={() => console.log('cancel')}
       >
-        Learn More
-      </TextButton>
-    </>
+        취소
+      </Button>
+    </div>
+  );
+}`}
+          language="tsx"
+        />
+
+        <p
+          style={{
+            ...descStyle,
+            marginTop: spacing.primitive[6],
+            marginBottom: spacing.primitive[4],
+          }}
+        >
+          폼 입력 필드도 마찬가지로 간단합니다.
+        </p>
+        <CodeBlock
+          code={`import { TextField, Button } from '@baerae-zkap/design-system';
+
+function LoginForm() {
+  return (
+    <form style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+      <TextField
+        label="이메일"
+        type="email"
+        placeholder="example@email.com"
+      />
+      <TextField
+        label="비밀번호"
+        type="password"
+      />
+      <Button buttonType="filled" color="primary">
+        로그인
+      </Button>
+    </form>
   );
 }`}
           language="tsx"
         />
       </Section>
 
-      {/* Usage - React Native */}
-      <Section title="Usage (React Native)">
-        <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginBottom: spacing.primitive[4], lineHeight: 1.6 }}>
-          React Native 프로젝트에서는 <code style={{ backgroundColor: "var(--bg-secondary)", padding: "2px 6px", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.compact }}>/native</code> 경로에서 import합니다.
+      {/* ── Token Usage ──────────────────────────────────────────────── */}
+      <Section title="디자인 토큰 사용">
+        <p style={descStyle}>
+          컴포넌트 외에도 스페이싱, 타이포그래피, 라디우스, 색상 토큰을 직접 사용할 수 있습니다.
+          하드코딩 대신 토큰을 사용하면 제품 전체의 시각적 일관성을 유지할 수 있습니다.
         </p>
         <CodeBlock
-          code={`import { Button, TextButton } from '@zkap/design-system/native';
+          code={`import { spacing, typography, radius } from '@baerae-zkap/design-system';
 
-function App() {
+function ProfileCard() {
   return (
-    <>
-      <Button
-        buttonType="filled"
-        color="primary"
-        size="medium"
-        onPress={() => console.log('pressed')}
+    <div
+      style={{
+        padding: spacing.primitive[5],        // 20px
+        borderRadius: radius.primitive.lg,     // 16px
+        backgroundColor: 'var(--surface-base-default)',
+        border: '1px solid var(--divider)',
+      }}
+    >
+      <h3
+        style={{
+          ...typography.semantic.title.sm,     // 18px, bold
+          color: 'var(--text-primary)',
+          margin: 0,
+        }}
       >
-        Confirm
-      </Button>
-
-      <TextButton
-        variant="arrow"
-        color="primary"
-        onPress={() => console.log('pressed')}
+        사용자 이름
+      </h3>
+      <p
+        style={{
+          ...typography.semantic.body.sm,      // 14px, regular
+          color: 'var(--text-secondary)',
+          marginTop: spacing.primitive[2],     // 8px
+        }}
       >
-        Learn More
-      </TextButton>
-    </>
+        프로필 설명 텍스트
+      </p>
+    </div>
   );
 }`}
           language="tsx"
         />
-      </Section>
 
-      {/* Available Components */}
-      <Section title="Available Components">
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: spacing.primitive[4] }}>
-          <ComponentCard
-            name="Button"
-            description="Primary action button with filled/weak variants"
-            href="/components/actions/button"
-          />
-          <ComponentCard
-            name="TextButton"
-            description="Lightweight text-based action button"
-            href="/components/actions/text-button"
-          />
-          <ComponentCard
-            name="ActionArea"
-            description="Layout pattern for button groups"
-            href="/components/actions/action-area"
-          />
+        {/* Token Overview Table */}
+        <div style={{ marginTop: spacing.primitive[6] }}>
+          <h3
+            style={{
+              fontSize: typography.fontSize.md,
+              fontWeight: typography.fontWeight.semibold,
+              color: "var(--text-primary)",
+              marginBottom: spacing.primitive[3],
+            }}
+          >
+            주요 토큰 종류
+          </h3>
+          <div
+            style={{
+              overflow: "hidden",
+              borderRadius: radius.primitive.md,
+              border: "1px solid var(--divider)",
+            }}
+          >
+            <table style={{ width: "100%", borderCollapse: "collapse" }}>
+              <thead>
+                <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
+                  {["토큰", "용도", "예시"].map((h) => (
+                    <th key={h} style={thStyle}>{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  ["spacing", "간격, 패딩, 마진", "spacing.primitive[4] → 16px"],
+                  ["typography", "폰트 크기, 굵기, 행간", "typography.semantic.body.md"],
+                  ["radius", "모서리 라운딩", "radius.primitive.md → 12px"],
+                  ["colors (CSS var)", "색상 (자동 다크모드)", "var(--text-primary)"],
+                  ["shadow (CSS var)", "그림자 엘리베이션", "var(--shadow-md)"],
+                ].map(([token, usage, example], i, arr) => (
+                  <tr
+                    key={token}
+                    style={i < arr.length - 1 ? { borderBottom: "1px solid var(--divider)" } : {}}
+                  >
+                    <td style={tdBrand}>{token}</td>
+                    <td style={tdDefault}>{usage}</td>
+                    <td style={tdMono}>{example}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </Section>
 
-      {/* AI Documentation */}
-      <Section title="AI Documentation">
-        <PreviewBox>
-          <div style={{ padding: spacing.primitive[6] }}>
-            <div style={{ display: "flex", alignItems: "center", gap: spacing.primitive[3], marginBottom: spacing.primitive[4] }}>
-              <span style={{
-                width: 40,
-                height: 40,
-                borderRadius: 10,
-                backgroundColor: "var(--surface-brand-secondary)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: typography.fontSize.xl,
-              }}>
-                AI
-              </span>
-              <div>
-                <div style={{ fontSize: 15, fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)" }}>
-                  AI-Readable Documentation
-                </div>
-                <div style={{ fontSize: typography.fontSize.compact, color: "var(--text-secondary)" }}>
-                  Vibe Coding을 위한 마크다운 문서가 패키지에 포함되어 있습니다.
-                </div>
-              </div>
-            </div>
-          </div>
-        </PreviewBox>
-        <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginTop: spacing.primitive[4], marginBottom: spacing.primitive[4], lineHeight: 1.6 }}>
-          AI가 컴포넌트의 디자인 규칙과 사용법을 이해할 수 있도록 마크다운 문서가 패키지에 포함됩니다.
+      {/* ── Component Categories ─────────────────────────────────────── */}
+      <Section title="컴포넌트 카테고리">
+        <p style={descStyle}>
+          총 <strong style={{ color: "var(--text-primary)" }}>45개</strong>의
+          컴포넌트가 6개 카테고리로 분류되어 있습니다.
         </p>
-        <CodeBlock
-          code={`# AI가 참조할 수 있는 문서 경로
-node_modules/@zkap/design-system/docs/COMPONENTS.md     # 전체 개요
-node_modules/@zkap/design-system/docs/components/Button.md
-node_modules/@zkap/design-system/docs/components/TextButton.md
-node_modules/@zkap/design-system/docs/components/ActionArea.md`}
-          language="bash"
-        />
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
+            gap: spacing.primitive[3],
+          }}
+        >
+          {componentCategories.map((cat) => (
+            <Link
+              key={cat.title}
+              href={cat.href}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: spacing.primitive[2],
+                padding: spacing.primitive[4],
+                backgroundColor: "var(--surface-base-alternative)",
+                borderRadius: radius.primitive.md,
+                textDecoration: "none",
+                transition: "background-color 0.2s ease",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: spacing.primitive[2] }}>
+                  <span style={{ color: "var(--content-brand-default)" }}>{cat.icon}</span>
+                  <span
+                    style={{
+                      fontSize: typography.fontSize.sm,
+                      fontWeight: typography.fontWeight.semibold,
+                      color: "var(--text-primary)",
+                    }}
+                  >
+                    {cat.title}
+                  </span>
+                </div>
+                <span
+                  style={{
+                    fontSize: typography.fontSize.compact,
+                    fontWeight: typography.fontWeight.medium,
+                    color: "var(--content-brand-default)",
+                    backgroundColor: "var(--surface-brand-secondary)",
+                    padding: "2px 8px",
+                    borderRadius: radius.primitive.full,
+                  }}
+                >
+                  {cat.count}
+                </span>
+              </div>
+              <p
+                style={{
+                  fontSize: typography.fontSize.compact,
+                  color: "var(--text-tertiary)",
+                  margin: 0,
+                  lineHeight: 1.5,
+                }}
+              >
+                {cat.description}
+              </p>
+            </Link>
+          ))}
+        </div>
       </Section>
 
-      {/* Peer Dependencies */}
-      <Section title="Peer Dependencies">
-        <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginBottom: spacing.primitive[4], lineHeight: 1.6 }}>
-          이 패키지는 다음 peer dependencies를 필요로 합니다.
+      {/* ── Next Steps ───────────────────────────────────────────────── */}
+      <Section title="다음 단계">
+        <p style={descStyle}>
+          설치를 마쳤다면, 아래 페이지에서 더 자세한 내용을 확인해보세요.
         </p>
-        <div style={{
-          backgroundColor: "var(--bg-secondary)",
-          borderRadius: radius.primitive.sm,
-          padding: spacing.primitive[4],
-        }}>
-          <table style={{ width: "100%", borderCollapse: "collapse" }}>
-            <thead>
-              <tr>
-                <th style={{ textAlign: "left", padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, color: "var(--text-secondary)" }}>Package</th>
-                <th style={{ textAlign: "left", padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, color: "var(--text-secondary)" }}>Version</th>
-                <th style={{ textAlign: "left", padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, color: "var(--text-secondary)" }}>Required</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontSize: typography.fontSize.sm, color: "var(--text-primary)" }}>react</td>
-                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontSize: typography.fontSize.compact, fontFamily: "monospace", color: "var(--content-brand-default)" }}>&gt;= 18.0.0</td>
-                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontSize: typography.fontSize.sm, color: "var(--text-primary)" }}>Yes</td>
-              </tr>
-              <tr>
-                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontSize: typography.fontSize.sm, color: "var(--text-primary)" }}>react-native</td>
-                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontSize: typography.fontSize.compact, fontFamily: "monospace", color: "var(--content-brand-default)" }}>&gt;= 0.70.0</td>
-                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontSize: typography.fontSize.sm, color: "var(--text-secondary)" }}>Optional (for native)</td>
-              </tr>
-            </tbody>
-          </table>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
+            gap: spacing.primitive[3],
+          }}
+        >
+          {nextSteps.map((step) => (
+            <Link
+              key={step.title}
+              href={step.href}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: spacing.primitive[4],
+                backgroundColor: "var(--bg-elevated)",
+                border: "1px solid var(--divider)",
+                borderRadius: radius.primitive.md,
+                textDecoration: "none",
+                transition: "border-color 0.2s ease",
+              }}
+            >
+              <div>
+                <p
+                  style={{
+                    margin: 0,
+                    fontSize: typography.fontSize.sm,
+                    fontWeight: typography.fontWeight.semibold,
+                    color: "var(--text-primary)",
+                  }}
+                >
+                  {step.title}
+                </p>
+                <p
+                  style={{
+                    margin: `${spacing.primitive[1]}px 0 0`,
+                    fontSize: typography.fontSize.compact,
+                    color: "var(--text-tertiary)",
+                    lineHeight: 1.5,
+                  }}
+                >
+                  {step.description}
+                </p>
+              </div>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="var(--text-tertiary)"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                style={{ flexShrink: 0, marginLeft: spacing.primitive[3] }}
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </Link>
+          ))}
         </div>
       </Section>
     </div>
   );
 }
 
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
+/* ── Shared Sub-Components ───────────────────────────────────────────── */
+
+function StepLabel({ children }: { children: React.ReactNode }) {
   return (
-    <section style={{ marginBottom: spacing.primitive[14] }}>
-      <h2
-        style={{
-          fontSize: typography.fontSize.xl,
-          fontWeight: typography.fontWeight.bold,
-          marginBottom: spacing.primitive[5],
-          color: "var(--text-primary)",
-          letterSpacing: "-0.01em",
-        }}
-      >
-        {title}
-      </h2>
+    <p
+      style={{
+        fontSize: typography.fontSize.sm,
+        fontWeight: typography.fontWeight.semibold,
+        color: "var(--text-primary)",
+        marginBottom: spacing.primitive[2],
+      }}
+    >
       {children}
-    </section>
+    </p>
   );
 }
 
-function ComponentCard({ name, description, href }: { name: string; description: string; href: string }) {
+function Callout({
+  accent,
+  children,
+}: {
+  accent: string;
+  children: React.ReactNode;
+}) {
   return (
-    <Link
-      href={href}
+    <div
       style={{
-        display: "block",
-        padding: spacing.primitive[5],
-        backgroundColor: "white",
+        marginTop: spacing.primitive[6],
+        padding: spacing.primitive[4],
+        backgroundColor: "var(--surface-base-alternative)",
         borderRadius: radius.primitive.md,
-        border: "1px solid var(--divider)",
-        textDecoration: "none",
-        transition: "all 150ms ease",
-      }}
-      onMouseOver={(e) => {
-        e.currentTarget.style.borderColor = "var(--content-brand-default)";
-        e.currentTarget.style.boxShadow = "var(--shadow-sm)";
-      }}
-      onMouseOut={(e) => {
-        e.currentTarget.style.borderColor = "var(--divider)";
-        e.currentTarget.style.boxShadow = "none";
+        borderLeft: `3px solid ${accent}`,
       }}
     >
-      <div style={{ fontSize: 15, fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)", marginBottom: 6 }}>
-        {name}
-      </div>
-      <p style={{ fontSize: typography.fontSize.compact, color: "var(--text-secondary)", margin: 0, lineHeight: 1.5 }}>
-        {description}
+      <p
+        style={{
+          fontSize: typography.fontSize.sm,
+          color: "var(--text-secondary)",
+          lineHeight: 1.7,
+          margin: 0,
+        }}
+      >
+        {children}
       </p>
-    </Link>
+    </div>
   );
 }
+
+/* ── Shared Styles ───────────────────────────────────────────────────── */
+
+const descStyle: React.CSSProperties = {
+  fontSize: typography.fontSize.sm,
+  color: "var(--text-secondary)",
+  lineHeight: 1.7,
+  marginBottom: spacing.primitive[4],
+};
+
+const thStyle: React.CSSProperties = {
+  padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`,
+  textAlign: "left" as const,
+  fontWeight: typography.fontWeight.semibold,
+  fontSize: typography.fontSize.compact,
+  color: "var(--text-primary)",
+  borderBottom: "1px solid var(--divider)",
+};
+
+const tdBrand: React.CSSProperties = {
+  padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`,
+  fontSize: typography.fontSize.compact,
+  fontWeight: typography.fontWeight.medium,
+  color: "var(--content-brand-default)",
+  fontFamily: "'SF Mono', 'Fira Code', monospace",
+};
+
+const tdDefault: React.CSSProperties = {
+  padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`,
+  fontSize: typography.fontSize.compact,
+  color: "var(--text-secondary)",
+};
+
+const tdMono: React.CSSProperties = {
+  padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`,
+  fontSize: typography.fontSize.compact,
+  color: "var(--text-secondary)",
+  fontFamily: "'SF Mono', 'Fira Code', monospace",
+};

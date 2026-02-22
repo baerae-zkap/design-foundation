@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { PlatformTabs, CodeBlock, PreviewBox, Platform, highlightCode } from "@/components/PlatformTabs";
-import { AlertDialog, Button, typography, spacing, radius } from '@baerae-zkap/design-system';
+import { Dialog, Button, typography, spacing, radius } from '@baerae-zkap/design-system';
 import { Section, Subsection, InlineCode } from "@/components/docs/Section";
 import { PropsTable } from "@/components/docs/PropsTable";
 import { PrincipleCard, DoCard, DontCard } from "@/components/docs/Cards";
@@ -11,25 +11,25 @@ import { RadioGroup, CopyButton } from "@/components/docs/Playground";
 
 export default function AlertDialogPage() {
   return (
-    <div style={{ maxWidth: 720 }}>
+    <div style={{ maxWidth: 840 }}>
       <Breadcrumb
         items={[
           { label: "Components", href: "/components" },
           { label: "Feedback" },
-          { label: "Alert Dialog" },
+          { label: "Dialog" },
         ]}
       />
 
       {/* Header */}
-      <h1 style={{ fontSize: typography.fontSize['3xl'], fontWeight: 700, marginBottom: spacing.primitive[2], color: "var(--text-primary)", letterSpacing: "-0.02em" }}>
-        Alert Dialog
+      <h1 style={{ fontSize: typography.fontSize['3xl'], fontWeight: typography.fontWeight.bold, marginBottom: spacing.primitive[2], color: "var(--text-primary)", letterSpacing: "-0.02em" }}>
+        Dialog
       </h1>
       <p style={{ fontSize: typography.fontSize.md, color: "var(--text-secondary)", marginBottom: spacing.primitive[8], lineHeight: 1.7 }}>
         중요한 정보를 전달하거나 단일 확인 액션을 요구하는 모달 다이얼로그입니다. 사용자가 의도적인 결정을 내리도록 유도합니다.
       </p>
 
       {/* Interactive Playground */}
-      <AlertDialogPlayground />
+      <DialogPlayground />
 
       {/* Platform Tabs */}
       <PlatformTabs>
@@ -39,7 +39,7 @@ export default function AlertDialogPage() {
   );
 }
 
-function AlertDialogPlayground() {
+function DialogPlayground() {
   const [isOpen, setIsOpen] = useState(false);
   const [hasTitle, setHasTitle] = useState<"with" | "without">("with");
   const [actionCount, setActionCount] = useState<"one" | "two">("two");
@@ -47,7 +47,7 @@ function AlertDialogPlayground() {
 
   const generateCode = () => {
     const lines: string[] = [];
-    lines.push("<AlertDialog");
+    lines.push("<Dialog");
     lines.push("  open={isOpen}");
     lines.push("  onClose={() => setIsOpen(false)}");
     if (hasTitle === "with") lines.push('  title="삭제하시겠어요?"');
@@ -55,7 +55,7 @@ function AlertDialogPlayground() {
     if (closeOnDimmer === "true") lines.push("  closeOnDimmerClick");
     if (actionCount === "one") {
       lines.push("  actions={[");
-      lines.push("    { label: '확인', onClick: () => setIsOpen(false), color: 'primary', variant: 'filled' },");
+      lines.push("    { label: '확인', onClick: () => setIsOpen(false) },");
       lines.push("  ]}");
     } else {
       lines.push("  actions={[");
@@ -68,18 +68,19 @@ function AlertDialogPlayground() {
   };
 
   const dialogTitle = hasTitle === "with" ? "삭제하시겠어요?" : undefined;
-  const dialogActions = actionCount === "one"
-    ? [{ label: "확인", onClick: () => setIsOpen(false), color: "primary" as const, variant: "filled" as const }]
+  type DialogAction = { label: string; onClick: () => void; color?: "primary" | "neutral" | "error"; variant?: "filled" | "weak" };
+  const dialogActions: DialogAction[] = actionCount === "one"
+    ? [{ label: "확인", onClick: () => setIsOpen(false) }]
     : [
-        { label: "취소", onClick: () => setIsOpen(false), color: "neutral" as const, variant: "weak" as const },
-        { label: "삭제", onClick: () => setIsOpen(false), color: "error" as const, variant: "filled" as const },
+        { label: "취소", onClick: () => setIsOpen(false), color: "neutral", variant: "weak" },
+        { label: "삭제", onClick: () => setIsOpen(false), color: "error", variant: "filled" },
       ];
 
   return (
     <div style={{ marginBottom: spacing.primitive[8] }}>
       <div
         style={{
-          borderRadius: 20,
+          borderRadius: radius.primitive.xl,
           overflow: "hidden",
           backgroundColor: "var(--surface-base-alternative)",
         }}
@@ -88,7 +89,7 @@ function AlertDialogPlayground() {
           {/* Preview Area */}
           <div
             style={{
-              padding: 60,
+              padding: spacing.primitive[16], // 64px — closest token to 60px preview area padding
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -105,25 +106,25 @@ function AlertDialogPlayground() {
                 textAlign: "left",
               }}>
                 {dialogTitle && (
-                  <div style={{ fontSize: typography.fontSize.lg, fontWeight: 700, color: "var(--content-base-default)", marginBottom: spacing.primitive[2] }}>
+                  <div style={{ fontSize: typography.fontSize.lg, fontWeight: typography.fontWeight.bold, color: "var(--content-base-default)", marginBottom: spacing.primitive[2] }}>
                     {dialogTitle}
                   </div>
                 )}
                 <div style={{ fontSize: typography.fontSize.sm, color: "var(--content-base-secondary)", lineHeight: 1.6, marginBottom: spacing.primitive[5] }}>
                   이 작업은 되돌릴 수 없습니다.
                 </div>
-                <div style={{ display: "flex", gap: spacing.primitive[2], justifyContent: actionCount === "one" ? "stretch" : "flex-end" }}>
+                <div style={{ display: "flex", gap: spacing.primitive[2], justifyContent: "stretch" }}>
                   {dialogActions.map((action, i) => (
-                    <Button
-                      key={i}
-                      buttonType={action.variant}
-                      color={action.color}
-                      size="medium"
-                      layout={actionCount === "one" ? "fillWidth" : "hug"}
-                    >
-                      {action.label}
-                    </Button>
-                  ))}
+                      <Button
+                        key={i}
+                        buttonType={action.variant}
+                        color={action.color}
+                        size="medium"
+                        layout="fillWidth"
+                      >
+                        {action.label}
+                      </Button>
+                    ))}
                 </div>
               </div>
               <Button
@@ -137,14 +138,14 @@ function AlertDialogPlayground() {
             </div>
 
             {/* Live dialog */}
-            <AlertDialog
+            <Dialog
               open={isOpen}
               onClose={() => setIsOpen(false)}
               title={dialogTitle}
               description="이 작업은 되돌릴 수 없습니다."
               actions={dialogActions}
               closeOnDimmerClick={closeOnDimmer === "true"}
-              aria-label={!dialogTitle ? "Alert Dialog" : undefined}
+              aria-label={!dialogTitle ? "Dialog" : undefined}
             />
           </div>
 
@@ -168,9 +169,9 @@ function AlertDialogPlayground() {
                 overflowY: "auto",
                 display: "flex",
                 flexDirection: "column",
-                gap: 28,
+                gap: spacing.primitive[7],
                 backgroundColor: "var(--surface-base-default)",
-                borderRadius: spacing.primitive[4],
+                borderRadius: radius.primitive.lg,
               }}
             >
               <RadioGroup
@@ -211,7 +212,7 @@ function AlertDialogPlayground() {
       <div style={{ marginTop: spacing.primitive[4], borderRadius: radius.primitive.md, overflow: "hidden", border: "1px solid var(--divider)" }}>
         <div
           style={{
-            padding: "10px 16px",
+            padding: `${spacing.primitive[2]}px ${spacing.primitive[4]}px`,
             backgroundColor: "var(--docs-code-surface)",
             display: "flex",
             alignItems: "center",
@@ -222,8 +223,8 @@ function AlertDialogPlayground() {
             <span style={{
               fontSize: typography.fontSize.compact,
               fontWeight: typography.fontWeight.semibold,
-              padding: "4px 12px",
-              borderRadius: 6,
+              padding: `${spacing.primitive[1]}px ${spacing.primitive[3]}px`,
+              borderRadius: 6, // optical: between xs(4) and sm(8), intentional for compact tab badge
               color: "var(--content-base-onColor)",
               backgroundColor: "var(--docs-code-active-bg)",
             }}>Web</span>
@@ -262,7 +263,7 @@ function DesignContent() {
       {/* Overview */}
       <Section title="Overview">
         <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", lineHeight: 1.7 }}>
-          <InlineCode>AlertDialog</InlineCode>는 중요한 결정이나 확인이 필요한 상황에서 사용하는 모달 컴포넌트입니다.
+          <InlineCode>Dialog</InlineCode>는 중요한 결정이나 확인이 필요한 상황에서 사용하는 모달 컴포넌트입니다.
           삭제, 로그아웃, 권한 요청 등 되돌리기 어렵거나 영향 범위가 큰 액션을 실행하기 전에 사용자의 의도를 명확히 확인합니다.
         </p>
       </Section>
@@ -272,7 +273,7 @@ function DesignContent() {
         <div style={{
           backgroundColor: "var(--surface-base-alternative)",
           borderRadius: radius.primitive.lg,
-          padding: "48px 40px",
+          padding: `${spacing.primitive[12]}px ${spacing.primitive[10]}px`,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -334,7 +335,7 @@ function DesignContent() {
       {/* Variants */}
       <Section title="Variants">
         <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginBottom: spacing.primitive[5], lineHeight: 1.7 }}>
-          AlertDialog는 액션 구성에 따라 두 가지 레이아웃을 지원합니다.
+          Dialog는 액션 구성에 따라 두 가지 레이아웃을 지원합니다.
         </p>
         <Subsection title="Two Actions (권장)">
           <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginBottom: spacing.primitive[4], lineHeight: 1.7 }}>
@@ -358,7 +359,7 @@ function DesignContent() {
       <Section title="States">
         <Subsection title="Interaction States">
           <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", lineHeight: 1.7, marginBottom: spacing.primitive[4] }}>
-            AlertDialog는 열림/닫힘 두 가지 상태를 가지며, 각각 Enter/Exit 애니메이션으로 전환됩니다.
+            Dialog는 열림/닫힘 두 가지 상태를 가지며, 각각 Enter/Exit 애니메이션으로 전환됩니다.
           </p>
           <div style={{
             display: "grid",
@@ -372,7 +373,7 @@ function DesignContent() {
               <div style={{
                 width: 120, height: 70,
                 backgroundColor: "var(--surface-base-default)",
-                borderRadius: 8,
+                borderRadius: radius.primitive.sm,
                 display: "flex", alignItems: "center", justifyContent: "center",
                 border: "1px dashed var(--divider)",
               }}>
@@ -383,26 +384,26 @@ function DesignContent() {
               <div style={{
                 width: 120, height: 70,
                 backgroundColor: "var(--surface-base-default)",
-                borderRadius: 8,
+                borderRadius: radius.primitive.sm,
                 border: "1px solid var(--border-base-default)",
                 boxShadow: "var(--shadow-primitive-md)",
                 opacity: 0.6,
                 transform: "scale(0.97)",
                 display: "flex", alignItems: "center", justifyContent: "center",
               }}>
-                <span style={{ fontSize: 11, color: "var(--content-base-secondary)", fontWeight: 500 }}>Animating...</span>
+                <span style={{ fontSize: 11, color: "var(--content-base-secondary)", fontWeight: typography.fontWeight.medium }}>Animating...</span>
               </div>
             </StateCard>
             <StateCard label="Open" sublabel="완전히 표시됨">
               <div style={{
                 width: 120, height: 70,
                 backgroundColor: "var(--surface-base-default)",
-                borderRadius: 8,
+                borderRadius: radius.primitive.sm,
                 border: "1px solid var(--border-base-default)",
                 boxShadow: "var(--shadow-semantic-modal-default)",
                 display: "flex", alignItems: "center", justifyContent: "center",
               }}>
-                <span style={{ fontSize: 11, color: "var(--content-base-default)", fontWeight: 600 }}>Visible</span>
+                <span style={{ fontSize: 11, color: "var(--content-base-default)", fontWeight: typography.fontWeight.semibold }}>Visible</span>
               </div>
             </StateCard>
           </div>
@@ -416,7 +417,7 @@ function DesignContent() {
             <PrincipleCard
               number={1}
               title="의도적 결정을 유도하세요"
-              desc="AlertDialog는 기본적으로 백드롭 클릭으로 닫히지 않습니다(closeOnDimmerClick=false). 중요한 결정은 명시적인 버튼 클릭으로만 처리되어야 합니다."
+              desc="Dialog는 기본적으로 백드롭 클릭으로 닫히지 않습니다(closeOnDimmerClick=false). 중요한 결정은 명시적인 버튼 클릭으로만 처리되어야 합니다."
             />
             <PrincipleCard
               number={2}
@@ -512,72 +513,72 @@ function DesignContent() {
       {/* Design Tokens */}
       <Section title="Design Tokens">
         <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", lineHeight: 1.7, marginBottom: spacing.primitive[4] }}>
-          AlertDialog 컴포넌트에 적용된 Foundation 기반 디자인 토큰입니다.
+          Dialog 컴포넌트에 적용된 Foundation 기반 디자인 토큰입니다.
         </p>
         <div style={{ overflowX: "auto", borderRadius: radius.primitive.md, border: "1px solid var(--divider)" }}>
           <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.compact }}>
             <thead>
               <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
-                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Property</th>
-                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Token</th>
-                <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-primary)", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Value</th>
+                <th style={{ textAlign: "left", padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-primary)", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Property</th>
+                <th style={{ textAlign: "left", padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-primary)", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Token</th>
+                <th style={{ textAlign: "left", padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-primary)", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>Value</th>
               </tr>
             </thead>
             <tbody>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>Container Border Radius</td>
-                <td style={{ padding: "10px 12px" }}><InlineCode>radius.primitive[&apos;2xl&apos;]</InlineCode></td>
-                <td style={{ padding: "10px 12px", color: "var(--text-secondary)" }}>24px</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-primary)" }}>Container Border Radius</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}><InlineCode>radius.primitive[&apos;2xl&apos;]</InlineCode></td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>24px</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>Container Padding</td>
-                <td style={{ padding: "10px 12px" }}><InlineCode>spacing.primitive[6]</InlineCode></td>
-                <td style={{ padding: "10px 12px", color: "var(--text-secondary)" }}>24px</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-primary)" }}>Container Padding</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}><InlineCode>spacing.primitive[6]</InlineCode></td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>24px</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>Max Width</td>
-                <td style={{ padding: "10px 12px" }}><InlineCode>360px</InlineCode></td>
-                <td style={{ padding: "10px 12px", color: "var(--text-secondary)" }}>360px</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-primary)" }}>Max Width</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}><InlineCode>360px</InlineCode></td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>360px</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>Background</td>
-                <td style={{ padding: "10px 12px" }}><InlineCode>surface.base.default</InlineCode></td>
-                <td style={{ padding: "10px 12px", color: "var(--text-secondary)" }}>var(--surface-base-default)</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-primary)" }}>Background</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}><InlineCode>surface.base.default</InlineCode></td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>var(--surface-base-default)</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>Backdrop</td>
-                <td style={{ padding: "10px 12px" }}><InlineCode>var(--overlay-dim)</InlineCode></td>
-                <td style={{ padding: "10px 12px", color: "var(--text-secondary)" }}>overlay-dim token (라이트/다크 자동 전환)</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-primary)" }}>Backdrop</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}><InlineCode>var(--overlay-dim)</InlineCode></td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>overlay-dim token (라이트/다크 자동 전환)</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>Shadow</td>
-                <td style={{ padding: "10px 12px" }}><InlineCode>cssVarShadow.semantic.modal.default</InlineCode></td>
-                <td style={{ padding: "10px 12px", color: "var(--text-secondary)" }}>modal shadow token</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-primary)" }}>Shadow</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}><InlineCode>cssVarShadow.semantic.modal.default</InlineCode></td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>modal shadow token</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>z-index</td>
-                <td style={{ padding: "10px 12px" }}><InlineCode>zIndex.modal</InlineCode></td>
-                <td style={{ padding: "10px 12px", color: "var(--text-secondary)" }}>1100</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-primary)" }}>z-index</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}><InlineCode>zIndex.modal</InlineCode></td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>1100</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>Title Font Size</td>
-                <td style={{ padding: "10px 12px" }}><InlineCode>typography.fontSize.lg</InlineCode></td>
-                <td style={{ padding: "10px 12px", color: "var(--text-secondary)" }}>18px / Bold</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-primary)" }}>Title Font Size</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}><InlineCode>typography.fontSize.lg</InlineCode></td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>18px / Bold</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>Description Font Size</td>
-                <td style={{ padding: "10px 12px" }}><InlineCode>typography.fontSize.sm</InlineCode></td>
-                <td style={{ padding: "10px 12px", color: "var(--text-secondary)" }}>14px / Regular</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-primary)" }}>Description Font Size</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}><InlineCode>typography.fontSize.sm</InlineCode></td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>14px / Regular</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>Actions Gap</td>
-                <td style={{ padding: "10px 12px" }}><InlineCode>spacing.primitive[2]</InlineCode></td>
-                <td style={{ padding: "10px 12px", color: "var(--text-secondary)" }}>8px</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-primary)" }}>Actions Gap</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}><InlineCode>spacing.primitive[2]</InlineCode></td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>8px</td>
               </tr>
               <tr>
-                <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>Animation Duration</td>
-                <td style={{ padding: "10px 12px" }}><InlineCode>180ms</InlineCode></td>
-                <td style={{ padding: "10px 12px", color: "var(--text-secondary)" }}>cubic-bezier(0.16, 1, 0.3, 1)</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-primary)" }}>Animation Duration</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}><InlineCode>180ms</InlineCode></td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>cubic-bezier(0.16, 1, 0.3, 1)</td>
               </tr>
             </tbody>
           </table>
@@ -587,37 +588,37 @@ function DesignContent() {
       {/* Accessibility */}
       <Section title="Accessibility">
         <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginBottom: spacing.primitive[5], lineHeight: 1.7 }}>
-          AlertDialog는 WAI-ARIA 다이얼로그 패턴을 준수합니다.
+          Dialog는 WAI-ARIA 다이얼로그 패턴을 준수합니다.
         </p>
 
         <div style={{ overflow: "auto", borderRadius: radius.primitive.md, border: "1px solid var(--divider)", marginBottom: spacing.primitive[6] }}>
           <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.sm }}>
             <thead>
               <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
-                <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>속성</th>
-                <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>설명</th>
+                <th style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>속성</th>
+                <th style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>설명</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)" }}><InlineCode>role=&quot;alertdialog&quot;</InlineCode></td>
-                <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>스크린 리더에 경고 다이얼로그임을 전달</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, borderBottom: "1px solid var(--divider)" }}><InlineCode>role=&quot;alertdialog&quot;</InlineCode></td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>스크린 리더에 경고 다이얼로그임을 전달</td>
               </tr>
               <tr>
-                <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)" }}><InlineCode>aria-modal=&quot;true&quot;</InlineCode></td>
-                <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>배경 콘텐츠 접근 차단</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, borderBottom: "1px solid var(--divider)" }}><InlineCode>aria-modal=&quot;true&quot;</InlineCode></td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>배경 콘텐츠 접근 차단</td>
               </tr>
               <tr>
-                <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)" }}><InlineCode>aria-labelledby</InlineCode></td>
-                <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>title이 있을 때 자동 연결</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, borderBottom: "1px solid var(--divider)" }}><InlineCode>aria-labelledby</InlineCode></td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>title이 있을 때 자동 연결</td>
               </tr>
               <tr>
-                <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)" }}><InlineCode>aria-label</InlineCode></td>
-                <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>title 없을 때 필수 — 접근성 레이블 직접 제공</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, borderBottom: "1px solid var(--divider)" }}><InlineCode>aria-label</InlineCode></td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>title 없을 때 필수 — 접근성 레이블 직접 제공</td>
               </tr>
               <tr>
-                <td style={{ padding: "10px 14px" }}><InlineCode>aria-describedby</InlineCode></td>
-                <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>description이 있을 때 자동 연결</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}><InlineCode>aria-describedby</InlineCode></td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>description이 있을 때 자동 연결</td>
               </tr>
             </tbody>
           </table>
@@ -628,22 +629,22 @@ function DesignContent() {
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.sm }}>
               <thead>
                 <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
-                  <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>키</th>
-                  <th style={{ padding: "10px 14px", textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>동작</th>
+                  <th style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>키</th>
+                  <th style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, textAlign: "left", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>동작</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--surface-base-alternative)", borderRadius: 4, fontSize: typography.fontSize.xs }}>Tab</kbd></td>
-                  <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>액션 버튼 간 포커스 이동</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.xs }}>Tab</kbd></td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>액션 버튼 간 포커스 이동</td>
                 </tr>
                 <tr>
-                  <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--surface-base-alternative)", borderRadius: 4, fontSize: typography.fontSize.xs }}>Enter</kbd> / <kbd style={{ padding: "2px 6px", backgroundColor: "var(--surface-base-alternative)", borderRadius: 4, fontSize: typography.fontSize.xs }}>Space</kbd></td>
-                  <td style={{ padding: "10px 14px", borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>포커스된 버튼 실행</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, borderBottom: "1px solid var(--divider)" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.xs }}>Enter</kbd> / <kbd style={{ padding: "2px 6px", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.xs }}>Space</kbd></td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, borderBottom: "1px solid var(--divider)", color: "var(--text-secondary)" }}>포커스된 버튼 실행</td>
                 </tr>
                 <tr>
-                  <td style={{ padding: "10px 14px" }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--surface-base-alternative)", borderRadius: 4, fontSize: typography.fontSize.xs }}>Esc</kbd></td>
-                  <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>다이얼로그 닫기 (onClose 호출)</td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px` }}><kbd style={{ padding: "2px 6px", backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.xs }}>Esc</kbd></td>
+                  <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>다이얼로그 닫기 (onClose 호출)</td>
                 </tr>
               </tbody>
             </table>
@@ -657,21 +658,21 @@ function DesignContent() {
           <table style={{ width: "100%", borderCollapse: "collapse", fontSize: typography.fontSize.sm }}>
             <thead>
               <tr style={{ backgroundColor: "var(--surface-base-alternative)" }}>
-                <th style={{ textAlign: "left", padding: "10px 14px", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>컴포넌트</th>
-                <th style={{ textAlign: "left", padding: "10px 14px", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>용도</th>
-                <th style={{ textAlign: "left", padding: "10px 14px", fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>차이점</th>
+                <th style={{ textAlign: "left", padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>컴포넌트</th>
+                <th style={{ textAlign: "left", padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>용도</th>
+                <th style={{ textAlign: "left", padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontWeight: typography.fontWeight.semibold, fontSize: typography.fontSize.compact, borderBottom: "1px solid var(--divider)" }}>차이점</th>
               </tr>
             </thead>
             <tbody>
               <tr style={{ borderBottom: "1px solid var(--divider)" }}>
-                <td style={{ padding: "10px 14px", fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)" }}>Button</td>
-                <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>직접 액션 실행</td>
-                <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>AlertDialog는 중간 확인 단계를 추가함</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)" }}>Button</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>직접 액션 실행</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>Dialog는 중간 확인 단계를 추가함</td>
               </tr>
               <tr>
-                <td style={{ padding: "10px 14px", fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)" }}>Card</td>
-                <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>콘텐츠 컨테이너</td>
-                <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>Card는 인라인, AlertDialog는 포털 기반 모달</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)" }}>Card</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>콘텐츠 컨테이너</td>
+                <td style={{ padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`, color: "var(--text-secondary)" }}>Card는 인라인, Dialog는 포털 기반 모달</td>
               </tr>
             </tbody>
           </table>
@@ -691,8 +692,8 @@ function WebContent() {
       <Section title="Source Code">
         <div style={{ padding: spacing.primitive[4], backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.md, marginBottom: spacing.primitive[6], display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div>
-            <p style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)", margin: 0 }}>AlertDialog Component</p>
-            <p style={{ fontSize: typography.fontSize.compact, color: "var(--text-secondary)", margin: "4px 0 0 0" }}>실제 컴포넌트 소스 코드를 GitHub에서 확인하세요.</p>
+            <p style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)", margin: 0 }}>Dialog Component</p>
+            <p style={{ fontSize: typography.fontSize.compact, color: "var(--text-secondary)", margin: `${spacing.primitive[1]}px 0 0 0` }}>실제 컴포넌트 소스 코드를 GitHub에서 확인하세요.</p>
           </div>
           <a
             href={ALERT_DIALOG_SOURCE}
@@ -701,7 +702,7 @@ function WebContent() {
             style={{
               display: "inline-flex",
               alignItems: "center",
-              gap: 6,
+              gap: 6, // optical: sub-token gap for icon+text in compact link
               padding: `${spacing.primitive[2]}px ${spacing.primitive[4]}px`,
               fontSize: typography.fontSize.compact,
               fontWeight: typography.fontWeight.medium,
@@ -721,7 +722,7 @@ function WebContent() {
 
       {/* Import */}
       <Section title="Import">
-        <CodeBlock code={`import { AlertDialog } from '@baerae-zkap/design-system';`} />
+        <CodeBlock code={`import { Dialog } from '@baerae-zkap/design-system';`} />
       </Section>
 
       {/* Basic Usage */}
@@ -732,7 +733,7 @@ function WebContent() {
   Open Dialog
 </Button>
 
-<AlertDialog
+<Dialog
   open={open}
   onClose={() => setOpen(false)}
   title="삭제하시겠어요?"
@@ -747,15 +748,15 @@ function WebContent() {
       {/* Single Action */}
       <Section title="Single Action">
         <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginBottom: spacing.primitive[4], lineHeight: 1.7 }}>
-          액션이 하나일 경우 버튼이 전체 너비로 늘어납니다.
+          액션이 하나일 경우 전체 너비 버튼으로 표시됩니다.
         </p>
-        <CodeBlock code={`<AlertDialog
+        <CodeBlock code={`<Dialog
   open={open}
   onClose={() => setOpen(false)}
   title="업데이트 완료"
   description="앱이 최신 버전으로 업데이트되었습니다."
   actions={[
-    { label: '확인', onClick: () => setOpen(false), color: 'primary', variant: 'filled' },
+    { label: '확인', onClick: () => setOpen(false) },
   ]}
 />`} />
       </Section>
@@ -765,7 +766,7 @@ function WebContent() {
         <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginBottom: spacing.primitive[4], lineHeight: 1.7 }}>
           <InlineCode>title</InlineCode>을 생략할 경우 <InlineCode>aria-label</InlineCode>을 반드시 제공해야 합니다.
         </p>
-        <CodeBlock code={`<AlertDialog
+        <CodeBlock code={`<Dialog
   open={open}
   onClose={() => setOpen(false)}
   aria-label="로그아웃 확인"
@@ -782,7 +783,7 @@ function WebContent() {
         <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginBottom: spacing.primitive[4], lineHeight: 1.7 }}>
           기본값은 <InlineCode>false</InlineCode>입니다. 중요도가 낮은 알림에는 <InlineCode>closeOnDimmerClick</InlineCode>을 활성화할 수 있습니다.
         </p>
-        <CodeBlock code={`<AlertDialog
+        <CodeBlock code={`<Dialog
   open={open}
   onClose={() => setOpen(false)}
   title="알림"
@@ -800,7 +801,7 @@ function WebContent() {
           props={[
             { name: "open", type: "boolean", required: true, description: "다이얼로그 열림 여부" },
             { name: "onClose", type: "() => void", required: true, description: "닫기 콜백 (Esc, 백드롭 클릭, 버튼)" },
-            { name: "actions", type: "AlertDialogAction[]", required: true, description: "액션 버튼 목록 (1-2개)" },
+            { name: "actions", type: "DialogAction[]", required: true, description: "액션 버튼 목록 (1-2개)" },
             { name: "title", type: "ReactNode", required: false, description: "다이얼로그 제목 (선택적 — 없으면 aria-label 필수)" },
             { name: "description", type: "ReactNode", required: false, description: "본문 내용" },
             { name: "closeOnDimmerClick", type: "boolean", required: false, defaultVal: "false", description: "백드롭 클릭 시 닫기 여부" },
@@ -809,7 +810,7 @@ function WebContent() {
         />
 
         <div style={{ marginTop: spacing.primitive[6] }}>
-          <p style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)", marginBottom: spacing.primitive[3] }}>AlertDialogAction</p>
+          <p style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)", marginBottom: spacing.primitive[3] }}>DialogAction</p>
           <PropsTable
             props={[
               { name: "label", type: "string", required: true, description: "버튼 레이블" },
@@ -839,15 +840,15 @@ function TwoActionDialogPreview() {
         boxShadow: "var(--shadow-semantic-modal-default)",
         border: "1px solid var(--divider)",
       }}>
-        <div style={{ fontSize: typography.fontSize.lg, fontWeight: 700, color: "var(--content-base-default)", marginBottom: spacing.primitive[2] }}>
+        <div style={{ fontSize: typography.fontSize.lg, fontWeight: typography.fontWeight.bold, color: "var(--content-base-default)", marginBottom: spacing.primitive[2] }}>
           삭제하시겠어요?
         </div>
         <div style={{ fontSize: typography.fontSize.sm, color: "var(--content-base-secondary)", lineHeight: 1.6, marginBottom: spacing.primitive[5] }}>
           이 작업은 되돌릴 수 없습니다.
         </div>
-        <div style={{ display: "flex", gap: spacing.primitive[2], justifyContent: "flex-end" }}>
-          <Button buttonType="weak" color="neutral" size="medium">취소</Button>
-          <Button buttonType="filled" color="error" size="medium">삭제</Button>
+        <div style={{ display: "flex", gap: spacing.primitive[2] }}>
+          <Button buttonType="weak" color="neutral" size="medium" layout="fillWidth">취소</Button>
+          <Button buttonType="filled" color="error" size="medium" layout="fillWidth">삭제</Button>
         </div>
       </div>
     </div>
@@ -865,7 +866,7 @@ function OneActionDialogPreview() {
         boxShadow: "var(--shadow-semantic-modal-default)",
         border: "1px solid var(--divider)",
       }}>
-        <div style={{ fontSize: typography.fontSize.lg, fontWeight: 700, color: "var(--content-base-default)", marginBottom: spacing.primitive[2] }}>
+        <div style={{ fontSize: typography.fontSize.lg, fontWeight: typography.fontWeight.bold, color: "var(--content-base-default)", marginBottom: spacing.primitive[2] }}>
           업데이트 완료
         </div>
         <div style={{ fontSize: typography.fontSize.sm, color: "var(--content-base-secondary)", lineHeight: 1.6, marginBottom: spacing.primitive[5] }}>
@@ -895,30 +896,35 @@ function MiniDialog({
       width: "100%",
       maxWidth: 200,
       backgroundColor: "var(--surface-base-default)",
-      borderRadius: 12,
-      padding: 12,
+      borderRadius: radius.primitive.md,
+      padding: spacing.primitive[3],
       boxShadow: "var(--shadow-primitive-sm)",
       border: "1px solid var(--divider)",
     }}>
+      {/* MiniDialog uses sub-token scale values for decorative preview illustration */}
       {title && (
-        <div style={{ fontSize: 12, fontWeight: 700, color: "var(--content-base-default)", marginBottom: 4 }}>
+        <div style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.bold, color: "var(--content-base-default)", marginBottom: spacing.primitive[1] }}>
           {title}
         </div>
       )}
-      <div style={{ fontSize: 11, color: "var(--content-base-secondary)", lineHeight: 1.5, marginBottom: 10 }}>
+      <div style={{ fontSize: 11, color: "var(--content-base-secondary)", lineHeight: 1.5, marginBottom: spacing.primitive[3] }}>
+        {/* fontSize:11 and marginBottom:10 are sub-token decorative values */}
         {desc}
       </div>
       <div style={{ display: "flex", gap: 6, justifyContent: cancelLabel ? "flex-end" : "stretch" }}>
+        {/* gap:6 is sub-token decorative value for mini preview */}
         {cancelLabel && (
           <div style={{
-            padding: "5px 10px", borderRadius: 6, fontSize: 11, fontWeight: 500,
+            padding: "5px 10px", borderRadius: 6, fontSize: 11, fontWeight: typography.fontWeight.medium,
+            /* padding/borderRadius/fontSize are sub-token decorative values for mini preview */
             backgroundColor: "var(--surface-base-alternative)", color: "var(--content-base-secondary)",
           }}>
             {cancelLabel}
           </div>
         )}
         <div style={{
-          padding: "5px 10px", borderRadius: 6, fontSize: 11, fontWeight: 600,
+          padding: "5px 10px", borderRadius: 6, fontSize: 11, fontWeight: typography.fontWeight.semibold,
+          /* padding/borderRadius/fontSize are sub-token decorative values for mini preview */
           backgroundColor: confirmColor, color: "white",
           flex: cancelLabel ? undefined : 1, textAlign: "center",
         }}>
@@ -937,7 +943,7 @@ function StateCard({ label, sublabel, children }: {
       {children}
       <div style={{ textAlign: "center" }}>
         <div style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)" }}>{label}</div>
-        <div style={{ fontSize: typography.fontSize.xs, color: "var(--text-tertiary)", marginTop: 2 }}>{sublabel}</div>
+        <div style={{ fontSize: typography.fontSize.xs, color: "var(--text-tertiary)", marginTop: 2 /* optical: sub-token tight gap */ }}>{sublabel}</div>
       </div>
     </div>
   );

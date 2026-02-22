@@ -73,13 +73,13 @@ Every data-fetching section must handle errors:
 - Don't break the rest of the page -- contain the error to its section.
 
 ```tsx
-// Error state pattern
-<div style={{ textAlign: 'center', padding: 40 }}>
-  <p style={{ ...typography.semantic.body.md, color: 'var(--content-base-secondary)' }}>
-    Failed to load data.
-  </p>
-  <Button buttonType="weak" color="primary" onClick={onRetry}>Retry</Button>
-</div>
+// Error state pattern -- prefer StateView for full empty/error states
+<StateView
+  figure={<ErrorIcon />}
+  title="Failed to load data"
+  description="Please check your connection and try again."
+  primaryAction={<Button buttonType="weak" color="primary" onClick={onRetry}>Retry</Button>}
+/>
 ```
 
 ## Feedback

@@ -17,6 +17,7 @@
 import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
 import { cssVarColors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
+import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
 import { opacity } from '../../tokens/general';
 import { usePressable } from '../../utils/usePressable';
@@ -195,7 +196,7 @@ export const Chip = forwardRef<HTMLButtonElement, ChipProps>(
       color: getTextColor(),
       backgroundColor: getBackgroundColor(),
       border: 'none',
-      borderRadius: sizeStyle.height / 2,
+      borderRadius: radius.primitive.full,
       cursor: disabled ? 'not-allowed' : 'pointer',
       opacity: disabled ? opacity.disabled : 1,
       transition: transitions.all,
@@ -274,12 +275,12 @@ export const Chip = forwardRef<HTMLButtonElement, ChipProps>(
             }}
             style={{
               marginRight: -spacing.component.chip.gap,
-              padding: 2,
+              padding: 0,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               cursor: 'pointer',
-              borderRadius: '50%',
+              borderRadius: radius.primitive.full,
             }}
           >
             {closeIcon || (

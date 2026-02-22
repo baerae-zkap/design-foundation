@@ -69,7 +69,6 @@ Switch changes take effect immediately. If async, show optimistic update and rev
 
 | Decision | Rule |
 |----------|------|
-| Radio vs Select | Use `Radio` for **≤5 options** visible at once; `Select` for **>5** or space-constrained |
 | Chip vs SegmentedControl | `Chip` for filter/tag behavior (multi-select OK); `SegmentedControl` for exclusive view/mode switching (2-5 options) |
 | ListCell vs Table | `ListCell` for mobile-first single-column rows; `Table` for cross-column comparison with 3+ data points per row |
 | Switch vs Checkbox | `Switch` for **immediate** setting effect; `Checkbox` for **form submission** values |

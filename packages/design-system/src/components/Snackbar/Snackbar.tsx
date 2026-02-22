@@ -29,6 +29,7 @@ import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
 import { zIndex } from '../../tokens/general';
+import { duration, easing } from '../../tokens/motion';
 
 export type SnackbarPosition = 'bottom-center' | 'bottom-left' | 'bottom-right';
 
@@ -53,7 +54,7 @@ export interface SnackbarProps {
 
 // ─── Animation injection ──────────────────────────────────────────────────────
 
-const ANIM_DURATION = 220;
+const ANIM_DURATION = duration.fast;
 
 let stylesInjected = false;
 function injectStyles() {
@@ -134,9 +135,9 @@ export function Snackbar({
 
   const wrapperStyle: React.CSSProperties = {
     position: 'fixed',
-    bottom: 40,
-    left: isCenter ? 0 : (isRight ? 'auto' : 20),
-    right: isRight ? 20 : (isCenter ? 0 : 'auto'),
+    bottom: spacing.primitive[10],
+    left: isCenter ? 0 : (isRight ? 'auto' : spacing.primitive[5]),
+    right: isRight ? spacing.primitive[5] : (isCenter ? 0 : 'auto'),
     display: isCenter ? 'flex' : 'block',
     justifyContent: 'center',
     zIndex: zIndex.toast,
@@ -155,7 +156,7 @@ export function Snackbar({
     backgroundColor: cssVarColors.inverse.surface.default,
     borderRadius: radius.primitive.md,
     pointerEvents: 'auto',
-    animation: `${visible ? '_zkap_sb_in' : '_zkap_sb_out'} ${ANIM_DURATION}ms cubic-bezier(0.16, 1, 0.3, 1) both`,
+    animation: `${visible ? '_zkap_sb_in' : '_zkap_sb_out'} ${ANIM_DURATION}ms ${easing.easeOut} both`,
   };
 
   const iconWrapStyle: React.CSSProperties = {
@@ -198,7 +199,7 @@ export function Snackbar({
     cursor: 'pointer',
     color: cssVarColors.inverse.content.secondary,
     borderRadius: radius.primitive.xs,
-    marginRight: -4,
+    marginRight: -spacing.primitive[1],
   };
 
   return createPortal(

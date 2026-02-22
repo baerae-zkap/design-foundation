@@ -298,7 +298,7 @@ function ComponentTokenSection({ title, tokens }: { title: string; tokens: Token
 
 export default function SpacingPage() {
   return (
-    <div style={{ maxWidth: 720 }}>
+    <div style={{ maxWidth: 840 }}>
       <Breadcrumb items={[{ label: "파운데이션", href: "/" }, { label: "Spacing" }]} />
 
       <h1 className="text-3xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>Spacing</h1>
