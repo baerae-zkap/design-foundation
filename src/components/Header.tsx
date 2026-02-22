@@ -11,7 +11,7 @@ interface HeaderProps {
 
 const mainNavigation = [
   { title: "Foundations", href: "/foundations" },
-  { title: "Components", href: "/components" },
+  { title: "Components", href: "/components/actions/action-area" },
 ];
 
 export function Header({ onMenuClick }: HeaderProps) {
@@ -40,6 +40,9 @@ export function Header({ onMenuClick }: HeaderProps) {
   const isActive = (href: string) => {
     if (href === "/foundations") {
       return pathname === "/" || pathname.startsWith("/foundations") || pathname.startsWith("/colors") || pathname.startsWith("/typography") || pathname.startsWith("/spacing") || pathname.startsWith("/radius") || pathname.startsWith("/shadow") || pathname.startsWith("/interaction");
+    }
+    if (href.startsWith("/components")) {
+      return pathname.startsWith("/components");
     }
     return pathname.startsWith(href);
   };

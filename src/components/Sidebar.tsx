@@ -19,8 +19,6 @@ const foundationsNav = [
 ];
 
 const componentsNav = [
-  { title: "Overview", href: "/components" },
-  { title: "Getting Started", href: "/getting-started" },
   { title: "Actions", isLabel: true },
   { title: "Action Area", href: "/components/actions/action-area" },
   { title: "Bottom CTA", href: "/components/actions/bottom-cta" },
