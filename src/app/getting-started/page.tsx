@@ -11,8 +11,8 @@ import { InlineCode } from "@/components/docs/Section";
 const componentCategories = [
   {
     title: "Actions",
-    count: 6,
-    description: "Button, IconButton, TextButton, Chip, ActionArea, BottomCTA",
+    count: 5,
+    description: "Button, IconButton, TextButton, Chip, ActionArea",
     href: "/components",
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

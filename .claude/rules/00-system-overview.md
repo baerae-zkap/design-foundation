@@ -22,15 +22,14 @@ Colors are CSS-variable-based. Light and dark mode switch automatically via `pre
 
 ## All 42 Components
 
-### Actions (6)
+### Actions (5)
 | Component | Purpose |
 |-----------|---------|
 | `Button` | Primary and secondary actions with label text |
 | `IconButton` | Icon-only actions (requires aria-label) |
 | `TextButton` | Inline text link-style actions |
 | `Chip` | Tags, filters, selectable labels |
-| `ActionArea` | Bottom-fixed container for action button groups in modals, sheets, and screen footers |
-| `BottomCTA` | Fixed bottom call-to-action bar |
+| `ActionArea` | Bottom-fixed container for action button groups in modals, sheets, and screen footers. Supports `topAccessory` for additional content above buttons. |
 
 ### Contents (8)
 | Component | Purpose |

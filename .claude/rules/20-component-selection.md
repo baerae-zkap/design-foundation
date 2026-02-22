@@ -16,7 +16,7 @@ Use this decision tree to pick the correct component. Follow top-to-bottom; use 
 | Click an icon-only action | `<IconButton aria-label="Close">` | Close, Menu, Share |
 | Toggle/select a tag or filter | `<Chip>` | Category filter, tag selector |
 | Show a button group at the bottom of a modal/sheet/page | `<ActionArea>` | Confirm/Cancel in dialog, submit in bottom sheet |
-| Show a fixed bottom CTA bar | `<BottomCTA>` | Checkout, Confirm booking |
+| Show a fixed bottom CTA bar with extra content | `<ActionArea topAccessory={...}>` | Checkout with terms checkbox, Confirm booking |
 
 ```tsx
 // Primary + Secondary pair

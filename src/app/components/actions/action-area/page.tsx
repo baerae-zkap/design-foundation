@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { PlatformTabs, CodeBlock, PreviewBox, Platform, highlightCode } from "@/components/PlatformTabs";
-import { ActionArea, Button, TextButton, IconButton } from '@baerae-zkap/design-system';
+import { ActionArea, Button, TextButton, IconButton, Checkbox } from '@baerae-zkap/design-system';
 import { typography, spacing, radius } from '@baerae-zkap/design-system';
 import { Section, Subsection, InlineCode } from "@/components/docs/Section";
 import { PropsTable } from "@/components/docs/PropsTable";
@@ -1101,6 +1101,39 @@ function WebContent() {
 </ActionArea>`} />
       </Section>
 
+      <Section title="With Top Accessory">
+        <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginBottom: spacing.primitive[4], lineHeight: 1.7 }}>
+          버튼 상단에 약관 동의 체크박스, 안내 문구 등 추가 콘텐츠를 배치합니다.
+          약관 동의, 가격 요약 등 버튼 위에 추가 정보가 필요한 경우 활용합니다.
+        </p>
+        <PreviewBox>
+          <div style={{ width: "100%", maxWidth: 320 }}>
+            <TopAccessoryDemo />
+          </div>
+        </PreviewBox>
+        <CodeBlock code={`<ActionArea
+  variant="strong"
+  position="sticky"
+  topAccessory={
+    <Checkbox
+      checked={agreed}
+      onChange={setAgreed}
+      label="이용약관에 동의합니다"
+    />
+  }
+>
+  <Button
+    buttonType="filled"
+    color="primary"
+    size="xLarge"
+    disabled={!agreed}
+    onClick={() => {}}
+  >
+    결제하기
+  </Button>
+</ActionArea>`} />
+      </Section>
+
       <Section title="API Reference">
         <Subsection title="ActionArea Props">
           <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginBottom: spacing.primitive[4], lineHeight: 1.7 }}>
@@ -1113,6 +1146,7 @@ function WebContent() {
               { name: "showGradient", type: "boolean", required: false, defaultVal: "true", description: "상단 그라데이션 표시 여부 (sticky/fixed에서만 적용)" },
               { name: "gradientHeight", type: "number", required: false, defaultVal: "48", description: "그라데이션 높이 (px)" },
               { name: "caption", type: "string", required: false, description: "버튼 상단에 표시되는 안내 텍스트. aria-describedby로 자동 연결됩니다." },
+              { name: "topAccessory", type: "ReactNode", required: false, description: "버튼 상단에 추가 콘텐츠 (예: 약관 동의 체크박스, 안내 텍스트). caption보다 위에 렌더링됩니다." },
               { name: "useSafeArea", type: "boolean", required: false, defaultVal: "true", description: "모바일 Safe Area 하단 패딩 적용 여부" },
               { name: "backgroundColor", type: "string", required: false, defaultVal: "var(--surface-base-default)", description: "컨테이너 및 그라데이션 배경색" },
               { name: "aria-label", type: "string", required: false, description: "스크린 리더가 읽을 버튼 그룹 설명 (예: \"결제 액션\")" },
@@ -1254,6 +1288,53 @@ function AnatomyDiagram() {
         <text x="30" y="94" textAnchor="middle" fill="white" fontSize="11" fontWeight={typography.fontWeight.semibold}>4</text>
         <line x1="42" y1="90" x2="60" y2="90" stroke="var(--content-base-default)" strokeWidth="1" strokeDasharray="2,2" />
       </svg>
+    </div>
+  );
+}
+
+// ============================================
+// Top Accessory Demo
+// ============================================
+function TopAccessoryDemo() {
+  const [agreed, setAgreed] = useState(false);
+  return (
+    <div
+      style={{
+        borderLeft: "2px solid var(--border-base-default)",
+        borderRight: "2px solid var(--border-base-default)",
+        borderBottom: "2px solid var(--border-base-default)",
+        borderRadius: `0 0 ${radius.primitive.xl}px ${radius.primitive.xl}px`,
+        overflow: "hidden",
+        backgroundColor: "var(--surface-base-default)",
+      }}
+    >
+      <ActionArea
+        variant="strong"
+        position="static"
+        showGradient={false}
+        useSafeArea={false}
+        topAccessory={
+          <Checkbox
+            checked={agreed}
+            onChange={setAgreed}
+            label="이용약관에 동의합니다"
+          />
+        }
+      >
+        <Button
+          buttonType="filled"
+          color="primary"
+          size="xLarge"
+          disabled={!agreed}
+          layout="fillWidth"
+          onClick={() => {}}
+        >
+          결제하기
+        </Button>
+      </ActionArea>
+      <div style={{ padding: `${spacing.primitive[2]}px 0 ${spacing.primitive[3]}px`, backgroundColor: "var(--surface-base-default)", display: "flex", justifyContent: "center" }}>
+        <div style={{ width: 60, height: 4, backgroundColor: "var(--border-base-default)", borderRadius: 2 }} />
+      </div>
     </div>
   );
 }

@@ -48,6 +48,8 @@ export interface ActionAreaProps extends Omit<HTMLAttributes<HTMLDivElement>, 'c
   useSafeArea?: boolean;
   /** 배경색 */
   backgroundColor?: string;
+  /** 버튼 상단에 추가 콘텐츠 (예: 약관 동의 체크박스, 안내 텍스트) */
+  topAccessory?: ReactNode;
   /** 버튼 그룹의 접근성 레이블 (스크린 리더용) */
   'aria-label'?: string;
   /** 버튼 요소들 (Button, TextButton 컴포넌트) */
@@ -86,6 +88,7 @@ export const ActionArea = forwardRef<HTMLDivElement, ActionAreaProps>(
       showGradient = true,
       gradientHeight = 48,
       caption,
+      topAccessory,
       useSafeArea = true,
       backgroundColor = cssVarColors.surface.base.default,
       children,
@@ -183,6 +186,13 @@ export const ActionArea = forwardRef<HTMLDivElement, ActionAreaProps>(
 
         {/* Content Area */}
         <div style={innerStyle}>
+          {/* Top Accessory */}
+          {topAccessory && (
+            <div style={{ marginBottom: spacing.component.modal.buttonGap }}>
+              {topAccessory}
+            </div>
+          )}
+
           {/* Caption */}
           {caption && (
             <p

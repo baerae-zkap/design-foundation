@@ -62,15 +62,14 @@ function MyPage() {
 
 ## 컴포넌트 (42개)
 
-### Actions (6)
+### Actions (5)
 | 컴포넌트 | 설명 |
 |---------|------|
 | Button | 기본 버튼 — `filled` / `weak` variant |
 | IconButton | 아이콘 전용 버튼 (aria-label 필수) |
 | TextButton | 인라인 텍스트 링크 스타일 버튼 |
 | Chip | 태그, 필터, 선택 가능 라벨 |
-| ActionArea | 모달/시트/페이지 하단 버튼 그룹 컨테이너 |
-| BottomCTA | 하단 고정 CTA 바 |
+| ActionArea | 모달/시트/페이지 하단 버튼 그룹 컨테이너 (topAccessory로 상단 콘텐츠 지원) |
 
 ### Contents (8)
 | 컴포넌트 | 설명 |

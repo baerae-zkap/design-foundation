@@ -173,9 +173,6 @@ export type { TextFieldProps } from './components/TextField/TextField';
 export { Skeleton } from './components/Skeleton/Skeleton';
 export type { SkeletonProps, SkeletonVariant } from './components/Skeleton/Skeleton';
 
-export { BottomCTA } from './components/BottomCTA/BottomCTA';
-export type { BottomCTAProps, BottomCTAVariant } from './components/BottomCTA/BottomCTA';
-
 export { TextArea } from './components/TextArea/TextArea';
 export type { TextAreaProps } from './components/TextArea/TextArea';
 
