@@ -85,7 +85,7 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
     const variantStyle = variantStyles[variant];
     const isInteractive = !!onClick;
 
-    const { isPressed, handlers } = usePressable<HTMLDivElement>({
+    const { isPressed, isHovered, handlers } = usePressable<HTMLDivElement>({
       disabled: !isInteractive,
       onMouseDown,
       onMouseUp,
@@ -93,34 +93,44 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
       onMouseEnter,
     });
 
-    const getPressedBackground = () => {
-      if (variant === 'filled') {
-        return cssVarColors.surface.base.container;
-      } else {
-        return cssVarColors.surface.base.alternative;
+    const [isFocusVisible, setIsFocusVisible] = useState(false);
+
+    const getInteractiveBackground = () => {
+      if (!isInteractive) return undefined;
+      if (isPressed) {
+        return variant === 'filled'
+          ? cssVarColors.surface.base.container
+          : cssVarColors.surface.base.alternative;
       }
+      if (isHovered) {
+        return cssVarColors.fill.alternative;
+      }
+      return undefined;
     };
 
-    const [isFocusVisible, setIsFocusVisible] = useState(false);
+    const interactiveBg = getInteractiveBackground();
 
     const containerStyle: React.CSSProperties = {
       display: 'flex',
-      flexDirection: 'column',
+      alignItems: 'center',
+      gap: spacing.primitive[3],
       padding: spacing.primitive[4],
       borderRadius: radius.component.card.sm,
       cursor: isInteractive ? 'pointer' : 'default',
-      outline: isFocusVisible && isInteractive ? `${borderWidth.strong}px solid ${cssVarColors.content.brand.default}` : 'none',
+      outline: isFocusVisible && isInteractive
+        ? `${borderWidth.strong}px solid ${cssVarColors.content.brand.default}`
+        : 'none',
       outlineOffset: 2,
-      transition: transitions.background,
+      transition: transitions.all,
       ...variantStyle,
-      ...(isPressed && isInteractive ? { backgroundColor: getPressedBackground() } : {}),
+      ...(interactiveBg ? { backgroundColor: interactiveBg } : {}),
       ...style,
     };
 
     const thumbnailContainerStyle: React.CSSProperties = {
       width: spacing.component.listCard.thumbnailSize.md,
       height: spacing.component.listCard.thumbnailSize.md,
-      borderRadius: radius.primitive.sm,
+      borderRadius: radius.primitive.md,
       overflow: 'hidden',
       flexShrink: 0,
       backgroundColor: cssVarColors.surface.base.container,
@@ -134,6 +144,12 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
       minWidth: 0,
       display: 'flex',
       flexDirection: 'column',
+      gap: spacing.primitive[1],
+    };
+
+    const badgesStyle: React.CSSProperties = {
+      display: 'flex',
+      flexWrap: 'wrap',
       gap: spacing.primitive[1],
     };
 
@@ -166,6 +182,13 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
       marginTop: spacing.primitive[1],
     };
 
+    const trailingStyle: React.CSSProperties = {
+      flexShrink: 0,
+      display: 'flex',
+      alignItems: 'center',
+      marginLeft: 'auto',
+    };
+
     const handleClick = () => {
       if (isInteractive) {
         onClick();
@@ -195,7 +218,14 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
           externalKeyUp?.(e);
         }}
         onFocus={(e) => {
-          setIsFocusVisible(true);
+          // Only show focus ring for keyboard navigation, not mouse clicks
+          try {
+            if (e.target.matches(':focus-visible')) {
+              setIsFocusVisible(true);
+            }
+          } catch {
+            // Fallback: don't show focus ring (safe default for older browsers)
+          }
           onFocus?.(e);
         }}
         onBlur={(e) => {
@@ -206,37 +236,27 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
         {...handlers}
         {...props}
       >
-        {/* Main row */}
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: spacing.primitive[4] }}>
-          {/* Thumbnail */}
-          {thumbnail && (
-            <div style={thumbnailContainerStyle}>
-              {thumbnail}
-            </div>
-          )}
-
-          {/* Content */}
-          <div style={contentStyle}>
-            {/* Badges */}
-            {badges && (
-              <div style={{ display: 'flex', gap: spacing.primitive[1], marginBottom: spacing.primitive[1] }}>
-                {badges}
-              </div>
-            )}
-
-            <div style={titleStyle}>{title}</div>
-            {subtitle && <div style={subtitleStyle}>{subtitle}</div>}
-            {meta && <div style={metaStyle}>{meta}</div>}
+        {/* Thumbnail */}
+        {thumbnail && (
+          <div style={thumbnailContainerStyle}>
+            {thumbnail}
           </div>
+        )}
 
-          {/* Action */}
-          {action && (
-            <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center', alignSelf: 'center' }}>
-              {action}
-            </div>
-          )}
+        {/* Content — fills available space between thumbnail and action */}
+        <div style={contentStyle}>
+          {badges && <div style={badgesStyle}>{badges}</div>}
+          <div style={titleStyle}>{title}</div>
+          {subtitle && <div style={subtitleStyle}>{subtitle}</div>}
+          {meta && <div style={metaStyle}>{meta}</div>}
         </div>
 
+        {/* Action — anchored to the right */}
+        {action && (
+          <div style={trailingStyle}>
+            {action}
+          </div>
+        )}
       </div>
     );
   }
