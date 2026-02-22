@@ -194,7 +194,13 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
           externalKeyUp?.(e);
         }}
         onFocus={(e) => {
-          setIsFocusVisible(true);
+          try {
+            if (e.target.matches(':focus-visible')) {
+              setIsFocusVisible(true);
+            }
+          } catch {
+            // Safe fallback for older browsers
+          }
           onFocus?.(e);
         }}
         onBlur={(e) => {
