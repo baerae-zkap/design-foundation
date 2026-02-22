@@ -62,12 +62,12 @@ function BadgePlayground() {
 
   return (
     <div style={{ marginBottom: spacing.primitive[8] }}>
-      <div style={{ borderRadius: radius.primitive.xl, overflow: 'hidden', backgroundColor: 'var(--surface-base-alternative)' }}>
+      <div style={{ borderRadius: radius.primitive.xl, overflow: 'hidden', backgroundColor: 'var(--surface-base-default)', border: '1px solid var(--border-solid-alternative)' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 280px', minHeight: 400 }}>
-          <div style={{ padding: 60, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--surface-base-alternative)' }}>
+          <div style={{ padding: 60, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--surface-base-default)' }}>
             <Badge color={color} variant={variant} size={size}>{label}</Badge>
           </div>
-          <div style={{ backgroundColor: 'var(--surface-base-alternative)', display: 'flex', flexDirection: 'column', padding: spacing.primitive[4], height: '100%', boxSizing: 'border-box' }}>
+          <div style={{ backgroundColor: 'var(--surface-base-default)', borderLeft: '1px solid var(--border-solid-alternative)', display: 'flex', flexDirection: 'column', padding: spacing.primitive[4], height: '100%', boxSizing: 'border-box' }}>
             <div style={{ flex: 1, minHeight: 0, padding: spacing.primitive[5], overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: spacing.primitive[5], backgroundColor: 'var(--surface-base-default)', borderRadius: radius.primitive.lg }}>
               <RadioGroup
                 label="Color"

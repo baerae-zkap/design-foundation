@@ -848,7 +848,7 @@ function WebContent() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: spacing.primitive[12] }}>
       <Section title="Source Code">
-        <div style={{ padding: spacing.primitive[4], backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.sm, border: "1px solid var(--divider)" }}>
+        <div style={{ padding: spacing.primitive[4], backgroundColor: "var(--surface-base-default)", borderLeft: "1px solid var(--border-solid-alternative)", borderRadius: radius.primitive.sm, border: "1px solid var(--divider)" }}>
           <a
             href="https://github.com/baerae-zkap/design-foundation/tree/main/packages/design-system/src/components/Table"
             target="_blank"
@@ -1015,14 +1015,14 @@ function TablePlayground() {
 
   return (
     <div style={{ marginBottom: spacing.primitive[8] }}>
-      <div style={{ borderRadius: radius.primitive.xl, overflow: "hidden", backgroundColor: "var(--surface-base-alternative)" }}>
+      <div style={{ borderRadius: radius.primitive.xl, overflow: "hidden", backgroundColor: "var(--surface-base-default)", border: "1px solid var(--border-solid-alternative)" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
           <div style={{ padding: spacing.primitive[14], display: "flex", alignItems: "center", justifyContent: "center" }}>
             <TableDemo variant={variant} size={size} />
           </div>
 
           <div style={{
-            backgroundColor: "var(--surface-base-alternative)",
+            backgroundColor: "var(--surface-base-default)", borderLeft: "1px solid var(--border-solid-alternative)",
             display: "flex",
             flexDirection: "column",
             padding: spacing.primitive[4],

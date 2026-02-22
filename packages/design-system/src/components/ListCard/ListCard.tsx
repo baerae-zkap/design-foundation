@@ -107,7 +107,7 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
     // -----------------------------------------------------------------------
     const getInteractiveBackground = (): string | undefined => {
       if (!isInteractive) return undefined;
-      if (isPressed || isHovered) return cssVarColors.surface.base.alternative;
+      if (isPressed || isHovered) return cssVarColors.surface.base.defaultPressed;
       return undefined;
     };
 

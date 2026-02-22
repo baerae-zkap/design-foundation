@@ -199,6 +199,7 @@
   --surface-base-alternative: var(--grey-99);
   --surface-base-container: var(--grey-97);
   --surface-base-containerPressed: var(--grey-95);
+  --surface-base-defaultPressed: var(--grey-98);
   --surface-elevated-default: var(--static-white);
   --surface-elevated-alternative: var(--grey-99);
   --surface-brand-default: var(--blue-50);
@@ -323,6 +324,7 @@
     --surface-base-alternative: var(--grey-10);
     --surface-base-container: var(--grey-20);
     --surface-base-containerPressed: var(--grey-23);
+    --surface-base-defaultPressed: var(--grey-17);
     --surface-elevated-default: var(--grey-17);
     --surface-elevated-alternative: var(--grey-20);
     --surface-brand-default: var(--blue-55);
@@ -447,6 +449,7 @@
   --surface-base-alternative: var(--grey-10);
   --surface-base-container: var(--grey-20);
   --surface-base-containerPressed: var(--grey-23);
+  --surface-base-defaultPressed: var(--grey-17);
   --surface-elevated-default: var(--grey-17);
   --surface-elevated-alternative: var(--grey-20);
   --surface-brand-default: var(--blue-55);

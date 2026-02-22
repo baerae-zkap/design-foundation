@@ -22,7 +22,9 @@
         "container": "{palette.grey.97}",
         "container_comment": "컨테이너 배경. 섹션 구분",
         "containerPressed": "{palette.grey.95}",
-        "containerPressed_comment": "컨테이너 눌림 상태"
+        "containerPressed_comment": "컨테이너 눌림 상태",
+        "defaultPressed": "{palette.grey.98}",
+        "defaultPressed_comment": "기본 배경 호버/눌림 상태 (투명 배경 위 인터랙션)"
       },
       "elevated": {
         "default": "{palette.static.white}",
@@ -335,7 +337,9 @@
         "container": "{palette.grey.20}",
         "container_comment": "컨테이너 배경",
         "containerPressed": "{palette.grey.23}",
-        "containerPressed_comment": "컨테이너 눌림 상태"
+        "containerPressed_comment": "컨테이너 눌림 상태",
+        "defaultPressed": "{palette.grey.17}",
+        "defaultPressed_comment": "기본 배경 호버/눌림 상태"
       },
       "elevated": {
         "default": "{palette.grey.17}",

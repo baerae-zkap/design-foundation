@@ -125,7 +125,7 @@ export const Switch = React.forwardRef<HTMLLabelElement, SwitchProps>(
         ? cssVarColors.surface.brand.defaultPressed
         : cssVarColors.surface.brand.default
       : isHovered
-        ? cssVarColors.surface.base.alternative
+        ? cssVarColors.surface.base.defaultPressed
         : cssVarColors.fill.normal;
 
     const trackStyle: CSSProperties = {

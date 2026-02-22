@@ -60,7 +60,7 @@ function ListCellPlayground() {
 
   return (
     <div style={{ marginBottom: spacing.primitive[8] }}>
-      <div style={{ borderRadius: radius.primitive.xl, overflow: "hidden", backgroundColor: "var(--surface-base-alternative)" }}>
+      <div style={{ borderRadius: radius.primitive.xl, overflow: "hidden", backgroundColor: "var(--surface-base-default)", border: "1px solid var(--border-solid-alternative)" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
           <div style={{ padding: spacing.primitive[14], display: "flex", alignItems: "center", justifyContent: "center" }}>
             <div style={{ width: 320, backgroundColor: "var(--surface-base-default)", borderRadius: radius.primitive.lg, overflow: "hidden", boxShadow: "var(--shadow-sm)" }}>
@@ -99,7 +99,7 @@ function ListCellPlayground() {
 
           <div
             style={{
-              backgroundColor: "var(--surface-base-alternative)",
+              backgroundColor: "var(--surface-base-default)", borderLeft: "1px solid var(--border-solid-alternative)",
               display: "flex",
               flexDirection: "column",
               padding: spacing.primitive[4],
@@ -1053,7 +1053,7 @@ function StatusDot({ color }: { color: string }) {
 
 function SettingsIconDemo() {
   return (
-    <div style={{ width: 40, height: 40, borderRadius: radius.primitive.md, backgroundColor: "var(--surface-base-alternative)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <div style={{ width: 40, height: 40, borderRadius: radius.primitive.md, backgroundColor: "var(--surface-base-default)", display: "flex", alignItems: "center", justifyContent: "center" }}>
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--icon-default)" strokeWidth="2">
         <circle cx="12" cy="12" r="3" />
         <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" />

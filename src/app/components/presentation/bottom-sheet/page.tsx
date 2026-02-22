@@ -232,8 +232,8 @@ function PhoneFrame({ children, height = 480 }: { children?: React.ReactNode; he
       width: 280,
       height,
       borderRadius: radius.primitive.xl,
-      backgroundColor: "var(--surface-base-alternative)",
-      border: "1px solid var(--divider)",
+      backgroundColor: "var(--surface-base-default)",
+      border: "1px solid var(--border-solid-alternative)",
       position: "relative",
       overflow: "hidden",
       flexShrink: 0,
@@ -277,7 +277,7 @@ function Playground() {
       <div style={{
         borderRadius: radius.primitive.xl,
         overflow: "hidden",
-        backgroundColor: "var(--surface-base-alternative)",
+        backgroundColor: "var(--surface-base-default)", border: "1px solid var(--border-solid-alternative)",
       }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 320px", height: 560 }}>
           {/* Preview */}
@@ -286,7 +286,7 @@ function Playground() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            backgroundColor: "var(--surface-base-alternative)",
+            backgroundColor: "var(--surface-base-default)",
           }}>
             <div style={{
               position: "relative",
@@ -355,7 +355,7 @@ function Playground() {
 
           {/* Controls */}
           <div style={{
-            backgroundColor: "var(--surface-base-alternative)",
+            backgroundColor: "var(--surface-base-default)", borderLeft: "1px solid var(--border-solid-alternative)",
             display: "flex",
             flexDirection: "column",
             padding: spacing.primitive[4],

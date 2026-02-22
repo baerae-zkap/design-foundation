@@ -136,7 +136,7 @@ ${children}
         style={{
           borderRadius: radius.primitive.xl,
           overflow: "hidden",
-          backgroundColor: "var(--surface-base-alternative)",
+          backgroundColor: "var(--surface-base-default)", border: "1px solid var(--border-solid-alternative)",
         }}
       >
         <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", minHeight: 420 }}>
@@ -147,7 +147,7 @@ ${children}
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              backgroundColor: "var(--surface-base-alternative)",
+              backgroundColor: "var(--surface-base-default)",
             }}
           >
             <div style={{ width: "100%", maxWidth: 380 }}>
@@ -197,7 +197,7 @@ ${children}
           {/* Control Panel */}
           <div
             style={{
-              backgroundColor: "var(--surface-base-alternative)",
+              backgroundColor: "var(--surface-base-default)", borderLeft: "1px solid var(--border-solid-alternative)",
               display: "flex",
               flexDirection: "column",
               padding: spacing.primitive[4],
@@ -1201,7 +1201,7 @@ function WebContent() {
 function AnatomyDiagram() {
   return (
     <div style={{
-      backgroundColor: "var(--surface-base-alternative)",
+      backgroundColor: "var(--surface-base-default)",
       borderRadius: radius.primitive.lg,
       padding: `${spacing.primitive[8]}px ${spacing.primitive[10]}px`,
       display: "flex",

@@ -64,16 +64,16 @@ const variantStyles: Record<CardVariant, {
 }> = {
   filled: {
     bg: cssVarColors.surface.base.default,
-    bgPressed: cssVarColors.surface.base.alternative,
+    bgPressed: cssVarColors.surface.base.defaultPressed,
   },
   elevated: {
     bg: cssVarColors.surface.base.default,
-    bgPressed: cssVarColors.surface.base.alternative,
+    bgPressed: cssVarColors.surface.base.defaultPressed,
     shadow: cssVarShadow.semantic.card.elevated,
   },
   outlined: {
     bg: cssVarColors.surface.base.default,
-    bgPressed: cssVarColors.surface.base.alternative,
+    bgPressed: cssVarColors.surface.base.defaultPressed,
     border: cssVarColors.border.base.default,
   },
 };
@@ -98,7 +98,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
     ref
   ) => {
     const useSlotMode = !children && (!!thumbnail || !!heading || !!caption);
-    const { isPressed, handlers } = usePressable<HTMLDivElement>({
+    const { isPressed, isHovered, handlers } = usePressable<HTMLDivElement>({
       disabled: false,
       onMouseDown,
       onMouseUp,
@@ -106,7 +106,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
     });
 
     const variantStyle = variantStyles[variant];
-    const backgroundColor = isPressed ? variantStyle.bgPressed : variantStyle.bg;
+    const backgroundColor = (isPressed || isHovered) ? variantStyle.bgPressed : variantStyle.bg;
     const borderRadiusValue = radius.component.card.sm;
 
     const cardStyle: React.CSSProperties = {

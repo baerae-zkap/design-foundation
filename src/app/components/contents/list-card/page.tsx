@@ -54,7 +54,7 @@ function ListCardPlayground() {
 
   return (
     <div style={{ marginBottom: spacing.primitive[8] }}>
-      <div style={{ borderRadius: radius.primitive.xl, overflow: "hidden", backgroundColor: "var(--surface-base-alternative)" }}>
+      <div style={{ borderRadius: radius.primitive.xl, overflow: "hidden", backgroundColor: "var(--surface-base-default)", border: "1px solid var(--border-solid-alternative)" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
           <div style={{ padding: `${spacing.primitive[8]}px ${spacing.primitive[6]}px`, display: "flex", flexDirection: "column", justifyContent: "center" }}>
             <ListCard
@@ -74,7 +74,7 @@ function ListCardPlayground() {
           </div>
 
           <div style={{
-            backgroundColor: "var(--surface-base-alternative)",
+            backgroundColor: "var(--surface-base-default)", borderLeft: "1px solid var(--border-solid-alternative)",
             display: "flex",
             flexDirection: "column",
             padding: spacing.primitive[4],
@@ -963,7 +963,7 @@ function UsageCard({ situation, description, config, examples }: {
 // ============================================
 function EthereumIcon({ size = 48 }: { size?: number }) {
   return (
-    <div style={{ width: size, height: size, borderRadius: size / 2, backgroundColor: "var(--surface-base-alternative)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <div style={{ width: size, height: size, borderRadius: size / 2, backgroundColor: "var(--surface-base-default)", display: "flex", alignItems: "center", justifyContent: "center" }}>
       <svg width={size * 0.55} height={size * 0.55} viewBox="0 0 24 24" fill={BRAND_EXTERNAL_COLORS.crypto.ethereum}>
         <path d="M12 1.5l-7 10.5 7 4 7-4-7-10.5z" opacity="0.6" />
         <path d="M12 22.5l-7-10 7 4 7-4-7 10z" />

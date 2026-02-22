@@ -59,7 +59,7 @@ function SliderPlayground() {
       <div style={{ borderRadius: radius.primitive.xl, overflow: 'hidden', border: '1px solid var(--divider)' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 280px', minHeight: 320 }}>
           {/* Preview Area */}
-          <div style={{ padding: spacing.primitive[10], display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--surface-base-alternative)' }}>
+          <div style={{ padding: spacing.primitive[10], display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--surface-base-default)' }}>
             <div style={{ width: '100%', maxWidth: 320 }}>
               <Slider
                 value={value}

@@ -88,7 +88,7 @@ function TextFieldPlayground() {
         style={{
           borderRadius: radius.primitive.xl,
           overflow: "hidden",
-          backgroundColor: "var(--surface-base-alternative)",
+          backgroundColor: "var(--surface-base-default)", border: "1px solid var(--border-solid-alternative)",
         }}
       >
         <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
@@ -99,7 +99,7 @@ function TextFieldPlayground() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              backgroundColor: "var(--surface-base-alternative)",
+              backgroundColor: "var(--surface-base-default)",
             }}
           >
             <div style={{ width: "100%", maxWidth: 320 }}>
@@ -117,7 +117,7 @@ function TextFieldPlayground() {
           {/* Control Panel */}
           <div
             style={{
-              backgroundColor: "var(--surface-base-alternative)",
+              backgroundColor: "var(--surface-base-default)", borderLeft: "1px solid var(--border-solid-alternative)",
               display: "flex",
               flexDirection: "column",
               padding: spacing.primitive[4],
@@ -298,7 +298,7 @@ function DesignContent() {
       <Section title="Anatomy">
         <div
           style={{
-            backgroundColor: "var(--surface-base-alternative)",
+            backgroundColor: "var(--surface-base-default)",
             borderRadius: radius.primitive.md,
             padding: `${spacing.primitive[12]}px ${spacing.primitive[10]}px`,
             display: "flex",
@@ -778,7 +778,7 @@ function WebContent() {
         <div
           style={{
             padding: spacing.primitive[4],
-            backgroundColor: "var(--surface-base-alternative)",
+            backgroundColor: "var(--surface-base-default)", borderLeft: "1px solid var(--border-solid-alternative)",
             borderRadius: radius.primitive.md,
             marginBottom: spacing.primitive[6],
             display: "flex",

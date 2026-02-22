@@ -73,7 +73,7 @@ function TabItem({ item, isActive, itemCount, onSelect }: TabItemProps) {
 
   // Pill bg: only appears on press/hover, not on static active state
   const pillBg = isPressed || isHovered
-    ? cssVarColors.surface.base.alternative
+    ? cssVarColors.surface.base.defaultPressed
     : 'transparent';
 
   const buttonStyle: CSSProperties = {

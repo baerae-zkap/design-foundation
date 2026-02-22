@@ -247,6 +247,7 @@ export const lightColors = {
       alternative: palette.grey["99"],
       container: palette.grey["97"],
       containerPressed: palette.grey["95"],
+      defaultPressed: palette.grey["98"],
     },
     elevated: {
       default: palette.static.white,
@@ -441,6 +442,7 @@ export const darkColors = {
       alternative: palette.grey["10"],
       container: palette.grey["20"],
       containerPressed: palette.grey["23"],
+      defaultPressed: palette.grey["17"],
     },
     elevated: {
       default: palette.grey["17"],
@@ -637,6 +639,7 @@ export const cssVarColors = {
       alternative: 'var(--surface-base-alternative)' as const,
       container: 'var(--surface-base-container)' as const,
       containerPressed: 'var(--surface-base-containerPressed)' as const,
+      defaultPressed: 'var(--surface-base-defaultPressed)' as const,
     },
     elevated: {
       default: 'var(--surface-elevated-default)' as const,

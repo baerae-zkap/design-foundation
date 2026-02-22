@@ -73,7 +73,7 @@ function SectionHeaderPlayground() {
 
   return (
     <div style={{ marginBottom: spacing.primitive[8] }}>
-      <div style={{ borderRadius: radius.primitive.xl, overflow: "hidden", backgroundColor: "var(--surface-base-alternative)" }}>
+      <div style={{ borderRadius: radius.primitive.xl, overflow: "hidden", backgroundColor: "var(--surface-base-default)", border: "1px solid var(--border-solid-alternative)" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
           <div style={{ padding: `${spacing.primitive[10]}px ${spacing.primitive[6]}px`, display: "flex", alignItems: "center", justifyContent: "center" }}>
             <div style={{ width: "100%", backgroundColor: "var(--surface-base-default)" }}>
@@ -87,7 +87,7 @@ function SectionHeaderPlayground() {
           </div>
 
           <div style={{
-            backgroundColor: "var(--surface-base-alternative)",
+            backgroundColor: "var(--surface-base-default)", borderLeft: "1px solid var(--border-solid-alternative)",
             display: "flex",
             flexDirection: "column",
             padding: spacing.primitive[4],
@@ -486,7 +486,7 @@ function WebContent() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: spacing.primitive[12] }}>
       <Section title="Source Code">
-        <div style={{ padding: spacing.primitive[4], backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.md, border: "1px solid var(--divider)" }}>
+        <div style={{ padding: spacing.primitive[4], backgroundColor: "var(--surface-base-default)", borderLeft: "1px solid var(--border-solid-alternative)", borderRadius: radius.primitive.md, border: "1px solid var(--divider)" }}>
           <a
             href="https://github.com/baerae-zkap/design-foundation/tree/main/packages/design-system/src/components/SectionHeader"
             target="_blank"

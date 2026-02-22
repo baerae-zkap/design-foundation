@@ -146,10 +146,10 @@ function Playground() {
 
   return (
     <div style={{ marginBottom: spacing.primitive[8] }}>
-      <div style={{ borderRadius: radius.primitive.xl, overflow: "hidden", backgroundColor: "var(--surface-base-alternative)" }}>
+      <div style={{ borderRadius: radius.primitive.xl, overflow: "hidden", backgroundColor: "var(--surface-base-default)", border: "1px solid var(--border-solid-alternative)" }}>
         <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 280px", height: isMobile ? "auto" : 480 }}>
           {/* Preview */}
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "var(--surface-base-alternative)", padding: isMobile ? `${spacing.primitive[8]}px ${spacing.primitive[4]}px` : 0 }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "var(--surface-base-default)", border: "1px solid var(--border-solid-alternative)", padding: isMobile ? `${spacing.primitive[8]}px ${spacing.primitive[4]}px` : 0 }}>
             <div style={{ width: "100%", maxWidth: 400, overflow: "hidden" }}>
               <TopNavigation
                 variant={variant}
@@ -166,7 +166,7 @@ function Playground() {
 
           {/* Controls */}
           <div style={{
-            backgroundColor: "var(--surface-base-alternative)",
+            backgroundColor: "var(--surface-base-default)", borderLeft: "1px solid var(--border-solid-alternative)",
             display: "flex",
             flexDirection: "column",
             padding: spacing.primitive[4],

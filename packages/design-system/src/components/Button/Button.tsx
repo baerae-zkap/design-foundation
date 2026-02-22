@@ -161,7 +161,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const isDisabled = disabled || isLoading;
-    const { isPressed, handlers } = usePressable<HTMLButtonElement>({
+    const { isPressed, isHovered, handlers } = usePressable<HTMLButtonElement>({
       disabled: isDisabled,
       onMouseDown,
       onMouseUp,
@@ -190,7 +190,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       opacity: disabled ? opacity.disabled : 1,
       background: disabled
         ? cssVarColors.surface.disabled.default
-        : (isPressed && !isLoading ? colorStyle.bgPressed : colorStyle.bg),
+        : ((isPressed || isHovered) && !isLoading ? colorStyle.bgPressed : colorStyle.bg),
       color: disabled ? cssVarColors.content.disabled.default : colorStyle.color,
       border: 'none',
       ...style,

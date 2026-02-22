@@ -79,7 +79,7 @@ function TextButtonPlayground() {
         style={{
           borderRadius: radius.primitive.xl,
           overflow: "hidden",
-          backgroundColor: "var(--surface-base-alternative)",
+          backgroundColor: "var(--surface-base-default)", border: "1px solid var(--border-solid-alternative)",
         }}
       >
         <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
@@ -90,7 +90,7 @@ function TextButtonPlayground() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              backgroundColor: "var(--surface-base-alternative)",
+              backgroundColor: "var(--surface-base-default)",
             }}
           >
             <TextButtonDemo
@@ -106,7 +106,7 @@ function TextButtonPlayground() {
           {/* Control Panel */}
           <div
             style={{
-              backgroundColor: "var(--surface-base-alternative)",
+              backgroundColor: "var(--surface-base-default)", borderLeft: "1px solid var(--border-solid-alternative)",
               display: "flex",
               flexDirection: "column",
               padding: spacing.primitive[4],
@@ -458,7 +458,7 @@ function DesignContent() {
               </div>
             </div>
           </PreviewBox>
-          <div style={{ marginTop: spacing.primitive[4], padding: spacing.primitive[4], backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.md, fontSize: typography.fontSize.compact }}>
+          <div style={{ marginTop: spacing.primitive[4], padding: spacing.primitive[4], backgroundColor: "var(--surface-base-default)", borderLeft: "1px solid var(--border-solid-alternative)", borderRadius: radius.primitive.md, fontSize: typography.fontSize.compact }}>
             <p style={{ margin: 0, color: "var(--text-secondary)", lineHeight: 1.8 }}>
               <strong style={{ color: "var(--text-primary)" }}>Default:</strong> 기본 텍스트 색상<br />
               <strong style={{ color: "var(--text-primary)" }}>Hover:</strong> 연한 배경색 표시 (rgba overlay)<br />

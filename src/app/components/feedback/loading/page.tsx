@@ -84,7 +84,7 @@ function SpinnerPlayground() {
         style={{
           borderRadius: radius.primitive.xl,
           overflow: "hidden",
-          backgroundColor: "var(--surface-base-alternative)",
+          backgroundColor: "var(--surface-base-default)", border: "1px solid var(--border-solid-alternative)",
         }}
       >
         <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", minHeight: 360 }}>
@@ -103,7 +103,7 @@ function SpinnerPlayground() {
 
           <div
             style={{
-              backgroundColor: "var(--surface-base-alternative)",
+              backgroundColor: "var(--surface-base-default)", borderLeft: "1px solid var(--border-solid-alternative)",
               display: "flex",
               flexDirection: "column",
               padding: spacing.primitive[4],
@@ -422,7 +422,7 @@ function WebContent() {
         <div
           style={{
             padding: spacing.primitive[4],
-            backgroundColor: "var(--surface-base-alternative)",
+            backgroundColor: "var(--surface-base-default)", borderLeft: "1px solid var(--border-solid-alternative)",
             borderRadius: radius.primitive.md,
             display: "flex",
             alignItems: "center",

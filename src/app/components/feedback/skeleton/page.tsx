@@ -219,7 +219,7 @@ function SkeletonPlayground() {
         style={{
           borderRadius: radius.primitive.xl,
           overflow: "hidden",
-          backgroundColor: "var(--surface-base-alternative)",
+          backgroundColor: "var(--surface-base-default)", border: "1px solid var(--border-solid-alternative)",
         }}
       >
         <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", minHeight: 360 }}>
@@ -243,7 +243,7 @@ function SkeletonPlayground() {
           {/* Controls */}
           <div
             style={{
-              backgroundColor: "var(--surface-base-alternative)",
+              backgroundColor: "var(--surface-base-default)", borderLeft: "1px solid var(--border-solid-alternative)",
               display: "flex",
               flexDirection: "column",
               padding: spacing.primitive[4],
@@ -378,7 +378,7 @@ function DesignContent() {
       <Section title="Anatomy">
         <div
           style={{
-            backgroundColor: "var(--surface-base-alternative)",
+            backgroundColor: "var(--surface-base-default)",
             borderRadius: radius.primitive.md,
             padding: `${spacing.primitive[10]}px ${spacing.primitive[8]}px`,
             display: "flex",
@@ -853,7 +853,7 @@ function WebContent() {
         <div
           style={{
             padding: spacing.primitive[4],
-            backgroundColor: "var(--surface-base-alternative)",
+            backgroundColor: "var(--surface-base-default)", borderLeft: "1px solid var(--border-solid-alternative)",
             borderRadius: radius.primitive.md,
             display: "flex",
             alignItems: "center",

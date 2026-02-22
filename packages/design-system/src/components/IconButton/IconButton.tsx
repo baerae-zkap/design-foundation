@@ -47,7 +47,7 @@ const sizeStyles: Record<IconButtonSize, { size: number; iconSize: number }> = {
 
 const colorStyles: Record<IconButtonColor, {
   filled: { bg: string; bgPressed: string; color: string };
-  ghost: { bg: string; bgHover: string; bgPressed: string; color: string; colorPressed: string };
+  ghost: { bg: string; bgPressed: string; color: string; colorPressed: string };
   weak: { bg: string; bgPressed: string; color: string };
 }> = {
   primary: {
@@ -58,8 +58,7 @@ const colorStyles: Record<IconButtonColor, {
     },
     ghost: {
       bg: 'transparent',
-      bgHover: cssVarColors.surface.base.alternative,
-      bgPressed: cssVarColors.surface.base.alternative,
+      bgPressed: cssVarColors.surface.base.defaultPressed,
       color: cssVarColors.content.brand.default,
       colorPressed: cssVarColors.surface.brand.defaultPressed
     },
@@ -77,14 +76,13 @@ const colorStyles: Record<IconButtonColor, {
     },
     ghost: {
       bg: 'transparent',
-      bgHover: cssVarColors.surface.base.alternative,
-      bgPressed: cssVarColors.surface.base.alternative,
+      bgPressed: cssVarColors.surface.base.defaultPressed,
       color: cssVarColors.content.base.default,
       colorPressed: cssVarColors.inverse.surface.default
     },
     weak: {
       bg: cssVarColors.surface.base.container,
-      bgPressed: cssVarColors.surface.base.alternative,
+      bgPressed: cssVarColors.surface.base.containerPressed,
       color: cssVarColors.content.base.default,
     },
   },
@@ -96,7 +94,6 @@ const colorStyles: Record<IconButtonColor, {
     },
     ghost: {
       bg: 'transparent',
-      bgHover: cssVarColors.surface.error.default,
       bgPressed: cssVarColors.surface.error.default,
       color: cssVarColors.content.error.default,
       colorPressed: cssVarColors.surface.error.solidPressed
@@ -137,14 +134,14 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
     const sizeStyle = sizeStyles[size];
     const colorStyle = colorStyles[color][variant];
 
-    // Determine background color based on state
+    // Determine background color based on state (hover = pressed = same token)
     const getBackgroundColor = (): string => {
       if (variant === 'ghost') {
         const s = colorStyle as typeof colorStyles.primary.ghost;
-        return isPressed ? s.bgPressed : isHovered ? s.bgHover : s.bg;
+        return (isPressed || isHovered) ? s.bgPressed : s.bg;
       }
       const s = colorStyle as typeof colorStyles.primary[typeof variant];
-      return isPressed ? s.bgPressed : s.bg;
+      return (isPressed || isHovered) ? s.bgPressed : s.bg;
     };
 
     // Determine icon color

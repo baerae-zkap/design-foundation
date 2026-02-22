@@ -68,7 +68,7 @@ function AccordionPlayground() {
         style={{
           borderRadius: radius.primitive.xl,
           overflow: "hidden",
-          backgroundColor: "var(--surface-base-alternative)",
+          backgroundColor: "var(--surface-base-default)", border: "1px solid var(--border-solid-alternative)",
         }}
       >
         <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
@@ -79,7 +79,7 @@ function AccordionPlayground() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              backgroundColor: "var(--surface-base-alternative)",
+              backgroundColor: "var(--surface-base-default)",
             }}
           >
             <div style={{ width: "100%", maxWidth: 400 }}>
@@ -99,7 +99,7 @@ function AccordionPlayground() {
           {/* Control Panel */}
           <div
             style={{
-              backgroundColor: "var(--surface-base-alternative)",
+              backgroundColor: "var(--surface-base-default)", borderLeft: "1px solid var(--border-solid-alternative)",
               display: "flex",
               flexDirection: "column",
               padding: spacing.primitive[4],
@@ -211,7 +211,7 @@ function DesignContent() {
       {/* Anatomy */}
       <Section title="Anatomy">
         <div style={{
-          backgroundColor: "var(--surface-base-alternative)",
+          backgroundColor: "var(--surface-base-default)",
           borderRadius: radius.primitive.lg,
           padding: `${spacing.primitive[12]}px ${spacing.primitive[10]}px`,
           display: "flex",
@@ -875,7 +875,7 @@ function WebContent() {
     <div style={{ display: "flex", flexDirection: "column", gap: spacing.primitive[12] }}>
       {/* Source Code */}
       <Section title="Source Code">
-        <div style={{ padding: spacing.primitive[4], backgroundColor: "var(--surface-base-alternative)", borderRadius: radius.primitive.md, marginBottom: spacing.primitive[6], display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <div style={{ padding: spacing.primitive[4], backgroundColor: "var(--surface-base-default)", borderLeft: "1px solid var(--border-solid-alternative)", borderRadius: radius.primitive.md, marginBottom: spacing.primitive[6], display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div>
             <p style={{ fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.semibold, color: "var(--text-primary)", margin: 0 }}>Accordion Component</p>
             <p style={{ fontSize: typography.fontSize.compact, color: "var(--text-secondary)", margin: `${spacing.primitive[1]}px 0 0 0` }}>실제 컴포넌트 소스 코드를 GitHub에서 확인하세요.</p>

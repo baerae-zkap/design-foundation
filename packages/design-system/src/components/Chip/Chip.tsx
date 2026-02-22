@@ -163,7 +163,7 @@ export const Chip = forwardRef<HTMLButtonElement, ChipProps>(
     },
     ref
   ) => {
-    const { isPressed, handlers } = usePressable<HTMLButtonElement>({
+    const { isPressed, isHovered, handlers } = usePressable<HTMLButtonElement>({
       disabled,
       onMouseDown,
       onMouseUp,
@@ -175,7 +175,7 @@ export const Chip = forwardRef<HTMLButtonElement, ChipProps>(
 
     const getBackgroundColor = (): string => {
       if (selected) return colorStyle.bgSelected;
-      if (isPressed && !disabled) return colorStyle.bgPressed;
+      if ((isPressed || isHovered) && !disabled) return colorStyle.bgPressed;
       return colorStyle.bg;
     };
 

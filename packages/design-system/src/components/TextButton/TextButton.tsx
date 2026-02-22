@@ -50,22 +50,22 @@ const colorStyles: Record<TextButtonColor, { default: string; pressed: string; p
   primary: {
     default: cssVarColors.content.brand.default,
     pressed: cssVarColors.surface.brand.defaultPressed,
-    pressedBg: cssVarColors.surface.base.alternative
+    pressedBg: cssVarColors.surface.base.defaultPressed
   },
   neutral: {
     default: cssVarColors.content.base.default,
     pressed: cssVarColors.content.base.strong,
-    pressedBg: cssVarColors.surface.base.alternative
+    pressedBg: cssVarColors.surface.base.defaultPressed
   },
   muted: {
     default: cssVarColors.content.base.neutral,
     pressed: cssVarColors.content.base.default,
-    pressedBg: cssVarColors.surface.base.alternative
+    pressedBg: cssVarColors.surface.base.defaultPressed
   },
   error: {
     default: cssVarColors.content.error.default,
     pressed: cssVarColors.surface.error.solidPressed,
-    pressedBg: cssVarColors.surface.base.alternative
+    pressedBg: cssVarColors.surface.base.defaultPressed
   },
 };
 
@@ -85,7 +85,7 @@ export const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(
     },
     ref
   ) => {
-    const { isPressed, handlers } = usePressable<HTMLButtonElement>({
+    const { isPressed, isHovered, handlers } = usePressable<HTMLButtonElement>({
       disabled,
       onMouseDown,
       onMouseUp,
@@ -102,8 +102,8 @@ export const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(
       padding: `${spacing.primitive[1]}px ${spacing.primitive[2]}px`,
       fontSize,
       fontWeight: typography.fontWeight.medium,
-      color: disabled ? cssVarColors.content.disabled.default : (isPressed ? colorStyle.pressed : colorStyle.default),
-      background: isPressed && !disabled ? colorStyle.pressedBg : 'transparent',
+      color: disabled ? cssVarColors.content.disabled.default : ((isPressed || isHovered) ? colorStyle.pressed : colorStyle.default),
+      background: (isPressed || isHovered) && !disabled ? colorStyle.pressedBg : 'transparent',
       border: 'none',
       borderRadius: radius.primitive.sm,
       cursor: disabled ? 'not-allowed' : 'pointer',

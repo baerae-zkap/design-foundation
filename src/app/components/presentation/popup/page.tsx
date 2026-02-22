@@ -159,7 +159,7 @@ function Playground() {
 
   return (
     <div style={{ marginBottom: spacing.primitive[8] }}>
-      <div style={{ borderRadius: radius.primitive.xl, overflow: "hidden", backgroundColor: "var(--surface-base-alternative)" }}>
+      <div style={{ borderRadius: radius.primitive.xl, overflow: "hidden", backgroundColor: "var(--surface-base-default)", border: "1px solid var(--border-solid-alternative)" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 320px", minHeight: 480 }}>
           {/* Preview */}
           <div style={{ padding: spacing.primitive[8], display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -169,7 +169,7 @@ function Playground() {
           </div>
 
           {/* Controls */}
-          <div style={{ backgroundColor: "var(--surface-base-alternative)", display: "flex", flexDirection: "column", padding: spacing.primitive[4], overflow: "hidden", height: "100%", boxSizing: "border-box" }}>
+          <div style={{ backgroundColor: "var(--surface-base-default)", borderLeft: "1px solid var(--border-solid-alternative)", display: "flex", flexDirection: "column", padding: spacing.primitive[4], overflow: "hidden", height: "100%", boxSizing: "border-box" }}>
             <div style={{ flex: 1, minHeight: 0, padding: spacing.primitive[6], overflowY: "auto", display: "flex", flexDirection: "column", gap: spacing.primitive[6], backgroundColor: "var(--surface-base-default)", borderRadius: radius.primitive.lg }}>
               <RadioGroup
                 label="Size"
@@ -320,7 +320,7 @@ function DesignContent() {
                 <MockPopup navigation="floating">
                   <div style={{
                     width: "100%", height: 80, borderRadius: radius.primitive.lg,
-                    backgroundColor: "var(--surface-base-alternative)",
+                    backgroundColor: "var(--surface-base-default)",
                     display: "flex", alignItems: "center", justifyContent: "center",
                     fontSize: typography.fontSize.sm, color: "var(--content-base-secondary)",
                   }}>
