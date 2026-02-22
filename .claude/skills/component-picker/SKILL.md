@@ -27,8 +27,6 @@ When you need to select the right component for a UI element but are unsure whic
 - Section title → SectionHeader
 - Expandable section → Accordion
 - Status/category label → ContentBadge
-- Tabular data → Table
-- Image with ratio → Thumbnail
 
 ### Is it an INPUT (user provides data)?
 - Single-line text → TextField

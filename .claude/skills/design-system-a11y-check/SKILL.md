@@ -39,10 +39,6 @@ After generating or reviewing UI code that uses `@baerae-zkap/design-system`. Ru
 - [ ] Has `aria-label` or associated visible label
 - [ ] Change is immediate (not deferred to form submit)
 
-### Table
-- [ ] Uses native `<table>` elements (built-in via system Table component)
-- [ ] Header cells have appropriate scope
-
 ## General Rules
 - [ ] No `onClick` on non-interactive elements without `role="button"` + keyboard handler
 - [ ] Color is not the only indicator of state -- add text or icon

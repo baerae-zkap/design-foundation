@@ -6,11 +6,11 @@
 
 ## 개요
 
-Design Foundation은 baerae-zkap 서비스에서 사용할 디자인 토큰 시스템과 44개 웹 컴포넌트 라이브러리입니다.
+Design Foundation은 baerae-zkap 서비스에서 사용할 디자인 토큰 시스템과 42개 웹 컴포넌트 라이브러리입니다.
 
 - **패키지명**: `@baerae-zkap/design-system`
 - **기술 스택**: React, TypeScript, Next.js (문서 사이트)
-- **웹 컴포넌트**: 44개
+- **웹 컴포넌트**: 42개
 - **테마**: CSS 변수 기반 Light/Dark 자동 전환
 
 ### 브랜치 구조
@@ -60,7 +60,7 @@ function MyPage() {
 
 ---
 
-## 컴포넌트 (44개)
+## 컴포넌트 (42개)
 
 ### Actions (6)
 | 컴포넌트 | 설명 |
@@ -72,7 +72,7 @@ function MyPage() {
 | ActionArea | 모달/시트/페이지 하단 버튼 그룹 컨테이너 |
 | BottomCTA | 하단 고정 CTA 바 |
 
-### Contents (10)
+### Contents (8)
 | 컴포넌트 | 설명 |
 |---------|------|
 | Card | 그룹 콘텐츠 컨테이너 (클릭 가능) |
@@ -83,8 +83,6 @@ function MyPage() {
 | ListCard | 수평 썸네일 + 텍스트 리스트 아이템 |
 | ListCell | 설정/메뉴용 단일행 리스트 아이템 |
 | SectionHeader | 섹션 제목 + 옵션 액션 |
-| Table | 행/열 데이터 테이블 |
-| Thumbnail | 고정 비율 이미지 |
 
 ### Inputs (9)
 | 컴포넌트 | 설명 |
@@ -194,7 +192,7 @@ npm run check:raw-colors   # 하드코딩 색상 잔존 검사
 design-foundation/
 ├── packages/design-system/          # 배포 패키지
 │   ├── src/
-│   │   ├── components/              # 웹 컴포넌트 44개
+│   │   ├── components/              # 웹 컴포넌트 42개
 │   │   ├── tokens/                  # 토큰 TS (auto-generated + manual)
 │   │   ├── utils/                   # usePressable, styles 등
 │   │   └── index.ts                 # 패키지 export

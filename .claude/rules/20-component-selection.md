@@ -36,8 +36,6 @@ Use this decision tree to pick the correct component. Follow top-to-bottom; use 
 | A section title with optional action link | `<SectionHeader>` |
 | Expandable/collapsible detail | `<Accordion>` |
 | A small status or category label | `<ContentBadge>` |
-| Tabular data with rows and columns | `<Table>` |
-| An image with controlled aspect ratio | `<Thumbnail>` |
 | A user profile picture | `<Avatar>` (multiple users: `<AvatarGroup>`) |
 | A numeric count or status badge | `<Badge>` |
 
@@ -135,7 +133,6 @@ When two components seem equally valid, apply these rules:
 | `Chip` vs `SegmentedControl` | Multi-select / filter behavior → Chip; Exclusive mode/view switching → SegmentedControl |
 | `Switch` vs `Checkbox` | Immediate effect on toggle → Switch; Value submitted with a form → Checkbox |
 | `TextButton` vs `Button` | Inline within sentence/content → TextButton; Standalone CTA → Button |
-| `ListCell` vs `Table` | Single-column mobile-friendly rows → ListCell; Multi-column data comparison → Table |
 | `Card` vs `ActionArea` | Structured content block → Card; Button group at bottom of modal/sheet/page → ActionArea |
 | `Badge` vs `ContentBadge` | Numeric count overlay on another element → Badge; Standalone status/category label in content → ContentBadge |
 | `Spinner` vs `Skeleton` | Unknown-duration action loading → Spinner; Content shape known, loading inline → Skeleton |

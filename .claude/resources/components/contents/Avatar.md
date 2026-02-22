@@ -12,8 +12,8 @@ A circular or rounded image placeholder that represents a user or entity. Suppor
 - Grouped member displays with overflow count
 
 ## When NOT to Use
-- Product or content images -- use `Thumbnail` instead
-- Icons or logos that aren't user representations -- use `IconButton` for actions or `Thumbnail` for content images
+- Product or content images -- use an `<img>` element with appropriate aspect ratio instead
+- Icons or logos that aren't user representations -- use `IconButton` for actions or an `<img>` element for content images
 
 ## Props
 

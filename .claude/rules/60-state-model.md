@@ -70,6 +70,5 @@ Switch changes take effect immediately. If async, show optimistic update and rev
 | Decision | Rule |
 |----------|------|
 | Chip vs SegmentedControl | `Chip` for filter/tag behavior (multi-select OK); `SegmentedControl` for exclusive view/mode switching (2-5 options) |
-| ListCell vs Table | `ListCell` for mobile-first single-column rows; `Table` for cross-column comparison with 3+ data points per row |
 | Switch vs Checkbox | `Switch` for **immediate** setting effect; `Checkbox` for **form submission** values |
 | TextButton vs Button | `TextButton` for inline low-emphasis actions within content; `Button` for standalone CTAs |

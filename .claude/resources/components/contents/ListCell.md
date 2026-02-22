@@ -13,7 +13,7 @@ A single-row horizontal list item for settings, menus, and option lists. Support
 
 ## When NOT to Use
 - Do NOT use for media-rich items with thumbnails -- use `ListCard` instead
-- Do NOT use for tabular data with multiple columns -- use `Table` instead
+- Do NOT use for tabular data with multiple columns
 - Do NOT use for card-like content blocks -- use `Card` instead
 
 ## Props

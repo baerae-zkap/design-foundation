@@ -78,7 +78,7 @@ Also accepts all standard `HTMLAttributes<HTMLDivElement>` except `onClick`.
     <Card
       key={item.id}
       variant="outlined"
-      thumbnail={<Thumbnail src={item.image} aspectRatio="16:9" />}
+      thumbnail={<img src={item.image} alt={item.title} style={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover' }} />}
       heading={item.title}
       caption={item.description}
       onClick={() => onSelect(item.id)}
@@ -116,4 +116,4 @@ Also accepts all standard `HTMLAttributes<HTMLDivElement>` except `onClick`.
 - Renders with `role="button"` and `tabIndex={0}` -- keyboard focusable and activatable
 - Enter and Space keys trigger `onClick`
 - Press state managed by `usePressable` hook for visual feedback
-- Thumbnail area has `overflow: hidden` with top border radius for clipped images
+- Image area has `overflow: hidden` with top border radius for clipped images

@@ -1,7 +1,7 @@
-# Skill: Build List & Table
+# Skill: Build List
 
 ## When to Use
-When building list screens, feed screens, search results, settings menus, or data tables.
+When building list screens, feed screens, search results, or settings menus.
 
 ## List Type Selector
 
@@ -9,7 +9,6 @@ When building list screens, feed screens, search results, settings menus, or dat
 |-------------|-----------|------|
 | Media items (image + title + meta) | ListCard | Product listings, article feeds |
 | Settings / menu rows | ListCell | App settings, option menus |
-| Tabular data with columns | Table | Comparison, data management |
 | Section-grouped items | SectionHeader + ListCard/ListCell | Grouped settings, categorized lists |
 
 ## Workflow
@@ -17,7 +16,6 @@ When building list screens, feed screens, search results, settings menus, or dat
 ### Step 1: Choose list component
 - Does each item have an image/thumbnail? → ListCard
 - Is it a settings-style row? → ListCell
-- Does data need column comparison? → Table
 
 ### Step 2: Structure the list
 ```tsx
@@ -37,7 +35,7 @@ When building list screens, feed screens, search results, settings menus, or dat
   {items.map(item => (
     <ListCard
       key={item.id}
-      thumbnail={<Thumbnail src={item.image} aspectRatio="16:9" />}
+      thumbnail={<img src={item.image} alt={item.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />}
       title={item.title}
       subtitle={item.subtitle}
       onClick={() => navigate(`/item/${item.id}`)}
@@ -63,13 +61,11 @@ return <ItemList items={items} />;
 - DO: Always handle loading, empty, error states
 - DON'T: Show blank area when list is empty
 - DO: Group related items with SectionHeader
-- DON'T: Use Table for mobile-primary content (use ListCell instead)
 - DO: Use consistent item height within a list
 - DON'T: Mix ListCard and ListCell in the same section
 
 ## References
 - `.claude/resources/components/contents/ListCard.md`
 - `.claude/resources/components/contents/ListCell.md`
-- `.claude/resources/components/contents/Table.md`
 - `.claude/resources/components/contents/SectionHeader.md`
 - `.claude/rules/60-state-model.md`

@@ -14,7 +14,7 @@ A horizontal card layout with thumbnail, text content, and optional action area.
 ## When NOT to Use
 - Do NOT use for simple text-only list rows -- use `ListCell` instead
 - Do NOT use for grid layouts -- use `Card` instead
-- Do NOT use for tabular data -- use `Table` instead
+- Do NOT use for tabular data with multiple columns
 
 ## Props
 
@@ -37,7 +37,7 @@ Also accepts all standard `HTMLAttributes<HTMLDivElement>` except `title`.
 ```tsx
 <ListCard
   variant="outlined"
-  thumbnail={<Thumbnail src="/product.jpg" aspectRatio="1:1" size={80} />}
+  thumbnail={<img src="/product.jpg" alt="Product" style={{ width: 80, height: 80, objectFit: 'cover', borderRadius: 8 }} />}
   title="Product Name"
   subtitle="Brand Name"
   meta="$59.00"
@@ -51,7 +51,7 @@ Also accepts all standard `HTMLAttributes<HTMLDivElement>` except `title`.
 <ListCard
   title="Song Title"
   subtitle="Artist Name"
-  thumbnail={<Thumbnail src={albumArt} aspectRatio="1:1" size={56} />}
+  thumbnail={<img src={albumArt} alt="Album art" style={{ width: 56, height: 56, objectFit: 'cover', borderRadius: 8 }} />}
   action={
     <IconButton aria-label="Play" onClick={onPlay}>
       <PlayIcon />
@@ -63,7 +63,7 @@ Also accepts all standard `HTMLAttributes<HTMLDivElement>` except `title`.
 ### Badges + meta
 ```tsx
 <ListCard
-  thumbnail={<Thumbnail src={item.image} aspectRatio="1:1" size={64} />}
+  thumbnail={<img src={item.image} alt={item.name} style={{ width: 64, height: 64, objectFit: 'cover', borderRadius: 8 }} />}
   title={item.name}
   subtitle={item.description}
   meta={`$${item.price}`}
@@ -100,8 +100,8 @@ Also accepts all standard `HTMLAttributes<HTMLDivElement>` except `title`.
 | Subtitle color | `cssVarColors.content.base.secondary` |
 | Meta color | `cssVarColors.content.base.default` |
 | Meta weight | `typography.fontWeight.bold` |
-| Thumbnail bg | `cssVarColors.surface.base.container` |
-| Thumbnail radius | `radius.primitive.sm` |
+| Image bg | `cssVarColors.surface.base.container` |
+| Image radius | `radius.primitive.sm` |
 | Transition | `transitions.background` |
 
 ## Accessibility

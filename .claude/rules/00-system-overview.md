@@ -1,7 +1,7 @@
 # zkap Design System Overview
 
 ## What It Is
-`@baerae-zkap/design-system` is a React component library and design token system for building product UIs. It provides 45 ready-to-use components and a full token set for spacing, typography, colors, and radius.
+`@baerae-zkap/design-system` is a React component library and design token system for building product UIs. It provides 43 ready-to-use components and a full token set for spacing, typography, colors, and radius.
 
 ## Installation
 ```bash
@@ -20,7 +20,7 @@ import { spacing, typography, radius, lightColors, darkColors } from '@baerae-zk
 ## Theme
 Colors are CSS-variable-based. Light and dark mode switch automatically via `prefers-color-scheme`. No manual theme toggling is needed in product code. Just include the generated CSS file and components adapt.
 
-## All 44 Components
+## All 42 Components
 
 ### Actions (6)
 | Component | Purpose |
@@ -32,7 +32,7 @@ Colors are CSS-variable-based. Light and dark mode switch automatically via `pre
 | `ActionArea` | Bottom-fixed container for action button groups in modals, sheets, and screen footers |
 | `BottomCTA` | Fixed bottom call-to-action bar |
 
-### Contents (10)
+### Contents (8)
 | Component | Purpose |
 |-----------|---------|
 | `Card` | Container for grouped content, optionally clickable |
@@ -41,8 +41,6 @@ Colors are CSS-variable-based. Light and dark mode switch automatically via `pre
 | `SectionHeader` | Section title with optional trailing action |
 | `Accordion` | Expandable/collapsible content panel |
 | `ContentBadge` | Small status or category label |
-| `Table` | Rows and columns for tabular data |
-| `Thumbnail` | Image with fixed aspect ratio |
 | `Avatar` | User profile image with fallback (also `AvatarGroup`) |
 | `Badge` | Numeric or status badge overlay |
 

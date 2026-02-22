@@ -84,8 +84,6 @@ TextButton ("Don't have an account? Sign up", color="primary")
 ## Detail Screen
 
 ```
-Thumbnail (hero image, aspect ratio 16:9)
----
 Heading (typography.semantic.title.md)
 ContentBadge (status: "Active", color="success")
 Body text (typography.semantic.body.md)
@@ -100,7 +98,7 @@ Button bar (bottom fixed):
   Button (variant="filled", color="primary", "Edit")
 ```
 
-**Key components:** `Thumbnail`, `ContentBadge`, `SectionHeader`, `ListCell`, `Button`
+**Key components:** `ContentBadge`, `SectionHeader`, `ListCell`, `Button`
 
 ## Dashboard Screen
 
