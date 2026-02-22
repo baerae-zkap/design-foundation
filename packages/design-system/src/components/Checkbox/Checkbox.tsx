@@ -175,7 +175,8 @@ export const Checkbox = React.forwardRef<HTMLLabelElement, CheckboxProps>(
       border: controlBorder,
       backgroundColor: controlBg,
       color: cssVarColors.inverse.content.default,
-      transition: transitions.all,
+      transition: 'background-color 150ms ease, transform 150ms ease',
+      transform: isPressed && !disabled ? 'scale(0.98)' : undefined,
       flexShrink: 0,
       boxSizing: 'border-box',
     };

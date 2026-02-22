@@ -118,7 +118,8 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
       border: variant === 'outlined' ? `${borderWidth.default}px solid ${variantStyle.border}` : 'none',
       boxShadow: variant === 'elevated' ? variantStyle.shadow : 'none',
       cursor: 'pointer',
-      transition: transitions.all,
+      transition: 'background-color 150ms ease, transform 150ms ease',
+      transform: isPressed ? 'scale(0.98)' : undefined,
       overflow: 'hidden',
       ...style,
     };

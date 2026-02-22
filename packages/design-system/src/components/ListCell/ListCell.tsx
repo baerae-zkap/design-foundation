@@ -131,7 +131,8 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
       outline: isFocusVisible && isInteractive ? `${borderWidth.strong}px solid ${cssVarColors.content.brand.default}` : 'none',
       outlineOffset: 2,
       borderBottom: divider ? `${borderWidth.default}px solid ${cssVarColors.border.solid.alternative}` : 'none',
-      transition: transitions.background,
+      transition: 'background-color 150ms ease, transform 150ms ease',
+      transform: isPressed && isInteractive ? 'scale(0.98)' : undefined,
       ...style,
     };
 

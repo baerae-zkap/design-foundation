@@ -114,7 +114,8 @@ function CategoryChip({
       ? cssVarColors.content.base.onColor
       : cssVarColors.content.base.default,
     cursor: 'pointer',
-    transition: transitions.all,
+    transition: 'background-color 150ms ease, transform 150ms ease',
+    transform: isPressed ? 'scale(0.98)' : undefined,
   };
 
   return (
