@@ -109,7 +109,7 @@ export const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(
       cursor: disabled ? 'not-allowed' : 'pointer',
       textDecoration: variant === 'underline' ? 'underline' : 'none',
       transition: 'background-color 150ms ease, transform 150ms ease',
-      transform: isPressed && !disabled ? 'scale(0.98)' : undefined,
+      transform: isPressed && !disabled ? 'scale(0.97)' : undefined,
       ...style,
     };
 

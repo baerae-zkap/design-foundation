@@ -17,6 +17,7 @@
 import { useState, forwardRef, type HTMLAttributes, type ReactNode } from 'react';
 import { cssVarColors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
+import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
 import { borderWidth } from '../../tokens/general';
 import { usePressable } from '../../utils/usePressable';
@@ -127,12 +128,12 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
       backgroundColor: (isPressed || isHovered) && isInteractive
         ? cssVarColors.surface.base.defaultPressed
         : 'transparent',
+      borderRadius: radius.primitive.sm,
       cursor: isInteractive ? 'pointer' : 'default',
       outline: isFocusVisible && isInteractive ? `${borderWidth.strong}px solid ${cssVarColors.content.brand.default}` : 'none',
       outlineOffset: 2,
-      borderBottom: divider ? `${borderWidth.default}px solid ${cssVarColors.border.solid.alternative}` : 'none',
       transition: 'background-color 150ms ease, transform 150ms ease',
-      transform: isPressed && isInteractive ? 'scale(0.98)' : undefined,
+      transform: isPressed && isInteractive ? 'scale(0.97)' : undefined,
       ...style,
     };
 

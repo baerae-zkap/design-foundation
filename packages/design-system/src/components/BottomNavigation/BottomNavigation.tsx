@@ -130,7 +130,7 @@ function TabItem({ item, isActive, itemCount, onSelect }: TabItemProps) {
         flexShrink: 0,
         // Press: snap down quickly
         // Release: spring back with overshoot (울렁울렁 jiggle)
-        transform: isPressed ? 'scale(0.98)' : 'scale(1)',
+        transform: isPressed ? 'scale(0.97)' : 'scale(1)',
         transition: isPressed
           ? `background-color ${duration.fast}ms ${easing.easeOut}, transform ${duration.instant}ms ${easing.easeIn}`
           : `background-color ${duration.fast}ms ${easing.easeOut}, transform ${duration.slow}ms ${easing.spring}`,

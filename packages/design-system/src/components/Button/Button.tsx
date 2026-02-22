@@ -186,7 +186,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       borderRadius: borderRadiusValue,
       cursor: isDisabled ? 'not-allowed' : 'pointer',
       transition: 'background-color 150ms ease, transform 150ms ease',
-      transform: isPressed && !isDisabled ? 'scale(0.98)' : undefined,
+      transform: isPressed && !isDisabled ? 'scale(0.97)' : undefined,
       width: layout === 'fillWidth' ? '100%' : 'auto',
       opacity: disabled ? opacity.disabled : 1,
       background: disabled

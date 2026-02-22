@@ -130,7 +130,7 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
         : 'none',
       outlineOffset: 2,
       transition: 'background-color 150ms ease, transform 150ms ease',
-      transform: isPressed && isInteractive ? 'scale(0.98)' : undefined,
+      transform: isPressed && isInteractive ? 'scale(0.97)' : undefined,
       ...variantStyles[variant],
       ...(interactiveBg ? { backgroundColor: interactiveBg } : {}),
       ...style,

@@ -138,7 +138,7 @@ export const Switch = React.forwardRef<HTMLLabelElement, SwitchProps>(
       borderRadius: radius.primitive.full,
       backgroundColor: trackBg,
       transition: 'background-color 150ms ease, transform 150ms ease',
-      transform: isPressed && !disabled ? 'scale(0.98)' : undefined,
+      transform: isPressed && !disabled ? 'scale(0.97)' : undefined,
       flexShrink: 0,
       boxSizing: 'border-box',
     };
