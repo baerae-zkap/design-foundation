@@ -79,7 +79,7 @@ Inherits all `ButtonHTMLAttributes<HTMLButtonElement>` except `color`.
 
 | Size | Height | Font | Typical Use |
 |------|--------|------|-------------|
-| `small` | 32px | 14px | Compact contexts, dense UI |
+| `small` | 36px | 14px | Compact contexts, dense UI |
 | `medium` | 40px | 14px | Default, most UI |
 | `large` | 44px | 14px | Touch-friendly primary CTAs |
 | `xLarge` | 48px | 16px | Hero / full-width CTAs |

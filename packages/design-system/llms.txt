@@ -59,6 +59,7 @@ No Select (dropdown) component exists. Use Radio/RadioGroup for small option set
 | Single choice from group | `<Radio>` / `<RadioGroup>` |
 | Segmented tab selector | `<SegmentedControl>` |
 | Numeric range | `<Slider>` |
+| Standalone check indicator | `<CheckMark>` |
 
 ### Feedback
 
@@ -186,6 +187,8 @@ Snackbar = single message. Toast = heading + detail. Spinner = unknown-duration 
 - One primary CTA per section max
 
 ## Optional
+
+Deep-dive references for advanced usage and AI code generation quality.
 
 - [Anti-Patterns](docs/anti-patterns.md): Common mistakes to avoid
 - [Visual Language](docs/visual-language.md): Color philosophy, spacing, typography, motion
