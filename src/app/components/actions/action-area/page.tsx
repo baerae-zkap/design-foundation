@@ -401,8 +401,8 @@ function DesignContent() {
         {/* Compact */}
         <Subsection title="Compact">
           <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", marginBottom: spacing.primitive[4], lineHeight: 1.7 }}>
-            <strong style={{ color: "var(--text-primary)" }}>가로 배치, 우측 정렬, 작은 버튼</strong>. 인라인 폼이나 카드 내부의 액션 영역에서 사용합니다.
-            컨텐츠와 함께 배치되어 공간을 절약합니다.
+            <strong style={{ color: "var(--text-primary)" }}>가로 배치, 우측 정렬, 작은 버튼 — 웹 전용</strong>. 웹 모달·다이얼로그 하단 버튼 영역에 최적화된 variant입니다.
+            버튼이 우측 정렬되며 내용 크기만큼만 차지합니다. 모바일 앱에서는 터치 타겟 확보를 위해 <InlineCode>strong</InlineCode> 또는 <InlineCode>neutral</InlineCode> 사용을 권장합니다.
           </p>
           <PreviewBox>
             <div style={{ width: "100%", maxWidth: 320, display: "flex", flexDirection: "column", gap: spacing.primitive[4] }}>
@@ -642,10 +642,10 @@ import { ActionArea, Button, TextButton } from '@baerae-zkap/design-system';
                   <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, borderBottom: "1px solid var(--divider)", color: "var(--text-tertiary)", fontSize: typography.fontSize.compact }}>확인/취소</td>
                 </tr>
                 <tr>
-                  <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, fontWeight: typography.fontWeight.medium }}>인라인 액션</td>
+                  <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, fontWeight: typography.fontWeight.medium }}>웹 모달·다이얼로그 <span style={{ fontWeight: typography.fontWeight.regular, color: "var(--text-tertiary)", fontSize: typography.fontSize.compact }}>(웹 전용)</span></td>
                   <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px` }}><code style={{ backgroundColor: "var(--surface-base-alternative)", padding: "2px 6px", borderRadius: radius.primitive.xs, fontSize: typography.fontSize.compact }}>compact</code></td>
                   <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-secondary)" }}>Main + Alternative</td>
-                  <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-tertiary)", fontSize: typography.fontSize.compact }}>수정/삭제</td>
+                  <td style={{ padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, color: "var(--text-tertiary)", fontSize: typography.fontSize.compact }}>수정/삭제, 확인/취소</td>
                 </tr>
               </tbody>
             </table>
@@ -736,6 +736,39 @@ import { ActionArea, Button, TextButton } from '@baerae-zkap/design-system';
                 </p>
                 <p style={{ fontSize: typography.fontSize.compact, color: "var(--content-error-default)", margin: 0, fontStyle: "italic" }}>
                   <span style={{ fontWeight: typography.fontWeight.bold }}>Don&apos;t</span> 동일한 역할의 버튼을 두 개 이상 배치하지 않습니다
+                </p>
+              </div>
+            </div>
+
+            <div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4] }}>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <DoCard>
+                    <div style={{ width: "100%", maxWidth: 260 }}>
+                      <ActionAreaDemo variant="compact">
+                        <ActionAreaButtonDemo variant="alternative" size="medium">취소</ActionAreaButtonDemo>
+                        <ActionAreaButtonDemo variant="main" size="medium">확인</ActionAreaButtonDemo>
+                      </ActionAreaDemo>
+                    </div>
+                  </DoCard>
+                </div>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <DontCard>
+                    <div style={{ width: "100%", maxWidth: 260 }}>
+                      <ActionAreaDemo variant="compact">
+                        <ActionAreaButtonDemo variant="alternative" size="xLarge">취소</ActionAreaButtonDemo>
+                        <ActionAreaButtonDemo variant="main" size="xLarge">확인</ActionAreaButtonDemo>
+                      </ActionAreaDemo>
+                    </div>
+                  </DontCard>
+                </div>
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing.primitive[4], marginTop: spacing.primitive[2] }}>
+                <p style={{ fontSize: typography.fontSize.compact, color: "var(--content-success-default)", margin: 0 }}>
+                  <span style={{ fontWeight: typography.fontWeight.bold }}>Do</span> 웹 모달·다이얼로그에서 compact를 사용해 버튼을 우측 정렬합니다
+                </p>
+                <p style={{ fontSize: typography.fontSize.compact, color: "var(--content-error-default)", margin: 0, fontStyle: "italic" }}>
+                  <span style={{ fontWeight: typography.fontWeight.bold }}>Don&apos;t</span> 모바일 화면에서 compact를 사용하지 않습니다. 전체 너비 버튼이 터치 타겟 확보에 유리합니다
                 </p>
               </div>
             </div>

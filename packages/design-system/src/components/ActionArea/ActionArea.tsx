@@ -5,6 +5,11 @@
  * 스크롤 시 하단에 고정되며, 상단 그라데이션으로 콘텐츠가 자연스럽게 페이드됩니다.
  *
  * ActionArea는 Button, TextButton 컴포넌트를 children으로 받아 레이아웃을 구성합니다.
+ *
+ * ## Variant 가이드
+ * - `strong`: 모바일 전체 화면, 바텀시트 — 세로 배치, 전체 너비 버튼
+ * - `neutral`: 모바일/웹 공통 — 가로 배치, 균등 너비 버튼
+ * - `compact`: **웹 전용** — 모달/다이얼로그 하단에서 우측 정렬, 작은 버튼 (모바일에서는 사용하지 않음)
  * @see docs/components/ActionArea.md - AI용 상세 가이드
  *
  * @example
@@ -34,7 +39,7 @@ export type ActionAreaVariant = 'strong' | 'neutral' | 'compact';
 export type ActionAreaPosition = 'static' | 'sticky' | 'fixed';
 
 export interface ActionAreaProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
-  /** 레이아웃 variant - strong(세로/메인상단), neutral(가로/균등), compact(가로/우측정렬) */
+  /** 레이아웃 variant - strong(세로, 모바일 전체화면/바텀시트), neutral(가로 균등), compact(가로 우측정렬, 웹 모달/다이얼로그 전용) */
   variant?: ActionAreaVariant;
   /** 위치 설정 - static(기본), sticky(스크롤시고정), fixed(항상고정) */
   position?: ActionAreaPosition;
