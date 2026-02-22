@@ -229,7 +229,10 @@ ${children}
                   { value: "compact", label: "Compact" },
                 ]}
                 value={variant}
-                onChange={(v) => setVariant(v as ActionAreaVariant)}
+                onChange={(v) => {
+                  setVariant(v as ActionAreaVariant);
+                  if (v === "strong" && subButtonOption === "icon") setSubButtonOption("label");
+                }}
               />
 
               {/* Combination */}
@@ -249,11 +252,11 @@ ${children}
                 label="Sub button option"
                 options={[
                   { value: "label", label: "Label" },
-                  { value: "icon", label: "With icon" },
+                  { value: "icon", label: "With icon", disabled: variant === "strong" },
                 ]}
                 value={subButtonOption}
                 onChange={(v) => setSubButtonOption(v as "label" | "icon")}
-                disabled={combination !== "sub"}
+                disabled={combination !== "sub" || variant === "strong"}
               />
             </div>
           </div>

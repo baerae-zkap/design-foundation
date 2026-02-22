@@ -5,7 +5,7 @@ import { typography, spacing, radius } from '@baerae-zkap/design-system';
 
 export function RadioGroup({ label, options, value, onChange, disabled }: {
   label: string;
-  options: { value: string; label: string }[];
+  options: { value: string; label: string; disabled?: boolean }[];
   value: string;
   onChange: (v: string) => void;
   disabled?: boolean;
@@ -17,6 +17,7 @@ export function RadioGroup({ label, options, value, onChange, disabled }: {
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
         {options.map(opt => {
+          const isDisabled = disabled || opt.disabled;
           const isSelected = value === opt.value;
           const inputId = `${label.replace(/\s+/g, "-").toLowerCase()}-${opt.value}`;
           return (
@@ -27,15 +28,15 @@ export function RadioGroup({ label, options, value, onChange, disabled }: {
                 display: "flex",
                 alignItems: "center",
                 gap: spacing.primitive[3],
-                cursor: disabled ? "not-allowed" : "pointer",
+                cursor: isDisabled ? "not-allowed" : "pointer",
                 fontSize: 15,
                 fontWeight: typography.fontWeight.medium,
-                color: disabled
+                color: isDisabled
                   ? "var(--content-disabled-default)"
                   : isSelected
                     ? "var(--content-base-strong)"
                     : "var(--content-base-alternative)",
-                opacity: disabled ? 0.5 : 1,
+                opacity: isDisabled ? 0.5 : 1,
                 transition: "color 0.15s ease",
               }}
             >
@@ -45,7 +46,7 @@ export function RadioGroup({ label, options, value, onChange, disabled }: {
                 name={label}
                 value={opt.value}
                 checked={isSelected}
-                disabled={disabled}
+                disabled={isDisabled}
                 onChange={() => onChange(opt.value)}
                 style={{
                   position: "absolute",
@@ -58,7 +59,7 @@ export function RadioGroup({ label, options, value, onChange, disabled }: {
                   width: 22,
                   height: 22,
                   borderRadius: "50%",
-                  border: isSelected
+                  border: isSelected && !isDisabled
                     ? "2px solid var(--content-brand-default)"
                     : "2px solid var(--border-base-default)",
                   display: "flex",
@@ -68,7 +69,7 @@ export function RadioGroup({ label, options, value, onChange, disabled }: {
                   backgroundColor: "var(--surface-base-default)",
                 }}
               >
-                {isSelected && (
+                {isSelected && !isDisabled && (
                   <div
                     style={{
                       width: spacing.primitive[3],
