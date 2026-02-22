@@ -309,7 +309,7 @@ Base unit: 4px. All spacing values are multiples of 4.
 | Cards | 12-16px | `radius.component.card.md` (16) |
 | Inputs | 8px | `radius.component.input.default` (8) |
 | Pills / full round | 9999px | `radius.primitive.full` |
-| Chips | 8px | `radius.component.chip.default` (8) |
+| Chips | 9999px | `radius.primitive.full` |
 
 ### Typography Hierarchy
 

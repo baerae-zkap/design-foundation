@@ -238,4 +238,3 @@ function ControlledExample() {
 
 - `TextArea` — multi-line text input
 - `SearchField` — single-line search input with built-in clear button
-- `Select` — dropdown selection (note: no system Select exists; use `Radio` or `SegmentedControl`)

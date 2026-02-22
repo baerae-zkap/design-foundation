@@ -1,6 +1,6 @@
 # @baerae-zkap/design-system
 
-> A React component library with 42 UI components and a design token system. Colors use CSS custom properties for automatic dark mode switching.
+> A React component library with 41 UI components and a design token system. Colors use CSS custom properties for automatic dark mode switching.
 
 ## Quick Start
 
@@ -155,7 +155,6 @@ Snackbar = single message. Toast = heading + detail. Spinner = unknown-duration 
 - [SectionHeader](docs/components/SectionHeader.md): Section title with optional trailing action
 - [SectionMessage](docs/components/SectionMessage.md): Inline contextual status banner (error/success/warning/info)
 - [SegmentedControl](docs/components/SegmentedControl.md): Tab-like exclusive selector (2-5 options)
-- [Select](docs/components/Select.md): Dropdown selector; prefer Radio/RadioGroup or SegmentedControl when possible
 - [Skeleton](docs/components/Skeleton.md): Loading placeholder matching content shape
 - [Slider](docs/components/Slider.md): Range value selector (min/max)
 - [Snackbar](docs/components/Snackbar.md): Brief auto-dismiss notification with optional action
