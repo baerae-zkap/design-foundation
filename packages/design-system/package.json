@@ -36,7 +36,9 @@
     "styles.css",
     "src/**/*.md",
     "README.md",
-    "COMPONENTS.md"
+    "COMPONENTS.md",
+    "llms.txt",
+    "llms-full.txt"
   ],
   "sideEffects": [
     "*.css"

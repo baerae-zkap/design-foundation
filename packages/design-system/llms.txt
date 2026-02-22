@@ -1,0 +1,196 @@
+# @baerae-zkap/design-system
+
+> A React component library with 42 UI components and a design token system. Colors use CSS custom properties for automatic dark mode switching.
+
+## Quick Start
+
+```bash
+npm install @baerae-zkap/design-system
+```
+
+```tsx
+import { Button, Card, TextField, ListCell } from '@baerae-zkap/design-system';
+import { spacing, typography, radius } from '@baerae-zkap/design-system';
+```
+
+Colors in styles: `color: 'var(--content-base-default)'`. Component color props: `primary`, `neutral`, `success`, `error`, `warning`, `info`.
+
+## Component Selection Guide
+
+Follow top-to-bottom; use the first match.
+
+### Actions
+
+| Need to... | Use |
+|------------|-----|
+| Primary action | `<Button buttonType="filled" color="primary">` |
+| Secondary/cancel action | `<Button buttonType="weak" color="neutral">` |
+| Destructive action | `<Button buttonType="filled" color="error">` |
+| Soft destructive action | `<Button buttonType="weak" color="error">` |
+| Text-only inline link | `<TextButton>` |
+| Icon-only action | `<IconButton aria-label="...">` |
+| Tag/filter toggle | `<Chip>` |
+| Button group at bottom of modal/sheet/page | `<ActionArea>` |
+
+### Contents
+
+| Content is... | Use |
+|---------------|-----|
+| Interactive info block (onClick required) | `<Card>` |
+| Thumbnail + text list item | `<ListCard>` |
+| Settings/menu row | `<ListCell>` |
+| Section title with optional action | `<SectionHeader>` |
+| Expandable/collapsible detail | `<Accordion>` |
+| Status or category label | `<ContentBadge>` |
+| User profile picture | `<Avatar>` (multiple: `<AvatarGroup>`) |
+| Numeric count or status overlay | `<Badge>` |
+
+### Inputs
+
+No Select (dropdown) component exists. Use Radio/RadioGroup for small option sets or SegmentedControl for tab-style selection.
+
+| Field is... | Use |
+|-------------|-----|
+| Single-line text | `<TextField>` |
+| Multi-line text | `<TextArea>` |
+| Search with clear | `<SearchField>` |
+| On/off toggle | `<Switch>` |
+| Multiple checkboxes | `<Checkbox>` |
+| Single choice from group | `<Radio>` / `<RadioGroup>` |
+| Segmented tab selector | `<SegmentedControl>` |
+| Numeric range | `<Slider>` |
+
+### Feedback
+
+| Need to... | Use |
+|------------|-----|
+| Brief auto-dismiss message | `<Snackbar>` |
+| Notification with heading + description | `<Toast>` |
+| Inline status within page content | `<SectionMessage>` |
+| Blocking confirmation dialog | `<Dialog>` (AlertDialog) |
+| Empty/error/result state | `<StateView>` |
+| Notification count on icon/button | `<PushBadge>` |
+| Content loading placeholder | `<Skeleton>` |
+| Indeterminate loading indicator | `<Spinner>` |
+
+Snackbar = single message. Toast = heading + detail. Spinner = unknown-duration action. Skeleton = content with known layout. SectionMessage = inline persistent. Dialog = blocks UI.
+
+### Navigation
+
+| Need... | Use |
+|---------|-----|
+| Mobile bottom tab bar | `<BottomNavigation>` |
+| Horizontal category scroll | `<CategoryNavigation>` |
+| Pagination dots/numbers | `<PageCounter>` |
+| Step/percentage progress | `<ProgressIndicator>` |
+| Multi-step process tracker | `<ProgressTracker>` |
+| Tab strip for view switching | `<Tab>` |
+| App bar / top header | `<TopNavigation>` |
+
+### Overlays
+
+| Need... | Use |
+|---------|-----|
+| Bottom-anchored modal sheet | `<BottomSheet>` |
+| Anchored floating panel | `<Popover>` |
+| Modal popup with actions | `<Popup>` |
+| Hover/tap hint | `<Tooltip>` |
+
+### Tie-Breakers
+
+| Decision | Rule |
+|----------|------|
+| Chip vs SegmentedControl | Multi-select/filter -> Chip. Exclusive switching -> SegmentedControl |
+| Switch vs Checkbox | Immediate effect -> Switch. Form submission -> Checkbox |
+| TextButton vs Button | Inline in content -> TextButton. Standalone CTA -> Button |
+| Card vs ActionArea | Content block -> Card. Button group in modal/sheet footer -> ActionArea |
+| Badge vs ContentBadge | Count overlay on element -> Badge. Standalone label -> ContentBadge |
+| Spinner vs Skeleton | Unknown-duration action -> Spinner. Known-layout content -> Skeleton |
+
+### Composition Rules
+
+- ActionArea expects Button/TextButton children only. Not a generic tappable region.
+- Max one `buttonType="filled" color="primary"` Button per section.
+- Card must NOT nest inside another Card.
+- ListCell trailing: use Switch, ContentBadge, or text string -- not Button.
+
+### What NOT to Do
+
+- No `<div onClick>` for buttons. Use Button, IconButton, or Card.
+- No native `<input>`, `<textarea>`, `<select>`. Use TextField, TextArea, Radio/RadioGroup, SegmentedControl.
+- No hardcoded hex/rgb colors. Use CSS variables.
+- No custom box-shadow cards. Use Card.
+- No custom toggle switches. Use Switch.
+- No `<IconButton>` without `aria-label`.
+- No full-screen spinners. Use inline Skeleton states.
+- No blank sections for empty data. Use StateView.
+
+## All Components
+
+- [Accordion](docs/components/Accordion.md): Expandable/collapsible content panel
+- [ActionArea](docs/components/ActionArea.md): Bottom-fixed button group container for modals/sheets/footers
+- [Avatar](docs/components/Avatar.md): User profile image with fallback; AvatarGroup for multiple
+- [Badge](docs/components/Badge.md): Numeric or status overlay on icons/buttons
+- [BottomNavigation](docs/components/BottomNavigation.md): Mobile bottom tab bar
+- [BottomSheet](docs/components/BottomSheet.md): Bottom-anchored modal sheet
+- [Button](docs/components/Button.md): Primary/secondary actions; uses buttonType (filled/weak) and color props
+- [Card](docs/components/Card.md): Interactive grouped content container (requires onClick)
+- [CategoryNavigation](docs/components/CategoryNavigation.md): Horizontal scrollable category filter
+- [Checkbox](docs/components/Checkbox.md): Multi-select toggle for form submission
+- [CheckMark](docs/components/CheckMark.md): Standalone check indicator
+- [Chip](docs/components/Chip.md): Tags, filters, selectable labels (filled/weak)
+- [ContentBadge](docs/components/ContentBadge.md): Standalone status or category label
+- [Dialog](docs/components/Dialog.md): Blocking confirmation dialog (AlertDialog)
+- [IconButton](docs/components/IconButton.md): Icon-only action (requires aria-label)
+- [ListCard](docs/components/ListCard.md): Thumbnail + text horizontal list item
+- [ListCell](docs/components/ListCell.md): Single-row settings/menu item with trailing element
+- [PageCounter](docs/components/PageCounter.md): Pagination dots or numbers
+- [Popover](docs/components/Popover.md): Anchored floating content panel
+- [Popup](docs/components/Popup.md): Modal popup with configurable actions
+- [ProgressIndicator](docs/components/ProgressIndicator.md): Step or percentage progress bar
+- [ProgressTracker](docs/components/ProgressTracker.md): Multi-step process tracker
+- [PushBadge](docs/components/PushBadge.md): Notification count overlay on icon/button
+- [Radio](docs/components/Radio.md): Single-select from group; RadioGroup for managed groups
+- [SearchField](docs/components/SearchField.md): Search input with built-in clear button
+- [SectionHeader](docs/components/SectionHeader.md): Section title with optional trailing action
+- [SectionMessage](docs/components/SectionMessage.md): Inline contextual status banner (error/success/warning/info)
+- [SegmentedControl](docs/components/SegmentedControl.md): Tab-like exclusive selector (2-5 options)
+- [Select](docs/components/Select.md): Dropdown selector; prefer Radio/RadioGroup or SegmentedControl when possible
+- [Skeleton](docs/components/Skeleton.md): Loading placeholder matching content shape
+- [Slider](docs/components/Slider.md): Range value selector (min/max)
+- [Snackbar](docs/components/Snackbar.md): Brief auto-dismiss notification with optional action
+- [Spinner](docs/components/Spinner.md): Indeterminate loading indicator
+- [StateView](docs/components/StateView.md): Empty/error/result state with optional CTA
+- [Switch](docs/components/Switch.md): Binary on/off toggle for immediate-effect settings
+- [Tab](docs/components/Tab.md): Tab strip for switching views
+- [TextArea](docs/components/TextArea.md): Multi-line text input
+- [TextButton](docs/components/TextButton.md): Inline text link-style action
+- [TextField](docs/components/TextField.md): Single-line input with label, validation, helper text
+- [Toast](docs/components/Toast.md): Rich notification with heading + description
+- [Tooltip](docs/components/Tooltip.md): Contextual hover/tap hint
+- [TopNavigation](docs/components/TopNavigation.md): App bar / top navigation header
+
+## Design Tokens
+
+- [Token Usage Guide](docs/tokens.md): Spacing, typography, radius, and color token reference
+- `spacing` -- Primitive scale (base 4px), semantic (screen padding, inset, gaps)
+- `typography` -- Semantic styles (headline, body, caption, label) spreadable as inline styles
+- `radius` -- Component-specific values (button 8, card 16, input 8, pill 9999)
+- CSS variables -- `var(--content-base-default)`, `var(--surface-base-default)`, `var(--divider)`, etc.
+
+## Layout Patterns
+
+- [Layout and Composition](docs/patterns.md): Page structure, forms, lists, empty states
+- Screen padding: `spacing.semantic.screen.paddingX` (20px)
+- Section gaps: 32-40px; item gaps: 8-16px
+- Every list needs: loading (Skeleton), empty (StateView), error (retry), populated
+- One primary CTA per section max
+
+## Optional
+
+- [Anti-Patterns](docs/anti-patterns.md): Common mistakes to avoid
+- [Visual Language](docs/visual-language.md): Color philosophy, spacing, typography, motion
+- [UX Patterns](docs/ux-patterns.md): Form validation, destructive confirmation, error handling
+- [State Model](docs/state-model.md): Required states for buttons, inputs, lists, toggles
+- [Output Contract](docs/output-contract.md): AI code generation structure requirements
+- [Preflight Checklist](docs/preflight-checklist.md): Pre-return verification for components, colors, states, a11y

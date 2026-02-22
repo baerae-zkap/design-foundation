@@ -1,0 +1,1510 @@
+# @baerae-zkap/design-system — Complete AI Reference
+
+> This file contains everything an AI needs to generate correct, on-brand UI code using this design system. All content is inline — no external links required.
+
+---
+
+## Table of Contents
+
+1. [System Overview](#system-overview)
+2. [AI Output Contract](#ai-output-contract)
+3. [Component Selection Guide](#component-selection-guide)
+4. [Visual Language](#visual-language)
+5. [Token Usage](#token-usage)
+6. [Layout & Composition](#layout--composition)
+7. [UX Patterns](#ux-patterns)
+8. [State Model](#state-model)
+9. [Anti-Patterns](#anti-patterns)
+10. [Pre-Flight Checklist](#pre-flight-checklist)
+11. [Component Quick Reference](#component-quick-reference)
+
+---
+
+## System Overview
+
+`@baerae-zkap/design-system` is a React component library and design token system for building product UIs. It provides 41+ ready-to-use components and a full token set for spacing, typography, colors, and radius.
+
+### Installation
+
+```bash
+npm install @baerae-zkap/design-system
+```
+
+### Imports
+
+```tsx
+// Components
+import { Button, Card, TextField, ListCell } from '@baerae-zkap/design-system';
+
+// Tokens
+import { spacing, typography, radius, lightColors, darkColors } from '@baerae-zkap/design-system';
+```
+
+### Theme
+
+Colors are CSS-variable-based. Light and dark mode switch automatically via `prefers-color-scheme`. No manual theme toggling is needed in product code. Just include the generated CSS file and components adapt.
+
+### All Components by Category
+
+**Actions (5):** Button, IconButton, TextButton, Chip, ActionArea
+**Contents (8):** Card, ListCard, ListCell, SectionHeader, Accordion, ContentBadge, Avatar (+ AvatarGroup), Badge
+**Inputs (9):** TextField, TextArea, SearchField, Checkbox, Radio (+ RadioGroup), Switch, Slider, SegmentedControl, CheckMark
+**Feedback (8):** Snackbar, Toast, SectionMessage, Dialog, StateView, PushBadge, Skeleton, Spinner
+**Navigation (7):** BottomNavigation, CategoryNavigation, PageCounter, ProgressIndicator, ProgressTracker, Tab, TopNavigation
+**Overlays (4):** BottomSheet, Popover, Popup, Tooltip
+
+> **Note**: There is no `Select` (dropdown) component. For small option sets (2-5 options), use `Radio`/`RadioGroup`. For tab-style exclusive selection, use `SegmentedControl`.
+
+### Core Principle
+
+Always use system components and tokens. Never create custom buttons, inputs, or cards. Never hardcode color hex values. If a system component exists for the job, use it.
+
+---
+
+## AI Output Contract
+
+When generating product UI code using this design system, AI output MUST follow this contract.
+
+### Required Output Structure
+
+For any screen or component generation task, return:
+
+1. **Component Selection** — Map each UI element to a specific system component:
+   ```
+   [UI Element] -> <ComponentName variant="..." color="...">
+   ```
+
+2. **State Requirements** — List which states must be implemented:
+   ```
+   [Component]: default | hover (built-in) | disabled | loading | error | empty
+   ```
+
+3. **Accessibility Notes** — Flag any required aria attributes:
+   ```
+   [Component]: aria-label="..." | role="..." | aria-expanded
+   ```
+
+4. **Code** — Implementation using only system components and tokens.
+
+### Output Rules
+
+- NEVER return code with hardcoded colors (`#hex`, `rgb()`, `hsl()`).
+- NEVER return native HTML controls (`<button>`, `<input>`, `<textarea>`). Use system equivalents (`Button`, `TextField`, `TextArea`). There is no system `Select` — use `Radio`/`RadioGroup` or `SegmentedControl` instead of native `<select>`.
+- ALWAYS include `disabled` and loading states for form submission buttons.
+- ALWAYS include empty state for lists and data tables.
+- ALWAYS verify: one primary CTA per section maximum.
+
+### Example Contract Response
+
+```
+Screen: User Profile Edit
+
+Component Selection:
+- Page title -> SectionHeader title="Edit Profile"
+- Name field -> TextField label="Name" value={name} onChange={setName}
+- Email field -> TextField label="Email" type="email"
+- Save action -> Button buttonType="filled" color="primary" isLoading={saving}
+- Cancel action -> Button buttonType="weak" color="neutral"
+
+State Requirements:
+- Save Button: disabled={!isDirty || !isValid}, isLoading={saving}
+- Name/Email fields: error={fieldErrors.name} for validation
+
+Accessibility:
+- Form wrapped in <form> element with onSubmit handler
+- All fields have visible label prop
+
+Code: [implementation follows]
+```
+
+---
+
+## Component Selection Guide
+
+Use this decision tree to pick the correct component. Follow top-to-bottom; use the first match.
+
+> **Note**: Button uses `buttonType` prop (not `variant`).
+
+### Actions — "User does something"
+
+| IF the user needs to... | THEN use | Example |
+|-------------------------|----------|---------|
+| Perform the primary action on screen | `<Button buttonType="filled" color="primary">` | Submit, Save, Continue |
+| Perform a secondary/cancel action | `<Button buttonType="weak" color="neutral">` | Cancel, Back, Skip |
+| Perform a destructive action | `<Button buttonType="filled" color="error">` | Delete, Remove |
+| Perform a soft destructive action | `<Button buttonType="weak" color="error">` | Remove item from list |
+| Click a text-only inline link | `<TextButton>` | "Forgot password?", "View all" |
+| Click an icon-only action | `<IconButton aria-label="Close">` | Close, Menu, Share |
+| Toggle/select a tag or filter | `<Chip>` | Category filter, tag selector |
+| Show a button group at the bottom of a modal/sheet/page | `<ActionArea>` | Confirm/Cancel in dialog |
+| Show a fixed bottom CTA bar with extra content | `<ActionArea topAccessory={...}>` | Checkout with terms checkbox |
+
+```tsx
+// Primary + Secondary pair
+<div style={{ display: 'flex', gap: 12 }}>
+  <Button buttonType="weak" color="neutral" onClick={onCancel}>Cancel</Button>
+  <Button buttonType="filled" color="primary" onClick={onSubmit}>Save</Button>
+</div>
+```
+
+### Contents — "Display information"
+
+| IF the content is... | THEN use |
+|----------------------|----------|
+| A self-contained info block (always interactive, `onClick` required) | `<Card>` |
+| A horizontal thumbnail + text list item | `<ListCard>` |
+| A simple text row in a settings/menu list | `<ListCell>` |
+| A section title with optional action link | `<SectionHeader>` |
+| Expandable/collapsible detail | `<Accordion>` |
+| A small status or category label | `<ContentBadge>` |
+| A user profile picture | `<Avatar>` (multiple users: `<AvatarGroup>`) |
+| A numeric count or status badge | `<Badge>` |
+
+```tsx
+// Settings list
+<SectionHeader title="Account" />
+<ListCell title="Email" trailing="user@example.com" />
+<ListCell title="Password" trailing="Change" onClick={onChangePassword} />
+<ListCell title="Notifications" trailing={<Switch checked={notifs} onChange={setNotifs} />} />
+```
+
+### Inputs — "User provides data"
+
+> **No Select component exists.** For dropdown-style selection, use `Radio`/`RadioGroup` (small option sets) or `SegmentedControl` (tab-style exclusive selection). Do NOT use native `<select>`.
+
+| IF the field is... | THEN use |
+|--------------------|----------|
+| Single-line text (name, email, phone) | `<TextField>` |
+| Multi-line text (bio, description) | `<TextArea>` |
+| Search with clear button | `<SearchField>` |
+| On/off toggle | `<Switch>` |
+| Multiple checkboxes | `<Checkbox>` |
+| Single choice from a group | `<Radio>` / `<RadioGroup>` |
+| Segmented tab-like selector | `<SegmentedControl>` |
+| Numeric range | `<Slider>` |
+
+```tsx
+// Login form inputs
+<TextField type="email" label="Email" placeholder="example@email.com" />
+<TextField type="password" label="Password" />
+<Button buttonType="filled" color="primary" onClick={onLogin} style={{ width: '100%' }}>
+  Log In
+</Button>
+```
+
+### Feedback — "System communicates to the user"
+
+| IF you need to... | THEN use | Example |
+|-------------------|----------|---------|
+| Show brief auto-dismiss notification (single message) | `<Snackbar>` | "Saved", "Copied" |
+| Show richer notification with heading + description | `<Toast>` | "Save complete" + "Uploaded to cloud" |
+| Show inline contextual status within page content | `<SectionMessage variant="...">` | Form error, success banner |
+| Block user for critical confirmation before action | `<Dialog>` | Delete, logout confirmation |
+| Show empty/error/result state for a content area | `<StateView>` | Empty list, error page |
+| Show notification count overlay on an icon/button | `<PushBadge>` | Unread count on bell icon |
+| Show content loading placeholder | `<Skeleton>` | List loading, card loading |
+| Show indeterminate action progress | `<Spinner>` | Button loading, background fetch |
+
+#### Snackbar vs Toast
+
+| Use `Snackbar` | Use `Toast` |
+|----------------|-------------|
+| Single short message | Heading + supporting detail |
+| "Saved" | "Save complete" + "File uploaded" |
+
+#### Spinner vs Skeleton
+
+| Use `Spinner` | Use `Skeleton` |
+|--------------|----------------|
+| Action in progress (button click, form submit) | Content loading (list, card, image) |
+| Duration unknown | Layout of incoming content is known |
+| Overlay / blocking loading | Inline placeholder in content flow |
+
+#### SectionMessage vs Dialog vs Toast
+
+| Component | When | Persistence | Blocks UI |
+|-----------|------|-------------|-----------|
+| `SectionMessage` | Inline in content | Persistent | No |
+| `Toast` / `Snackbar` | Global transient | Auto-dismiss | No |
+| `Dialog` | Critical confirmation | Until dismissed | Yes |
+
+### Tie-Breakers
+
+| Decision | Rule |
+|----------|------|
+| `Chip` vs `SegmentedControl` | Multi-select / filter -> Chip; Exclusive mode switching -> SegmentedControl |
+| `Switch` vs `Checkbox` | Immediate effect on toggle -> Switch; Value submitted with a form -> Checkbox |
+| `TextButton` vs `Button` | Inline within sentence -> TextButton; Standalone CTA -> Button |
+| `Card` vs `ActionArea` | Structured content block -> Card; Button group at bottom of modal/sheet -> ActionArea |
+| `Badge` vs `ContentBadge` | Numeric count overlay on another element -> Badge; Standalone status label -> ContentBadge |
+| `Spinner` vs `Skeleton` | Unknown-duration action -> Spinner; Content shape known, loading inline -> Skeleton |
+
+### Composition Conflict Rules
+
+- `ActionArea` is a button group container (for modals, sheets, page footers). It expects `Button` and `TextButton` as children. Do NOT use it as a generic tappable region.
+- A section MUST have at most one `buttonType="filled" color="primary"` Button. Additional CTAs use `weak`/`neutral`.
+- `Card` MUST NOT nest inside another `Card`.
+- `ListCell` trailing element: use `Switch`, `ContentBadge`, or a text string — not a full `Button`.
+
+### What NOT to Do
+
+- **DO NOT** create `<div onClick>` for button-like behavior. Use `Button`, `IconButton`, or `Card`.
+- **DO NOT** use native `<input>` or `<textarea>`. Always use `TextField`, `SearchField`, or `TextArea`.
+- **DO NOT** use native `<select>`. Use `Radio`/`RadioGroup` or `SegmentedControl`.
+- **DO NOT** hardcode hex colors. Use CSS variables or token imports.
+- **DO NOT** build custom card containers with `box-shadow`. Use `Card`.
+- **DO NOT** create custom toggle switches. Use `Switch`.
+
+---
+
+## Visual Language
+
+### Color Philosophy
+
+The design system uses semantic color names on component props:
+
+| Color | Meaning | When to Use |
+|-------|---------|-------------|
+| `primary` | Brand blue | Main CTA, key actions |
+| `neutral` | Gray/default | Secondary actions, non-emphasis |
+| `success` | Green | Positive confirmation, completion |
+| `error` | Red | Destructive actions, validation errors |
+| `warning` | Amber | Caution states, alerts |
+| `info` | Blue (lighter) | Informational notices |
+| `kakao` | Yellow | Kakao social login only |
+| `google` | White/outlined | Google social login only |
+| `muted` | Faded gray | Low-emphasis text links (TextButton only) |
+
+### Color Usage Rules
+
+1. **One primary CTA per screen section.** If a section has multiple buttons, only one should be `color="primary"`. Others use `neutral`.
+2. **Destructive actions use `error` color.** Delete, remove, logout buttons must use `color="error"`.
+3. **Social login buttons use their dedicated colors.** Kakao = `kakao`, Google = `google`. Never style these manually.
+4. **Never mix multiple strong colors in a cluster.** A button group should not have both `primary` and `error` side by side unless one is clearly destructive and the other is the safe action.
+5. **Semantic colors are for status only.** Don't use `success`/`warning`/`info` for general-purpose buttons. Use them for badges, alerts, and status indicators.
+
+### Elevation
+
+Use `Card` for contained content. Do not apply custom `box-shadow`. The system handles elevation through its token layer.
+
+### Spacing
+
+Base unit: 4px. All spacing values are multiples of 4.
+
+| Use Case | Value | Token |
+|----------|-------|-------|
+| Tight internal gap | 4px | `spacing.primitive[1]` |
+| Default item gap | 8px | `spacing.primitive[2]` |
+| Comfortable gap | 12px | `spacing.primitive[3]` |
+| Standard padding | 16px | `spacing.primitive[4]` |
+| Section separation | 32px | `spacing.primitive[8]` |
+| Large section gap | 40-48px | `spacing.primitive[10]` or `[12]` |
+| Screen horizontal padding | 20px | `spacing.semantic.screen.paddingX` |
+
+### Border Radius
+
+| Element | Radius | Token |
+|---------|--------|-------|
+| Buttons | 8-12px | `radius.component.button.md` (8) |
+| Cards | 12-16px | `radius.component.card.md` (16) |
+| Inputs | 8px | `radius.component.input.default` (8) |
+| Pills / full round | 9999px | `radius.primitive.full` |
+| Chips | 8px | `radius.component.chip.default` (8) |
+
+### Typography Hierarchy
+
+Font: Pretendard (Korean-optimized sans-serif). Numbers: Spoqa Han Sans Neo with tabular-nums.
+
+| Level | Style | Font Size |
+|-------|-------|-----------|
+| Display | Bold, large headings | 32-48px |
+| Headline | Semibold section titles | 20-28px |
+| Title | Bold subheadings | 18-24px |
+| Body | Regular reading text | 14-18px |
+| Label | Medium, UI labels | 12-16px |
+| Caption | Small supporting text | 11-14px |
+
+Access via `typography.semantic.body.md`, `typography.semantic.headline.sm`, etc.
+
+### Motion
+
+Interactions should feel snappy. Use 200ms for most transitions. Never exceed 500ms for UI feedback. The system provides `transitions.background`, `transitions.all`, and `transitions.expand` presets.
+
+---
+
+## Token Usage
+
+### Color Tokens
+
+Colors are managed through CSS custom properties. They switch automatically between light and dark mode.
+
+**In CSS or inline styles, use CSS variables directly:**
+
+```tsx
+<p style={{ color: 'var(--content-base-default)' }}>Primary text</p>
+<p style={{ color: 'var(--content-base-secondary)' }}>Secondary text</p>
+<div style={{ backgroundColor: 'var(--surface-base-default)' }}>Background</div>
+```
+
+**Key CSS variables:**
+
+| Variable | Use For |
+|----------|---------|
+| `--surface-base-default` | Page/card background |
+| `--surface-base-alternative` | Subtle background difference |
+| `--surface-brand-default` | Brand-colored surface |
+| `--content-base-default` | Primary text |
+| `--content-base-secondary` | Secondary/helper text |
+| `--content-base-disabled` | Disabled text |
+| `--content-brand-default` | Brand-colored text |
+| `--divider` | Borders and separators |
+| `--fill-base-default` | Default fill for icons/shapes |
+
+**For JS-side token access** (e.g., conditional logic, charts, canvas):
+
+```tsx
+import { lightColors, darkColors } from '@baerae-zkap/design-system';
+// lightColors.content.base.default -> hex string for light mode
+// darkColors.content.base.default -> hex string for dark mode
+```
+
+> **Important**: Prefer CSS variables (`var(--...)`) for all inline styles. Only use `lightColors`/`darkColors` when you need hex values in JavaScript logic (e.g., canvas rendering, chart libraries). Never import these just for inline `style` props.
+
+**NEVER hardcode hex values.** Always use CSS variables or token imports.
+
+### Spacing Tokens
+
+```tsx
+import { spacing } from '@baerae-zkap/design-system';
+
+// Primitive scale (base 4px)
+spacing.primitive[1]  // 4px
+spacing.primitive[2]  // 8px
+spacing.primitive[3]  // 12px
+spacing.primitive[4]  // 16px
+spacing.primitive[5]  // 20px
+spacing.primitive[6]  // 24px
+spacing.primitive[8]  // 32px
+spacing.primitive[10] // 40px
+spacing.primitive[12] // 48px
+
+// Semantic spacing
+spacing.semantic.screen.paddingX    // 20px - screen horizontal padding
+spacing.semantic.inset.sm           // 16px - standard container inset
+spacing.semantic.vertical.lg        // 24px - vertical section gap
+
+// Component-specific
+spacing.component.input.paddingX    // 16px
+spacing.component.card.padding.md   // 20px
+spacing.component.list.sectionGap   // 32px
+```
+
+### Typography Tokens
+
+```tsx
+import { typography } from '@baerae-zkap/design-system';
+
+// Semantic styles (spread as inline style)
+<h1 style={{ ...typography.semantic.headline.md, margin: 0 }}>Section Title</h1>
+<p style={{ ...typography.semantic.body.md, margin: 0 }}>Body text here.</p>
+<span style={{ ...typography.semantic.caption.md }}>Small helper text</span>
+<span style={{ ...typography.semantic.label.md }}>Form label</span>
+
+// Individual values
+typography.fontSize.md    // 16
+typography.fontWeight.semibold  // '600'
+typography.lineHeight.md  // 24
+```
+
+**Semantic type scale quick reference:**
+
+| Style | Font Size | Weight | Use For |
+|-------|-----------|--------|---------|
+| `display.md` | 36px | Bold | Hero headings |
+| `headline.md` | 24px | Semibold | Page titles |
+| `headline.sm` | 20px | Semibold | Section titles |
+| `title.sm` | 18px | Bold | Card/list titles |
+| `body.md` | 16px | Regular | Body copy |
+| `body.sm` | 14px | Regular | Compact body |
+| `label.md` | 14px | Medium | Form labels, UI labels |
+| `caption.md` | 12px | Regular | Timestamps, footnotes |
+
+### Radius Tokens
+
+```tsx
+import { radius } from '@baerae-zkap/design-system';
+
+radius.component.button.md   // 8
+radius.component.card.md     // 16
+radius.component.input.default // 8
+radius.primitive.full         // 9999 (pill shape)
+```
+
+### Dark Mode
+
+**No manual handling required.** CSS custom properties switch automatically via `prefers-color-scheme`. Components using the system tokens adapt automatically.
+
+If you need to detect theme in JS for non-token purposes:
+
+```tsx
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+```
+
+But for all visual styling, rely on CSS variables. They just work.
+
+---
+
+## Layout & Composition
+
+### Page Structure
+
+```
++---------------------------+
+|     Top Navigation        |  Fixed header (56px height)
++---------------------------+
+|                           |
+|   Scrollable Content      |  Screen padding: 20px horizontal
+|                           |
+|   Section A               |
+|   (32-40px gap)           |
+|   Section B               |
+|                           |
++---------------------------+
+|   Bottom Fixed Actions    |  Optional: sticky CTA bar
++---------------------------+
+```
+
+Use `spacing.semantic.screen.paddingX` (20px) for horizontal page padding. Use `spacing.semantic.screen.paddingTop` (16px) and `paddingBottom` (20px) for vertical.
+
+### Spacing Rhythm
+
+| Between... | Gap | Token |
+|------------|-----|-------|
+| Major sections | 32-40px | `spacing.primitive[8]` to `[10]` |
+| Items within a section | 8-16px | `spacing.primitive[2]` to `[4]` |
+| Label and its input | 8px | `spacing.component.input.labelGap` |
+| Helper text and input | 4px | `spacing.component.input.helperGap` |
+| Buttons in a group | 8-12px | `spacing.primitive[2]` to `[3]` |
+
+### Card Patterns
+
+- Cards do NOT nest inside other cards.
+- Cards have consistent internal padding: 16-20px (`spacing.component.card.padding.sm` or `.md`).
+- Use `Card variant="outlined"` for bordered cards, `Card variant="filled"` for solid background.
+- Card always requires `onClick` — it is always interactive. The Card handles keyboard a11y internally.
+
+```tsx
+// Slot mode (structured)
+<Card
+  variant="outlined"
+  heading="Order #1234"
+  caption="Delivered on Jan 15"
+  onClick={() => navigate('/detail')}
+/>
+
+// Children mode (custom content)
+<Card variant="elevated" padding="medium" onClick={() => navigate('/detail')}>
+  <h3 style={{ ...typography.semantic.title.sm, margin: 0 }}>Order #1234</h3>
+  <p style={{ ...typography.semantic.body.sm, color: 'var(--content-base-secondary)', margin: 0 }}>
+    Delivered on Jan 15
+  </p>
+</Card>
+```
+
+### List Patterns
+
+- **Media content lists** (feed, products, search results): Use `ListCard` with thumbnail.
+- **Settings / options lists** (menu, preferences): Use `ListCell` with optional trailing element.
+- Group related list items under a `SectionHeader`.
+- List items have zero gap between them. Dividers are built in.
+- Section-to-section gap is 32px (`spacing.component.list.sectionGap`).
+
+```tsx
+<SectionHeader title="General" />
+<ListCell title="Language" trailing="English" onClick={onLanguage} />
+<ListCell title="Dark Mode" trailing={<Switch checked={dark} onChange={setDark} />} />
+
+<SectionHeader title="Account" />
+<ListCell title="Change Password" onClick={onPassword} />
+<ListCell title="Delete Account" onClick={onDelete} />
+```
+
+### Form Layout
+
+- Stack inputs vertically with 16px gap (`spacing.primitive[4]`).
+- Group related fields together. Add a `SectionHeader` between groups.
+- Single-column layout on mobile. Two-column only on wide desktop.
+- Primary CTA at bottom, full-width or right-aligned.
+- Destructive actions separated from primary actions by 32px+ or placed in a different section.
+
+```tsx
+<div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+  <TextField label="Name" value={name} onChange={setName} />
+  <TextField label="Email" type="email" value={email} onChange={setEmail} />
+  <Button buttonType="filled" color="primary" onClick={onSave} style={{ marginTop: 16 }}>
+    Save Profile
+  </Button>
+</div>
+```
+
+### Action Placement
+
+- **Primary CTA**: Bottom of form or screen section. Filled + primary.
+- **Secondary action**: Left of primary or above it. Weak + neutral.
+- **Destructive action**: Separated from primary cluster. Error color. Consider adding confirmation.
+
+### Empty States
+
+Center vertically and horizontally. Include:
+1. Illustration or icon (optional)
+2. Heading text (headline.sm or title.sm)
+3. Body text explaining why it's empty (body.sm, secondary color)
+4. Optional CTA button
+
+```tsx
+<StateView
+  figure={<EmptyIcon />}
+  title="No results found"
+  description="Try adjusting your search or filters."
+  primaryAction={
+    <Button buttonType="weak" color="primary" onClick={onReset}>Clear Filters</Button>
+  }
+/>
+```
+
+### Loading States
+
+- Use skeleton patterns for content areas (shimmer placeholders matching content shape).
+- Use `isLoading` prop on Button for action loading states.
+- Never block the entire UI with a full-screen spinner. Show skeleton inline.
+- Disable interactive elements during submission but keep the layout visible.
+
+---
+
+## UX Patterns
+
+### Button States
+
+Every button must handle:
+- **Default**: Normal interactive state
+- **Disabled**: `disabled` prop. Opacity drops to 0.5, cursor becomes not-allowed.
+- **Loading**: `isLoading` prop (Button). Shows spinner, prevents double-submit.
+
+```tsx
+<Button
+  buttonType="filled"
+  color="primary"
+  onClick={onSubmit}
+  disabled={!isValid}
+  isLoading={isSubmitting}
+>
+  Save
+</Button>
+```
+
+### Form Validation
+
+- Show errors inline, below the input field. Use TextField's `error` prop.
+- Validate on blur (field-level) and on submit (form-level).
+- Don't show errors before the user has interacted with the field.
+- Keep the submit button visible but disabled until required fields are filled.
+
+```tsx
+<TextField
+  label="Email"
+  type="email"
+  value={email}
+  onChange={setEmail}
+  error={emailError}
+  placeholder="example@email.com"
+/>
+```
+
+### Destructive Action Confirmation
+
+Any destructive action (delete, remove, logout) must have a confirmation step:
+
+1. **Option A — Dialog**: Show a confirmation dialog with clear messaging.
+2. **Option B — Inline**: Replace the button with "Are you sure?" + Confirm/Cancel.
+
+The confirm button should use `color="error"`. The cancel button should use `color="neutral"`.
+
+```tsx
+<Dialog
+  open={showConfirm}
+  onClose={() => setShowConfirm(false)}
+  title="Delete this item?"
+  description="This action cannot be undone."
+  actions={[
+    { label: 'Cancel', onClick: () => setShowConfirm(false), color: 'neutral', variant: 'weak' },
+    { label: 'Delete', onClick: onConfirmDelete, color: 'error', variant: 'filled' },
+  ]}
+/>
+```
+
+### Empty States
+
+Every list, table, and data section must handle the empty case:
+- **Empty list**: Show centered message + optional CTA ("Add your first item")
+- **Empty search results**: "No results found" + suggestion to adjust filters
+- **Error state**: "Something went wrong" + retry button
+
+Never show a blank white area. Always communicate why there's no content.
+
+### Error States
+
+Every data-fetching section must handle errors:
+- Show a clear error message (not a stack trace).
+- Provide a retry action.
+- Don't break the rest of the page — contain the error to its section.
+
+```tsx
+<StateView
+  figure={<ErrorIcon />}
+  title="Failed to load data"
+  description="Please check your connection and try again."
+  primaryAction={<Button buttonType="weak" color="primary" onClick={onRetry}>Retry</Button>}
+/>
+```
+
+### Feedback Patterns
+
+- **Button press**: Visual press state is built into components (handled by `usePressable`).
+- **Form submission**: Show loading on submit button. On success, navigate or show success message.
+- **Destructive action**: After deletion, remove the item from the list immediately (optimistic UI) or show loading then remove.
+- **Toggle/switch**: Immediate visual change. If async, revert on failure.
+
+### Accessibility
+
+- Use semantic HTML elements (`<nav>`, `<main>`, `<section>`, `<form>`).
+- Every `IconButton` must have an `aria-label` describing the action.
+- All form inputs must have a visible `label` prop or `aria-label`.
+- Interactive elements must be keyboard-navigable (Tab to focus, Enter/Space to activate).
+- Color must not be the only indicator of state — add text or icons alongside color changes.
+- Minimum touch target: 44px (`spacing.semantic.minTouchTarget`).
+
+### Language Consistency
+
+Use consistent terminology across the UI:
+- "Save" for persisting changes (not "Submit", "Done", "OK" mixed together)
+- "Cancel" for discarding (not "Back", "Close", "Dismiss" interchangeably)
+- "Delete" for permanent removal (not "Remove", "Erase", "Clear" mixed)
+
+---
+
+## State Model
+
+Every interactive element and data section MUST implement the states listed below. Missing states are bugs, not optional polish.
+
+### Button / Action States
+
+| State | When | How |
+|-------|------|-----|
+| `default` | Always present | Normal rendered state |
+| `hover` | Cursor over element | Built-in via usePressable — no extra code needed |
+| `pressed` | Mouse/touch down | Built-in — no extra code needed |
+| `disabled` | Precondition not met | `disabled={true}` prop |
+| `loading` | Async op in progress | `isLoading={true}` prop on Button |
+
+### Input Field States
+
+| State | When | How |
+|-------|------|-----|
+| `default` | Empty, untouched | Normal state |
+| `focused` | User is typing | Built-in |
+| `filled` | Has value | Built-in |
+| `error` | Validation failed | `error="Error message string"` prop |
+| `disabled` | Field not editable | `disabled={true}` prop |
+
+Rule: Do NOT show error state before user has interacted with the field (validate on blur or submit).
+
+### List / Data Section States
+
+Every list, table, or data-fetched section needs ALL four:
+
+| State | Required Component/Pattern |
+|-------|---------------------------|
+| `loading` | Skeleton placeholders matching content shape |
+| `empty` | Centered message + optional CTA |
+| `error` | Error message + Retry button (contained, not full-page) |
+| `populated` | Normal content render |
+
+```tsx
+// Required pattern for every data list
+if (isLoading) return <SkeletonList />;
+if (error) return <ErrorState onRetry={refetch} />;
+if (items.length === 0) return <EmptyState message="No items yet" />;
+return <ItemList items={items} />;
+```
+
+### Toggle / Switch States
+
+| State | When |
+|-------|------|
+| `on` | Active/enabled |
+| `off` | Inactive/disabled value |
+| `disabled` | Toggle not available |
+
+Switch changes take effect immediately. If async, show optimistic update and revert on failure.
+
+---
+
+## Anti-Patterns
+
+These patterns produce off-brand, inconsistent, or inaccessible UI. Reject any generated code that contains them.
+
+### Color Anti-Patterns
+
+| Wrong | Correct |
+|-------|---------|
+| `color: '#1a73e8'` | `color: 'var(--content-brand-default)'` |
+| `backgroundColor: 'rgb(255,255,255)'` | `backgroundColor: 'var(--surface-base-default)'` |
+| Importing `lightColors` for inline styles | CSS variables via `var(--...)` |
+| Using `success` color for a primary CTA | `color="primary"` for CTAs |
+| Using `error` color for non-destructive actions | `color="neutral"` or `color="primary"` |
+| Two `color="primary"` buttons side by side | One primary, one `color="neutral" buttonType="weak"` |
+
+### Component Anti-Patterns
+
+| Wrong | Correct |
+|-------|---------|
+| `<div onClick={...}>Click me</div>` | `<Button>`, `<IconButton>`, or `<Card>` |
+| `<input type="text" />` | `<TextField>` |
+| `<select><option>...</option></select>` | `<Radio>` / `<RadioGroup>` or `<SegmentedControl>` |
+| `<textarea>` | `<TextArea>` |
+| `<input type="checkbox">` | `<Checkbox>` |
+| Custom `box-shadow` on a card div | `<Card>` component |
+| Custom toggle built with CSS | `<Switch>` |
+| Nested `<ActionArea>` inside `<ActionArea>` | Single `<ActionArea>` |
+| Using `ActionArea` as generic tappable region | `Card` with `onClick` |
+
+### Spacing Anti-Patterns
+
+| Wrong | Correct |
+|-------|---------|
+| `gap: 13` (arbitrary) | `gap: spacing.primitive[3]` (12px) |
+| `padding: '15px 20px'` | `padding: spacing.primitive[4]` / `spacing.semantic.screen.paddingX` |
+| `margin: 'auto'` for centering in flexbox | `alignItems: 'center'` / `justifyContent: 'center'` |
+
+### Layout Anti-Patterns
+
+- **DO NOT** build full-screen loading spinners. Use inline skeleton states.
+- **DO NOT** render a blank white section when data is empty. Always show an empty state.
+- **DO NOT** nest Cards inside Cards.
+- **DO NOT** place more than one `buttonType="filled" color="primary"` button in the same action group.
+- **DO NOT** put destructive actions next to primary CTAs without visual separation.
+- **DO NOT** use fixed pixel widths for buttons. Let content or container define width.
+
+### Accessibility Anti-Patterns
+
+- **DO NOT** use `<IconButton>` without `aria-label`.
+- **DO NOT** attach `onClick` to `<div>` or `<span>` without `role="button"` and keyboard handler.
+- **DO NOT** rely on color alone to communicate state (add text or icon alongside color).
+- **DO NOT** remove focus outlines without replacement.
+- **DO NOT** set `tabIndex={-1}` on elements that should be keyboard-accessible.
+
+### Motion Anti-Patterns
+
+- **DO NOT** use transition durations over 500ms for UI feedback.
+- **DO NOT** use `transition: all` with custom values — use `transitions.all` from the token system.
+- **DO NOT** animate layout properties (`width`, `height` for non-accordion) — causes reflow.
+
+---
+
+## Pre-Flight Checklist
+
+Before returning any generated UI code, verify every item below. If any check fails, fix the code first.
+
+### Components
+- [ ] All interactive elements use system components (`Button`, `IconButton`, `TextField`, etc.)
+- [ ] No native `<button>`, `<input>`, `<select>`, `<textarea>`
+- [ ] No `<div onClick>` used as a button — use `Button`, `IconButton`, or `Card`
+- [ ] `ActionArea` used only as button group container with `Button`/`TextButton` children
+
+### Colors
+- [ ] Zero hardcoded hex/rgb/hsl values in styles
+- [ ] CSS variables used for all color references
+- [ ] Maximum one `buttonType="filled" color="primary"` button per action group
+- [ ] Destructive actions use `color="error"`, not manually styled red
+
+### States
+- [ ] Form submit button has `disabled={!isValid}` and `isLoading={isSubmitting}`
+- [ ] Every list/table has: loading state, empty state, error state
+- [ ] Destructive action has a confirmation step before executing
+
+### Layout & Spacing
+- [ ] Spacing values from `spacing.primitive[N]` or `spacing.semantic.*` — no arbitrary numbers
+- [ ] Cards do not nest inside other Cards
+- [ ] Page has consistent horizontal padding (`spacing.semantic.screen.paddingX`)
+
+### Accessibility
+- [ ] Every `IconButton` has `aria-label`
+- [ ] All form inputs have a visible `label` prop or `aria-label`
+- [ ] Interactive non-button elements have `role`, `tabIndex`, and `onKeyDown` handlers
+- [ ] Semantic HTML used: `<form>`, `<nav>`, `<main>`, `<section>` where appropriate
+
+### Output Format
+- [ ] Component selection is documented
+- [ ] State requirements listed
+- [ ] Accessibility notes included for non-obvious elements
+
+If all boxes are checked, return the code. If any box fails, fix before returning.
+
+---
+
+## Component Quick Reference
+
+### Accordion
+> Expandable/collapsible content panel for progressive disclosure.
+
+Key props: `title` (required), `children` (required), `expanded`, `onChange`, `defaultExpanded`, `size` ('medium' | 'large')
+
+```tsx
+<Accordion title="What is the return policy?">
+  Items can be returned within 30 days of purchase.
+</Accordion>
+```
+
+---
+
+### ActionArea
+> Bottom-anchored container for action button groups in modals, sheets, and page footers.
+
+Key props: `variant` ('strong' | 'neutral' | 'compact'), `position` ('static' | 'sticky' | 'fixed'), `topAccessory`, `caption`, `showGradient`, `children` (Button/TextButton)
+
+```tsx
+<ActionArea variant="strong" position="sticky">
+  <Button buttonType="filled" color="primary" onClick={onConfirm}>Confirm</Button>
+  <Button buttonType="weak" color="neutral" onClick={onCancel}>Cancel</Button>
+</ActionArea>
+```
+
+---
+
+### Avatar
+> User profile image with initials fallback and online indicator. Use `AvatarGroup` for stacking.
+
+Key props: `src`, `alt`, `size` ('xs' | 'sm' | 'md' | 'lg' | 'xl'), `shape` ('circle' | 'rounded'), `online`, `onClick`
+AvatarGroup props: `max`, `size`, `children`
+
+```tsx
+<Avatar src="/user.jpg" alt="Jane Doe" size="md" online />
+
+<AvatarGroup max={3} size="sm">
+  <Avatar src={url1} alt="Alice" />
+  <Avatar src={url2} alt="Bob" />
+  <Avatar src={url3} alt="Carol" />
+</AvatarGroup>
+```
+
+---
+
+### Badge
+> Pill-shaped label for status, category, or short text with semantic colors.
+
+Key props: `children` (required), `color` ('neutral' | 'primary' | 'success' | 'error' | 'warning' | 'info'), `variant` ('filled' | 'weak' | 'outline'), `size` ('sm' | 'md'), `leadingIcon`
+
+```tsx
+<Badge color="success">Verified</Badge>
+<Badge color="error" variant="outline">Expired</Badge>
+```
+
+---
+
+### BottomNavigation
+> Fixed bottom tab bar for 2-5 top-level app sections.
+
+Key props: `items` (BottomNavigationItem[]), `activeIndex`, `onChange`
+Item: `icon`, `activeIcon`, `label`
+
+```tsx
+<BottomNavigation
+  items={[
+    { icon: <HomeIcon />, label: 'Home' },
+    { icon: <SearchIcon />, label: 'Search' },
+    { icon: <ProfileIcon />, label: 'Profile' },
+  ]}
+  activeIndex={activeTab}
+  onChange={setActiveTab}
+/>
+```
+
+---
+
+### BottomSheet
+> Sheet that slides up from the bottom for supplemental actions or contextual content.
+
+Key props: `open`, `onClose`, `title`, `description`, `children`, `actions`, `footerLink`, `scrollable`, `maxHeight`, `showHandle`
+
+```tsx
+<BottomSheet
+  open={open}
+  onClose={() => setOpen(false)}
+  title="Select an option"
+  actions={
+    <Button buttonType="filled" color="primary" layout="fillWidth" onClick={onConfirm}>
+      Confirm
+    </Button>
+  }
+>
+  <ListCell title="Option A" onClick={() => setSelected('a')} />
+  <ListCell title="Option B" onClick={() => setSelected('b')} />
+</BottomSheet>
+```
+
+---
+
+### Button
+> Primary and secondary action trigger with label text. Uses `buttonType` prop (not `variant`).
+
+Key props: `buttonType` ('filled' | 'weak'), `color` ('primary' | 'neutral' | 'success' | 'error' | 'kakao' | 'google'), `size` ('small' | 'medium' | 'large' | 'xLarge'), `layout` ('hug' | 'fillWidth'), `isLoading`, `disabled`, `leftContent`, `rightContent`
+
+```tsx
+<Button buttonType="filled" color="primary" isLoading={saving} disabled={!isValid} onClick={onSave}>
+  Save Changes
+</Button>
+```
+
+---
+
+### Card
+> Clickable container for grouped content. Always interactive (`onClick` required).
+
+Key props: `onClick` (required), `variant` ('filled' | 'elevated' | 'outlined'), `padding` ('small' | 'medium' | 'large'), `thumbnail`, `heading`, `caption`, `children`
+
+```tsx
+<Card
+  thumbnail={<img src="/product.jpg" alt="Product" style={{ width: '100%', height: 200, objectFit: 'cover' }} />}
+  heading="Running Shoes"
+  caption="$89"
+  onClick={() => navigate('/product/42')}
+/>
+```
+
+---
+
+### CategoryNavigation
+> Horizontally scrollable chip row for filtering/navigating content categories.
+
+Key props: `items` ({label, value}[]), `value`, `onChange`, `size` ('sm' | 'md' | 'lg' | 'xl'), `iconButton`
+
+```tsx
+<CategoryNavigation
+  items={[
+    { label: 'All', value: 'all' },
+    { label: 'Fashion', value: 'fashion' },
+    { label: 'Food', value: 'food' },
+  ]}
+  value={category}
+  onChange={setCategory}
+/>
+```
+
+---
+
+### Checkbox
+> Multi-select boolean toggle for form values submitted on submit.
+
+Key props: `checked`, `defaultChecked`, `onChange`, `label`, `description`, `size` ('small' | 'medium'), `disabled`, `invalid`, `indeterminate`
+
+```tsx
+<Checkbox
+  checked={accepted}
+  onChange={setAccepted}
+  label="I agree to the terms and conditions"
+/>
+```
+
+---
+
+### CheckMark
+> Lightweight icon-only check indicator (no box). For read-only confirmation or minimal toggles.
+
+Key props: `checked`, `onChange`, `label`, `description`, `size` ('small' | 'medium'), `disabled`, `invalid`
+
+```tsx
+<CheckMark checked label="Email verified" />
+```
+
+---
+
+### Chip
+> Compact interactive element for filters, tags, and selectable labels.
+
+Key props: `variant` ('filled' | 'weak'), `color` ('primary' | 'neutral' | 'success' | 'error' | 'warning'), `size` ('small' | 'medium' | 'large'), `selected`, `onClose`, `leftIcon`, `avatar`, `disabled`
+
+```tsx
+<Chip color="primary" variant="weak" selected={selected} onClick={() => setSelected(!selected)}>
+  Electronics
+</Chip>
+```
+
+---
+
+### ContentBadge
+> Small non-interactive label for status, category, or count inline within content.
+
+Key props: `color` ('primary' | 'neutral' | 'success' | 'error' | 'warning' | 'info'), `variant` ('filled' | 'weak'), `size` ('small' | 'medium' | 'large'), `leftIcon`, `children`
+
+```tsx
+<ContentBadge color="success">In Stock</ContentBadge>
+<ContentBadge color="error" variant="weak">Sold Out</ContentBadge>
+```
+
+---
+
+### Dialog
+> Blocking modal dialog for confirmations or critical messages before irreversible actions.
+
+Key props: `open` (required), `onClose` (required), `title`, `description`, `actions` (DialogAction[], required), `closeOnDimmerClick`
+DialogAction: `{ label, onClick, color?, variant? }`
+
+```tsx
+<Dialog
+  open={open}
+  onClose={() => setOpen(false)}
+  title="Delete this item?"
+  description="This action cannot be undone."
+  actions={[
+    { label: 'Cancel', onClick: () => setOpen(false), color: 'neutral', variant: 'weak' },
+    { label: 'Delete', onClick: handleDelete, color: 'error', variant: 'filled' },
+  ]}
+/>
+```
+
+---
+
+### IconButton
+> Square icon-only button with built-in press states. Always provide `aria-label`.
+
+Key props: `variant` ('filled' | 'ghost' | 'weak'), `color` ('primary' | 'neutral' | 'error'), `size` ('small' | 'medium' | 'large'), `disabled`, `aria-label` (required), `children` (icon)
+
+```tsx
+<IconButton aria-label="Close" variant="ghost" onClick={onClose}>
+  <CloseIcon />
+</IconButton>
+```
+
+---
+
+### ListCard
+> Horizontal list item with thumbnail, title/subtitle, and optional meta/action slots.
+
+Key props: `title` (required), `variant` ('filled' | 'outlined'), `thumbnail`, `subtitle`, `meta`, `action`, `badges`, `onClick`
+
+```tsx
+<ListCard
+  thumbnail={<img src="/product.jpg" alt="Product" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />}
+  title="Running Shoes Pro"
+  subtitle="Nike - Size 270"
+  meta="$89"
+  onClick={() => navigate('/product/42')}
+/>
+```
+
+---
+
+### ListCell
+> Single-row horizontal list item for settings, menus, and option lists.
+
+Key props: `title` (required), `leading`, `description`, `trailing`, `size` ('small' | 'medium' | 'large'), `onClick`, `withArrow`, `verticalAlign` ('top' | 'center')
+
+```tsx
+<ListCell
+  title="Push Notifications"
+  description="Receive alerts for new activity"
+  trailing={<Switch checked={notifications} onChange={setNotifications} />}
+/>
+```
+
+---
+
+### PageCounter
+> Pill-shaped "X / Y" indicator for carousel or image gallery position.
+
+Key props: `current` (required, 1-indexed), `total` (required), `variant` ('normal' | 'alternative'), `size` ('small' | 'medium')
+
+```tsx
+<PageCounter current={2} total={8} variant="alternative" />
+```
+
+---
+
+### Popover
+> Non-blocking floating card for feature announcements, hints, and contextual messages.
+
+Key props: `description` (required), `open`, `onClose`, `heading`, `action`, `subAction`, `showClose`, `size` ('sm' | 'md')
+
+```tsx
+<Popover
+  open={showHint}
+  heading="New feature"
+  description="You can now export data as CSV."
+  action={<TextButton color="primary" onClick={() => setShowHint(false)}>Got it</TextButton>}
+  showClose
+  onClose={() => setShowHint(false)}
+/>
+```
+
+---
+
+### Popup
+> Centered modal dialog that blocks UI and demands user attention.
+
+Key props: `open` (required), `onClose` (required), `children` (required), `title`, `navigation` ('normal' | 'emphasize' | 'floating'), `actions` (PopupAction[]), `actionLayout`, `size` ('medium' | 'large' | 'xlarge'), `type` ('hug' | 'fixed'), `closeOnDimmerClick`
+
+```tsx
+<Popup
+  open={open}
+  onClose={() => setOpen(false)}
+  title="Confirm changes"
+  actions={[
+    { label: 'Cancel', onClick: () => setOpen(false) },
+    { label: 'Save', onClick: handleSave },
+  ]}
+>
+  <p>Your changes will be saved immediately.</p>
+</Popup>
+```
+
+---
+
+### ProgressIndicator
+> Horizontal linear bar showing percentage completion (0.0 to 1.0).
+
+Key props: `progress` (required, 0-1), `size` ('sm' | 'md' | 'lg'), `color` ('primary' | 'neutral' | 'success' | 'error' | 'warning'), `animate`, `aria-label`
+
+```tsx
+<ProgressIndicator progress={0.65} color="primary" aria-label="Upload progress" />
+```
+
+---
+
+### ProgressTracker
+> Discrete step-by-step tracker for multi-step flows (checkout, onboarding).
+
+Key props: `steps` (ProgressTrackerStep[] | number), `activeStep` (0-indexed), `variant` ('default' | 'compact'), `orientation` ('horizontal' | 'vertical'), `checkForFinish`
+
+```tsx
+<ProgressTracker
+  steps={[{ label: 'Cart' }, { label: 'Shipping' }, { label: 'Payment' }, { label: 'Confirm' }]}
+  activeStep={1}
+/>
+```
+
+---
+
+### PushBadge
+> Overlay badge on an icon/button showing notification count, dot, or "new" marker.
+
+Key props: `children` (required, the wrapped element), `variant` ('number' | 'dot' | 'new'), `color` ('error' | 'primary' | 'success' | 'warning'), `count`, `max`, `hidden`, `size` ('default' | 'small' | 'tiny')
+
+```tsx
+<PushBadge count={3} hidden={unreadCount === 0}>
+  <IconButton aria-label="Notifications"><BellIcon /></IconButton>
+</PushBadge>
+```
+
+---
+
+### Radio / RadioGroup
+> Single-selection control for picking one option from a mutually exclusive set.
+
+RadioGroup props: `value`, `defaultValue`, `onChange`, `orientation` ('vertical' | 'horizontal'), `size`, `disabled`, `invalid`, `aria-label`
+Radio props: `value` (required), `label`, `description`, `disabled`, `invalid`
+
+```tsx
+<RadioGroup value={plan} onChange={setPlan} aria-label="Plan">
+  <Radio value="free" label="Free" />
+  <Radio value="pro" label="Pro" description="Includes premium features" />
+  <Radio value="enterprise" label="Enterprise" />
+</RadioGroup>
+```
+
+---
+
+### SearchField
+> Single-line search input with built-in search icon, clear button, and keyboard shortcuts.
+
+Key props: `value`, `onChange`, `onSearch`, `onClear`, `label`, `placeholder`, `disabled`, `aria-label`
+
+```tsx
+<SearchField
+  placeholder="Search products"
+  value={query}
+  onChange={setQuery}
+  onSearch={runSearch}
+  onClear={() => setQuery('')}
+/>
+```
+
+---
+
+### SectionHeader
+> Section title row with optional inline content and trailing action slots.
+
+Key props: `title` (required), `headingContent` (inline slot for badges), `trailing` (far-right slot for TextButton/IconButton), `size` ('small' | 'medium' | 'large')
+
+```tsx
+<SectionHeader
+  title="Notifications"
+  headingContent={<ContentBadge color="primary">12</ContentBadge>}
+  trailing={<TextButton size="small" color="primary" onClick={onViewAll}>View All</TextButton>}
+/>
+```
+
+---
+
+### SectionMessage
+> Inline banner for contextual status (info, success, warning, error) within a page section.
+
+Key props: `variant` ('default' | 'info' | 'success' | 'warning' | 'error'), `heading`, `description`, `icon`, `action`, `onClose`
+
+```tsx
+<SectionMessage
+  variant="error"
+  heading="Payment failed"
+  description="Your card was declined. Please update your payment method."
+  action={<Button buttonType="weak" color="error" onClick={retry}>Try again</Button>}
+/>
+```
+
+---
+
+### SegmentedControl
+> Compact tab-like selector for exclusive switching between 2-5 views or modes.
+
+Key props: `options` ({value, label}[], required), `value` (required), `onChange` (required), `size` ('small' | 'medium' | 'large'), `fullWidth`, `disabled`
+
+```tsx
+<SegmentedControl
+  options={[
+    { value: 'list', label: 'List' },
+    { value: 'grid', label: 'Grid' },
+  ]}
+  value={view}
+  onChange={setView}
+/>
+```
+
+---
+
+### Skeleton
+> Shimmering placeholder that mimics content shape while loading.
+
+Key props: `variant` ('text' | 'circular' | 'rectangular' | 'rounded'), `width`, `height`, `borderRadius`, `animate`
+
+```tsx
+// Text lines
+<Skeleton variant="text" width="80%" />
+<Skeleton variant="text" width="60%" />
+
+// Avatar placeholder
+<Skeleton variant="circular" width={40} height={40} />
+
+// Card image placeholder
+<Skeleton variant="rounded" width="100%" height={200} />
+```
+
+---
+
+### Slider
+> Range input for selecting a numeric value by dragging a thumb along a track.
+
+Key props: `value`, `defaultValue`, `onChange`, `min`, `max`, `step`, `disabled`, `showValue`, `aria-label` (required)
+
+```tsx
+<Slider
+  value={brightness}
+  onChange={setBrightness}
+  min={0}
+  max={100}
+  aria-label="Brightness"
+/>
+```
+
+---
+
+### Snackbar
+> Brief auto-dismissing notification at the bottom of the screen for single-line feedback.
+
+Key props: `open` (required), `message` (required), `onClose`, `action`, `icon`, `closable`, `duration` (ms or null), `position`
+
+```tsx
+<Snackbar
+  open={saved}
+  message="Changes saved."
+  onClose={() => setSaved(false)}
+/>
+```
+
+---
+
+### Spinner
+> Animated circular indicator for indeterminate loading states.
+
+Key props: `size` ('xs' | 'sm' | 'md' | 'lg' | 'xl'), `color` ('primary' | 'neutral' | 'inverse' | 'inherit'), `aria-label`
+
+```tsx
+<Spinner size="md" color="primary" aria-label="Loading results" />
+```
+
+---
+
+### StateView
+> Centered content area for empty states, error states, and full-page results.
+
+Key props: `figure`, `title`, `description`, `primaryAction`, `secondaryAction`, `variant` ('inline' | 'page'), `size` ('default' | 'compact')
+
+```tsx
+<StateView
+  figure={<EmptyBoxIcon />}
+  title="Nothing here yet"
+  description="Add your first item to get started."
+  primaryAction={
+    <Button buttonType="weak" color="primary" onClick={onAdd}>Add Item</Button>
+  }
+/>
+```
+
+---
+
+### Switch
+> Binary on/off toggle that takes immediate effect when activated.
+
+Key props: `checked`, `defaultChecked`, `onChange`, `label`, `description`, `size` ('small' | 'medium'), `disabled`, `aria-label`
+
+```tsx
+<Switch
+  checked={darkMode}
+  onChange={setDarkMode}
+  label="Dark mode"
+/>
+```
+
+---
+
+### Tab
+> Underline-style tab strip for switching between views within a section.
+
+Key props: `items` ({label, value, disabled?}[]), `value`, `onChange`, `size` ('sm' | 'md' | 'lg'), `resize` ('hug' | 'fill'), `iconButton`
+
+```tsx
+<Tab
+  items={[
+    { label: 'Overview', value: 'overview' },
+    { label: 'Reviews', value: 'reviews' },
+    { label: 'Details', value: 'details' },
+  ]}
+  value={tab}
+  onChange={setTab}
+/>
+```
+
+---
+
+### TextArea
+> Multi-line text input with label, validation, and character count support.
+
+Key props: `label`, `value`, `onChange`, `error`, `helperText`, `placeholder`, `disabled`, `required`, `maxLength`, `showCount`, `rows`, `resize` ('none' | 'vertical' | 'both')
+
+```tsx
+<TextArea
+  label="Description"
+  placeholder="Tell us about yourself..."
+  value={bio}
+  onChange={setBio}
+  maxLength={500}
+  showCount
+/>
+```
+
+---
+
+### TextButton
+> Text-only low-emphasis action for inline or link-style interactions.
+
+Key props: `variant` ('clear' | 'underline' | 'arrow'), `color` ('primary' | 'neutral' | 'muted' | 'error'), `size` ('xSmall' | 'small' | 'medium' | 'large' | 'xLarge'), `disabled`
+
+```tsx
+<TextButton variant="arrow" color="primary" onClick={onViewAll}>
+  View all
+</TextButton>
+```
+
+---
+
+### TextField
+> Single-line text input with label, validation, and icon slots.
+
+Key props: `label`, `value`, `onChange`, `type`, `error`, `helperText`, `placeholder`, `disabled`, `required`, `readOnly`, `leadingIcon`, `trailingIcon`, `maxLength`
+
+```tsx
+<TextField
+  label="Email"
+  type="email"
+  value={email}
+  onChange={setEmail}
+  error={emailError}
+  placeholder="example@email.com"
+  required
+/>
+```
+
+---
+
+### Toast
+> Temporary notification with heading + description, rendered at screen bottom via portal.
+
+Key props: `open` (required), `onClose`, `heading`, `description`, `icon`, `action`, `closable`, `duration` (ms or null), `position`
+
+```tsx
+<Toast
+  open={open}
+  heading="Save complete"
+  description="Your changes have been uploaded to the cloud."
+  onClose={() => setOpen(false)}
+/>
+```
+
+---
+
+### Tooltip
+> Small floating label for supplemental context. Appears on hover, focus, or click.
+
+Key props: `label` (required), `children` (required), `position` ('top' | 'bottom' | 'left' | 'right' | 'top-start' | 'top-end' | 'bottom-start' | 'bottom-end'), `size` ('small' | 'medium'), `mode` ('hover' | 'click' | 'always'), `shortcut`
+
+```tsx
+<Tooltip label="Copy to clipboard" shortcut="Ctrl+C">
+  <IconButton aria-label="Copy"><CopyIcon /></IconButton>
+</Tooltip>
+```
+
+---
+
+### TopNavigation
+> App bar fixed to the top of a screen with title, leading button, and trailing actions.
+
+Key props: `variant` ('normal' | 'display' | 'floating' | 'search'), `title`, `leadingButton`, `trailingButtons`, `toolbar`, `fixed`, `scrollEffect` ('none' | 'floating' | 'overlay'), `searchPlaceholder`, `searchValue`
+
+```tsx
+<TopNavigation
+  title="Product Detail"
+  leadingButton={
+    <IconButton aria-label="Go back" onClick={() => router.back()}>
+      <BackIcon />
+    </IconButton>
+  }
+  trailingButtons={
+    <IconButton aria-label="Share" onClick={onShare}>
+      <ShareIcon />
+    </IconButton>
+  }
+  fixed
+  scrollEffect="floating"
+/>
+```
+
+---
+
+*End of @baerae-zkap/design-system Complete AI Reference*
