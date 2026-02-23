@@ -66,6 +66,7 @@ function TextFieldPlayground() {
   const [leadingIcon, setLeadingIcon] = useState("none");
   const [trailingButton, setTrailingButton] = useState("none");
   const [trailingContents, setTrailingContents] = useState("none");
+  const [state, setState] = useState("default");
 
   const iconPlaceholder = (
     <div
@@ -103,7 +104,8 @@ function TextFieldPlayground() {
             <div style={{ width: "100%", maxWidth: 320 }}>
               <TextField
                 label="Heading"
-                required
+                error={state === "error" ? "This field is required" : undefined}
+                disabled={state === "disabled"}
                 placeholder="Placeholder"
                 helperText="Description"
                 leadingIcon={leadingIcon === "icon" ? iconPlaceholder : undefined}
@@ -145,6 +147,17 @@ function TextFieldPlayground() {
                 borderRadius: radius.primitive.lg,
               }}
             >
+              <RadioGroup
+                label="State"
+                options={[
+                  { value: "default", label: "Default" },
+                  { value: "error", label: "Error" },
+                  { value: "disabled", label: "Disabled" },
+                ]}
+                value={state}
+                onChange={setState}
+              />
+
               <RadioGroup
                 label="Leading icon"
                 options={[
