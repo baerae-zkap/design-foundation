@@ -170,7 +170,7 @@ export { Switch } from './components/Switch/Switch';
 export type { SwitchProps, SwitchSize } from './components/Switch/Switch';
 
 export { TextField } from './components/TextField/TextField';
-export type { TextFieldProps } from './components/TextField/TextField';
+export type { TextFieldProps, TextFieldVariant } from './components/TextField/TextField';
 
 
 export { Skeleton } from './components/Skeleton/Skeleton';

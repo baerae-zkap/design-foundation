@@ -63,6 +63,9 @@ export default function TextFieldPage() {
 // ─── Playground ───────────────────────────────────────────────────────
 
 function TextFieldPlayground() {
+  const [variant, setVariant] = useState("box");
+  const [heading, setHeading] = useState("show");
+  const [description, setDescription] = useState("show");
   const [leadingIcon, setLeadingIcon] = useState("none");
   const [trailingButton, setTrailingButton] = useState("none");
   const [trailingContents, setTrailingContents] = useState("none");
@@ -94,7 +97,7 @@ function TextFieldPlayground() {
         );
       case "timer":
         return (
-          <span style={{ fontSize: typography.fontSize.compact, color: "var(--content-error-default)", whiteSpace: "nowrap", fontVariantNumeric: "tabular-nums" }}>
+          <span style={{ fontSize: typography.fontSize.compact, color: "var(--content-base-secondary)", whiteSpace: "nowrap", fontVariantNumeric: "tabular-nums" }}>
             03:00
           </span>
         );
@@ -126,11 +129,12 @@ function TextFieldPlayground() {
           >
             <div style={{ width: "100%", maxWidth: 320 }}>
               <TextField
-                label="Heading"
+                variant={variant as "box" | "line"}
+                label={heading === "show" ? "Heading" : undefined}
                 error={state === "error" ? "This field is required" : undefined}
                 disabled={state === "disabled"}
                 placeholder="Placeholder"
-                helperText="Description"
+                helperText={description === "show" ? "Description" : undefined}
                 leadingIcon={leadingIcon === "icon" ? iconPlaceholder : undefined}
                 trailingIcon={getTrailingIcon()}
                 trailingButton={
@@ -170,6 +174,36 @@ function TextFieldPlayground() {
                 borderRadius: radius.primitive.lg,
               }}
             >
+              <RadioGroup
+                label="Variant"
+                options={[
+                  { value: "box", label: "Box" },
+                  { value: "line", label: "Line" },
+                ]}
+                value={variant}
+                onChange={setVariant}
+              />
+
+              <RadioGroup
+                label="Heading"
+                options={[
+                  { value: "show", label: "Show" },
+                  { value: "hide", label: "Hide" },
+                ]}
+                value={heading}
+                onChange={setHeading}
+              />
+
+              <RadioGroup
+                label="Description"
+                options={[
+                  { value: "show", label: "Show" },
+                  { value: "hide", label: "Hide" },
+                ]}
+                value={description}
+                onChange={setDescription}
+              />
+
               <RadioGroup
                 label="State"
                 options={[

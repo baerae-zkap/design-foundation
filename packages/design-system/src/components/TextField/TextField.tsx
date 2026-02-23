@@ -10,6 +10,8 @@ import { transitions } from '../../tokens/motion';
 
 // ─── Types ───────────────────────────────────────────────────────────
 
+export type TextFieldVariant = 'box' | 'line';
+
 export interface TextFieldProps {
   /** Label displayed above the input */
   label?: string;
@@ -53,6 +55,8 @@ export interface TextFieldProps {
   maxLength?: number;
   /** Makes the input read-only */
   readOnly?: boolean;
+  /** Visual variant @default 'box' */
+  variant?: TextFieldVariant;
   /** Custom inline styles on the outer wrapper */
   style?: CSSProperties;
   /** Additional class names on the outer wrapper */
@@ -85,6 +89,7 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
       autoComplete,
       maxLength,
       readOnly = false,
+      variant = 'box',
       style,
       className,
     } = props;
@@ -140,26 +145,36 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
       lineHeight: 1.4,
     };
 
+    const isLine = variant === 'line';
+
     const containerStyle: CSSProperties = {
       display: 'flex',
       alignItems: 'center',
       gap: spacing.primitive[2],
       height: spacing.component.input.height.md,
-      padding: trailingButton
-        ? `0 0 0 ${spacing.primitive[4]}px`
-        : `0 ${spacing.primitive[4]}px`,
-      borderRadius: radius.component.input.default,
-      border: `${borderWidth.medium}px solid ${borderColor}`,
-      backgroundColor: disabled
-        ? cssVarColors.surface.base.alternative
-        : cssVarColors.surface.base.default,
+      padding: isLine
+        ? '0'
+        : trailingButton
+          ? `0 0 0 ${spacing.primitive[4]}px`
+          : `0 ${spacing.primitive[4]}px`,
+      borderRadius: isLine ? 0 : radius.component.input.default,
+      borderTop: isLine ? 'none' : `${borderWidth.medium}px solid ${borderColor}`,
+      borderRight: isLine ? 'none' : `${borderWidth.medium}px solid ${borderColor}`,
+      borderBottom: `${borderWidth.medium}px solid ${borderColor}`,
+      borderLeft: isLine ? 'none' : `${borderWidth.medium}px solid ${borderColor}`,
+      backgroundColor: isLine
+        ? 'transparent'
+        : disabled
+          ? cssVarColors.surface.base.alternative
+          : cssVarColors.surface.base.default,
       transition: transitions.all,
       opacity: disabled ? opacity.disabled : 1,
       boxSizing: 'border-box' as const,
-      // Focus ring via box-shadow when focused
-      boxShadow: focused && !hasError
-        ? `0 0 0 3px ${cssVarColors.surface.brand.secondary}`
-        : 'none',
+      boxShadow: isLine
+        ? 'none'
+        : focused && !hasError
+          ? `0 0 0 3px ${cssVarColors.surface.brand.secondary}`
+          : 'none',
     };
 
     const inputStyle: CSSProperties = {
@@ -279,7 +294,7 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
                   flexShrink: 0,
                 }}
               />
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', alignSelf: 'stretch', paddingLeft: spacing.primitive[3], paddingRight: spacing.primitive[1] }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', alignSelf: 'stretch', paddingLeft: spacing.primitive[2], paddingRight: spacing.primitive[2] }}>
                 {trailingButton}
               </div>
             </div>
