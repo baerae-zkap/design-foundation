@@ -10,7 +10,7 @@ import { DoCard, DontCard, PrincipleCard, VariantCard } from "@/components/docs/
 import { RadioGroup, CopyButton } from "@/components/docs/Playground";
 
 type FilterButtonVariant = 'filled' | 'outlined';
-type FilterButtonSize = 'small' | 'medium' | 'large';
+type FilterButtonSize = 'xsmall' | 'small' | 'medium' | 'large';
 
 const sampleItems = [
   { label: 'Menu item 1', value: '1' },
@@ -139,6 +139,7 @@ function FilterButtonPlayground() {
               <RadioGroup
                 label="Size"
                 options={[
+                  { value: 'xsmall', label: 'XSmall' },
                   { value: 'small', label: 'Small' },
                   { value: 'medium', label: 'Medium' },
                   { value: 'large', label: 'Large' },

@@ -156,11 +156,11 @@ export const spacing = {
       },
     },
     filterButton: {
-      height: { sm: 32, md: 36, lg: 40 },
-      paddingLeft: { sm: 12, md: 14, lg: 16 },
-      paddingRight: { sm: 8, md: 10, lg: 12 },
-      gap: { sm: 2, md: 2, lg: 4 },
-      iconSize: { sm: 16, md: 16, lg: 18 },
+      height: { xs: 24, sm: 32, md: 36, lg: 40 },
+      paddingLeft: { xs: 8, sm: 12, md: 14, lg: 16 },
+      paddingRight: { xs: 6, sm: 8, md: 10, lg: 12 },
+      gap: { xs: 2, sm: 2, md: 2, lg: 4 },
+      iconSize: { xs: 14, sm: 16, md: 16, lg: 18 },
     },
     badge: {
       height: {

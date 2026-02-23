@@ -36,7 +36,7 @@ import { cssVarShadow } from '../../tokens/shadow';
 import { usePressable } from '../../utils/usePressable';
 
 export type FilterButtonVariant = 'filled' | 'outlined';
-export type FilterButtonSize = 'small' | 'medium' | 'large';
+export type FilterButtonSize = 'xsmall' | 'small' | 'medium' | 'large';
 
 export interface FilterItem {
   label: string;
@@ -70,6 +70,15 @@ const sizeConfig: Record<FilterButtonSize, {
   iconSize: number;
   borderRadius: number;
 }> = {
+  xsmall: {
+    height: spacing.component.filterButton.height.xs,
+    fontSize: typography.fontSize['2xs'],
+    paddingLeft: spacing.component.filterButton.paddingLeft.xs,
+    paddingRight: spacing.component.filterButton.paddingRight.xs,
+    gap: spacing.component.filterButton.gap.xs,
+    iconSize: spacing.component.filterButton.iconSize.xs,
+    borderRadius: radius.component.filterButton.xs,
+  },
   small: {
     height: spacing.component.filterButton.height.sm,
     fontSize: typography.fontSize.compact,

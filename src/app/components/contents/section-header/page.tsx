@@ -48,7 +48,7 @@ function SectionHeaderPlayground() {
     headingContentType === "filter" ? (
       <FilterButton
         variant="filled"
-        size="small"
+        size="xsmall"
         items={[
           { label: "최신순", value: "latest" },
           { label: "인기순", value: "popular" },

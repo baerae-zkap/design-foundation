@@ -38,6 +38,7 @@ export const radius = {
       pill: 9999,
     },
     filterButton: {
+      xs: 6,
       sm: 8,
       md: 8,
       lg: 10,
