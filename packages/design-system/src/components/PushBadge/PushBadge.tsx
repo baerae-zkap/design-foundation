@@ -77,21 +77,21 @@ const sizeConfig = {
   default: {
     height: spacing.component.badge.height.lg,     // 26
     paddingX: spacing.component.badge.paddingX.lg, // 10
-    fontSize: typography.fontSize.xs,              // 12
+    fontSize: typography.fontSize.compact,           // 13
     dotSize: 10,
     offset: -spacing.primitive[1],                 // -4
   },
   small: {
     height: spacing.component.badge.height.md,     // 22
     paddingX: spacing.component.badge.paddingX.md, // 8
-    fontSize: typography.fontSize['2xs'],           // 11
+    fontSize: typography.fontSize.xs,               // 12
     dotSize: 8,
     offset: -spacing.primitive[1],                 // -4
   },
   tiny: {
     height: spacing.component.badge.height.sm,     // 18
     paddingX: spacing.component.badge.paddingX.sm, // 6
-    fontSize: typography.fontSize['2xs'],           // 11
+    fontSize: typography.fontSize['2xs'],            // 11
     dotSize: 6,
     offset: -spacing.primitive[1],                 // -4
   },
