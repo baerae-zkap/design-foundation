@@ -153,7 +153,7 @@ export const SearchField = React.forwardRef<HTMLInputElement, SearchFieldProps>(
       display: 'flex',
       alignItems: 'center',
       height: spacing.primitive[12],
-      borderRadius: radius.primitive.xl,
+      borderRadius: radius.primitive.md,
       border: 'none',
       backgroundColor: cssVarColors.surface.base.alternative,
       transition: transitions.all,
