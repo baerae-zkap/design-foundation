@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { PlatformTabs, CodeBlock, PreviewBox, Platform } from "@/components/PlatformTabs";
-import { SectionHeader, ContentBadge, TextButton, IconButton, typography, spacing, radius } from '@baerae-zkap/design-system';
+import { SectionHeader, ContentBadge, TextButton, IconButton, FilterButton, typography, spacing, radius } from '@baerae-zkap/design-system';
 import type { SectionHeaderSize } from '@baerae-zkap/design-system';
 import { Section, Subsection, InlineCode } from "@/components/docs/Section";
 import { PropsTable } from "@/components/docs/PropsTable";
@@ -46,10 +46,17 @@ function SectionHeaderPlayground() {
 
   const headingContent =
     headingContentType === "filter" ? (
-      <span style={{ display: "inline-flex", alignItems: "center", gap: spacing.primitive[1], padding: "2px 8px", border: "1px solid var(--border-solid-default)", borderRadius: radius.primitive.full, fontSize: typography.fontSize.xs, color: "var(--content-base-secondary)" }}>
+      <FilterButton
+        variant="outlined"
+        size="small"
+        items={[
+          { label: "최신순", value: "latest" },
+          { label: "인기순", value: "popular" },
+          { label: "가격순", value: "price" },
+        ]}
+      >
         Filter
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-      </span>
+      </FilterButton>
     ) :
     headingContentType === "icon" ? (
       <IconButton aria-label="Sort" size="small" color="neutral" variant="ghost" onClick={() => {}}>
