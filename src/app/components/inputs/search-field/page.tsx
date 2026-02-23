@@ -45,8 +45,10 @@ export default function SearchFieldPage() {
 
 function SearchFieldPlayground() {
   const [value, setValue] = useState("");
-  const [disabled, setDisabled] = useState(false);
+  const [state, setState] = useState<"default" | "disabled">("default");
   const [showLabel, setShowLabel] = useState(false);
+
+  const disabled = state === "disabled";
 
   const generateCode = () => {
     const props: string[] = [];
@@ -66,7 +68,8 @@ function SearchFieldPlayground() {
         style={{
           borderRadius: radius.primitive.xl,
           overflow: "hidden",
-          backgroundColor: "var(--surface-base-default)", border: "1px solid var(--border-solid-alternative)",
+          backgroundColor: "var(--surface-base-default)",
+          border: "1px solid var(--border-solid-alternative)",
         }}
       >
         <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
@@ -94,7 +97,8 @@ function SearchFieldPlayground() {
           {/* Control Panel */}
           <div
             style={{
-              backgroundColor: "var(--surface-base-default)", borderLeft: "1px solid var(--border-solid-alternative)",
+              backgroundColor: "var(--surface-base-default)",
+              borderLeft: "1px solid var(--border-solid-alternative)",
               display: "flex",
               flexDirection: "column",
               padding: spacing.primitive[4],
@@ -117,6 +121,15 @@ function SearchFieldPlayground() {
               }}
             >
               <RadioGroup
+                label="State"
+                options={[
+                  { value: "default", label: "Default" },
+                  { value: "disabled", label: "Disabled" },
+                ]}
+                value={state}
+                onChange={(v) => setState(v as "default" | "disabled")}
+              />
+              <RadioGroup
                 label="Label"
                 options={[
                   { value: "false", label: "Hide" },
@@ -124,15 +137,6 @@ function SearchFieldPlayground() {
                 ]}
                 value={showLabel ? "true" : "false"}
                 onChange={(v) => setShowLabel(v === "true")}
-              />
-              <RadioGroup
-                label="Disabled"
-                options={[
-                  { value: "false", label: "False" },
-                  { value: "true", label: "True" },
-                ]}
-                value={disabled ? "true" : "false"}
-                onChange={(v) => setDisabled(v === "true")}
               />
               <div>
                 <p style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.medium, color: "var(--text-secondary)", margin: `0 0 ${spacing.primitive[2]}px` }}>Value</p>

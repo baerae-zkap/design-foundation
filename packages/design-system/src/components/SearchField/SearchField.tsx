@@ -5,7 +5,7 @@ import { cssVarColors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
-import { opacity, borderWidth } from '../../tokens/general';
+import { opacity } from '../../tokens/general';
 import { transitions } from '../../tokens/motion';
 
 // ─── Types ───────────────────────────────────────────────────────────
@@ -41,8 +41,8 @@ export interface SearchFieldProps {
 
 const SearchIcon = ({ color }: { color: string }) => (
   <svg
-    width="16"
-    height="16"
+    width="18"
+    height="18"
     viewBox="0 0 24 24"
     fill="none"
     stroke={color}
@@ -58,20 +58,9 @@ const SearchIcon = ({ color }: { color: string }) => (
 );
 
 const ClearIcon = ({ color }: { color: string }) => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke={color}
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    aria-hidden="true"
-    focusable="false"
-  >
-    <circle cx="12" cy="12" r="10" />
-    <path d="m15 9-6 6M9 9l6 6" />
+  <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+    <circle cx="12" cy="12" r="10" fill={color} />
+    <path d="m15 9-6 6M9 9l6 6" stroke="white" strokeWidth="2" strokeLinecap="round" />
   </svg>
 );
 
@@ -102,9 +91,6 @@ export const SearchField = React.forwardRef<HTMLInputElement, SearchFieldProps>(
     const [internalValue, setInternalValue] = useState(defaultValue ?? '');
     const currentValue = isControlled ? valueProp : internalValue;
 
-    const [focused, setFocused] = useState(false);
-    const [hovered, setHovered] = useState(false);
-
     const handleChange = useCallback(
       (e: React.ChangeEvent<HTMLInputElement>) => {
         const next = e.target.value;
@@ -116,11 +102,8 @@ export const SearchField = React.forwardRef<HTMLInputElement, SearchFieldProps>(
       [isControlled, onChange],
     );
 
-    const handleFocus = useCallback(() => setFocused(true), []);
-
     const handleBlur = useCallback(
       (e: React.FocusEvent<HTMLInputElement>) => {
-        setFocused(false);
         onBlur?.(e);
       },
       [onBlur],
@@ -164,22 +147,14 @@ export const SearchField = React.forwardRef<HTMLInputElement, SearchFieldProps>(
       lineHeight: 1.4,
     };
 
-    const borderColor = focused
-      ? cssVarColors.border.brand.default
-      : hovered
-      ? cssVarColors.border.secondary.default
-      : cssVarColors.border.base.default;
-
     const inputWrapperStyle: CSSProperties = {
       position: 'relative',
       display: 'flex',
       alignItems: 'center',
-      height: 48,
-      borderRadius: radius.component.input.default,
-      border: `${borderWidth.medium}px solid ${borderColor}`,
-      backgroundColor: disabled
-        ? cssVarColors.surface.base.alternative
-        : cssVarColors.surface.base.default,
+      height: spacing.primitive[12],
+      borderRadius: radius.component.input.search,
+      border: 'none',
+      backgroundColor: cssVarColors.surface.base.alternative,
       transition: transitions.all,
       boxSizing: 'border-box',
       opacity: disabled ? opacity.disabled : 1,
@@ -244,11 +219,7 @@ export const SearchField = React.forwardRef<HTMLInputElement, SearchFieldProps>(
           </label>
         )}
 
-        <div
-          style={inputWrapperStyle}
-          onMouseEnter={() => !disabled && setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
-        >
+        <div style={inputWrapperStyle}>
           {/* Search icon */}
           <span style={searchIconWrapperStyle}>
             <SearchIcon color={iconColor} />
@@ -264,7 +235,6 @@ export const SearchField = React.forwardRef<HTMLInputElement, SearchFieldProps>(
             disabled={disabled}
             aria-label={!label ? (ariaLabel ?? placeholder) : undefined}
             onChange={handleChange}
-            onFocus={handleFocus}
             onBlur={handleBlur}
             onKeyDown={handleKeyDown}
             style={inputStyle}
