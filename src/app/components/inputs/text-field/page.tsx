@@ -106,9 +106,6 @@ function TextFieldPlayground() {
                 required
                 placeholder="Placeholder"
                 helperText="Description"
-                readOnly
-                value=""
-                onChange={() => {}}
                 leadingIcon={leadingIcon === "icon" ? iconPlaceholder : undefined}
                 trailingIcon={trailingContents === "icon" ? iconPlaceholder : undefined}
                 trailingButton={
