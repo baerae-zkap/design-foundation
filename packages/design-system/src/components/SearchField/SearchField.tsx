@@ -7,6 +7,7 @@ import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
 import { opacity } from '../../tokens/general';
 import { transitions } from '../../tokens/motion';
+import { IconButton } from '../IconButton/IconButton';
 
 // ─── Types ───────────────────────────────────────────────────────────
 
@@ -152,7 +153,7 @@ export const SearchField = React.forwardRef<HTMLInputElement, SearchFieldProps>(
       display: 'flex',
       alignItems: 'center',
       height: spacing.primitive[12],
-      borderRadius: radius.component.input.search,
+      borderRadius: radius.primitive.xl,
       border: 'none',
       backgroundColor: cssVarColors.surface.base.alternative,
       transition: transitions.all,
@@ -188,25 +189,19 @@ export const SearchField = React.forwardRef<HTMLInputElement, SearchFieldProps>(
       cursor: disabled ? 'not-allowed' : undefined,
       boxSizing: 'border-box',
       width: '100%',
+      // Hide native search clear button (WebKit/Blink)
+      WebkitAppearance: 'none',
+      appearance: 'none' as CSSProperties['appearance'],
     };
 
-    const clearButtonStyle: CSSProperties = {
+    const clearButtonWrapperStyle: CSSProperties = {
       position: 'absolute',
-      right: spacing.primitive[3],
+      right: spacing.primitive[2],
       top: '50%',
       transform: 'translateY(-50%)',
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'center',
-      width: 24,
-      height: 24,
-      background: 'none',
-      border: 'none',
-      cursor: 'pointer',
-      padding: 0,
-      color: cssVarColors.content.base.secondary,
       flexShrink: 0,
-      borderRadius: radius.primitive.full,
     };
 
     const iconColor = cssVarColors.content.base.secondary;
@@ -242,15 +237,17 @@ export const SearchField = React.forwardRef<HTMLInputElement, SearchFieldProps>(
 
           {/* Clear button — only when there is a value and not disabled */}
           {currentValue.length > 0 && !disabled && (
-            <button
-              type="button"
-              onClick={handleClear}
-              aria-label="검색어 지우기"
-              tabIndex={0}
-              style={clearButtonStyle}
-            >
-              <ClearIcon color={iconColor} />
-            </button>
+            <div style={clearButtonWrapperStyle}>
+              <IconButton
+                variant="ghost"
+                size="small"
+                color="neutral"
+                aria-label="검색어 지우기"
+                onClick={handleClear}
+              >
+                <ClearIcon color={iconColor} />
+              </IconButton>
+            </div>
           )}
         </div>
       </div>
