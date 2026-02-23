@@ -94,7 +94,7 @@ export { Dialog } from './components/AlertDialog/AlertDialog';
 export type { DialogProps, DialogAction } from './components/AlertDialog/AlertDialog';
 
 export { FilterButton } from './components/FilterButton/FilterButton';
-export type { FilterButtonProps, FilterButtonVariant, FilterButtonSize } from './components/FilterButton/FilterButton';
+export type { FilterButtonProps, FilterButtonVariant, FilterButtonSize, FilterItem } from './components/FilterButton/FilterButton';
 
 export { StateView } from './components/StateView/StateView';
 export type { StateViewProps, StateViewVariant, StateViewSize } from './components/StateView/StateView';

@@ -12,6 +12,12 @@ import { RadioGroup, CopyButton } from "@/components/docs/Playground";
 type FilterButtonVariant = 'filled' | 'outlined';
 type FilterButtonSize = 'small' | 'medium' | 'large';
 
+const sampleItems = [
+  { label: 'Menu item 1', value: '1' },
+  { label: 'Menu item 2', value: '2' },
+  { label: 'Menu item 3', value: '3' },
+];
+
 export default function FilterButtonPage() {
   return (
     <div style={{ maxWidth: 840 }}>
@@ -27,7 +33,7 @@ export default function FilterButtonPage() {
         Filter Button
       </h1>
       <p style={{ fontSize: typography.fontSize.md, color: "var(--text-secondary)", marginBottom: spacing.primitive[8], lineHeight: 1.7 }}>
-        콘텐츠 필터링을 위한 컴팩트한 선택 버튼입니다. 라벨과 트레일링 쉐브론으로 구성됩니다.
+        콘텐츠 필터링을 위한 컴팩트한 선택 버튼입니다. 클릭하면 드롭다운 메뉴가 열려 아이템을 선택할 수 있습니다.
       </p>
 
       <FilterButtonPlayground />
@@ -44,17 +50,21 @@ export default function FilterButtonPage() {
 function FilterButtonPlayground() {
   const [variant, setVariant] = useState<FilterButtonVariant>('filled');
   const [size, setSize] = useState<FilterButtonSize>('medium');
-  const [active, setActive] = useState(false);
-  const [expanded, setExpanded] = useState(false);
+  const [selectedValue, setSelectedValue] = useState<string | undefined>(undefined);
 
   const generateCode = () => {
     const props: string[] = [];
     if (variant !== 'filled') props.push(`variant="${variant}"`);
     if (size !== 'medium') props.push(`size="${size}"`);
-    if (active) props.push('active');
-    if (expanded) props.push('expanded');
-    const propsStr = props.length > 0 ? `\n  ${props.join('\n  ')}\n` : ' ';
-    return `<FilterButton${propsStr.length > 1 ? propsStr : ' '}onClick={() => {}}>
+    props.push(`items={[
+    { label: 'Menu item 1', value: '1' },
+    { label: 'Menu item 2', value: '2' },
+    { label: 'Menu item 3', value: '3' },
+  ]}`);
+    props.push(`value={selected}`);
+    props.push(`onSelect={setSelected}`);
+    const propsStr = `\n  ${props.join('\n  ')}\n`;
+    return `<FilterButton${propsStr}>
   카테고리
 </FilterButton>`;
   };
@@ -83,9 +93,9 @@ function FilterButtonPlayground() {
             <FilterButton
               variant={variant}
               size={size}
-              active={active}
-              expanded={expanded}
-              onClick={() => setExpanded(e => !e)}
+              items={sampleItems}
+              value={selectedValue}
+              onSelect={setSelectedValue}
             >
               카테고리
             </FilterButton>
@@ -136,24 +146,30 @@ function FilterButtonPlayground() {
                 value={size}
                 onChange={(v) => setSize(v as FilterButtonSize)}
               />
-              <RadioGroup
-                label="Active"
-                options={[
-                  { value: 'false', label: 'Off' },
-                  { value: 'true', label: 'On' },
-                ]}
-                value={active ? 'true' : 'false'}
-                onChange={(v) => setActive(v === 'true')}
-              />
-              <RadioGroup
-                label="Expanded"
-                options={[
-                  { value: 'false', label: 'Off' },
-                  { value: 'true', label: 'On' },
-                ]}
-                value={expanded ? 'true' : 'false'}
-                onChange={(v) => setExpanded(v === 'true')}
-              />
+              <div style={{ display: 'flex', flexDirection: 'column', gap: spacing.primitive[2] }}>
+                <span style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.medium, color: 'var(--text-primary)' }}>
+                  Selected
+                </span>
+                <span style={{ fontSize: typography.fontSize.compact, color: 'var(--text-secondary)' }}>
+                  {selectedValue ? sampleItems.find(i => i.value === selectedValue)?.label : '(none)'}
+                </span>
+                {selectedValue && (
+                  <button
+                    onClick={() => setSelectedValue(undefined)}
+                    style={{
+                      fontSize: typography.fontSize.compact,
+                      color: 'var(--content-brand-default)',
+                      background: 'none',
+                      border: 'none',
+                      cursor: 'pointer',
+                      padding: 0,
+                      textAlign: 'left',
+                    }}
+                  >
+                    Reset
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -207,8 +223,7 @@ function DesignContent() {
       <Section title="Overview">
         <p style={{ fontSize: typography.fontSize.sm, color: 'var(--text-secondary)', lineHeight: 1.7 }}>
           <InlineCode>FilterButton</InlineCode>은 콘텐츠 목록을 필터링하거나 정렬 기준을 선택하는 데 사용하는
-          컴팩트한 선택 버튼입니다. 라벨 텍스트와 트레일링 쉐브론 아이콘으로 구성되며,
-          활성 상태와 드롭다운 열림 상태를 시각적으로 표현합니다.
+          컴팩트한 선택 버튼입니다. 클릭하면 드롭다운 메뉴가 열리며, 아이템을 선택하면 버튼 라벨이 변경됩니다.
           복수 선택 필터에는 <InlineCode>Chip</InlineCode>을, 배타적 뷰 전환에는 <InlineCode>SegmentedControl</InlineCode>을 사용하세요.
         </p>
       </Section>
@@ -225,13 +240,13 @@ function DesignContent() {
         }}>
           <svg width="420" height="100" viewBox="0 0 420 100">
             {/* Button container */}
-            <rect x="130" y="30" width="160" height="40" rx="8" fill="var(--surface-brand-secondary)" />
+            <rect x="130" y="30" width="160" height="40" rx="8" fill="var(--surface-base-alternative)" stroke="var(--border-solid-default)" strokeWidth="1" />
 
             {/* Label text */}
-            <text x="182" y="55" textAnchor="middle" fill="var(--content-brand-default)" fontSize={typography.fontSize.sm} fontWeight={typography.fontWeight.medium}>카테고리</text>
+            <text x="182" y="55" textAnchor="middle" fill="var(--content-base-default)" fontSize={typography.fontSize.sm} fontWeight={typography.fontWeight.medium}>카테고리</text>
 
-            {/* Chevron icon (simplified down arrow) */}
-            <polyline points="256,46 263,54 270,46" fill="none" stroke="var(--content-brand-default)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            {/* Chevron icon */}
+            <polyline points="256,46 263,54 270,46" fill="none" stroke="var(--content-base-default)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
 
             {/* Arrow to container */}
             <line x1="100" y1="50" x2="129" y2="50" stroke="var(--content-base-default)" strokeWidth="1.5" />
@@ -277,14 +292,12 @@ function DesignContent() {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: spacing.primitive[4] }}>
           <VariantCard name="Filled" description="채워진 배경 스타일 (기본값). 단독 또는 소수 필터에 적합합니다.">
             <div style={{ display: 'flex', gap: spacing.primitive[2] }}>
-              <FilterButton variant="filled" onClick={() => {}}>카테고리</FilterButton>
-              <FilterButton variant="filled" active onClick={() => {}}>활성 필터</FilterButton>
+              <FilterButton variant="filled">카테고리</FilterButton>
             </div>
           </VariantCard>
           <VariantCard name="Outlined" description="테두리만 있는 투명 배경. 여러 필터를 나란히 배치할 때 적합합니다.">
             <div style={{ display: 'flex', gap: spacing.primitive[2] }}>
-              <FilterButton variant="outlined" onClick={() => {}}>카테고리</FilterButton>
-              <FilterButton variant="outlined" active onClick={() => {}}>활성 필터</FilterButton>
+              <FilterButton variant="outlined">카테고리</FilterButton>
             </div>
           </VariantCard>
         </div>
@@ -295,52 +308,19 @@ function DesignContent() {
         <PreviewBox>
           <div style={{ display: 'flex', gap: spacing.primitive[6], alignItems: 'center' }}>
             <div style={{ textAlign: 'center' }}>
-              <FilterButton size="small" onClick={() => {}}>필터</FilterButton>
-              <p style={{ fontSize: typography.fontSize['2xs'], color: 'var(--content-base-secondary)', marginTop: spacing.primitive[2] }}>Small · 32px</p>
+              <FilterButton size="small">필터</FilterButton>
+              <p style={{ fontSize: typography.fontSize['2xs'], color: 'var(--content-base-secondary)', marginTop: spacing.primitive[2] }}>Small</p>
             </div>
             <div style={{ textAlign: 'center' }}>
-              <FilterButton size="medium" onClick={() => {}}>필터</FilterButton>
-              <p style={{ fontSize: typography.fontSize['2xs'], color: 'var(--content-base-secondary)', marginTop: spacing.primitive[2] }}>Medium · 36px</p>
+              <FilterButton size="medium">필터</FilterButton>
+              <p style={{ fontSize: typography.fontSize['2xs'], color: 'var(--content-base-secondary)', marginTop: spacing.primitive[2] }}>Medium</p>
             </div>
             <div style={{ textAlign: 'center' }}>
-              <FilterButton size="large" onClick={() => {}}>필터</FilterButton>
-              <p style={{ fontSize: typography.fontSize['2xs'], color: 'var(--content-base-secondary)', marginTop: spacing.primitive[2] }}>Large · 40px</p>
+              <FilterButton size="large">필터</FilterButton>
+              <p style={{ fontSize: typography.fontSize['2xs'], color: 'var(--content-base-secondary)', marginTop: spacing.primitive[2] }}>Large</p>
             </div>
           </div>
         </PreviewBox>
-
-        <div style={{ overflow: 'auto', marginTop: spacing.primitive[5] }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: typography.fontSize.compact }}>
-            <thead>
-              <tr style={{ backgroundColor: 'var(--surface-base-alternative)' }}>
-                <th style={thStyle}>Size</th>
-                <th style={thStyle}>Height</th>
-                <th style={thStyle}>Font Size</th>
-                <th style={thStyle}>Padding X</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style={trBorder}>
-                <td style={tdStyle}>Small</td>
-                <td style={tdMono}>32px</td>
-                <td style={tdMono}>12px (xs)</td>
-                <td style={tdMono}>10px</td>
-              </tr>
-              <tr style={trBorder}>
-                <td style={tdStyle}>Medium <span style={{ fontSize: typography.fontSize['2xs'], color: 'var(--text-tertiary)' }}>(기본)</span></td>
-                <td style={tdMono}>36px</td>
-                <td style={tdMono}>14px (sm)</td>
-                <td style={tdMono}>12px</td>
-              </tr>
-              <tr>
-                <td style={tdStyle}>Large</td>
-                <td style={tdMono}>40px</td>
-                <td style={tdMono}>16px (md)</td>
-                <td style={tdMono}>14px</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
       </Section>
 
       {/* 5. States */}
@@ -352,23 +332,20 @@ function DesignContent() {
         <PreviewBox>
           <div style={{ display: 'flex', gap: spacing.primitive[5], flexWrap: 'wrap', alignItems: 'flex-end' }}>
             <div style={{ textAlign: 'center' }}>
-              <FilterButton onClick={() => {}}>기본</FilterButton>
+              <FilterButton>기본</FilterButton>
               <p style={{ fontSize: typography.fontSize['2xs'], color: 'var(--content-base-secondary)', marginTop: spacing.primitive[2] }}>Default</p>
             </div>
             <div style={{ textAlign: 'center' }}>
-              <FilterButton active onClick={() => {}}>선택됨</FilterButton>
-              <p style={{ fontSize: typography.fontSize['2xs'], color: 'var(--content-base-secondary)', marginTop: spacing.primitive[2] }}>Active</p>
+              <FilterButton
+                items={[{ label: '전자제품', value: 'electronics' }]}
+                value="electronics"
+              >
+                카테고리
+              </FilterButton>
+              <p style={{ fontSize: typography.fontSize['2xs'], color: 'var(--content-base-secondary)', marginTop: spacing.primitive[2] }}>Selected</p>
             </div>
             <div style={{ textAlign: 'center' }}>
-              <FilterButton active activeLabel="전자제품" onClick={() => {}}>카테고리</FilterButton>
-              <p style={{ fontSize: typography.fontSize['2xs'], color: 'var(--content-base-secondary)', marginTop: spacing.primitive[2] }}>Active + Label</p>
-            </div>
-            <div style={{ textAlign: 'center' }}>
-              <FilterButton expanded onClick={() => {}}>열림</FilterButton>
-              <p style={{ fontSize: typography.fontSize['2xs'], color: 'var(--content-base-secondary)', marginTop: spacing.primitive[2] }}>Expanded</p>
-            </div>
-            <div style={{ textAlign: 'center' }}>
-              <FilterButton disabled onClick={() => {}}>비활성</FilterButton>
+              <FilterButton disabled>비활성</FilterButton>
               <p style={{ fontSize: typography.fontSize['2xs'], color: 'var(--content-base-secondary)', marginTop: spacing.primitive[2] }}>Disabled</p>
             </div>
           </div>
@@ -376,8 +353,8 @@ function DesignContent() {
 
         <Subsection title="Interaction States">
           <p style={{ fontSize: typography.fontSize.sm, color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: spacing.primitive[4] }}>
-            <InlineCode>active</InlineCode> 상태에서는 filled 변형에서 반전 배경, outlined 변형에서 브랜드 틴트 배경이 적용됩니다.
-            <InlineCode>expanded</InlineCode> 상태에서는 쉐브론이 180도 회전하여 드롭다운이 열렸음을 나타냅니다.
+            클릭하면 드롭다운 메뉴가 열리며 셰브론이 180도 회전합니다.
+            값을 선택하면 버튼 라벨이 선택된 아이템의 라벨로 변경됩니다.
           </p>
           <div style={{
             display: 'grid',
@@ -387,11 +364,10 @@ function DesignContent() {
             backgroundColor: 'var(--surface-base-default)',
             borderRadius: radius.primitive.md,
           }}>
-            <StateCard label="Default" sublabel="기본 상태" bgColor="var(--surface-base-container)" textColor="var(--content-base-default)" />
-            <StateCard label="Hover" sublabel="마우스 오버" bgColor="var(--surface-base-containerPressed)" textColor="var(--content-base-default)" />
-            <StateCard label="Active" sublabel="선택됨" bgColor="var(--content-base-default)" textColor="var(--content-base-onColor)" />
-            <StateCard label="Expanded" sublabel="드롭다운 열림" bgColor="var(--surface-base-container)" textColor="var(--content-base-default)" showChevronUp />
-            <StateCard label="Disabled" sublabel="비활성" bgColor="var(--surface-base-container)" textColor="var(--content-base-default)" opacity={0.4} />
+            <StateCard label="Default" sublabel="기본 상태" bgColor="var(--surface-base-alternative)" textColor="var(--content-base-default)" />
+            <StateCard label="Hover" sublabel="마우스 오버" bgColor="var(--surface-base-defaultPressed)" textColor="var(--content-base-default)" />
+            <StateCard label="Open" sublabel="메뉴 열림" bgColor="var(--surface-base-defaultPressed)" textColor="var(--content-base-default)" showChevronUp />
+            <StateCard label="Disabled" sublabel="비활성" bgColor="var(--surface-base-alternative)" textColor="var(--content-base-default)" opacity={0.4} />
           </div>
         </Subsection>
       </Section>
@@ -412,9 +388,9 @@ function DesignContent() {
                   <div style={{ display: 'flex', flexDirection: 'column', gap: spacing.primitive[3] }}>
                     <p style={{ fontSize: typography.fontSize.compact, color: 'var(--text-secondary)', margin: 0 }}>필터 유형이 많으면 카테고리별로 분리</p>
                     <div style={{ display: 'flex', gap: spacing.primitive[2], flexWrap: 'wrap' }}>
-                      <FilterButton size="small" onClick={() => {}}>카테고리</FilterButton>
-                      <FilterButton size="small" onClick={() => {}}>브랜드</FilterButton>
-                      <FilterButton size="small" onClick={() => {}}>가격</FilterButton>
+                      <FilterButton size="small">카테고리</FilterButton>
+                      <FilterButton size="small">브랜드</FilterButton>
+                      <FilterButton size="small">가격</FilterButton>
                     </div>
                   </div>
                 </DoCard>
@@ -423,7 +399,7 @@ function DesignContent() {
                     <p style={{ fontSize: typography.fontSize.compact, color: 'var(--text-secondary)', margin: 0 }}>폰트 스타일이나 아이콘 변경 금지</p>
                     <div style={{ display: 'flex', gap: spacing.primitive[2] }}>
                       <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '6px 12px', borderRadius: 8, backgroundColor: 'var(--surface-base-container)', fontSize: 12, fontStyle: 'italic', fontWeight: 'bold' }}>
-                        카테고리 ★
+                        카테고리
                       </div>
                     </div>
                   </div>
@@ -443,8 +419,14 @@ function DesignContent() {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: spacing.primitive[4] }}>
                 <DoCard>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: spacing.primitive[3] }}>
-                    <p style={{ fontSize: typography.fontSize.compact, color: 'var(--text-secondary)', margin: 0 }}>필터가 유추 가능하면 기본값 선택 추천</p>
-                    <FilterButton size="small" active activeLabel="최신순" onClick={() => {}}>정렬</FilterButton>
+                    <p style={{ fontSize: typography.fontSize.compact, color: 'var(--text-secondary)', margin: 0 }}>items를 사용하여 드롭다운 메뉴 제공</p>
+                    <FilterButton
+                      size="small"
+                      items={[{ label: '최신순', value: 'latest' }, { label: '인기순', value: 'popular' }]}
+                      value="latest"
+                    >
+                      정렬
+                    </FilterButton>
                   </div>
                 </DoCard>
                 <DontCard>
@@ -452,7 +434,7 @@ function DesignContent() {
                     <p style={{ fontSize: typography.fontSize.compact, color: 'var(--text-secondary)', margin: 0 }}>과도하게 많은 필터를 한 줄에 배치</p>
                     <div style={{ display: 'flex', gap: 4, flexWrap: 'nowrap', overflow: 'hidden' }}>
                       {['카테고리', '브랜드', '가격', '배송', '할인', '평점'].map(label => (
-                        <FilterButton key={label} size="small" onClick={() => {}} style={{ flexShrink: 0 }}>{label}</FilterButton>
+                        <FilterButton key={label} size="small" style={{ flexShrink: 0 }}>{label}</FilterButton>
                       ))}
                     </div>
                   </div>
@@ -460,7 +442,7 @@ function DesignContent() {
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: spacing.primitive[4], marginTop: spacing.primitive[2] }}>
                 <p style={{ fontSize: typography.fontSize.compact, color: 'var(--content-success-default)', margin: 0 }}>
-                  <span style={{ fontWeight: typography.fontWeight.bold }}>Do</span> 자주 사용하는 필터는 기본 선택 상태를 제공합니다
+                  <span style={{ fontWeight: typography.fontWeight.bold }}>Do</span> items prop으로 선택 메뉴를 제공합니다
                 </p>
                 <p style={{ fontSize: typography.fontSize.compact, color: 'var(--content-error-default)', margin: 0, fontStyle: 'italic' }}>
                   <span style={{ fontWeight: typography.fontWeight.bold }}>Don&apos;t</span> 한 줄에 6개 이상의 FilterButton을 배치하지 않습니다
@@ -478,47 +460,6 @@ function DesignContent() {
           FilterButton 컴포넌트에 적용된 Foundation 기반 디자인 토큰입니다.
         </p>
 
-        <Subsection title="Size 토큰">
-          <div style={{ overflow: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: typography.fontSize.compact }}>
-              <thead>
-                <tr style={{ backgroundColor: 'var(--surface-base-alternative)' }}>
-                  <th style={thStyle}>Property</th>
-                  <th style={thStyle}>Small</th>
-                  <th style={thStyle}>Medium</th>
-                  <th style={thStyle}>Large</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr style={trBorder}>
-                  <td style={tdStyle}>Height</td>
-                  <td style={tdMono}>32px</td>
-                  <td style={tdMono}>36px</td>
-                  <td style={tdMono}>40px</td>
-                </tr>
-                <tr style={trBorder}>
-                  <td style={tdStyle}>Padding X</td>
-                  <td style={tdMono}>10px</td>
-                  <td style={tdMono}>12px</td>
-                  <td style={tdMono}>14px</td>
-                </tr>
-                <tr style={trBorder}>
-                  <td style={tdStyle}>Font Size</td>
-                  <td style={tdMono}>12px (xs)</td>
-                  <td style={tdMono}>14px (sm)</td>
-                  <td style={tdMono}>16px (md)</td>
-                </tr>
-                <tr>
-                  <td style={tdStyle}>Icon Size</td>
-                  <td style={tdMono}>14px</td>
-                  <td style={tdMono}>16px</td>
-                  <td style={tdMono}>18px</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </Subsection>
-
         <Subsection title="Color 토큰">
           <div style={{ overflow: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: typography.fontSize.compact }}>
@@ -532,28 +473,23 @@ function DesignContent() {
               <tbody>
                 <tr style={trBorder}>
                   <td style={tdStyle}>Default BG</td>
-                  <td style={tdMono}>surface.base.container</td>
+                  <td style={tdMono}>surface.base.alternative</td>
                   <td style={tdMono}>transparent</td>
                 </tr>
                 <tr style={trBorder}>
+                  <td style={tdStyle}>Hover / Open BG</td>
+                  <td style={tdMono}>surface.base.defaultPressed</td>
+                  <td style={tdMono}>fill.alternative</td>
+                </tr>
+                <tr style={trBorder}>
                   <td style={tdStyle}>Default Border</td>
-                  <td style={tdMono}>—</td>
-                  <td style={tdMono}>border.solid.alternative</td>
+                  <td style={tdMono}>-</td>
+                  <td style={tdMono}>border.solid.default</td>
                 </tr>
                 <tr style={trBorder}>
-                  <td style={tdStyle}>Default Text</td>
+                  <td style={tdStyle}>Text</td>
                   <td style={tdMono}>content.base.default</td>
                   <td style={tdMono}>content.base.default</td>
-                </tr>
-                <tr style={trBorder}>
-                  <td style={tdStyle}>Active BG</td>
-                  <td style={tdMono}>content.base.default (반전)</td>
-                  <td style={tdMono}>surface.brand.secondary</td>
-                </tr>
-                <tr style={trBorder}>
-                  <td style={tdStyle}>Active Text</td>
-                  <td style={tdMono}>content.base.onColor</td>
-                  <td style={tdMono}>content.brand.default</td>
                 </tr>
                 <tr>
                   <td style={tdStyle}>Disabled Opacity</td>
@@ -564,38 +500,12 @@ function DesignContent() {
             </table>
           </div>
         </Subsection>
-
-        <Subsection title="Motion 토큰">
-          <div style={{ overflow: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: typography.fontSize.compact }}>
-              <thead>
-                <tr style={{ backgroundColor: 'var(--surface-base-alternative)' }}>
-                  <th style={thStyle}>Property</th>
-                  <th style={thStyle}>Token</th>
-                  <th style={thStyle}>Value</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr style={trBorder}>
-                  <td style={tdStyle}>Background</td>
-                  <td style={tdStyle}><InlineCode>duration.fast</InlineCode> + <InlineCode>easing.easeOut</InlineCode></td>
-                  <td style={tdMono}>150ms ease-out</td>
-                </tr>
-                <tr>
-                  <td style={tdStyle}>Chevron Rotation</td>
-                  <td style={tdStyle}><InlineCode>duration.normal</InlineCode> + <InlineCode>easing.easeOut</InlineCode></td>
-                  <td style={tdMono}>200ms ease-out</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </Subsection>
       </Section>
 
       {/* 8. Accessibility */}
       <Section title="Accessibility">
         <p style={{ fontSize: typography.fontSize.sm, color: 'var(--text-secondary)', marginBottom: spacing.primitive[4], lineHeight: 1.7 }}>
-          FilterButton은 <InlineCode>role=&quot;button&quot;</InlineCode>과 <InlineCode>aria-expanded</InlineCode> 속성으로
+          FilterButton은 <InlineCode>aria-expanded</InlineCode>와 <InlineCode>aria-haspopup=&quot;listbox&quot;</InlineCode> 속성으로
           드롭다운 연계 패턴을 스크린 리더에 전달합니다.
         </p>
 
@@ -613,16 +523,16 @@ function DesignContent() {
                 <td style={{ ...tdMono, borderBottom: undefined }}>드롭다운 열림/닫힘 상태를 보조 기술에 전달</td>
               </tr>
               <tr style={trBorder}>
-                <td style={tdStyle}><InlineCode>aria-pressed</InlineCode></td>
-                <td style={{ ...tdMono, borderBottom: undefined }}>active 선택 상태를 스크린 리더에 전달</td>
+                <td style={tdStyle}><InlineCode>aria-haspopup</InlineCode></td>
+                <td style={{ ...tdMono, borderBottom: undefined }}>listbox 역할의 팝업이 있음을 전달</td>
               </tr>
               <tr style={trBorder}>
-                <td style={tdStyle}><InlineCode>aria-disabled</InlineCode></td>
-                <td style={{ ...tdMono, borderBottom: undefined }}>비활성 상태를 보조 기술에 전달</td>
+                <td style={tdStyle}><InlineCode>role=&quot;listbox&quot;</InlineCode></td>
+                <td style={{ ...tdMono, borderBottom: undefined }}>드롭다운 메뉴의 역할</td>
               </tr>
               <tr>
-                <td style={tdStyle}><InlineCode>aria-label</InlineCode></td>
-                <td style={tdMono}>activeLabel이 있을 때 현재 선택값을 텍스트로 제공</td>
+                <td style={tdStyle}><InlineCode>role=&quot;option&quot;</InlineCode></td>
+                <td style={tdMono}>각 메뉴 아이템의 역할 (aria-selected로 선택 상태 표시)</td>
               </tr>
             </tbody>
           </table>
@@ -644,11 +554,11 @@ function DesignContent() {
                 </tr>
                 <tr style={trBorder}>
                   <td style={tdStyle}><kbd style={kbdStyle}>Enter</kbd> / <kbd style={kbdStyle}>Space</kbd></td>
-                  <td style={tdMono}>버튼 클릭 (드롭다운 열기/닫기 또는 활성 토글)</td>
+                  <td style={tdMono}>드롭다운 열기/닫기</td>
                 </tr>
                 <tr>
                   <td style={tdStyle}><kbd style={kbdStyle}>Esc</kbd></td>
-                  <td style={tdMono}>드롭다운이 열려 있을 때 닫기</td>
+                  <td style={tdMono}>드롭다운 닫기 (버튼에 포커스 복귀)</td>
                 </tr>
               </tbody>
             </table>
@@ -660,12 +570,12 @@ function DesignContent() {
             <PrincipleCard
               number={1}
               title="aria-expanded로 드롭다운 상태 전달"
-              desc="expanded prop이 true일 때 aria-expanded='true'가 설정됩니다. 연결된 드롭다운 패널은 aria-controls로 연결하세요."
+              desc="메뉴가 열리면 aria-expanded='true'가 설정됩니다. ESC 키로 닫을 수 있으며, 포커스가 버튼으로 복귀합니다."
             />
             <PrincipleCard
               number={2}
-              title="활성 상태를 텍스트로도 전달"
-              desc="activeLabel을 사용할 때 스크린 리더는 현재 선택된 값을 읽을 수 있습니다. 시각적 색상 변화만으로 상태를 전달하지 않습니다."
+              title="선택 상태를 텍스트로 전달"
+              desc="값이 선택되면 버튼 라벨이 선택된 아이템의 라벨로 변경되어 시각적, 텍스트적으로 현재 상태를 전달합니다."
             />
             <PrincipleCard
               number={3}
@@ -695,13 +605,8 @@ function DesignContent() {
               </tr>
               <tr style={trBorder}>
                 <td style={{ ...tdStyle, fontWeight: typography.fontWeight.medium }}>SegmentedControl</td>
-                <td style={{ ...tdStyle, color: 'var(--text-secondary)' }}>배타적 뷰/모드 전환 (2~4 옵션)</td>
-                <td style={{ ...tdStyle, color: 'var(--text-secondary)' }}>SegmentedControl은 즉시 적용, FilterButton은 드롭다운 선택 후 적용</td>
-              </tr>
-              <tr>
-                <td style={{ ...tdStyle, fontWeight: typography.fontWeight.medium }}>Select</td>
-                <td style={{ ...tdStyle, color: 'var(--text-secondary)' }}>폼 내 단일 드롭다운 선택</td>
-                <td style={{ ...tdStyle, color: 'var(--text-secondary)' }}>Select는 폼 제출 값, FilterButton은 콘텐츠 필터링용</td>
+                <td style={{ ...tdStyle, color: 'var(--text-secondary)' }}>배타적 뷰/모드 전환 (2-4 옵션)</td>
+                <td style={{ ...tdStyle, color: 'var(--text-secondary)' }}>SegmentedControl은 즉시 적용, FilterButton은 드롭다운 선택</td>
               </tr>
             </tbody>
           </table>
@@ -759,110 +664,96 @@ function WebContent() {
 
       {/* 2. Import */}
       <Section title="Import">
-        <CodeBlock code={`import { FilterButton } from '@baerae-zkap/design-system';`} />
+        <CodeBlock code={`import { FilterButton } from '@baerae-zkap/design-system';
+import type { FilterItem } from '@baerae-zkap/design-system';`} />
       </Section>
 
       {/* 3. Basic Usage */}
       <Section title="Basic Usage">
         <PreviewBox>
           <div style={{ display: 'flex', gap: spacing.primitive[3] }}>
-            <BasicFilledDemo />
-            <BasicOutlinedDemo />
+            <BasicDemo />
           </div>
         </PreviewBox>
-        <CodeBlock code={`// Filled (기본값)
-<FilterButton onClick={handleClick}>
-  카테고리
-</FilterButton>
+        <CodeBlock code={`const items = [
+  { label: '최신순', value: 'latest' },
+  { label: '인기순', value: 'popular' },
+  { label: '가격순', value: 'price' },
+];
 
-// Outlined
-<FilterButton variant="outlined" onClick={handleClick}>
-  카테고리
+const [selected, setSelected] = useState<string>();
+
+<FilterButton
+  items={items}
+  value={selected}
+  onSelect={setSelected}
+>
+  정렬
 </FilterButton>`} />
       </Section>
 
-      {/* 4. Active State */}
-      <Section title="Active State">
-        <p style={{ fontSize: typography.fontSize.sm, color: 'var(--text-secondary)', marginBottom: spacing.primitive[4], lineHeight: 1.7 }}>
-          <InlineCode>active</InlineCode> prop으로 선택 상태를 표현합니다.
-          <InlineCode>activeLabel</InlineCode>을 제공하면 활성 시 라벨 텍스트를 대체하여 선택된 값을 보여줄 수 있습니다.
-        </p>
+      {/* 4. Variants */}
+      <Section title="Variants">
         <PreviewBox>
-          <div style={{ display: 'flex', gap: spacing.primitive[3], alignItems: 'center' }}>
-            <ActiveDemo />
+          <div style={{ display: 'flex', gap: spacing.primitive[3] }}>
+            <FilterButton variant="filled" items={sampleItems}>Filled</FilterButton>
+            <FilterButton variant="outlined" items={sampleItems}>Outlined</FilterButton>
           </div>
         </PreviewBox>
-        <CodeBlock code={`const [active, setActive] = useState(false);
-
-// active 상태만
-<FilterButton
-  active={active}
-  onClick={() => setActive(!active)}
->
-  카테고리
-</FilterButton>
-
-// active + activeLabel (선택값 표시)
-<FilterButton
-  active={active}
-  activeLabel="전자제품"
-  onClick={() => setActive(!active)}
->
-  카테고리
-</FilterButton>`} />
+        <CodeBlock code={`<FilterButton variant="filled" items={items}>Filled</FilterButton>
+<FilterButton variant="outlined" items={items}>Outlined</FilterButton>`} />
       </Section>
 
       {/* 5. Sizes */}
       <Section title="Sizes">
         <PreviewBox>
           <div style={{ display: 'flex', gap: spacing.primitive[4], alignItems: 'center' }}>
-            <FilterButton size="small" onClick={() => {}}>Small</FilterButton>
-            <FilterButton size="medium" onClick={() => {}}>Medium</FilterButton>
-            <FilterButton size="large" onClick={() => {}}>Large</FilterButton>
+            <FilterButton size="small" items={sampleItems}>Small</FilterButton>
+            <FilterButton size="medium" items={sampleItems}>Medium</FilterButton>
+            <FilterButton size="large" items={sampleItems}>Large</FilterButton>
           </div>
         </PreviewBox>
-        <CodeBlock code={`<FilterButton size="small" onClick={handleClick}>Small</FilterButton>
-<FilterButton size="medium" onClick={handleClick}>Medium</FilterButton>
-<FilterButton size="large" onClick={handleClick}>Large</FilterButton>`} />
+        <CodeBlock code={`<FilterButton size="small" items={items}>Small</FilterButton>
+<FilterButton size="medium" items={items}>Medium</FilterButton>
+<FilterButton size="large" items={items}>Large</FilterButton>`} />
       </Section>
 
-      {/* 6. With Expanded */}
-      <Section title="With Expanded">
+      {/* 6. Controlled Selection */}
+      <Section title="Controlled Selection">
         <p style={{ fontSize: typography.fontSize.sm, color: 'var(--text-secondary)', marginBottom: spacing.primitive[4], lineHeight: 1.7 }}>
-          <InlineCode>expanded</InlineCode> prop을 사용하여 드롭다운 열림 상태를 나타냅니다.
-          쉐브론 아이콘이 180도 회전합니다.
+          <InlineCode>value</InlineCode>와 <InlineCode>onSelect</InlineCode>를 사용하여 선택 상태를 제어합니다.
+          값이 선택되면 버튼 라벨이 해당 아이템의 라벨로 변경됩니다.
         </p>
         <PreviewBox>
-          <ExpandedDemo />
+          <ControlledDemo />
         </PreviewBox>
-        <CodeBlock code={`const [open, setOpen] = useState(false);
+        <CodeBlock code={`const [selected, setSelected] = useState<string>();
 
 <FilterButton
-  expanded={open}
-  onClick={() => setOpen(!open)}
+  items={[
+    { label: '최신순', value: 'latest' },
+    { label: '인기순', value: 'popular' },
+    { label: '가격순', value: 'price' },
+  ]}
+  value={selected}
+  onSelect={setSelected}
 >
-  카테고리
-</FilterButton>
-
-{open && (
-  <div>
-    {/* 드롭다운 패널 */}
-  </div>
-)}`} />
+  정렬
+</FilterButton>`} />
       </Section>
 
       {/* 7. API Reference */}
       <Section title="API Reference">
         <PropsTable
           props={[
-            { name: 'children', type: 'ReactNode', required: true, description: '라벨 텍스트' },
-            { name: 'variant', type: "'filled' | 'outlined'", required: false, defaultVal: "'filled'", description: "버튼 스타일 — filled(채워진 배경), outlined(테두리 배경)" },
-            { name: 'size', type: "'small' | 'medium' | 'large'", required: false, defaultVal: "'medium'", description: '버튼 크기 — 높이 32/36/40px' },
-            { name: 'active', type: 'boolean', required: false, defaultVal: 'false', description: '선택/활성 상태' },
-            { name: 'activeLabel', type: 'ReactNode', required: false, description: '활성 시 표시할 라벨 (children 대체). 선택된 값을 표시할 때 사용' },
-            { name: 'expanded', type: 'boolean', required: false, defaultVal: 'false', description: '드롭다운 열림 상태 — 쉐브론 아이콘 180도 회전' },
-            { name: 'disabled', type: 'boolean', required: false, defaultVal: 'false', description: '비활성 상태 — 클릭 불가, opacity 감소' },
-            { name: 'onClick', type: '() => void', required: false, description: '클릭 핸들러' },
+            { name: 'children', type: 'ReactNode', required: true, description: '라벨 텍스트 (값 미선택 시 표시)' },
+            { name: 'variant', type: "'filled' | 'outlined'", required: false, defaultVal: "'filled'", description: "버튼 스타일 -- filled(채워진 배경), outlined(테두리 배경)" },
+            { name: 'size', type: "'small' | 'medium' | 'large'", required: false, defaultVal: "'medium'", description: '버튼 크기' },
+            { name: 'items', type: 'FilterItem[]', required: false, description: '드롭다운 메뉴 아이템 목록 ({ label, value })' },
+            { name: 'value', type: 'string', required: false, description: '선택된 값 (controlled). items 내 value와 매칭' },
+            { name: 'onSelect', type: '(value: string) => void', required: false, description: '아이템 선택 시 콜백' },
+            { name: 'disabled', type: 'boolean', required: false, defaultVal: 'false', description: '비활성 상태' },
+            { name: 'onClick', type: '() => void', required: false, description: '버튼 클릭 핸들러 (드롭다운 토글과 별도)' },
             { name: 'style', type: 'CSSProperties', required: false, description: '인라인 스타일 오버라이드' },
           ]}
         />
@@ -873,45 +764,38 @@ function WebContent() {
 
 // ─── Demo Components ──────────────────────────────────────────────────
 
-function BasicFilledDemo() {
-  const [active, setActive] = useState(false);
+function BasicDemo() {
+  const [selected, setSelected] = useState<string | undefined>(undefined);
+  const items = [
+    { label: '최신순', value: 'latest' },
+    { label: '인기순', value: 'popular' },
+    { label: '가격순', value: 'price' },
+  ];
   return (
-    <FilterButton variant="filled" active={active} onClick={() => setActive(a => !a)}>
-      카테고리
+    <FilterButton items={items} value={selected} onSelect={setSelected}>
+      정렬
     </FilterButton>
   );
 }
 
-function BasicOutlinedDemo() {
-  const [active, setActive] = useState(false);
+function ControlledDemo() {
+  const [selected, setSelected] = useState<string | undefined>(undefined);
+  const items = [
+    { label: '최신순', value: 'latest' },
+    { label: '인기순', value: 'popular' },
+    { label: '가격순', value: 'price' },
+  ];
   return (
-    <FilterButton variant="outlined" active={active} onClick={() => setActive(a => !a)}>
-      카테고리
-    </FilterButton>
-  );
-}
-
-function ActiveDemo() {
-  const [active1, setActive1] = useState(false);
-  const [active2, setActive2] = useState(true);
-  return (
-    <>
-      <FilterButton active={active1} onClick={() => setActive1(a => !a)}>
-        카테고리
+    <div style={{ display: 'flex', gap: spacing.primitive[3], alignItems: 'center' }}>
+      <FilterButton items={items} value={selected} onSelect={setSelected}>
+        정렬
       </FilterButton>
-      <FilterButton active={active2} activeLabel="전자제품" onClick={() => setActive2(a => !a)}>
-        카테고리
-      </FilterButton>
-    </>
-  );
-}
-
-function ExpandedDemo() {
-  const [open, setOpen] = useState(false);
-  return (
-    <FilterButton expanded={open} onClick={() => setOpen(o => !o)}>
-      카테고리
-    </FilterButton>
+      {selected && (
+        <span style={{ fontSize: typography.fontSize.sm, color: 'var(--text-secondary)' }}>
+          선택: {items.find(i => i.value === selected)?.label}
+        </span>
+      )}
+    </div>
   );
 }
 
