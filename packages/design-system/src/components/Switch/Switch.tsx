@@ -38,19 +38,22 @@ export interface SwitchProps {
 const SIZE_CONFIG: Record<SwitchSize, {
   trackWidth: number;
   trackHeight: number;
-  thumbSize: number;
+  thumbSizeOn: number;
+  thumbSizeOff: number;
   thumbOffset: number;
 }> = {
   small: {
     trackWidth: 36,
     trackHeight: 20,
-    thumbSize: 14,
+    thumbSizeOn: 14,
+    thumbSizeOff: 12,
     thumbOffset: 3,
   },
   medium: {
     trackWidth: 44,
     trackHeight: 24,
-    thumbSize: 18,
+    thumbSizeOn: 18,
+    thumbSizeOff: 14,
     thumbOffset: 3,
   },
 };
@@ -94,8 +97,9 @@ export const Switch = React.forwardRef<HTMLLabelElement, SwitchProps>(
     );
 
     // ── Size config ──────────────────────────────────────────────────
-    const { trackWidth, trackHeight, thumbSize, thumbOffset } = SIZE_CONFIG[size];
-    const thumbTravel = trackWidth - thumbSize - thumbOffset * 2;
+    const { trackWidth, trackHeight, thumbSizeOn, thumbSizeOff, thumbOffset } = SIZE_CONFIG[size];
+    const thumbSize = isChecked ? thumbSizeOn : thumbSizeOff;
+    const thumbTravel = trackWidth - thumbSizeOn - thumbOffset * 2;
 
     // ── Styles ───────────────────────────────────────────────────────
     const hiddenInputStyle: CSSProperties = {
@@ -113,7 +117,7 @@ export const Switch = React.forwardRef<HTMLLabelElement, SwitchProps>(
 
     const labelStyle: CSSProperties = {
       display: 'inline-flex',
-      alignItems: 'flex-start',
+      alignItems: 'center',
       gap: spacing.primitive[3],
       cursor: disabled ? 'not-allowed' : 'pointer',
       opacity: disabled ? opacity.disabled : 1,
@@ -143,9 +147,11 @@ export const Switch = React.forwardRef<HTMLLabelElement, SwitchProps>(
       boxSizing: 'border-box',
     };
 
+    const thumbTop = (trackHeight - thumbSize) / 2;
     const thumbStyle: CSSProperties = {
       position: 'absolute',
       left: thumbOffset,
+      top: thumbTop,
       width: thumbSize,
       height: thumbSize,
       borderRadius: radius.primitive.full,
@@ -188,7 +194,6 @@ export const Switch = React.forwardRef<HTMLLabelElement, SwitchProps>(
               display: 'flex',
               flexDirection: 'column',
               gap: spacing.primitive[1],
-              paddingTop: size === 'medium' ? 2 : 0,
             }}
           >
             {label && (
