@@ -30,7 +30,6 @@ import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
 import { zIndex } from '../../tokens/general';
 import { duration, easing } from '../../tokens/motion';
-import { IconButton } from '../IconButton/IconButton';
 
 export type SnackbarPosition = 'bottom-center' | 'bottom-left' | 'bottom-right';
 
@@ -187,13 +186,6 @@ export function Snackbar({
     color: cssVarColors.inverse.content.default,
   };
 
-  const closeButtonWrapStyle: React.CSSProperties = {
-    flexShrink: 0,
-    display: 'flex',
-    alignItems: 'center',
-    marginRight: -spacing.primitive[1],
-    color: cssVarColors.inverse.content.secondary,
-  };
 
   return createPortal(
     <div style={wrapperStyle} aria-live="polite" aria-atomic="true">
@@ -218,17 +210,7 @@ export function Snackbar({
         )}
 
         {closable && (
-          <span style={closeButtonWrapStyle}>
-            <IconButton
-              variant="ghost"
-              size="small"
-              color="neutral"
-              aria-label="닫기"
-              onClick={onClose}
-            >
-              <CloseIcon />
-            </IconButton>
-          </span>
+          <SnackbarCloseButton onClick={onClose} />
         )}
       </div>
     </div>,
@@ -237,3 +219,47 @@ export function Snackbar({
 }
 
 Snackbar.displayName = 'Snackbar';
+
+// ─── Internal close button with inverse hover/press ──────────────────────────
+
+function SnackbarCloseButton({ onClick }: { onClick?: () => void }) {
+  const [hovered, setHovered] = useState(false);
+  const [pressed, setPressed] = useState(false);
+
+  const style: React.CSSProperties = {
+    flexShrink: 0,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 28,
+    height: 28,
+    padding: 0,
+    border: 'none',
+    borderRadius: radius.primitive.sm,
+    cursor: 'pointer',
+    color: cssVarColors.inverse.content.secondary,
+    backgroundColor: pressed
+      ? 'rgba(255,255,255,0.2)'
+      : hovered
+        ? 'rgba(255,255,255,0.1)'
+        : 'transparent',
+    transition: 'background-color 150ms ease, transform 150ms ease',
+    transform: pressed ? 'scale(0.92)' : undefined,
+    marginRight: -spacing.primitive[1],
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label="닫기"
+      style={style}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => { setHovered(false); setPressed(false); }}
+      onMouseDown={() => setPressed(true)}
+      onMouseUp={() => setPressed(false)}
+    >
+      <CloseIcon />
+    </button>
+  );
+}
