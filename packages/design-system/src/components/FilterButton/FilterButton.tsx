@@ -31,7 +31,7 @@ import { cssVarColors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
-import { opacity, borderWidth } from '../../tokens/general';
+import { opacity, borderWidth, zIndex } from '../../tokens/general';
 import { cssVarShadow } from '../../tokens/shadow';
 import { usePressable } from '../../utils/usePressable';
 
@@ -282,10 +282,10 @@ export const FilterButton = forwardRef<HTMLButtonElement, FilterButtonProps>(
       marginTop: spacing.primitive[1],
       minWidth: 160,
       backgroundColor: cssVarColors.surface.base.default,
-      border: `1px solid ${cssVarColors.border.solid.alternative}`,
+      border: `${borderWidth.default}px solid ${cssVarColors.border.solid.alternative}`,
       borderRadius: radius.primitive.lg,
       boxShadow: cssVarShadow.semantic.dropdown.default,
-      zIndex: 1000,
+      zIndex: zIndex.dropdown,
       overflow: 'hidden',
       padding: `${spacing.primitive[1]}px 0`,
     };
