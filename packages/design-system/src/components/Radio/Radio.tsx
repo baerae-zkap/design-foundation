@@ -203,8 +203,11 @@ export const Radio = React.forwardRef<HTMLLabelElement, RadioProps>(
       height: controlSize,
       borderRadius: radius.primitive.full,
       border: `${borderWidth.medium}px solid ${outerBorderColor}`,
-      backgroundColor: cssVarColors.surface.base.default,
+      backgroundColor: (isPressed || isHovered) && !isChecked
+        ? cssVarColors.surface.base.defaultPressed
+        : cssVarColors.surface.base.default,
       transition: transitions.all,
+      transform: isPressed && !isDisabled ? 'scale(0.97)' : undefined,
       flexShrink: 0,
       boxSizing: 'border-box',
     };
