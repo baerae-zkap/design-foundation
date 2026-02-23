@@ -39,6 +39,8 @@ export interface TextFieldProps {
   leadingIcon?: React.ReactNode;
   /** Icon element rendered on the right inside the input container */
   trailingIcon?: React.ReactNode;
+  /** Button element rendered on the right side, outside the input area but inside the container border */
+  trailingButton?: React.ReactNode;
   /** Accessible label when no visible label is provided */
   'aria-label'?: string;
   /** Input id — auto-generated if not provided */
@@ -76,6 +78,7 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
       required = false,
       leadingIcon,
       trailingIcon,
+      trailingButton,
       'aria-label': ariaLabel,
       id: idProp,
       name,
@@ -226,39 +229,47 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
           onMouseEnter={() => !disabled && setHovered(true)}
           onMouseLeave={() => setHovered(false)}
         >
-          {leadingIcon && (
-            <span aria-hidden="true" style={iconStyle}>
-              {leadingIcon}
-            </span>
-          )}
+          <div style={{ display: 'flex', alignItems: 'center', gap: spacing.primitive[2], flex: 1, minWidth: 0 }}>
+            {leadingIcon && (
+              <span aria-hidden="true" style={iconStyle}>
+                {leadingIcon}
+              </span>
+            )}
 
-          <input
-            ref={ref}
-            id={inputId}
-            type={type}
-            value={value}
-            defaultValue={defaultValue}
-            onChange={handleChange}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            placeholder={placeholder}
-            disabled={disabled}
-            required={required}
-            readOnly={readOnly}
-            name={name}
-            autoComplete={autoComplete}
-            maxLength={maxLength}
-            aria-label={!label ? ariaLabel : undefined}
-            aria-invalid={hasError || undefined}
-            aria-describedby={hasHelper ? helperId : undefined}
-            aria-disabled={disabled || undefined}
-            style={inputStyle}
-          />
+            <input
+              ref={ref}
+              id={inputId}
+              type={type}
+              value={value}
+              defaultValue={defaultValue}
+              onChange={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              placeholder={placeholder}
+              disabled={disabled}
+              required={required}
+              readOnly={readOnly}
+              name={name}
+              autoComplete={autoComplete}
+              maxLength={maxLength}
+              aria-label={!label ? ariaLabel : undefined}
+              aria-invalid={hasError || undefined}
+              aria-describedby={hasHelper ? helperId : undefined}
+              aria-disabled={disabled || undefined}
+              style={inputStyle}
+            />
 
-          {trailingIcon && (
-            <span aria-hidden="true" style={iconStyle}>
-              {trailingIcon}
-            </span>
+            {trailingIcon && (
+              <span aria-hidden="true" style={iconStyle}>
+                {trailingIcon}
+              </span>
+            )}
+          </div>
+
+          {trailingButton && (
+            <div style={{ display: 'flex', alignItems: 'center', flexShrink: 0 }}>
+              {trailingButton}
+            </div>
           )}
         </div>
 

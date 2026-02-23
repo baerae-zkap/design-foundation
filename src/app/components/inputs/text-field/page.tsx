@@ -7,13 +7,12 @@ import {
   CodeBlock,
   PreviewBox,
   Platform,
-  highlightCode,
 } from "@/components/PlatformTabs";
-import { TextField, typography, spacing, radius } from "@baerae-zkap/design-system";
+import { TextField, TextButton, typography, spacing, radius } from "@baerae-zkap/design-system";
 import { Section, Subsection, InlineCode } from "@/components/docs/Section";
 import { PropsTable } from "@/components/docs/PropsTable";
 import { PrincipleCard, DoCard, DontCard } from "@/components/docs/Cards";
-import { RadioGroup, CopyButton } from "@/components/docs/Playground";
+import { RadioGroup } from "@/components/docs/Playground";
 
 // ─── Page ─────────────────────────────────────────────────────────────
 
@@ -64,23 +63,21 @@ export default function TextFieldPage() {
 // ─── Playground ───────────────────────────────────────────────────────
 
 function TextFieldPlayground() {
-  const [label, setLabel] = useState("이메일");
-  const [placeholder, setPlaceholder] = useState("example@email.com");
-  const [error, setError] = useState("");
-  const [disabled, setDisabled] = useState(false);
-  const [value, setValue] = useState("");
+  const [leadingIcon, setLeadingIcon] = useState("none");
+  const [trailingButton, setTrailingButton] = useState("none");
+  const [trailingContents, setTrailingContents] = useState("none");
 
-  const generateCode = () => {
-    const props: string[] = [];
-    if (label) props.push(`label="${label}"`);
-    if (placeholder) props.push(`placeholder="${placeholder}"`);
-    if (error) props.push(`error="${error}"`);
-    if (disabled) props.push("disabled");
-    props.push('value={value}');
-    props.push('onChange={setValue}');
-    const propsStr = props.length > 0 ? `\n  ${props.join("\n  ")}\n` : " ";
-    return `<TextField${propsStr}/>`;
-  };
+  const iconPlaceholder = (
+    <div
+      style={{
+        width: 20,
+        height: 20,
+        border: "1.5px dashed var(--border-solid-default)",
+        borderRadius: 4,
+        opacity: 0.5,
+      }}
+    />
+  );
 
   return (
     <div style={{ marginBottom: spacing.primitive[8] }}>
@@ -88,7 +85,8 @@ function TextFieldPlayground() {
         style={{
           borderRadius: radius.primitive.xl,
           overflow: "hidden",
-          backgroundColor: "var(--surface-base-default)", border: "1px solid var(--border-solid-alternative)",
+          backgroundColor: "var(--surface-base-default)",
+          border: "1px solid var(--border-solid-alternative)",
         }}
       >
         <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
@@ -104,12 +102,22 @@ function TextFieldPlayground() {
           >
             <div style={{ width: "100%", maxWidth: 320 }}>
               <TextField
-                label={label || undefined}
-                placeholder={placeholder || undefined}
-                error={error || undefined}
-                disabled={disabled}
-                value={value}
-                onChange={setValue}
+                label="Heading"
+                required
+                placeholder="Placeholder"
+                helperText="Description"
+                readOnly
+                value=""
+                onChange={() => {}}
+                leadingIcon={leadingIcon === "icon" ? iconPlaceholder : undefined}
+                trailingIcon={trailingContents === "icon" ? iconPlaceholder : undefined}
+                trailingButton={
+                  trailingButton === "button" ? (
+                    <TextButton size="small" color="primary">
+                      Button
+                    </TextButton>
+                  ) : undefined
+                }
               />
             </div>
           </div>
@@ -117,7 +125,8 @@ function TextFieldPlayground() {
           {/* Control Panel */}
           <div
             style={{
-              backgroundColor: "var(--surface-base-default)", borderLeft: "1px solid var(--border-solid-alternative)",
+              backgroundColor: "var(--surface-base-default)",
+              borderLeft: "1px solid var(--border-solid-alternative)",
               display: "flex",
               flexDirection: "column",
               padding: spacing.primitive[4],
@@ -139,135 +148,39 @@ function TextFieldPlayground() {
                 borderRadius: radius.primitive.lg,
               }}
             >
-              {/* Label */}
-              <ControlInput
-                label="Label"
-                value={label}
-                onChange={setLabel}
-                placeholder="Label text"
-              />
-
-              {/* Placeholder */}
-              <ControlInput
-                label="Placeholder"
-                value={placeholder}
-                onChange={setPlaceholder}
-                placeholder="Placeholder text"
-              />
-
-              {/* Error */}
-              <ControlInput
-                label="Error"
-                value={error}
-                onChange={setError}
-                placeholder="Error message"
-              />
-
-              {/* Disabled */}
               <RadioGroup
-                label="Disabled"
+                label="Leading icon"
                 options={[
-                  { value: "false", label: "False" },
-                  { value: "true", label: "True" },
+                  { value: "none", label: "None" },
+                  { value: "icon", label: "Icon" },
                 ]}
-                value={disabled ? "true" : "false"}
-                onChange={(v) => setDisabled(v === "true")}
+                value={leadingIcon}
+                onChange={setLeadingIcon}
+              />
+
+              <RadioGroup
+                label="Trailing button"
+                options={[
+                  { value: "none", label: "None" },
+                  { value: "button", label: "Button" },
+                ]}
+                value={trailingButton}
+                onChange={setTrailingButton}
+              />
+
+              <RadioGroup
+                label="Trailing contents"
+                options={[
+                  { value: "none", label: "None" },
+                  { value: "icon", label: "Icon" },
+                ]}
+                value={trailingContents}
+                onChange={setTrailingContents}
               />
             </div>
           </div>
         </div>
       </div>
-
-      {/* Generated Code */}
-      <div
-        style={{
-          marginTop: spacing.primitive[4],
-          borderRadius: radius.primitive.md,
-          overflow: "hidden",
-          border: "1px solid var(--divider)",
-        }}
-      >
-        <div
-          style={{
-            padding: "10px 16px",
-            backgroundColor: "var(--docs-code-surface)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <span
-            style={{
-              fontSize: typography.fontSize.compact,
-              fontWeight: typography.fontWeight.medium,
-              color: "var(--docs-code-active-text)",
-            }}
-          >
-            Web
-          </span>
-          <CopyButton text={generateCode()} />
-        </div>
-        <pre
-          style={{
-            margin: 0,
-            padding: spacing.primitive[4],
-            fontSize: typography.fontSize.compact,
-            lineHeight: 1.7,
-            color: "var(--docs-code-text)",
-            backgroundColor: "var(--docs-code-surface)",
-            fontFamily: "'SF Mono', 'Fira Code', monospace",
-            overflow: "auto",
-          }}
-        >
-          <code>{highlightCode(generateCode())}</code>
-        </pre>
-      </div>
-    </div>
-  );
-}
-
-// Small text input for playground controls
-function ControlInput({
-  label,
-  value,
-  onChange,
-  placeholder,
-}: {
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-  placeholder?: string;
-}) {
-  return (
-    <div>
-      <div
-        style={{
-          fontSize: typography.fontSize.sm,
-          fontWeight: typography.fontWeight.medium,
-          color: "var(--content-base-assistive)",
-          marginBottom: 10,
-        }}
-      >
-        {label}
-      </div>
-      <input
-        type="text"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
-        style={{
-          width: "100%",
-          padding: "8px 10px",
-          fontSize: typography.fontSize.compact,
-          border: "1.5px solid var(--border-base-default)",
-          borderRadius: radius.primitive.sm,
-          backgroundColor: "var(--surface-base-alternative)",
-          color: "var(--content-base-default)",
-          outline: "none",
-          fontFamily: "inherit",
-          boxSizing: "border-box" as const,
-        }}
-      />
     </div>
   );
 }
