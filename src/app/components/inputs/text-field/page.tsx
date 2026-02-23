@@ -8,7 +8,7 @@ import {
   PreviewBox,
   Platform,
 } from "@/components/PlatformTabs";
-import { TextField, TextButton, typography, spacing, radius } from "@baerae-zkap/design-system";
+import { TextField, TextButton, Badge, typography, spacing, radius } from "@baerae-zkap/design-system";
 import { Section, Subsection, InlineCode } from "@/components/docs/Section";
 import { PropsTable } from "@/components/docs/PropsTable";
 import { PrincipleCard, DoCard, DontCard } from "@/components/docs/Cards";
@@ -80,6 +80,35 @@ function TextFieldPlayground() {
     />
   );
 
+  const getTrailingIcon = () => {
+    switch (trailingContents) {
+      case "icon":
+        return iconPlaceholder;
+      case "badge":
+        return <Badge color="error" size="sm">2</Badge>;
+      case "text":
+        return (
+          <span style={{ fontSize: typography.fontSize.compact, color: "var(--content-base-secondary)", whiteSpace: "nowrap" }}>
+            0/100
+          </span>
+        );
+      case "timer":
+        return (
+          <span style={{ fontSize: typography.fontSize.compact, color: "var(--content-error-default)", whiteSpace: "nowrap", fontVariantNumeric: "tabular-nums" }}>
+            03:00
+          </span>
+        );
+      case "custom":
+        return (
+          <span style={{ fontSize: typography.fontSize.compact, color: "var(--content-brand-default)", fontWeight: typography.fontWeight.medium, whiteSpace: "nowrap", cursor: "pointer" }}>
+            Clear
+          </span>
+        );
+      default:
+        return undefined;
+    }
+  };
+
   return (
     <div style={{ marginBottom: spacing.primitive[8] }}>
       <div
@@ -109,7 +138,7 @@ function TextFieldPlayground() {
                 placeholder="Placeholder"
                 helperText="Description"
                 leadingIcon={leadingIcon === "icon" ? iconPlaceholder : undefined}
-                trailingIcon={trailingContents === "icon" ? iconPlaceholder : undefined}
+                trailingIcon={getTrailingIcon()}
                 trailingButton={
                   trailingButton === "button" ? (
                     <TextButton size="small" color="primary">
@@ -182,7 +211,11 @@ function TextFieldPlayground() {
                 label="Trailing contents"
                 options={[
                   { value: "none", label: "None" },
+                  { value: "custom", label: "Custom" },
+                  { value: "badge", label: "Badge" },
+                  { value: "text", label: "Text" },
                   { value: "icon", label: "Icon" },
+                  { value: "timer", label: "Timer" },
                 ]}
                 value={trailingContents}
                 onChange={setTrailingContents}
