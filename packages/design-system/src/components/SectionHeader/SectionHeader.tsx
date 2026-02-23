@@ -84,7 +84,7 @@ export const SectionHeader = forwardRef<HTMLDivElement, SectionHeaderProps>(
 
     const containerStyle: React.CSSProperties = {
       display: 'flex',
-      alignItems: 'flex-end',
+      alignItems: 'center',
       gap: spacing.primitive[4],
       paddingLeft: sizeStyle.paddingX,
       paddingRight: sizeStyle.paddingX,
@@ -97,7 +97,7 @@ export const SectionHeader = forwardRef<HTMLDivElement, SectionHeaderProps>(
     const headingAreaStyle: React.CSSProperties = {
       flex: 1,
       display: 'flex',
-      alignItems: 'flex-end',
+      alignItems: 'center',
       gap: spacing.primitive[2],
       minWidth: 0,
     };
