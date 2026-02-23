@@ -98,12 +98,6 @@ function TextFieldPlayground() {
             03:00
           </span>
         );
-      case "custom":
-        return (
-          <span style={{ fontSize: typography.fontSize.compact, color: "var(--content-brand-default)", fontWeight: typography.fontWeight.medium, whiteSpace: "nowrap", cursor: "pointer" }}>
-            Clear
-          </span>
-        );
       default:
         return undefined;
     }
@@ -211,7 +205,6 @@ function TextFieldPlayground() {
                 label="Trailing contents"
                 options={[
                   { value: "none", label: "None" },
-                  { value: "custom", label: "Custom" },
                   { value: "badge", label: "Badge" },
                   { value: "text", label: "Text" },
                   { value: "icon", label: "Icon" },
