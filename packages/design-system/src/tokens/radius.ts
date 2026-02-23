@@ -37,6 +37,11 @@ export const radius = {
       default: 8,
       pill: 9999,
     },
+    filterButton: {
+      sm: 8,
+      md: 8,
+      lg: 10,
+    },
     badge: {
       default: 4,
       pill: 9999,

@@ -155,6 +155,13 @@ export const spacing = {
         lg: 22,
       },
     },
+    filterButton: {
+      height: { sm: 32, md: 36, lg: 40 },
+      paddingLeft: { sm: 12, md: 14, lg: 16 },
+      paddingRight: { sm: 8, md: 10, lg: 12 },
+      gap: { sm: 2, md: 2, lg: 4 },
+      iconSize: { sm: 16, md: 16, lg: 18 },
+    },
     badge: {
       height: {
         sm: 18,
