@@ -25,6 +25,7 @@ import { SectionHeader } from '@baerae-zkap/design-system';
 | `headingContent` | `ReactNode` | — | Inline slot rendered directly after the title, baseline-aligned. Use for `ContentBadge`, `Chip`, or `IconButton`. |
 | `trailing` | `ReactNode` | — | Far-right slot, baseline-aligned. Use for `TextButton` ("View All"), pagination, or an `IconButton`. |
 | `size` | `'small' \| 'medium' \| 'large'` | `'medium'` | Controls font size and vertical padding. |
+| `headingLevel` | `1 \| 2 \| 3 \| 4 \| 5 \| 6` | — | Semantic heading level. When set, renders `<h1>`–`<h6>` instead of `<div>` for the title. Improves screen reader navigation. |
 | `style` | `React.CSSProperties` | — | Additional inline styles on the container. |
 
 ## Basic Usage

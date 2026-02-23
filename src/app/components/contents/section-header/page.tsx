@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { PlatformTabs, CodeBlock, PreviewBox, Platform } from "@/components/PlatformTabs";
-import { SectionHeader, ContentBadge, typography, spacing, radius } from '@baerae-zkap/design-system';
+import { SectionHeader, ContentBadge, TextButton, typography, spacing, radius } from '@baerae-zkap/design-system';
 import type { SectionHeaderSize } from '@baerae-zkap/design-system';
 import { Section, Subsection, InlineCode } from "@/components/docs/Section";
 import { PropsTable } from "@/components/docs/PropsTable";
@@ -40,7 +40,7 @@ export default function SectionHeaderPage() {
 function SectionHeaderPlayground() {
   const [platform, setPlatform] = useState<"mobile" | "desktop">("mobile");
   const [headingContentType, setHeadingContentType] = useState<"none" | "filter" | "icon">("none");
-  const [trailingType, setTrailingType] = useState<"none" | "text" | "pagination" | "icon">("text");
+  const [trailingType, setTrailingType] = useState<"none" | "text" | "icon">("text");
 
   const size: SectionHeaderSize = platform === "mobile" ? "small" : "medium";
 
@@ -52,22 +52,16 @@ function SectionHeaderPlayground() {
       </span>
     ) :
     headingContentType === "icon" ? (
-      <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 20, height: 20, color: "var(--content-base-secondary)", cursor: "pointer" }}>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="14" y2="12"/><line x1="4" y1="18" x2="11" y2="18"/></svg>
+      <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 22, height: 22, border: "1.5px dashed var(--border-base-default)", borderRadius: 4, color: "var(--content-base-assistive)" }}>
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
       </span>
     ) : undefined;
 
   const trailing =
-    trailingType === "text" ? <ActionButton>전체보기</ActionButton> :
-    trailingType === "pagination" ? (
-      <span style={{ fontSize: typography.fontSize.compact, color: "var(--content-base-secondary)", display: "inline-flex", alignItems: "center", gap: spacing.primitive[1] }}>
-        1 / 5
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-      </span>
-    ) :
+    trailingType === "text" ? <TextButton size="small" color="primary">Text</TextButton> :
     trailingType === "icon" ? (
-      <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 20, height: 20, color: "var(--content-base-secondary)", cursor: "pointer" }}>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="5" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="19" r="1" fill="currentColor"/></svg>
+      <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 22, height: 22, border: "1.5px dashed var(--border-base-default)", borderRadius: 4, color: "var(--content-base-assistive)" }}>
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
       </span>
     ) : undefined;
 
@@ -76,10 +70,10 @@ function SectionHeaderPlayground() {
       <div style={{ borderRadius: radius.primitive.xl, overflow: "hidden", backgroundColor: "var(--surface-base-default)", border: "1px solid var(--border-solid-alternative)" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 480 }}>
           <div style={{ padding: `${spacing.primitive[10]}px ${spacing.primitive[6]}px`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <div style={{ width: "100%", backgroundColor: "var(--surface-base-default)" }}>
+            <div style={{ width: "100%", backgroundColor: "var(--surface-base-default)", border: "1px solid var(--border-solid-alternative)", borderRadius: radius.primitive.md }}>
               <SectionHeader
                 size={size}
-                title="내 자산"
+                title="Heading"
                 headingContent={headingContent}
                 trailing={trailing}
               />
@@ -130,11 +124,10 @@ function SectionHeaderPlayground() {
                 options={[
                   { value: "none", label: "None" },
                   { value: "text", label: "Text button" },
-                  { value: "pagination", label: "Pagination" },
                   { value: "icon", label: "Icon button" },
                 ]}
                 value={trailingType}
-                onChange={(v) => setTrailingType(v as "none" | "text" | "pagination" | "icon")}
+                onChange={(v) => setTrailingType(v as "none" | "text" | "icon")}
               />
             </div>
           </div>
@@ -596,6 +589,7 @@ function WebContent() {
               { name: "headingContent", type: "ReactNode", required: false, description: "타이틀 오른쪽 인라인 슬롯 — Chip, ContentBadge, IconButton 등. baseline 하단 정렬" },
               { name: "trailing", type: "ReactNode", required: false, description: "맨 우측 슬롯 — TextButton, Pagination, IconButton 등. baseline 하단 정렬" },
               { name: "size", type: '"small" | "medium" | "large"', required: false, defaultVal: '"medium"', description: "타이틀 크기 및 패딩 (small=16px, medium=20px, large=24px)" },
+              { name: "headingLevel", type: "1 | 2 | 3 | 4 | 5 | 6", required: false, description: "시맨틱 heading 레벨. 지정 시 h1~h6 태그 사용, 미지정 시 div" },
               { name: "style", type: "React.CSSProperties", required: false, description: "커스텀 스타일" },
             ]}
           />

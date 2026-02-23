@@ -37,6 +37,8 @@ export interface SectionHeaderProps extends Omit<HTMLAttributes<HTMLDivElement>,
   trailing?: ReactNode;
   /** 크기 (폰트 및 패딩 스케일) */
   size?: SectionHeaderSize;
+  /** 시맨틱 heading 레벨 (1-6). 지정 시 h1~h6 태그 사용, 미지정 시 div */
+  headingLevel?: 1 | 2 | 3 | 4 | 5 | 6;
 }
 
 const sizeConfig: Record<SectionHeaderSize, {
@@ -72,6 +74,7 @@ export const SectionHeader = forwardRef<HTMLDivElement, SectionHeaderProps>(
       headingContent,
       trailing,
       size = 'medium',
+      headingLevel,
       style,
       ...props
     },
@@ -115,7 +118,10 @@ export const SectionHeader = forwardRef<HTMLDivElement, SectionHeaderProps>(
       <div ref={ref} style={containerStyle} {...props}>
         {/* Heading area: title + headingContent (baseline-aligned) */}
         <div style={headingAreaStyle}>
-          <div style={titleStyle}>{title}</div>
+          {(() => {
+            const TitleTag = headingLevel ? (`h${headingLevel}` as keyof JSX.IntrinsicElements) : 'div';
+            return <TitleTag style={{ ...titleStyle, margin: headingLevel ? 0 : undefined }}>{title}</TitleTag>;
+          })()}
           {headingContent && (
             <div style={{ flexShrink: 0 }}>{headingContent}</div>
           )}
