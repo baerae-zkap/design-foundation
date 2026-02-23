@@ -76,14 +76,14 @@ export type PushBadgeProps = Omit<HTMLAttributes<HTMLDivElement>, 'children'> & 
 const sizeConfig = {
   default: {
     height: spacing.component.badge.height.lg,     // 26
-    paddingX: spacing.component.badge.paddingX.lg, // 10
+    paddingX: spacing.component.badge.paddingX.md, // 8
     fontSize: typography.fontSize.compact,           // 13
     dotSize: 10,
     offset: -spacing.primitive[1],                 // -4
   },
   small: {
     height: spacing.component.badge.height.md,     // 22
-    paddingX: spacing.component.badge.paddingX.md, // 8
+    paddingX: spacing.component.badge.paddingX.sm, // 6
     fontSize: typography.fontSize.xs,               // 12
     dotSize: 8,
     offset: -spacing.primitive[1],                 // -4
