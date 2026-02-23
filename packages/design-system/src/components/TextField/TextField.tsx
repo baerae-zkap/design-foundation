@@ -145,7 +145,9 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
       alignItems: 'center',
       gap: spacing.primitive[2],
       height: spacing.component.input.height.md,
-      padding: `0 ${spacing.primitive[4]}px`,
+      padding: trailingButton
+        ? `0 0 0 ${spacing.primitive[4]}px`
+        : `0 ${spacing.primitive[4]}px`,
       borderRadius: radius.component.input.default,
       border: `${borderWidth.medium}px solid ${borderColor}`,
       backgroundColor: disabled
