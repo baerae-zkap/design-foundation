@@ -21,7 +21,7 @@
  * />
  */
 
-import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
+import { forwardRef, createElement, type HTMLAttributes, type ReactNode } from 'react';
 import { cssVarColors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { typography } from '../../tokens/typography';
@@ -118,10 +118,11 @@ export const SectionHeader = forwardRef<HTMLDivElement, SectionHeaderProps>(
       <div ref={ref} style={containerStyle} {...props}>
         {/* Heading area: title + headingContent (baseline-aligned) */}
         <div style={headingAreaStyle}>
-          {(() => {
-            const TitleTag = headingLevel ? (`h${headingLevel}` as keyof JSX.IntrinsicElements) : 'div';
-            return <TitleTag style={{ ...titleStyle, margin: headingLevel ? 0 : undefined }}>{title}</TitleTag>;
-          })()}
+          {createElement(
+            headingLevel ? `h${headingLevel}` : 'div',
+            { style: headingLevel ? { ...titleStyle, margin: 0 } : titleStyle },
+            title
+          )}
           {headingContent && (
             <div style={{ flexShrink: 0 }}>{headingContent}</div>
           )}
