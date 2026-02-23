@@ -268,11 +268,11 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
           </div>
 
           {trailingButton && (
-            <div style={{ display: 'flex', alignItems: 'center', flexShrink: 0, gap: spacing.primitive[2] }}>
+            <div style={{ display: 'flex', alignItems: 'center', alignSelf: 'stretch', flexShrink: 0, gap: spacing.primitive[2] }}>
               <div
                 style={{
                   width: borderWidth.default,
-                  height: 20,
+                  alignSelf: 'stretch',
                   backgroundColor: cssVarColors.border.base.default,
                   flexShrink: 0,
                 }}
