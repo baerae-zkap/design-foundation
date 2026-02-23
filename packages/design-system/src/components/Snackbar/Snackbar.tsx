@@ -30,6 +30,7 @@ import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
 import { zIndex } from '../../tokens/general';
 import { duration, easing } from '../../tokens/motion';
+import { IconButton } from '../IconButton/IconButton';
 
 export type SnackbarPosition = 'bottom-center' | 'bottom-left' | 'bottom-right';
 
@@ -186,20 +187,12 @@ export function Snackbar({
     color: cssVarColors.inverse.content.default,
   };
 
-  const closeButtonStyle: React.CSSProperties = {
+  const closeButtonWrapStyle: React.CSSProperties = {
     flexShrink: 0,
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
-    width: 24,
-    height: 24,
-    padding: 0,
-    border: 'none',
-    background: 'none',
-    cursor: 'pointer',
-    color: cssVarColors.inverse.content.secondary,
-    borderRadius: radius.primitive.xs,
     marginRight: -spacing.primitive[1],
+    color: cssVarColors.inverse.content.secondary,
   };
 
   return createPortal(
@@ -225,14 +218,17 @@ export function Snackbar({
         )}
 
         {closable && (
-          <button
-            type="button"
-            onClick={onClose}
-            style={closeButtonStyle}
-            aria-label="닫기"
-          >
-            <CloseIcon />
-          </button>
+          <span style={closeButtonWrapStyle}>
+            <IconButton
+              variant="ghost"
+              size="small"
+              color="neutral"
+              aria-label="닫기"
+              onClick={onClose}
+            >
+              <CloseIcon />
+            </IconButton>
+          </span>
         )}
       </div>
     </div>,
