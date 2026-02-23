@@ -39,10 +39,10 @@ export interface IconButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonEle
 }
 
 // Size: button size, icon size
-const sizeStyles: Record<IconButtonSize, { size: number; iconSize: number }> = {
-  small: { size: spacing.component.iconButton.size.sm, iconSize: spacing.component.iconButton.iconSize.sm },
-  medium: { size: spacing.component.iconButton.size.md, iconSize: spacing.component.iconButton.iconSize.md },
-  large: { size: spacing.component.iconButton.size.lg, iconSize: spacing.component.iconButton.iconSize.lg },
+const sizeStyles: Record<IconButtonSize, { size: number; iconSize: number; borderRadius: number }> = {
+  small: { size: spacing.component.iconButton.size.sm, iconSize: spacing.component.iconButton.iconSize.sm, borderRadius: radius.component.iconButton.sm },
+  medium: { size: spacing.component.iconButton.size.md, iconSize: spacing.component.iconButton.iconSize.md, borderRadius: radius.component.iconButton.md },
+  large: { size: spacing.component.iconButton.size.lg, iconSize: spacing.component.iconButton.iconSize.lg, borderRadius: radius.component.iconButton.lg },
 };
 
 const colorStyles: Record<IconButtonColor, {
@@ -159,7 +159,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
       justifyContent: 'center',
       width: sizeStyle.size,
       height: sizeStyle.size,
-      borderRadius: radius.primitive.lg,
+      borderRadius: sizeStyle.borderRadius,
       border: 'none',
       backgroundColor: getBackgroundColor(),
       color: getIconColor(),

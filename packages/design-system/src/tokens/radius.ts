@@ -45,6 +45,11 @@ export const radius = {
       circle: 9999,
       square: 12,
     },
+    iconButton: {
+      sm: 8,
+      md: 10,
+      lg: 12,
+    },
     image: {
       sm: 8,
       md: 12,
