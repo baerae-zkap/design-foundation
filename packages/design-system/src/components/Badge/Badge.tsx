@@ -61,7 +61,7 @@ const colorConfig: Record<BadgeColor, Record<BadgeVariant, { bg: string; text: s
   },
   success: {
     filled: {
-      bg: cssVarColors.surface.success.default,
+      bg: cssVarColors.surface.success.solid,
       text: cssVarColors.content.base.onColor,
     },
     weak: {
@@ -77,7 +77,7 @@ const colorConfig: Record<BadgeColor, Record<BadgeVariant, { bg: string; text: s
   },
   error: {
     filled: {
-      bg: cssVarColors.surface.error.default,
+      bg: cssVarColors.surface.error.solid,
       text: cssVarColors.content.base.onColor,
     },
     weak: {
@@ -93,7 +93,7 @@ const colorConfig: Record<BadgeColor, Record<BadgeVariant, { bg: string; text: s
   },
   warning: {
     filled: {
-      bg: cssVarColors.surface.warning.default,
+      bg: cssVarColors.surface.warning.solid,
       text: cssVarColors.content.base.onColor,
     },
     weak: {
@@ -109,7 +109,7 @@ const colorConfig: Record<BadgeColor, Record<BadgeVariant, { bg: string; text: s
   },
   info: {
     filled: {
-      bg: cssVarColors.surface.info.default,
+      bg: cssVarColors.surface.info.solid,
       text: cssVarColors.content.base.onColor,
     },
     weak: {
