@@ -183,7 +183,7 @@ export const Checkbox = React.forwardRef<HTMLLabelElement, CheckboxProps>(
 
     const labelStyle: CSSProperties = {
       display: 'inline-flex',
-      alignItems: 'flex-start',
+      alignItems: 'center',
       gap: spacing.primitive[2],
       cursor: disabled ? 'not-allowed' : 'pointer',
       opacity: disabled ? opacity.disabled : 1,
@@ -250,7 +250,6 @@ export const Checkbox = React.forwardRef<HTMLLabelElement, CheckboxProps>(
               display: 'flex',
               flexDirection: 'column',
               gap: spacing.primitive[1],
-              paddingTop: size === 'medium' ? 2 : 0,
             }}
           >
             {label && (

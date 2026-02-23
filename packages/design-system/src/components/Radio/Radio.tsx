@@ -219,7 +219,7 @@ export const Radio = React.forwardRef<HTMLLabelElement, RadioProps>(
 
     const labelStyle: CSSProperties = {
       display: 'inline-flex',
-      alignItems: 'flex-start',
+      alignItems: 'center',
       gap: spacing.primitive[2],
       cursor: isDisabled ? 'not-allowed' : 'pointer',
       opacity: isDisabled ? opacity.disabled : 1,
@@ -278,7 +278,6 @@ export const Radio = React.forwardRef<HTMLLabelElement, RadioProps>(
               display: 'flex',
               flexDirection: 'column',
               gap: spacing.primitive[1],
-              paddingTop: size === 'medium' ? 2 : 0,
             }}
           >
             {label && (
