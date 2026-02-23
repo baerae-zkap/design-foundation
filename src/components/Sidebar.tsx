@@ -44,6 +44,7 @@ const componentsNav = [
   { title: "Switch", href: "/components/inputs/switch" },
   { title: "Slider", href: "/components/inputs/slider" },
   { title: "Segmented Control", href: "/components/inputs/segmented-control" },
+  { title: "Filter Button", href: "/components/inputs/filter-button" },
   { title: "Feedback", isLabel: true },
   { title: "Dialog", href: "/components/feedback/alert-dialog" },
   { title: "Push Badge", href: "/components/feedback/push-badge" },
