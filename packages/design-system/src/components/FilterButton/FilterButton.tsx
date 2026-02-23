@@ -296,26 +296,33 @@ export const FilterButton = forwardRef<HTMLButtonElement, FilterButtonProps>(
       boxShadow: cssVarShadow.semantic.dropdown.default,
       zIndex: zIndex.dropdown,
       overflow: 'hidden',
-      padding: `${spacing.primitive[1]}px 0`,
+      padding: spacing.primitive[1],
     };
 
-    const getMenuItemStyle = (itemValue: string, isItemHovered: boolean): CSSProperties => {
+    const getMenuItemStyle = (itemValue: string, isItemHovered: boolean, isItemPressed: boolean): CSSProperties => {
       const isSelected = value === itemValue;
       return {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         width: '100%',
-        padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`,
+        padding: `${spacing.primitive[3]}px ${spacing.primitive[3]}px`,
         fontSize: typography.fontSize.sm,
         fontWeight: isSelected ? typography.fontWeight.semibold : typography.fontWeight.regular,
         color: cssVarColors.content.base.default,
-        backgroundColor: isItemHovered ? cssVarColors.surface.base.alternative : 'transparent',
+        backgroundColor: isItemPressed
+          ? cssVarColors.surface.base.defaultPressed
+          : isItemHovered
+            ? cssVarColors.surface.base.alternative
+            : 'transparent',
         border: 'none',
+        borderRadius: radius.primitive.sm,
         cursor: 'pointer',
         textAlign: 'left',
         lineHeight: 1.5,
         boxSizing: 'border-box',
+        transition: 'background-color 150ms ease, transform 150ms ease',
+        transform: isItemPressed ? 'scale(0.98)' : undefined,
       };
     };
 
@@ -385,18 +392,21 @@ function MenuItem({
 }: {
   item: FilterItem;
   isSelected: boolean;
-  getMenuItemStyle: (value: string, isHovered: boolean) => CSSProperties;
+  getMenuItemStyle: (value: string, isHovered: boolean, isPressed: boolean) => CSSProperties;
   onItemClick: (value: string) => void;
 }) {
   const [hovered, setHovered] = useState(false);
+  const [pressed, setPressed] = useState(false);
 
   return (
     <button
       role="option"
       aria-selected={isSelected}
-      style={getMenuItemStyle(item.value, hovered)}
+      style={getMenuItemStyle(item.value, hovered, pressed)}
       onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onMouseLeave={() => { setHovered(false); setPressed(false); }}
+      onMouseDown={() => setPressed(true)}
+      onMouseUp={() => setPressed(false)}
       onClick={() => onItemClick(item.value)}
     >
       <span>{item.label}</span>
