@@ -146,30 +146,6 @@ function FilterButtonPlayground() {
                 value={size}
                 onChange={(v) => setSize(v as FilterButtonSize)}
               />
-              <div style={{ display: 'flex', flexDirection: 'column', gap: spacing.primitive[2] }}>
-                <span style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.medium, color: 'var(--text-primary)' }}>
-                  Selected
-                </span>
-                <span style={{ fontSize: typography.fontSize.compact, color: 'var(--text-secondary)' }}>
-                  {selectedValue ? sampleItems.find(i => i.value === selectedValue)?.label : '(none)'}
-                </span>
-                {selectedValue && (
-                  <button
-                    onClick={() => setSelectedValue(undefined)}
-                    style={{
-                      fontSize: typography.fontSize.compact,
-                      color: 'var(--content-brand-default)',
-                      background: 'none',
-                      border: 'none',
-                      cursor: 'pointer',
-                      padding: 0,
-                      textAlign: 'left',
-                    }}
-                  >
-                    Reset
-                  </button>
-                )}
-              </div>
             </div>
           </div>
         </div>
