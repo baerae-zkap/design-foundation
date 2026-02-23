@@ -138,12 +138,6 @@ function SearchFieldPlayground() {
                 value={showLabel ? "true" : "false"}
                 onChange={(v) => setShowLabel(v === "true")}
               />
-              <div>
-                <p style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.medium, color: "var(--text-secondary)", margin: `0 0 ${spacing.primitive[2]}px` }}>Value</p>
-                <p style={{ fontSize: typography.fontSize.compact, color: "var(--text-tertiary)", margin: 0 }}>
-                  {value ? `"${value}"` : "(empty — type in preview)"}
-                </p>
-              </div>
             </div>
           </div>
         </div>

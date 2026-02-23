@@ -189,9 +189,6 @@ export const SearchField = React.forwardRef<HTMLInputElement, SearchFieldProps>(
       cursor: disabled ? 'not-allowed' : undefined,
       boxSizing: 'border-box',
       width: '100%',
-      // Hide native search clear button (WebKit/Blink)
-      WebkitAppearance: 'none',
-      appearance: 'none' as CSSProperties['appearance'],
     };
 
     const clearButtonWrapperStyle: CSSProperties = {
@@ -224,7 +221,7 @@ export const SearchField = React.forwardRef<HTMLInputElement, SearchFieldProps>(
           <input
             ref={ref}
             id={inputId}
-            type="search"
+            type="text"
             value={currentValue}
             placeholder={placeholder}
             disabled={disabled}
