@@ -25,24 +25,25 @@ interface AcOption {
   value: string;
   secondary: string;
   abbr: string;
+  thumbnail?: string;
 }
 
 // ─── Mock Data ────────────────────────────────────────────────────────────────
 
 const OPTIONS: AcOption[] = [
-  { label: "Bitcoin", value: "btc", secondary: "BTC · 디지털 금", abbr: "BT" },
-  { label: "Ethereum", value: "eth", secondary: "ETH · 스마트 컨트랙트", abbr: "ET" },
-  { label: "BNB Chain", value: "bnb", secondary: "BNB · 바이낸스", abbr: "BN" },
-  { label: "Solana", value: "sol", secondary: "SOL · 고속 블록체인", abbr: "SO" },
-  { label: "XRP", value: "xrp", secondary: "XRP · 결제 네트워크", abbr: "XR" },
-  { label: "Dogecoin", value: "doge", secondary: "DOGE · 밈 코인", abbr: "DO" },
+  { label: "Bitcoin", value: "btc", secondary: "BTC · 디지털 금", abbr: "BT", thumbnail: "https://assets.coingecko.com/coins/images/1/small/bitcoin.png" },
+  { label: "Ethereum", value: "eth", secondary: "ETH · 스마트 컨트랙트", abbr: "ET", thumbnail: "https://assets.coingecko.com/coins/images/279/small/ethereum.png" },
+  { label: "BNB Chain", value: "bnb", secondary: "BNB · 바이낸스", abbr: "BN", thumbnail: "https://assets.coingecko.com/coins/images/825/small/bnb-icon2_2x.png" },
+  { label: "Solana", value: "sol", secondary: "SOL · 고속 블록체인", abbr: "SO", thumbnail: "https://assets.coingecko.com/coins/images/4128/small/solana.png" },
+  { label: "XRP", value: "xrp", secondary: "XRP · 결제 네트워크", abbr: "XR", thumbnail: "https://assets.coingecko.com/coins/images/44/small/xrp-symbol-white-128.png" },
+  { label: "Dogecoin", value: "doge", secondary: "DOGE · 밈 코인", abbr: "DO", thumbnail: "https://assets.coingecko.com/coins/images/5/small/dogecoin.png" },
 ];
 
 // ETH 검색 결과 데모용 데이터
 const ETH_OPTIONS: AcOption[] = [
-  { label: "Ethereum", value: "eth", secondary: "ETH · 스마트 컨트랙트 플랫폼", abbr: "ET" },
-  { label: "Ethereum Classic", value: "etc", secondary: "ETC · 오리지널 이더리움 체인", abbr: "EC" },
-  { label: "Ethena", value: "ena", secondary: "ENA · USDe 기반 DeFi 스테이킹", abbr: "EN" },
+  { label: "Ethereum", value: "eth", secondary: "ETH · 스마트 컨트랙트 플랫폼", abbr: "ET", thumbnail: "https://assets.coingecko.com/coins/images/279/small/ethereum.png" },
+  { label: "Ethereum Classic", value: "etc", secondary: "ETC · 오리지널 이더리움 체인", abbr: "EC", thumbnail: "https://assets.coingecko.com/coins/images/453/small/ethereum-classic-logo.png" },
+  { label: "Ethena", value: "ena", secondary: "ENA · USDe 기반 DeFi 스테이킹", abbr: "EN", thumbnail: "https://assets.coingecko.com/coins/images/36530/small/ethena.png" },
 ];
 
 // 쿼리 매칭 텍스트를 bold로 렌더링
@@ -188,7 +189,13 @@ function OptionRow({
           color: "var(--content-base-secondary)",
           overflow: "hidden",
         }}>
-          {option.abbr}
+          {option.thumbnail ? (
+            <img
+              src={option.thumbnail}
+              alt={option.label}
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            />
+          ) : option.abbr}
         </div>
       )}
 

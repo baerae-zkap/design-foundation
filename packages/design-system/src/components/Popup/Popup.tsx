@@ -248,11 +248,12 @@ export function Popup({
     flex: 1,
     overflowY: 'auto',
     padding: config.padding,
+    paddingTop: nav === 'floating' ? config.padding + spacing.primitive[8] : config.padding,
   };
 
   const actionAreaStyle: React.CSSProperties = {
     padding: `${spacing.primitive[4]}px ${config.padding}px`,
-    borderTop: `${borderWidth.default}px solid var(--divider)`,
+    borderTop: 'none',
     display: 'flex',
     gap: spacing.primitive[2],
   };
@@ -270,7 +271,7 @@ export function Popup({
       justifyContent: isEmphasize ? 'flex-start' : 'center',
       position: 'relative',
       padding: `${spacing.primitive[4]}px ${config.padding}px`,
-      borderBottom: `${borderWidth.default}px solid var(--divider)`,
+      borderBottom: 'none',
       minHeight: 56,
       flexShrink: 0,
     };
@@ -280,7 +281,10 @@ export function Popup({
       fontWeight: isEmphasize ? typography.fontWeight.bold : typography.fontWeight.semibold,
       color: cssVarColors.content.base.default,
       lineHeight: 1.4,
-      paddingRight: spacing.primitive[10],
+      ...(isEmphasize
+        ? { paddingRight: spacing.primitive[10] }
+        : { flex: 1, textAlign: 'center' as const, paddingLeft: spacing.primitive[10], paddingRight: spacing.primitive[10] }
+      ),
     };
 
     return (
@@ -347,7 +351,44 @@ export function Popup({
       );
     }
 
-    // neutral, cancel, compact — sub button + main button
+    // cancel: single full-width weak cancel button
+    if (resolvedLayout === 'cancel') {
+      const action = actions[0];
+      return (
+        <div style={actionAreaStyle}>
+          <Button
+            buttonType={action.variant ?? 'weak'}
+            color={action.color ?? 'neutral'}
+            size="large"
+            layout="fillWidth"
+            onClick={action.onClick}
+          >
+            {action.label}
+          </Button>
+        </div>
+      );
+    }
+
+    // compact: smaller buttons, right-aligned, no fillWidth
+    if (resolvedLayout === 'compact') {
+      return (
+        <div style={{ ...actionAreaStyle, justifyContent: 'flex-end' }}>
+          {actions.map((action, i) => (
+            <Button
+              key={i}
+              buttonType={action.variant ?? (i === actions.length - 1 ? 'filled' : 'weak')}
+              color={action.color ?? (i === actions.length - 1 ? 'primary' : 'neutral')}
+              size="medium"
+              onClick={action.onClick}
+            >
+              {action.label}
+            </Button>
+          ))}
+        </div>
+      );
+    }
+
+    // neutral: full-width buttons (default)
     return (
       <div style={actionAreaStyle}>
         {actions.map((action, i) => (

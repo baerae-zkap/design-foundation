@@ -8,7 +8,7 @@ import {
   PreviewBox,
   type Platform,
 } from "@/components/PlatformTabs";
-import { typography, spacing, radius, Button, TextButton } from "@baerae-zkap/design-system";
+import { typography, spacing, radius, Button, TextButton, IconButton } from "@baerae-zkap/design-system";
 import { Section, Subsection, InlineCode } from "@/components/docs/Section";
 import { PropsTable, type PropItem } from "@/components/docs/PropsTable";
 import { DoCard, DontCard, PrincipleCard } from "@/components/docs/Cards";
@@ -56,25 +56,19 @@ function PopoverBox({
     }}>
       {/* Close button */}
       {showClose && (
-        <button
-          onClick={onClose}
-          aria-label="닫기"
-          style={{
-            position: "absolute",
-            top: spacing.primitive[3],
-            right: spacing.primitive[3],
-            width: 24, height: 24,
-            display: "flex", alignItems: "center", justifyContent: "center",
-            background: "none", border: "none", cursor: "pointer",
-            color: "var(--content-base-secondary)",
-            borderRadius: radius.primitive.full,
-            padding: 0,
-          }}
-        >
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-          </svg>
-        </button>
+        <div style={{ position: "absolute", top: spacing.primitive[2], right: spacing.primitive[2] }}>
+          <IconButton
+            variant="ghost"
+            color="neutral"
+            size="small"
+            aria-label="닫기"
+            onClick={onClose}
+          >
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+          </IconButton>
+        </div>
       )}
 
       {/* Heading */}

@@ -75,6 +75,7 @@ function Playground() {
   const [trailingMode, setTrailingMode] = useState("icons");
   const [toolbarMode, setToolbarMode] = useState("none");
   const [tabValue, setTabValue] = useState("all");
+  const [searchValue, setSearchValue] = useState("");
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -160,6 +161,8 @@ function Playground() {
                 fixed={false}
                 pad
                 scrollEffect="none"
+                searchValue={searchValue}
+                onSearchChange={setSearchValue}
               />
             </div>
           </div>

@@ -69,8 +69,7 @@ function SectionMessagePlayground() {
 
   function headingText(v: SectionMessageVariant): string {
     switch (v) {
-      case "default": return "안내 메시지";
-      case "info": return "업데이트 안내";
+      case "info": return "안내 메시지";
       case "success": return "저장이 완료되었습니다";
       case "warning": return "주의가 필요합니다";
       case "error": return "오류가 발생했습니다";
@@ -79,8 +78,7 @@ function SectionMessagePlayground() {
 
   function descriptionText(v: SectionMessageVariant): string {
     switch (v) {
-      case "default": return "확인이 필요한 정보가 있습니다.";
-      case "info": return "새로운 기능이 추가되었습니다. 지금 확인해보세요.";
+      case "info": return "확인이 필요한 정보가 있습니다.";
       case "success": return "변경 사항이 성공적으로 저장되었습니다.";
       case "warning": return "이 작업은 되돌릴 수 없습니다. 진행 전에 확인해주세요.";
       case "error": return "요청을 처리하는 중에 문제가 발생했습니다. 다시 시도해주세요.";
@@ -176,7 +174,6 @@ function SectionMessagePlayground() {
               <RadioGroup
                 label="variant"
                 options={[
-                  { value: "default", label: "default" },
                   { value: "info", label: "info" },
                   { value: "success", label: "success" },
                   { value: "warning", label: "warning" },
@@ -304,7 +301,7 @@ function DesignContent() {
         >
           <svg width="560" height="120" viewBox="0 0 560 120" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SectionMessage anatomy diagram">
             {/* Container */}
-            <rect x="20" y="20" width="520" height="80" rx="16" fill="var(--surface-info-default)" />
+            <rect x="20" y="20" width="520" height="80" rx="16" fill="var(--surface-base-alternative)" />
 
             {/* Icon area */}
             <rect x="36" y="36" width="20" height="20" rx="10" fill="var(--content-info-default)" opacity="0.85" />
@@ -381,10 +378,10 @@ function DesignContent() {
       {/* Variants */}
       <Section title="Variants">
         <p style={{ fontSize: typography.fontSize.sm, color: "var(--text-secondary)", lineHeight: 1.7, marginBottom: spacing.primitive[4] }}>
-          5가지 상태 variant로 맥락에 맞는 피드백을 제공합니다.
+          4가지 상태 variant로 맥락에 맞는 피드백을 제공합니다.
         </p>
         <div style={{ display: "flex", flexDirection: "column", gap: spacing.primitive[3] }}>
-          {(["default", "info", "success", "warning", "error"] as SectionMessageVariant[]).map((v) => (
+          {(["info", "success", "warning", "error"] as SectionMessageVariant[]).map((v) => (
             <div key={v} style={{ display: "flex", alignItems: "flex-start", gap: spacing.primitive[4] }}>
               <div style={{ flex: 1 }}>
                 <SectionMessage
@@ -487,11 +484,7 @@ function DesignContent() {
           </thead>
           <tbody>
             {[
-              ["surface.info.default", "grey.97 / grey.20", "info variant background"],
-              ["surface.success.default", "green.95 / green.20", "success variant background"],
-              ["surface.warning.default", "orange.95 / orange.20", "warning variant background"],
-              ["surface.error.default", "red.95 / red.20", "error variant background"],
-              ["surface.brand.secondary", "brand-95 / brand-20", "default variant background"],
+              ["surface.base.alternative", "grey.97 / grey.20", "all variant background"],
               ["content.base.strong", "grey.15 / grey.99", "heading text"],
               ["content.base.secondary", "grey.50 / grey.80", "description text, close icon"],
               ["icon.info / icon.success / icon.warning / icon.error", "teal.50 / green.50 / orange.50 / red.50", "variant icon color"],
@@ -514,7 +507,7 @@ function DesignContent() {
         <div style={{ display: "flex", flexDirection: "column", gap: spacing.primitive[3] }}>
           {[
             { prop: 'role="alert"', desc: 'error, warning variant에 자동 적용 — 스크린 리더가 즉시 읽음 (assertive)' },
-            { prop: 'role="status"', desc: 'default, info, success variant에 자동 적용 — 현재 작업 완료 후 읽음 (polite)' },
+            { prop: 'role="status"', desc: 'info, success variant에 자동 적용 — 현재 작업 완료 후 읽음 (polite)' },
             { prop: 'aria-live', desc: 'role에 따라 "assertive" 또는 "polite"로 자동 설정' },
             { prop: 'aria-label="닫기"', desc: '닫기 버튼에 자동 부여' },
           ].map(({ prop, desc }) => (
@@ -557,8 +550,7 @@ function DesignContent() {
 
 function variantHeading(v: SectionMessageVariant): string {
   switch (v) {
-    case "default": return "안내 메시지";
-    case "info": return "업데이트 안내";
+    case "info": return "안내 메시지";
     case "success": return "저장 완료";
     case "warning": return "주의가 필요합니다";
     case "error": return "오류가 발생했습니다";
@@ -567,8 +559,7 @@ function variantHeading(v: SectionMessageVariant): string {
 
 function variantDescription(v: SectionMessageVariant): string {
   switch (v) {
-    case "default": return "확인이 필요한 일반 정보입니다.";
-    case "info": return "새로운 기능이 추가되었습니다. 확인해보세요.";
+    case "info": return "확인이 필요한 정보가 있습니다.";
     case "success": return "변경 사항이 성공적으로 저장되었습니다.";
     case "warning": return "이 작업은 되돌릴 수 없습니다. 신중하게 진행하세요.";
     case "error": return "요청을 처리하는 중 문제가 발생했습니다.";
@@ -577,8 +568,7 @@ function variantDescription(v: SectionMessageVariant): string {
 
 function variantUse(v: SectionMessageVariant): string {
   switch (v) {
-    case "default": return "중립적 안내";
-    case "info": return "정보성 메시지";
+    case "info": return "정보성 안내";
     case "success": return "성공/완료";
     case "warning": return "주의/경고";
     case "error": return "오류/실패";
@@ -692,7 +682,7 @@ import type { SectionMessageVariant } from "@baerae-zkap/design-system";`}
       <Section title="All Variants">
         <PreviewBox>
           <div style={{ width: "100%", maxWidth: 480, display: "flex", flexDirection: "column", gap: spacing.primitive[3] }}>
-            {(["default", "info", "success", "warning", "error"] as SectionMessageVariant[]).map((v) => (
+            {(["info", "success", "warning", "error"] as SectionMessageVariant[]).map((v) => (
               <SectionMessage
                 key={v}
                 variant={v}
@@ -703,8 +693,7 @@ import type { SectionMessageVariant } from "@baerae-zkap/design-system";`}
           </div>
         </PreviewBox>
         <CodeBlock
-          code={`<SectionMessage variant="default" heading="안내 메시지" description="확인이 필요한 일반 정보입니다." />
-<SectionMessage variant="info" heading="업데이트 안내" description="새로운 기능이 추가되었습니다." />
+          code={`<SectionMessage variant="info" heading="안내 메시지" description="확인이 필요한 정보가 있습니다." />
 <SectionMessage variant="success" heading="저장 완료" description="변경 사항이 성공적으로 저장되었습니다." />
 <SectionMessage variant="warning" heading="주의가 필요합니다" description="이 작업은 되돌릴 수 없습니다." />
 <SectionMessage variant="error" heading="오류가 발생했습니다" description="요청 처리 중 문제가 발생했습니다." />`}
@@ -718,7 +707,7 @@ import type { SectionMessageVariant } from "@baerae-zkap/design-system";`}
           props={[
             {
               name: "variant",
-              type: '"default" | "info" | "success" | "warning" | "error"',
+              type: '"info" | "success" | "warning" | "error"',
               required: false,
               defaultVal: '"info"',
               description: "상태 variant — 배경 색상과 기본 아이콘을 결정합니다.",

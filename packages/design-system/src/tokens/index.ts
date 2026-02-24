@@ -34,8 +34,8 @@ export type { RadiusToken } from './radius';
 export { opacity, borderWidth, zIndex } from './general';
 export type { OpacityToken, BorderWidthToken, ZIndexToken } from './general';
 
-export { duration, easing, transitions } from './motion';
-export type { DurationToken, EasingToken, TransitionsToken } from './motion';
+export { duration, easing, transitions, skeleton } from './motion';
+export type { DurationToken, EasingToken, TransitionsToken, SkeletonMotionToken } from './motion';
 
 // Convenience re-exports
 export const tokens = {

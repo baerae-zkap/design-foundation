@@ -13,8 +13,9 @@ import { cssVarColors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
+import { IconButton } from '../IconButton/IconButton';
 
-export type SectionMessageVariant = 'default' | 'info' | 'success' | 'warning' | 'error';
+export type SectionMessageVariant = 'info' | 'success' | 'warning' | 'error';
 
 export interface SectionMessageProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   /** Status variant — controls background color and default icon. Default: 'info' */
@@ -37,39 +38,25 @@ const variantConfig: Record<SectionMessageVariant, {
   bg: string;
   iconColor: string;
 }> = {
-  default: {
-    bg: cssVarColors.surface.brand.secondary,
+  info: {
+    bg: cssVarColors.surface.base.alternative,
     iconColor: cssVarColors.content.brand.default,
   },
-  info: {
-    bg: cssVarColors.surface.info.default,
-    iconColor: cssVarColors.icon.info,
-  },
   success: {
-    bg: cssVarColors.surface.success.default,
+    bg: cssVarColors.surface.base.alternative,
     iconColor: cssVarColors.icon.success,
   },
   warning: {
-    bg: cssVarColors.surface.warning.default,
+    bg: cssVarColors.surface.base.alternative,
     iconColor: cssVarColors.icon.warning,
   },
   error: {
-    bg: cssVarColors.surface.error.default,
+    bg: cssVarColors.surface.base.alternative,
     iconColor: cssVarColors.icon.error,
   },
 };
 
 // ─── Built-in variant icons (inline SVG 20×20) ───────────────────────────────
-
-function DefaultIcon({ color }: { color: string }): JSX.Element {
-  return (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <circle cx="10" cy="10" r="8.5" stroke={color} strokeWidth="1.5" />
-      <rect x="9.25" y="9" width="1.5" height="5.5" rx="0.75" fill={color} />
-      <circle cx="10" cy="6.5" r="0.875" fill={color} />
-    </svg>
-  );
-}
 
 function InfoIcon({ color }: { color: string }): JSX.Element {
   return (
@@ -119,7 +106,6 @@ function CloseIcon(): JSX.Element {
 
 function getDefaultIcon(variant: SectionMessageVariant, color: string): JSX.Element {
   switch (variant) {
-    case 'default': return <DefaultIcon color={color} />;
     case 'info': return <InfoIcon color={color} />;
     case 'success': return <SuccessIcon color={color} />;
     case 'warning': return <WarningIcon color={color} />;
@@ -199,22 +185,6 @@ export function SectionMessage({
     marginLeft: -spacing.primitive[2], // compensate TextButton paddingLeft (8px) for visual alignment
   };
 
-  const closeButtonStyle: React.CSSProperties = {
-    flexShrink: 0,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 24,
-    height: 24,
-    padding: 0,
-    border: 'none',
-    background: 'none',
-    cursor: 'pointer',
-    color: cssVarColors.content.base.secondary,
-    borderRadius: radius.primitive.xs,
-    marginTop: -2, // optical alignment
-  };
-
   return (
     <div
       role={role}
@@ -248,14 +218,16 @@ export function SectionMessage({
 
       {/* Close button */}
       {onClose && (
-        <button
-          type="button"
+        <IconButton
+          variant="ghost"
+          color="neutral"
+          size="small"
           onClick={onClose}
-          style={closeButtonStyle}
           aria-label="닫기"
+          style={{ flexShrink: 0, marginTop: -2 }}
         >
           <CloseIcon />
-        </button>
+        </IconButton>
       )}
     </div>
   );

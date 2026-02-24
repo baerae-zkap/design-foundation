@@ -159,7 +159,6 @@ function Playground() {
   const [position, setPosition] = useState<TooltipPosition>("bottom");
   const [size, setSize] = useState<TooltipSize>("medium");
   const [mode, setMode] = useState<TooltipMode>("hover");
-  const [shortcutText, setShortcutText] = useState("");
 
   return (
     <div style={{ marginBottom: spacing.primitive[8] }}>
@@ -172,7 +171,6 @@ function Playground() {
               position={position}
               size={size}
               mode={mode}
-              shortcut={shortcutText || undefined}
             >
               <Button buttonType="weak" color="neutral" size="medium" onClick={() => {}}>
                 트리거 버튼
@@ -214,31 +212,8 @@ function Playground() {
                 options={[
                   { value: "hover", label: "Hover" },
                   { value: "click", label: "Click" },
-                  { value: "always", label: "Always" },
                 ]}
               />
-              <div>
-                <div style={{ fontSize: typography.fontSize.xs, fontWeight: typography.fontWeight.semibold, color: "var(--content-base-secondary)", marginBottom: spacing.primitive[2] }}>
-                  Shortcut
-                </div>
-                <input
-                  type="text"
-                  value={shortcutText}
-                  onChange={(e) => setShortcutText(e.target.value)}
-                  placeholder="e.g. Ctrl+S"
-                  style={{
-                    width: "100%",
-                    padding: `${spacing.primitive[2]}px ${spacing.primitive[3]}px`,
-                    fontSize: typography.fontSize.sm,
-                    border: "1px solid var(--divider)",
-                    borderRadius: radius.primitive.md,
-                    backgroundColor: "var(--surface-base-default)",
-                    color: "var(--content-base-default)",
-                    outline: "none",
-                    boxSizing: "border-box",
-                  }}
-                />
-              </div>
             </div>
           </div>
         </div>

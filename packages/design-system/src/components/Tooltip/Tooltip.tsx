@@ -220,7 +220,11 @@ export function Tooltip({
 
   const [mounted, setMounted] = useState(false);
   const [visible, setVisible] = useState(false);
-  const [tooltipStyle, setTooltipStyle] = useState<React.CSSProperties>({});
+  const [tooltipStyle, setTooltipStyle] = useState<React.CSSProperties>({
+    position: 'fixed',
+    top: -9999,
+    left: -9999,
+  });
 
   const triggerRef = useRef<HTMLSpanElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
@@ -234,11 +238,13 @@ export function Tooltip({
     injectStyles();
   }, []);
 
-  // Mount/unmount animation
+  // Mount/unmount animation (double rAF to ensure DOM paint before animating)
   useEffect(() => {
     if (isOpen) {
       setMounted(true);
-      const raf = requestAnimationFrame(() => setVisible(true));
+      const raf = requestAnimationFrame(() => {
+        requestAnimationFrame(() => setVisible(true));
+      });
       return () => cancelAnimationFrame(raf);
     } else {
       setVisible(false);
@@ -254,7 +260,7 @@ export function Tooltip({
       const tooltipRect = tooltipRef.current.getBoundingClientRect();
       setTooltipStyle(getTooltipStyle(triggerRect, tooltipRect, position));
     }
-  }, [isOpen, mounted, position, label, shortcut]);
+  }, [isOpen, mounted, visible, position, label, shortcut]);
 
   // Click outside handler for click mode
   useEffect(() => {
@@ -316,7 +322,8 @@ export function Tooltip({
     justifyContent: 'center',
     gap: spacing.primitive[1],
     pointerEvents: 'none',
-    animation: `${visible ? '_zkap_tooltip_in' : '_zkap_tooltip_out'} ${ANIMATION_DURATION}ms ${easing.easeOut} both`,
+    opacity: visible ? 1 : 0,
+    animation: visible ? `_zkap_tooltip_in ${ANIMATION_DURATION}ms ${easing.easeOut} both` : 'none',
   };
 
   const arrowBasePos = getArrowPosition(position);

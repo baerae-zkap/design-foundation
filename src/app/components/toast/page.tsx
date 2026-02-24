@@ -24,7 +24,7 @@ function Toast({ message, type = "info", isVisible, onClose }: ToastProps) {
 
   const typeStyles: Record<ToastType, { bg: string; border: string; icon: React.ReactNode }> = {
     success: {
-      bg: "var(--surface-success-default)",
+      bg: "var(--surface-base-alternative)",
       border: "var(--content-success-default)",
       icon: (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--content-success-default)" strokeWidth="2">
@@ -34,7 +34,7 @@ function Toast({ message, type = "info", isVisible, onClose }: ToastProps) {
       ),
     },
     error: {
-      bg: "var(--surface-error-default)",
+      bg: "var(--surface-base-alternative)",
       border: "var(--content-error-default)",
       icon: (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--content-error-default)" strokeWidth="2">
@@ -44,7 +44,7 @@ function Toast({ message, type = "info", isVisible, onClose }: ToastProps) {
       ),
     },
     warning: {
-      bg: "var(--surface-warning-default)",
+      bg: "var(--surface-base-alternative)",
       border: "var(--content-warning-default)",
       icon: (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--content-warning-default)" strokeWidth="2">
@@ -54,7 +54,7 @@ function Toast({ message, type = "info", isVisible, onClose }: ToastProps) {
       ),
     },
     info: {
-      bg: "var(--surface-info-default)",
+      bg: "var(--surface-base-alternative)",
       border: "var(--brand-primary)",
       icon: (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--brand-primary)" strokeWidth="2">
@@ -205,7 +205,7 @@ showToast("새로운 알림이 있습니다.", "info");`}</code>
             };
             const typeStyles: Record<ToastType, { bg: string; border: string; icon: React.ReactNode }> = {
               success: {
-                bg: "var(--surface-success-default)",
+                bg: "var(--surface-base-alternative)",
                 border: "var(--content-success-default)",
                 icon: (
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--content-success-default)" strokeWidth="2">
@@ -215,7 +215,7 @@ showToast("새로운 알림이 있습니다.", "info");`}</code>
                 ),
               },
               error: {
-                bg: "var(--surface-error-default)",
+                bg: "var(--surface-base-alternative)",
                 border: "var(--content-error-default)",
                 icon: (
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--content-error-default)" strokeWidth="2">
@@ -225,7 +225,7 @@ showToast("새로운 알림이 있습니다.", "info");`}</code>
                 ),
               },
               warning: {
-                bg: "var(--surface-warning-default)",
+                bg: "var(--surface-base-alternative)",
                 border: "var(--content-warning-default)",
                 icon: (
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--content-warning-default)" strokeWidth="2">
@@ -235,7 +235,7 @@ showToast("새로운 알림이 있습니다.", "info");`}</code>
                 ),
               },
               info: {
-                bg: "var(--surface-info-default)",
+                bg: "var(--surface-base-alternative)",
                 border: "var(--brand-primary)",
                 icon: (
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--brand-primary)" strokeWidth="2">

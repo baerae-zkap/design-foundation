@@ -30,6 +30,7 @@ import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
 import { zIndex } from '../../tokens/general';
 import { duration, easing } from '../../tokens/motion';
+import { IconButton } from '../IconButton/IconButton';
 
 export type SnackbarPosition = 'bottom-center' | 'bottom-left' | 'bottom-right';
 
@@ -153,7 +154,7 @@ export function Snackbar({
     minWidth: 280,
     maxWidth: 420,
     padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`,
-    backgroundColor: cssVarColors.inverse.surface.default,
+    backgroundColor: cssVarColors.surface.base.alternative,
     borderRadius: radius.primitive.md,
     pointerEvents: 'auto',
     animation: `${visible ? '_zkap_sb_in' : '_zkap_sb_out'} ${ANIM_DURATION}ms ${easing.easeOut} both`,
@@ -166,7 +167,7 @@ export function Snackbar({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    color: cssVarColors.inverse.icon.default,
+    color: cssVarColors.icon.default,
   };
 
   const messageStyle: React.CSSProperties = {
@@ -174,7 +175,7 @@ export function Snackbar({
     fontSize: typography.fontSize.sm,
     fontWeight: typography.fontWeight.medium,
     lineHeight: String(typography.lineHeight.sm / typography.fontSize.sm),
-    color: cssVarColors.inverse.content.default,
+    color: cssVarColors.content.base.default,
     wordBreak: 'keep-all',
     overflowWrap: 'break-word',
   };
@@ -183,7 +184,7 @@ export function Snackbar({
     flexShrink: 0,
     display: 'flex',
     alignItems: 'center',
-    color: cssVarColors.inverse.content.default,
+    color: cssVarColors.content.brand.default,
   };
 
 
@@ -210,7 +211,16 @@ export function Snackbar({
         )}
 
         {closable && (
-          <SnackbarCloseButton onClick={onClose} />
+          <IconButton
+            variant="ghost"
+            color="neutral"
+            size="small"
+            onClick={onClose}
+            aria-label="닫기"
+            style={{ flexShrink: 0, marginRight: -spacing.primitive[1] }}
+          >
+            <CloseIcon />
+          </IconButton>
         )}
       </div>
     </div>,
@@ -220,53 +230,3 @@ export function Snackbar({
 
 Snackbar.displayName = 'Snackbar';
 
-// ─── Internal close button with inverse hover/press ──────────────────────────
-
-function SnackbarCloseButton({ onClick }: { onClick?: () => void }) {
-  const [hovered, setHovered] = useState(false);
-  const [pressed, setPressed] = useState(false);
-
-  const style: React.CSSProperties = {
-    position: 'relative',
-    flexShrink: 0,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 28,
-    height: 28,
-    padding: 0,
-    border: 'none',
-    borderRadius: radius.primitive.sm,
-    cursor: 'pointer',
-    color: cssVarColors.inverse.content.secondary,
-    backgroundColor: 'transparent',
-    transition: 'background-color 150ms ease, transform 150ms ease',
-    transform: pressed ? 'scale(0.92)' : undefined,
-    marginRight: -spacing.primitive[1],
-  };
-  const overlayStyle: React.CSSProperties = {
-    position: 'absolute',
-    inset: 0,
-    borderRadius: radius.primitive.sm,
-    pointerEvents: 'none',
-    backgroundColor: cssVarColors.inverse.content.secondary,
-    opacity: pressed ? 0.2 : hovered ? 0.1 : 0,
-    transition: 'opacity 150ms ease',
-  };
-
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-label="닫기"
-      style={style}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => { setHovered(false); setPressed(false); }}
-      onMouseDown={() => setPressed(true)}
-      onMouseUp={() => setPressed(false)}
-    >
-      <span aria-hidden="true" style={overlayStyle} />
-      <CloseIcon />
-    </button>
-  );
-}

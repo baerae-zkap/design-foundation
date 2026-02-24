@@ -99,16 +99,6 @@ Toggles on click. Closes on outside click or Escape key. Useful for touch-friend
 </Tooltip>
 ```
 
-### always
-
-Always visible. Use sparingly — only for onboarding callouts or persistent labels.
-
-```tsx
-<Tooltip label="Start here" mode="always" position="right">
-  <Button buttonType="filled" color="primary">Get started</Button>
-</Tooltip>
-```
-
 ## Controlled Mode
 
 Override internal state by providing `open` and `onOpenChange`:
@@ -185,14 +175,13 @@ Show the tooltip initially without controlling it:
 |-------|---------|---------|
 | `hover` | mouseenter / focus | mouseleave / blur |
 | `click` | click | outside click / Escape |
-| `always` | — (always visible) | — |
 
 ## Behavior
 
 - Tooltip is portaled to `document.body` to avoid overflow clipping.
-- Position is recalculated via `useLayoutEffect` each time the tooltip mounts or the trigger/label changes.
+- Position is recalculated via `useLayoutEffect` each time the tooltip mounts, becomes visible, or the trigger/label changes. The tooltip is initially rendered off-screen (`position: fixed`) for accurate measurement before being placed.
 - Max width is 280px; labels shorter than 30 characters render on a single line (`white-space: nowrap`).
-- Entrance animation: scale from 0.94 + fade in. Exit: reverse.
+- Entrance animation: scale from 0.94 + fade in (double requestAnimationFrame ensures no flicker on first hover). No exit animation — tooltip fades via opacity to prevent flash artifacts.
 - Escape key closes the tooltip in `hover` and `click` modes.
 - The tooltip element itself has `pointer-events: none` so it never captures mouse events.
 
@@ -209,7 +198,6 @@ Show the tooltip initially without controlling it:
 - Keep labels short — one to five words. If you need a sentence or more, use Popover instead.
 - Use `shortcut` to surface keyboard shortcuts for power users without adding visual clutter.
 - Prefer `position="bottom"` or `position="top"` as defaults; use `left`/`right` only when vertical space is constrained.
-- Do not use `mode="always"` outside of focused onboarding flows. Persistent tooltips add visual noise.
 - Never put critical information solely in a tooltip — users on touch devices may not discover it.
 
 ## Related Components

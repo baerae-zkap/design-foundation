@@ -40,3 +40,14 @@ export const transitions = {
 } as const;
 
 export type TransitionsToken = typeof transitions;
+
+/** Component-specific animation tokens from interaction-tokens.json */
+export const skeleton = {
+  pulse: {
+    duration: 2000,
+    opacityMin: 0.6,
+    opacityMax: 1.0,
+  },
+} as const;
+
+export type SkeletonMotionToken = typeof skeleton;

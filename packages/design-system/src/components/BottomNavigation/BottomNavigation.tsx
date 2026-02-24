@@ -63,7 +63,7 @@ interface TabItemProps {
 function TabItem({ item, isActive, itemCount, onSelect }: TabItemProps) {
   const { isPressed, isHovered, handlers } = usePressable<HTMLButtonElement>();
 
-  // Monochromatic: active = primary text, inactive = secondary text
+  // Monochromatic: active = strong text, inactive = secondary text
   const iconColor = isActive
     ? cssVarColors.content.base.default
     : cssVarColors.content.base.secondary;

@@ -132,16 +132,19 @@ function DeviceFrame({
   return (
     <div style={{
       width: 320,
-      borderRadius: radius.primitive.lg,
-      border: "1px solid var(--divider)",
+      borderRadius: radius.primitive['2xl'],
+      boxShadow: "0 0 0 1px var(--divider)",
       overflow: "hidden",
-      isolation: "isolate",
+      display: "flex",
+      flexDirection: "column",
     }}>
+      {/* Screen area */}
+      <div style={{ flex: 1, minHeight: 160, backgroundColor: "var(--surface-base-default)" }} />
       <BottomNavigation
         items={items}
         activeIndex={activeIndex}
         onChange={onChange}
-        style={{ borderRadius: `0 0 ${radius.primitive.lg}px ${radius.primitive.lg}px` }}
+        style={{ backdropFilter: 'none', WebkitBackdropFilter: 'none' }}
       />
     </div>
   );
@@ -194,7 +197,7 @@ function Playground() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            backgroundColor: "var(--surface-base-default)",
+            backgroundColor: "var(--surface-base-alternative)",
           }}>
             <DeviceFrame items={items} activeIndex={active} onChange={setActiveIndex} />
           </div>

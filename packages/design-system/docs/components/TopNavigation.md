@@ -40,6 +40,7 @@ import type {
 | `scrollEffect` | `'none' \| 'floating' \| 'overlay'` | `'none'` | No | Effect applied when the page is scrolled. Only active when `fixed` is `true`. |
 | `searchPlaceholder` | `string` | `'검색어를 입력하세요.'` | No | Placeholder text for the search input in `search` variant. |
 | `searchValue` | `string` | — | No | Current value displayed in the search field in `search` variant. |
+| `onSearchChange` | `(value: string) => void` | — | No | Called when the search input value changes in `search` variant. |
 | `className` | `string` | — | No | Additional CSS class on the root `<nav>` element. |
 | `aria-label` | `string` | — | No | Accessible label for the `<nav>` landmark. |
 
@@ -122,14 +123,16 @@ Always shows a drop shadow regardless of scroll position — for headers that vi
 
 ### Search
 
-Replaces the title area with a read-only search field (acts as a tap target to open a search screen).
+Replaces the title area with a real `SearchField` component. Supports both interactive input (via `onSearchChange`) and read-only tap target modes.
 
 ```tsx
+// Interactive search input
 <TopNavigation
   variant="search"
   leadingButton={<IconButton aria-label="Back"><BackIcon /></IconButton>}
   searchPlaceholder="Search products..."
   searchValue={query}
+  onSearchChange={setQuery}
 />
 ```
 
@@ -172,7 +175,7 @@ Attach a `Tab` or `CategoryNavigation` below the header row.
 - Renders as a `<nav>` landmark element.
 - Provide `aria-label` when multiple `<nav>` elements exist on the page to distinguish them.
 - `leadingButton` and `trailingButtons` should be `IconButton` components, each with a descriptive `aria-label`.
-- In `search` variant, the search field displays the current `searchValue` or `searchPlaceholder`; wire the container to open a proper search input on tap.
+- In `search` variant, a real `SearchField` component is rendered with `aria-label` set to the `searchPlaceholder` value. Use `onSearchChange` for interactive search input.
 - Title text uses `pointer-events: none` in centered layouts to prevent blocking button interaction.
 
 ## Do / Don't

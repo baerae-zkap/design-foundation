@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { PlatformTabs, CodeBlock, PreviewBox, Platform, highlightCode } from "@/components/PlatformTabs";
-import { Snackbar, typography, spacing, radius } from "@baerae-zkap/design-system";
+import { Snackbar, TextButton, IconButton, typography, spacing, radius } from "@baerae-zkap/design-system";
 import { Section, Subsection, InlineCode } from "@/components/docs/Section";
 import { PropsTable } from "@/components/docs/PropsTable";
 import { DoCard, DontCard } from "@/components/docs/Cards";
@@ -132,23 +132,9 @@ function CheckCircleIcon() {
 
 function ActionButton({ children, onClick }: { children: React.ReactNode; onClick?: () => void }) {
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      style={{
-        background: "none",
-        border: "none",
-        cursor: "pointer",
-        padding: `${spacing.primitive[1]}px ${spacing.primitive[2]}px`,
-        fontSize: typography.fontSize.sm,
-        fontWeight: typography.fontWeight.semibold,
-        color: "var(--inverse-content-default)",
-        borderRadius: radius.primitive.xs,
-        whiteSpace: "nowrap",
-      }}
-    >
+    <TextButton color="primary" size="small" onClick={onClick}>
       {children}
-    </button>
+    </TextButton>
   );
 }
 
@@ -276,10 +262,10 @@ function DesignContent() {
           </thead>
           <tbody>
             {[
-              ["inverse.surface.default", "var(--inverse-surface-default)", "배경색"],
-              ["inverse.content.default", "var(--inverse-content-default)", "메시지 텍스트"],
-              ["inverse.content.secondary", "var(--inverse-content-secondary)", "닫기 버튼 아이콘"],
-              ["inverse.icon.default", "var(--inverse-icon-default)", "리딩 아이콘"],
+              ["surface.base.alternative", "var(--surface-base-alternative)", "배경색"],
+              ["content.base.default", "var(--content-base-default)", "메시지 텍스트"],
+              ["content.base.secondary", "var(--content-base-secondary)", "닫기 버튼 아이콘"],
+              ["icon.default", "var(--icon-default)", "리딩 아이콘"],
               ["radius.primitive.md", "12px", "컨테이너 border-radius"],
               ["spacing.primitive[3]", "12px", "수직 패딩"],
               ["spacing.primitive[4]", "16px", "수평 패딩"],
@@ -319,9 +305,9 @@ function DesignContent() {
 // ─── Anatomy diagram ──────────────────────────────────────────────────────────
 
 function SnackbarAnatomy() {
-  const bg = "var(--inverse-surface-default)";
-  const textColor = "var(--inverse-content-default)";
-  const secondaryColor = "var(--inverse-content-secondary)";
+  const bg = "var(--surface-base-alternative)";
+  const textColor = "var(--content-base-default)";
+  const secondaryColor = "var(--content-base-secondary)";
 
   return (
     <div style={{ background: "var(--surface-base-alternative)", borderRadius: radius.primitive.md, padding: spacing.primitive[6] }}>
@@ -388,12 +374,12 @@ function SnackbarPreview({
         minWidth: 260,
         maxWidth: 400,
         padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`,
-        backgroundColor: "var(--inverse-surface-default)",
+        backgroundColor: "var(--surface-base-alternative)",
         borderRadius: radius.primitive.md,
       }}
     >
       {icon && (
-        <span style={{ flexShrink: 0, width: 20, height: 20, display: "flex", alignItems: "center", justifyContent: "center", color: "var(--inverse-icon-default)" }}>
+        <span style={{ flexShrink: 0, width: 20, height: 20, display: "flex", alignItems: "center", justifyContent: "center", color: "var(--icon-default)" }}>
           {icon}
         </span>
       )}
@@ -401,39 +387,22 @@ function SnackbarPreview({
         flex: 1,
         fontSize: typography.fontSize.sm,
         fontWeight: typography.fontWeight.medium,
-        color: "var(--inverse-content-default)",
+        color: "var(--content-base-default)",
         wordBreak: "keep-all",
       }}>
         {message}
       </span>
       {action && (
-        <span style={{ flexShrink: 0, color: "var(--inverse-content-default)" }}>
+        <span style={{ flexShrink: 0, color: "var(--content-brand-default)" }}>
           {action}
         </span>
       )}
       {closable && (
-        <button
-          type="button"
-          style={{
-            flexShrink: 0,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: 24,
-            height: 24,
-            padding: 0,
-            border: "none",
-            background: "none",
-            cursor: "pointer",
-            color: "var(--inverse-content-secondary)",
-            borderRadius: radius.primitive.xs,
-          }}
-          aria-label="닫기"
-        >
+        <IconButton variant="ghost" color="neutral" size="small" aria-label="닫기" style={{ flexShrink: 0 }}>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path d="M4 4L12 12M12 4L4 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
           </svg>
-        </button>
+        </IconButton>
       )}
     </div>
   );
@@ -491,7 +460,7 @@ function WebContent() {
   onClose={() => setOpen(false)}
   action={
     <button
-      style={{ color: 'var(--inverse-content-default)', fontWeight: 600, background: 'none', border: 'none', cursor: 'pointer' }}
+      style={{ color: 'var(--content-brand-default)', fontWeight: 600, background: 'none', border: 'none', cursor: 'pointer' }}
       onClick={handleUndo}
     >
       실행 취소

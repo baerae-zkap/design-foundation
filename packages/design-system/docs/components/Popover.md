@@ -109,7 +109,7 @@ const [shown, setShown] = useState(!localStorage.getItem('hint-dismissed'));
 | `heading` | `string` | — | Optional bold title above the description |
 | `action` | `ReactNode` | — | Primary action, right-aligned (TextButton recommended) |
 | `subAction` | `ReactNode` | — | Secondary action, left-aligned (TextButton color="muted" recommended) |
-| `showClose` | `boolean` | `false` | Shows an X close button in the top-right corner |
+| `showClose` | `boolean` | `false` | Shows an IconButton close button in the top-right corner |
 | `size` | `'sm' \| 'md'` | `'md'` | Controls max width: sm=240px, md=320px |
 | `className` | `string` | — | Additional CSS class |
 | `style` | `CSSProperties` | — | Inline styles, commonly used for positioning |
@@ -124,7 +124,7 @@ const [shown, setShown] = useState(!localStorage.getItem('hint-dismissed'));
 ## Accessibility
 
 - The container has `role="dialog"` and `aria-modal="false"` (non-blocking).
-- If `showClose` is true, the close button has `aria-label="닫기"`.
+- If `showClose` is true, an `IconButton` (ghost, neutral, small) is rendered with `aria-label="닫기"`.
 - Popover does not trap focus — it is a non-modal overlay.
 - When used as an onboarding hint, ensure it does not obscure critical interactive elements.
 

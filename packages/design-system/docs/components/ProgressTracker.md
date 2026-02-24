@@ -44,6 +44,7 @@ import type {
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
 | `label` | `string` | — | No | Text label rendered below (horizontal) or beside (vertical) the step node. Only shown in `default` variant. |
+| `description` | `string` | — | No | Secondary description text rendered below the label. Only shown in `default` variant. Uses smaller font size (`2xs`) and secondary color. |
 | `icon` | `ReactNode` | — | No | Custom icon inside the node. Shown in `default` variant when step is not completed-with-check. |
 
 ## Basic Usage
@@ -99,6 +100,20 @@ Small dots with no labels or numbers — suitable for tight spaces like carousel
 
 ```tsx
 <ProgressTracker steps={4} activeStep={1} variant="compact" />
+```
+
+### With Descriptions
+
+```tsx
+<ProgressTracker
+  steps={[
+    { label: 'Cart', description: 'Review items' },
+    { label: 'Shipping', description: 'Enter address' },
+    { label: 'Payment', description: 'Choose method' },
+    { label: 'Confirm', description: 'Place order' },
+  ]}
+  activeStep={1}
+/>
 ```
 
 ### Vertical Orientation
@@ -169,7 +184,8 @@ Pass a plain number to generate steps without labels or icons.
 | `borderWidth.strong` | Connector thickness |
 | `spacing.primitive[2]`, `spacing.primitive[6]` | Node sizes (compact vs default) |
 | `spacing.primitive[3]`, `spacing.primitive[4]`, `spacing.primitive[6]` | Connector and layout gaps |
-| `typography.fontSize.compact`, `typography.fontWeight.medium` | Node number text |
+| `typography.fontSize.compact`, `typography.fontWeight.medium` | Node number text and step label text |
+| `typography.fontSize['2xs']`, `typography.fontWeight.regular` | Step description text |
 | `duration.fast`, `easing.easeOut` | Node size and color transitions |
 
 ## Related Components

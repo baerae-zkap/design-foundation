@@ -127,8 +127,10 @@
       },
       "skeleton": {
         "pulse": {
-          "duration": "1500ms",
+          "duration": "2000ms",
           "easing": "{easing.easeInOut}",
+          "opacityMin": 0.6,
+          "opacityMax": 1.0,
           "_comment": "스켈레톤 펄스 애니메이션 (반복)"
         }
       },

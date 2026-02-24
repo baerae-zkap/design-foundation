@@ -32,17 +32,17 @@ const descText = {
 } as const;
 
 const onboardingSteps: ProgressTrackerStep[] = [
-  { label: "지갑 생성" },
-  { label: "신원 확인" },
-  { label: "입금" },
-  { label: "거래 시작" },
+  { label: "약관 동의", description: "서비스 이용약관에 동의합니다" },
+  { label: "정보 입력", description: "기본 정보를 입력합니다" },
+  { label: "본인 인증", description: "휴대폰 인증을 진행합니다" },
+  { label: "가입 완료", description: "회원가입이 완료됩니다" },
 ];
 
 const iconSteps: ProgressTrackerStep[] = [
-  { label: "지갑 생성", icon: <span style={{ fontSize: typography.fontSize.xs }}>W</span> },
-  { label: "신원 확인", icon: <span style={{ fontSize: typography.fontSize.xs }}>ID</span> },
-  { label: "입금", icon: <span style={{ fontSize: typography.fontSize.xs }}>₿</span> },
-  { label: "거래 시작", icon: <span style={{ fontSize: typography.fontSize.xs }}>↗</span> },
+  { label: "약관 동의", icon: <span style={{ fontSize: typography.fontSize.xs }}>📋</span> },
+  { label: "정보 입력", icon: <span style={{ fontSize: typography.fontSize.xs }}>✏️</span> },
+  { label: "본인 인증", icon: <span style={{ fontSize: typography.fontSize.xs }}>📱</span> },
+  { label: "가입 완료", icon: <span style={{ fontSize: typography.fontSize.xs }}>✅</span> },
 ];
 
 
@@ -103,10 +103,10 @@ function Playground() {
     return `import { ProgressTracker } from '@baerae-zkap/design-system';
 
 const steps = [
-  { label: '지갑 생성' },
-  { label: '신원 확인' },
-  { label: '입금' },
-  { label: '거래 시작' },
+  { label: '약관 동의' },
+  { label: '정보 입력' },
+  { label: '본인 인증' },
+  { label: '가입 완료' },
 ];
 
 <ProgressTracker
@@ -607,10 +607,10 @@ function WebContent() {
   const basicCode = `import { ProgressTracker } from '@baerae-zkap/design-system';
 
 const steps = [
-  { label: '지갑 생성' },
-  { label: '신원 확인' },
-  { label: '입금' },
-  { label: '거래 시작' },
+  { label: '약관 동의' },
+  { label: '정보 입력' },
+  { label: '본인 인증' },
+  { label: '가입 완료' },
 ];
 
 <ProgressTracker steps={steps} activeStep={1} />`;
@@ -618,10 +618,10 @@ const steps = [
   const compactCode = `<ProgressTracker steps={4} activeStep={2} variant="compact" />`;
 
   const verticalCode = `const steps = [
-  { label: '지갑 생성' },
-  { label: '신원 확인' },
-  { label: '입금' },
-  { label: '거래 시작' },
+  { label: '약관 동의' },
+  { label: '정보 입력' },
+  { label: '본인 인증' },
+  { label: '가입 완료' },
 ];
 
 <ProgressTracker
@@ -637,10 +637,10 @@ const steps = [
 />`;
 
   const withIconsCode = `const steps = [
-  { label: '지갑 생성', icon: <WalletIcon /> },
-  { label: '신원 확인', icon: <UserIcon /> },
-  { label: '입금', icon: <DepositIcon /> },
-  { label: '거래 시작', icon: <TradeIcon /> },
+  { label: '약관 동의', icon: <DocIcon /> },
+  { label: '정보 입력', icon: <EditIcon /> },
+  { label: '본인 인증', icon: <PhoneIcon /> },
+  { label: '가입 완료', icon: <CheckIcon /> },
 ];
 
 <ProgressTracker

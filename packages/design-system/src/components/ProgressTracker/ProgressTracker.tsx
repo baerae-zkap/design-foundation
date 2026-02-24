@@ -11,6 +11,7 @@ import { duration, easing } from '../../tokens/motion';
 
 export interface ProgressTrackerStep {
   label?: string;
+  description?: string;
   icon?: ReactNode;
 }
 
@@ -98,6 +99,7 @@ export function ProgressTracker({
         const isCompleted = state === 'completed';
         const nodeCurrentSize = isActive ? activeNodeSize : nodeSize;
         const showLabel = !isCompact && Boolean(step.label);
+        const showDescription = !isCompact && Boolean(step.description);
 
         const labelColor =
           state === 'active'
@@ -166,7 +168,7 @@ export function ProgressTracker({
           color: labelColor,
           fontSize: typography.fontSize.compact,
           lineHeight: `${typography.lineHeight.compact}px`,
-          fontWeight: typography.fontWeight.regular,
+          fontWeight: typography.fontWeight.medium,
           textAlign: isVertical ? 'left' : 'center',
           whiteSpace: 'nowrap',
           transition: transitions.all,
@@ -215,7 +217,28 @@ export function ProgressTracker({
               <div style={nodeStyle}>
                 {!isCompact && <span style={nodeContentStyle}>{nodeContent}</span>}
               </div>
-              {showLabel && <span style={labelStyle}>{step.label}</span>}
+              {(showLabel || showDescription) && (
+                <div style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 0,
+                  textAlign: isVertical ? 'left' : 'center',
+                }}>
+                  {showLabel && <span style={labelStyle}>{step.label}</span>}
+                  {showDescription && (
+                    <span style={{
+                      color: cssVarColors.content.base.secondary,
+                      fontSize: typography.fontSize['2xs'],
+                      lineHeight: `${typography.lineHeight['2xs']}px`,
+                      fontWeight: typography.fontWeight.regular,
+                      whiteSpace: isVertical ? 'normal' : 'nowrap',
+                      transition: transitions.all,
+                    }}>
+                      {step.description}
+                    </span>
+                  )}
+                </div>
+              )}
             </div>
 
             {index < stepItems.length - 1 && (

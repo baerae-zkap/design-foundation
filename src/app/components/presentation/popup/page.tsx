@@ -70,7 +70,6 @@ function MockPopup({
           justifyContent: isEmphasize ? "flex-start" : "center",
           position: "relative",
           padding: `${spacing.primitive[3]}px ${config.padding}px`,
-          borderBottom: "1px solid var(--divider)",
           minHeight: 44,
         }}>
           {title && (
@@ -120,7 +119,6 @@ function MockPopup({
       {actions && actions.length > 0 && (
         <div style={{
           padding: `${spacing.primitive[3]}px ${config.padding}px`,
-          borderTop: "1px solid var(--divider)",
           display: "flex",
           gap: spacing.primitive[2],
         }}>
@@ -128,6 +126,24 @@ function MockPopup({
             <Button buttonType="filled" color="primary" size="medium" layout="fillWidth" onClick={() => {}}>
               {actions[0].label}
             </Button>
+          ) : actionLayout === "cancel" ? (
+            <Button buttonType="weak" color="neutral" size="medium" layout="fillWidth" onClick={() => {}}>
+              {actions[0].label}
+            </Button>
+          ) : actionLayout === "compact" ? (
+            <div style={{ display: "flex", gap: spacing.primitive[2], justifyContent: "flex-end", width: "100%" }}>
+              {actions.map((a, i) => (
+                <Button
+                  key={i}
+                  buttonType={a.variant ?? (i === actions.length - 1 ? "filled" : "weak")}
+                  color={i === actions.length - 1 ? "primary" : "neutral"}
+                  size="small"
+                  onClick={() => {}}
+                >
+                  {a.label}
+                </Button>
+              ))}
+            </div>
           ) : (
             actions.map((a, i) => (
               <Button
@@ -230,10 +246,7 @@ function Playground() {
           actionLayout === "strong"
             ? [{ label: "확인", onClick: () => setOpen(false) }]
             : actionLayout === "cancel"
-              ? [
-                  { label: "취소", onClick: () => setOpen(false) },
-                  { label: "확인", onClick: () => setOpen(false) },
-                ]
+              ? [{ label: "취소", onClick: () => setOpen(false) }]
               : [
                   { label: "보조", onClick: () => setOpen(false) },
                   { label: "확인", onClick: () => setOpen(false) },
@@ -348,7 +361,7 @@ function DesignContent() {
                 <span style={{ fontSize: typography.fontSize.compact, color: "var(--content-base-secondary)", fontWeight: typography.fontWeight.medium }}>Neutral</span>
               </div>
               <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: spacing.primitive[2] }}>
-                <MockPopup title="삭제" navigation="normal" actionLayout="cancel" actions={[{ label: "취소" }, { label: "확인" }]} />
+                <MockPopup title="삭제" navigation="normal" actionLayout="cancel" actions={[{ label: "취소" }]} />
                 <span style={{ fontSize: typography.fontSize.compact, color: "var(--content-base-secondary)", fontWeight: typography.fontWeight.medium }}>Cancel</span>
               </div>
             </div>

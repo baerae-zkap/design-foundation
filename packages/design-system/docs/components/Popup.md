@@ -86,7 +86,16 @@ The `actionLayout` prop controls how action buttons are rendered. It resolves au
   ]}
 />
 
-// compact — same as neutral but visually tighter
+// cancel — single full-width weak cancel button
+<Popup
+  open={open}
+  onClose={onClose}
+  title="Options"
+  actionLayout="cancel"
+  actions={[{ label: 'Cancel', onClick: onCancel }]}
+/>
+
+// compact — smaller right-aligned buttons, no full width
 <Popup
   open={open}
   onClose={onClose}
@@ -186,9 +195,9 @@ By default, clicking the backdrop does not close the popup. Enable it for non-cr
 
 | Value | Behavior |
 |-------|----------|
-| `normal` | Centered title, close button at right, bottom border divider |
-| `emphasize` | Left-aligned bold title, close button at right, bottom border divider |
-| `floating` | No nav bar; close button overlays top-right corner of content |
+| `normal` | Centered title (with equal left/right padding for symmetry), close button at right |
+| `emphasize` | Left-aligned bold title, close button at right |
+| `floating` | No nav bar; close button overlays top-right corner of content. Contents area has extra top padding to avoid overlapping the close button. |
 
 ### PopupSize
 
@@ -202,10 +211,10 @@ By default, clicking the backdrop does not close the popup. Enable it for non-cr
 
 | Value | Behavior | Auto-selected when |
 |-------|----------|--------------------|
-| `strong` | Single full-width filled button | 1 action |
-| `neutral` | Two equal-width buttons | 2+ actions |
-| `cancel` | Two buttons, last is primary | Explicit only |
-| `compact` | Tighter two-button layout | Explicit only |
+| `strong` | Single full-width filled primary button | 1 action |
+| `neutral` | Full-width buttons side by side (last is filled primary, others are weak neutral) | 2+ actions |
+| `cancel` | Single full-width weak neutral button (cancel-only pattern) | Explicit only |
+| `compact` | Smaller medium-sized buttons, right-aligned, no full width (last is filled primary, others are weak neutral) | Explicit only |
 
 ## Behavior
 
@@ -214,6 +223,7 @@ By default, clicking the backdrop does not close the popup. Enable it for non-cr
 - Pressing `Escape` calls `onClose`.
 - Entrance animation: fade + slide up (28px). Exit: reverse.
 - Click events on the container do not propagate to the backdrop.
+- No border dividers between navigation, contents, and action areas — sections are visually separated by spacing only.
 
 ## Accessibility
 

@@ -71,7 +71,7 @@ function CardPreview({ animate }: { animate: boolean }) {
         backgroundColor: "var(--surface-base-default)",
       }}
     >
-      <Skeleton variant="rectangular" width="100%" height={140} animate={animate} />
+      <Skeleton variant="rounded" width="100%" height={140} animate={animate} />
       <div style={{ marginTop: spacing.primitive[3], display: "flex", flexDirection: "column", gap: spacing.primitive[2] }}>
         <Skeleton variant="text" width="70%" animate={animate} />
         <Skeleton variant="text" width="50%" animate={animate} />
@@ -92,7 +92,6 @@ function ListPreview({ animate }: { animate: boolean }) {
             gap: spacing.primitive[3],
             alignItems: "center",
             padding: `${spacing.primitive[3]}px 0`,
-            borderBottom: i < 3 ? "1px solid var(--divider)" : "none",
           }}
         >
           <Skeleton variant="circular" width={44} height={44} animate={animate} />
@@ -277,19 +276,18 @@ function SkeletonPlayground() {
                 onChange={(v) => setPreset(v as Preset)}
               />
 
-              {preset === "single" && (
-                <RadioGroup
-                  label="variant"
-                  options={[
-                    { value: "rectangular", label: "rectangular" },
-                    { value: "rounded", label: "rounded" },
-                    { value: "text", label: "text" },
-                    { value: "circular", label: "circular" },
-                  ]}
-                  value={variant}
-                  onChange={(v) => setVariant(v as SkeletonVariant)}
-                />
-              )}
+              <RadioGroup
+                label="variant"
+                options={[
+                  { value: "rectangular", label: "rectangular" },
+                  { value: "rounded", label: "rounded" },
+                  { value: "text", label: "text" },
+                  { value: "circular", label: "circular" },
+                ]}
+                value={variant}
+                onChange={(v) => setVariant(v as SkeletonVariant)}
+                disabled={preset !== "single"}
+              />
 
               <RadioGroup
                 label="animate"

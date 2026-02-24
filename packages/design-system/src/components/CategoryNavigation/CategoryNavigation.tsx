@@ -102,7 +102,7 @@ function CategoryChip({
     height: sizeStyle.height,
     padding: `0 ${fixedPadding
       ? `${sizeStyle.paddingX}px`
-      : `clamp(${sizeStyle.paddingX}px, 3vw, ${sizeStyle.paddingX + spacing.primitive[3]}px)`}`,
+      : `clamp(${sizeStyle.paddingX - spacing.primitive[1]}px, 2vw, ${sizeStyle.paddingX}px)`}`,
     fontSize: sizeStyle.fontSize,
     lineHeight: `${sizeStyle.lineHeight}px`,
     fontWeight: typography.fontWeight.medium,
@@ -178,9 +178,9 @@ export function CategoryNavigation({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-end',
-    paddingLeft: spacing.primitive[6],
+    paddingLeft: spacing.primitive[12],
     pointerEvents: 'none',
-    background: `linear-gradient(90deg, transparent 0%, ${cssVarColors.surface.base.default} 45%)`,
+    background: `linear-gradient(90deg, transparent 0%, ${cssVarColors.surface.base.default} 50%)`,
   };
 
   return (

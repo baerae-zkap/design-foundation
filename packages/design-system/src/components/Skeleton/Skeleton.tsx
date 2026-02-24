@@ -3,7 +3,7 @@
 import React, { type CSSProperties } from 'react';
 import { cssVarColors } from '../../tokens/colors';
 import { radius } from '../../tokens/radius';
-import { easing } from '../../tokens/motion';
+import { skeleton as skeletonMotion } from '../../tokens/motion';
 
 // ─── Types ───────────────────────────────────────────────────────────
 
@@ -24,29 +24,6 @@ export interface SkeletonProps {
   style?: CSSProperties;
   /** Whether animation is active @default true */
   animate?: boolean;
-}
-
-// ─── Style injection ─────────────────────────────────────────────────
-
-const STYLE_ID = 'skeleton-shimmer-keyframes';
-
-function injectShimmerKeyframes(): void {
-  if (typeof document === 'undefined') return;
-  if (document.getElementById(STYLE_ID)) return;
-  const style = document.createElement('style');
-  style.id = STYLE_ID;
-  style.textContent = `
-@keyframes skeleton-shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
-}
-@media (prefers-reduced-motion: reduce) {
-  [aria-busy="true"] {
-    animation-duration: 0s !important;
-  }
-}
-  `.trim();
-  document.head.appendChild(style);
 }
 
 // ─── Variant border radius map ────────────────────────────────────────
@@ -78,10 +55,41 @@ export const Skeleton = React.forwardRef<HTMLSpanElement, SkeletonProps>(
       animate = true,
     } = props;
 
-    // Inject keyframes once on first render
+    const spanRef = React.useRef<HTMLSpanElement>(null);
+
+    const mergedRef = React.useCallback(
+      (node: HTMLSpanElement | null) => {
+        (spanRef as React.MutableRefObject<HTMLSpanElement | null>).current = node;
+        if (typeof ref === 'function') ref(node);
+        else if (ref) (ref as React.MutableRefObject<HTMLSpanElement | null>).current = node;
+      },
+      [ref],
+    );
+
+    // Pure JS opacity animation via requestAnimationFrame — no CSS @keyframes needed
     React.useEffect(() => {
-      injectShimmerKeyframes();
-    }, []);
+      const el = spanRef.current;
+      if (!animate || !el) return;
+
+      let raf: number;
+      let startTime: number | null = null;
+      const { duration, opacityMin, opacityMax } = skeletonMotion.pulse;
+      const mid = (opacityMin + opacityMax) / 2;   // 0.8
+      const amp = (opacityMax - opacityMin) / 2;   // 0.2
+
+      function tick(time: number) {
+        if (startTime === null) startTime = time;
+        const elapsed = (time - startTime) % duration;
+        const progress = elapsed / duration;
+        // Pulse: max → min → max using cosine wave
+        const opacity = mid + amp * Math.cos(progress * Math.PI * 2);
+        el!.style.opacity = String(opacity);
+        raf = requestAnimationFrame(tick);
+      }
+
+      raf = requestAnimationFrame(tick);
+      return () => cancelAnimationFrame(raf);
+    }, [animate]);
 
     // Default sizes per variant
     const defaultWidth: number | string | undefined =
@@ -99,24 +107,17 @@ export const Skeleton = React.forwardRef<HTMLSpanElement, SkeletonProps>(
 
     const baseStyle: CSSProperties = {
       display: 'block',
-      width: typeof resolvedWidth === 'number' ? resolvedWidth : resolvedWidth,
-      height: typeof resolvedHeight === 'number' ? resolvedHeight : resolvedHeight,
+      width: resolvedWidth,
+      height: resolvedHeight,
       borderRadius: resolvedBorderRadius,
       overflow: 'hidden',
       flexShrink: 0,
+      backgroundColor: cssVarColors.fill.alternative,
     };
-
-    if (animate) {
-      baseStyle.backgroundImage = `linear-gradient(90deg, ${cssVarColors.surface.base.alternative} 25%, ${cssVarColors.surface.base.default} 50%, ${cssVarColors.surface.base.alternative} 75%)`;
-      baseStyle.backgroundSize = '200% 100%';
-      baseStyle.animation = `skeleton-shimmer 3.5s ${easing.easeInOut} infinite`;
-    } else {
-      baseStyle.backgroundColor = cssVarColors.surface.base.alternative;
-    }
 
     return (
       <span
-        ref={ref}
+        ref={mergedRef}
         role="status"
         aria-busy="true"
         aria-label="로딩 중"

@@ -23,6 +23,7 @@ import { radius } from '../../tokens/radius';
 import { typography } from '../../tokens/typography';
 import { zIndex } from '../../tokens/general';
 import { duration, easing } from '../../tokens/motion';
+import { IconButton } from '../IconButton/IconButton';
 
 export type ToastPosition = 'bottom-center' | 'bottom-left' | 'bottom-right';
 
@@ -149,7 +150,7 @@ export function Toast({
     padding: hasTwoLines
       ? `${spacing.primitive[4]}px ${spacing.primitive[4]}px`
       : `${spacing.primitive[3]}px ${spacing.primitive[4]}px`,
-    backgroundColor: cssVarColors.inverse.surface.default,
+    backgroundColor: cssVarColors.surface.base.alternative,
     borderRadius: radius.primitive.md,
     pointerEvents: 'auto',
     animation: `${visible ? '_zkap_toast_in' : '_zkap_toast_out'} ${ANIM_DURATION}ms ${easing.easeOut} both`,
@@ -162,7 +163,7 @@ export function Toast({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    color: cssVarColors.inverse.icon.default,
+    color: cssVarColors.icon.default,
     marginTop: hasTwoLines ? 1 : 0, // optical: sub-token alignment with heading baseline
   };
 
@@ -178,7 +179,7 @@ export function Toast({
     fontSize: typography.fontSize.sm,
     fontWeight: typography.fontWeight.semibold,
     lineHeight: String(typography.lineHeight.sm / typography.fontSize.sm),
-    color: cssVarColors.inverse.content.default,
+    color: cssVarColors.content.base.strong,
     wordBreak: 'keep-all',
     overflowWrap: 'break-word',
     margin: 0,
@@ -188,7 +189,7 @@ export function Toast({
     fontSize: typography.fontSize.xs,
     fontWeight: typography.fontWeight.regular,
     lineHeight: 1.5,
-    color: cssVarColors.inverse.content.secondary,
+    color: cssVarColors.content.base.secondary,
     wordBreak: 'keep-all',
     overflowWrap: 'break-word',
     margin: 0,
@@ -198,24 +199,8 @@ export function Toast({
     flexShrink: 0,
     display: 'flex',
     alignItems: 'center',
-    color: cssVarColors.inverse.content.default,
+    color: cssVarColors.content.brand.default,
     marginTop: hasTwoLines ? 2 : 0, // optical: sub-token alignment with action slot
-  };
-
-  const closeButtonStyle: React.CSSProperties = {
-    flexShrink: 0,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 24,
-    height: 24,
-    padding: 0,
-    border: 'none',
-    background: 'none',
-    cursor: 'pointer',
-    color: cssVarColors.inverse.content.secondary,
-    borderRadius: radius.primitive.xs,
-    marginRight: -spacing.primitive[1],
   };
 
   return createPortal(
@@ -235,14 +220,16 @@ export function Toast({
         )}
 
         {closable && (
-          <button
-            type="button"
+          <IconButton
+            variant="ghost"
+            color="neutral"
+            size="small"
             onClick={onClose}
-            style={closeButtonStyle}
             aria-label="닫기"
+            style={{ flexShrink: 0, marginRight: -spacing.primitive[1] }}
           >
             <CloseIcon />
-          </button>
+          </IconButton>
         )}
       </div>
     </div>,
