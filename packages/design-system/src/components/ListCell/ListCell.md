@@ -80,9 +80,9 @@ import { ListCell, Switch, ContentBadge } from '@baerae-zkap/design-system';
 | `medium` | from token `listCell.minHeight.md` | 12px | 16px | 14px |
 | `large` | from token `listCell.minHeight.lg` | 16px | 16px | 14px |
 
-## Toss-Style Inset Press Area
+## Press Area
 
-ListCell implements an inset pressed region — the interactive background is applied with a small horizontal margin (`4px` each side) and rounded corners (`radius.primitive.md`). This means the pressed highlight does not bleed to the screen edges, matching the Toss design system's list cell behavior. No visible dividers are used between cells.
+ListCell's pressed/hover background fills the full width of its container with rounded corners (`radius.primitive.md`). The parent container should provide horizontal padding (typically `spacing.semantic.screen.paddingX` = 20px) so the press area sits within the screen padding. No visible dividers are used between cells.
 
 ## States
 
@@ -122,7 +122,6 @@ Hover/press visual effects are **always active by default**, regardless of wheth
 | `cssVarColors.content.base.neutral` | Trailing chevron icon color |
 | `cssVarColors.content.brand.default` | Focus ring color |
 | `radius.primitive.md` | Inset pressed area corner radius |
-| `spacing.primitive[1]` (4) | Inset margin |
 | `spacing.primitive[4]` (16) | Horizontal padding |
 | `typography.fontWeight.medium` | Title font weight |
 | `typography.fontWeight.regular` | Description font weight |
