@@ -127,7 +127,8 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
       alignItems: verticalAlign === 'top' ? 'flex-start' : 'center',
       gap: sizeStyle.gap,
       minHeight: sizeStyle.minHeight,
-      padding: `${sizeStyle.paddingY}px ${sizeStyle.paddingX}px`,
+      margin: `0 ${spacing.primitive[1]}px`,
+      padding: `${sizeStyle.paddingY}px ${sizeStyle.paddingX - spacing.primitive[1]}px`,
       backgroundColor: (isPressed || isHovered) && !isStatic
         ? cssVarColors.surface.base.defaultPressed
         : 'transparent',

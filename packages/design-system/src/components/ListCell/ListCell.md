@@ -80,30 +80,9 @@ import { ListCell, Switch, ContentBadge } from '@baerae-zkap/design-system';
 | `medium` | from token `listCell.minHeight.md` | 12px | 16px | 14px |
 | `large` | from token `listCell.minHeight.lg` | 16px | 16px | 14px |
 
-## Press Area (Container Padding Requirement)
+## Press Area
 
-ListCell's pressed/hover background fills the **full width of its container** with rounded corners (`radius.primitive.md`). No visible dividers are used between cells.
-
-**Important:** ListCell does NOT have its own horizontal margin. The **parent container** MUST provide horizontal padding so the press area starts inset from the screen edge.
-
-```tsx
-// CORRECT — parent provides 20px padding
-<div style={{ padding: `0 ${spacing.semantic.screen.paddingX}px` }}>
-  <ListCell title="Language" trailing="English" withArrow onClick={onLang} />
-  <ListCell title="Dark Mode" trailing={<Switch />} />
-</div>
-
-// WRONG — no parent padding → press area touches screen edges
-<div>
-  <ListCell title="Language" trailing="English" withArrow />
-</div>
-```
-
-| Token | Value | Purpose |
-|-------|-------|---------|
-| `spacing.semantic.screen.paddingX` | 20px | Recommended parent horizontal padding for mobile screens |
-
-The result: a 20px gap between the screen edge and the start of the pressed background area.
+ListCell's pressed/hover background is inset by `spacing.primitive[1]` (4px) on each side with rounded corners (`radius.primitive.md`). The parent container should provide horizontal padding (typically `spacing.semantic.screen.paddingX` = 20px) so the press area sits within the screen padding. No visible dividers are used between cells.
 
 ## States
 

@@ -1,6 +1,6 @@
 {
   "name": "@baerae-zkap/design-system",
-  "version": "0.1.18",
+  "version": "0.1.19",
   "description": "ZKAP Design System - React & React Native Components with AI-readable documentation",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
