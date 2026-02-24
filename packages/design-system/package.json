@@ -27,7 +27,8 @@
       "require": "./dist/native/index.js"
     },
     "./styles.css": "./styles.css",
-    "./docs": "./docs/COMPONENTS.md",
+    "./llms": "./llms.txt",
+    "./llms-full": "./llms-full.txt",
     "./docs/*": "./docs/*"
   },
   "files": [
@@ -35,8 +36,8 @@
     "docs",
     "styles.css",
     "src/**/*.md",
+    "scripts",
     "README.md",
-    "COMPONENTS.md",
     "llms.txt",
     "llms-full.txt"
   ],
@@ -45,11 +46,13 @@
   ],
   "scripts": {
     "build": "tsup",
+    "build:docs": "node scripts/generate-llms.mjs",
+    "build:all": "tsup && node scripts/generate-llms.mjs",
     "build:watch": "tsup --watch",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src/",
     "clean": "rm -rf dist",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build:all"
   },
   "peerDependencies": {
     "lucide-react-native": ">=0.300.0",

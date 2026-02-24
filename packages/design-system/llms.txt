@@ -1,6 +1,7 @@
 # @baerae-zkap/design-system
 
-> A React component library with 41 UI components and a design token system. Colors use CSS custom properties for automatic dark mode switching.
+> React component library with 42 UI components and a design token system.
+> Colors use CSS custom properties for automatic dark mode switching.
 
 ## Quick Start
 
@@ -128,47 +129,65 @@ Snackbar = single message. Toast = heading + detail. Spinner = unknown-duration 
 
 ## All Components
 
-- [Accordion](docs/components/Accordion.md): Expandable/collapsible content panel
-- [ActionArea](docs/components/ActionArea.md): Bottom-fixed button group container for modals/sheets/footers
-- [Avatar](docs/components/Avatar.md): User profile image with fallback; AvatarGroup for multiple
-- [Badge](docs/components/Badge.md): Numeric or status overlay on icons/buttons
-- [BottomNavigation](docs/components/BottomNavigation.md): Mobile bottom tab bar
-- [BottomSheet](docs/components/BottomSheet.md): Bottom-anchored modal sheet
-- [Button](docs/components/Button.md): Primary/secondary actions; uses buttonType (filled/weak) and color props
-- [Card](docs/components/Card.md): Interactive grouped content container (requires onClick)
-- [CategoryNavigation](docs/components/CategoryNavigation.md): Horizontal scrollable category filter
-- [Checkbox](docs/components/Checkbox.md): Multi-select toggle for form submission
-- [CheckMark](docs/components/CheckMark.md): Standalone check indicator
-- [Chip](docs/components/Chip.md): Tags, filters, selectable labels (filled/weak)
-- [ContentBadge](docs/components/ContentBadge.md): Standalone status or category label
-- [Dialog](docs/components/Dialog.md): Blocking confirmation dialog (AlertDialog)
-- [IconButton](docs/components/IconButton.md): Icon-only action (requires aria-label)
-- [ListCard](docs/components/ListCard.md): Thumbnail + text horizontal list item
-- [ListCell](docs/components/ListCell.md): Single-row settings/menu item with trailing element
-- [PageCounter](docs/components/PageCounter.md): Pagination dots or numbers
-- [Popover](docs/components/Popover.md): Anchored floating content panel
-- [Popup](docs/components/Popup.md): Modal popup with configurable actions
-- [ProgressIndicator](docs/components/ProgressIndicator.md): Step or percentage progress bar
-- [ProgressTracker](docs/components/ProgressTracker.md): Multi-step process tracker
-- [PushBadge](docs/components/PushBadge.md): Notification count overlay on icon/button
-- [Radio](docs/components/Radio.md): Single-select from group; RadioGroup for managed groups
-- [SearchField](docs/components/SearchField.md): Search input with built-in clear button
-- [SectionHeader](docs/components/SectionHeader.md): Section title with optional trailing action
-- [SectionMessage](docs/components/SectionMessage.md): Inline contextual status banner (error/success/warning/info)
-- [SegmentedControl](docs/components/SegmentedControl.md): Tab-like exclusive selector (2-5 options)
-- [Skeleton](docs/components/Skeleton.md): Loading placeholder matching content shape
-- [Slider](docs/components/Slider.md): Range value selector (min/max)
-- [Snackbar](docs/components/Snackbar.md): Brief auto-dismiss notification with optional action
-- [Spinner](docs/components/Spinner.md): Indeterminate loading indicator
-- [StateView](docs/components/StateView.md): Empty/error/result state with optional CTA
-- [Switch](docs/components/Switch.md): Binary on/off toggle for immediate-effect settings
-- [Tab](docs/components/Tab.md): Tab strip for switching views
-- [TextArea](docs/components/TextArea.md): Multi-line text input
-- [TextButton](docs/components/TextButton.md): Inline text link-style action
-- [TextField](docs/components/TextField.md): Single-line input with label, validation, helper text
-- [Toast](docs/components/Toast.md): Rich notification with heading + description
-- [Tooltip](docs/components/Tooltip.md): Contextual hover/tap hint
-- [TopNavigation](docs/components/TopNavigation.md): App bar / top navigation header
+### Actions
+
+- **ActionArea** — A bottom-anchored container that groups action buttons for modals, bottom sheets, and screen footers. Handles layout, safe area padding, and an optional gradient fade. | Source: `src/components/ActionArea/ActionArea.tsx` | Doc: `src/components/ActionArea/ActionArea.md`
+- **Button** — A clickable element used to trigger primary and secondary actions with label text. | Source: `src/components/Button/Button.tsx` | Doc: `src/components/Button/Button.md`
+- **Chip** — A compact interactive element used for filters, tags, and selectable labels. Supports avatars, icons, selection state, and a dismissible close button. | Source: `src/components/Chip/Chip.tsx` | Doc: `src/components/Chip/Chip.md`
+- **FilterButton** — A compact filter selection button with label and trailing chevron icon. Changes visual appearance when active (selected). | Source: `src/components/FilterButton/FilterButton.tsx` | Doc: `src/components/FilterButton/FilterButton.md`
+- **IconButton** — A square icon-only button with built-in press states, used for compact actions that are understood from context or an accessible label. | Source: `src/components/IconButton/IconButton.tsx` | Doc: `src/components/IconButton/IconButton.md`
+- **TextButton** — A text-only low-emphasis action button used for inline or link-style interactions within content. | Source: `src/components/TextButton/TextButton.tsx` | Doc: `src/components/TextButton/TextButton.md`
+
+### Contents
+
+- **Accordion** — An expandable/collapsible content panel that hides detail until the user requests it. | Source: `src/components/Accordion/Accordion.tsx` | Doc: `src/components/Accordion/Accordion.md`
+- **Avatar** — Displays a user profile image with an automatic initials fallback, online status indicator, and group stacking via `AvatarGroup`. | Source: `src/components/Avatar/Avatar.tsx` | Doc: `src/components/Avatar/Avatar.md`
+- **Badge** — A small pill-shaped label for displaying short text, status, or category — with semantic color and style variants. | Source: `src/components/Badge/Badge.tsx` | Doc: `src/components/Badge/Badge.md`
+- **Card** — A clickable container that groups related content into a self-contained block. | Source: `src/components/Card/Card.tsx` | Doc: `src/components/Card/Card.md`
+- **ContentBadge** — A small non-interactive label for displaying status, category, or count inline within content. | Source: `src/components/ContentBadge/ContentBadge.tsx` | Doc: `src/components/ContentBadge/ContentBadge.md`
+- **ListCard** — A horizontal list item combining a thumbnail, title/subtitle text, and an optional right-side meta value or action. | Source: `src/components/ListCard/ListCard.tsx` | Doc: `src/components/ListCard/ListCard.md`
+- **ListCell** — A single-row horizontal list item for settings menus, option lists, and navigation rows. | Source: `src/components/ListCell/ListCell.tsx` | Doc: `src/components/ListCell/ListCell.md`
+- **SectionHeader** — A section title row with optional inline and trailing content slots, used to label groups of content. | Source: `src/components/SectionHeader/SectionHeader.tsx` | Doc: `src/components/SectionHeader/SectionHeader.md`
+
+### Inputs
+
+- **Checkbox** — A form control for toggling one or more independent boolean options. Values are submitted with the form. | Source: `src/components/Checkbox/Checkbox.tsx` | Doc: `src/components/Checkbox/Checkbox.md`
+- **CheckMark** — A lightweight check indicator rendered as an icon only — no box or circle container. Used for read-only confirmation states, table rows, and inline status display. | Source: `src/components/CheckMark/CheckMark.tsx` | Doc: `src/components/CheckMark/CheckMark.md`
+- **Radio** — A single-selection control used within a `RadioGroup` to pick one option from a mutually exclusive set. | Source: `src/components/Radio/Radio.tsx` | Doc: `src/components/Radio/Radio.md`
+- **SearchField** — A single-line search input with a built-in search icon, clear button, and keyboard shortcuts. | Source: `src/components/SearchField/SearchField.tsx` | Doc: `src/components/SearchField/SearchField.md`
+- **SegmentedControl** — A compact tab-like selector for switching exclusively between 2–5 views or modes. | Source: `src/components/SegmentedControl/SegmentedControl.tsx` | Doc: `src/components/SegmentedControl/SegmentedControl.md`
+- **Slider** — A range input that lets users select a numeric value by dragging a thumb along a track. | Source: `src/components/Slider/Slider.tsx` | Doc: `src/components/Slider/Slider.md`
+- **Switch** — A binary on/off toggle that takes effect immediately when activated. | Source: `src/components/Switch/Switch.tsx` | Doc: `src/components/Switch/Switch.md`
+- **TextArea** — A multi-line text input with label, validation feedback, character count, and full controlled/uncontrolled support. | Source: `src/components/TextArea/TextArea.tsx` | Doc: `src/components/TextArea/TextArea.md`
+- **TextField** — A single-line text input with label, validation feedback, icon slots, and full controlled/uncontrolled support. | Source: `src/components/TextField/TextField.tsx` | Doc: `src/components/TextField/TextField.md`
+
+### Feedback
+
+- **Dialog** — A blocking modal dialog that interrupts the user to request confirmation or communicate critical information before an irreversible action proceeds. | Source: `src/components/AlertDialog/AlertDialog.tsx` | Doc: `src/components/AlertDialog/Dialog.md`
+- **PushBadge** — An overlay badge that wraps another UI element to display a notification count, dot indicator, or "new" marker positioned at the top-right corner. | Source: `src/components/PushBadge/PushBadge.tsx` | Doc: `src/components/PushBadge/PushBadge.md`
+- **SectionMessage** — An inline banner component for communicating contextual status — information, success, warning, or error — within a page section without interrupting user flow. | Source: `src/components/SectionMessage/SectionMessage.tsx` | Doc: `src/components/SectionMessage/SectionMessage.md`
+- **Skeleton** — A shimmering placeholder that mimics the shape of incoming content while it loads. | Source: `src/components/Skeleton/Skeleton.tsx` | Doc: `src/components/Skeleton/Skeleton.md`
+- **Snackbar** — A brief, auto-dismissing notification rendered at the bottom of the screen via a portal — for single-line feedback messages with an optional action. | Source: `src/components/Snackbar/Snackbar.tsx` | Doc: `src/components/Snackbar/Snackbar.md`
+- **Spinner** — An animated circular indicator for indeterminate loading states where the duration is unknown. | Source: `src/components/Spinner/Spinner.tsx` | Doc: `src/components/Spinner/Spinner.md`
+- **StateView** — A centered content area component for communicating empty states, error states, loading outcomes, and full-page results — with optional figure, title, description, and action slots. | Source: `src/components/StateView/StateView.tsx` | Doc: `src/components/StateView/StateView.md`
+- **Toast** — A temporary notification that appears at the bottom of the screen, supporting a bold heading and a supporting description line. Rendered via React Portal. | Source: `src/components/Toast/Toast.tsx` | Doc: `src/components/Toast/Toast.md`
+
+### Navigation
+
+- **BottomNavigation** — Fixed bottom tab bar for switching between the app's top-level sections. | Source: `src/components/BottomNavigation/BottomNavigation.tsx` | Doc: `src/components/BottomNavigation/BottomNavigation.md`
+- **CategoryNavigation** — Horizontally scrollable chip row for filtering or navigating between content categories. | Source: `src/components/CategoryNavigation/CategoryNavigation.tsx` | Doc: `src/components/CategoryNavigation/CategoryNavigation.md`
+- **PageCounter** — Pill-shaped badge displaying the current page position within a total page count. | Source: `src/components/PageCounter/PageCounter.tsx` | Doc: `src/components/PageCounter/PageCounter.md`
+- **ProgressIndicator** — Horizontal linear bar showing the percentage completion of a task or process. | Source: `src/components/ProgressIndicator/ProgressIndicator.tsx` | Doc: `src/components/ProgressIndicator/ProgressIndicator.md`
+- **ProgressTracker** — Discrete step-by-step tracker showing completed, active, and upcoming steps in a process. | Source: `src/components/ProgressTracker/ProgressTracker.tsx` | Doc: `src/components/ProgressTracker/ProgressTracker.md`
+- **Tab** — Underline-style tab strip for switching between views within a section. | Source: `src/components/Tab/Tab.tsx` | Doc: `src/components/Tab/Tab.md`
+- **TopNavigation** — App bar fixed to the top of a screen, providing a title, leading back/menu button, and trailing actions. | Source: `src/components/TopNavigation/TopNavigation.tsx` | Doc: `src/components/TopNavigation/TopNavigation.md`
+
+### Overlays
+
+- **BottomSheet** — <ListCell title="Option A" onClick={() => setSelected('a')} /> | Source: `src/components/BottomSheet/BottomSheet.tsx` | Doc: `src/components/BottomSheet/BottomSheet.md`
+- **Popover** —  | Source: `src/components/Popover/Popover.tsx` | Doc: `src/components/Popover/Popover.md`
+- **Popup** — <p>Your changes will be saved and applied immediately.</p> | Source: `src/components/Popup/Popup.tsx` | Doc: `src/components/Popup/Popup.md`
+- **Tooltip** — <Button disabled>Export</Button> | Source: `src/components/Tooltip/Tooltip.tsx` | Doc: `src/components/Tooltip/Tooltip.md`
 
 ## Design Tokens
 
@@ -186,13 +205,6 @@ Snackbar = single message. Toast = heading + detail. Spinner = unknown-duration 
 - Every list needs: loading (Skeleton), empty (StateView), error (retry), populated
 - One primary CTA per section max
 
-## Optional
+## Full Reference
 
-Deep-dive references for advanced usage and AI code generation quality.
-
-- [Anti-Patterns](docs/anti-patterns.md): Common mistakes to avoid
-- [Visual Language](docs/visual-language.md): Color philosophy, spacing, typography, motion
-- [UX Patterns](docs/ux-patterns.md): Form validation, destructive confirmation, error handling
-- [State Model](docs/state-model.md): Required states for buttons, inputs, lists, toggles
-- [Output Contract](docs/output-contract.md): AI code generation structure requirements
-- [Preflight Checklist](docs/preflight-checklist.md): Pre-return verification for components, colors, states, a11y
+For complete component API documentation, read `llms-full.txt` in this package.
