@@ -435,8 +435,10 @@
   --interaction-semantic-bottom-sheet-enter-easing: cubic-bezier(0.16, 1, 0.3, 1);
   --interaction-semantic-bottom-sheet-exit-duration: 300ms;
   --interaction-semantic-bottom-sheet-exit-easing: cubic-bezier(0.7, 0, 0.84, 0);
-  --interaction-semantic-skeleton-pulse-duration: 1500ms;
+  --interaction-semantic-skeleton-pulse-duration: 2000ms;
   --interaction-semantic-skeleton-pulse-easing: cubic-bezier(0.4, 0, 0.2, 1);
+  --interaction-semantic-skeleton-pulse-opacity-min: 0.6;
+  --interaction-semantic-skeleton-pulse-opacity-max: 1;
   --interaction-semantic-fade-in-duration: 200ms;
   --interaction-semantic-fade-in-easing: cubic-bezier(0.16, 1, 0.3, 1);
   --interaction-semantic-fade-out-duration: 100ms;
