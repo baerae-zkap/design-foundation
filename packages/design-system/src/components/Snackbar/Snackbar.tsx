@@ -227,6 +227,7 @@ function SnackbarCloseButton({ onClick }: { onClick?: () => void }) {
   const [pressed, setPressed] = useState(false);
 
   const style: React.CSSProperties = {
+    position: 'relative',
     flexShrink: 0,
     display: 'flex',
     alignItems: 'center',
@@ -238,14 +239,19 @@ function SnackbarCloseButton({ onClick }: { onClick?: () => void }) {
     borderRadius: radius.primitive.sm,
     cursor: 'pointer',
     color: cssVarColors.inverse.content.secondary,
-    backgroundColor: pressed
-      ? 'rgba(255,255,255,0.2)'
-      : hovered
-        ? 'rgba(255,255,255,0.1)'
-        : 'transparent',
+    backgroundColor: 'transparent',
     transition: 'background-color 150ms ease, transform 150ms ease',
     transform: pressed ? 'scale(0.92)' : undefined,
     marginRight: -spacing.primitive[1],
+  };
+  const overlayStyle: React.CSSProperties = {
+    position: 'absolute',
+    inset: 0,
+    borderRadius: radius.primitive.sm,
+    pointerEvents: 'none',
+    backgroundColor: cssVarColors.inverse.content.secondary,
+    opacity: pressed ? 0.2 : hovered ? 0.1 : 0,
+    transition: 'opacity 150ms ease',
   };
 
   return (
@@ -259,6 +265,7 @@ function SnackbarCloseButton({ onClick }: { onClick?: () => void }) {
       onMouseDown={() => setPressed(true)}
       onMouseUp={() => setPressed(false)}
     >
+      <span aria-hidden="true" style={overlayStyle} />
       <CloseIcon />
     </button>
   );
