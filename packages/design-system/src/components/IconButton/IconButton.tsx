@@ -71,14 +71,14 @@ const colorStyles: Record<IconButtonColor, {
   neutral: {
     filled: {
       bg: cssVarColors.content.base.default,
-      bgPressed: cssVarColors.inverse.surface.default,
+      bgPressed: cssVarColors.content.base.strong,
       color: cssVarColors.content.base.onColor
     },
     ghost: {
       bg: 'transparent',
       bgPressed: cssVarColors.surface.base.defaultPressed,
       color: cssVarColors.content.base.default,
-      colorPressed: cssVarColors.inverse.surface.default
+      colorPressed: cssVarColors.content.base.strong
     },
     weak: {
       bg: cssVarColors.surface.base.container,

@@ -33,12 +33,12 @@ export interface TextAreaProps {
   required?: boolean;
   /** Maximum character count */
   maxLength?: number;
-  /** Show character count when maxLength is set @default false */
-  showCount?: boolean;
   /** Number of visible text rows @default 4 */
   rows?: number;
-  /** Resize behaviour @default 'vertical' */
-  resize?: 'none' | 'vertical' | 'both';
+  /** Content rendered at the bottom-left inside the textarea container */
+  leadingContent?: React.ReactNode;
+  /** Content rendered at the bottom-right inside the textarea container */
+  trailingContent?: React.ReactNode;
   /** Accessibility label (required when no label prop) */
   'aria-label'?: string;
   /** Custom id — auto-generated when omitted */
@@ -65,9 +65,9 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
       disabled = false,
       required = false,
       maxLength,
-      showCount = false,
       rows = 4,
-      resize = 'vertical',
+      leadingContent,
+      trailingContent,
       'aria-label': ariaLabel,
       id: idProp,
       name,
@@ -108,7 +108,7 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
 
     // ── Derived state ────────────────────────────────────────────────
     const hasError = Boolean(error);
-    const showCharCount = showCount && maxLength !== undefined;
+    const hasBottomBar = Boolean(leadingContent || trailingContent);
 
     // ── Styles ───────────────────────────────────────────────────────
     const containerStyle: CSSProperties = {
@@ -159,9 +159,17 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
       backgroundColor: 'transparent',
       border: 'none',
       outline: 'none',
-      resize,
+      resize: 'none',
       boxSizing: 'border-box',
       cursor: disabled ? 'not-allowed' : undefined,
+    };
+
+    const bottomBarStyle: CSSProperties = {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      padding: `0 ${spacing.primitive[4]}px ${spacing.primitive[2]}px`,
+      gap: spacing.primitive[2],
     };
 
     const footerStyle: CSSProperties = {
@@ -169,7 +177,7 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
       justifyContent: 'space-between',
       alignItems: 'flex-start',
       gap: spacing.primitive[2],
-      minHeight: (hasError || helperText || showCharCount) ? undefined : 0,
+      minHeight: (hasError || helperText) ? undefined : 0,
     };
 
     const helperTextStyle: CSSProperties = {
@@ -179,15 +187,6 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
       color: hasError
         ? cssVarColors.content.error.default
         : cssVarColors.content.base.secondary,
-    };
-
-    const charCountStyle: CSSProperties = {
-      fontSize: typography.fontSize.compact,
-      lineHeight: 1.4,
-      margin: 0,
-      marginLeft: 'auto',
-      flexShrink: 0,
-      color: cssVarColors.content.base.secondary,
     };
 
     return (
@@ -231,24 +230,23 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
             onBlur={handleBlur}
             style={textareaStyle}
           />
+          {hasBottomBar && (
+            <div style={bottomBarStyle}>
+              <div>{leadingContent}</div>
+              <div>{trailingContent}</div>
+            </div>
+          )}
         </div>
 
-        {(hasError || helperText || showCharCount) && (
+        {(hasError || helperText) && (
           <div style={footerStyle}>
-            {(hasError || helperText) && (
-              <p
-                id={hasError ? `${inputId}-error` : `${inputId}-helper`}
-                role={hasError ? 'alert' : undefined}
-                style={helperTextStyle}
-              >
-                {error || helperText}
-              </p>
-            )}
-            {showCharCount && (
-              <p style={charCountStyle} aria-live="polite">
-                {currentValue.length}/{maxLength}
-              </p>
-            )}
+            <p
+              id={hasError ? `${inputId}-error` : `${inputId}-helper`}
+              role={hasError ? 'alert' : undefined}
+              style={helperTextStyle}
+            >
+              {error || helperText}
+            </p>
           </div>
         )}
       </div>

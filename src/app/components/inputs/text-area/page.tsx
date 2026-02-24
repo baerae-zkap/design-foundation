@@ -2,12 +2,12 @@
 
 import { useState } from "react";
 import { Breadcrumb } from "@/components/Breadcrumb";
-import { PlatformTabs, CodeBlock, PreviewBox, Platform, highlightCode } from "@/components/PlatformTabs";
-import { typography, spacing, radius, TextArea } from '@baerae-zkap/design-system';
+import { PlatformTabs, CodeBlock, PreviewBox, Platform } from "@/components/PlatformTabs";
+import { TextArea, Badge, Chip, IconButton, typography, spacing, radius } from '@baerae-zkap/design-system';
 import { Section, Subsection, InlineCode } from "@/components/docs/Section";
 import { PropsTable } from "@/components/docs/PropsTable";
 import { DoCard, DontCard, PrincipleCard } from "@/components/docs/Cards";
-import { RadioGroup, CopyButton } from "@/components/docs/Playground";
+import { RadioGroup } from "@/components/docs/Playground";
 
 // ─── Page ─────────────────────────────────────────────────────────────
 
@@ -44,24 +44,44 @@ export default function TextAreaPage() {
 // ─── Playground ──────────────────────────────────────────────────────
 
 function TextAreaPlayground() {
-  const [label, setLabel] = useState(true);
-  const [placeholder, setPlaceholder] = useState(true);
-  const [maxLength, setMaxLength] = useState(false);
-  const [error, setError] = useState(false);
-  const [disabled, setDisabled] = useState(false);
-  const [value, setValue] = useState("");
+  const [heading, setHeading] = useState("show");
+  const [description, setDescription] = useState("show");
+  const [state, setState] = useState("default");
+  const [leading, setLeading] = useState("none");
+  const [trailing, setTrailing] = useState("none");
+  const [textValue, setTextValue] = useState("");
 
-  const generateCode = () => {
-    const props: string[] = [];
-    if (label) props.push('label="소개"');
-    if (placeholder) props.push('placeholder="자신을 소개해주세요."');
-    if (maxLength) props.push("maxLength={200}");
-    if (error) props.push('error="200자를 초과할 수 없습니다."');
-    if (disabled) props.push("disabled");
-    props.push("rows={4}");
+  const hasCharCounter = leading === "counter" || trailing === "counter";
 
-    const propsStr = props.length > 0 ? `\n  ${props.join("\n  ")}\n` : " ";
-    return `<TextArea${propsStr}/>`;
+  const buildContent = (type: string) => {
+    switch (type) {
+      case "counter":
+        return (
+          <span style={{ fontSize: typography.fontSize.compact, color: "var(--content-base-secondary)" }}>
+            {textValue.length}/{2000}
+          </span>
+        );
+      case "badge":
+        return <Badge color="neutral" size="sm">Draft</Badge>;
+      case "text":
+        return (
+          <span style={{ fontSize: typography.fontSize.compact, color: "var(--content-base-secondary)" }}>
+            Optional
+          </span>
+        );
+      case "chip":
+        return <Chip size="small" color="neutral">Label</Chip>;
+      case "iconButton":
+        return (
+          <IconButton size="small" variant="ghost" color="neutral" aria-label="More options">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="1" /><circle cx="19" cy="12" r="1" /><circle cx="5" cy="12" r="1" />
+            </svg>
+          </IconButton>
+        );
+      default:
+        return undefined;
+    }
   };
 
   return (
@@ -70,10 +90,11 @@ function TextAreaPlayground() {
         style={{
           borderRadius: radius.primitive.xl,
           overflow: "hidden",
-          backgroundColor: "var(--surface-base-default)", border: "1px solid var(--border-solid-alternative)",
+          backgroundColor: "var(--surface-base-default)",
+          border: "1px solid var(--border-solid-alternative)",
         }}
       >
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", minHeight: 480 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: 560 }}>
           {/* Preview Area */}
           <div
             style={{
@@ -86,14 +107,17 @@ function TextAreaPlayground() {
           >
             <div style={{ width: "100%", maxWidth: 320 }}>
               <TextArea
-                label={label ? "소개" : undefined}
-                placeholder={placeholder ? "자신을 소개해주세요." : undefined}
-                maxLength={maxLength ? 200 : undefined}
-                error={error ? "200자를 초과할 수 없습니다." : undefined}
-                disabled={disabled}
-                value={value}
-                onChange={setValue}
+                label={heading === "show" ? "Heading" : undefined}
+                placeholder="Placeholder"
+                helperText={description === "show" ? "Description" : undefined}
+                error={state === "error" ? "This field is required" : undefined}
+                disabled={state === "disabled"}
                 rows={4}
+                maxLength={hasCharCounter ? 2000 : undefined}
+                value={textValue}
+                onChange={setTextValue}
+                leadingContent={buildContent(leading)}
+                trailingContent={buildContent(trailing)}
               />
             </div>
           </div>
@@ -101,13 +125,14 @@ function TextAreaPlayground() {
           {/* Control Panel */}
           <div
             style={{
-              backgroundColor: "var(--surface-base-default)", borderLeft: "1px solid var(--border-solid-alternative)",
+              backgroundColor: "var(--surface-base-default)",
+              borderLeft: "1px solid var(--border-solid-alternative)",
               display: "flex",
               flexDirection: "column",
               padding: spacing.primitive[4],
               overflow: "hidden",
               height: "100%",
-              boxSizing: "border-box",
+              boxSizing: "border-box" as const,
             }}
           >
             <div
@@ -115,92 +140,75 @@ function TextAreaPlayground() {
                 flex: 1,
                 minHeight: 0,
                 padding: spacing.primitive[6],
-                overflowY: "auto",
+                overflowY: "auto" as const,
                 display: "flex",
-                flexDirection: "column",
+                flexDirection: "column" as const,
                 gap: spacing.primitive[7],
                 backgroundColor: "var(--surface-base-default)",
                 borderRadius: radius.primitive.lg,
               }}
             >
               <RadioGroup
-                label="Label"
+                label="Heading"
                 options={[
-                  { value: "true", label: "Show" },
-                  { value: "false", label: "Hide" },
+                  { value: "show", label: "Show" },
+                  { value: "hide", label: "Hide" },
                 ]}
-                value={label ? "true" : "false"}
-                onChange={(v) => setLabel(v === "true")}
+                value={heading}
+                onChange={setHeading}
               />
+
               <RadioGroup
-                label="Placeholder"
+                label="Description"
                 options={[
-                  { value: "true", label: "Show" },
-                  { value: "false", label: "Hide" },
+                  { value: "show", label: "Show" },
+                  { value: "hide", label: "Hide" },
                 ]}
-                value={placeholder ? "true" : "false"}
-                onChange={(v) => setPlaceholder(v === "true")}
+                value={description}
+                onChange={setDescription}
               />
+
               <RadioGroup
-                label="Max Length"
+                label="State"
                 options={[
-                  { value: "false", label: "None" },
-                  { value: "true", label: "200" },
+                  { value: "default", label: "Default" },
+                  { value: "error", label: "Error" },
+                  { value: "disabled", label: "Disabled" },
                 ]}
-                value={maxLength ? "true" : "false"}
-                onChange={(v) => setMaxLength(v === "true")}
+                value={state}
+                onChange={setState}
               />
+
               <RadioGroup
-                label="Error"
+                label="Leading contents"
                 options={[
-                  { value: "false", label: "False" },
-                  { value: "true", label: "True" },
+                  { value: "none", label: "None" },
+                  { value: "counter", label: "Character counter" },
+                  { value: "badge", label: "Badge" },
+                  { value: "chip", label: "Chip" },
+                  { value: "text", label: "Text" },
+                  { value: "iconButton", label: "Icon button" },
                 ]}
-                value={error ? "true" : "false"}
-                onChange={(v) => setError(v === "true")}
+                value={leading}
+                onChange={setLeading}
               />
+
               <RadioGroup
-                label="Disabled"
+                label="Trailing contents"
                 options={[
-                  { value: "false", label: "False" },
-                  { value: "true", label: "True" },
+                  { value: "none", label: "None" },
+                  { value: "counter", label: "Character counter" },
+                  { value: "badge", label: "Badge" },
+                  { value: "chip", label: "Chip" },
+                  { value: "text", label: "Text" },
+                  { value: "iconButton", label: "Icon button" },
                 ]}
-                value={disabled ? "true" : "false"}
-                onChange={(v) => setDisabled(v === "true")}
+                value={trailing}
+                onChange={setTrailing}
               />
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Generated Code */}
-      <div style={{ marginTop: spacing.primitive[4], borderRadius: radius.primitive.md, overflow: "hidden", border: "1px solid var(--divider)" }}>
-        <div
-          style={{
-            padding: "10px 16px",
-            backgroundColor: "var(--docs-code-surface)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <span style={{ fontSize: typography.fontSize.compact, fontWeight: typography.fontWeight.medium, color: "var(--docs-code-active-text)" }}>Web</span>
-          <CopyButton text={generateCode()} />
-        </div>
-        <pre
-          style={{
-            margin: 0,
-            padding: spacing.primitive[4],
-            fontSize: typography.fontSize.compact,
-            lineHeight: 1.7,
-            color: "var(--docs-code-text)",
-            backgroundColor: "var(--docs-code-surface)",
-            fontFamily: "'SF Mono', 'Fira Code', monospace",
-            overflow: "auto",
-          }}
-        >
-          <code>{highlightCode(generateCode())}</code>
-        </pre>
       </div>
     </div>
   );
@@ -693,8 +701,12 @@ function WebContent() {
   value={bio}
   onChange={setBio}
   maxLength={200}
-  helperText={\`\${bio.length}/200\`}
   rows={4}
+  trailingContent={
+    <span style={{ fontSize: 12, color: "var(--content-base-secondary)" }}>
+      {bio.length}/200
+    </span>
+  }
 />`} />
       </Section>
 
@@ -729,12 +741,12 @@ const error = feedback.length > 0 && feedback.length < 20
             { name: "onChange", type: "(value: string) => void", required: false, description: "값 변경 콜백" },
             { name: "rows", type: "number", required: false, defaultVal: "4", description: "표시되는 행 수 (높이)" },
             { name: "maxLength", type: "number", required: false, description: "최대 입력 글자 수" },
-            { name: "showCount", type: "boolean", required: false, defaultVal: "false", description: "최대 글자 수 카운터 표시 (maxLength 필요)" },
             { name: "error", type: "string", required: false, description: "오류 메시지. 설정 시 오류 스타일 적용" },
             { name: "helperText", type: "string", required: false, description: "textarea 아래 안내 텍스트" },
             { name: "disabled", type: "boolean", required: false, defaultVal: "false", description: "비활성화" },
             { name: "required", type: "boolean", required: false, defaultVal: "false", description: "필수 입력 표시 (*)" },
-            { name: "resize", type: "'none' | 'vertical' | 'both'", required: false, defaultVal: "'vertical'", description: "리사이즈 방향" },
+            { name: "leadingContent", type: "ReactNode", required: false, description: "textarea 컨테이너 하단 왼쪽에 표시되는 콘텐츠" },
+            { name: "trailingContent", type: "ReactNode", required: false, description: "textarea 컨테이너 하단 오른쪽에 표시되는 콘텐츠" },
             { name: "defaultValue", type: "string", required: false, description: "초기값 (비제어 모드)" },
             { name: "aria-label", type: "string", required: false, description: "label 없을 때 필수 접근성 레이블" },
           ]}
@@ -754,8 +766,12 @@ function CharCounterDemo() {
       value={value}
       onChange={setValue}
       maxLength={200}
-      helperText={`${value.length}/200`}
       rows={4}
+      trailingContent={
+        <span style={{ fontSize: typography.fontSize.compact, color: "var(--content-base-secondary)" }}>
+          {value.length}/200
+        </span>
+      }
     />
   );
 }

@@ -414,16 +414,16 @@ export const lightColors = {
   },
   inverse: {
     surface: {
-      default: palette.grey["15"],
-      alternative: palette.grey["20"],
+      default: palette.grey["40"],
+      alternative: palette.grey["50"],
     },
     content: {
       default: palette.grey["99"],
       secondary: palette.grey["95"],
     },
     border: {
-      default: palette.grey["40"],
-      secondary: palette.grey["50"],
+      default: palette.grey["60"],
+      secondary: palette.grey["70"],
     },
     icon: {
       default: palette.grey["95"],

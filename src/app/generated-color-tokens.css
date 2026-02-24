@@ -292,12 +292,12 @@
   --icon-info: var(--teal-50);
   --overlay-dim: hsla(222, 33%, 11%, 0.40);
   --overlay-heavy: hsla(222, 33%, 11%, 0.85);
-  --inverse-surface-default: var(--grey-15);
-  --inverse-surface-alternative: var(--grey-20);
+  --inverse-surface-default: var(--grey-40);
+  --inverse-surface-alternative: var(--grey-50);
   --inverse-content-default: var(--grey-99);
   --inverse-content-secondary: var(--grey-95);
-  --inverse-border-default: var(--grey-40);
-  --inverse-border-secondary: var(--grey-50);
+  --inverse-border-default: var(--grey-60);
+  --inverse-border-secondary: var(--grey-70);
   --inverse-icon-default: var(--grey-95);
 
   /* Effects tokens (light) */

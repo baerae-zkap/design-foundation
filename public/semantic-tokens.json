@@ -300,9 +300,9 @@
     "inverse": {
       "_description": "반전 컨텍스트(다크 배경 카드/배너) 전용 토큰",
       "surface": {
-        "default": "{palette.grey.15}",
+        "default": "{palette.grey.40}",
         "default_comment": "라이트 테마에서 반전 배경 기본",
-        "alternative": "{palette.grey.20}",
+        "alternative": "{palette.grey.50}",
         "alternative_comment": "라이트 테마 반전 배경 보조"
       },
       "content": {
@@ -312,9 +312,9 @@
         "secondary_comment": "반전 배경 위 보조 텍스트"
       },
       "border": {
-        "default": "{palette.grey.40}",
+        "default": "{palette.grey.60}",
         "default_comment": "반전 배경 기본 경계선",
-        "secondary": "{palette.grey.50}",
+        "secondary": "{palette.grey.70}",
         "secondary_comment": "반전 배경 강한 경계선"
       },
       "icon": {
