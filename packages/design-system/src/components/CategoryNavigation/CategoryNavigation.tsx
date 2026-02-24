@@ -28,7 +28,7 @@ export interface CategoryNavigationProps {
 interface CategoryNavigationSizeStyle {
   height: number;
   fontSize: number;
-  lineHeight: number;
+  lineHeight: number | string;
   paddingX: number;
   gap: number;
 }

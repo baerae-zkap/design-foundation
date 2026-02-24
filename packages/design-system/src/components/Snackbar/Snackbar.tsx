@@ -174,7 +174,7 @@ export function Snackbar({
     flex: 1,
     fontSize: typography.fontSize.sm,
     fontWeight: typography.fontWeight.medium,
-    lineHeight: String(typography.lineHeight.sm / typography.fontSize.sm),
+    lineHeight: typography.lineHeight.sm,
     color: cssVarColors.content.base.default,
     wordBreak: 'keep-all',
     overflowWrap: 'break-word',

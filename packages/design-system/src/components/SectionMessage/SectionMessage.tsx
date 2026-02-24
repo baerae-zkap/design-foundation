@@ -167,7 +167,7 @@ export function SectionMessage({
   const headingStyle: React.CSSProperties = {
     fontSize: typography.fontSize.sm,
     fontWeight: typography.fontWeight.semibold,
-    lineHeight: String(typography.lineHeight.sm / typography.fontSize.sm),
+    lineHeight: typography.lineHeight.sm,
     color: cssVarColors.content.base.strong,
     margin: 0,
   };
@@ -175,7 +175,7 @@ export function SectionMessage({
   const descriptionStyle: React.CSSProperties = {
     fontSize: typography.fontSize.sm,
     fontWeight: typography.fontWeight.regular,
-    lineHeight: String(typography.lineHeight.sm / typography.fontSize.sm),
+    lineHeight: typography.lineHeight.sm,
     color: cssVarColors.content.base.secondary,
     margin: 0,
   };

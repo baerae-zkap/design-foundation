@@ -32,7 +32,7 @@ export interface TabProps {
 interface TabSizeStyle {
   height: number;
   fontSize: number;
-  lineHeight: number;
+  lineHeight: number | string;
   paddingX: number;
 }
 

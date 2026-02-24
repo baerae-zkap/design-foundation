@@ -2,6 +2,22 @@
 @import "./generated-color-tokens.css";
 @import "./generated-foundation-tokens.css";
 
+/*
+ * Tailwind Preflight 충돌 방지
+ * Tailwind가 img/svg/video 등을 display:block + height:auto로 강제하는데,
+ * 이게 디자인 시스템 컴포넌트 내부 flex 레이아웃을 깨뜨림.
+ * revert로 브라우저 기본값 복원 → 컴포넌트 inline style이 정상 작동.
+ */
+img, svg, video, canvas {
+  display: revert;
+  vertical-align: revert;
+}
+
+img, video {
+  max-width: revert;
+  height: revert;
+}
+
 :root {
   /* Docs UI - Code/Playground */
   --docs-code-surface: var(--grey-15);

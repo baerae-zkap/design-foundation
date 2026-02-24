@@ -178,7 +178,7 @@ export function Toast({
   const headingStyle: React.CSSProperties = {
     fontSize: typography.fontSize.sm,
     fontWeight: typography.fontWeight.semibold,
-    lineHeight: String(typography.lineHeight.sm / typography.fontSize.sm),
+    lineHeight: typography.lineHeight.sm,
     color: cssVarColors.content.base.strong,
     wordBreak: 'keep-all',
     overflowWrap: 'break-word',
