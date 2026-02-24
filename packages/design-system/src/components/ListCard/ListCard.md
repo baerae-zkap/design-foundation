@@ -30,7 +30,8 @@ import { ListCard } from '@baerae-zkap/design-system';
 | `meta` | `ReactNode` | — | Right-side top value — typically a price or date. Bold 14px, right-aligned. |
 | `action` | `ReactNode` | — | Right-side bottom slot — icon button, chip, or any trailing control. |
 | `badges` | `ReactNode` | — | Row of badges rendered above the title (e.g., `ContentBadge` components). |
-| `onClick` | `() => void` | — | Optional. When provided, the entire row becomes interactive with press states. |
+| `onClick` | `() => void` | — | Optional. When provided, adds `role="button"`, `tabIndex`, and keyboard activation. |
+| `static` | `boolean` | `false` | Disables hover/press visual effects (background tint, scale). Useful for purely informational rows. |
 | `style` | `React.CSSProperties` | — | Additional inline styles on the container. |
 
 ## Basic Usage
@@ -91,12 +92,15 @@ import { ListCard, ContentBadge } from '@baerae-zkap/design-system';
 
 ## States
 
+Hover/press visual effects are **always active by default**, regardless of whether `onClick` is provided. Use `static` prop to opt out.
+
 | State | Behavior |
 |-------|----------|
 | Default | Transparent background |
-| Hovered (interactive) | `surface.base.defaultPressed` background |
-| Pressed (interactive) | Same tint + `scale(0.97)` transform |
-| Static (no `onClick`) | No cursor change, no hover state |
+| Hovered | `surface.base.defaultPressed` background |
+| Pressed | Same tint + `scale(0.97)` transform |
+| Focused (keyboard) | 2px brand-colored outline with 2px offset (only when `onClick` is set) |
+| Static (`static={true}`) | No hover/press effects, default cursor |
 
 ## Accessibility
 

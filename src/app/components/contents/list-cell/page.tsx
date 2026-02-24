@@ -945,7 +945,8 @@ function WebContent() {
         <Subsection title="Web-specific Props">
           <PropsTable
             props={[
-              { name: "onClick", type: "() => void", required: false, description: "클릭 핸들러" },
+              { name: "onClick", type: "() => void", required: false, description: "클릭 핸들러. 있으면 role='button' 및 키보드 활성화 추가" },
+              { name: "static", type: "boolean", required: false, defaultVal: "false", description: "hover/press 시각 효과 비활성화" },
               { name: "aria-label", type: "string", required: false, description: "스크린 리더용 레이블" },
             ]}
           />

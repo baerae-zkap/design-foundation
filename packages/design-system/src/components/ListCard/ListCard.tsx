@@ -44,6 +44,8 @@ export interface ListCardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'tit
   badges?: ReactNode;
   /** 클릭 핸들러 */
   onClick?: () => void;
+  /** 정적 모드 — hover/press 시각 효과를 비활성화합니다. @default false */
+  static?: boolean;
 }
 
 // ---------------------------------------------------------------------------
@@ -77,6 +79,7 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
       action,
       badges,
       onClick,
+      static: isStatic = false,
       style,
       onMouseDown,
       onMouseUp,
@@ -90,10 +93,10 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
     },
     ref
   ) => {
-    const isInteractive = !!onClick;
+    const hasClick = !!onClick;
 
     const { isPressed, isHovered, handlers } = usePressable<HTMLDivElement>({
-      disabled: !isInteractive,
+      disabled: isStatic,
       onMouseDown,
       onMouseUp,
       onMouseLeave,
@@ -106,7 +109,7 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
     // Interactive background — both hover and pressed use the lightest tint
     // -----------------------------------------------------------------------
     const getInteractiveBackground = (): string | undefined => {
-      if (!isInteractive) return undefined;
+      if (isStatic) return undefined;
       if (isPressed || isHovered) return cssVarColors.surface.base.defaultPressed;
       return undefined;
     };
@@ -123,14 +126,14 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
       gap: spacing.primitive[3],                          // 12px between thumbnail and content
       padding: `${spacing.primitive[3]}px ${spacing.primitive[4]}px`, // 12px vertical, 16px horizontal
       borderRadius: variant === 'filled' ? radius.primitive.sm : undefined, // 8px subtle rounding for hover area
-      cursor: isInteractive ? 'pointer' : 'default',
-      userSelect: isInteractive ? 'none' : undefined,
-      outline: isFocusVisible && isInteractive
+      cursor: isStatic ? 'default' : 'pointer',
+      userSelect: isStatic ? undefined : 'none',
+      outline: isFocusVisible && hasClick
         ? `${borderWidth.strong}px solid ${cssVarColors.content.brand.default}`
         : 'none',
       outlineOffset: 2,
       transition: 'background-color 150ms ease, transform 150ms ease',
-      transform: isPressed && isInteractive ? 'scale(0.97)' : undefined,
+      transform: isPressed && !isStatic ? 'scale(0.97)' : undefined,
       ...variantStyles[variant],
       ...(interactiveBg ? { backgroundColor: interactiveBg } : {}),
       ...style,
@@ -215,7 +218,7 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
     // -----------------------------------------------------------------------
 
     const handleClick = () => {
-      if (isInteractive) {
+      if (hasClick) {
         onClick();
       }
     };
@@ -227,21 +230,21 @@ export const ListCard = forwardRef<HTMLDivElement, ListCardProps>(
     return (
       <div
         ref={ref}
-        role={isInteractive ? 'button' : undefined}
-        tabIndex={isInteractive ? 0 : undefined}
+        role={hasClick ? 'button' : undefined}
+        tabIndex={hasClick ? 0 : undefined}
         onClick={handleClick}
         onKeyDown={(e) => {
-          if (isInteractive && e.key === 'Enter') {
+          if (hasClick && e.key === 'Enter') {
             e.preventDefault();
             onClick!();
           }
-          if (isInteractive && e.key === ' ') {
+          if (hasClick && e.key === ' ') {
             e.preventDefault();
           }
           externalKeyDown?.(e);
         }}
         onKeyUp={(e) => {
-          if (isInteractive && e.key === ' ') {
+          if (hasClick && e.key === ' ') {
             onClick!();
           }
           externalKeyUp?.(e);

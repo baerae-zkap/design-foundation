@@ -38,12 +38,14 @@ export interface ListCellProps extends Omit<HTMLAttributes<HTMLDivElement>, 'tit
   size?: ListCellSize;
   /** 수직 정렬 */
   verticalAlign?: 'top' | 'center';
-  /** 클릭 핸들러 (있으면 인터랙티브) */
+  /** 클릭 핸들러 */
   onClick?: () => void;
   /** 하단 구분선 표시 */
   divider?: boolean;
   /** 우측에 화살표(chevron) 아이콘 표시 */
   withArrow?: boolean;
+  /** 정적 모드 — hover/press 시각 효과를 비활성화합니다. @default false */
+  static?: boolean;
 }
 
 // Size configurations (from Foundation tokens)
@@ -93,6 +95,7 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
       onClick,
       divider = false,
       withArrow = false,
+      static: isStatic = false,
       style,
       onMouseDown,
       onMouseUp,
@@ -107,10 +110,10 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
     ref
   ) => {
     const sizeStyle = sizeConfig[size];
-    const isInteractive = !!onClick;
+    const hasClick = !!onClick;
 
     const { isPressed, isHovered, handlers } = usePressable<HTMLDivElement>({
-      disabled: !isInteractive,
+      disabled: isStatic,
       onMouseDown,
       onMouseUp,
       onMouseLeave,
@@ -126,15 +129,15 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
       minHeight: sizeStyle.minHeight,
       margin: `0 ${spacing.primitive[1]}px`,
       padding: `${sizeStyle.paddingY}px ${sizeStyle.paddingX - spacing.primitive[1]}px`,
-      backgroundColor: (isPressed || isHovered) && isInteractive
+      backgroundColor: (isPressed || isHovered) && !isStatic
         ? cssVarColors.surface.base.defaultPressed
         : 'transparent',
       borderRadius: radius.primitive.md,
-      cursor: isInteractive ? 'pointer' : 'default',
-      outline: isFocusVisible && isInteractive ? `${borderWidth.strong}px solid ${cssVarColors.content.brand.default}` : 'none',
+      cursor: isStatic ? 'default' : 'pointer',
+      outline: isFocusVisible && hasClick ? `${borderWidth.strong}px solid ${cssVarColors.content.brand.default}` : 'none',
       outlineOffset: 2,
       transition: 'background-color 150ms ease, transform 150ms ease',
-      transform: isPressed && isInteractive ? 'scale(0.97)' : undefined,
+      transform: isPressed && !isStatic ? 'scale(0.97)' : undefined,
       ...style,
     };
 
@@ -167,7 +170,7 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
     };
 
     const handleClick = () => {
-      if (isInteractive) {
+      if (hasClick) {
         onClick();
       }
     };
@@ -175,21 +178,21 @@ export const ListCell = forwardRef<HTMLDivElement, ListCellProps>(
     return (
       <div
         ref={ref}
-        role={isInteractive ? 'button' : undefined}
-        tabIndex={isInteractive ? 0 : undefined}
+        role={hasClick ? 'button' : undefined}
+        tabIndex={hasClick ? 0 : undefined}
         onClick={handleClick}
         onKeyDown={(e) => {
-          if (isInteractive && e.key === 'Enter') {
+          if (hasClick && e.key === 'Enter') {
             e.preventDefault();
             onClick!();
           }
-          if (isInteractive && e.key === ' ') {
+          if (hasClick && e.key === ' ') {
             e.preventDefault();
           }
           externalKeyDown?.(e);
         }}
         onKeyUp={(e) => {
-          if (isInteractive && e.key === ' ') {
+          if (hasClick && e.key === ' ') {
             onClick!();
           }
           externalKeyUp?.(e);

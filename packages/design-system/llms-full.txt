@@ -3564,7 +3564,8 @@ import { ListCard } from '@baerae-zkap/design-system';
 | `meta` | `ReactNode` | — | Right-side top value — typically a price or date. Bold 14px, right-aligned. |
 | `action` | `ReactNode` | — | Right-side bottom slot — icon button, chip, or any trailing control. |
 | `badges` | `ReactNode` | — | Row of badges rendered above the title (e.g., `ContentBadge` components). |
-| `onClick` | `() => void` | — | Optional. When provided, the entire row becomes interactive with press states. |
+| `onClick` | `() => void` | — | Optional. When provided, adds `role="button"`, `tabIndex`, and keyboard activation. |
+| `static` | `boolean` | `false` | Disables hover/press visual effects (background tint, scale). Useful for purely informational rows. |
 | `style` | `React.CSSProperties` | — | Additional inline styles on the container. |
 
 ## Basic Usage
@@ -3625,12 +3626,15 @@ import { ListCard, ContentBadge } from '@baerae-zkap/design-system';
 
 ## States
 
+Hover/press visual effects are **always active by default**, regardless of whether `onClick` is provided. Use `static` prop to opt out.
+
 | State | Behavior |
 |-------|----------|
 | Default | Transparent background |
-| Hovered (interactive) | `surface.base.defaultPressed` background |
-| Pressed (interactive) | Same tint + `scale(0.97)` transform |
-| Static (no `onClick`) | No cursor change, no hover state |
+| Hovered | `surface.base.defaultPressed` background |
+| Pressed | Same tint + `scale(0.97)` transform |
+| Focused (keyboard) | 2px brand-colored outline with 2px offset (only when `onClick` is set) |
+| Static (`static={true}`) | No hover/press effects, default cursor |
 
 ## Accessibility
 
@@ -3705,7 +3709,8 @@ import { ListCell } from '@baerae-zkap/design-system';
 | `trailing` | `ReactNode` | — | Right slot — value string, `Switch`, `ContentBadge`, or icon. |
 | `size` | `'small' \| 'medium' \| 'large'` | `'medium'` | Controls min-height, padding, and font sizes. |
 | `verticalAlign` | `'top' \| 'center'` | `'center'` | Vertical alignment of the row contents. Use `top` when description is multi-line. |
-| `onClick` | `() => void` | — | Optional. Makes the row interactive with press states. |
+| `onClick` | `() => void` | — | Optional. When provided, adds `role="button"`, `tabIndex`, and keyboard activation. |
+| `static` | `boolean` | `false` | Disables hover/press visual effects (background tint, scale). Useful for purely informational rows. |
 | `withArrow` | `boolean` | `false` | Appends a right-facing chevron icon to the trailing area. |
 | `divider` | `boolean` | `false` | Reserved prop — dividers are not currently rendered visually. |
 | `style` | `React.CSSProperties` | — | Additional inline styles on the container. |
@@ -3761,13 +3766,15 @@ ListCell implements an inset pressed region — the interactive background is ap
 
 ## States
 
+Hover/press visual effects are **always active by default**, regardless of whether `onClick` is provided. Use `static` prop to opt out.
+
 | State | Behavior |
 |-------|----------|
 | Default | Transparent background |
-| Hovered (interactive) | `surface.base.defaultPressed` background on inset area |
-| Pressed (interactive) | Same tint + `scale(0.97)` transform |
-| Focused (keyboard) | 2px brand-colored outline with 2px offset |
-| Static (no `onClick`) | No hover, default cursor |
+| Hovered | `surface.base.defaultPressed` background on inset area |
+| Pressed | Same tint + `scale(0.97)` transform |
+| Focused (keyboard) | 2px brand-colored outline with 2px offset (only when `onClick` is set) |
+| Static (`static={true}`) | No hover/press effects, default cursor |
 
 ## Accessibility
 
