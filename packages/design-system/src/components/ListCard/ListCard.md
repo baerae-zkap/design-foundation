@@ -78,6 +78,31 @@ import { ListCard, ContentBadge } from '@baerae-zkap/design-system';
 | `filled` | None | Subtle 8px on hover area | Feed lists, product grids |
 | `outlined` | 1px border | Full card radius | Contained list items, order cards |
 
+## Press Area (Container Padding Requirement)
+
+ListCard's pressed/hover background fills the **full width of its container**. No visible dividers are used between cards.
+
+**Important:** ListCard does NOT have its own horizontal margin. The **parent container** MUST provide horizontal padding so the press area starts inset from the screen edge.
+
+```tsx
+// CORRECT — parent provides 20px padding
+<div style={{ padding: `0 ${spacing.semantic.screen.paddingX}px` }}>
+  <ListCard thumbnail={...} title="Product" subtitle="Details" onClick={onTap} />
+  <ListCard thumbnail={...} title="Product 2" subtitle="Details" onClick={onTap2} />
+</div>
+
+// WRONG — no parent padding → press area touches screen edges
+<div>
+  <ListCard thumbnail={...} title="Product" onClick={onTap} />
+</div>
+```
+
+| Token | Value | Purpose |
+|-------|-------|---------|
+| `spacing.semantic.screen.paddingX` | 20px | Recommended parent horizontal padding for mobile screens |
+
+The result: a 20px gap between the screen edge and the start of the pressed background area.
+
 ## Layout Anatomy
 
 ```

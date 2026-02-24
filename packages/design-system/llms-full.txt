@@ -3612,6 +3612,31 @@ import { ListCard, ContentBadge } from '@baerae-zkap/design-system';
 | `filled` | None | Subtle 8px on hover area | Feed lists, product grids |
 | `outlined` | 1px border | Full card radius | Contained list items, order cards |
 
+## Press Area (Container Padding Requirement)
+
+ListCard's pressed/hover background fills the **full width of its container**. No visible dividers are used between cards.
+
+**Important:** ListCard does NOT have its own horizontal margin. The **parent container** MUST provide horizontal padding so the press area starts inset from the screen edge.
+
+```tsx
+// CORRECT — parent provides 20px padding
+<div style={{ padding: `0 ${spacing.semantic.screen.paddingX}px` }}>
+  <ListCard thumbnail={...} title="Product" subtitle="Details" onClick={onTap} />
+  <ListCard thumbnail={...} title="Product 2" subtitle="Details" onClick={onTap2} />
+</div>
+
+// WRONG — no parent padding → press area touches screen edges
+<div>
+  <ListCard thumbnail={...} title="Product" onClick={onTap} />
+</div>
+```
+
+| Token | Value | Purpose |
+|-------|-------|---------|
+| `spacing.semantic.screen.paddingX` | 20px | Recommended parent horizontal padding for mobile screens |
+
+The result: a 20px gap between the screen edge and the start of the pressed background area.
+
 ## Layout Anatomy
 
 ```
@@ -3760,9 +3785,30 @@ import { ListCell, Switch, ContentBadge } from '@baerae-zkap/design-system';
 | `medium` | from token `listCell.minHeight.md` | 12px | 16px | 14px |
 | `large` | from token `listCell.minHeight.lg` | 16px | 16px | 14px |
 
-## Toss-Style Inset Press Area
+## Press Area (Container Padding Requirement)
 
-ListCell implements an inset pressed region — the interactive background is applied with a small horizontal margin (`4px` each side) and rounded corners (`radius.primitive.md`). This means the pressed highlight does not bleed to the screen edges, matching the Toss design system's list cell behavior. No visible dividers are used between cells.
+ListCell's pressed/hover background fills the **full width of its container** with rounded corners (`radius.primitive.md`). No visible dividers are used between cells.
+
+**Important:** ListCell does NOT have its own horizontal margin. The **parent container** MUST provide horizontal padding so the press area starts inset from the screen edge.
+
+```tsx
+// CORRECT — parent provides 20px padding
+<div style={{ padding: `0 ${spacing.semantic.screen.paddingX}px` }}>
+  <ListCell title="Language" trailing="English" withArrow onClick={onLang} />
+  <ListCell title="Dark Mode" trailing={<Switch />} />
+</div>
+
+// WRONG — no parent padding → press area touches screen edges
+<div>
+  <ListCell title="Language" trailing="English" withArrow />
+</div>
+```
+
+| Token | Value | Purpose |
+|-------|-------|---------|
+| `spacing.semantic.screen.paddingX` | 20px | Recommended parent horizontal padding for mobile screens |
+
+The result: a 20px gap between the screen edge and the start of the pressed background area.
 
 ## States
 
@@ -3802,7 +3848,6 @@ Hover/press visual effects are **always active by default**, regardless of wheth
 | `cssVarColors.content.base.neutral` | Trailing chevron icon color |
 | `cssVarColors.content.brand.default` | Focus ring color |
 | `radius.primitive.md` | Inset pressed area corner radius |
-| `spacing.primitive[1]` (4) | Inset margin |
 | `spacing.primitive[4]` (16) | Horizontal padding |
 | `typography.fontWeight.medium` | Title font weight |
 | `typography.fontWeight.regular` | Description font weight |

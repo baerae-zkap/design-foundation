@@ -61,15 +61,19 @@ Use `spacing.semantic.screen.paddingX` (20px) for horizontal page padding. Use `
 - Group related list items under a `SectionHeader`.
 - List items have zero gap between them (`spacing.component.list.itemGap` = 0). Dividers are built in.
 - Section-to-section gap is 32px (`spacing.component.list.sectionGap`).
+- **Container padding required:** `ListCell` and `ListCard` fill their container's full width on press/hover. The **parent container** must provide `spacing.semantic.screen.paddingX` (20px) horizontal padding so the press area starts 20px inset from the screen edge.
 
 ```tsx
-<SectionHeader title="General" />
-<ListCell title="Language" trailing="English" onClick={onLanguage} />
-<ListCell title="Dark Mode" trailing={<Switch checked={dark} onChange={setDark} />} />
+// Parent container provides 20px horizontal padding
+<div style={{ padding: `0 ${spacing.semantic.screen.paddingX}px` }}>
+  <SectionHeader title="General" />
+  <ListCell title="Language" trailing="English" onClick={onLanguage} />
+  <ListCell title="Dark Mode" trailing={<Switch checked={dark} onChange={setDark} />} />
 
-<SectionHeader title="Account" />
-<ListCell title="Change Password" onClick={onPassword} />
-<ListCell title="Delete Account" onClick={onDelete} />
+  <SectionHeader title="Account" />
+  <ListCell title="Change Password" onClick={onPassword} />
+  <ListCell title="Delete Account" onClick={onDelete} />
+</div>
 ```
 
 ## Form Layout
