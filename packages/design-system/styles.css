@@ -196,6 +196,7 @@
 
   /* Semantic tokens (light) */
   --surface-base-default: var(--static-white);
+  --surface-base-defaultPressed: var(--grey-98);
   --surface-base-alternative: var(--grey-99);
   --surface-base-container: var(--grey-97);
   --surface-base-containerPressed: var(--grey-95);
@@ -320,6 +321,7 @@
   :root:not([data-theme="light"]) {
     /* Semantic tokens (dark overrides) */
     --surface-base-default: var(--grey-15);
+    --surface-base-defaultPressed: var(--grey-17);
     --surface-base-alternative: var(--grey-10);
     --surface-base-container: var(--grey-20);
     --surface-base-containerPressed: var(--grey-23);
@@ -444,6 +446,7 @@
 :root[data-theme="dark"] {
   /* Semantic tokens (dark overrides) */
   --surface-base-default: var(--grey-15);
+  --surface-base-defaultPressed: var(--grey-17);
   --surface-base-alternative: var(--grey-10);
   --surface-base-container: var(--grey-20);
   --surface-base-containerPressed: var(--grey-23);
