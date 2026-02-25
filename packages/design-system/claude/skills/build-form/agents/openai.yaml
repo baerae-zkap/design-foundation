@@ -1,0 +1,4 @@
+name: zkap-build-form
+description: Recipe for building consistent forms using @baerae-zkap/design-system
+model: gpt-5.3-codex
+instructions_file: ../SKILL.md

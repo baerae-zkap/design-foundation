@@ -241,14 +241,35 @@ npm publish
 
 ## AI Documentation
 
-AI tools can read component design rules from included markdown files:
+이 패키지는 AI가 디자인 시스템 규칙을 이해하고 올바른 UI 코드를 생성할 수 있도록 문서를 포함하고 있습니다.
+
+### 패키지에 포함된 AI 문서
+
+| 파일 | 설명 |
+|------|------|
+| `llms.txt` | 전체 레퍼런스 (규칙 + 42개 컴포넌트 API) — 8,000줄 |
+| `claude/rules/` | 디자인 시스템 규칙 10개 (컴포넌트 선택, 레이아웃, 토큰, 안티패턴 등) |
+| `claude/skills/` | 워크플로우 스킬 6개 (화면 빌드, 폼 빌드, 리스트 빌드 등) |
+| `claude/resources/` | 개별 컴포넌트 상세 문서 41개 + registry |
+
+### Claude Code 사용자
+
+프로젝트 루트 `CLAUDE.md`에 아래 내용을 추가하세요:
+
+```markdown
+# Design System
+
+이 프로젝트는 @baerae-zkap/design-system을 사용합니다.
+UI 코드 작성 전 반드시 `node_modules/@baerae-zkap/design-system/llms.txt`를 읽고 규칙을 따르세요.
+컴포넌트 상세가 필요하면 `node_modules/@baerae-zkap/design-system/claude/resources/components/`를 참고하세요.
+```
+
+### 다른 AI 도구
 
 ```
-node_modules/@baerae-zkap/design-system/docs/COMPONENTS.md
-node_modules/@baerae-zkap/design-system/docs/components/Button.md
-node_modules/@baerae-zkap/design-system/docs/components/TextButton.md
-node_modules/@baerae-zkap/design-system/docs/components/ActionArea.md
+node_modules/@baerae-zkap/design-system/llms.txt
 ```
+위 파일을 컨텍스트로 제공하면 됩니다.
 
 ### Platform Differences
 

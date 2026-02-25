@@ -1,6 +1,6 @@
 {
   "name": "@baerae-zkap/design-system",
-  "version": "0.1.19",
+  "version": "0.1.25",
   "description": "ZKAP Design System - React & React Native Components with AI-readable documentation",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -28,8 +28,8 @@
     },
     "./styles.css": "./styles.css",
     "./llms": "./llms.txt",
-    "./llms-full": "./llms-full.txt",
-    "./docs/*": "./docs/*"
+    "./docs/*": "./docs/*",
+    "./claude/*": "./claude/*"
   },
   "files": [
     "dist",
@@ -39,7 +39,7 @@
     "scripts",
     "README.md",
     "llms.txt",
-    "llms-full.txt"
+    "claude"
   ],
   "sideEffects": [
     "*.css"
@@ -52,6 +52,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint src/",
     "clean": "rm -rf dist",
+    "postinstall": "node scripts/postinstall.mjs",
     "prepublishOnly": "npm run build:all"
   },
   "peerDependencies": {

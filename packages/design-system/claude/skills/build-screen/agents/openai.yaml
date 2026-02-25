@@ -1,0 +1,4 @@
+name: zkap-build-screen
+description: Recipe for building consistent product screens using @baerae-zkap/design-system
+model: gpt-5.3-codex
+instructions_file: ../SKILL.md

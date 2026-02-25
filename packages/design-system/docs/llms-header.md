@@ -22,7 +22,7 @@
 
 ## System Overview
 
-`@baerae-zkap/design-system` is a React component library and design token system for building product UIs. It provides 41+ ready-to-use components and a full token set for spacing, typography, colors, and radius.
+`@baerae-zkap/design-system` is a React component library and design token system for building product UIs. It provides 42 ready-to-use components and a full token set for spacing, typography, colors, and radius.
 
 ### Installation
 
@@ -350,8 +350,9 @@ Colors are managed through CSS custom properties. They switch automatically betw
 
 | Variable | Use For |
 |----------|---------|
-| `--surface-base-default` | Page/card background |
-| `--surface-base-alternative` | Subtle background difference |
+| `--surface-base-default` | Page background, card background (white in light mode) |
+| `--surface-base-alternative` | Subtle background sections, search fields, disabled inputs, segmented control track (lightest grey) |
+| `--surface-base-container` | Interactive element fills — buttons, chips, badges (slightly darker grey). **Do NOT use for section/page backgrounds.** Components use this internally. |
 | `--surface-brand-default` | Brand-colored surface |
 | `--content-base-default` | Primary text |
 | `--content-base-secondary` | Secondary/helper text |
@@ -481,7 +482,8 @@ Use `spacing.semantic.screen.paddingX` (20px) for horizontal page padding. Use `
 | Between... | Gap | Token |
 |------------|-----|-------|
 | Major sections | 32-40px | `spacing.primitive[8]` to `[10]` |
-| Items within a section | 8-16px | `spacing.primitive[2]` to `[4]` |
+| Items within a section (general) | 8-16px | `spacing.primitive[2]` to `[4]` |
+| **ListCell / ListCard items** | **0px** | gap 추가 금지 — 컴포넌트 내부 padding으로 간격 처리 |
 | Label and its input | 8px | `spacing.component.input.labelGap` |
 | Helper text and input | 4px | `spacing.component.input.helperGap` |
 | Buttons in a group | 8-12px | `spacing.primitive[2]` to `[3]` |
@@ -516,8 +518,8 @@ Use `spacing.semantic.screen.paddingX` (20px) for horizontal page padding. Use `
 - **Media content lists** (feed, products, search results): Use `ListCard` with thumbnail.
 - **Settings / options lists** (menu, preferences): Use `ListCell` with optional trailing element.
 - Group related list items under a `SectionHeader`.
-- List items have zero gap between them. Dividers are built in.
-- Section-to-section gap is 32px (`spacing.component.list.sectionGap`).
+- **ListCell / ListCard 사이 gap은 반드시 0.** 부모 컨테이너에 `gap` 추가 금지. 각 컴포넌트가 내부 paddingY로 간격을 처리함.
+- Section-to-section gap은 32px (`spacing.component.list.sectionGap`).
 
 ```tsx
 <SectionHeader title="General" />
@@ -763,6 +765,7 @@ These patterns produce off-brand, inconsistent, or inaccessible UI. Reject any g
 | Using `success` color for a primary CTA | `color="primary"` for CTAs |
 | Using `error` color for non-destructive actions | `color="neutral"` or `color="primary"` |
 | Two `color="primary"` buttons side by side | One primary, one `color="neutral" buttonType="weak"` |
+| `var(--surface-base-container)` for section/page backgrounds | `var(--surface-base-default)` or `var(--surface-base-alternative)`. `container` is for interactive element fills only (buttons, chips) — components handle it internally. |
 
 ### Component Anti-Patterns
 
